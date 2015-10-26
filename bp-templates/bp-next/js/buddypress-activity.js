@@ -11,9 +11,7 @@ window.bp = window.bp || {};
 	bp.Next = bp.Next || {};
 
 	bp.Next.Activity = {
-		start: function() {
-			console.log( this );
-		},
+		start: function() {},
 
 		ajax: function( post_data ) {
 			$.extend( post_data, bp.Next.getStorage( 'bp-activity' ), { nonce: BP_Next.nonces.activity } );
@@ -22,15 +20,24 @@ window.bp = window.bp || {};
 		}
 	}
 
-	/** DOM Events specific to the Activity object */
+	// Launch BP Next Activity
+	bp.Next.Activity.start();
+
+	/** Events specific to the Activity object requiring the user to be logged in */
+
+	/**
+	 * A link into the activity item has been clicked
+	 */
 	$( '#buddypress #activity-stream' ).on( 'click', '.activity-item', function( event ) {
 		var button = $( event.target ), activity_item = $( event.currentTarget ),
 			activity_id = activity_item.data( 'id' ), stream = $( event.delegateTarget ); 
 
-		event.preventDefault();
-
+		// Favoriting
 		if ( button.hasClass( 'fav') || button.hasClass('unfav') ) {
-			var type = button.hasClass('fav') ? 'fav' : 'unfav';
+			var type = button.hasClass( 'fav' ) ? 'fav' : 'unfav';
+
+			// Stop event propagation
+			event.preventDefault();
 
 			button.addClass( 'loading' );
 
@@ -87,8 +94,5 @@ window.bp = window.bp || {};
 			} );
 		}
 	} );
-
-	// Launch BP Next
-	bp.Next.Activity.start();
 
 } )( bp, jQuery );

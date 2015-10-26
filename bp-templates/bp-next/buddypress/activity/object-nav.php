@@ -83,7 +83,7 @@
 
 				<?php if ( bp_get_total_group_count_for_user( bp_loggedin_user_id() ) ) : ?>
 
-					<li id="activity-groups" class="bp-activity-primary-nav" data-scope-"groups" data-object="activity">
+					<li id="activity-groups" class="bp-activity-primary-nav" data-scope="groups" data-object="activity">
 						<a href="<?php echo bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_groups_slug() . '/'; ?>" title="<?php esc_attr_e( 'The activity of groups I am a member of.', 'bp-next' ); ?>">
 							<?php printf( __( 'My Groups %s', 'bp-next' ), '<span>' . bp_get_total_group_count_for_user( bp_loggedin_user_id() ) . '</span>' ); ?>
 						</a>

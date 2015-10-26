@@ -16,6 +16,10 @@ window.bp = window.bp || {};
 			this.objects                = BP_Next.objects;
 			this.objectNavParent        = BP_Next.object_nav_parent;
 
+			if( $( 'body' ).hasClass( 'no-js' ) ) {
+				$('body').removeClass( 'no-js' ).addClass( 'js' );
+			}
+
 			this.initObjects();
 		},
 
@@ -52,11 +56,47 @@ window.bp = window.bp || {};
 			return sessionStorage.getItem( type ) !== null;
 		},
 
+		truncateComments: function( event ) {
+			var comments = $( event.target ).find( '.activity-comments' ),
+				activity_item, comment_items, comment_count;
+
+			if ( ! comments.length ) {
+				return;
+			}
+
+			comments.each( function( c, comment ) {
+				comment_items = $( comment ).children( 'ul' ).find( 'li' );
+
+				if ( ! comment_items.length ) {
+					return;
+				}
+
+				// Get the activity id
+				activity_item = $( comment ).closest( '.activity-item' );
+
+				// Get the comment count
+				comment_count = $('#acomment-comment-' + activity_item.data( 'id' ) + ' span' ).html() || ' ';
+
+				// Keep first 5 root comments
+				comment_items.each( function( i, item ) {
+					if ( i < comment_items.length - 5 ) {
+						$( item ).addClass( 'hidden' );
+						$( item ).toggle();
+
+						// Prepend a link to display all 
+						if ( ! i ) {
+							$( item ).before( '<li class="show-all"><a href="#' + activity_item.prop( 'id' ) + '/show-all/" title="' + BP_Next.show_all_comments + '">' + BP_Next.show_x_comments.replace( '%d', comment_count ) + '</a></li>' );
+						}
+					}
+				} );
+			} );
+		},
+
 		/**
 		 * Query objects and refresh the objets list
 		 */
 		objectRequest: function( object, scope, filter, target, search_terms, page, extras, caller, template ) {
-			var postdata;
+			var postdata, clone = {};
 
 			if ( null !== scope ) {
 				this.setStorage( 'bp-' + object, 'scope', scope );
@@ -86,9 +126,7 @@ window.bp = window.bp || {};
 				this.ajax_request.abort();
 			}
 
-			postdata = {
-				action:                   object + '_filter',
-				'_bpnonce_object_filter': $( '#_wpnonce_' + object + '_filter' ).val(),
+			clone = {
 				'object':                 object,
 				'search_terms':           search_terms,
 				'page':                   page,
@@ -98,14 +136,17 @@ window.bp = window.bp || {};
 			if ( 'activity' === object ) {
 				// Reset the page
 				this.setStorage( 'bp-activity', 'page', 1 );
-				delete postdata.page;
+				delete clone.page;
 			}
 
-			this.ajax_request = $.post( ajaxurl, $.extend(
-				postdata,
-				this.getStorage( 'bp-' + object )
+			$.extend( clone, this.getStorage( 'bp-' + object ) );
 
-			), function( response ) {
+			postdata = $.extend( {
+				action:                   object + '_filter',
+				'_bpnonce_object_filter': $( '#_wpnonce_' + object + '_filter' ).val(),
+			}, clone );
+
+			this.ajax_request = $.post( ajaxurl, postdata, function( response ) {
 				if ( false === response.success ) {
 					return;
 				}
@@ -117,6 +158,9 @@ window.bp = window.bp || {};
 						$( target ).fadeOut( 100, function() {
 							$( this ).html( response.data.contents );
 							$( this ).fadeIn( 100 );
+
+							// Inform other scripts the list of objects has been refreshed.
+							$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
 						} );
 					} );
 
@@ -124,14 +168,17 @@ window.bp = window.bp || {};
 					$( target ).fadeOut( 100, function() {
 						$( this ).html( response.data.contents );
 						$( this ).fadeIn( 100 );
+
+						// Inform other scripts the list of objects has been refreshed.
+						$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
 					} );
 				} else {
 					$( '#buddypress #activity-stream' ).fadeOut( 100, function() {
 						$( this ).html( response.data.contents );
 						$( this ).fadeIn( 100 );
 
-						/* Selectively hide comments
-						bp_legacy_theme_hide_comments();*/
+						// Inform other scripts the list of activities has been refreshed.
+						$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
 					} );
 
 					/* Update the feed link */
@@ -141,6 +188,7 @@ window.bp = window.bp || {};
 				}
 
 				$( this.objectNavParent + ' .item-list-tabs .selected' ).removeClass( 'loading' );
+
 			}, 'json' );
 		},
 
@@ -194,7 +242,8 @@ window.bp = window.bp || {};
 	// Launch BP Next
 	bp.Next.start();
 
-	/** DOM events shared by all objects ******************************************/
+	/** DOM events available for all users ****************************************/
+
 	/**
 	 * Object's primary nav listener
 	 *
@@ -302,6 +351,27 @@ window.bp = window.bp || {};
 
 		// Hide the submit button
 		$( event.delegateTarget ).find( 'input[type=submit]' ).hide();
+	} );
+	
+	/**
+	 * Only keep 5 root comments after each activity request
+	 */
+	$( '#buddypress .bp-activity-list' ).on( 'bp_ajax_request', bp.Next.truncateComments );
+
+	/**
+	 * Show all activity comments if requested
+	 */
+	$( '#buddypress' ).on( 'click', '.show-all', function( event ) {
+		// Stop event propagation
+		event.preventDefault();
+		
+		$( event.currentTarget ).addClass( 'loading' );
+
+		setTimeout( function() {
+			$( event.currentTarget ).closest( 'ul' ).find( 'li' ).fadeIn( 200, function() {
+				$( event.currentTarget ).remove();
+			} );
+		}, 600 );
 	} );
 
 	/**
