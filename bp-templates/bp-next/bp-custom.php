@@ -25,13 +25,13 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 	public function __construct() {
 
 		$widget_ops = array(
-			'description' => __( 'Displays BuddyPress item primary nav & avatar in the sidebar of your site.', 'bp-next' ),
+			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-next' ),
 			'classname'   => 'widget_nav_menu buddypress_object_nav'
 		);
 
 		parent::__construct(
 			'bp_next_sidebar_object_nav_widget',
-			__( '(BuddyPress) Sidebar item nav', 'bp-next' ),
+			__( '(BuddyPress) Primary nav', 'bp-next' ),
 			$widget_ops
 		);
 	}
@@ -126,8 +126,10 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 		$bp_next_widget_title = (bool) $instance['bp_next_widget_title'];
 		?>
 
-		<input class="checkbox" type="checkbox" <?php checked( $bp_next_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_next_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_next_widget_title' ); ?>" />
-		<label for="<?php echo $this->get_field_id( 'bp_next_widget_title' ); ?>"><?php esc_html_e( 'Include Navigation title', 'bp-next' ); ?></label><br />
+		<p>
+			<input class="checkbox" type="checkbox" <?php checked( $bp_next_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_next_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_next_widget_title' ); ?>" />
+			<label for="<?php echo $this->get_field_id( 'bp_next_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-next' ); ?></label>
+		</p>
 
 		<?php
 	}

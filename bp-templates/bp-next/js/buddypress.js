@@ -1,4 +1,5 @@
-/* global bp, BP_Next, ajaxurl */
+/* global wp, bp, BP_Next, ajaxurl */
+window.wp = window.wp || {};
 window.bp = window.bp || {};
 
 ( function( exports, $ ) {
@@ -11,6 +12,7 @@ window.bp = window.bp || {};
 	bp.Next = {
 		start: function() {
 			this.ajax_request           = null;
+			this.heartbeat              = wp.heartbeat || {};
 			this.newest_activities      = '';
 			this.activity_last_recorded = 0;
 			this.objects                = BP_Next.objects;
@@ -83,7 +85,7 @@ window.bp = window.bp || {};
 						$( item ).addClass( 'hidden' );
 						$( item ).toggle();
 
-						// Prepend a link to display all 
+						// Prepend a link to display all
 						if ( ! i ) {
 							$( item ).before( '<li class="show-all"><a href="#' + activity_item.prop( 'id' ) + '/show-all/" title="' + BP_Next.show_all_comments + '">' + BP_Next.show_x_comments.replace( '%d', comment_count ) + '</a></li>' );
 						}
@@ -352,7 +354,7 @@ window.bp = window.bp || {};
 		// Hide the submit button
 		$( event.delegateTarget ).find( 'input[type=submit]' ).hide();
 	} );
-	
+
 	/**
 	 * Only keep 5 root comments after each activity request
 	 */
@@ -364,7 +366,7 @@ window.bp = window.bp || {};
 	$( '#buddypress' ).on( 'click', '.show-all', function( event ) {
 		// Stop event propagation
 		event.preventDefault();
-		
+
 		$( event.currentTarget ).addClass( 'loading' );
 
 		setTimeout( function() {
