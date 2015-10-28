@@ -61,7 +61,7 @@ do_action( 'bp_after_member_activity_post_form' );
  */
 do_action( 'bp_before_member_activity_content' ); ?>
 
-<div class="activity bp-activity-list">
+<div class="activity bp-activity-list single-user">
 
 	<ul id="activity-stream" class="activity-list item-list">
 

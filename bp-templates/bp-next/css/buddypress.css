@@ -310,6 +310,10 @@ body.activity-permalink #buddypress .activity-content blockquote {
 	color: #4D4D4D;
 }
 
+#buddypress .activity-list li.activity-item.new_mention {
+	background: rgba(31, 179, 221, 0.1);
+}
+
 
 /*--------------------------------------------------------------
 3.1.2 - Activity Comments
@@ -496,12 +500,14 @@ body.activity-permalink #buddypress div.activity-comments div.acomment-content {
 	margin: -39px 0 0 0;
 }
 
+#buddypress li.dir-search form input[type="search"],
 #buddypress div.dir-search input[type=text],
 #buddypress li.dir-search input[type=text],
 #buddypress li.groups-members-search input[type=text] {
 	font-size: 90%;
 	padding: 5px 10px;
 }
+#buddypress li.dir-search form input[type="search"],
 #buddypress li.dir-search input[type=text] {
 	float:left;
 	width:65%;
@@ -521,6 +527,16 @@ body.activity-permalink #buddypress div.activity-comments div.acomment-content {
 	line-height: inherit;
 	display: none;
 }
+
+#buddypress li.dir-search form input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: searchfield-cancel-button;
+}
+
+#buddypress li.dir-search form input[type="search"]::-webkit-search-results-button,
+#buddypress li.dir-search form input[type="search"]::-webkit-search-results-decoration {
+	display: none;
+}
+
 #buddypress .current-member-type {
 	font-style: italic;
 }

@@ -161,6 +161,7 @@ class BP_Next extends BP_Theme_Compat {
 			'activity_get_older_updates'  => 'bp_legacy_theme_activity_template_loader',
 			'activity_mark_fav'           => 'bp_legacy_theme_mark_activity_favorite',
 			'activity_mark_unfav'         => 'bp_legacy_theme_unmark_activity_favorite',
+			'activity_clear_new_mentions' => 'bp_next_clear_new_mentions',
 			'activity_widget_filter'      => 'bp_legacy_theme_activity_template_loader',
 			'delete_activity'             => 'bp_legacy_theme_delete_activity',
 			'delete_activity_comment'     => 'bp_legacy_theme_delete_activity_comment',
@@ -338,6 +339,10 @@ class BP_Next extends BP_Theme_Compat {
 			'unsaved_changes'     => __( 'Your profile has unsaved changes. If you leave the page, the changes will be lost.', 'bp-next' ),
 			'view'                => __( 'View', 'bp-next' ),
 			'object_nav_parent'   => '#buddypress',
+			'new_mentions'        => array(
+				'singular' => _x( '%s new', 'one new activity mention', 'bp-next' ),
+				'plural'   => _x( '%p new', 'Number of new activity mentions', 'bp-next' ),
+			),
 		);
 
 		if ( bp_next_is_object_nav_in_sidebar() ) {
@@ -743,6 +748,23 @@ function bp_legacy_theme_ajax_querystring( $query_string, $object ) {
 
 	if ( ! empty( $_POST ) ) {
 		$post_query = wp_parse_args( $_POST, $post_query );
+
+		if ( ! empty( $post_query['data']['bp_heartbeat'] ) ) {
+			$bp_heartbeat = $post_query['data']['bp_heartbeat'];
+
+			$post_query = array_diff_key(
+				wp_parse_args( $bp_heartbeat, $post_query ),
+				array(
+					'data'      => false,
+					'interval'  => false,
+					'_nonce'    => false,
+					'_nonce'    => false,
+					'action'    => false,
+					'screen_id' => false,
+					'has_focus' => false,
+				)
+			);
+		}
 	}
 
 	// Init the query string
@@ -853,14 +875,25 @@ function bp_legacy_theme_object_template_loader() {
 				break;
 			case 'mentions':
 				$feed_url = bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/feed/';
-				bp_activity_clear_new_mentions( bp_loggedin_user_id() );
+
+				// Get user new mentions
+				$new_mentions = bp_get_user_meta( bp_loggedin_user_id(), 'bp_new_mentions', true );
+
+				// If we have some, include them into the returned json before deleting them
+				if ( is_array( $new_mentions ) ) {
+					$result['new_mentions'] = $new_mentions;
+
+					// Clear new mentions
+					bp_activity_clear_new_mentions( bp_loggedin_user_id() );
+				}
+
 				break;
 			default:
 				$feed_url = home_url( bp_get_activity_root_slug() . '/feed/' );
 				break;
 		}
 
-		$result = array( 'feed_url' => apply_filters( 'bp_legacy_theme_activity_feed_url', $feed_url, $scope ) );
+		$result['feed_url'] = apply_filters( 'bp_legacy_theme_activity_feed_url', $feed_url, $scope );
 	}
 
  	/**
@@ -1339,6 +1372,21 @@ function bp_legacy_theme_unmark_activity_favorite() {
 	} else {
 		wp_send_json_error();
 	}
+}
+
+function bp_next_clear_new_mentions() {
+	// Bail if not a POST action.
+	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		wp_send_json_error();
+	}
+
+	// Nonce check!
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_activity' ) ) {
+		wp_send_json_error();
+	}
+
+	bp_activity_clear_new_mentions( bp_loggedin_user_id() );
+	wp_send_json_success();
 }
 
 /**
@@ -1869,36 +1917,6 @@ function bp_legacy_theme_ajax_messages_star_handler() {
 	echo '-1';
 	die();
 }
-
-if ( ! function_exists( 'bp_directory_activity_search_form' ) ) :
-
-function bp_directory_activity_search_form() {
-
-	$query_arg = bp_core_get_component_search_query_arg( 'activity' );
-
-	if ( ! empty( $_REQUEST[ $query_arg ] ) ) {
-		$search_value = stripslashes( $_REQUEST[ $query_arg ] );
-	} else {
-		$search_value = bp_get_search_default_text( 'activity' );
-	}
-
-	$search_form_html = '<form action="" method="get" id="search-activity-form">
-		<label for="activity_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="activity_search" placeholder="'. esc_attr( $search_value ) .'" /></label>
-		<input type="submit" id="activity_search_submit" name="activity_search_submit" value="'. __( 'Search', 'bp-next' ) .'" />
-	</form>';
-
-	/**
-	 * Filters the HTML markup for the groups search form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $search_form_html HTML markup for the search form.
-	 */
-	echo apply_filters( 'bp_directory_activity_search_form', $search_form_html );
-
-}
-
-endif;
 
 /**
  * BP Legacy's callback for the cover image feature.

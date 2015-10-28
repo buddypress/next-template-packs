@@ -12,29 +12,51 @@ window.bp = window.bp || {};
 	bp.Next = {
 		start: function() {
 			this.ajax_request           = null;
+
+			// Object Globals
+			this.objects                = BP_Next.objects;
+			this.objectNavParent        = BP_Next.object_nav_parent;
+			this.just_posted            = [];
+
+			// HeartBeat Globals
 			this.heartbeat              = wp.heartbeat || {};
 			this.newest_activities      = '';
 			this.activity_last_recorded = 0;
-			this.objects                = BP_Next.objects;
-			this.objectNavParent        = BP_Next.object_nav_parent;
+			this.first_item_recorded    = 0;
+			this.document_title         = $( document ).prop( 'title' );
 
-			if( $( 'body' ).hasClass( 'no-js' ) ) {
+			if ( $( 'body' ).hasClass( 'no-js' ) ) {
 				$('body').removeClass( 'no-js' ).addClass( 'js' );
 			}
 
+			this.prepareFields();
 			this.initObjects();
+			this.setHeartBeat();
+
+			// Listeners
+			$( document ).on( 'heartbeat-send.buddypress', this.heartbeatSend );
+			$( document ).on( 'heartbeat-tick.buddypress', this.heartbeatTick );
+		},
+
+		prepareFields: function() {
+			// Transform text field into search field
+			$( '#buddypress li.dir-search input[type=text]' ).prop( 'type', 'search' );
 		},
 
 		/**
 		 * Get the object state
 		 */
-		getStorage: function( type ) {
+		getStorage: function( type, property ) {
 			var store = sessionStorage.getItem( type );
 
 			if ( store ) {
 				store = JSON.parse( store );
 			} else {
 				store = {};
+			}
+
+			if ( undefined !== property && store[property] ) {
+				return store[property];
 			}
 
 			return store;
@@ -46,7 +68,7 @@ window.bp = window.bp || {};
 		setStorage: function( type, property, value ) {
 			var store = this.getStorage( type );
 
-			if ( 'undefined' === value && 'undefined' !== store[ property ] ) {
+			if ( undefined === value && undefined !== store[ property ] ) {
 				delete store[ property ];
 			} else {
 				// Set property
@@ -58,11 +80,11 @@ window.bp = window.bp || {};
 			return sessionStorage.getItem( type ) !== null;
 		},
 
-		truncateComments: function( event ) {
+		truncateComments: function( event, data ) {
 			var comments = $( event.target ).find( '.activity-comments' ),
 				activity_item, comment_items, comment_count;
 
-			if ( ! comments.length ) {
+			if ( ! comments.length || 1 !== data.page ) {
 				return;
 			}
 
@@ -136,8 +158,12 @@ window.bp = window.bp || {};
 			};
 
 			if ( 'activity' === object ) {
-				// Reset the page
-				this.setStorage( 'bp-activity', 'page', 1 );
+				page = page || 1;
+
+				clone.exclude_just_posted = this.just_posted.join( ',' );
+
+				// Set the page
+				this.setStorage( 'bp-activity', 'page', page );
 				delete clone.page;
 			}
 
@@ -175,17 +201,28 @@ window.bp = window.bp || {};
 						$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
 					} );
 				} else {
-					$( '#buddypress #activity-stream' ).fadeOut( 100, function() {
-						$( this ).html( response.data.contents );
-						$( this ).fadeIn( 100 );
+					// Loading the full stream
+					if ( 1 === postdata.page ) {
+						$( '#buddypress #activity-stream' ).fadeOut( 100, function() {
+							$( this ).html( response.data.contents );
+							$( this ).fadeIn( 100 );
+
+							// Inform other scripts the list of activities has been refreshed.
+							$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
+						} );
+
+						/* Update the feed link */
+						if ( undefined !== response.data.feed_url ) {
+							$( '.directory #subnav .feed a, .home-page #subnav .feed a').prop( 'href', response.data.feed_url );
+						}
+
+					// Appending more activities to current stream
+					} else {
+						$( '#buddypress #activity-stream' ).append( response.data.contents );
+						$( '#buddypress #activity-stream li.load-more' ).remove();
 
 						// Inform other scripts the list of activities has been refreshed.
-						$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
-					} );
-
-					/* Update the feed link */
-					if ( undefined !== response.data.feed_url ) {
-						$( '.directory #subnav .feed a, .home-page #subnav .feed a').prop( 'href', response.data.feed_url );
+						$( target ).trigger( 'bp_ajax_append', $.extend( clone, { response: response.data } ) );
 					}
 				}
 
@@ -238,7 +275,86 @@ window.bp = window.bp || {};
 					self.objectRequest( object, scope, objectData.filter, '#buddypress .bp-' + object + '-list', '', 1 );
 				}
 			} );
-		}
+		},
+
+		setHeartBeat: function() {
+			if ( typeof BP_Next.pulse === 'undefined' || ! this.heartbeat ) {
+				return;
+			}
+
+			this.heartbeat.interval( Number( BP_Next.pulse ) );
+
+			// Extend "send" with BuddyPress namespace
+			$.fn.extend( {
+				'heartbeat-send': function() {
+					return this.bind( 'heartbeat-send.buddypress' );
+				}
+			} );
+
+			// Extend "tick" with BuddyPress namespace
+			$.fn.extend( {
+				'heartbeat-tick': function() {
+					return this.bind( 'heartbeat-tick.buddypress' );
+				}
+			} );
+		},
+
+		getActivityTimestamp: function( selector ) {
+			if ( ! selector.length  ) {
+				return null;
+			}
+
+			var timestamp = selector.find( '.activity-time-since span' ).data( 'timestamp' ) || 0;
+
+			if ( ! timestamp ) {
+				timestamp = selector.prop( 'class' ).match( /date-recorded-([0-9]+)/ );
+
+				if ( null !== timestamp && timestamp[1] ) {
+					timestamp = timestamp[1];
+				}
+			}
+
+			return Number( timestamp );
+		},
+
+		heartbeatSend: function( event, data ) {
+			bp.Next.first_item_recorded = bp.Next.getActivityTimestamp( $( '#buddypress #activity-stream .activity-item' ).first() ) || 0;
+
+			if ( 0 === bp.Next.activity_last_recorded || bp.Next.first_item_recorded > bp.Next.activity_last_recorded ) {
+				bp.Next.activity_last_recorded = bp.Next.first_item_recorded;
+			}
+
+			data.bp_activity_last_recorded = bp.Next.activity_last_recorded;
+
+			if ( $( '#buddypress .dir-search input[type=search]' ).length ) {
+				data.bp_activity_last_recorded_search_terms = $( '#buddypress .dir-search input[type=search]' ).val();
+			}
+
+			$.extend( data, { bp_heartbeat: bp.Next.getStorage( 'bp-activity' ) } );
+		},
+
+		heartbeatTick: function( event, data ) {
+			var newest_activities_count;
+
+			// Only proceed if we have newest activities
+			if ( ! data.bp_activity_newest_activities ) {
+				return;
+			}
+
+			bp.Next.newest_activities = $.trim( data.bp_activity_newest_activities.activities ) + bp.Next.newest_activities;
+			bp.Next.activity_last_recorded  = Number( data.bp_activity_newest_activities.last_recorded );
+			newest_activities_count = Number( $( bp.Next.newest_activities ).filter( '.activity-item' ).length );
+
+			$( document ).prop( 'title', '(' + newest_activities_count + ') ' + bp.Next.document_title );
+
+			if ( $( '#buddypress #activity-stream li' ).first().hasClass( 'load-newest' ) ) {
+				newest_link = $( '#buddypress #activity-stream .load-newest a' ).html();
+				$( '#buddypress #activity-stream .load-newest a' ).html( newest_link.replace( /([0-9]+)/, newest_activities_count ) );
+				return;
+			}
+
+			$( '#buddypress #activity-stream' ).prepend( '<li class="load-newest"><a href="#newest">' + BP_Next.newest + ' (' + newest_activities_count + ')</a></li>' );
+		},
 	}
 
 	// Launch BP Next
@@ -271,8 +387,13 @@ window.bp = window.bp || {};
 
 		filter = $( '#buddypress' ).find( '[data-filter="' + object + '"]' ).first().val();
 
-		if ( $( '#buddypress .dir-search input' ).length ) {
-			search_terms = $( '#buddypress .dir-search input' ).val();
+		if ( $( '#buddypress .dir-search input[type=search]' ).length ) {
+			search_terms = $( '#buddypress .dir-search input[type=search]' ).val();
+		}
+
+		// Remove the New count on the mentions tab
+		if ( 'activity' === object && 'mentions' === scope ) {
+			target.find( 'a strong' ).remove();
 		}
 
 		bp.Next.objectRequest( object, scope, filter, '#buddypress .bp-' + object + '-list', search_terms, 1 );
@@ -296,14 +417,14 @@ window.bp = window.bp || {};
 			scope = $( bp.Next.objectNavParent + ' .item-list-tabs .selected' ).data( 'scope' );
 		}
 
-		if ( $( '#buddypress .dir-search input' ).length ) {
-			search_terms = $( '#buddypress .dir-search input' ).val();
+		if ( $( '#buddypress .dir-search input[type=search]' ).length ) {
+			search_terms = $( '#buddypress .dir-search input[type=search]' ).val();
 		}
 
 		// The Group Members page has a different selector for its
 		// search terms box
-		if ( $( '#buddypress .groups-members-search input' ).length ) {
-			search_terms = $( '#buddypress .groups-members-search input' ).val();
+		if ( $( '#buddypress .groups-members-search input[type=search]' ).length ) {
+			search_terms = $( '#buddypress .groups-members-search input[type=search]' ).val();
 			object = 'members';
 			scope = 'groups';
 		}
@@ -329,7 +450,7 @@ window.bp = window.bp || {};
 	$( '#buddypress .dir-search, #buddypress .groups-members-search' ).on( 'submit', 'form', function( event ) {
 		var object, scope = 'all', filter = null, template = null, search_terms = '';
 
-		if ( $( event.delegateTarget ).hasClass( 'no-ajax' ) || 'undefined' === $( event.delegateTarget ).data( 'search' ) ) {
+		if ( $( event.delegateTarget ).hasClass( 'no-ajax' ) || undefined === $( event.delegateTarget ).data( 'search' ) ) {
 			return event;
 		}
 
@@ -338,7 +459,7 @@ window.bp = window.bp || {};
 
 		object       = $( event.delegateTarget ).data( 'search' );
 		filter       = $( '#buddypress' ).find( '[data-filter="' + object + '"]' ).first().val();
-		search_terms = $( event.delegateTarget ).find( 'input[type=text]' ).first().val();
+		search_terms = $( event.delegateTarget ).find( 'input[type=search]' ).first().val();
 
 		if ( $( event.delegateTarget ).hasClass( 'groups-members-search' ) ) {
 			object = 'group_members';
@@ -350,15 +471,26 @@ window.bp = window.bp || {};
 		}
 
 		bp.Next.objectRequest( object, scope, filter, '#buddypress .bp-' + object + '-list', search_terms, 1, null, null, template );
-
-		// Hide the submit button
-		$( event.delegateTarget ).find( 'input[type=submit]' ).hide();
 	} );
 
 	/**
-	 * Only keep 5 root comments after each activity request
+	 * Only keep 5 root comments after each activity request and highlight new mentions
+	 * once the corresponding tab has been clicked
 	 */
-	$( '#buddypress .bp-activity-list' ).on( 'bp_ajax_request', bp.Next.truncateComments );
+	$( '#buddypress .bp-activity-list' ).on( 'bp_ajax_request', function( event, data ) {
+		bp.Next.truncateComments( event, data );
+
+		// In case of mentions, we'll highlight temporarly these
+		if ( 'mentions' === data.scope && undefined !== data.response.new_mentions ) {
+			$.each( data.response.new_mentions, function( i, id ) {
+				$( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).addClass( 'new_mention' );
+			} );
+
+			setTimeout( function () {
+				$( '#buddypress #activity-stream .activity-item' ).removeClass( 'new_mention' );
+			}, 3000 );
+		}
+	} );
 
 	/**
 	 * Show all activity comments if requested
@@ -377,18 +509,85 @@ window.bp = window.bp || {};
 	} );
 
 	/**
+	 * Load newest or more activities
+	 */
+	 $( '#buddypress #activity-stream' ).on( 'click', 'li.load-newest, li.load-more', function( event ) {
+	 	// Load newest activities
+	 	if ( $( event.currentTarget ).hasClass( 'load-newest' ) ) {
+	 		// Stop event propagation
+			event.preventDefault();
+
+			$( event.currentTarget ).remove();
+
+			/**
+			 * If a plugin is updating the recorded_date of an activity
+			 * it will be loaded as a new one. We need to look in the
+			 * stream and eventually remove similar ids to avoid "double".
+			 */
+			var activities = $.parseHTML( bp.Next.newest_activities );
+
+			$.each( activities, function( a, activity ){
+				if( 'LI' === activity.nodeName && $( activity ).hasClass( 'just-posted' ) ) {
+					if( $( '#' + $( activity ).prop( 'id' ) ).length ) {
+						$( '#' + $( activity ).prop( 'id' ) ).remove();
+					}
+				}
+			} );
+
+			// Now the stream is cleaned, prepend newest
+			$( event.delegateTarget ).prepend( bp.Next.newest_activities ).trigger( 'bp_heartbeat_prepend' );
+
+			// reset the newest activities now they're displayed
+			bp.Next.newest_activities = '';
+
+			// Reset the document title
+			$( document ).prop( 'title', bp.Next.document_title );
+
+		// Load more activities
+	 	} else if ( $( event.currentTarget ).hasClass( 'load-more' ) ) {
+	 		var next_page = ( Number( bp.Next.getStorage( 'bp-activity', 'page' ) ) * 1 ) + 1;
+
+	 		// Stop event propagation
+			event.preventDefault();
+
+			$( event.currentTarget ).addClass( 'loading' );
+
+			// reset the just posted
+			bp.Next.just_posted = [];
+
+			// Now set it
+			$( event.delegateTarget ).children( '.just-posted' ).each( function() {
+				bp.Next.just_posted.push( $( this ).data( 'id' ) );
+			} );
+
+			bp.Next.objectRequest( 'activity', null, null, '#buddypress .bp-activity-list', bp_get_querystring( 's' ), next_page, null );
+	 	}
+	 } );
+
+	/**
 	 * Show the search button, even if hitting enter will submit the form, if the user enters the text field
 	 */
-	$( '#buddypress .dir-search, #buddypress .groups-members-search' ).on( 'focus', 'input[type=text]', function( event ) {
+	$( '#buddypress .dir-search, #buddypress .groups-members-search' ).on( 'focus', 'input[type=search]', function( event ) {
 		$( event.delegateTarget ).find( 'input[type=submit]' ).show();
 	} );
 
 	/**
 	 * Hide the search button when the text field is empty
 	 */
-	$( '#buddypress .dir-search, #buddypress .groups-members-search' ).on( 'blur', 'input[type=text]', function( event ) {
+	$( '#buddypress .dir-search, #buddypress .groups-members-search' ).on( 'blur', 'input[type=search]', function( event ) {
 		if ( ! $( event.target ).val() ) {
 			$( event.delegateTarget ).find( 'input[type=submit]' ).hide();
+		}
+	} );
+
+	/**
+	 * Reset results on en empty search
+	 */
+	$( '#buddypress .dir-search form, #buddypress .groups-members-search form' ).on( 'search', 'input[type=search]', function( event ) {
+		if ( ! $( event.target ).val() ) {
+			$( event.delegateTarget ).submit();
+		} else {
+			$( event.delegateTarget ).find( 'input[type=submit]' ).show();
 		}
 	} );
 

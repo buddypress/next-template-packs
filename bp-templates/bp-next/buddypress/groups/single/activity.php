@@ -72,11 +72,15 @@ do_action( 'bp_after_group_activity_post_form' ); ?>
  */
 do_action( 'bp_before_group_activity_content' ); ?>
 
-<div class="activity single-group">
+<div class="activity bp-activity-list single-group">
 
-	<?php bp_get_template_part( 'activity/activity-loop' ); ?>
+	<ul id="activity-stream" class="activity-list item-list">
 
-</div><!-- .activity.single-group -->
+		<li id="bp-activity-ajax-loader">loading</li>
+
+	</ul>
+
+</div><!-- .activity -->
 
 <?php
 
