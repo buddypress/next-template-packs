@@ -1454,6 +1454,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	float: right;
 }
 
+.buddypress_object_nav div.item-list-tabs ul li a span:empty,
 #buddypress div.item-list-tabs ul li a span:empty {
 	display: none;
 }
