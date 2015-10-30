@@ -200,7 +200,7 @@ class BP_Next extends BP_Theme_Compat {
 			add_action( 'wp_ajax_nopriv_' . $name, $function );
 		}
 
-		add_filter( 'bp_ajax_querystring', 'bp_legacy_theme_ajax_querystring', 10, 2 );
+		add_filter( 'bp_ajax_querystring', 'bp_next_ajax_querystring', 10, 2 );
 
 		/** Override **********************************************************/
 
@@ -224,13 +224,14 @@ class BP_Next extends BP_Theme_Compat {
 	 */
 	public function enqueue_styles() {
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$css_dependencies = apply_filters( 'bp_next_css_dependencies', array( 'dashicons' ) );
 
 		// Locate the BP stylesheet.
-		$ltr = $this->locate_asset_in_stack( "buddypress{$min}.css",     'css' );
+		$ltr = $this->locate_asset_in_stack( "buddypress{$min}.css", 'css', 'bp-next' );
 
 		// LTR.
 		if ( ! is_rtl() && isset( $ltr['location'], $ltr['handle'] ) ) {
-			wp_enqueue_style( $ltr['handle'], $ltr['location'], array(), $this->version, 'screen' );
+			wp_enqueue_style( $ltr['handle'], $ltr['location'], $css_dependencies, $this->version, 'screen' );
 
 			if ( $min ) {
 				wp_style_add_data( $ltr['handle'], 'suffix', $min );
@@ -239,40 +240,14 @@ class BP_Next extends BP_Theme_Compat {
 
 		// RTL.
 		if ( is_rtl() ) {
-			$rtl = $this->locate_asset_in_stack( "buddypress-rtl{$min}.css", 'css' );
+			$rtl = $this->locate_asset_in_stack( "buddypress-rtl{$min}.css", 'css', 'bp-next-rtl' );
 
 			if ( isset( $rtl['location'], $rtl['handle'] ) ) {
 				$rtl['handle'] = str_replace( '-css', '-css-rtl', $rtl['handle'] );  // Backwards compatibility.
-				wp_enqueue_style( $rtl['handle'], $rtl['location'], array(), $this->version, 'screen' );
+				wp_enqueue_style( $rtl['handle'], $rtl['location'], $css_dependencies, $this->version, 'screen' );
 
 				if ( $min ) {
 					wp_style_add_data( $rtl['handle'], 'suffix', $min );
-				}
-			}
-		}
-
-		// Compatibility stylesheets for specific themes.
-		$theme = $this->locate_asset_in_stack( get_template() . "{$min}.css", 'css' );
-		if ( ! is_rtl() && isset( $theme['location'] ) ) {
-			// Use a unique handle.
-			$theme['handle'] = 'bp-' . get_template();
-			wp_enqueue_style( $theme['handle'], $theme['location'], array(), $this->version, 'screen' );
-
-			if ( $min ) {
-				wp_style_add_data( $theme['handle'], 'suffix', $min );
-			}
-		}
-
-		// Compatibility stylesheet for specific themes, RTL-version.
-		if ( is_rtl() ) {
-			$theme_rtl = $this->locate_asset_in_stack( get_template() . "-rtl{$min}.css", 'css' );
-
-			if ( isset( $theme_rtl['location'] ) ) {
-				$theme_rtl['handle'] = $theme['handle'] . '-rtl';
-				wp_enqueue_style( $theme_rtl['handle'], $theme_rtl['location'], array(), $this->version, 'screen' );
-
-				if ( $min ) {
-					wp_style_add_data( $theme_rtl['handle'], 'suffix', $min );
 				}
 			}
 		}
@@ -343,6 +318,7 @@ class BP_Next extends BP_Theme_Compat {
 				'singular' => _x( '%s new', 'one new activity mention', 'bp-next' ),
 				'plural'   => _x( '%p new', 'Number of new activity mentions', 'bp-next' ),
 			),
+			'search_icon' => '&#xf179;'
 		);
 
 		if ( bp_next_is_object_nav_in_sidebar() ) {
@@ -732,7 +708,7 @@ function bp_legacy_theme_blog_create_nav() {
  * @return string Query string for the component loops
  * @since 1.2.0
  */
-function bp_legacy_theme_ajax_querystring( $query_string, $object ) {
+function bp_next_ajax_querystring( $query_string, $object ) {
 	if ( empty( $object ) ) {
 		return '';
 	}
@@ -749,9 +725,11 @@ function bp_legacy_theme_ajax_querystring( $query_string, $object ) {
 	if ( ! empty( $_POST ) ) {
 		$post_query = wp_parse_args( $_POST, $post_query );
 
+		// Make sure to transport the scope, filter etc.. in HeartBeat Requests
 		if ( ! empty( $post_query['data']['bp_heartbeat'] ) ) {
 			$bp_heartbeat = $post_query['data']['bp_heartbeat'];
 
+			// Remove heartbeat specific vars
 			$post_query = array_diff_key(
 				wp_parse_args( $bp_heartbeat, $post_query ),
 				array(
@@ -826,7 +804,7 @@ function bp_legacy_theme_ajax_querystring( $query_string, $object ) {
 	 * @param string $search_terms The current object search terms.
 	 * @param string $extras       The current object extras.
 	 */
-	return apply_filters( 'bp_legacy_theme_ajax_querystring', $query_string, $object, $filter, $scope, $page, $search_terms, $extras );
+	return apply_filters( 'bp_next_ajax_querystring', $query_string, $object, $filter, $scope, $page, $search_terms, $extras );
 }
 
 /**
@@ -1323,7 +1301,7 @@ function bp_legacy_theme_mark_activity_favorite() {
 			if ( 1 === $fav_count ) {
 				$response['directory_tab'] = '<li id="activity-favorites" class="bp-activity-primary-nav" data-scope="favorites" data-object="activity">
 					<a href="' . bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/" title="' . esc_attr__( "The activity I've marked as a favorite.", 'bp-next' ) . '">
-						' . sprintf( __( 'My Favorites %s', 'bp-next' ), '<span>1</span>' ) . '
+						' . esc_html__( 'My Favorites', 'bp-next' ) . '
 					</a>
 				</li>';
 			} else {

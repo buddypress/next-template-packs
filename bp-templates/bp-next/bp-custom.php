@@ -174,24 +174,84 @@ function bp_directory_activity_search_form() {
 
 endif;
 
-function bp_next_activity_new_mention_class( $classes = '' ) {
+function bp_next_activity_scope_newest_class( $classes = '' ) {
 	if ( ! is_user_logged_in() ) {
 		return $classes;
 	}
 
-	$new_mentions = bp_get_user_meta( bp_loggedin_user_id(), 'bp_new_mentions', true );
+	// We'll use this several times
+	$user_id = bp_loggedin_user_id();
 
-	if ( is_array( $new_mentions ) && in_array( bp_get_activity_id(), $new_mentions ) ) {
-		$classes .= ' activity_mention';
+	// New classes to add.
+	$my_classes = array();
 
-		if ( ! empty( $_POST['data']['bp_heartbeat']['scope'] ) && 'mentions' === $_POST['data']['bp_heartbeat']['scope'] ) {
-			$classes .= ' new_mention';
+	/**
+	 * HeartBeat requests will transport the scope
+	 * 
+	 * @see bp_next_ajax_querystring()
+	 */ 
+	$scope = '';
+
+	if ( ! empty( $_POST['data']['bp_heartbeat']['scope'] ) ) {
+		$scope = sanitize_key( $_POST['data']['bp_heartbeat']['scope'] );
+	}
+
+	/**
+	 * Add specific classes to perform specific actions on the client side
+	 */ 
+	if ( $scope && bp_is_activity_directory() ) {
+		$component  = bp_get_activity_object_name();
+
+		/** 
+		 * These classes will be used to count the number of newest activities for
+		 * the 'Mentions', 'My Groups' & 'My Friends' tabs
+		 */
+		if ( 'all' === $scope ) {
+			if ( 'groups' === $component && bp_is_active( $component ) ) {
+				// Is the current user a member of the group the activity is attached to?
+				if ( groups_is_user_member( $user_id, bp_get_activity_item_id() ) ) {
+					$my_classes[] = 'bp-my-groups';
+				}
+			}
+
+			// Friends can post in groups the user is a member of
+			if ( bp_is_active( 'friends' ) && (int) $user_id !== (int) bp_get_activity_user_id() ) {
+				if ( friends_check_friendship( $user_id, bp_get_activity_user_id() ) ) {
+					$my_classes[] = 'bp-my-friends';
+				}
+			}
+
+			// A mention can be posted by a friend within a group
+			if ( true === bp_activity_do_mentions() ) {
+				$new_mentions = bp_get_user_meta( $user_id, 'bp_new_mentions', true );
+
+				// The current activity is one of the new mentions
+				if ( is_array( $new_mentions ) && in_array( bp_get_activity_id(), $new_mentions ) ) {
+					$my_classes[] = 'bp-my-mentions';
+				}
+			}
+
+		/** 
+		 * This class will be used to highlight the newest activities when
+		 * viewing the 'Mentions', 'My Groups' or the 'My Friends' tabs
+		 */
+		} elseif ( 'friends' === $scope || 'groups' === $scope || 'mentions' === $scope ) {
+			$my_classes[] = 'newest_' . $scope . '_activity';
+		}
+
+		/**
+		 * Leave other components do their specific stuff if needed.
+		 */ 
+		$myclasses = (array) apply_filters( 'bp_next_activity_scope_newest_class', $my_classes, $scope );
+
+		if ( ! empty( $my_classes ) ) {
+			$classes .= ' ' . join( ' ', $my_classes );
 		}
 	}
 
 	return $classes;
 }
-add_filter( 'bp_get_activity_css_class', 'bp_next_activity_new_mention_class', 10, 1 );
+add_filter( 'bp_get_activity_css_class', 'bp_next_activity_scope_newest_class', 10, 1 );
 
 function bp_next_activity_time_since( $time_since, $activity = null ) {
 	if ( ! isset ( $activity->date_recorded ) ) {

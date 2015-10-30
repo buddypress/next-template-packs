@@ -12,23 +12,84 @@ window.bp = window.bp || {};
 
 	bp.Next.Activity = {
 		start: function() {
-			$( '#buddypress' ).on( 'bp_heartbeat_prepend', '#activity-stream', this.adjustMentionsCount );
+			$( '#buddypress' ).on( 'bp_heartbeat_pending', '#activity-stream', this.prepareScope );
+			
+			$( '#buddypress' ).on( 'bp_heartbeat_prepend', '#activity-stream', this.updateScope );
+
+			$( '#buddypress' ).on( 'bp_ajax_request', '.bp-activity-list', this.scopeLoaded );
 		},
 
-		adjustMentionsCount: function( event ) {
-			if ( 'mentions' === bp.Next.getStorage( 'bp-activity', 'scope' ) ) {
+		prepareScope: function( event ) {
+			var objects = bp.Next.objects;
+			
+			/**
+			 * It's not a regular object but we need it!
+			 * so let's add it temporarly..
+			 */
+			objects.push( 'mentions' );
+
+			$.each( objects, function( o, object ) {
+				if ( undefined !== bp.Next.highlights[ object ] && bp.Next.highlights[ object ].length ) {
+					$( bp.Next.objectNavParent + ' [data-scope="' + object + '"]' ).find( 'a span' ).html( Number( bp.Next.highlights[ object ].length ) );
+				}
+			} );
+
+			/**
+			 * Let's remove the mentions from objects!
+			 */
+			 objects.pop();
+		},
+
+		updateScope: function( event ) {
+			var scope = bp.Next.getStorage( 'bp-activity', 'scope' );
+
+			// Specific to mentions
+			if ( 'mentions' === scope ) {
+				// Now mentions are displayed, remove the user_metas
 				bp.Next.Activity.ajax( { action: 'activity_clear_new_mentions' } ).done( function( response ) {
 					if ( false === response.success ) {
 						// Display a warning ?
 						console.log( 'warning' );
 					}
 				} );
-
-				// Remove highlighted new mentions
-				setTimeout( function () {
-					$( event.currentTarget ).find( '.activity-item' ).removeClass( 'new_mention' );
-				}, 3000 );
 			}
+
+			// Activities are now displayed, clear the newest count for the scope
+			$( bp.Next.objectNavParent + ' [data-scope="' + scope + '"]' ).find( 'a span' ).html( '' );
+
+			// Activities are now displayed, clear the highlighted activities for the scope
+			if ( undefined !== bp.Next.highlights[ scope ] ) {
+				bp.Next.highlights[ scope ] = [];
+			}
+			
+			// Remove highlighted for the current scope
+			setTimeout( function () {
+				$( event.currentTarget ).find( '.activity-item' ).removeClass( 'newest_' + scope + '_activity' );
+			}, 3000 );
+		},
+
+		scopeLoaded: function ( event, data ) {
+			// Mentions are specific
+			if ( 'mentions' === data.scope && undefined !== data.response.new_mentions ) {
+				$.each( data.response.new_mentions, function( i, id ) {
+					$( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).addClass( 'newest_mentions_activity' );
+				} );
+			} else if ( undefined !== bp.Next.highlights[data.scope] && bp.Next.highlights[data.scope].length ) {
+				$.each( bp.Next.highlights[data.scope], function( i, id ) {
+					if ( $( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).length ) {
+						$( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).addClass( 'newest_' + data.scope + '_activity' );
+					}
+				} );
+			}
+
+			// Activities are now loaded, clear the highlighted activities for the scope
+			if ( undefined !== bp.Next.highlights[ data.scope ] ) {
+				bp.Next.highlights[ data.scope ] = [];
+			}
+
+			setTimeout( function () {
+				$( '#buddypress #activity-stream .activity-item' ).removeClass( 'newest_' + data.scope +'_activity' );
+			}, 3000 );
 		},
 
 		ajax: function( post_data ) {
@@ -76,37 +137,26 @@ window.bp = window.bp || {};
 					if ( undefined !== response.data.directory_tab ) {
 						if ( ! $( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).length ) {
 							$( bp.Next.objectNavParent + ' [data-scope="all"]' ).after( response.data.directory_tab );
-						} else {
-							$( bp.Next.objectNavParent + ' [data-scope="favorites"] span' ).html( 1 );
 						}
-					}
-
-					if ( undefined !== response.data.fav_count ) {
-						$( bp.Next.objectNavParent + ' [data-scope="favorites"] span' ).html( response.data.fav_count );
 					}
 
 					button.removeClass( 'fav' );
 					button.addClass( 'unfav' );
 
 				} else if ( 'unfav' === type ) {
-					if ( undefined !== response.data.no_favorite ) {
-						if ( $( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).hasClass( 'selected' ) ) {
-							$( bp.Next.objectNavParent + ' [data-scope="favorites"] span' ).html( 0 );
-							activity_item.remove();
-							stream.append( response.data.no_favorite );
-						} else if ( ! $( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).length ) {
-							activity_item.remove();
-							stream.append( response.data.no_favorite );
-						} else {
-							$( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).remove();
-						}
+					// If on user's profile or on the favorites directory tab, remove the entry
+					if ( ! $( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).length || $( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).hasClass( 'selected' )  ) {
+						activity_item.remove();
 					}
 
-					if ( undefined !== response.data.fav_count ) {
-						$( bp.Next.objectNavParent + ' [data-scope="favorites"] span' ).html( response.data.fav_count );
+					if ( undefined !== response.data.no_favorite ) {
+						// Remove the tab when on activity directory but not on the favorites tabs
+						if ( $( bp.Next.objectNavParent + ' [data-scope="all"]' ).length && $( bp.Next.objectNavParent + ' [data-scope="all"]' ).hasClass( 'selected' ) ) {
+							$( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).remove();
 
-						if ( $( bp.Next.objectNavParent + ' [data-scope="favorites"]' ).hasClass( 'selected' ) ) {
-							activity_item.remove();
+						// In all the other cases, append a message to the empty stream
+						} else {
+							stream.append( response.data.no_favorite );
 						}
 					}
 

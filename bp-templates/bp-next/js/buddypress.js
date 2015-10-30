@@ -21,6 +21,7 @@ window.bp = window.bp || {};
 			// HeartBeat Globals
 			this.heartbeat              = wp.heartbeat || {};
 			this.newest_activities      = '';
+			this.highlights             = {};
 			this.activity_last_recorded = 0;
 			this.first_item_recorded    = 0;
 			this.document_title         = $( document ).prop( 'title' );
@@ -39,8 +40,15 @@ window.bp = window.bp || {};
 		},
 
 		prepareFields: function() {
+			var search_title;
+
 			// Transform text field into search field
 			$( '#buddypress li.dir-search input[type=text]' ).prop( 'type', 'search' );
+
+			// Add a title attribute and use an icon for the search submit button
+			search_title = $( '#buddypress li.dir-search input[type=submit]' ).prop( 'value' );
+			$( '#buddypress li.dir-search input[type=submit]' ).prop( 'title', search_title );
+			$( '#buddypress li.dir-search input[type=submit]' ).prop( 'value', BP_Next.search_icon );
 		},
 
 		/**
@@ -120,7 +128,7 @@ window.bp = window.bp || {};
 		 * Query objects and refresh the objets list
 		 */
 		objectRequest: function( object, scope, filter, target, search_terms, page, extras, caller, template ) {
-			var postdata, clone = {};
+			var postdata, clone = {}, self = this;
 
 			if ( null !== scope ) {
 				this.setStorage( 'bp-' + object, 'scope', scope );
@@ -206,6 +214,9 @@ window.bp = window.bp || {};
 						$( '#buddypress #activity-stream' ).fadeOut( 100, function() {
 							$( this ).html( response.data.contents );
 							$( this ).fadeIn( 100 );
+
+							// Make sure the All members dynamic span is reset
+							$( self.objectNavParent + ' [data-scope="all"]' ).find( 'a span' ).html( '' );
 
 							// Inform other scripts the list of activities has been refreshed.
 							$( target ).trigger( 'bp_ajax_request', $.extend( clone, { response: response.data } ) );
@@ -334,7 +345,8 @@ window.bp = window.bp || {};
 		},
 
 		heartbeatTick: function( event, data ) {
-			var newest_activities_count;
+			var newest_activities_count, newest_activities, objects = bp.Next.objects
+				scope = bp.Next.getStorage( 'bp-activity', 'scope' );
 
 			// Only proceed if we have newest activities
 			if ( ! data.bp_activity_newest_activities ) {
@@ -343,17 +355,81 @@ window.bp = window.bp || {};
 
 			bp.Next.newest_activities = $.trim( data.bp_activity_newest_activities.activities ) + bp.Next.newest_activities;
 			bp.Next.activity_last_recorded  = Number( data.bp_activity_newest_activities.last_recorded );
-			newest_activities_count = Number( $( bp.Next.newest_activities ).filter( '.activity-item' ).length );
 
+			// Parse activities
+			newest_activities = $( bp.Next.newest_activities ).filter( '.activity-item' );
+
+			// Count them
+			newest_activities_count = Number( newest_activities.length );
+
+			/**
+			 * On the All Members tab, we need to know these activities are about
+			 * in order to update all the other tabs dynamic span
+			 */
+			if ( 'all' === scope ) {
+				/**
+				 * It's not a regular object but we need it!
+				 * so let's add it temporarly..
+				 */
+				objects.push( 'mentions' );
+
+				$.each( newest_activities, function( a, activity ) {
+					var activity = $( activity );
+
+					$.each( objects, function( o, object ) {
+						if ( -1 !== $.inArray( 'bp-my-' + object, activity.get( 0 ).classList ) ) {
+							if ( undefined === bp.Next.highlights[ object ] ) {
+								bp.Next.highlights[ object ] = [ activity.data( 'id' ) ];
+							} else if ( -1 === $.inArray( activity.data( 'id' ), bp.Next.highlights[ object ] ) ) {
+								bp.Next.highlights[ object ].push( activity.data( 'id' ) );
+							}
+						}
+					} );
+				} );
+
+				// Remove the specific classes to count highligthts
+				var regexp = new RegExp( 'bp-my-(' + objects.join( '|' ) + ')', 'g' );
+				bp.Next.newest_activities = bp.Next.newest_activities.replace( regexp, '' );
+
+				/**
+				 * Let's remove the mentions from objects!
+				 */
+				 objects.pop();
+
+				/** 
+				 * Deal with the 'All Members' dynamic span from here as HeartBeat is working even when 
+				 * the user is not logged in
+				 */
+				 $( bp.Next.objectNavParent + ' [data-scope="all"]' ).find( 'a span' ).html( newest_activities_count );
+
+			// Set all activities to be highlighted for the current scope
+			} else {
+				// Init the array of highlighted activities
+				bp.Next.highlights[ scope ] = [];
+
+				$.each( newest_activities, function( a, activity ) {
+					bp.Next.highlights[ scope ].push( $( activity ).data ( 'id' ) );
+				} );
+			}
+
+			// Add an information about the number of newest activities inside the document's title
 			$( document ).prop( 'title', '(' + newest_activities_count + ') ' + bp.Next.document_title );
 
+			// Update the Load Newest li if it already exists.
 			if ( $( '#buddypress #activity-stream li' ).first().hasClass( 'load-newest' ) ) {
 				newest_link = $( '#buddypress #activity-stream .load-newest a' ).html();
 				$( '#buddypress #activity-stream .load-newest a' ).html( newest_link.replace( /([0-9]+)/, newest_activities_count ) );
-				return;
+
+			// Otherwise add it
+			} else {
+				$( '#buddypress #activity-stream' ).prepend( '<li class="load-newest"><a href="#newest">' + BP_Next.newest + ' (' + newest_activities_count + ')</a></li>' );
 			}
 
-			$( '#buddypress #activity-stream' ).prepend( '<li class="load-newest"><a href="#newest">' + BP_Next.newest + ' (' + newest_activities_count + ')</a></li>' );
+			/**
+			 * Finally trigger a pending event containing the number of newest activities
+			 * by scope.
+			 */
+			$( '#buddypress #activity-stream' ).trigger( 'bp_heartbeat_pending' );
 		},
 	}
 
@@ -391,9 +467,9 @@ window.bp = window.bp || {};
 			search_terms = $( '#buddypress .dir-search input[type=search]' ).val();
 		}
 
-		// Remove the New count on the mentions tab
-		if ( 'activity' === object && 'mentions' === scope ) {
-			target.find( 'a strong' ).remove();
+		// Remove the New count on dynamic tabs
+		if ( 'activity' === object && target.hasClass( 'dynamic' ) ) {
+			target.find( 'a span' ).html('');
 		}
 
 		bp.Next.objectRequest( object, scope, filter, '#buddypress .bp-' + object + '-list', search_terms, 1 );
@@ -477,20 +553,7 @@ window.bp = window.bp || {};
 	 * Only keep 5 root comments after each activity request and highlight new mentions
 	 * once the corresponding tab has been clicked
 	 */
-	$( '#buddypress .bp-activity-list' ).on( 'bp_ajax_request', function( event, data ) {
-		bp.Next.truncateComments( event, data );
-
-		// In case of mentions, we'll highlight temporarly these
-		if ( 'mentions' === data.scope && undefined !== data.response.new_mentions ) {
-			$.each( data.response.new_mentions, function( i, id ) {
-				$( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).addClass( 'new_mention' );
-			} );
-
-			setTimeout( function () {
-				$( '#buddypress #activity-stream .activity-item' ).removeClass( 'new_mention' );
-			}, 3000 );
-		}
-	} );
+	$( '#buddypress .bp-activity-list' ).on( 'bp_ajax_request', bp.Next.truncateComments );
 
 	/**
 	 * Show all activity comments if requested
@@ -537,8 +600,18 @@ window.bp = window.bp || {};
 			// Now the stream is cleaned, prepend newest
 			$( event.delegateTarget ).prepend( bp.Next.newest_activities ).trigger( 'bp_heartbeat_prepend' );
 
-			// reset the newest activities now they're displayed
+			// Reset the newest activities now they're displayed
 			bp.Next.newest_activities = '';
+
+			/**
+			 * Reset highlights ???
+			bp.Next.highlights = [];
+			*/
+
+			// Reset the All members tab dynamic span id it's the current one
+			if ( 'all' === bp.Next.getStorage( 'bp-activity', 'scope' ) ) {
+				$( bp.Next.objectNavParent + ' [data-scope="all"]' ).find( 'a span' ).html( '' );
+			}
 
 			// Reset the document title
 			$( document ).prop( 'title', bp.Next.document_title );
