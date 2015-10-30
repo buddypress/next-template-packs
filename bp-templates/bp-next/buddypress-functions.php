@@ -159,11 +159,11 @@ class BP_Next extends BP_Theme_Compat {
 
 			// Activity.
 			'activity_get_older_updates'  => 'bp_legacy_theme_activity_template_loader',
-			'activity_mark_fav'           => 'bp_legacy_theme_mark_activity_favorite',
-			'activity_mark_unfav'         => 'bp_legacy_theme_unmark_activity_favorite',
+			'activity_mark_fav'           => 'bp_next_mark_activity_favorite',
+			'activity_mark_unfav'         => 'bp_next_unmark_activity_favorite',
 			'activity_clear_new_mentions' => 'bp_next_clear_new_mentions',
 			'activity_widget_filter'      => 'bp_legacy_theme_activity_template_loader',
-			'delete_activity'             => 'bp_legacy_theme_delete_activity',
+			'delete_activity'             => 'bp_next_delete_activity',
 			'delete_activity_comment'     => 'bp_legacy_theme_delete_activity_comment',
 			'get_single_activity_content' => 'bp_legacy_theme_get_single_activity_content',
 			'new_activity_comment'        => 'bp_legacy_theme_new_activity_comment',
@@ -1159,35 +1159,50 @@ function bp_legacy_theme_new_activity_comment() {
  *
  * @return mixed String on error, void on success.
  */
-function bp_legacy_theme_delete_activity() {
+function bp_next_delete_activity() {
+	$response = array(
+		'feedback' => sprintf(
+			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			esc_html__( 'There was a problem when deleting. Please try again.', 'bp-next' )
+		)
+	);
+
 	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
+	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		wp_send_json_error( $response );
+	}
 
-	// Check the nonce.
-	check_admin_referer( 'bp_activity_delete_link' );
+	// Nonce check!
+	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'bp_activity_jdelete_link' ) ) {
+		wp_send_json_error( $response );
+	}
 
-	if ( ! is_user_logged_in() )
-		exit( '-1' );
+	if ( ! is_user_logged_in() ) {
+		wp_send_json_error( $response );
+	}
 
-	if ( empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) )
-		exit( '-1' );
+	if ( empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) ) {
+		wp_send_json_error( $response );
+	}
 
 	$activity = new BP_Activity_Activity( (int) $_POST['id'] );
 
 	// Check access.
-	if ( ! bp_activity_user_can_delete( $activity ) )
-		exit( '-1' );
+	if ( ! bp_activity_user_can_delete( $activity ) ) {
+		wp_send_json_error( $response );
+	}
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_before_action_delete_activity', $activity->id, $activity->user_id );
 
-	if ( ! bp_activity_delete( array( 'id' => $activity->id, 'user_id' => $activity->user_id ) ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem when deleting. Please try again.', 'bp-next' ) . '</p></div>' );
+	if ( ! bp_activity_delete( array( 'id' => $activity->id, 'user_id' => $activity->user_id ) ) ) {
+		wp_send_json_error( $response );
+	}
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_action_delete_activity', $activity->id, $activity->user_id );
-	exit;
+	 
+	wp_send_json_success( array( 'deleted' => $activity->id ) );
 }
 
 /**
@@ -1281,7 +1296,7 @@ function bp_legacy_theme_spam_activity() {
  *
  * @return string HTML
  */
-function bp_legacy_theme_mark_activity_favorite() {
+function bp_next_mark_activity_favorite() {
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 		wp_send_json_error();
@@ -1322,7 +1337,7 @@ function bp_legacy_theme_mark_activity_favorite() {
  *
  * @return string HTML
  */
-function bp_legacy_theme_unmark_activity_favorite() {
+function bp_next_unmark_activity_favorite() {
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 		wp_send_json_error();

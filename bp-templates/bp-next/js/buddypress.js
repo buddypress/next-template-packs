@@ -88,6 +88,34 @@ window.bp = window.bp || {};
 			return sessionStorage.getItem( type ) !== null;
 		},
 
+		ajax: function( post_data ) {
+			$.extend( post_data, bp.Next.getStorage( 'bp-activity' ), { nonce: BP_Next.nonces.activity } );
+
+			return $.post( ajaxurl, post_data, 'json' );
+		},
+
+		getLinkParams: function( url, param ) {
+			if ( url ) {
+				qs = ( -1 !== url.indexOf( '?' ) ) ? '?' + url.split( '?' )[1] : '';
+			} else {
+				qs = document.location.search;
+			}
+
+			if ( ! qs ) {
+				return null;
+			}
+			
+			var params = qs.replace( /(^\?)/, '' ).split( '&' ).map( function( n ) { 
+				return n = n.split( '=' ),this[n[0]] = n[1],this
+			}.bind( {} ) )[0];
+
+			if ( param ) {
+				return params[param];
+			}
+
+			return params;
+		},
+
 		truncateComments: function( event, data ) {
 			var comments = $( event.target ).find( '.activity-comments' ),
 				activity_item, comment_items, comment_count;

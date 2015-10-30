@@ -21,7 +21,7 @@ window.bp = window.bp || {};
 
 		prepareScope: function( event ) {
 			var objects = bp.Next.objects;
-			
+
 			/**
 			 * It's not a regular object but we need it!
 			 * so let's add it temporarly..
@@ -46,7 +46,7 @@ window.bp = window.bp || {};
 			// Specific to mentions
 			if ( 'mentions' === scope ) {
 				// Now mentions are displayed, remove the user_metas
-				bp.Next.Activity.ajax( { action: 'activity_clear_new_mentions' } ).done( function( response ) {
+				bp.Next.ajax( { action: 'activity_clear_new_mentions' } ).done( function( response ) {
 					if ( false === response.success ) {
 						// Display a warning ?
 						console.log( 'warning' );
@@ -90,12 +90,6 @@ window.bp = window.bp || {};
 			setTimeout( function () {
 				$( '#buddypress #activity-stream .activity-item' ).removeClass( 'newest_' + data.scope +'_activity' );
 			}, 3000 );
-		},
-
-		ajax: function( post_data ) {
-			$.extend( post_data, bp.Next.getStorage( 'bp-activity' ), { nonce: BP_Next.nonces.activity } );
-
-			return $.post( ajaxurl, post_data, 'json' );
 		}
 	}
 
@@ -120,7 +114,7 @@ window.bp = window.bp || {};
 
 			button.addClass( 'loading' );
 
-			bp.Next.Activity.ajax( { action: 'activity_mark_' + type, 'id': activity_id } ).done( function( response ) {
+			bp.Next.ajax( { action: 'activity_mark_' + type, 'id': activity_id } ).done( function( response ) {
 				button.removeClass( 'loading' );
 
 				if ( false === response.success ) {
@@ -162,6 +156,35 @@ window.bp = window.bp || {};
 
 					button.removeClass( 'unfav' );
 					button.addClass( 'fav' );
+				}
+			} );
+		}
+
+		// Deleting
+		if ( button.hasClass( 'delete-activity' ) ) {
+			// Stop event propagation
+			event.preventDefault();
+
+			button.addClass( 'loading' );
+
+			bp.Next.ajax( {
+				action     : 'delete_activity',
+				'id'       : activity_id,
+				'_wpnonce' : bp.Next.getLinkParams( button.prop( 'href' ), '_wpnonce' )
+			} ).done( function( response ) {
+				button.removeClass( 'loading' );
+
+				if ( false === response.success ) {
+					activity_item.prepend( response.data.feedback );
+					activity_item.find( '.feedback' ).hide().fadeIn( 300 );
+				} else {
+					activity_item.slideUp( 300 );
+
+					// reset vars to get newest activities
+					if ( bp.Next.getActivityTimestamp( activity_item ) === bp.Next.activity_last_recorded ) {
+						bp.Next.newest_activities       = '';
+						bp.Next.activity_last_recorded  = 0;
+					}
 				}
 			} );
 		}
