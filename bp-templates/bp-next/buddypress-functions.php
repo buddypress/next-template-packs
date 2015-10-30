@@ -1173,7 +1173,7 @@ function bp_next_delete_activity() {
 	}
 
 	// Nonce check!
-	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'bp_activity_jdelete_link' ) ) {
+	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'bp_activity_delete_link' ) ) {
 		wp_send_json_error( $response );
 	}
 
@@ -1201,7 +1201,7 @@ function bp_next_delete_activity() {
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_action_delete_activity', $activity->id, $activity->user_id );
-	 
+
 	wp_send_json_success( array( 'deleted' => $activity->id ) );
 }
 

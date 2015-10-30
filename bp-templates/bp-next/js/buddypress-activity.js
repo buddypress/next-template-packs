@@ -29,9 +29,9 @@ window.bp = window.bp || {};
 		 */
 		addListeners: function() {
 			// HeartBeat listeners
-			$( '#buddypress' ).on( 'bp_heartbeat_pending', '#activity-stream', this.prepareScope );
-			$( '#buddypress' ).on( 'bp_heartbeat_prepend', '#activity-stream', this.updateScope );
-			$( '#buddypress' ).on( 'bp_ajax_request', '.bp-activity-list', this.scopeLoaded );
+			$( '#buddypress' ).on( 'bp_heartbeat_pending', '#activity-stream', bp.Next, this.prepareScope );
+			$( '#buddypress' ).on( 'bp_heartbeat_prepend', '#activity-stream', bp.Next, this.updateScope );
+			$( '#buddypress' ).on( 'bp_ajax_request', '.bp-activity-list', bp.Next, this.scopeLoaded );
 
 			// Activity actions
 			$( '#buddypress #activity-stream' ).on( 'click', '.activity-item', bp.Next, this.activityActions );
@@ -43,7 +43,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		prepareScope: function( event ) {
-			var objects = bp.Next.objects;
+			var parent = event.data, objects = parent.objects;
 
 			/**
 			 * It's not a regular object but we need it!
@@ -52,8 +52,8 @@ window.bp = window.bp || {};
 			objects.push( 'mentions' );
 
 			$.each( objects, function( o, object ) {
-				if ( undefined !== bp.Next.highlights[ object ] && bp.Next.highlights[ object ].length ) {
-					$( bp.Next.objectNavParent + ' [data-scope="' + object + '"]' ).find( 'a span' ).html( Number( bp.Next.highlights[ object ].length ) );
+				if ( undefined !== parent.highlights[ object ] && parent.highlights[ object ].length ) {
+					$( parent.objectNavParent + ' [data-scope="' + object + '"]' ).find( 'a span' ).html( Number( parent.highlights[ object ].length ) );
 				}
 			} );
 
@@ -69,12 +69,12 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		updateScope: function( event ) {
-			var scope = bp.Next.getStorage( 'bp-activity', 'scope' );
+			var parent = event.data, scope = parent.getStorage( 'bp-activity', 'scope' );
 
 			// Specific to mentions
 			if ( 'mentions' === scope ) {
 				// Now mentions are displayed, remove the user_metas
-				bp.Next.ajax( { action: 'activity_clear_new_mentions' }, 'activity' ).done( function( response ) {
+				parent.ajax( { action: 'activity_clear_new_mentions' }, 'activity' ).done( function( response ) {
 					if ( false === response.success ) {
 						// Display a warning ?
 						console.log( 'warning' );
@@ -83,11 +83,11 @@ window.bp = window.bp || {};
 			}
 
 			// Activities are now displayed, clear the newest count for the scope
-			$( bp.Next.objectNavParent + ' [data-scope="' + scope + '"]' ).find( 'a span' ).html( '' );
+			$( parent.objectNavParent + ' [data-scope="' + scope + '"]' ).find( 'a span' ).html( '' );
 
 			// Activities are now displayed, clear the highlighted activities for the scope
-			if ( undefined !== bp.Next.highlights[ scope ] ) {
-				bp.Next.highlights[ scope ] = [];
+			if ( undefined !== parent.highlights[ scope ] ) {
+				parent.highlights[ scope ] = [];
 			}
 
 			// Remove highlighted for the current scope
@@ -103,13 +103,15 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		scopeLoaded: function ( event, data ) {
+			var parent = event.data;
+
 			// Mentions are specific
 			if ( 'mentions' === data.scope && undefined !== data.response.new_mentions ) {
 				$.each( data.response.new_mentions, function( i, id ) {
 					$( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).addClass( 'newest_mentions_activity' );
 				} );
-			} else if ( undefined !== bp.Next.highlights[data.scope] && bp.Next.highlights[data.scope].length ) {
-				$.each( bp.Next.highlights[data.scope], function( i, id ) {
+			} else if ( undefined !== parent.highlights[data.scope] && parent.highlights[data.scope].length ) {
+				$.each( parent.highlights[data.scope], function( i, id ) {
 					if ( $( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).length ) {
 						$( '#buddypress #activity-stream' ).find( '[data-id="' + id + '"]' ).addClass( 'newest_' + data.scope + '_activity' );
 					}
@@ -117,8 +119,8 @@ window.bp = window.bp || {};
 			}
 
 			// Activities are now loaded, clear the highlighted activities for the scope
-			if ( undefined !== bp.Next.highlights[ data.scope ] ) {
-				bp.Next.highlights[ data.scope ] = [];
+			if ( undefined !== parent.highlights[ data.scope ] ) {
+				parent.highlights[ data.scope ] = [];
 			}
 
 			setTimeout( function () {

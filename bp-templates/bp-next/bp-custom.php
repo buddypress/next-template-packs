@@ -149,15 +149,10 @@ if ( ! function_exists( 'bp_directory_activity_search_form' ) ) :
 function bp_directory_activity_search_form() {
 
 	$query_arg = bp_core_get_component_search_query_arg( 'activity' );
-
-	if ( ! empty( $_REQUEST[ $query_arg ] ) ) {
-		$search_value = stripslashes( $_REQUEST[ $query_arg ] );
-	} else {
-		$search_value = bp_get_search_default_text( 'activity' );
-	}
+	$placeholder = bp_get_search_default_text( 'activity' );
 
 	$search_form_html = '<form action="" method="get" id="search-activity-form">
-		<label for="activity_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="activity_search" placeholder="'. esc_attr( $search_value ) .'" /></label>
+		<label for="activity_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="activity_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
 		<input type="submit" id="activity_search_submit" name="activity_search_submit" value="'. __( 'Search', 'bp-next' ) .'" />
 	</form>';
 
@@ -174,6 +169,54 @@ function bp_directory_activity_search_form() {
 
 endif;
 
+/**
+ * BuddyPress shouldn't use the placeholder the way it does imho!
+ *
+ * @todo filter group members / sites ... well anywhere :)
+ */
+function bp_next_directory_groups_search_form( $search_form_html = '' ) {
+
+	$query_arg   = bp_core_get_component_search_query_arg( 'groups' );
+	$placeholder = bp_get_search_default_text( 'groups' );
+
+	$search_form_html = '<form action="" method="get" id="search-groups-form">
+		<label for="groups_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="groups_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
+		<input type="submit" id="groups_search_submit" name="groups_search_submit" value="'. __( 'Search', 'bp-next' ) .'" />
+	</form>';
+
+	/**
+	 * Filters the HTML markup for the groups search form.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $search_form_html HTML markup for the search form.
+	 */
+	echo apply_filters( 'bp_next_directory_groups_search_form', $search_form_html );
+
+}
+add_filter( 'bp_directory_groups_search_form', 'bp_next_directory_groups_search_form', 10, 1 );
+
+function bp_next_directory_members_search_form() {
+
+	$query_arg = bp_core_get_component_search_query_arg( 'members' );
+	$placeholder = bp_get_search_default_text( 'members' );
+
+	$search_form_html = '<form action="" method="get" id="search-members-form">
+		<label for="members_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="members_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
+		<input type="submit" id="members_search_submit" name="members_search_submit" value="' . __( 'Search', 'bp-next' ) . '" />
+	</form>';
+
+	/**
+	 * Filters the Members component search form.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $search_form_html HTML markup for the member search form.
+	 */
+	echo apply_filters( 'bp_next_directory_members_search_form', $search_form_html );
+}
+add_filter( 'bp_directory_members_search_form', 'bp_next_directory_members_search_form', 10, 1 );
+
 function bp_next_activity_scope_newest_class( $classes = '' ) {
 	if ( ! is_user_logged_in() ) {
 		return $classes;
@@ -187,9 +230,9 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 
 	/**
 	 * HeartBeat requests will transport the scope
-	 * 
+	 *
 	 * @see bp_next_ajax_querystring()
-	 */ 
+	 */
 	$scope = '';
 
 	if ( ! empty( $_POST['data']['bp_heartbeat']['scope'] ) ) {
@@ -198,11 +241,11 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 
 	/**
 	 * Add specific classes to perform specific actions on the client side
-	 */ 
+	 */
 	if ( $scope && bp_is_activity_directory() ) {
 		$component  = bp_get_activity_object_name();
 
-		/** 
+		/**
 		 * These classes will be used to count the number of newest activities for
 		 * the 'Mentions', 'My Groups' & 'My Friends' tabs
 		 */
@@ -231,7 +274,7 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 				}
 			}
 
-		/** 
+		/**
 		 * This class will be used to highlight the newest activities when
 		 * viewing the 'Mentions', 'My Groups' or the 'My Friends' tabs
 		 */
@@ -241,7 +284,7 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 
 		/**
 		 * Leave other components do their specific stuff if needed.
-		 */ 
+		 */
 		$myclasses = (array) apply_filters( 'bp_next_activity_scope_newest_class', $my_classes, $scope );
 
 		if ( ! empty( $my_classes ) ) {

@@ -58,6 +58,9 @@ window.bp = window.bp || {};
 			this.activity_last_recorded = 0;
 			this.first_item_recorded    = 0;
 			this.document_title         = $( document ).prop( 'title' );
+
+			// An object containing each query var
+			this.querystring            = this.getLinkParams();
 		},
 
 		/**
@@ -83,13 +86,15 @@ window.bp = window.bp || {};
 				} );
 			}
 
-			// Transform text field into search field
-			$( '#buddypress li.dir-search input[type=text]' ).prop( 'type', 'search' );
+			if ( $( '#buddypress li.dir-search input[type=text]' ).length ) {
+				// Transform text field into search field
+				$( '#buddypress li.dir-search input[type=text]' ).prop( 'type', 'search' );
 
-			// Add a title attribute and use an icon for the search submit button
-			search_title = $( '#buddypress li.dir-search input[type=submit]' ).prop( 'value' );
-			$( '#buddypress li.dir-search input[type=submit]' ).prop( 'title', search_title );
-			$( '#buddypress li.dir-search input[type=submit]' ).prop( 'value', BP_Next.search_icon );
+				// Add a title attribute and use an icon for the search submit button
+				search_title = $( '#buddypress li.dir-search input[type=submit]' ).prop( 'value' );
+				$( '#buddypress li.dir-search input[type=submit]' ).prop( 'title', search_title );
+				$( '#buddypress li.dir-search input[type=submit]' ).prop( 'value', BP_Next.search_icon );
+			}
 		},
 
 		/** Helpers *******************************************************************/
@@ -333,7 +338,7 @@ window.bp = window.bp || {};
 		 * @return {[type]} [description]
 		 */
 		initObjects: function() {
-			var self = this, objectData = {}, scope = 'all';
+			var self = this, objectData = {}, scope = 'all', search_terms = '';
 
 			$.each( this.objects, function( o, object ) {
 				objectData = self.getStorage( 'bp-' + object );
@@ -354,9 +359,28 @@ window.bp = window.bp || {};
 					$( this.objectNavParent + ' [data-scope="' + object + '"], #object-nav li.current' ).addClass( 'selected' );
 				}
 
+				// Check the querystring to eventually include the search terms
+				if ( null !== self.querystring ) {
+					if ( undefined !== self.querystring[ object + '_search'] ) {
+						search_terms = self.querystring[ object + '_search'];
+					} else if ( undefined !== self.querystring.s ) {
+						search_terms = self.querystring.s;
+					}
+
+					if ( search_terms ) {
+						var selector = '.dir-search';
+
+						if ( 'group_members' === object ) {
+							selector = '.groups-members-search';
+						}
+
+						$( '#buddypress ' + selector + ' input[type=search]' ).val( search_terms );
+					}
+				}
+
 				if ( $( '#buddypress .bp-' + object + '-list').length ) {
 					// Populate the object list
-					self.objectRequest( object, scope, objectData.filter, '#buddypress .bp-' + object + '-list', '', 1 );
+					self.objectRequest( object, scope, objectData.filter, '#buddypress .bp-' + object + '-list', search_terms, 1 );
 				}
 			} );
 		},
