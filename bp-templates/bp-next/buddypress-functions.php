@@ -165,8 +165,8 @@ class BP_Next extends BP_Theme_Compat {
 			'activity_widget_filter'      => 'bp_legacy_theme_activity_template_loader',
 			'delete_activity'             => 'bp_next_delete_activity',
 			'delete_activity_comment'     => 'bp_legacy_theme_delete_activity_comment',
-			'get_single_activity_content' => 'bp_legacy_theme_get_single_activity_content',
-			'new_activity_comment'        => 'bp_legacy_theme_new_activity_comment',
+			'get_single_activity_content' => 'bp_next_get_single_activity_content',
+			'new_activity_comment'        => 'bp_next_new_activity_comment',
 			'post_update'                 => 'bp_legacy_theme_post_update',
 			'bp_spam_activity'            => 'bp_legacy_theme_spam_activity',
 			'bp_spam_activity_comment'    => 'bp_legacy_theme_spam_activity',
@@ -1082,31 +1082,40 @@ function bp_legacy_theme_post_update() {
  *
  * @return string HTML
  */
-function bp_legacy_theme_new_activity_comment() {
+function bp_next_new_activity_comment() {
 	global $activities_template;
-
 	$bp = buddypress();
+
+	$response = array(
+		'feedback' => sprintf(
+			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			esc_html__( 'There was an error posting your reply. Please try again.', 'bp-next' )
+		)
+	);
 
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
-		return;
+		wp_send_json_error( $response );
 	}
 
-	// Check the nonce.
-	check_admin_referer( 'new_activity_comment', '_wpnonce_new_activity_comment' );
+	// Nonce check!
+	if ( empty( $_POST['_wpnonce_new_activity_comment'] ) || ! wp_verify_nonce( $_POST['_wpnonce_new_activity_comment'], 'new_activity_comment' ) ) {
+		wp_send_json_error( $response );
+	}
 
 	if ( ! is_user_logged_in() ) {
-		exit( '-1' );
+		wp_send_json_error( $response );
 	}
 
-	$feedback = __( 'There was an error posting your reply. Please try again.', 'bp-next' );
-
 	if ( empty( $_POST['content'] ) ) {
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . esc_html__( 'Please do not leave the comment area blank.', 'bp-next' ) . '</p></div>' );
+		wp_send_json_error( array( 'feedback' => sprintf(
+			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			esc_html__( 'Please do not leave the comment area blank.', 'bp-next' )
+		) ) );
 	}
 
 	if ( empty( $_POST['form_id'] ) || empty( $_POST['comment_id'] ) || ! is_numeric( $_POST['form_id'] ) || ! is_numeric( $_POST['comment_id'] ) ) {
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . esc_html( $feedback ) . '</p></div>' );
+		wp_send_json_error( $response );
 	}
 
 	$comment_id = bp_activity_new_comment( array(
@@ -1117,20 +1126,28 @@ function bp_legacy_theme_new_activity_comment() {
 
 	if ( ! $comment_id ) {
 		if ( ! empty( $bp->activity->errors['new_comment'] ) && is_wp_error( $bp->activity->errors['new_comment'] ) ) {
-			$feedback = $bp->activity->errors['new_comment']->get_error_message();
+			$response = array( 'feedback' => sprintf(
+				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+				esc_html( $bp->activity->errors['new_comment']->get_error_message() )
+			) );
 			unset( $bp->activity->errors['new_comment'] );
 		}
 
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . esc_html( $feedback ) . '</p></div>' );
+		wp_send_json_error( $response );
 	}
 
 	// Load the new activity item into the $activities_template global.
-	bp_has_activities( 'display_comments=stream&hide_spam=false&show_hidden=true&include=' . $comment_id );
+	bp_has_activities( array(
+		'display_comments' => 'stream',
+		'hide_spam'        => false,
+		'show_hidden'      => true,
+		'include'          => $comment_id,
+	) );
 
 	// Swap the current comment with the activity item we just loaded.
 	if ( isset( $activities_template->activities[0] ) ) {
 		$activities_template->activity = new stdClass();
-		$activities_template->activity->id              = $activities_template->activities[0]->item_id;
+		$activities_template->activity->id = $activities_template->activities[0]->item_id;
 		$activities_template->activity->current_comment = $activities_template->activities[0];
 
 		// Because the whole tree has not been loaded, we manually
@@ -1145,11 +1162,15 @@ function bp_legacy_theme_new_activity_comment() {
 		$activities_template->activity->current_comment->depth = $depth;
 	}
 
+	ob_start();
 	// Get activity comment template part.
 	bp_get_template_part( 'activity/comment' );
+	$response = array( 'contents' => ob_get_contents() );
+	ob_end_clean();
 
 	unset( $activities_template );
-	exit;
+
+	wp_send_json_success( $response );
 }
 
 /**
@@ -1386,33 +1407,47 @@ function bp_next_clear_new_mentions() {
  * Fetches an activity's full, non-excerpted content via a POST request.
  * Used for the 'Read More' link on long activity items.
  *
- * @since 1.5.0
+ * @since 1.0.0
  *
  * @return string HTML
  */
-function bp_legacy_theme_get_single_activity_content() {
+function bp_next_get_single_activity_content() {
+	$response = array(
+		'feedback' => sprintf(
+			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			esc_html__( 'There was a problem displaying the content. Please try again.', 'bp-next' )
+		)
+	);
+
 	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
+	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// Nonce check!
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_activity' ) ) {
+		wp_send_json_error( $response );
+	}
 
 	$activity_array = bp_activity_get_specific( array(
-		'activity_ids'     => $_POST['activity_id'],
+		'activity_ids'     => $_POST['id'],
 		'display_comments' => 'stream'
 	) );
 
-	$activity = ! empty( $activity_array['activities'][0] ) ? $activity_array['activities'][0] : false;
+	if ( empty( $activity_array['activities'][0] ) ) {
+		wp_send_json_error( $response );
+	}
 
-	if ( empty( $activity ) )
-		exit; // @todo: error?
+	$activity = $activity_array['activities'][0];
 
 	/**
 	 * Fires before the return of an activity's full, non-excerpted content via a POST request.
 	 *
-	 * @since 1.7.0
+	 * @since 1.0.0
 	 *
 	 * @param string $activity Activity content. Passed by reference.
 	 */
-	do_action_ref_array( 'bp_legacy_theme_get_single_activity_content', array( &$activity ) );
+	do_action_ref_array( 'bp_next_get_single_activity_content', array( &$activity ) );
 
 	// Activity content retrieved through AJAX should run through normal filters, but not be truncated.
 	remove_filter( 'bp_get_activity_content_body', 'bp_activity_truncate_entry', 5 );
@@ -1420,7 +1455,7 @@ function bp_legacy_theme_get_single_activity_content() {
 	/** This filter is documented in bp-activity/bp-activity-template.php */
 	$content = apply_filters( 'bp_get_activity_content_body', $activity->content );
 
-	exit( $content );
+	wp_send_json_success( array( 'contents' => $content ) );
 }
 
 /**

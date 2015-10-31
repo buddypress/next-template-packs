@@ -16,7 +16,7 @@
  */
 do_action( 'bp_before_activity_comment' ); ?>
 
-<li id="acomment-<?php bp_activity_comment_id(); ?>">
+<li id="acomment-<?php bp_activity_comment_id(); ?>" data-commentid="<?php bp_activity_comment_id(); ?>">
 	<div class="acomment-avatar">
 		<a href="<?php bp_activity_comment_user_link(); ?>">
 			<?php bp_activity_avatar( 'type=thumb&user_id=' . bp_get_activity_comment_user_id() ); ?>

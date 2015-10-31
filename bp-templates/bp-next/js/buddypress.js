@@ -323,7 +323,7 @@ window.bp = window.bp || {};
 					// Appending more activities to current stream
 					} else {
 						$( '#buddypress #activity-stream' ).append( response.data.contents );
-						$( '#buddypress #activity-stream li.load-more' ).remove();
+						$( '#buddypress #activity-stream li.load-more' ).first().remove();
 
 						// Inform other scripts the list of activities has been refreshed.
 						$( target ).trigger( 'bp_ajax_append', $.extend( clone, { response: response.data } ) );
@@ -757,7 +757,7 @@ window.bp = window.bp || {};
 				// Stop event propagation
 				event.preventDefault();
 
-				//$( event.currentTarget ).addClass( 'loading' );
+				$( event.currentTarget ).find( 'a' ).first().addClass( 'loading' );
 
 				// reset the just posted
 				self.just_posted = [];
@@ -800,7 +800,7 @@ window.bp = window.bp || {};
 				activity_item = $( comment ).closest( '.activity-item' );
 
 				// Get the comment count
-				comment_count = $('#acomment-comment-' + activity_item.data( 'id' ) + ' span' ).html() || ' ';
+				comment_count = $('#acomment-comment-' + activity_item.data( 'id' ) + ' span.comment-count' ).html() || ' ';
 
 				// Keep first 5 root comments
 				comment_items.each( function( i, item ) {

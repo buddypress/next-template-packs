@@ -329,6 +329,42 @@ body.activity-permalink #buddypress div.activity-meta {
 #buddypress div.activity-meta a {
 	padding: 4px 8px;
 }
+
+#buddypress div.activity-meta a.button {
+	border:none;
+	background: none;
+	text-decoration: none;
+}
+
+#buddypress div.activity-meta a.button:before {
+	font-family: dashicons;
+	font-size: 18px;
+}
+
+#buddypress div.activity-meta a.acomment-reply:before {
+	content: "\f101";
+	vertical-align: bottom;
+}
+
+#buddypress div.activity-meta a.fav:before {
+	content: "\f154";
+	vertical-align: bottom;
+}
+
+#buddypress div.activity-meta a.unfav:before {
+	content: "\f155";
+	vertical-align: bottom;
+}
+
+#buddypress div.activity-meta a.delete-activity:before {
+	content: "\f153";
+	vertical-align: bottom;
+}
+
+#buddypress div.activity-meta a.delete-activity:hover {
+	color: #800;
+}
+
 #buddypress a.activity-time-since {
 	color: #aaa;
 	text-decoration: none;
@@ -363,6 +399,13 @@ body.activity-permalink #buddypress div.activity-meta {
 	width: auto;
 	clear: both;
 }
+
+#buddypress div.activity-meta a.button span {
+	color: #555;
+	background: none;
+	font-weight: bold;
+}
+
 body.activity-permalink #buddypress div.activity-comments {
 	background: none;
 	margin-left: 170px;
@@ -1495,6 +1538,11 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	display: none;
 }
 
+.buddypress_object_nav div.item-list-tabs ul li.dynamic a span,
+.buddypress_object_nav div.item-list-tabs ul li.dynamic a:hover span,
+.buddypress_object_nav div.item-list-tabs ul li.dynamic.selected a span,
+.buddypress_object_nav div.item-list-tabs ul li.dynamic.current a span,
+.buddypress_object_nav div.item-list-tabs ul li.dynamic a:hover span,
 #buddypress div.item-list-tabs ul li.dynamic a span,
 #buddypress div.item-list-tabs ul li.dynamic a:hover span,
 #buddypress div.item-list-tabs ul li.dynamic.selected a span,

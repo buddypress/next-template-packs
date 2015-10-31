@@ -64,7 +64,7 @@ do_action( 'bp_before_activity_entry' ); ?>
 
 				<?php if ( bp_activity_can_comment() ) : ?>
 
-					<a href="<?php bp_activity_comment_link(); ?>" class="button acomment-reply bp-primary-action" id="acomment-comment-<?php bp_activity_id(); ?>"><?php printf( __( 'Comment %s', 'bp-next' ), '<span>' . bp_activity_get_comment_count() . '</span>' ); ?></a>
+					<a href="<?php bp_activity_comment_link(); ?>" class="button acomment-reply bp-primary-action" id="acomment-comment-<?php bp_activity_id(); ?>" title="<?php esc_attr_e( 'Comment', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php esc_html_e( 'Comment', 'bp-next' ); ?></span> <span class="comment-count"><?php bp_activity_comment_count(); ?></span></a>
 
 				<?php endif; ?>
 
@@ -72,11 +72,11 @@ do_action( 'bp_before_activity_entry' ); ?>
 
 					<?php if ( !bp_get_activity_is_favorite() ) : ?>
 
-						<a href="<?php bp_activity_favorite_link(); ?>" class="button fav bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'bp-next' ); ?>"><?php _e( 'Favorite', 'bp-next' ); ?></a>
+						<a href="<?php bp_activity_favorite_link(); ?>" class="button fav bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Favorite', 'bp-next' ); ?></span></a>
 
 					<?php else : ?>
 
-						<a href="<?php bp_activity_unfavorite_link(); ?>" class="button unfav bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'bp-next' ); ?>"><?php _e( 'Remove Favorite', 'bp-next' ); ?></a>
+						<a href="<?php bp_activity_unfavorite_link(); ?>" class="button unfav bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Remove Favorite', 'bp-next' ); ?></span></a>
 
 					<?php endif; ?>
 
