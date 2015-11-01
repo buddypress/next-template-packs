@@ -86,7 +86,7 @@ do_action( 'bp_before_directory_members_page' ); ?>
 		</ul>
 	</div>
 
-	<div id="members-dir-list" class="members dir-list bp-members-list">
+	<div id="members-dir-list" class="members dir-list bp-members-list" data-bp-list="members">
 		<div id="bp-ajax-loader">loading</div>
 	</div><!-- #members-dir-list -->
 

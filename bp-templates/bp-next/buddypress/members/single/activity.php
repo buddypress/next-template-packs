@@ -63,7 +63,7 @@ do_action( 'bp_before_member_activity_content' ); ?>
 
 <div class="activity bp-activity-list single-user">
 
-	<ul id="activity-stream" class="activity-list item-list">
+	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
 		<li id="bp-activity-ajax-loader">loading</li>
 

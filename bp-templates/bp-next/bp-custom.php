@@ -302,17 +302,19 @@ function bp_next_activity_time_since( $time_since, $activity = null ) {
 	}
 
 	return apply_filters( 'bp_next_activity_time_since', sprintf(
-		'<span class="time-since" data-timestamp="%1$d">%2$s</span>',
-		strtotime( $activity->date_recorded ),
-		bp_core_time_since( $activity->date_recorded )
+		'<time class="time-since" datetime="%1$s" data-timestamp="%2$d">%3$s</time>',
+		esc_attr( $activity->date_recorded ),
+		esc_attr( strtotime( $activity->date_recorded ) ),
+		esc_attr( bp_core_time_since( $activity->date_recorded ) )
 	) );
 }
 add_filter( 'bp_activity_time_since', 'bp_next_activity_time_since', 10, 2 );
 
 function bp_next_activity_allowed_tags( $activity_allowedtags = array() ) {
-	if ( isset( $activity_allowedtags['span'] ) ) {
-		$activity_allowedtags['span']['data-timestamp'] = array();
-	}
+	$activity_allowedtags['time'] = array();
+	$activity_allowedtags['time']['class'] = array();
+	$activity_allowedtags['time']['datetime'] = array();
+	$activity_allowedtags['time']['data-timestamp'] = array();
 
 	return $activity_allowedtags;
 }

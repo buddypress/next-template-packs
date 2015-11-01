@@ -95,17 +95,11 @@ do_action( 'bp_before_directory_activity' ); ?>
 
 	<div class="activity bp-activity-list">
 
-		<ul id="activity-stream" class="activity-list item-list">
+		<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		 	<li id="bp-ajax-loader">loading</li>
+		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Requesting the community updates, please wait.', 'bp-next' ) ;?></li>
 
 		</ul>
-
-		<form action="" name="activity-loop-form" id="activity-loop-form" method="post">
-
-			<?php wp_nonce_field( 'activity_filter', '_wpnonce_activity_filter' ); ?>
-
-		</form><!-- activity-loop-form -->
 
 	</div><!-- .activity -->
 
