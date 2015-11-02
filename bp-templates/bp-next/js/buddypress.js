@@ -481,7 +481,7 @@ window.bp = window.bp || {};
 		 */
 		heartbeatSend: function( event, data ) {
 			// Add an heartbeat send event to possibly any BuddyPress pages
-			$( '#buddypress' ).trigger( 'bp_heartbeat_send', { event, data } );
+			$( '#buddypress' ).trigger( 'bp_heartbeat_send', data );
 		},
 
 		/**
@@ -492,7 +492,7 @@ window.bp = window.bp || {};
 		 */
 		heartbeatTick: function( event, data ) {
 			// Add an heartbeat send event to possibly any BuddyPress pages
-			$( '#buddypress' ).trigger( 'bp_heartbeat_tick', { event, data } );
+			$( '#buddypress' ).trigger( 'bp_heartbeat_tick', data );
 		},
 
 		/**

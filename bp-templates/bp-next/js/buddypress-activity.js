@@ -75,24 +75,24 @@ window.bp = window.bp || {};
 
 		/**
 		 * [heartbeatSend description]
-		 * @param  {[type]} event          [description]
-		 * @param  {[type]} heartbeat_send [description]
-		 * @return {[type]}                [description]
+		 * @param  {[type]} event [description]
+		 * @param  {[type]} data  [description]
+		 * @return {[type]}       [description]
 		 */
-		heartbeatSend: function( event, heartbeat_send ) {
+		heartbeatSend: function( event, data ) {
 			this.heartbeat_data.first_recorded = $( '#buddypress [data-bp-list] [data-bp-activity-id] time' ).first().data( 'timestamp' ) || 0;
 
 			if ( 0 === this.heartbeat_data.last_recorded || this.heartbeat_data.first_recorded > this.heartbeat_data.last_recorded ) {
 				this.heartbeat_data.last_recorded = this.heartbeat_data.first_recorded;
 			}
 
-			heartbeat_send.data.bp_activity_last_recorded = this.heartbeat_data.last_recorded;
+			data.bp_activity_last_recorded = this.heartbeat_data.last_recorded;
 
 			if ( $( '#buddypress .dir-search input[type=search]' ).length ) {
-				heartbeat_send.data.bp_activity_last_recorded_search_terms = $( '#buddypress .dir-search input[type=search]' ).val();
+				data.bp_activity_last_recorded_search_terms = $( '#buddypress .dir-search input[type=search]' ).val();
 			}
 
-			$.extend( heartbeat_send.data, { bp_heartbeat: bp.Next.getStorage( 'bp-activity' ) } );
+			$.extend( data, { bp_heartbeat: bp.Next.getStorage( 'bp-activity' ) } );
 
 			// Update all displayed time
 			$.each( $( '#buddypress time' ), function( t, time ) {
@@ -105,20 +105,20 @@ window.bp = window.bp || {};
 		/**
 		 * [heartbeatTick description]
 		 * @param  {[type]} event          [description]
-		 * @param  {[type]} heartbeat_tick [description]
+		 * @param  {[type]} data           [description]
 		 * @return {[type]}                [description]
 		 */
-		heartbeatTick: function( event, heartbeat_tick ) {
+		heartbeatTick: function( event, data ) {
 			var newest_activities_count, newest_activities, objects = bp.Next.objects,
 				scope = bp.Next.getStorage( 'bp-activity', 'scope' ), self = this;
 
 			// Only proceed if we have newest activities
-			if ( ! heartbeat_tick.data.bp_activity_newest_activities ) {
+			if ( undefined === data || ! data.bp_activity_newest_activities ) {
 				return;
 			}
 
-			this.heartbeat_data.newest = $.trim( heartbeat_tick.data.bp_activity_newest_activities.activities ) + this.heartbeat_data.newest;
-			this.heartbeat_data.last_recorded  = Number( heartbeat_tick.data.bp_activity_newest_activities.last_recorded );
+			this.heartbeat_data.newest = $.trim( data.bp_activity_newest_activities.activities ) + this.heartbeat_data.newest;
+			this.heartbeat_data.last_recorded  = Number( data.bp_activity_newest_activities.last_recorded );
 
 			// Parse activities
 			newest_activities = $( this.heartbeat_data.newest ).filter( '.activity-item' );
@@ -407,6 +407,9 @@ window.bp = window.bp || {};
 			if ( undefined !== this.heartbeat_data.highlights[ data.scope ] ) {
 				this.heartbeat_data.highlights[ data.scope ] = [];
 			}
+
+			// Reset the document title
+			$( document ).prop( 'title', this.heartbeat_data.document_title );
 
 			setTimeout( function () {
 				$( '#buddypress #activity-stream .activity-item' ).removeClass( 'newest_' + data.scope +'_activity' );
