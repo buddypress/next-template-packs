@@ -7,38 +7,6 @@
  */
 
 ?>
-<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-	<ul>
-		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>"><?php _e( 'RSS', 'bp-next' ); ?></a></li>
-
-		<?php
-
-		/**
-		 * Fires inside the syndication options list, after the RSS option.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_group_activity_syndication_options' ); ?>
-
-		<li id="activity-filter-select" class="last">
-			<label for="activity-filter-by"><?php _e( 'Show:', 'bp-next' ); ?></label>
-			<select id="activity-filter-by">
-				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
-
-				<?php bp_activity_show_filters( 'group' ); ?>
-
-				<?php
-
-				/**
-				 * Fires inside the select input for group activity filter options.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_group_activity_filter_options' ); ?>
-			</select>
-		</li>
-	</ul>
-</div><!-- .item-list-tabs -->
 
 <?php
 
@@ -63,6 +31,44 @@ do_action( 'bp_before_group_activity_post_form' ); ?>
  * @since 1.2.0
  */
 do_action( 'bp_after_group_activity_post_form' ); ?>
+
+<div class="item-list-tabs" id="subnav" role="navigation">
+	<ul>
+		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
+
+		<li class="group-search" role="search" data-bp-search="activity">
+			<?php bp_directory_activity_search_form(); ?>
+		</li>
+
+		<?php
+
+		/**
+		 * Fires inside the syndication options list, after the RSS option.
+		 *
+		 * @since 1.2.0
+		 */
+		do_action( 'bp_group_activity_syndication_options' ); ?>
+
+		<li id="activity-filter-select" class="last filter">
+			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-next' ); ?></span></label>
+			<select id="activity-filter-by" data-bp-filter="activity">
+				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
+
+				<?php bp_activity_show_filters( 'group' ); ?>
+
+				<?php
+
+				/**
+				 * Fires inside the select input for group activity filter options.
+				 *
+				 * @since 1.2.0
+				 */
+				do_action( 'bp_group_activity_filter_options' ); ?>
+			</select>
+		</li>
+	</ul>
+</div><!-- .item-list-tabs -->
+
 <?php
 
 /**
@@ -72,9 +78,9 @@ do_action( 'bp_after_group_activity_post_form' ); ?>
  */
 do_action( 'bp_before_group_activity_content' ); ?>
 
-<div class="activity bp-activity-list single-group">
+<div class="activity single-group">
 
-	<ul id="activity-stream" class="activity-list item-list">
+	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
 		<li id="bp-activity-ajax-loader">loading</li>
 

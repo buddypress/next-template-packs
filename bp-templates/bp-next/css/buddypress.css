@@ -540,24 +540,18 @@ body.activity-permalink #buddypress div.activity-comments div.acomment-content {
 /*--------------------------------------------------------------
 3.3 - Directories - Members, Groups, Blogs, Forums
 --------------------------------------------------------------*/
-#buddypress div.dir-search {
-	float: right;
-	margin: -39px 0 0 0;
-}
 
-#buddypress li.dir-search form input[type="search"],
-#buddypress div.dir-search input[type=text],
-#buddypress li.dir-search input[type=text],
-#buddypress li.groups-members-search input[type=text] {
+#buddypress [data-bp-search] form input[type="search"],
+#buddypress [data-bp-search] input[type=text] {
 	font-size: 90%;
 	padding: 5px 10px;
 }
-#buddypress li.dir-search form input[type="search"],
-#buddypress li.dir-search input[type=text] {
+#buddypress [data-bp-search] form input[type="search"],
+#buddypress [data-bp-search] input[type=text] {
 	float:left;
 	width:65%;
 }
-#buddypress li.dir-search form input[type='submit'] {
+#buddypress [data-bp-search] form input[type='submit'] {
 	float: left;
 	font-weight: normal;
 	padding: 5px 10px;
@@ -565,24 +559,23 @@ body.activity-permalink #buddypress div.activity-comments div.acomment-content {
 	text-transform: none;
 	width: auto;
 }
-#buddypress li.dir-search form input[type='submit'],
-#buddypress li.groups-members-search form input[type='submit'] {
+#buddypress [data-bp-search] form input[type='submit'] {
 	font-size: 90%;
 	border-left: none;
 	line-height: inherit;
 	display: none;
 }
 
-#buddypress li.dir-search form input[type="search"]::-webkit-search-cancel-button {
+#buddypress [data-bp-search] form input[type="search"]::-webkit-search-cancel-button {
 	-webkit-appearance: searchfield-cancel-button;
 }
 
-#buddypress li.dir-search form input[type="search"]::-webkit-search-results-button,
-#buddypress li.dir-search form input[type="search"]::-webkit-search-results-decoration {
+#buddypress [data-bp-search] form input[type="search"]::-webkit-search-results-button,
+#buddypress [data-bp-search] form input[type="search"]::-webkit-search-results-decoration {
 	display: none;
 }
 
-#buddypress li.dir-search form input[type="submit"] {
+#buddypress [data-bp-search] form input[type="submit"] {
 	font-family: dashicons;
 }
 
@@ -720,8 +713,8 @@ body.activity-permalink #buddypress div.activity-comments div.acomment-content {
 #buddypress .standard-form input[type=week],
 #buddypress .standard-form select,
 #buddypress .standard-form input[type=password],
-#buddypress .dir-search input[type=search],
-#buddypress .dir-search input[type=text],
+#buddypress [data-bp-search] input[type=search],
+#buddypress [data-bp-search] input[type=text],
 #buddypress .groups-members-search input[type=search],
 #buddypress .groups-members-search input[type=text] {
 	border: 1px solid #ccc;
@@ -1429,14 +1422,16 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	margin: 0;
 	list-style: none;
 }
-#buddypress div.item-list-tabs#subnav ul li {
+#buddypress div.item-list-tabs#subnav ul li,
+#buddypress div.item-list-tabs#subsubnav ul li {
 	margin-top: 0;
 }
 #buddypress div.item-list-tabs ul li.last {
 	float: right;
 	margin: 7px 0 0;
 }
-#buddypress div.item-list-tabs#subnav ul li.last {
+#buddypress div.item-list-tabs#subnav ul li.last,
+#buddypress div.item-list-tabs#subsubnav ul li.last {
 	margin-top: 4px;
 }
 #buddypress div.item-list-tabs ul li.last select {
@@ -1508,7 +1503,8 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 #buddypress div.item-list-tabs#object-nav {
 	margin-top: 0;
 }
-#buddypress div.item-list-tabs#subnav {
+#buddypress div.item-list-tabs#subnav,
+#buddypress div.item-list-tabs#subsubnav {
 	background: transparent;
 	margin: 10px 0 10px;
 	overflow: hidden;
@@ -1856,12 +1852,12 @@ body.register #buddypress div.page ul {
 4.1 - Smartphones - landscape
 --------------------------------------------------------------*/
 @media only screen and (max-width: 480px ){
-	#buddypress div.dir-search {
+	#buddypress [data-bp-search] {
 		float: right;
 		margin-top: -50px;
 		text-align: right;
 	}
-	#buddypress div.dir-search input[type="text"] {
+	#buddypress [data-bp-search] input[type="text"] {
 		margin-bottom: 1em;
 		width: 50%;
 	}
@@ -1881,7 +1877,7 @@ body.register #buddypress div.page ul {
 4.2 - Smartphones - portrait
 --------------------------------------------------------------*/
 @media only screen and (max-width: 320px) {
-	#buddypress div.dir-search {
+	#buddypress [data-bp-search] {
 		clear: left;
 		float: left;
 		margin-top: 0;
@@ -1926,11 +1922,11 @@ body.register #buddypress div.page ul {
 4.2 - Smartphones - smaller screen sizes
 --------------------------------------------------------------*/
 @media only screen and (max-width: 240px) {
-	#buddypress div.dir-search {
+	#buddypress [data-bp-search] {
 		float: left;
 		margin: 0;
 	}
-	#buddypress div.dir-search input[type="text"] {
+	#buddypress [data-bp-search] input[type="text"] {
 		width: 50%;
 	}
 	#buddypress li#groups-order-select {

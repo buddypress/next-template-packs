@@ -50,7 +50,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 		<ul>
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
-			<li class="dir-search" role="search" data-search="activity">
+			<li class="dir-search" role="search" data-bp-search="activity">
 				<?php bp_directory_activity_search_form(); ?>
 			</li>
 
@@ -65,7 +65,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 
 			<li id="activity-filter-select" class="last filter">
 				<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-next' ); ?></span></label>
-				<select id="activity-filter-by" data-filter="activity">
+				<select id="activity-filter-by" data-bp-filter="activity">
 					<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
 
 					<?php bp_activity_show_filters(); ?>
@@ -93,11 +93,11 @@ do_action( 'bp_before_directory_activity' ); ?>
 	 */
 	do_action( 'bp_before_directory_activity_list' ); ?>
 
-	<div class="activity bp-activity-list">
+	<div class="activity">
 
 		<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Requesting the community updates, please wait.', 'bp-next' ) ;?></li>
+		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Loading the community updates, please wait.', 'bp-next' ) ;?></li>
 
 		</ul>
 

@@ -38,7 +38,7 @@ window.bp = window.bp || {};
 			this.current_page   = 1;
 
 			// Init mentions count
-			this.mentions_count = Number( $( bp.Next.objectNavParent + ' [data-scope="mentions"]' ).find( 'a span' ).html() ) || 0;
+			this.mentions_count = Number( $( bp.Next.objectNavParent + ' [data-bp-scope="mentions"]' ).find( 'a span' ).html() ) || 0;
 
 			// HeartBeat Globals
 			this.heartbeat_data = {
@@ -80,7 +80,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		heartbeatSend: function( event, data ) {
-			this.heartbeat_data.first_recorded = $( '#buddypress [data-bp-list] [data-bp-activity-id] time' ).first().data( 'timestamp' ) || 0;
+			this.heartbeat_data.first_recorded = $( '#buddypress [data-bp-list] [data-bp-activity-id] time' ).first().data( 'bp-timestamp' ) || 0;
 
 			if ( 0 === this.heartbeat_data.last_recorded || this.heartbeat_data.first_recorded > this.heartbeat_data.last_recorded ) {
 				this.heartbeat_data.last_recorded = this.heartbeat_data.first_recorded;
@@ -96,8 +96,8 @@ window.bp = window.bp || {};
 
 			// Update all displayed time
 			$.each( $( '#buddypress time' ), function( t, time ) {
-				if ( $( time ).data( 'timestamp' ) ) {
-					$( time ).html( bp.Next.updateTimeSince( Number( $( time ).data( 'timestamp' ) ) ) );
+				if ( $( time ).data( 'bp-timestamp' ) ) {
+					$( time ).html( bp.Next.updateTimeSince( Number( $( time ).data( 'bp-timestamp' ) ) ) );
 				}
 			} );
 		},
@@ -160,7 +160,7 @@ window.bp = window.bp || {};
 				 * Deal with the 'All Members' dynamic span from here as HeartBeat is working even when
 				 * the user is not logged in
 				 */
-				 $( bp.Next.objectNavParent + ' [data-scope="all"]' ).find( 'a span' ).html( newest_activities_count );
+				 $( bp.Next.objectNavParent + ' [data-bp-scope="all"]' ).find( 'a span' ).html( newest_activities_count );
 
 			// Set all activities to be highlighted for the current scope
 			} else {
@@ -180,7 +180,7 @@ window.bp = window.bp || {};
 						count = self.mentions_count;
 					}
 
-					$( bp.Next.objectNavParent + ' [data-scope="' + object + '"]' ).find( 'a span' ).html( Number( self.heartbeat_data.highlights[ object ].length ) + count );
+					$( bp.Next.objectNavParent + ' [data-bp-scope="' + object + '"]' ).find( 'a span' ).html( Number( self.heartbeat_data.highlights[ object ].length ) + count );
 				}
 			} );
 
@@ -247,7 +247,7 @@ window.bp = window.bp || {};
 
 				// Reset the All members tab dynamic span id it's the current one
 				if ( 'all' === scope ) {
-					$( bp.Next.objectNavParent + ' [data-scope="all"]' ).find( 'a span' ).html( '' );
+					$( bp.Next.objectNavParent + ' [data-bp-scope="all"]' ).find( 'a span' ).html( '' );
 				}
 
 				// Specific to mentions
@@ -258,7 +258,7 @@ window.bp = window.bp || {};
 				}
 
 				// Activities are now displayed, clear the newest count for the scope
-				$( bp.Next.objectNavParent + ' [data-scope="' + scope + '"]' ).find( 'a span' ).html( '' );
+				$( bp.Next.objectNavParent + ' [data-bp-scope="' + scope + '"]' ).find( 'a span' ).html( '' );
 
 				// Activities are now displayed, clear the highlighted activities for the scope
 				if ( undefined !== this.heartbeat_data.highlights[ scope ] ) {
@@ -401,7 +401,7 @@ window.bp = window.bp || {};
 
 			// Reset the newest activities now they're displayed
 			this.heartbeat_data.newest = '';
-			$( bp.Next.objectNavParent + ' [data-scope="all"]' ).find( 'a span' ).html( '' );
+			$( bp.Next.objectNavParent + ' [data-bp-scope="all"]' ).find( 'a span' ).html( '' );
 
 			// Activities are now loaded, clear the highlighted activities for the scope
 			if ( undefined !== this.heartbeat_data.highlights[ data.scope ] ) {
@@ -453,8 +453,8 @@ window.bp = window.bp || {};
 
 					if ( 'fav' === type ) {
 						if ( undefined !== response.data.directory_tab ) {
-							if ( ! $( parent.objectNavParent + ' [data-scope="favorites"]' ).length ) {
-								$( parent.objectNavParent + ' [data-scope="all"]' ).after( response.data.directory_tab );
+							if ( ! $( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).length ) {
+								$( parent.objectNavParent + ' [data-bp-scope="all"]' ).after( response.data.directory_tab );
 							}
 						}
 
@@ -463,14 +463,14 @@ window.bp = window.bp || {};
 
 					} else if ( 'unfav' === type ) {
 						// If on user's profile or on the favorites directory tab, remove the entry
-						if ( ! $( parent.objectNavParent + ' [data-scope="favorites"]' ).length || $( parent.objectNavParent + ' [data-scope="favorites"]' ).hasClass( 'selected' )  ) {
+						if ( ! $( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).length || $( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).hasClass( 'selected' )  ) {
 							activity_item.remove();
 						}
 
 						if ( undefined !== response.data.no_favorite ) {
 							// Remove the tab when on activity directory but not on the favorites tabs
-							if ( $( parent.objectNavParent + ' [data-scope="all"]' ).length && $( parent.objectNavParent + ' [data-scope="all"]' ).hasClass( 'selected' ) ) {
-								$( parent.objectNavParent + ' [data-scope="favorites"]' ).remove();
+							if ( $( parent.objectNavParent + ' [data-bp-scope="all"]' ).length && $( parent.objectNavParent + ' [data-bp-scope="all"]' ).hasClass( 'selected' ) ) {
+								$( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).remove();
 
 							// In all the other cases, append a message to the empty stream
 							} else {
@@ -505,7 +505,7 @@ window.bp = window.bp || {};
 						activity_item.slideUp( 300 );
 
 						// reset vars to get newest activities
-						if ( activity_item.find( 'time' ).first().data( 'timestamp' ) === parent.Activity.heartbeat_data.last_recorded ) {
+						if ( activity_item.find( 'time' ).first().data( 'bp-timestamp' ) === parent.Activity.heartbeat_data.last_recorded ) {
 							parent.Activity.heartbeat_data.newest        = '';
 							parent.Activity.heartbeat_data.last_recorded  = 0;
 						}

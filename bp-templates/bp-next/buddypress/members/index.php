@@ -51,7 +51,7 @@ do_action( 'bp_before_directory_members_page' ); ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
 		<ul>
-			<li class="dir-search" role="search" data-search="members">
+			<li class="dir-search" role="search" data-bp-search="members">
 				<?php bp_directory_members_search_form(); ?>
 			</li>
 			<?php
@@ -64,8 +64,8 @@ do_action( 'bp_before_directory_members_page' ); ?>
 			do_action( 'bp_members_directory_member_sub_types' ); ?>
 
 			<li id="members-order-select" class="last filter">
-				<label for="members-order-by"><?php _e( 'Order By:', 'bp-next' ); ?></label>
-				<select id="members-order-by" data-filter="members">
+				<label for="members-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
+				<select id="members-order-by" data-bp-filter="members">
 					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
 					<option value="newest"><?php _e( 'Newest Registered', 'bp-next' ); ?></option>
 
@@ -86,7 +86,7 @@ do_action( 'bp_before_directory_members_page' ); ?>
 		</ul>
 	</div>
 
-	<div id="members-dir-list" class="members dir-list bp-members-list" data-bp-list="members">
+	<div id="members-dir-list" class="members dir-list" data-bp-list="members">
 		<div id="bp-ajax-loader">loading</div>
 	</div><!-- #members-dir-list -->
 

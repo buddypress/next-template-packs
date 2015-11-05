@@ -1359,7 +1359,7 @@ function bp_next_mark_activity_favorite() {
 			$fav_count = (int) bp_get_total_favorite_count_for_user( bp_loggedin_user_id() );
 
 			if ( 1 === $fav_count ) {
-				$response['directory_tab'] = '<li id="activity-favorites" class="bp-activity-primary-nav" data-scope="favorites" data-object="activity">
+				$response['directory_tab'] = '<li id="activity-favorites" data-bp-scope="favorites" data-bp-object="activity">
 					<a href="' . bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/" title="' . esc_attr__( "The activity I've marked as a favorite.", 'bp-next' ) . '">
 						' . esc_html__( 'My Favorites', 'bp-next' ) . '
 					</a>

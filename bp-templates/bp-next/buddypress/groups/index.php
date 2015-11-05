@@ -33,96 +33,77 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 	 */
 	do_action( 'bp_before_directory_groups_content' ); ?>
 
-	<div id="group-dir-search" class="dir-search" role="search">
-		<?php bp_directory_groups_search_form(); ?>
-	</div><!-- #group-dir-search -->
+	<?php
 
-	<form action="" method="post" id="groups-directory-form" class="dir-form">
+	/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
+	do_action( 'template_notices' ); ?>
 
-		<?php
+	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
 
-		/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-		do_action( 'template_notices' ); ?>
+		<?php bp_get_template_part( 'groups/object-nav' ); ?>
 
-		<div class="item-list-tabs" role="navigation">
-			<ul>
-				<li class="selected" id="groups-all"><a href="<?php bp_groups_directory_permalink(); ?>"><?php printf( __( 'All Groups %s', 'bp-next' ), '<span>' . bp_get_total_group_count() . '</span>' ); ?></a></li>
+	<?php endif; ?>
 
-				<?php if ( is_user_logged_in() && bp_get_total_group_count_for_user( bp_loggedin_user_id() ) ) : ?>
-					<li id="groups-personal"><a href="<?php echo bp_loggedin_user_domain() . bp_get_groups_slug() . '/my-groups/'; ?>"><?php printf( __( 'My Groups %s', 'bp-next' ), '<span>' . bp_get_total_group_count_for_user( bp_loggedin_user_id() ) . '</span>' ); ?></a></li>
-				<?php endif; ?>
+	<div class="item-list-tabs" id="subnav" role="navigation">
+		<ul>
+			<li class="dir-search" role="search" data-bp-search="groups">
+				<?php bp_directory_groups_search_form(); ?>
+			</li>
+			<?php
 
-				<?php
+			/**
+			 * Fires inside the groups directory group types.
+			 *
+			 * @since 1.2.0
+			 */
+			do_action( 'bp_groups_directory_group_types' ); ?>
 
-				/**
-				 * Fires inside the groups directory group filter input.
-				 *
-				 * @since 1.5.0
-				 */
-				do_action( 'bp_groups_directory_group_filter' ); ?>
+			<li id="groups-order-select" class="last filter">
 
-			</ul>
-		</div><!-- .item-list-tabs -->
+				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
 
-		<div class="item-list-tabs" id="subnav" role="navigation">
-			<ul>
-				<?php
+				<select id="groups-order-by" data-bp-filter="groups">
+					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
+					<option value="popular"><?php _e( 'Most Members', 'bp-next' ); ?></option>
+					<option value="newest"><?php _e( 'Newly Created', 'bp-next' ); ?></option>
+					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
 
-				/**
-				 * Fires inside the groups directory group types.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_groups_directory_group_types' ); ?>
+					<?php
 
-				<li id="groups-order-select" class="last filter">
+					/**
+					 * Fires inside the groups directory group order options.
+					 *
+					 * @since 1.2.0
+					 */
+					do_action( 'bp_groups_directory_order_options' ); ?>
+				</select>
+			</li>
+		</ul>
+	</div>
 
-					<label for="groups-order-by"><?php _e( 'Order By:', 'bp-next' ); ?></label>
+	<div id="groups-dir-list" class="groups dir-list" data-bp-list="groups">
+		<div id="bp-ajax-loader">loading</div>
+	</div><!-- #groups-dir-list -->
 
-					<select id="groups-order-by">
-						<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-						<option value="popular"><?php _e( 'Most Members', 'bp-next' ); ?></option>
-						<option value="newest"><?php _e( 'Newly Created', 'bp-next' ); ?></option>
-						<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
+	<?php
 
-						<?php
+	/**
+		 * Fires and displays the group content.
+		 *
+		 * @since 1.1.0
+		 */
+	do_action( 'bp_directory_groups_content' ); ?>
 
-						/**
-						 * Fires inside the groups directory group order options.
-						 *
-						 * @since 1.2.0
-						 */
-						do_action( 'bp_groups_directory_order_options' ); ?>
-					</select>
-				</li>
-			</ul>
-		</div>
+	<?php wp_nonce_field( 'directory_groups', '_wpnonce-groups-filter' ); ?>
 
-		<div id="groups-dir-list" class="groups dir-list">
-			<?php bp_get_template_part( 'groups/groups-loop' ); ?>
-		</div><!-- #groups-dir-list -->
+	<?php
 
-		<?php
-
-		/**
- 		 * Fires and displays the group content.
- 		 *
- 		 * @since 1.1.0
- 		 */
-		do_action( 'bp_directory_groups_content' ); ?>
-
-		<?php wp_nonce_field( 'directory_groups', '_wpnonce-groups-filter' ); ?>
-
-		<?php
-
-		/**
- 		 * Fires after the display of the groups content.
- 		 *
- 		 * @since 1.1.0
- 		 */
-		do_action( 'bp_after_directory_groups_content' ); ?>
-
-	</form><!-- #groups-directory-form -->
+	/**
+		 * Fires after the display of the groups content.
+		 *
+		 * @since 1.1.0
+		 */
+	do_action( 'bp_after_directory_groups_content' ); ?>
 
 	<?php
 

@@ -5,10 +5,13 @@
  * @package BuddyPress
  * @subpackage bp-legacy
  */
-
 ?>
 
-<?php if ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
+<?php if ( empty( $_POST ) ) : ?>
+
+	<div id="bp-ajax-loader"><?php esc_html_e( 'Requesting the group members, please wait.', 'bp-next' ) ;?></div>
+
+<?php elseif ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
 
 	<?php
 

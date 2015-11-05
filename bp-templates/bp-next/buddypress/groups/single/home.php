@@ -35,24 +35,11 @@
 
 	</div><!-- #item-header -->
 
-	<div id="item-nav">
-		<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
-			<ul>
+	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
 
-				<?php bp_get_options_nav(); ?>
+		<?php bp_get_template_part( 'groups/single/item-nav' ); ?>
 
-				<?php
-
-				/**
-				 * Fires after the display of group options navigation.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_group_options_nav' ); ?>
-
-			</ul>
-		</div>
-	</div><!-- #item-nav -->
+	<?php endif; ?>
 
 	<div id="item-body">
 
@@ -118,9 +105,6 @@
 
 				// Group Invitations
 				elseif ( bp_is_group_invites()    ) : bp_get_template_part( 'groups/single/send-invites' );
-
-				// Old group forums
-				elseif ( bp_is_group_forum()      ) : bp_get_template_part( 'groups/single/forum'        );
 
 				// Membership request
 				elseif ( bp_is_group_membership_request() ) : bp_get_template_part( 'groups/single/request-membership' );

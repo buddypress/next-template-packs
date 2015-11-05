@@ -13,26 +13,8 @@
 
 		<?php bp_get_options_nav(); ?>
 
-		<li id="activity-filter-select" class="last filter">
-			<label for="activity-filter-by"><?php _e( 'Show:', 'bp-next' ); ?></label>
-			<select id="activity-filter-by" data-filter="activity">
-				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
-
-				<?php bp_activity_show_filters(); ?>
-
-				<?php
-
-				/**
-				 * Fires inside the select input for member activity filter options.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_member_activity_filter_options' ); ?>
-
-			</select>
-		</li>
 	</ul>
-</div><!-- .item-list-tabs -->
+</div><!-- .item-list-tabs#subnav -->
 
 <?php
 
@@ -52,8 +34,35 @@ if ( is_user_logged_in() && bp_is_my_profile() && ( !bp_current_action() || bp_i
  *
  * @since 1.2.0
  */
-do_action( 'bp_after_member_activity_post_form' );
+do_action( 'bp_after_member_activity_post_form' ); ?>
 
+<div class="item-list-tabs no-ajax" id="subsubnav">
+	<ul>
+		<li class="member-search" role="search" data-bp-search="activity">
+			<?php bp_directory_activity_search_form(); ?>
+		</li>
+		<li id="activity-filter-select" class="last filter">
+			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-next' ); ?></span></label>
+			<select id="activity-filter-by" data-bp-filter="activity">
+				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
+
+				<?php bp_activity_show_filters(); ?>
+
+				<?php
+
+				/**
+				 * Fires inside the select input for member activity filter options.
+				 *
+				 * @since 1.2.0
+				 */
+				do_action( 'bp_member_activity_filter_options' ); ?>
+
+			</select>
+		</li>
+	</ul>
+</div><!-- .item-list-tabs#subsubnav -->
+
+<?php
 /**
  * Fires before the display of the member activities list.
  *
@@ -61,11 +70,11 @@ do_action( 'bp_after_member_activity_post_form' );
  */
 do_action( 'bp_before_member_activity_content' ); ?>
 
-<div class="activity bp-activity-list single-user">
+<div class="activity single-user">
 
 	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		<li id="bp-activity-ajax-loader">loading</li>
+		<li id="bp-ajax-loader"><?php esc_html_e( 'Loading your updates, please wait.', 'bp-next' ) ;?></li>
 
 	</ul>
 

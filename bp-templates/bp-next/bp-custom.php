@@ -69,7 +69,11 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 		if ( ! empty( $item_nav_args[ 'bp_next_widget_title' ] ) ) {
 			$title = '';
 
-			if ( bp_get_directory_title( bp_current_component() ) ) {
+			if ( bp_is_active( 'groups' ) && bp_get_current_group_name() ) {
+				$title = bp_get_current_group_name();
+			} elseif ( bp_is_user() ) {
+				$title = bp_get_displayed_user_fullname();
+			} elseif ( bp_get_directory_title( bp_current_component() ) ) {
 				$title = bp_get_directory_title( bp_current_component() );
 			}
 		}
@@ -86,6 +90,12 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 			bp_get_template_part( 'activity/object-nav' );
 		} elseif ( bp_is_members_directory() ) {
 			bp_get_template_part( 'members/object-nav' );
+		} elseif ( bp_is_user() ) {
+			bp_get_template_part( 'members/single/item-nav' );
+		} elseif ( bp_is_groups_directory() ) {
+			bp_get_template_part( 'groups/object-nav' );
+		} elseif ( bp_is_group() ) {
+			bp_get_template_part( 'groups/single/item-nav' );
 		}
 
 		echo $args['after_widget'];
@@ -196,9 +206,23 @@ function bp_next_directory_groups_search_form( $search_form_html = '' ) {
 }
 add_filter( 'bp_directory_groups_search_form', 'bp_next_directory_groups_search_form', 10, 1 );
 
+function bp_next_get_component_search_query_arg( $query_arg, $component = '' ) {
+	if ( 'members' === $component ) {
+		$query_arg = str_replace( '_s', '_search', $query_arg );
+
+		if ( bp_is_group() ) {
+			$query_arg = 'group_' . $query_arg;
+		}
+	}
+
+	return $query_arg;
+}
+add_filter( 'bp_core_get_component_search_query_arg', 'bp_next_get_component_search_query_arg', 10, 2 );
+
 function bp_next_directory_members_search_form() {
 
 	$query_arg = bp_core_get_component_search_query_arg( 'members' );
+
 	$placeholder = bp_get_search_default_text( 'members' );
 
 	$search_form_html = '<form action="" method="get" id="search-members-form">
@@ -302,7 +326,7 @@ function bp_next_activity_time_since( $time_since, $activity = null ) {
 	}
 
 	return apply_filters( 'bp_next_activity_time_since', sprintf(
-		'<time class="time-since" datetime="%1$s" data-timestamp="%2$d">%3$s</time>',
+		'<time class="time-since" datetime="%1$s" data-bp-timestamp="%2$d">%3$s</time>',
 		esc_attr( $activity->date_recorded ),
 		esc_attr( strtotime( $activity->date_recorded ) ),
 		esc_attr( bp_core_time_since( $activity->date_recorded ) )
@@ -314,7 +338,7 @@ function bp_next_activity_allowed_tags( $activity_allowedtags = array() ) {
 	$activity_allowedtags['time'] = array();
 	$activity_allowedtags['time']['class'] = array();
 	$activity_allowedtags['time']['datetime'] = array();
-	$activity_allowedtags['time']['data-timestamp'] = array();
+	$activity_allowedtags['time']['data-bp-timestamp'] = array();
 
 	return $activity_allowedtags;
 }
@@ -336,3 +360,68 @@ function bp_next_get_activity_delete_link( $delete_link = '' ) {
 	return apply_filters( 'bp_next_get_activity_delete_link', $delete_link );
 }
 add_filter( 'bp_get_activity_delete_link', 'bp_next_get_activity_delete_link', 10, 1 );
+
+/**
+ * Allow members to search inside their activity mentions
+ *
+ * This is a copy paste of bp_activity_filter_mentions_scope()
+ * without the search_terms hard resetting. I think members should
+ * be able to search into their activity mentions.
+ *
+ * @see https://buddypress.trac.wordpress.org/ticket/6713
+ *
+ * @since 1.0.0
+ *
+ * @param array $retval Empty array by default.
+ * @param array $filter Current activity arguments.
+ * @return array $retval
+ */
+function bp_next_activity_filter_mentions_scope( $retval = array(), $filter = array() ) {
+
+	// Are mentions disabled?
+	if ( ! bp_activity_do_mentions() ) {
+		return $retval;
+	}
+
+	// Determine the user_id.
+	if ( ! empty( $filter['user_id'] ) ) {
+		$user_id = $filter['user_id'];
+	} else {
+		$user_id = bp_displayed_user_id()
+			? bp_displayed_user_id()
+			: bp_loggedin_user_id();
+	}
+
+	// Should we show all items regardless of sitewide visibility?
+	$show_hidden = array();
+	if ( ! empty( $user_id ) && $user_id !== bp_loggedin_user_id() ) {
+		$show_hidden = array(
+			'column' => 'hide_sitewide',
+			'value'  => 0
+		);
+	}
+
+	$retval = array(
+		'relation' => 'AND',
+		array(
+			'column'  => 'content',
+			'compare' => 'LIKE',
+
+			// Start search at @ symbol and stop search at closing tag delimiter.
+			'value'   => '@' . bp_activity_get_user_mentionname( $user_id ) . '<'
+		),
+		$show_hidden,
+
+		// Overrides.
+		'override' => array(
+			'display_comments' => 'stream',
+			'filter'           => array( 'user_id' => 0 ),
+			'show_hidden'      => true
+		),
+	);
+
+	return $retval;
+}
+add_filter( 'bp_activity_set_mentions_scope_args', 'bp_next_activity_filter_mentions_scope', 10, 2 );
+// Remove Core filter as it's not possible to search inside mentions otherwise
+remove_filter( 'bp_activity_set_mentions_scope_args', 'bp_activity_filter_mentions_scope', 10, 2 );

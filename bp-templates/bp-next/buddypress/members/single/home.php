@@ -34,24 +34,11 @@
 
 	</div><!-- #item-header -->
 
-	<div id="item-nav">
-		<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
-			<ul>
+	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
 
-				<?php bp_get_displayed_user_nav(); ?>
+		<?php bp_get_template_part( 'members/single/item-nav' ); ?>
 
-				<?php
-
-				/**
-				 * Fires after the display of member options navigation.
-				 *
-				 * @since 1.2.4
-				 */
-				do_action( 'bp_member_options_nav' ); ?>
-
-			</ul>
-		</div>
-	</div><!-- #item-nav -->
+	<?php endif; ?>
 
 	<div id="item-body">
 
@@ -81,9 +68,6 @@
 
 		elseif ( bp_is_user_profile() ) :
 			bp_get_template_part( 'members/single/profile'  );
-
-		elseif ( bp_is_user_forums() ) :
-			bp_get_template_part( 'members/single/forums'   );
 
 		elseif ( bp_is_user_notifications() ) :
 			bp_get_template_part( 'members/single/notifications' );
