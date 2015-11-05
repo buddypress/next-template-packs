@@ -20,7 +20,7 @@
 	 */
 	do_action( 'bp_before_group_home_content' ); ?>
 
-	<div id="item-header" role="complementary">
+	<div id="item-header" role="complementary" data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
 
 		<?php
 		/**

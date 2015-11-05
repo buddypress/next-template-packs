@@ -50,7 +50,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
 
-		<li <?php bp_member_class(); ?>>
+		<li <?php bp_member_class(); ?>  data-bp-item-id="<?php bp_member_user_id(); ?>" data-bp-item-component="members">
 			<div class="item-avatar">
 				<a href="<?php bp_member_permalink(); ?>"><?php bp_member_avatar(); ?></a>
 			</div>

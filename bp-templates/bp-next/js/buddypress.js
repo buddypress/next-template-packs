@@ -43,7 +43,7 @@ window.bp = window.bp || {};
 			this.ajax_request           = null;
 
 			// Object Globals
-			this.objects                = $.map( BP_Next.objects, function(value, key) { return value; } );
+			this.objects                = $.map( BP_Next.objects, function( value, key ) { return value; } );
 			this.objectNavParent        = BP_Next.object_nav_parent;
 			this.time_since             = BP_Next.time_since;
 
@@ -479,6 +479,9 @@ window.bp = window.bp || {};
 			$( '#buddypress [data-bp-search]' ).on( 'focus', 'input[type=search]', this.showSearchSubmit );
 			$( '#buddypress [data-bp-search]' ).on( 'blur', 'input[type=search]', this.hideSearchSubmit );
 			$( '#buddypress [data-bp-search] form' ).on( 'search', 'input[type=search]', this.resetSearch );
+
+			// Buttons
+			$( '#buddypress [data-bp-list], #buddypress #item-header' ).on( 'click', '[data-bp-btn-action]', this, this.buttonAction );
 		},
 
 		/** Event Callbacks ***********************************************************/
@@ -658,6 +661,75 @@ window.bp = window.bp || {};
 				$( event.delegateTarget ).find( 'input[type=submit]' ).show();
 			}
 		},
+
+		buttonAction: function( event ) {
+			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ),
+				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ),
+				object = item.data( 'bp-item-component' );
+
+			// Simply let the event fire if we don't have needed values
+			if ( ! action || ! item_id || ! object ) {
+				return event;
+			}
+
+			// Stop event propagation
+			event.preventDefault();
+
+			if ( ( undefined !== BP_Next[ action + '_confirm'] && false === confirm( BP_Next[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
+				return false;
+			}
+
+			// Unforunately unlike groups
+			// Friends actions does not match the wpnonce
+			var friends_actions_map = {
+				'is_friend'  : 'remove_friend',
+				'not_friends' : 'add_friend',
+				'pending'     : 'withdraw_friendship'
+			}
+
+			if ( 'members' === object && undefined !== friends_actions_map[ action ] ) {
+				action = friends_actions_map[ action ];
+				object = 'friends';
+			}
+
+			// Add a pending class to prevent queries while we're processing the action
+			target.addClass( 'pending loading' );
+
+			self.ajax( {
+				action     : object + '_' + action,
+				'item_id'  : item_id,
+				'_wpnonce' : self.getLinkParams( target.prop( 'href' ), '_wpnonce' )
+			}, object ).done( function( response ) {
+				if ( false === response.success ) {
+					item.prepend( response.data.feedback );
+					target.removeClass( 'pending loading' );
+				} else {
+					// Reloading the window is the easiest way to update the page
+					if ( ! $( 'body.directory' ).length && 'groups' === object ) {
+						return window.location.reload();
+					}
+
+					// Update count
+					if ( $( self.objectNavParent + ' [data-bp-scope="personal"]' ).length ) {
+						var personal_count = Number( $( self.objectNavParent + ' [data-bp-scope="personal"] span' ).html() ) || 0;
+
+						if ( -1 !== $.inArray( action, ['leave_group', 'remove_friend'] ) ) {
+							personal_count -= 1;
+						} else if ( -1 !== $.inArray( action, ['join_group'] ) ) {
+							personal_count += 1;
+						}
+
+						if ( personal_count < 0 ) {
+							personal_count = 0;
+						}
+
+						$( self.objectNavParent + ' [data-bp-scope="personal"] span' ).html( personal_count );
+					}
+
+					target.replaceWith( response.data.contents );
+				}
+			} );
+		}
 	}
 
 	// Launch BP Next

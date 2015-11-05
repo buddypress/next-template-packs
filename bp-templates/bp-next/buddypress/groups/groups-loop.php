@@ -50,7 +50,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 	<?php while ( bp_groups() ) : bp_the_group(); ?>
 
-		<li <?php bp_group_class(); ?>>
+		<li <?php bp_group_class(); ?> data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
 			<?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 				<div class="item-avatar">
 					<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ); ?></a>

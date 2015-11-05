@@ -149,6 +149,129 @@ endif;
 
 add_action( 'bp_widgets_init', array( 'BP_Next_Object_Nav_Widget', 'register_widget' ) );
 
+if ( ! class_exists( 'BP_Next_Group_Invite_Query' ) ) :
+/**
+ * Query to get members that are not already members of the group
+ *
+ * @since 1.0
+ */
+class BP_Next_Group_Invite_Query extends BP_User_Query {
+	/**
+	 * Array of group member ids, cached to prevent redundant lookups
+	 *
+	 * @var null|array Null if not yet defined, otherwise an array of ints
+	 * @package BP Next
+	 * @since 1.0
+	 */
+	protected $group_member_ids;
+
+	/**
+	 * Set up action hooks
+	 *
+	 * @package BP Next
+	 * @since 1.0
+	 */
+	public function setup_hooks() {
+		add_action( 'bp_pre_user_query_construct', array( $this, 'build_exclude_args' ) );
+	}
+
+	/**
+	 * Exclude group members from the user query
+	 * as it's not needed to invite members to join the group
+	 *
+	 * @package BP Next
+	 * @since 1.0
+	 */
+	public function build_exclude_args() {
+		$this->query_vars = wp_parse_args( $this->query_vars, array(
+			'group_id'     => 0,
+		) );
+
+		$group_member_ids = $this->get_group_member_ids();
+
+		if ( !empty( $group_member_ids ) ) {
+			$this->query_vars['exclude'] = $group_member_ids;
+		}
+	}
+
+	/**
+	 * Get the members of the queried group
+	 *
+	 * @package BP Next
+	 * @since 1.0
+	 *
+	 * @return array $ids User IDs of relevant group member ids
+	 */
+	protected function get_group_member_ids() {
+		global $wpdb;
+
+		if ( is_array( $this->group_member_ids ) ) {
+			return $this->group_member_ids;
+		}
+
+		$bp  = buddypress();
+		$sql = array(
+			'select'  => "SELECT user_id FROM {$bp->groups->table_name_members}",
+			'where'   => array(),
+			'orderby' => '',
+			'order'   => '',
+			'limit'   => '',
+		);
+
+		/** WHERE clauses *****************************************************/
+
+		// Group id
+		$sql['where'] = $wpdb->prepare( "WHERE group_id = %d", $this->query_vars['group_id'] );
+
+		/** ORDER BY clause ***************************************************/
+		$sql['orderby'] = "ORDER BY date_modified";
+		$sql['order']   = "DESC";
+
+		/** LIMIT clause ******************************************************/
+		$this->group_member_ids = $wpdb->get_col( "{$sql['select']} {$sql['where']} {$sql['orderby']} {$sql['order']} {$sql['limit']}" );
+
+		return $this->group_member_ids;
+	}
+}
+
+endif;
+
+function bp_next_get_group_potential_invites( $args = array() ) {
+	$r = bp_parse_args( $args, array(
+		'group_id'     => bp_get_current_group_id(),
+		'type'         => 'alphabetical',
+		'per_page'     => 20,
+		'page'         => 1,
+		'search_terms' => false,
+		'member_type'  => false,
+		'user_id'      => 0
+	) );
+
+	if ( empty( $r['group_id'] ) ) {
+		return false;
+	}
+
+	$query = new BP_Next_Group_Invite_Query( $r );
+
+	$response = new stdClass();
+
+	$response->meta = array( 'total_page' => 0, 'current_page' => 0 );
+
+	if ( empty( $query->results ) ) {
+		return false;
+	}
+
+	$response->items = array_filter( array_values( $query->results ) );
+
+	if ( ! empty( $r['per_page'] ) ) {
+		$response->meta = array(
+			'total_page'   => ceil( (int) $query->total_users / (int) $r['per_page'] ),
+			'current_page' => (int) $r['page'],
+		);
+	}
+
+	return $response;
+}
 
 function bp_next_is_object_nav_in_sidebar() {
 	return is_active_widget( false, false, 'bp_next_sidebar_object_nav_widget', true );
@@ -425,3 +548,40 @@ function bp_next_activity_filter_mentions_scope( $retval = array(), $filter = ar
 add_filter( 'bp_activity_set_mentions_scope_args', 'bp_next_activity_filter_mentions_scope', 10, 2 );
 // Remove Core filter as it's not possible to search inside mentions otherwise
 remove_filter( 'bp_activity_set_mentions_scope_args', 'bp_activity_filter_mentions_scope', 10, 2 );
+
+// I don't see any reason why to restrict group invites to friends..
+function bp_next_group_invites_create_steps( $steps = array() ) {
+	if ( bp_is_active( 'friends' ) ) {
+		return $steps;
+	}
+
+	$steps['group-invites'] = array(
+		'name'     => _x( 'Invites',  'Group screen nav', 'bp-next' ),
+		'position' => 30
+	);
+
+	return $steps;
+}
+add_filter( 'groups_create_group_steps', 'bp_next_group_invites_create_steps', 10, 1 );
+
+function bp_next_group_setup_nav() {
+	if ( bp_is_active( 'friends' ) || ! bp_is_group() || ! bp_groups_user_can_send_invites() ) {
+		return;
+	}
+
+	$current_group = groups_get_current_group();
+	$group_link    = bp_get_group_permalink( $current_group );
+
+	bp_core_new_subnav_item( array(
+		'name'            => _x( 'Send Invites', 'My Group screen nav', 'bp-next' ),
+		'slug'            => 'send-invites',
+		'parent_url'      => $group_link,
+		'parent_slug'     => $current_group->slug,
+		'screen_function' => 'groups_screen_group_invite',
+		'item_css_id'     => 'invite',
+		'position'        => 70,
+		'user_has_access' => $current_group->user_has_access,
+		'no_access_url'   => $group_link,
+	) );
+}
+add_action( 'groups_setup_nav', 'bp_next_group_setup_nav' );

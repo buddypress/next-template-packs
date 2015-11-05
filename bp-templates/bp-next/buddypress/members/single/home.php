@@ -19,7 +19,7 @@
 	 */
 	do_action( 'bp_before_member_home_content' ); ?>
 
-	<div id="item-header" role="complementary">
+	<div id="item-header" role="complementary" data-bp-item-id="<?php echo bp_displayed_user_id(); ?>" data-bp-item-type="members">
 
 		<?php
 		/**
