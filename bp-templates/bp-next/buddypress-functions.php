@@ -356,101 +356,6 @@ class BP_Next extends BP_Theme_Compat {
 			wp_enqueue_script( 'bp-next-group-invites' );
 		}
 
-		$params = array(
-			'accepted'            => __( 'Accepted', 'bp-next' ),
-			'close'               => __( 'Close', 'bp-next' ),
-			'comments'            => __( 'comments', 'bp-next' ),
-			'leave_group_confirm' => __( 'Are you sure you want to leave this group?', 'bp-next' ),
-			'my_favs'             => __( 'My Favorites', 'bp-next' ),
-			'rejected'            => __( 'Rejected', 'bp-next' ),
-			'show_all'            => __( 'Show all', 'bp-next' ),
-			'show_all_comments'   => __( 'Show all comments for this thread', 'bp-next' ),
-			'show_x_comments'     => __( 'Show all %d comments', 'bp-next' ),
-			'unsaved_changes'     => __( 'Your profile has unsaved changes. If you leave the page, the changes will be lost.', 'bp-next' ),
-			'view'                => __( 'View', 'bp-next' ),
-			'object_nav_parent'   => '#buddypress',
-			'time_since'        => array(
-				'sometime'  => _x( 'sometime', 'javascript time since', 'bp-next' ),
-				'now'       => _x( 'right now', 'javascript time since', 'bp-next' ),
-				'ago'       => _x( '% ago', 'javascript time since', 'bp-next' ),
-				'separator' => _x( ',', 'Separator in javascript time since', 'bp-next' ),
-				'year'      => _x( '% year', 'javascript time since singular', 'bp-next' ),
-				'years'     => _x( '% years', 'javascript time since plural', 'bp-next' ),
-				'month'     => _x( '% month', 'javascript time since singular', 'bp-next' ),
-				'months'    => _x( '% months', 'javascript time since plural', 'bp-next' ),
-				'week'      => _x( '% week', 'javascript time since singular', 'bp-next' ),
-				'weeks'     => _x( '% weeks', 'javascript time since plural', 'bp-next' ),
-				'day'       => _x( '% day', 'javascript time since singular', 'bp-next' ),
-				'days'      => _x( '% days', 'javascript time since plural', 'bp-next' ),
-				'hour'      => _x( '% hour', 'javascript time since singular', 'bp-next' ),
-				'hours'     => _x( '% hours', 'javascript time since plural', 'bp-next' ),
-				'minute'    => _x( '% minute', 'javascript time since singular', 'bp-next' ),
-				'minutes'   => _x( '% minutes', 'javascript time since plural', 'bp-next' ),
-				'second'    => _x( '% second', 'javascript time since singular', 'bp-next' ),
-				'seconds'   => _x( '% seconds', 'javascript time since plural', 'bp-next' ),
-				'time_chunks' => array(
-					'a_year'   => YEAR_IN_SECONDS,
-					'b_month'  => 30 * DAY_IN_SECONDS,
-					'c_week'   => WEEK_IN_SECONDS,
-					'd_day'    => DAY_IN_SECONDS,
-					'e_hour'   => HOUR_IN_SECONDS,
-					'f_minute' => MINUTE_IN_SECONDS,
-					'g_second' => 1,
-				),
-			),
-			'search_icon' => '&#xf179;'
-		);
-
-		if ( bp_next_is_object_nav_in_sidebar() ) {
-			$params['object_nav_parent'] = '.buddypress_object_nav';
-		}
-
-		$supported_objects = (array) apply_filters( 'bp_next_supported_components', bp_core_get_packaged_component_ids() );
-		$object_nonces     = array();
-
-		foreach ( $supported_objects as $key_object => $object ) {
-			if ( ! bp_is_active( $object ) || 'forums' === $object ) {
-				unset( $supported_objects[ $key_object ] );
-				continue;
-			}
-
-			if ( 'groups' === $object ) {
-				$supported_objects[] = 'group_members';
-			}
-
-			$object_nonces[ $object ] = wp_create_nonce( 'bp_next_' . $object );
-		}
-
-		// Add components & nonces
-		$params['objects'] = $supported_objects;
-		$params['nonces']  = $object_nonces;
-
-		// Star private messages.
-		if ( bp_is_active( 'messages', 'star' ) && bp_is_user_messages() ) {
-			$params['messages'] = array(
-				'strings' => array(
-					'text_unstar'  => __( 'Unstar', 'bp-next' ),
-					'text_star'    => __( 'Star', 'bp-next' ),
-					'title_unstar' => __( 'Starred', 'bp-next' ),
-					'title_star'   => __( 'Not starred', 'bp-next' ),
-					'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-next' ),
-					'title_star_thread'   => __( 'Star the first message in this thread', 'bp-next' ),
-				),
-				'is_single_thread' => (int) bp_is_messages_conversation(),
-				'star_counter'     => 0,
-				'unstar_counter'   => 0
-			);
-		}
-
-		/**
-		 * Filters core JavaScript strings for internationalization before AJAX usage.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array $value Array of key/value pairs for AJAX usage.
-		 */
-		wp_localize_script( 'bp-next', 'BP_Next', apply_filters( 'bp_core_get_js_strings', $params ) );
-
 		// Maybe enqueue comment reply JS.
 		if ( is_singular() && bp_is_blog_page() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -585,6 +490,120 @@ class BP_Next extends BP_Theme_Compat {
 	 * @since 1.7.0
 	 */
 	public function localize_scripts() {
+		// First global params
+		$params = array(
+			'accepted'            => __( 'Accepted', 'bp-next' ),
+			'close'               => __( 'Close', 'bp-next' ),
+			'comments'            => __( 'comments', 'bp-next' ),
+			'leave_group_confirm' => __( 'Are you sure you want to leave this group?', 'bp-next' ),
+			'my_favs'             => __( 'My Favorites', 'bp-next' ),
+			'rejected'            => __( 'Rejected', 'bp-next' ),
+			'show_all'            => __( 'Show all', 'bp-next' ),
+			'show_all_comments'   => __( 'Show all comments for this thread', 'bp-next' ),
+			'show_x_comments'     => __( 'Show all %d comments', 'bp-next' ),
+			'unsaved_changes'     => __( 'Your profile has unsaved changes. If you leave the page, the changes will be lost.', 'bp-next' ),
+			'view'                => __( 'View', 'bp-next' ),
+			'object_nav_parent'   => '#buddypress',
+			'time_since'        => array(
+				'sometime'  => _x( 'sometime', 'javascript time since', 'bp-next' ),
+				'now'       => _x( 'right now', 'javascript time since', 'bp-next' ),
+				'ago'       => _x( '% ago', 'javascript time since', 'bp-next' ),
+				'separator' => _x( ',', 'Separator in javascript time since', 'bp-next' ),
+				'year'      => _x( '% year', 'javascript time since singular', 'bp-next' ),
+				'years'     => _x( '% years', 'javascript time since plural', 'bp-next' ),
+				'month'     => _x( '% month', 'javascript time since singular', 'bp-next' ),
+				'months'    => _x( '% months', 'javascript time since plural', 'bp-next' ),
+				'week'      => _x( '% week', 'javascript time since singular', 'bp-next' ),
+				'weeks'     => _x( '% weeks', 'javascript time since plural', 'bp-next' ),
+				'day'       => _x( '% day', 'javascript time since singular', 'bp-next' ),
+				'days'      => _x( '% days', 'javascript time since plural', 'bp-next' ),
+				'hour'      => _x( '% hour', 'javascript time since singular', 'bp-next' ),
+				'hours'     => _x( '% hours', 'javascript time since plural', 'bp-next' ),
+				'minute'    => _x( '% minute', 'javascript time since singular', 'bp-next' ),
+				'minutes'   => _x( '% minutes', 'javascript time since plural', 'bp-next' ),
+				'second'    => _x( '% second', 'javascript time since singular', 'bp-next' ),
+				'seconds'   => _x( '% seconds', 'javascript time since plural', 'bp-next' ),
+				'time_chunks' => array(
+					'a_year'   => YEAR_IN_SECONDS,
+					'b_month'  => 30 * DAY_IN_SECONDS,
+					'c_week'   => WEEK_IN_SECONDS,
+					'd_day'    => DAY_IN_SECONDS,
+					'e_hour'   => HOUR_IN_SECONDS,
+					'f_minute' => MINUTE_IN_SECONDS,
+					'g_second' => 1,
+				),
+			),
+			'search_icon' => '&#xf179;'
+		);
+
+		// If the Object/Item nav are in the sidebar
+		if ( bp_next_is_object_nav_in_sidebar() ) {
+			$params['object_nav_parent'] = '.buddypress_object_nav';
+		}
+
+		// Set the supported components
+		$supported_objects = (array) apply_filters( 'bp_next_supported_components', bp_core_get_packaged_component_ids() );
+		$object_nonces     = array();
+
+		foreach ( $supported_objects as $key_object => $object ) {
+			if ( ! bp_is_active( $object ) || 'forums' === $object ) {
+				unset( $supported_objects[ $key_object ] );
+				continue;
+			}
+
+			if ( 'groups' === $object ) {
+				$supported_objects[] = 'group_members';
+			}
+
+			$object_nonces[ $object ] = wp_create_nonce( 'bp_next_' . $object );
+		}
+
+		// Add components & nonces
+		$params['objects'] = $supported_objects;
+		$params['nonces']  = $object_nonces;
+
+		// Star private messages.
+		if ( bp_is_active( 'messages', 'star' ) && bp_is_user_messages() ) {
+			$params['messages'] = array(
+				'strings' => array(
+					'text_unstar'  => __( 'Unstar', 'bp-next' ),
+					'text_star'    => __( 'Star', 'bp-next' ),
+					'title_unstar' => __( 'Starred', 'bp-next' ),
+					'title_star'   => __( 'Not starred', 'bp-next' ),
+					'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-next' ),
+					'title_star_thread'   => __( 'Star the first message in this thread', 'bp-next' ),
+				),
+				'is_single_thread' => (int) bp_is_messages_conversation(),
+				'star_counter'     => 0,
+				'unstar_counter'   => 0
+			);
+		}
+
+		if ( bp_is_group_invites() ) {
+			// Init the Group invites nav
+			$invites_nav = array(
+				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-next' ), 'order' => 5 ),
+				'invited' => array( 'id' => 'invited', 'caption' => __( 'Invited', 'bp-next' ), 'order' => 90 ),
+				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-next' ), 'order' => 100, 'hide' => (int) ! bp_group_has_invites() ),
+			);
+
+			if ( bp_is_active( 'friends' ) ) {
+				$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-next' ), 'order' => 0 );
+			}
+
+			$params['group_invites'] = array(
+				'nav' => bp_sort_by_key( $invites_nav, 'order', 'num' ),
+			);
+		}
+
+		/**
+		 * Filters core JavaScript strings for internationalization before AJAX usage.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $value Array of key/value pairs for AJAX usage.
+		 */
+		wp_localize_script( 'bp-next', 'BP_Next', apply_filters( 'bp_core_get_js_strings', $params ) );
 	}
 
 	/**
@@ -2306,3 +2325,23 @@ function bp_legacy_theme_cover_image( $params = array() ) {
 		}
 	';
 }
+
+function bp_next_get_users_to_invite() {
+	$args = array();
+
+	$request = wp_parse_args( $_POST, array(
+		'scope' => 'members',
+	) );
+
+	if ( 'friends' === $request['scope'] ) {
+		$args['user_id'] = bp_loggedin_user_id();
+	}
+
+	$potential_invites = bp_next_get_group_potential_invites( $args );
+
+	$potential_invites->users = array_map( 'bp_next_prepare_group_potential_invites_for_js', array_values( $potential_invites->users ) );
+	$potential_invites->users = array_filter( $potential_invites->users );
+
+	wp_send_json_success( $potential_invites );
+}
+add_action( 'wp_ajax_groups_get_potential_invites', 'bp_next_get_users_to_invite' );

@@ -189,7 +189,7 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 
 		$group_member_ids = $this->get_group_member_ids();
 
-		if ( !empty( $group_member_ids ) ) {
+		if ( ! empty( $group_member_ids ) ) {
 			$this->query_vars['exclude'] = $group_member_ids;
 		}
 	}
@@ -236,6 +236,24 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 
 endif;
 
+function bp_next_prepare_group_potential_invites_for_js( $users ) {
+
+	$response = array(
+		'id'           => intval( $users->ID ),
+		'name'         => $users->display_name,
+		'avatar'       => htmlspecialchars_decode( bp_core_fetch_avatar( array(
+			'item_id' => $users->ID,
+			'object' => 'user',
+			'type' => 'thumb',
+			'width' => 50,
+			'height' => 50,
+			'html' => false )
+		) ),
+	);
+
+	return apply_filters( 'bp_next_prepare_group_potential_invites_for_js', $response, $users );
+}
+
 function bp_next_get_group_potential_invites( $args = array() ) {
 	$r = bp_parse_args( $args, array(
 		'group_id'     => bp_get_current_group_id(),
@@ -261,7 +279,7 @@ function bp_next_get_group_potential_invites( $args = array() ) {
 		return false;
 	}
 
-	$response->items = array_filter( array_values( $query->results ) );
+	$response->users = $query->results;
 
 	if ( ! empty( $r['per_page'] ) ) {
 		$response->meta = array(

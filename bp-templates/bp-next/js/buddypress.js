@@ -662,6 +662,11 @@ window.bp = window.bp || {};
 			}
 		},
 
+		/**
+		 * [buttonAction description]
+		 * @param  {[type]} event [description]
+		 * @return {[type]}       [description]
+		 */
 		buttonAction: function( event ) {
 			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ),
 				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ),
