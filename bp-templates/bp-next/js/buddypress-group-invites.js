@@ -40,8 +40,12 @@ window.bp = window.bp || {};
 			// Add an invite when a user is selected
 			this.users.on( 'change:selected', this.addInvite, this );
 
+			// Add an invite when a user is selected
+			this.invites.on( 'change:selected', this.manageInvite, this );
+
 			// And display the Invites nav
 			this.invites.on( 'add', this.invitesNav, this );
+			this.invites.on( 'reset', this.hideInviteNav, this );
 		},
 
 		setupNav: function() {
@@ -99,11 +103,42 @@ window.bp = window.bp || {};
 		},
 
 		addInvite: function( user ) {
-			this.invites.add( user );
+			if ( true === user.get( 'selected' ) ) {
+				this.invites.add( user );
+			} else {
+				var invite = this.invites.get( user.get( 'id' ) );
+
+				if ( true === invite.get( 'selected' ) ) {
+					this.invites.remove( invite );
+				}
+			}
+		},
+
+		manageInvite: function( invite ) {
+			var user = this.users.get( invite.get( 'id' ) );
+
+			// Update the user
+			if ( user ) {
+				user.set( 'selected', false );
+			}
+
+			// remove the invite
+			this.invites.remove( invite );
+
+			// Here the content should be cleaned first
+			// and a warnin should inform to use the tab to
+			// select invites.
+			/*if ( ! this.invites.length  ) {
+				this.invites.reset();
+			}*/
 		},
 
 		invitesNav: function() {
 			this.navItems.get( 'invites' ).set( { active: 0, hide: 0 } );
+		},
+
+		hideInviteNav: function() {
+			this.navItems.get( 'invites' ).set( { active: 0, hide: 1 } );
 		},
 
 		clearViews: function() {
@@ -119,6 +154,13 @@ window.bp = window.bp || {};
 
 		loadConfirmView: function() {
 			this.clearViews();
+
+			// Activate the loop view
+			var invites = new bp.Views.invitesEditor( { collection: this.invites } );
+
+			this.views.add( { id: 'invites', view: invites } );
+
+			invites.inject( '.bp-invites-content' );
 		}
 	}
 
@@ -128,7 +170,7 @@ window.bp = window.bp || {};
 			id       : 0,
 			avatar   : '',
 			name     : '',
-			selected : 0
+			selected : false
         },
 	} );
 
@@ -143,13 +185,37 @@ window.bp = window.bp || {};
 		},
 
 		sync: function( method, model, options ) {
+			options = options || {};
+			options.context = this;
 
 			if ( 'read' === method ) {
-				options = options || {};
-				options.context = this;
 				options.data = _.extend( options.data || {}, {
-					action: 'groups_get_potential_invites',
+					action: 'groups_get_group_potential_invites',
 				} );
+
+				return bp.ajax.send( options );
+			}
+
+			if ( 'create' === method ) {
+				options.data = _.extend( options.data || {}, {
+					action: 'groups_send_group_invites',
+				} );
+
+				if ( model ) {
+					options.data.users = model;
+				}
+
+				return bp.ajax.send( options );
+			}
+
+			if ( 'delete' === method ) {
+				options.data = _.extend( options.data || {}, {
+					action: 'groups_delete_group_invite',
+				} );
+
+				if ( model ) {
+					options.data.user = model;
+				}
 
 				return bp.ajax.send( options );
 			}
@@ -279,11 +345,13 @@ window.bp = window.bp || {};
 			}
 
 			this.model.on( 'change:active', this.toggleClass, this );
-			this.on( 'ready', this.addCount, this );
-			bp.Next.GroupInvites.invites.on( 'add', this.addCount, this );
+			this.on( 'ready', this.updateCount, this );
+
+			bp.Next.GroupInvites.invites.on( 'add', this.updateCount, this );
+			bp.Next.GroupInvites.invites.on( 'remove', this.updateCount, this );
 		},
 
-		addCount: function( user, invite ) {
+		updateCount: function( user, invite ) {
 			if ( 'invites' !== this.model.get( 'id' ) ) {
 				return;
 			}
@@ -358,15 +426,141 @@ window.bp = window.bp || {};
 		template:  bp.template( 'bp-invites-users' ),
 
 		events: {
-			'click' : 'selectUser'
+			'click .group-add-invite-button'    : 'toggleUser',
+			'click .group-remove-invite-button' : 'removeInvite',
+		},
+
+		initialize: function() {
+			var invite = bp.Next.GroupInvites.invites.get( this.model.get( 'id' ) );
+
+			if ( invite ) {
+				this.el.className = 'selected';
+				this.model.set( 'selected', true, { silent: true } );
+			}
+		},
+
+		toggleUser: function( event ) {
+			event.preventDefault();
+
+			var selected = this.model.get( 'selected' );
+
+			if ( false === selected ) {
+				this.model.set( 'selected', true );
+
+				// Set the selected class
+				$( this.el ).addClass( 'selected' );
+			} else {
+				this.model.set( 'selected', false );
+
+				// Set the selected class
+				$( this.el ).removeClass( 'selected' );
+
+				if ( ! bp.Next.GroupInvites.invites.length  ) {
+					bp.Next.GroupInvites.invites.reset();
+				}
+			}
+		},
+
+		removeInvite: function( event ) {
+			event.preventDefault();
+
+			var collection = this.model.collection;
+
+			if ( ! collection.length ) {
+				return;
+			}
+
+			collection.sync( 'delete', this.model.get( 'id' ), {
+				success : _.bind( this.inviteRemoved, this ),
+				error   : _.bind( this.uninviteError, this )
+			} );
+		},
+
+		inviteRemoved: function( response ) {
+			var collection = this.model.collection;
+
+			if ( ! collection.length ) {
+				return;
+			}
+
+			collection.remove( this.model );
+			this.remove();
+		},
+
+		uninviteError: function( response ) {
+			console.log( response );
+		}
+	} );
+
+	bp.Views.invitesEditor = bp.Next.GroupInvites.View.extend( {
+		tagName: 'div',
+		id:      'send-invites-editor',
+
+		events: {
+			'click #do_send' : 'sendInvites'
+		},
+
+		initialize: function() {
+			this.views.add( new bp.Views.selectedUsers( { collection: this.collection } ) );
+			this.views.add( new bp.Next.GroupInvites.View( { tagName: 'textarea', attributes: { placeholder: 'Optional: add a message to your invite.' } } ) );
+			this.views.add( new bp.Next.GroupInvites.View( { tagName: 'input', id: 'do_send', attributes: { type: 'button' } } ) );
+		},
+
+		sendInvites: function( event ) {
+			event.preventDefault();
+
+			this.collection.sync( 'create', _.pluck( this.collection.models, 'id' ), {
+				success : _.bind( this.invitesSent, this ),
+				error   : _.bind( this.invitesError, this ),
+				data    : {
+					message: $( this.el ).find( 'textarea' ).val()
+				}
+			} );
+		},
+
+		invitesSent: function( response ) {
+			console.log( response );
+			console.log( this );
+		},
+
+		invitesError: function( response ) {
+			console.log( response );
+		}
+	} );
+
+	bp.Views.selectedUsers = bp.Next.GroupInvites.View.extend( {
+		tagName: 'ul',
+
+		initialize: function() {
+			this.cleanContent();
+
+			_.each( this.collection.models, function( invite ) {
+				this.views.add( new bp.Views.selectedUser( { model: invite } ) );
+			}, this );
+		},
+
+		cleanContent: function() {
+			_.each( this.views._views[''], function( view ) {
+				view.remove();
+			} );
+		}
+	} );
+
+	bp.Views.selectedUser = bp.Next.GroupInvites.View.extend( {
+		tagName:   'li',
+		template:  bp.template( 'bp-invites-selection' ),
+
+		events: {
+			'click' : 'removeSelection'
 		},
 
 		initialize: function() {},
 
-		selectUser: function( event ) {
+		removeSelection: function( event ) {
 			event.preventDefault();
 
-			this.model.set( 'selected', true );
+			this.model.set( 'selected', false );
+			this.remove();
 		}
 	} );
 

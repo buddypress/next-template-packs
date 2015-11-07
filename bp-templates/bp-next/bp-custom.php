@@ -185,12 +185,21 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 	public function build_exclude_args() {
 		$this->query_vars = wp_parse_args( $this->query_vars, array(
 			'group_id'     => 0,
+			'is_confirmed' => true,
 		) );
 
 		$group_member_ids = $this->get_group_member_ids();
 
+		// We want to get users that are already members of the group
+		$type = 'exclude';
+
+		// We want to get invited users who did not confirmed yet
+		if ( false === $this->query_vars['is_confirmed'] ) {
+			$type = 'include';
+		}
+
 		if ( ! empty( $group_member_ids ) ) {
-			$this->query_vars['exclude'] = $group_member_ids;
+			$this->query_vars[ $type ] = $group_member_ids;
 		}
 	}
 
@@ -221,7 +230,14 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 		/** WHERE clauses *****************************************************/
 
 		// Group id
-		$sql['where'] = $wpdb->prepare( "WHERE group_id = %d", $this->query_vars['group_id'] );
+		$sql['where'][] = $wpdb->prepare( "group_id = %d", $this->query_vars['group_id'] );
+
+		if ( false === $this->query_vars['is_confirmed'] ) {
+			$sql['where'][] = $wpdb->prepare( "is_confirmed = %d", (int) $this->query_vars['is_confirmed'] );
+		}
+
+		// Join the query part
+		$sql['where'] = ! empty( $sql['where'] ) ? 'WHERE ' . implode( ' AND ', $sql['where'] ) : '';
 
 		/** ORDER BY clause ***************************************************/
 		$sql['orderby'] = "ORDER BY date_modified";
@@ -232,26 +248,82 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 
 		return $this->group_member_ids;
 	}
+
+	public static function get_inviter_ids( $user_id = 0, $group_id = 0 ) {
+		global $wpdb;
+
+		if ( empty( $group_id ) || empty( $user_id ) ) {
+			return array();
+		}
+
+		$bp  = buddypress();
+
+		return $wpdb->get_col( $wpdb->prepare( "SELECT inviter_id FROM {$bp->groups->table_name_members} WHERE user_id = %d AND group_id = %d", $user_id, $group_id ) );
+	}
 }
 
 endif;
 
-function bp_next_prepare_group_potential_invites_for_js( $users ) {
+function bp_next_groups_get_inviter_ids( $user_id, $group_id ) {
+	if ( empty( $user_id ) || empty( $group_id ) ) {
+		return false;
+	}
+
+	return BP_Next_Group_Invite_Query::get_inviter_ids( $user_id, $group_id );
+}
+
+function bp_next_prepare_group_potential_invites_for_js( $user ) {
+	$bp = buddypress();
 
 	$response = array(
-		'id'           => intval( $users->ID ),
-		'name'         => $users->display_name,
+		'id'           => intval( $user->ID ),
+		'name'         => $user->display_name,
 		'avatar'       => htmlspecialchars_decode( bp_core_fetch_avatar( array(
-			'item_id' => $users->ID,
-			'object' => 'user',
-			'type' => 'thumb',
-			'width' => 50,
-			'height' => 50,
-			'html' => false )
+			'item_id' => $user->ID,
+			'object'  => 'user',
+			'type'    => 'thumb',
+			'width'   => 50,
+			'height'  => 50,
+			'html'    => false )
 		) ),
 	);
 
-	return apply_filters( 'bp_next_prepare_group_potential_invites_for_js', $response, $users );
+	// Do extra queries only if needed
+	if ( ! empty( $bp->groups->invites_scope ) && 'invited' === $bp->groups->invites_scope ) {
+		$response['is_sent']  = (bool) groups_check_user_has_invite( $user->ID, bp_get_current_group_id() );
+
+		$inviter_ids = bp_next_groups_get_inviter_ids( $user->ID, bp_get_current_group_id() );
+
+		foreach ( $inviter_ids as $inviter_id ) {
+			$class = false;
+
+			if ( bp_loggedin_user_id() === (int) $inviter_id ) {
+				$class = 'group-self-inviter';
+			}
+
+			$response['invited_by'][] = array(
+				'avatar' => htmlspecialchars_decode( bp_core_fetch_avatar( array(
+					'item_id' => $inviter_id,
+					'object'  => 'user',
+					'type'    => 'thumb',
+					'width'   => 50,
+					'height'  => 50,
+					'html'    => false,
+					'class'   => $class,
+				) ) ),
+				'user_link' => bp_core_get_userlink( $inviter_id, false, true ),
+				'user_name' => bp_core_get_username( $inviter_id ),
+			);
+		}
+
+		if ( bp_is_item_admin() ) {
+			$response['can_edit'] = true;
+		} else {
+			$response['can_edit'] = in_array( bp_loggedin_user_id(), $inviter_ids );
+		}
+	}
+
+	return apply_filters( 'bp_next_prepare_group_potential_invites_for_js', $response, $user );
 }
 
 function bp_next_get_group_potential_invites( $args = array() ) {
@@ -262,7 +334,8 @@ function bp_next_get_group_potential_invites( $args = array() ) {
 		'page'         => 1,
 		'search_terms' => false,
 		'member_type'  => false,
-		'user_id'      => 0
+		'user_id'      => 0,
+		'is_confirmed' => true,
 	) );
 
 	if ( empty( $r['group_id'] ) ) {
@@ -274,18 +347,17 @@ function bp_next_get_group_potential_invites( $args = array() ) {
 	$response = new stdClass();
 
 	$response->meta = array( 'total_page' => 0, 'current_page' => 0 );
+	$response->users = array();
 
-	if ( empty( $query->results ) ) {
-		return false;
-	}
+	if ( ! empty( $query->results ) ) {
+		$response->users = $query->results;
 
-	$response->users = $query->results;
-
-	if ( ! empty( $r['per_page'] ) ) {
-		$response->meta = array(
-			'total_page'   => ceil( (int) $query->total_users / (int) $r['per_page'] ),
-			'current_page' => (int) $r['page'],
-		);
+		if ( ! empty( $r['per_page'] ) ) {
+			$response->meta = array(
+				'total_page'   => ceil( (int) $query->total_users / (int) $r['per_page'] ),
+				'current_page' => (int) $r['page'],
+			);
+		}
 	}
 
 	return $response;

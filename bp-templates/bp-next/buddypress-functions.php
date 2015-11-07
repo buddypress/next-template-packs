@@ -582,13 +582,13 @@ class BP_Next extends BP_Theme_Compat {
 		if ( bp_is_group_invites() ) {
 			// Init the Group invites nav
 			$invites_nav = array(
-				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-next' ), 'order' => 5 ),
-				'invited' => array( 'id' => 'invited', 'caption' => __( 'Invited', 'bp-next' ), 'order' => 90 ),
-				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-next' ), 'order' => 100, 'hide' => (int) ! bp_group_has_invites() ),
+				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-next' ), 'order' => 0 ),
+				'invited' => array( 'id' => 'invited', 'caption' => __( 'Invited', 'bp-next' ), 'order' => 90, 'hide' => (int) ! bp_group_has_invites( array( 'user_id' => 'any' ) ) ),
+				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-next' ), 'order' => 100, 'hide' => 1 ),
 			);
 
 			if ( bp_is_active( 'friends' ) ) {
-				$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-next' ), 'order' => 0 );
+				$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-next' ), 'order' => 5 );
 			}
 
 			$params['group_invites'] = array(
@@ -2327,21 +2327,160 @@ function bp_legacy_theme_cover_image( $params = array() ) {
 }
 
 function bp_next_get_users_to_invite() {
+	$bp = buddypress();
 	$args = array();
 
 	$request = wp_parse_args( $_POST, array(
 		'scope' => 'members',
 	) );
 
+	$bp->groups->invites_scope = 'members';
+
 	if ( 'friends' === $request['scope'] ) {
 		$args['user_id'] = bp_loggedin_user_id();
+		$bp->groups->invites_scope = 'friends';
+	}
+
+	if ( 'invited' === $request['scope'] ) {
+		$args['is_confirmed'] = false;
+		$bp->groups->invites_scope = 'invited';
 	}
 
 	$potential_invites = bp_next_get_group_potential_invites( $args );
 
+	if ( empty( $potential_invites->users ) ) {
+		$error = array(
+			'feedback' => __( 'No members were found, try another filter.', 'bp-next' ),
+		);
+
+		if ( 'friends' === $bp->groups->invites_scope ) {
+			$error = array(
+				'feedback' => __( 'All your friends are already invited to join this group.', 'bp-next' ),
+			);
+
+			if ( 0 === (int) bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
+				$error = array(
+					'feedback' => __( 'You have no friends!', 'bp-next' ),
+				);
+			}
+
+		}
+
+		unset( $bp->groups->invites_scope );
+
+		wp_send_json_error( $error );
+	}
+
 	$potential_invites->users = array_map( 'bp_next_prepare_group_potential_invites_for_js', array_values( $potential_invites->users ) );
 	$potential_invites->users = array_filter( $potential_invites->users );
 
+	unset( $bp->groups->invites_scope );
+
 	wp_send_json_success( $potential_invites );
 }
-add_action( 'wp_ajax_groups_get_potential_invites', 'bp_next_get_users_to_invite' );
+add_action( 'wp_ajax_groups_get_group_potential_invites', 'bp_next_get_users_to_invite' );
+
+function bp_next_groups_invites_custom_message( $message = '' ) {
+	if ( empty( $message ) ) {
+		return $message;
+	}
+
+	$bp = buddypress();
+
+	if ( empty( $bp->groups->invites_message ) ) {
+		return $message;
+	}
+
+	$message = str_replace( '---------------------', "
+		---------------------\n
+		" . $bp->groups->invites_message . "\n
+		---------------------
+	", $message );
+
+	return $message;
+}
+
+function bp_next_send_group_invites() {
+	$bp = buddypress();
+
+	$response = array(
+		'feedback' => __( 'Invites could not be sent, please try again.', 'bp-next' ),
+	);
+
+	// Verify nonce
+	/*if ( !check_admin_referer( 'groups_send_invites', '_wpnonce_send_invites' ) )
+			return false;*/
+
+	$group_id = bp_get_current_group_id();
+
+	if ( ! bp_groups_user_can_send_invites( $group_id ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'You are not allowed to send invites for this group.', 'bp-next' ),
+		) );
+	}
+
+	if ( empty( $_POST['users'] ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// For feedback
+	$invited = array();
+
+	foreach ( (array) $_POST['users'] as $user_id ) {
+		$invited[ $user_id ] = groups_invite_user( array( 'user_id' => $user_id, 'group_id' => $group_id ) );
+	}
+
+	if ( array_search( false, $invited ) ) {
+		$errors = array_keys( $invited, false );
+
+		wp_send_json_error( array(
+			'feedback' => sprintf( __( 'Invites failed for %d user(s).', 'bp-next' ), count( $errors ) ),
+			'users'    => $errors,
+		) );
+	}
+
+	if ( ! empty( $_POST['message'] ) ) {
+		$bp->groups->invites_message = wp_kses( wp_unslash( $_POST['message'] ), array() );
+
+		add_filter( 'groups_notification_group_invites_message', 'bp_next_groups_invites_custom_message', 10, 1 );
+	}
+
+	// Send the invites.
+	groups_send_invites( bp_loggedin_user_id(), $group_id );
+
+	if ( ! empty( $_POST['message'] ) ) {
+		unset( $bp->groups->invites_message );
+
+		remove_filter( 'groups_notification_group_invites_message', 'bp_next_groups_invites_custom_message', 10, 1 );
+	}
+
+	wp_send_json_success( array(
+		'feedback' => __( 'Invites sent.', 'bp-next' )
+	) );
+}
+add_action( 'wp_ajax_groups_send_group_invites', 'bp_next_send_group_invites' );
+
+function bp_next_remove_group_invite() {
+	$user_id  = $_POST['user'];
+	$group_id = bp_get_current_group_id();
+
+	if ( BP_Groups_Member::check_for_membership_request( $user_id, $group_id ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'Too late, the user is now member of the group.', 'bp-next' ),
+			'code'     => 1,
+		) );
+	}
+
+	// Remove the unsent invitation.
+	if ( ! groups_uninvite_user( $user_id, $group_id ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'Removing the invite for the user failed, please try again.', 'bp-next' ),
+			'code'     => 0,
+		) );
+	}
+
+	wp_send_json_success( array(
+		'feedback' => __( 'Invite removed.', 'bp-next' )
+	) );
+}
+add_action( 'wp_ajax_groups_delete_group_invite', 'bp_next_remove_group_invite' );
