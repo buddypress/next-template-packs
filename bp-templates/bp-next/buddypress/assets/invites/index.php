@@ -13,6 +13,7 @@
 <div class="item-list-tabs bp-invites-nav" id="subnav"></div>
 <div class="item-list-tabs bp-invites-filters" id="subsubnav"></div>
 <div class="members bp-invites-content"></div>
+<div class="bp-invites-feedback"></div>
 
 <script type="text/html" id="tmpl-bp-invites-nav">
 	<a href="{{data.href}}" class="bp-invites-nav-item" data-nav="{{data.id}}">{{data.name}}</a>
@@ -30,7 +31,7 @@
 
 		<# if ( undefined !== data.is_sent ) { #>
 			<div class="item-meta">
-				<span class="activity">
+				<span class="status">
 					<# if ( false === data.is_sent ) { #>
 						<?php esc_html_e( 'The invite has not been sent yet.', 'bp-next' ); ?>
 					<# } else { #>
@@ -52,11 +53,15 @@
 
 	<div class="action">
 		<# if ( undefined === data.is_sent || ( false === data.is_sent && true === data.can_edit ) ) { #>
-			<a href="#" class="button group-add-invite-button" title="<?php esc_attr_e( 'Invite', 'bp-next' );?>"><?php esc_html_e( 'Invite', 'bp-next' );?></a>
+			<a href="#" class="button invite-button group-add-remove-invite-button" title="<?php esc_attr_e( 'Invite / Uninvite', 'bp-next' );?>">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Invite/Uninvite', 'bp-next' );?></span>
+			</a>
 		<# } #>
 
 		<# if ( undefined !== data.can_edit && true === data.can_edit ) { #>
-			<a href="#" class="button group-remove-invite-button" title="<?php esc_attr_e( 'Remove', 'bp-next' );?>"><?php esc_html_e( 'Remove', 'bp-next' );?></a>
+			<a href="#" class="button invite-button group-remove-invite-button" title="<?php esc_attr_e( 'Remove', 'bp-next' );?>">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove', 'bp-next' );?></span>
+			</a>
 		<# } #>
 	</div>
 
@@ -64,5 +69,16 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-selection">
-	<img src="{{data.avatar}}" class="avatar" alt="{{data.name}}">
+	<a href="#" title="{{data.name}}">
+		<img src="{{data.avatar}}" class="avatar" alt="{{data.name}}">
+	</a>
+</script>
+
+<script type="text/html" id="tmpl-bp-invites-form">
+	<textarea placeholder="<?php esc_attr_e( 'Optional: add a message to your invite.', 'bp-next' ); ?>"></textarea>
+
+	<div class="action">
+		<input type="button" id="bp-invites-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Cancel', 'bp-next' ); ?>"/>
+		<input type="button" id="bp-invites-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-next' ); ?>"/>
+	</div>
 </script>

@@ -592,7 +592,9 @@ class BP_Next extends BP_Theme_Compat {
 			}
 
 			$params['group_invites'] = array(
-				'nav' => bp_sort_by_key( $invites_nav, 'order', 'num' ),
+				'nav'          => bp_sort_by_key( $invites_nav, 'order', 'num' ),
+				'loading'      => __( 'Loading members, please wait.', 'bp-next' ),
+				'invites_form' => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-next' ),
 			);
 		}
 
@@ -2335,15 +2337,25 @@ function bp_next_get_users_to_invite() {
 	) );
 
 	$bp->groups->invites_scope = 'members';
+	$message = __( 'You can invite members using the + button, a new nav will appear to let you send your invites', 'bp-next' );
 
 	if ( 'friends' === $request['scope'] ) {
 		$args['user_id'] = bp_loggedin_user_id();
 		$bp->groups->invites_scope = 'friends';
+		$message = __( 'You can invite friends using the + button, a new nav will appear to let you send your invites', 'bp-next' );
 	}
 
 	if ( 'invited' === $request['scope'] ) {
+
+		if ( ! bp_group_has_invites( array( 'user_id' => 'any' ) ) ) {
+			wp_send_json_error( array(
+				'feedback' => __( 'No pending invites found.', 'bp-next' ),
+			) );
+		}
+
 		$args['is_confirmed'] = false;
 		$bp->groups->invites_scope = 'invited';
+		$message = __( 'You can manage the group\'s pending invites from this screen.', 'bp-next' );
 	}
 
 	$potential_invites = bp_next_get_group_potential_invites( $args );
@@ -2355,7 +2367,7 @@ function bp_next_get_users_to_invite() {
 
 		if ( 'friends' === $bp->groups->invites_scope ) {
 			$error = array(
-				'feedback' => __( 'All your friends are already invited to join this group.', 'bp-next' ),
+				'feedback' => __( 'All your friends are already members of this group or already received an invite to join this group.', 'bp-next' ),
 			);
 
 			if ( 0 === (int) bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
@@ -2373,6 +2385,9 @@ function bp_next_get_users_to_invite() {
 
 	$potential_invites->users = array_map( 'bp_next_prepare_group_potential_invites_for_js', array_values( $potential_invites->users ) );
 	$potential_invites->users = array_filter( $potential_invites->users );
+
+	// Set a message to explain use of the current scope
+	$potential_invites->feedback = $message;
 
 	unset( $bp->groups->invites_scope );
 

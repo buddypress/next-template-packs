@@ -36,6 +36,7 @@ window.bp = window.bp || {};
 			// Add views
 			this.setupNav();
 			this.setupLoops();
+			this.displayFeedback( BP_Next.group_invites.loading, 'loading' );
 
 			// Add an invite when a user is selected
 			this.users.on( 'change:selected', this.addInvite, this );
@@ -88,6 +89,9 @@ window.bp = window.bp || {};
 		setupLoops: function( scope ) {
 			scope = scope || this.scope;
 
+			// Loading
+			this.displayFeedback( BP_Next.group_invites.loading, 'loading' );
+
 			if ( ! _.isUndefined( this.views.get( 'users' ) ) ) {
 				return;
 			} else {
@@ -100,6 +104,30 @@ window.bp = window.bp || {};
 			this.views.add( { id: 'users', view: users } );
 
 			users.inject( '.bp-invites-content' );
+		},
+
+		displayFeedback: function( message, type ) {
+			var feedback;
+
+			// Make sure to remove the uploads status
+			if ( ! _.isUndefined( this.views.get( 'feedback' ) ) ) {
+				feedback = this.views.get( 'feedback' );
+				feedback.get( 'view' ).remove();
+				this.views.remove( { id: 'feedback', view: feedback } );
+			}
+
+			if ( ! message ) {
+				return;
+			}
+
+			feedback = new bp.Views.Feedback( {
+				value: message,
+				type:  type || 'info'
+			} );
+
+			this.views.add( { id: 'feedback', view: feedback } );
+
+			feedback.inject( '.bp-invites-feedback' );
 		},
 
 		addInvite: function( user ) {
@@ -126,7 +154,7 @@ window.bp = window.bp || {};
 			this.invites.remove( invite );
 
 			// Here the content should be cleaned first
-			// and a warnin should inform to use the tab to
+			// and a warning should inform to use the tab to
 			// select invites.
 			/*if ( ! this.invites.length  ) {
 				this.invites.reset();
@@ -154,6 +182,8 @@ window.bp = window.bp || {};
 
 		loadConfirmView: function() {
 			this.clearViews();
+
+			this.displayFeedback( BP_Next.group_invites.invites_form, 'help' );
 
 			// Activate the loop view
 			var invites = new bp.Views.invitesEditor( { collection: this.invites } );
@@ -222,26 +252,27 @@ window.bp = window.bp || {};
 		},
 
 		parse: function( resp ) {
+
 			if ( ! _.isArray( resp.users ) ) {
 				resp.users = [resp.users];
 			}
 
-            _.each( resp.users, function( value, index ) {
-                if ( _.isNull( value ) ) {
-                	return;
-                }
+			_.each( resp.users, function( value, index ) {
+				if ( _.isNull( value ) ) {
+					return;
+				}
 
-                resp.users[index].id = value.id;
-                resp.users[index].avatar = value.avatar;
-                resp.users[index].name = value.name;
-            } );
+				resp.users[index].id = value.id;
+				resp.users[index].avatar = value.avatar;
+				resp.users[index].name = value.name;
+			} );
 
-            if( ! _.isUndefined( resp.meta ) ){
-                 this.options.current_page = resp.meta.current_page;
-                 this.options.total_page = resp.meta.total_page;
-            }
+			if ( ! _.isUndefined( resp.meta ) ) {
+				this.options.current_page = resp.meta.current_page;
+				this.options.total_page = resp.meta.total_page;
+			}
 
-            return resp.users;
+			return resp.users;
 		}
 
 	} );
@@ -260,6 +291,25 @@ window.bp = window.bp || {};
 			} else {
 				return {};
 			}
+		}
+	} );
+
+	// Feedback view
+	bp.Views.Feedback = bp.Next.GroupInvites.View.extend( {
+		tagName: 'div',
+		className: 'bp-feedback',
+
+		initialize: function() {
+			this.value = this.options.value;
+
+			if ( this.options.type ) {
+				this.el.className += ' ' + this.options.type;
+			}
+		},
+
+		render: function() {
+			this.$el.html( this.value );
+			return this;
 		}
 	} );
 
@@ -344,6 +394,10 @@ window.bp = window.bp || {};
 				this.el.className += ' current';
 			}
 
+			if ( 'invites' === this.model.get( 'id' ) ) {
+				this.el.className += ' dynamic';
+			}
+
 			this.model.on( 'change:active', this.toggleClass, this );
 			this.on( 'ready', this.updateCount, this );
 
@@ -394,8 +448,18 @@ window.bp = window.bp || {};
 			this.collection.reset();
 
 			this.collection.fetch( {
-				data: { scope: this.options.scope }
+				data: { scope: this.options.scope },
+				success : this.usersFetched,
+				error   : this.usersFetchError
 			} );
+		},
+
+		usersFetched: function( collection, response ) {
+			bp.Next.GroupInvites.displayFeedback( response.feedback, 'help' );
+		},
+
+		usersFetchError: function( collection, response ) {
+			bp.Next.GroupInvites.displayFeedback( response.feedback, 'help' );
 		},
 
 		updateUsers: function( nav ) {
@@ -426,8 +490,8 @@ window.bp = window.bp || {};
 		template:  bp.template( 'bp-invites-users' ),
 
 		events: {
-			'click .group-add-invite-button'    : 'toggleUser',
-			'click .group-remove-invite-button' : 'removeInvite',
+			'click .group-add-remove-invite-button'    : 'toggleUser',
+			'click .group-remove-invite-button'        : 'removeInvite'
 		},
 
 		initialize: function() {
@@ -497,13 +561,12 @@ window.bp = window.bp || {};
 		id:      'send-invites-editor',
 
 		events: {
-			'click #do_send' : 'sendInvites'
+			'click #bp-invites-send' : 'sendInvites'
 		},
 
 		initialize: function() {
 			this.views.add( new bp.Views.selectedUsers( { collection: this.collection } ) );
-			this.views.add( new bp.Next.GroupInvites.View( { tagName: 'textarea', attributes: { placeholder: 'Optional: add a message to your invite.' } } ) );
-			this.views.add( new bp.Next.GroupInvites.View( { tagName: 'input', id: 'do_send', attributes: { type: 'button' } } ) );
+			this.views.add( new bp.Views.invitesForm() );
 		},
 
 		sendInvites: function( event ) {
@@ -526,6 +589,12 @@ window.bp = window.bp || {};
 		invitesError: function( response ) {
 			console.log( response );
 		}
+	} );
+
+	bp.Views.invitesForm = bp.Next.GroupInvites.View.extend( {
+		tagName : 'div',
+		id      : 'bp-send-invites-form',
+		template:  bp.template( 'bp-invites-form' )
 	} );
 
 	bp.Views.selectedUsers = bp.Next.GroupInvites.View.extend( {
