@@ -1426,7 +1426,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 }
 
 #buddypress .bp-invites-content ul.item-list li {
-	width: 48%;
+	width: 49%;
 	float: left;
 	margin: 0.5%;
 	padding-right: 5px;
@@ -1500,6 +1500,10 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 #buddypress .bp-invites-content #send-invites-editor {
 	overflow:hidden;
 }
+
+#buddypress .bp-invites-content #send-invites-editor textarea {
+	width: 100%;
+}
 #buddypress .bp-invites-content #send-invites-editor ul {
 	list-style: none;
 	overflow: hidden;
@@ -1529,6 +1533,10 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	vertical-align: top;
 	line-height: 50px;
 	color: rgba(170, 0, 0, .7);
+	display:none;
+}
+
+#buddypress .bp-invites-content #send-invites-editor.bp-hide {
 	display:none;
 }
 
@@ -1578,6 +1586,11 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 #buddypress div.item-list-tabs#subsubnav ul li.last {
 	margin-top: 4px;
 }
+
+#buddypress div.item-list-tabs.bp-invites-nav#subnav ul li.last,
+#buddypress div.item-list-tabs.bp-invites-filters#subsubnav ul li.last {
+	margin-top: 0;
+}
 #buddypress div.item-list-tabs ul li.last select {
 	max-width: 185px;
 }
@@ -1594,6 +1607,11 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	padding: 5px 10px;
 	text-decoration: none;
 	border: none;
+}
+
+#buddypress div.item-list-tabs.bp-invites-filters ul li a {
+	display:inline-block;
+	border: 1px solid #ccc;
 }
 
 .buddypress_object_nav div.item-list-tabs ul li a span,
@@ -1656,7 +1674,8 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 
 #buddypress div.item-list-tabs ul li.filter label:before,
 #buddypress div.item-list-tabs ul li.feed a:before,
-#buddypress .bp-invites-content ul.item-list li a.invite-button:before {
+#buddypress .bp-invites-content ul.item-list li a.invite-button:before,
+#buddypress .bp-invites-filters ul li a.invite-button:before {
 	font-family: dashicons;
 	font-size: 18px;
 }
@@ -1680,6 +1699,13 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 #buddypress .bp-invites-content ul.item-list li.selected a.invite-button:before,
 #buddypress .bp-invites-content ul.item-list li a.group-remove-invite-button:before {
 	content: "\f153";
+}
+
+#buddypress .bp-invites-filters ul li a#bp-invites-next-page:before {
+	content: "\f345";
+}
+#buddypress .bp-invites-filters ul li a#bp-invites-prev-page:before {
+	content: "\f341";
 }
 
 #buddypress .bp-invites-content ul.item-list li a.invite-button:hover {

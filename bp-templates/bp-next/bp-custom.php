@@ -355,7 +355,7 @@ function bp_next_get_group_potential_invites( $args = array() ) {
 		if ( ! empty( $r['per_page'] ) ) {
 			$response->meta = array(
 				'total_page'   => ceil( (int) $query->total_users / (int) $r['per_page'] ),
-				'current_page' => (int) $r['page'],
+				'page' => (int) $r['page'],
 			);
 		}
 	}
@@ -663,7 +663,7 @@ function bp_next_group_setup_nav() {
 	$group_link    = bp_get_group_permalink( $current_group );
 
 	bp_core_new_subnav_item( array(
-		'name'            => _x( 'Send Invites', 'My Group screen nav', 'bp-next' ),
+		'name'            => _x( 'Invites', 'My Group screen nav', 'bp-next' ),
 		'slug'            => 'send-invites',
 		'parent_url'      => $group_link,
 		'parent_slug'     => $current_group->slug,

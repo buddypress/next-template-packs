@@ -352,7 +352,7 @@ class BP_Next extends BP_Theme_Compat {
 			wp_enqueue_script( 'bp-next-password-verify' );
 		}
 
-		if ( bp_is_group_invites() ) {
+		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
 			wp_enqueue_script( 'bp-next-group-invites' );
 		}
 
@@ -579,11 +579,13 @@ class BP_Next extends BP_Theme_Compat {
 			);
 		}
 
-		if ( bp_is_group_invites() ) {
+		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
+			$show_pending = bp_group_has_invites( array( 'user_id' => 'any' ) ) && ! bp_is_group_create();
+
 			// Init the Group invites nav
 			$invites_nav = array(
 				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-next' ), 'order' => 0 ),
-				'invited' => array( 'id' => 'invited', 'caption' => __( 'Invited', 'bp-next' ), 'order' => 90, 'hide' => (int) ! bp_group_has_invites( array( 'user_id' => 'any' ) ) ),
+				'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-next' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
 				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-next' ), 'order' => 100, 'hide' => 1 ),
 			);
 
@@ -592,9 +594,13 @@ class BP_Next extends BP_Theme_Compat {
 			}
 
 			$params['group_invites'] = array(
-				'nav'          => bp_sort_by_key( $invites_nav, 'order', 'num' ),
-				'loading'      => __( 'Loading members, please wait.', 'bp-next' ),
-				'invites_form' => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-next' ),
+				'nav'                => bp_sort_by_key( $invites_nav, 'order', 'num' ),
+				'loading'            => __( 'Loading members, please wait.', 'bp-next' ),
+				'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-next' ),
+				'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'bp-next' ),
+				'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-next' ),
+				'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
+				'is_group_create'    => bp_is_group_create(),
 			);
 		}
 
@@ -2330,7 +2336,6 @@ function bp_legacy_theme_cover_image( $params = array() ) {
 
 function bp_next_get_users_to_invite() {
 	$bp = buddypress();
-	$args = array();
 
 	$request = wp_parse_args( $_POST, array(
 		'scope' => 'members',
@@ -2340,7 +2345,7 @@ function bp_next_get_users_to_invite() {
 	$message = __( 'You can invite members using the + button, a new nav will appear to let you send your invites', 'bp-next' );
 
 	if ( 'friends' === $request['scope'] ) {
-		$args['user_id'] = bp_loggedin_user_id();
+		$request['user_id'] = bp_loggedin_user_id();
 		$bp->groups->invites_scope = 'friends';
 		$message = __( 'You can invite friends using the + button, a new nav will appear to let you send your invites', 'bp-next' );
 	}
@@ -2353,12 +2358,12 @@ function bp_next_get_users_to_invite() {
 			) );
 		}
 
-		$args['is_confirmed'] = false;
+		$request['is_confirmed'] = false;
 		$bp->groups->invites_scope = 'invited';
-		$message = __( 'You can manage the group\'s pending invites from this screen.', 'bp-next' );
+		$message = __( 'You can view all the group\'s pending invites from this screen.', 'bp-next' );
 	}
 
-	$potential_invites = bp_next_get_group_potential_invites( $args );
+	$potential_invites = bp_next_get_group_potential_invites( $request );
 
 	if ( empty( $potential_invites->users ) ) {
 		$error = array(
@@ -2407,9 +2412,9 @@ function bp_next_groups_invites_custom_message( $message = '' ) {
 	}
 
 	$message = str_replace( '---------------------', "
-		---------------------\n
-		" . $bp->groups->invites_message . "\n
-		---------------------
+---------------------\n
+" . $bp->groups->invites_message . "\n
+---------------------
 	", $message );
 
 	return $message;
@@ -2428,6 +2433,10 @@ function bp_next_send_group_invites() {
 
 	$group_id = bp_get_current_group_id();
 
+	if ( bp_is_group_create() && ! empty( $_POST['group_id'] ) ) {
+		$group_id = (int) $_POST['group_id'];
+	}
+
 	if ( ! bp_groups_user_can_send_invites( $group_id ) ) {
 		wp_send_json_error( array(
 			'feedback' => __( 'You are not allowed to send invites for this group.', 'bp-next' ),
@@ -2445,15 +2454,6 @@ function bp_next_send_group_invites() {
 		$invited[ $user_id ] = groups_invite_user( array( 'user_id' => $user_id, 'group_id' => $group_id ) );
 	}
 
-	if ( array_search( false, $invited ) ) {
-		$errors = array_keys( $invited, false );
-
-		wp_send_json_error( array(
-			'feedback' => sprintf( __( 'Invites failed for %d user(s).', 'bp-next' ), count( $errors ) ),
-			'users'    => $errors,
-		) );
-	}
-
 	if ( ! empty( $_POST['message'] ) ) {
 		$bp->groups->invites_message = wp_kses( wp_unslash( $_POST['message'] ), array() );
 
@@ -2469,6 +2469,15 @@ function bp_next_send_group_invites() {
 		remove_filter( 'groups_notification_group_invites_message', 'bp_next_groups_invites_custom_message', 10, 1 );
 	}
 
+	if ( array_search( false, $invited ) ) {
+		$errors = array_keys( $invited, false );
+
+		wp_send_json_error( array(
+			'feedback' => sprintf( __( 'Invites failed for %d user(s).', 'bp-next' ), count( $errors ) ),
+			'users'    => $errors,
+		) );
+	}
+
 	wp_send_json_success( array(
 		'feedback' => __( 'Invites sent.', 'bp-next' )
 	) );
@@ -2481,7 +2490,7 @@ function bp_next_remove_group_invite() {
 
 	if ( BP_Groups_Member::check_for_membership_request( $user_id, $group_id ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Too late, the user is now member of the group.', 'bp-next' ),
+			'feedback' => __( 'Too late, the user is now a member of the group.', 'bp-next' ),
 			'code'     => 1,
 		) );
 	}
@@ -2489,13 +2498,14 @@ function bp_next_remove_group_invite() {
 	// Remove the unsent invitation.
 	if ( ! groups_uninvite_user( $user_id, $group_id ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Removing the invite for the user failed, please try again.', 'bp-next' ),
+			'feedback' => __( 'Removing the invite for the user failed.', 'bp-next' ),
 			'code'     => 0,
 		) );
 	}
 
 	wp_send_json_success( array(
-		'feedback' => __( 'Invite removed.', 'bp-next' )
+		'feedback'    => __( 'No more pending invites for the group.', 'bp-next' ),
+		'has_invites' => bp_group_has_invites( array( 'user_id' => 'any' ) ),
 	) );
 }
 add_action( 'wp_ajax_groups_delete_group_invite', 'bp_next_remove_group_invite' );

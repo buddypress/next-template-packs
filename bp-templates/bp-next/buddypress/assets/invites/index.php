@@ -82,3 +82,28 @@
 		<input type="button" id="bp-invites-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-next' ); ?>"/>
 	</div>
 </script>
+
+<script type="text/html" id="tmpl-bp-invites-filters">
+	<li class="group-invites-search" role="search" data-bp-search="{{data.scope}}">
+		<form action="" method="get" id="group_invites_search_form">
+			<label for="group_invites_search">
+				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-next' ) ); ?>"/>
+			</label>
+			<input type="submit" id="group_invites_search_submit" title="<?php esc_attr_e( 'Search', 'bp-next' ); ?>" value="{{data.search_icon}}" />
+		</form>
+	</li>
+</script>
+
+<script type="text/html" id="tmpl-bp-invites-paginate">
+	<# if ( 1 !== data.page ) { #>
+		<a href="#" id="bp-invites-prev-page" title="<?php esc_attr_e( 'Prev', 'bp-next' );?>" class="button invite-button">
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'bp-next' );?></span>
+		</a>
+	<# } #>
+
+	<# if ( data.total_page !== data.page ) { #>
+		<a href="#" id="bp-invites-next-page" title="<?php esc_attr_e( 'Next', 'bp-next' );?>" class="button invite-button">
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'bp-next' );?></span>
+		</a>
+	<# } #>
+</script>
