@@ -687,7 +687,7 @@ window.bp = window.bp || {};
 			// Unforunately unlike groups
 			// Friends actions does not match the wpnonce
 			var friends_actions_map = {
-				'is_friend'  : 'remove_friend',
+				'is_friend'   : 'remove_friend',
 				'not_friends' : 'add_friend',
 				'pending'     : 'withdraw_friendship'
 			}

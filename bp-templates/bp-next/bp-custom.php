@@ -641,10 +641,13 @@ remove_filter( 'bp_activity_set_mentions_scope_args', 'bp_activity_filter_mentio
 
 // I don't see any reason why to restrict group invites to friends..
 function bp_next_group_invites_create_steps( $steps = array() ) {
-	if ( bp_is_active( 'friends' ) ) {
+	if ( bp_is_active( 'friends' ) && isset( $steps['group-invites'] ) ) {
+		// Simply change the name
+		$steps['group-invites']['name'] = _x( 'Invites',  'Group screen nav', 'bp-next' );
 		return $steps;
 	}
 
+	// Add the create step if friends component is not active
 	$steps['group-invites'] = array(
 		'name'     => _x( 'Invites',  'Group screen nav', 'bp-next' ),
 		'position' => 30
@@ -655,23 +658,34 @@ function bp_next_group_invites_create_steps( $steps = array() ) {
 add_filter( 'groups_create_group_steps', 'bp_next_group_invites_create_steps', 10, 1 );
 
 function bp_next_group_setup_nav() {
-	if ( bp_is_active( 'friends' ) || ! bp_is_group() || ! bp_groups_user_can_send_invites() ) {
+	if ( ! bp_is_group() || ! bp_groups_user_can_send_invites() ) {
 		return;
 	}
 
-	$current_group = groups_get_current_group();
-	$group_link    = bp_get_group_permalink( $current_group );
+	// Simply change the name
+	if ( bp_is_active( 'friends' ) ) {
+		$bp = buddypress();
 
-	bp_core_new_subnav_item( array(
-		'name'            => _x( 'Invites', 'My Group screen nav', 'bp-next' ),
-		'slug'            => 'send-invites',
-		'parent_url'      => $group_link,
-		'parent_slug'     => $current_group->slug,
-		'screen_function' => 'groups_screen_group_invite',
-		'item_css_id'     => 'invite',
-		'position'        => 70,
-		'user_has_access' => $current_group->user_has_access,
-		'no_access_url'   => $group_link,
-	) );
+		if ( isset( $bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites'] ) ) {
+			$bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites']['name'] = _x( 'Invites', 'My Group screen nav', 'bp-next' );
+		}
+
+	// Create the Subnav item for the group
+	} else {
+		$current_group = groups_get_current_group();
+		$group_link    = bp_get_group_permalink( $current_group );
+
+		bp_core_new_subnav_item( array(
+			'name'            => _x( 'Invites', 'My Group screen nav', 'bp-next' ),
+			'slug'            => 'send-invites',
+			'parent_url'      => $group_link,
+			'parent_slug'     => $current_group->slug,
+			'screen_function' => 'groups_screen_group_invite',
+			'item_css_id'     => 'invite',
+			'position'        => 70,
+			'user_has_access' => $current_group->user_has_access,
+			'no_access_url'   => $group_link,
+		) );
+	}
 }
 add_action( 'groups_setup_nav', 'bp_next_group_setup_nav' );

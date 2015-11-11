@@ -250,6 +250,9 @@ window.bp = window.bp || {};
 			options.context = this;
 			options.data    = options.data || {};
 
+			// Add generic nonce
+			options.data.nonce = BP_Next.nonces.groups;
+
 			if ( this.options.group_id ) {
 				options.data.group_id = this.options.group_id;
 			}
@@ -264,7 +267,8 @@ window.bp = window.bp || {};
 
 			if ( 'create' === method ) {
 				options.data = _.extend( options.data, {
-					action: 'groups_send_group_invites',
+					action     : 'groups_send_group_invites',
+					'_wpnonce' : BP_Next.group_invites.nonces.send_invites
 				} );
 
 				if ( model ) {
@@ -276,7 +280,8 @@ window.bp = window.bp || {};
 
 			if ( 'delete' === method ) {
 				options.data = _.extend( options.data, {
-					action: 'groups_delete_group_invite',
+					action     : 'groups_delete_group_invite',
+					'_wpnonce' : BP_Next.group_invites.nonces.uninvite
 				} );
 
 				if ( model ) {
@@ -520,7 +525,6 @@ window.bp = window.bp || {};
 
 		usersFiltered: function( collection, response ) {
 			bp.Next.GroupInvites.removeFeedback();
-			//bp.Next.GroupInvites.displayFeedback( response.feedback, 'help' );
 		},
 
 		usersFilterError: function( collection, response ) {
@@ -603,7 +607,9 @@ window.bp = window.bp || {};
 		},
 
 		usersFetchError: function( collection, response ) {
-			bp.Next.GroupInvites.displayFeedback( response.feedback, 'help' );
+			var type = response.type || 'help';
+
+			bp.Next.GroupInvites.displayFeedback( response.feedback, type );
 		},
 
 		cleanContent: function( collection ) {
@@ -682,6 +688,8 @@ window.bp = window.bp || {};
 			collection.remove( this.model );
 			this.remove();
 
+			bp.Next.GroupInvites.removeFeedback();
+
 			if ( false === response.has_invites ) {
 				bp.Next.GroupInvites.displayFeedback( response.feedback, 'success' );
 
@@ -737,9 +745,11 @@ window.bp = window.bp || {};
 		},
 
 		invitesError: function( response ) {
+			var type = response.type || 'help';
+
 			$( this.el ).removeClass( 'bp-hide' );
 
-			bp.Next.GroupInvites.displayFeedback( response.feedback, 'help' );
+			bp.Next.GroupInvites.displayFeedback( response.feedback, type );
 
 			if ( ! _.isUndefined( response.users ) ) {
 				// Display the pending invites

@@ -601,6 +601,10 @@ class BP_Next extends BP_Theme_Compat {
 				'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-next' ),
 				'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
 				'is_group_create'    => bp_is_group_create(),
+				'nonces'             => array(
+					'uninvite'     => wp_create_nonce( 'groups_invite_uninvite_user' ),
+					'send_invites' => wp_create_nonce( 'groups_send_invites' )
+				),
 			);
 		}
 
@@ -2337,6 +2341,30 @@ function bp_legacy_theme_cover_image( $params = array() ) {
 function bp_next_get_users_to_invite() {
 	$bp = buddypress();
 
+	$response = array(
+		'feedback' => esc_html__( 'There was a problem performing this action. Please try again.', 'bp-next' ),
+		'type'     => 'error',
+	);
+
+	if ( empty( $_POST['nonce'] ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// Use default nonce
+	$nonce = $_POST['nonce'];
+	$check = 'bp_next_groups';
+
+	// Use a specific one for actions needed it
+	if ( ! empty( $_POST['_wpnonce'] ) && ! empty( $_POST['action'] ) ) {
+		$nonce = $_POST['_wpnonce'];
+		$check = $_POST['action'];
+	}
+
+	// Nonce check!
+	if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, $check ) ) {
+		wp_send_json_error( $response );
+	}
+
 	$request = wp_parse_args( $_POST, array(
 		'scope' => 'members',
 	) );
@@ -2355,6 +2383,7 @@ function bp_next_get_users_to_invite() {
 		if ( ! bp_group_has_invites( array( 'user_id' => 'any' ) ) ) {
 			wp_send_json_error( array(
 				'feedback' => __( 'No pending invites found.', 'bp-next' ),
+				'type'     => 'info',
 			) );
 		}
 
@@ -2368,16 +2397,19 @@ function bp_next_get_users_to_invite() {
 	if ( empty( $potential_invites->users ) ) {
 		$error = array(
 			'feedback' => __( 'No members were found, try another filter.', 'bp-next' ),
+			'type'     => 'info',
 		);
 
 		if ( 'friends' === $bp->groups->invites_scope ) {
 			$error = array(
 				'feedback' => __( 'All your friends are already members of this group or already received an invite to join this group.', 'bp-next' ),
+				'type'     => 'info',
 			);
 
 			if ( 0 === (int) bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
 				$error = array(
 					'feedback' => __( 'You have no friends!', 'bp-next' ),
+					'type'     => 'info',
 				);
 			}
 
@@ -2428,8 +2460,12 @@ function bp_next_send_group_invites() {
 	);
 
 	// Verify nonce
-	/*if ( !check_admin_referer( 'groups_send_invites', '_wpnonce_send_invites' ) )
-			return false;*/
+	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'groups_send_invites' ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'Invites could not be sent, please try again.', 'bp-next' ),
+			'type'     => 'error',
+		) );
+	}
 
 	$group_id = bp_get_current_group_id();
 
@@ -2440,6 +2476,7 @@ function bp_next_send_group_invites() {
 	if ( ! bp_groups_user_can_send_invites( $group_id ) ) {
 		wp_send_json_error( array(
 			'feedback' => __( 'You are not allowed to send invites for this group.', 'bp-next' ),
+			'type'     => 'error',
 		) );
 	}
 
@@ -2475,6 +2512,7 @@ function bp_next_send_group_invites() {
 		wp_send_json_error( array(
 			'feedback' => sprintf( __( 'Invites failed for %d user(s).', 'bp-next' ), count( $errors ) ),
 			'users'    => $errors,
+			'type'     => 'error',
 		) );
 	}
 
@@ -2487,6 +2525,13 @@ add_action( 'wp_ajax_groups_send_group_invites', 'bp_next_send_group_invites' );
 function bp_next_remove_group_invite() {
 	$user_id  = $_POST['user'];
 	$group_id = bp_get_current_group_id();
+
+	// Verify nonce
+	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'groups_invite_uninvite_user' ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'Invites could not be removed, please try again.', 'bp-next' ),
+		) );
+	}
 
 	if ( BP_Groups_Member::check_for_membership_request( $user_id, $group_id ) ) {
 		wp_send_json_error( array(
