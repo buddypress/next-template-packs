@@ -708,10 +708,22 @@ window.bp = window.bp || {};
 				if ( false === response.success ) {
 					item.prepend( response.data.feedback );
 					target.removeClass( 'pending loading' );
+					item.find( '.bp-feedback' ).fadeOut( 1500 );
 				} else {
-					// Reloading the window is the easiest way to update the page
-					if ( ! $( 'body.directory' ).length && 'groups' === object ) {
-						return window.location.reload();
+					// Specific cases for groups
+					if ( 'groups' === object ) {
+
+						// Group's header button
+						if ( undefined !== response.data.is_group && response.data.is_group ) {
+							return window.location.reload();
+						}
+
+						// User's groups invitations screen
+						if ( undefined !== response.data.is_user && response.data.is_user ) {
+							target.parent().html( response.data.feedback );
+							item.fadeOut( 1500 );
+							return;
+						}
 					}
 
 					// Update count

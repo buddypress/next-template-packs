@@ -689,3 +689,95 @@ function bp_next_group_setup_nav() {
 	}
 }
 add_action( 'groups_setup_nav', 'bp_next_group_setup_nav' );
+
+if ( ! function_exists( 'bp_group_accept_invite_button' ) ) :
+
+function bp_group_accept_invite_button( $group = false ) {
+	echo bp_get_group_accept_invite_button( $group );
+}
+
+endif;
+
+if ( ! function_exists( 'bp_get_group_accept_invite_button' ) ) :
+
+function bp_get_group_accept_invite_button( $group = false ) {
+	global $groups_template;
+
+	// Set group to current loop group if none passed
+	if ( empty( $group ) ) {
+		$group =& $groups_template->group;
+	}
+
+	// Don't show button if not logged in or previously banned
+	if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) ) {
+		return false;
+	}
+
+	// Group creation was not completed or status is unknown
+	if ( empty( $group->status ) ) {
+		return false;
+	}
+
+	// Setup button attributes
+	$button = array(
+		'id'                => 'accept_invite',
+		'component'         => 'groups',
+		'must_be_logged_in' => true,
+		'block_self'        => false,
+		'wrapper'           => false,
+		'link_href'         => bp_get_group_accept_invite_link(),
+		'link_text'         => __( 'Accept', 'bp-next' ),
+		'link_title'        => __( 'Accept', 'bp-next' ),
+		'link_class'        => 'button accept group-button accept-invite',
+	);
+
+	return bp_get_button( apply_filters( 'bp_get_group_accept_invite_button', $button, $group ) );
+}
+
+endif;
+
+if ( ! function_exists( 'bp_group_reject_invite_button' ) ) :
+
+function bp_group_reject_invite_button( $group = false ) {
+	echo bp_get_group_reject_invite_button( $group );
+}
+
+endif;
+
+if ( ! function_exists( 'bp_get_group_reject_invite_button' ) ) :
+
+function bp_get_group_reject_invite_button( $group = false ) {
+	global $groups_template;
+
+	// Set group to current loop group if none passed
+	if ( empty( $group ) ) {
+		$group =& $groups_template->group;
+	}
+
+	// Don't show button if not logged in or previously banned
+	if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) ) {
+		return false;
+	}
+
+	// Group creation was not completed or status is unknown
+	if ( empty( $group->status ) ) {
+		return false;
+	}
+
+	// Setup button attributes
+	$button = array(
+		'id'                => 'reject_invite',
+		'component'         => 'groups',
+		'must_be_logged_in' => true,
+		'block_self'        => false,
+		'wrapper'           => false,
+		'link_href'         => bp_get_group_reject_invite_link(),
+		'link_text'         => __( 'Reject', 'bp-next' ),
+		'link_title'        => __( 'Reject', 'bp-next' ),
+		'link_class'        => 'button reject group-button reject-invite',
+	);
+
+	return bp_get_button( apply_filters( 'bp_get_group_reject_invite_button', $button, $group ) );
+}
+
+endif;

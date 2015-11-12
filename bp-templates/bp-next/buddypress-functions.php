@@ -124,6 +124,8 @@ class BP_Next extends BP_Theme_Compat {
 				add_action( 'bp_group_header_actions',          'bp_group_new_topic_button',         20 );
 				add_action( 'bp_directory_groups_actions',      'bp_group_join_button'                  );
 				add_action( 'bp_groups_directory_group_filter', 'bp_legacy_theme_group_create_nav', 999 );
+				add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',      5 );
+				add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button',     10 );
 			}
 
 			// Blog button.
@@ -179,9 +181,10 @@ class BP_Next extends BP_Theme_Compat {
 			'bp_spam_activity_comment'    => 'bp_legacy_theme_spam_activity',
 
 			// Groups.
-			'groups_invite_user'  => 'bp_legacy_theme_ajax_invite_user',
 			'groups_join_group'   => 'bp_next_ajax_joinleave_group',
 			'groups_leave_group'  => 'bp_next_ajax_joinleave_group',
+			'groups_accept_invite'  => 'bp_next_ajax_joinleave_group',
+			'groups_reject_invite'  => 'bp_next_ajax_joinleave_group',
 			'request_membership'  => 'bp_next_ajax_joinleave_group',
 
 			// Messages.
@@ -231,6 +234,7 @@ class BP_Next extends BP_Theme_Compat {
 				'groups_leave_group',
 				'groups_join_group',
 				'groups_accept_invite',
+				'groups_reject_invite',
 				'groups_membership_requested',
 				'groups_request_membership',
 			);
@@ -1578,89 +1582,6 @@ function bp_next_get_single_activity_content() {
 }
 
 /**
- * Invites a friend to join a group via a POST request.
- *
- * @since 1.2.0
- *
- * @todo Audit return types
- */
-function bp_legacy_theme_ajax_invite_user() {
-	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
-
-	check_ajax_referer( 'groups_invite_uninvite_user' );
-
-	if ( ! $_POST['friend_id'] || ! $_POST['friend_action'] || ! $_POST['group_id'] )
-		return;
-
-	if ( ! bp_groups_user_can_send_invites( $_POST['group_id'] ) )
-		return;
-
-	if ( ! friends_check_friendship( bp_loggedin_user_id(), $_POST['friend_id'] ) )
-		return;
-
-	$group_id = (int) $_POST['group_id'];
-	$friend_id = (int) $_POST['friend_id'];
-
-	if ( 'invite' == $_POST['friend_action'] ) {
-		$group = groups_get_group( $group_id );
-
-		// Users who have previously requested membership do not need
-		// another invitation created for them.
-		if ( BP_Groups_Member::check_for_membership_request( $friend_id, $group_id ) ) {
-			$user_status = 'is_pending';
-
-		// Create the user invitation.
-		} elseif ( groups_invite_user( array( 'user_id' => $friend_id, 'group_id' => $group_id ) ) ) {
-			$user_status = 'is_invited';
-
-		// Miscellaneous failure.
-		} else {
-			return;
-		}
-
-		$user = new BP_Core_User( $friend_id );
-
-		$uninvite_url = bp_is_current_action( 'create' )
-			? bp_get_groups_directory_permalink() . 'create/step/group-invites/?user_id=' . $friend_id
-			: bp_get_group_permalink( $group )    . 'send-invites/remove/' . $friend_id;
-
-		echo '<li id="uid-' . esc_attr( $user->id ) . '">';
-		echo $user->avatar_thumb;
-		echo '<h4>' . $user->user_link . '</h4>';
-		echo '<span class="activity">' . esc_attr( $user->last_active ) . '</span>';
-		echo '<div class="action">
-				<a class="button remove" href="' . wp_nonce_url( $uninvite_url, 'groups_invite_uninvite_user' ) . '" id="uid-' . esc_attr( $user->id ) . '">' . __( 'Remove Invite', 'bp-next' ) . '</a>
-			  </div>';
-
-		if ( 'is_pending' == $user_status ) {
-			echo '<p class="description">' . sprintf( __( '%s has previously requested to join this group. Sending an invitation will automatically add the member to the group.', 'bp-next' ), $user->user_link ) . '</p>';
-		}
-
-		echo '</li>';
-		exit;
-
-	} elseif ( 'uninvite' == $_POST['friend_action'] ) {
-		// Users who have previously requested membership should not
-		// have their requests deleted on the "uninvite" action.
-		if ( BP_Groups_Member::check_for_membership_request( $friend_id, $group_id ) ) {
-			return;
-		}
-
-		// Remove the unsent invitation.
-		if ( ! groups_uninvite_user( $friend_id, $group_id ) ) {
-			return;
-		}
-
-		exit;
-
-	} else {
-		return;
-	}
-}
-
-/**
  * Friend/un-friend a user via a POST request.
  *
  * @since 1.0.0
@@ -1808,7 +1729,7 @@ function bp_next_ajax_joinleave_group() {
 	);
 
 	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) || empty( $_POST['action'] ) ) {
 		wp_send_json_error( $response );
 	}
 
@@ -1836,7 +1757,7 @@ function bp_next_ajax_joinleave_group() {
 
 	if ( groups_is_user_banned( bp_loggedin_user_id(), $group_id ) ) {
 		$response['feedback'] = sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback error"><p>%s</p></div>',
 			esc_html__( 'You cannot join this group.', 'bp-next' )
 		);
 
@@ -1848,6 +1769,69 @@ function bp_next_ajax_joinleave_group() {
 
 	if ( empty( $group->id ) ) {
 		wp_send_json_error( $response );
+	}
+
+	/**
+	 *
+
+	 Every action should be handled here
+
+	 */
+	switch ( $_POST['action'] ) {
+
+		case 'groups_accept_invite' :
+			if ( ! groups_accept_invite( bp_loggedin_user_id(), $group_id ) ) {
+				$response = array(
+					'feedback' => sprintf(
+						'<div class="bp-feedback error">%s</div>',
+						esc_html__( 'Group invite could not be accepted', 'bp-next' )
+					),
+					'type'     => 'error'
+				);
+
+			} else {
+				groups_record_activity( array(
+					'type'    => 'joined_group',
+					'item_id' => $group->id
+				) );
+
+				$response = array(
+					'feedback' => sprintf(
+						'<div class="bp-feedback success">%s</div>',
+						esc_html__( 'Group invite accepted', 'bp-next' )
+					),
+					'type'     => 'success',
+					'is_user'  => bp_is_user(),
+				);
+			}
+			break;
+
+		case 'groups_reject_invite' :
+			if ( ! groups_reject_invite( bp_loggedin_user_id(), $group_id ) ) {
+				$response = array(
+					'feedback' => sprintf(
+						'<div class="bp-feedback error">%s</div>',
+						esc_html__( 'Group invite could not be rejected', 'bp-next' )
+					),
+					'type'     => 'error'
+				);
+			} else {
+				$response = array(
+					'feedback' => sprintf(
+						'<div class="bp-feedback success">%s</div>',
+						esc_html__( 'Group invite rejected', 'bp-next' )
+					),
+					'type'     => 'success',
+					'is_user'  => bp_is_user(),
+				);
+			}
+			break;
+	}
+
+	if ( 'error' === $response['type'] ) {
+		wp_send_json_error( $response );
+	} else {
+		wp_send_json_success( $response );
 	}
 
 	if ( ! groups_is_user_member( bp_loggedin_user_id(), $group->id ) ) {
@@ -1864,7 +1848,10 @@ function bp_next_ajax_joinleave_group() {
 				// User is now a member of the group
 				$group->is_member = '1';
 
-				wp_send_json_success( array( 'contents' => bp_get_group_join_button( $group ) ) );
+				wp_send_json_success( array(
+					'contents' => bp_get_group_join_button( $group ),
+					'is_group' => bp_is_group()
+				) );
 			}
 
 		} elseif ( 'private' == $group->status ) {
@@ -1884,7 +1871,10 @@ function bp_next_ajax_joinleave_group() {
 					// User is now a member of the group
 					$group->is_member = '1';
 
-					wp_send_json_success( array( 'contents' => bp_get_group_join_button( $group ) ) );
+					wp_send_json_success( array(
+						'contents' => bp_get_group_join_button( $group ),
+						'is_group' => bp_is_group()
+					) );
 				}
 
 			// Otherwise, it's a Request Membership button.
@@ -1901,7 +1891,10 @@ function bp_next_ajax_joinleave_group() {
 					// Request is pending
 					$group->is_pending = '1';
 
-					wp_send_json_success( array( 'contents' => bp_get_group_join_button( $group ) ) );
+					wp_send_json_success( array(
+						'contents' => bp_get_group_join_button( $group ),
+						'is_group' => bp_is_group()
+					) );
 				}
 			}
 		}
@@ -1919,7 +1912,10 @@ function bp_next_ajax_joinleave_group() {
 			// User is no more a member of the group
 			$group->is_member = '0';
 
-			wp_send_json_success( array( 'contents' => bp_get_group_join_button( $group ) ) );
+			wp_send_json_success( array(
+				'contents' => bp_get_group_join_button( $group ),
+				'is_group' => bp_is_group()
+			) );
 		}
 	}
 }

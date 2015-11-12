@@ -15,11 +15,11 @@ do_action( 'bp_before_group_invites_content' ); ?>
 
 <?php if ( bp_has_groups( 'type=invites&user_id=' . bp_loggedin_user_id() ) ) : ?>
 
-	<ul id="group-list" class="invites item-list">
+	<ul id="group-list" class="invites item-list" data-bp-list="groups_invites">
 
 		<?php while ( bp_groups() ) : bp_the_group(); ?>
 
-			<li>
+			<li data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
 				<?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 					<div class="item-avatar">
 						<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ); ?></a>
@@ -42,8 +42,6 @@ do_action( 'bp_before_group_invites_content' ); ?>
 				do_action( 'bp_group_invites_item' ); ?>
 
 				<div class="action">
-					<a class="button accept" href="<?php bp_group_accept_invite_link(); ?>"><?php _e( 'Accept', 'bp-next' ); ?></a> &nbsp;
-					<a class="button reject confirm" href="<?php bp_group_reject_invite_link(); ?>"><?php _e( 'Reject', 'bp-next' ); ?></a>
 
 					<?php
 
