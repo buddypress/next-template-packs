@@ -19,12 +19,7 @@
 	do_action( 'bp_before_messages_compose_content' ); ?>
 
 	<label for="send-to-input"><?php _e("Send To (Username or Friend's Name)", 'bp-next' ); ?></label>
-	<ul class="first acfb-holder">
-		<li>
-			<?php bp_message_get_recipient_tabs(); ?>
-			<input type="text" name="send-to-input" class="send-to-input" id="send-to-input" />
-		</li>
-	</ul>
+	<input type="text" name="send-to-input" class="bp-suggestions send-to-input" id="send-to-input" />
 
 	<?php if ( bp_current_user_can( 'bp_moderate' ) ) : ?>
 		<p><label for="send-notice"><input type="checkbox" id="send-notice" name="send-notice" value="1" /> <?php _e( "This is a notice to all users.", "buddypress" ); ?></label></p>

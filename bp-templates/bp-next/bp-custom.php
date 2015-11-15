@@ -454,6 +454,28 @@ function bp_next_directory_members_search_form() {
 }
 add_filter( 'bp_directory_members_search_form', 'bp_next_directory_members_search_form', 10, 1 );
 
+function bp_next_message_search_form() {
+	$query_arg = bp_core_get_component_search_query_arg( 'messages' );
+
+	// Get the default search text.
+	$placeholder = bp_get_search_default_text( 'messages' );
+
+	$search_form_html = '<form action="" method="get" id="search-messages-form">
+		<label for="messages_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="messages_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
+		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . __( 'Search', 'bp-next' ) . '" />
+	</form>';
+
+	/**
+	 * Filters the private message component search form.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $search_form_html HTML markup for the message search form.
+	 */
+	echo apply_filters( 'bp_next_message_search_form', $search_form_html );
+}
+add_filter( 'bp_message_search_form', 'bp_next_message_search_form', 10, 1 );
+
 function bp_next_activity_scope_newest_class( $classes = '' ) {
 	if ( ! is_user_logged_in() ) {
 		return $classes;
@@ -781,3 +803,72 @@ function bp_get_group_reject_invite_button( $group = false ) {
 }
 
 endif;
+
+function bp_next_mce_buttons( $buttons = array() ) {
+	$remove_buttons = array(
+		'wp_more',
+		'spellchecker',
+		'wp_adv',
+		'fullscreen',
+	);
+
+	// Remove unused buttons
+	$buttons = array_diff( $buttons, $remove_buttons );
+
+	// Add the image button
+	array_push( $buttons, 'image' );
+
+	return $buttons;
+}
+
+function bp_next_messages_at_on_tinymce_init( $settings, $editor_id ) {
+	// We only apply the mentions init to the visual post editor in the WP dashboard.
+	if ( 'message_content' === $editor_id ) {
+		$settings['init_instance_callback'] = 'window.bp.Next.Messages.tinyMCEinit';
+	}
+
+	return $settings;
+}
+
+
+add_filter( 'bp_get_message_thread_content', 'wp_filter_kses', 1 );
+add_filter( 'bp_get_message_thread_content', 'wptexturize' );
+add_filter( 'bp_get_message_thread_content', 'convert_smilies', 2 );
+add_filter( 'bp_get_message_thread_content', 'convert_chars' );
+add_filter( 'bp_get_message_thread_content', 'make_clickable', 9 );
+add_filter( 'bp_get_message_thread_content', 'wpautop' );
+add_filter( 'bp_get_message_thread_content', 'stripslashes_deep' );
+
+function bp_next_get_message_date( $date ) {
+	$now = bp_core_current_time( true, 'timestamp' );
+	$date = strtotime( $date );
+
+	$now_date  = getdate( $now );
+	$date_date = getdate( $date );
+	$compare   = array_diff( $now_date, $date_date );
+	$date_format = 'Y/m/d';
+
+	// Use Timezone string if set
+	$timezone_string = bp_get_option( 'timezone_string' );
+	if ( ! empty( $timezone_string ) ) {
+		$timezone_object = timezone_open( $timezone_string );
+		$datetime_object = date_create( "@{$date}" );
+		$timezone_offset = timezone_offset_get( $timezone_object, $datetime_object ) / HOUR_IN_SECONDS;
+
+	// Fall back on less reliable gmt_offset
+	} else {
+		$timezone_offset = bp_get_option( 'gmt_offset' );
+	}
+
+	// Calculate time based on the offset
+	$calculated_time = $date + ( $timezone_offset * HOUR_IN_SECONDS );
+
+	if ( empty( $compare['mday'] ) && empty( $compare['mon'] ) && empty( $compare['year'] ) ) {
+		$date_format = 'H:i';
+
+	} elseif ( empty( $compare['year'] ) ) {
+		$date_format = 'M j';
+	}
+
+	return apply_filters( 'bp_next_get_message_date', date_i18n( $date_format, $calculated_time, true ), $calculated_time, $date, $date_format );
+}

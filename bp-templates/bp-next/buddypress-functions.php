@@ -293,6 +293,10 @@ class BP_Next extends BP_Theme_Compat {
 				}
 			}
 		}
+
+		if ( bp_is_user_messages() ) {
+			wp_enqueue_style( 'bp-next-at-message', buddypress()->plugin_url . "bp-activity/css/mentions{$min}.css", array(), bp_get_version() );
+		}
 	}
 
 	/**
@@ -328,6 +332,21 @@ class BP_Next extends BP_Theme_Compat {
 			}
 		}
 
+		if ( bp_is_active( 'messages' ) && isset( $main['handle'] ) ) {
+			$messages = $this->locate_asset_in_stack( "buddypress-messages{$min}.js", 'js', 'bp-next-messages' );
+
+			if ( isset( $messages['location'], $messages['handle'] ) ) {
+				$this->message_handle = $messages['handle'];
+
+				// Use the activity mentions script
+				wp_register_script( $messages['handle'] . '-at', buddypress()->plugin_url . "bp-activity/js/mentions{$min}.js", array( 'jquery', 'jquery-atwho' ), bp_get_version(), true );
+				wp_register_script( $messages['handle'], $messages['location'], array( $main['handle'], 'json2', 'wp-backbone', $messages['handle'] . '-at' ), $this->version, true );
+			}
+
+			// Remove deprecated scripts
+			remove_action( 'bp_enqueue_scripts', 'messages_add_autocomplete_js' );
+		}
+
 		if ( ( bp_is_active( 'settings' ) || bp_get_signup_allowed() ) && isset( $main['handle'] ) ) {
 			$password = $this->locate_asset_in_stack( "password-verify{$min}.js", 'js', 'bp-next-password-verify' );
 
@@ -358,6 +377,12 @@ class BP_Next extends BP_Theme_Compat {
 
 		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
 			wp_enqueue_script( 'bp-next-group-invites' );
+		}
+
+		if ( bp_is_user_messages() ) {
+			wp_enqueue_script( 'bp-next-messages' );
+
+			add_filter( 'tiny_mce_before_init', 'bp_next_messages_at_on_tinymce_init', 10, 2 );
 		}
 
 		// Maybe enqueue comment reply JS.
@@ -566,21 +591,34 @@ class BP_Next extends BP_Theme_Compat {
 		$params['objects'] = $supported_objects;
 		$params['nonces']  = $object_nonces;
 
-		// Star private messages.
-		if ( bp_is_active( 'messages', 'star' ) && bp_is_user_messages() ) {
+		if ( bp_is_user_messages() ) {
 			$params['messages'] = array(
-				'strings' => array(
-					'text_unstar'  => __( 'Unstar', 'bp-next' ),
-					'text_star'    => __( 'Star', 'bp-next' ),
-					'title_unstar' => __( 'Starred', 'bp-next' ),
-					'title_star'   => __( 'Not starred', 'bp-next' ),
-					'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-next' ),
-					'title_star_thread'   => __( 'Star the first message in this thread', 'bp-next' ),
+				'errors' => array(
+					'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'bp-next' ),
+					'subject'         => __( 'Please add a subject to your message.', 'bp-next' ),
+					'message_content' => __( 'Please add some content to your message.', 'bp-next' ),
 				),
-				'is_single_thread' => (int) bp_is_messages_conversation(),
-				'star_counter'     => 0,
-				'unstar_counter'   => 0
+				'nonces' => array(
+					'send' => wp_create_nonce( 'messages_send_message' ),
+				),
 			);
+
+			// Star private messages.
+			if ( bp_is_active( 'messages', 'star' ) ) {
+				$params['messages'] = array_merge( $params['messages'], array(
+					'strings' => array(
+						'text_unstar'  => __( 'Unstar', 'bp-next' ),
+						'text_star'    => __( 'Star', 'bp-next' ),
+						'title_unstar' => __( 'Starred', 'bp-next' ),
+						'title_star'   => __( 'Not starred', 'bp-next' ),
+						'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-next' ),
+						'title_star_thread'   => __( 'Star the first message in this thread', 'bp-next' ),
+					),
+					'is_single_thread' => (int) bp_is_messages_conversation(),
+					'star_counter'     => 0,
+					'unstar_counter'   => 0
+				) );
+			}
 		}
 
 		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
@@ -904,15 +942,22 @@ function bp_next_ajax_querystring( $query_string, $object ) {
 	}
 
 	$object_search_text = bp_get_search_default_text( $object );
- 	if ( ! empty( $post_query['search_terms'] ) && $object_search_text != $post_query['search_terms'] && 'false' != $post_query['search_terms'] && 'undefined' != $post_query['search_terms'] ) {
- 		$qs[] = 'search_terms=' . urlencode( $_POST['search_terms'] );
- 	}
+	if ( ! empty( $post_query['search_terms'] ) && $object_search_text != $post_query['search_terms'] && 'false' != $post_query['search_terms'] && 'undefined' != $post_query['search_terms'] ) {
+		$qs[] = 'search_terms=' . urlencode( $_POST['search_terms'] );
+	}
 
- 	// Now pass the querystring to override default values.
+	// Specific to messages
+	if ( 'messages' === $object ) {
+		if ( ! empty( $post_query['box'] ) ) {
+			$qs[] = 'box=' . $post_query['box'];
+		}
+	}
+
+	// Now pass the querystring to override default values.
 	$query_string = empty( $qs ) ? '' : join( '&', (array) $qs );
 
- 	// List the variables for the filter
- 	list( $filter, $scope, $page, $search_terms, $extras ) = array_values( $post_query );
+	// List the variables for the filter
+	list( $filter, $scope, $page, $search_terms, $extras ) = array_values( $post_query );
 
 	/**
 	 * Filters the AJAX query string for the component loops.
@@ -2550,3 +2595,139 @@ function bp_next_remove_group_invite() {
 	) );
 }
 add_action( 'wp_ajax_groups_delete_group_invite', 'bp_next_remove_group_invite' );
+
+function bp_next_messages_send_message() {
+	$response = array(
+		'feedback' => __( 'Your message could not be sent, please try again.', 'bp-next' ),
+		'type'     => 'error',
+	);
+
+	// Verify nonce
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'messages_send_message' ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// Validate subject and message content
+	if ( empty( $_POST['subject'] ) || empty( $_POST['message_content'] ) ) {
+		if ( empty( $_POST['subject'] ) ) {
+			$response['feedback'] = __( 'Your message was not sent. Please enter a subject line.', 'bp-next' );
+		} else {
+			$response['feedback'] = __( 'Your message was not sent. Please enter some content.', 'bp-next' );
+		}
+
+		wp_send_json_error( $response );
+	}
+
+	// Validate recipients
+	if ( empty( $_POST['send_to'] ) || ! is_array( $_POST['send_to'] ) ) {
+		$response['feedback'] = __( 'Your message was not sent. Please enter at least one @username.', 'bp-next' );
+
+		wp_send_json_error( $response );
+	}
+
+	// Trim @ from usernames
+	$recipients = apply_filters( 'bp_messages_recipients', array_map( create_function( '$r', "return trim( \$r, '@' );" ), $_POST['send_to'] ) );
+
+	// Attempt to send the message.
+	$send = messages_new_message( array(
+		'recipients' => $recipients,
+		'subject'    => $_POST['subject'],
+		'content'    => $_POST['message_content'],
+		'error_type' => 'wp_error'
+	) );
+
+	// Send the message.
+	if ( true === is_int( $send ) ) {
+		wp_send_json_success( array(
+			'feedback' => __( 'Message successfully sent.', 'bp-next' ),
+			'type'     => 'success',
+		) );
+
+	// Message could not be sent.
+	} else {
+		$response['feedback'] = $send->get_error_message();
+
+		wp_send_json_error( $response );
+	}
+}
+add_action( 'wp_ajax_messages_send_message', 'bp_next_messages_send_message' );
+
+function bp_next_get_user_message_threads() {
+	global $messages_template;
+
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'Unauthorized request.', 'bp-next' ),
+			'type'     => 'error'
+		) );
+	}
+
+	if ( isset( $_POST['box'] ) && 'starred' === $_POST['box'] ) {
+		$star_filter = true;
+
+		// Add the message thread filter.
+		add_filter( 'bp_after_has_message_threads_parse_args', 'bp_messages_filter_starred_message_threads' );
+	}
+
+	// Simulate the loop.
+	if ( ! bp_has_message_threads( bp_ajax_querystring( 'messages' ) ) ) {
+		wp_send_json_error( array(
+			'feedback' => __( 'Sorry, no messages were found.', 'bp-next' ),
+			'type'     => 'info'
+		) );
+	}
+
+	if ( ! empty( $star_filter ) ) {
+
+		// remove the message thread filter.
+		remove_filter( 'bp_after_has_message_threads_parse_args', 'bp_messages_filter_starred_message_threads' );
+	}
+
+	$threads = new stdClass;
+	$threads->meta = array(
+		'total_page' => ceil( (int) $messages_template->total_thread_count / (int) $messages_template->pag_num ),
+		'page'       => $messages_template->pag_page
+	);
+
+	$threads->threads = array();
+	$i = 0;
+
+	while ( bp_message_threads() ) : bp_message_thread();
+		$threads->threads[ $i ] = array(
+			'id'            => bp_get_message_thread_id(),
+			'subject'       => html_entity_decode( bp_get_message_thread_subject() ),
+			'excerpt'       => html_entity_decode( bp_get_message_thread_excerpt() ),
+			'content'       => html_entity_decode( bp_get_message_thread_content() ),
+			'sender_name'   => bp_core_get_user_displayname( $messages_template->thread->last_sender_id ),
+			'sender_link'   => bp_core_get_userlink( $messages_template->thread->last_sender_id, false, true ),
+			'sender_avatar' => htmlspecialchars_decode( bp_core_fetch_avatar( array(
+				'item_id' => $messages_template->thread->last_sender_id,
+				'object'  => 'user',
+				'type'    => 'thumb',
+				'width'   => 32,
+				'height'  => 32,
+				'html'    => false,
+			) ) ),
+			'count'         => bp_get_message_thread_total_count(),
+			'date'          => bp_get_message_thread_last_post_date_raw(),
+			'display_date'  => bp_next_get_message_date( bp_get_message_thread_last_post_date_raw() ),
+		);
+
+		if ( bp_is_active( 'messages', 'star' ) ) {
+			$star_link = bp_get_the_message_star_action_link( array(
+				'thread_id' => bp_get_message_thread_id(),
+				'url_only'  => true,
+			) );
+
+			$threads->threads[ $i ]['star_link']  = $star_link;
+			$threads->threads[ $i ]['is_starred'] = array_search( 'unstar', explode( '/', $star_link ) );
+		}
+
+		$i += 1;
+	endwhile;
+
+	$threads->threads = array_filter( $threads->threads );
+
+	wp_send_json_success( $threads );
+}
+add_action( 'wp_ajax_messages_get_user_message_threads', 'bp_next_get_user_message_threads' );

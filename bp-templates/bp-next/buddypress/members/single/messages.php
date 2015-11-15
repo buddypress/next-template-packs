@@ -8,85 +8,43 @@
 
 ?>
 
-<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
+<div class="item-list-tabs" id="subnav" role="navigation">
 	<ul>
 
 		<?php bp_get_options_nav(); ?>
 
 	</ul>
-
-	<?php if ( bp_is_messages_inbox() || bp_is_messages_sentbox() ) : ?>
-
-		<div class="message-search"><?php bp_message_search_form(); ?></div>
-
-	<?php endif; ?>
-
 </div><!-- .item-list-tabs -->
 
-<?php
-switch ( bp_current_action() ) :
+<div class="item-list-tabs no-ajax" id="subsubnav">
+	<ul>
+		<li class="messages-search" role="search" data-bp-search="messages">
+			<?php bp_next_message_search_form(); ?>
+		</li>
+	</ul>
+</div><!-- .item-list-tabs#subsubnav -->
 
-	// Inbox/Sentbox
-	case 'inbox'   :
-	case 'sentbox' :
+<?php if ( ! in_array( bp_current_action(), array( 'inbox', 'sentbox', 'starred', 'view', 'compose', 'notices' ) ) ) :
 
-		/**
-		 * Fires before the member messages content for inbox and sentbox.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_member_messages_content' ); ?>
+	bp_get_template_part( 'members/single/plugins' );
 
-		<div class="messages">
-			<?php bp_get_template_part( 'members/single/messages/messages-loop' ); ?>
-		</div><!-- .messages -->
+else :
 
-		<?php
+	/**
+	 * Fires before the member messages content.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_before_member_messages_content' );
 
-		/**
-		 * Fires after the member messages content for inbox and sentbox.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_member_messages_content' );
-		break;
+	// Load the Private messages UI
+	bp_get_template_part( 'assets/messages/index' );
 
-	// Single Message View
-	case 'view' :
-		bp_get_template_part( 'members/single/messages/single' );
-		break;
+	/**
+	 * Fires after the member messages content.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_after_member_messages_content' );
 
-	// Compose
-	case 'compose' :
-		bp_get_template_part( 'members/single/messages/compose' );
-		break;
-
-	// Sitewide Notices
-	case 'notices' :
-
-		/**
-		 * Fires before the member messages content for notices.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_member_messages_content' ); ?>
-
-		<div class="messages">
-			<?php bp_get_template_part( 'members/single/messages/notices-loop' ); ?>
-		</div><!-- .messages -->
-
-		<?php
-
-		/**
-		 * Fires after the member messages content for inbox and sentbox.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_member_messages_content' );
-		break;
-
-	// Any other
-	default :
-		bp_get_template_part( 'members/single/plugins' );
-		break;
-endswitch;
+endif ;?>
