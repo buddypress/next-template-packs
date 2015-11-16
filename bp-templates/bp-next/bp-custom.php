@@ -804,6 +804,34 @@ function bp_get_group_reject_invite_button( $group = false ) {
 
 endif;
 
+function bp_next_messages_adjust_nav() {
+	$bp = buddypress();
+
+	if ( ! isset( $bp->bp_options_nav[ bp_get_messages_slug() ] ) ) {
+		return;
+	}
+
+	foreach ( $bp->bp_options_nav[ bp_get_messages_slug() ] as $nav_id => $nav_item ) {
+		$bp->bp_options_nav[ bp_get_messages_slug() ][ $nav_id ]['link'] = '#' . $nav_id;
+	}
+}
+add_action( 'bp_messages_setup_nav', 'bp_next_messages_adjust_nav' );
+
+function bp_next_messages_adjust_admin_nav( $admin_nav ) {
+	$user_messages_link = trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() );
+
+	foreach ( $admin_nav as $nav_iterator => $nav ) {
+		$nav_id = str_replace( 'my-account-messages-', '', $nav['id'] );
+
+		if ( 'my-account-messages' !== $nav_id ) {
+			$admin_nav[ $nav_iterator ]['href'] = $user_messages_link . '#' . trim( $nav_id );
+		}
+	}
+
+	return $admin_nav;
+}
+add_filter( 'bp_messages_admin_nav', 'bp_next_messages_adjust_admin_nav', 10, 1 );
+
 function bp_next_mce_buttons( $buttons = array() ) {
 	$remove_buttons = array(
 		'wp_more',
@@ -829,7 +857,6 @@ function bp_next_messages_at_on_tinymce_init( $settings, $editor_id ) {
 
 	return $settings;
 }
-
 
 add_filter( 'bp_get_message_thread_content', 'wp_filter_kses', 1 );
 add_filter( 'bp_get_message_thread_content', 'wptexturize' );

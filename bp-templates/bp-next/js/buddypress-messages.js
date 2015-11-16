@@ -47,9 +47,9 @@ window.bp = window.bp || {};
 
 			$( '#compose-personal-li a#compose' ).addClass( 'button' );
 
-			$( '#subnav li a' ).each( function( e, element ) {
+			/*$( '#subnav li a' ).each( function( e, element ) {
 				$( element ).prop( 'href', '#' + $( element ).prop( 'id' ) );
-			} );
+			} );*/
 
 			$( '#subnav a' ).on( 'click', function( event ) {
 				event.preventDefault();
@@ -75,6 +75,14 @@ window.bp = window.bp || {};
 						self.router.navigate( 'compose', { trigger: true } );
 					}
 				} else {
+					if ( typeof tinymce !== 'undefined' ) {
+						var editor = tinymce.get( 'message_content' );
+
+						if ( editor !== null ) {
+						    editor.destroy();
+						}
+					}
+
 					self.clearViews();
 
 					self.router.navigate( view_id, { trigger: true } );
