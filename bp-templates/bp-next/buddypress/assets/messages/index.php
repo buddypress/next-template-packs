@@ -128,8 +128,8 @@
 		</div>
 		<div class="thread-subject">
 			<span class="thread-count">({{data.count}})</span>
-			<span class="subject">{{data.subject}}</span>
-			<span class="excerpt">{{data.excerpt}}</span>
+			<span class="subject"><# print( data.subject ); #></span>
+			<span class="excerpt"><# print( data.excerpt ); #></span>
 		</div>
 		<div class="thread-date">
 			<time datetime="{{data.date.toISOString()}}">{{data.display_date}}</time>
@@ -141,7 +141,7 @@
 
 <script type="text/html" id="tmpl-bp-messages-preview">
 	<# if ( undefined !== data.content ) { #>
-		<h4><?php esc_html_e( 'Active conversation:', 'bp-next' ); ?> {{data.subject}}</h4>
+		<h4><?php esc_html_e( 'Active conversation:', 'bp-next' ); ?> <# print( data.subject ); #></h4>
 		<div class="preview-content">
 			<# if ( undefined !== data.recipients ) { #>
 				<ul class="thread-participants">
@@ -187,7 +187,7 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single-header">
-	<h4 id="message-subject">{{data.subject}}</h4>
+	<h4 id="message-subject"><# print( data.subject ); #></h4>
 
 	<# if ( undefined !== data.recipients ) { #>
 		<ul class="thread-participants">
