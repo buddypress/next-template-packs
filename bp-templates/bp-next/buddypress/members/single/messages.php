@@ -16,14 +16,6 @@
 	</ul>
 </div><!-- .item-list-tabs -->
 
-<div class="item-list-tabs no-ajax" id="subsubnav">
-	<ul>
-		<li class="messages-search" role="search" data-bp-search="messages">
-			<?php bp_next_message_search_form(); ?>
-		</li>
-	</ul>
-</div><!-- .item-list-tabs#subsubnav -->
-
 <?php if ( ! in_array( bp_current_action(), array( 'inbox', 'sentbox', 'starred', 'view', 'compose', 'notices' ) ) ) :
 
 	bp_get_template_part( 'members/single/plugins' );

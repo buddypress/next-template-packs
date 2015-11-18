@@ -858,13 +858,20 @@ function bp_next_messages_at_on_tinymce_init( $settings, $editor_id ) {
 	return $settings;
 }
 
-add_filter( 'bp_get_message_thread_content', 'wp_filter_kses', 1 );
+remove_filter( 'messages_notice_message_before_save',  'wp_filter_kses', 1 );
+remove_filter( 'messages_message_content_before_save',  'wp_filter_kses', 1 );
+remove_filter( 'bp_get_the_thread_message_content',    'wp_filter_kses', 1 );
+add_filter( 'messages_notice_message_before_save',  'wp_filter_post_kses', 1 );
+add_filter( 'messages_message_content_before_save',  'wp_filter_post_kses', 1 );
+add_filter( 'bp_get_the_thread_message_content', 'wp_filter_post_kses', 1 );
+
+add_filter( 'bp_get_message_thread_content', 'wp_filter_post_kses', 1 );
 add_filter( 'bp_get_message_thread_content', 'wptexturize' );
+add_filter( 'bp_get_message_thread_content', 'stripslashes_deep', 1 );
 add_filter( 'bp_get_message_thread_content', 'convert_smilies', 2 );
 add_filter( 'bp_get_message_thread_content', 'convert_chars' );
 add_filter( 'bp_get_message_thread_content', 'make_clickable', 9 );
 add_filter( 'bp_get_message_thread_content', 'wpautop' );
-add_filter( 'bp_get_message_thread_content', 'stripslashes_deep' );
 
 function bp_next_get_message_date( $date ) {
 	$now = bp_core_current_time( true, 'timestamp' );
@@ -872,7 +879,7 @@ function bp_next_get_message_date( $date ) {
 
 	$now_date  = getdate( $now );
 	$date_date = getdate( $date );
-	$compare   = array_diff( $now_date, $date_date );
+	$compare   = array_diff( $date_date, $now_date );
 	$date_format = 'Y/m/d';
 
 	// Use Timezone string if set
@@ -893,9 +900,34 @@ function bp_next_get_message_date( $date ) {
 	if ( empty( $compare['mday'] ) && empty( $compare['mon'] ) && empty( $compare['year'] ) ) {
 		$date_format = 'H:i';
 
-	} elseif ( empty( $compare['year'] ) ) {
+	} elseif ( empty( $compare['mon'] ) || empty( $compare['year'] ) ) {
 		$date_format = 'M j';
 	}
 
 	return apply_filters( 'bp_next_get_message_date', date_i18n( $date_format, $calculated_time, true ), $calculated_time, $date, $date_format );
+}
+
+function bp_next_messages_get_bulk_actions() {
+	ob_start();
+	bp_messages_bulk_management_dropdown();
+
+	$bulk_actions = array();
+
+	$bulk_options = ob_get_clean();
+
+	$matched = preg_match_all( '/<option value="(.*?)"\s*>(.*?)<\/option>/', $bulk_options, $matches, PREG_SET_ORDER );
+
+	if ( $matched && is_array( $matches ) ) {
+		foreach ( $matches as $i => $match ) {
+			if ( 0 === $i ) {
+				continue;
+			}
+
+			if ( isset( $match[1] ) && isset( $match[2] ) ) {
+				$bulk_actions[] = array( 'value' => trim( $match[1] ), 'label' => trim( $match[2] ) );
+			}
+		}
+	}
+
+	return $bulk_actions;
 }
