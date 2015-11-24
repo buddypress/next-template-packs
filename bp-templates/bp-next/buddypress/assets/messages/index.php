@@ -40,7 +40,7 @@
 	do_action( 'bp_after_messages_compose_content' ); ?>
 
 	<div class="submit">
-		<input type="button" id="bp-messages-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Cancel', 'bp-next' ); ?>"/>
+		<input type="button" id="bp-messages-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Reset', 'bp-next' ); ?>"/>
 		<input type="button" id="bp-messages-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-next' ); ?>"/>
 	</div>
 </script>

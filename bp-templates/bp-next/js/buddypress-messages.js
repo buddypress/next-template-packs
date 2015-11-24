@@ -315,21 +315,6 @@ window.bp = window.bp || {};
 
 				return bp.ajax.send( options );
 			}
-
-			/*
-
-			if ( 'delete' === method ) {
-				options.data = _.extend( options.data, {
-					action     : 'groups_delete_group_invite',
-					'_wpnonce' : BP_Next.group_invites.nonces.uninvite
-				} );
-
-				if ( model ) {
-					options.data.user = model;
-				}
-
-				return bp.ajax.send( options );
-			}*/
 		},
 
 		parse: function( resp ) {
@@ -363,6 +348,10 @@ window.bp = window.bp || {};
 			if ( ! _.isUndefined( resp.meta ) ) {
 				this.options.page       = resp.meta.page;
 				this.options.total_page = resp.meta.total_page;
+			}
+
+			if ( bp.Next.Messages.box ) {
+				this.options.box = bp.Next.Messages.box
 			}
 
 			return resp.threads;
@@ -516,7 +505,8 @@ window.bp = window.bp || {};
 		template  : bp.template( 'bp-messages-form' ),
 
 		events: {
-			'click #bp-messages-send' : 'sendMessage'
+			'click #bp-messages-send'  : 'sendMessage',
+			'click #bp-messages-reset' : 'resetForm'
 		},
 
 		initialize: function() {
@@ -556,7 +546,7 @@ window.bp = window.bp || {};
 			} );
 
 			// Listen to this to eventually reset your custom inputs.
-			$(this.el ).trigger( 'message:reset', _.pick( model.previousAttributes(), 'meta' ) );
+			$( this.el ).trigger( 'message:reset', _.pick( model.previousAttributes(), 'meta' ) );
 		},
 
 		sendMessage: function( event ) {
@@ -653,6 +643,12 @@ window.bp = window.bp || {};
 					bp.Next.Messages.displayFeedback( response.feedback, response.type );
 				}
 			} );
+		},
+
+		resetForm: function( event ) {
+			event.preventDefault();
+
+			this.model.set( this.resetModel );
 		}
 	} );
 
@@ -836,6 +832,7 @@ window.bp = window.bp || {};
 
 		initialize: function() {
 			this.collection.on( 'change:active', this.setPreview, this );
+			this.collection.on( 'change:is_starred', this.updatePreview, this );
 			this.collection.on( 'reset', this.emptyPreview, this );
 			this.collection.on( 'remove', this.emptyPreview, this );
 		},
@@ -863,12 +860,18 @@ window.bp = window.bp || {};
 			this.render();
 		},
 
+		updatePreview: function( model ) {
+			if ( true === model.get( 'active' ) ) {
+				this.render();
+			}
+		},
+
 		emptyPreview: function() {
 			$( this.el ).html( '' );
 		},
 
 		doAction: function( event ) {
-			var action = $( event.currentTarget ).data( 'bp-action' ), self = this;
+			var action = $( event.currentTarget ).data( 'bp-action' ), self = this, options = {}, mid;
 
 			if ( ! action ) {
 				return event;
@@ -882,7 +885,17 @@ window.bp = window.bp || {};
 				return;
 			}
 
-			this.collection.doAction( action, model.get( 'id' ) ).done( function( response ) {
+			mid = model.get( 'id' );
+
+			if ( 'star' === action || 'unstar' === action ) {
+				options.data = {
+					'star_nonce' : model.get( 'star_nonce' )
+				};
+
+				mid = model.get( 'starred_id' );
+			}
+
+			this.collection.doAction( action, mid, options ).done( function( response ) {
 				bp.Next.Messages.displayFeedback( response.feedback, response.type );
 
 				if ( 'delete' === action || ( 'starred' === self.collection.options.box && 'unstar' === action ) ) {
@@ -893,6 +906,8 @@ window.bp = window.bp || {};
 					self.collection.fetch( {
 						data : _.pick( self.collection.options, ['box', 'search_terms', 'page'] )
 					} );
+				} else if ( response.messages ) {
+					model.set( _.first( response.messages ) );
 				}
 			} ).fail( function( response ) {
 				bp.Next.Messages.displayFeedback( response.feedback, response.type );
@@ -930,7 +945,7 @@ window.bp = window.bp || {};
 		},
 
 		doBulkAction: function( event ) {
-			var self = this;
+			var self = this, options = {}, ids, attr = 'id';
 
 			event.preventDefault();
 
@@ -940,15 +955,36 @@ window.bp = window.bp || {};
 				return;
 			}
 
-			var thread_ids = [];
-
-			_.each( this.collection.models, function( model ) {
-				if ( true === model.get( 'checked' ) ) {
-					thread_ids.push( model.get( 'id' ) );
-				}
+			var threads    = this.collection.where( { checked: true } );
+			var thread_ids = _.map( threads, function( model ) {
+				return model.get( 'id' );
 			} );
 
-			this.collection.doAction( action, thread_ids ).done( function( response ) {
+			// Default to thread ids
+			ids = thread_ids;
+
+			// We need to get the starred ids
+			if ( 'star' === action || 'unstar' === action ) {
+				ids = _.map( threads, function( model ) {
+					return model.get( 'starred_id' );
+				} );
+
+				if ( 1 === ids.length ) {
+					options.data = {
+						'star_nonce' : this.collection.get( ids[0] ).get( 'star_nonce' )
+					};
+				}
+
+				// Map with first message starred in the thread
+				attr = 'starred_id';
+			}
+
+			// Message id to Thread id
+			var m_tid = _.object( _.map( threads, function (model, key) {
+			    return [model.get( attr ), model.get( 'id' )];
+			} ) );
+
+			this.collection.doAction( action, ids, options ).done( function( response ) {
 				bp.Next.Messages.displayFeedback( response.feedback, response.type );
 
 				if ( 'delete' === action || ( 'starred' === self.collection.options.box && 'unstar' === action ) ) {
@@ -959,12 +995,17 @@ window.bp = window.bp || {};
 					self.collection.fetch( {
 						data : _.pick( self.collection.options, ['box', 'search_terms', 'page'] )
 					} );
+				} else if ( response.messages ) {
+					// Update each model attributes
+					_.each( response.messages, function( updated, id ) {
+						var model = self.collection.get( m_tid[id] );
+						model.set( updated );
+					} );
 				}
 			} ).fail( function( response ) {
 				bp.Next.Messages.displayFeedback( response.feedback, response.type );
 			} );
-		},
-
+		}
 	} );
 
 	bp.Views.messageFilters = bp.Next.Messages.View.extend( {
@@ -1078,7 +1119,7 @@ window.bp = window.bp || {};
 		},
 
 		doAction: function( event ) {
-			var action = $( event.currentTarget ).data( 'bp-action' ), self = this;
+			var action = $( event.currentTarget ).data( 'bp-action' ), self = this, options = {};
 
 			if ( ! action ) {
 				return event;
@@ -1086,16 +1127,22 @@ window.bp = window.bp || {};
 
 			event.preventDefault();
 
-			console.log( bp.Next.Messages.threads )
-
 			if ( ! this.model.get( 'id' ) ) {
 				return;
 			}
 
-			bp.Next.Messages.threads.doAction( action, this.model.get( 'id' ) ).done( function( response ) {
+			if ( 'star' === action || 'unstar' === action ) {
+				options.data = {
+					'star_nonce' : this.model.get( 'star_nonce' )
+				};
+			}
+
+			bp.Next.Messages.threads.doAction( action, this.model.get( 'id' ), options ).done( function( response ) {
 				// Remove all views
 				if ( 'delete' === action ) {
 					bp.Next.Messages.clearViews();
+				} else if ( response.messages ) {
+					self.model.set( _.first( response.messages ) );
 				}
 				// Display the feedback
 				bp.Next.Messages.displayFeedback( response.feedback, response.type );
@@ -1106,9 +1153,25 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.userMessagesEntry = bp.Next.Messages.View.extend( {
+	bp.Views.userMessagesEntry = bp.Views.userMessagesHeader.extend( {
 		tagName  : 'li',
-		template : bp.template( 'bp-messages-single-list' )
+		template : bp.template( 'bp-messages-single-list' ),
+
+		events: {
+			'click [data-bp-action]' : 'doAction'
+		},
+
+		initialize: function() {
+			this.model.on( 'change:is_starred', this.updateMessage, this );
+		},
+
+		updateMessage: function( model ) {
+			if ( this.model.get( 'id' ) !== model.get( 'id' ) ) {
+				return;
+			}
+
+			this.render();
+		}
 	} );
 
 	bp.Views.userMessages = bp.Next.Messages.View.extend( {

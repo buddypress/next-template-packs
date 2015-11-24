@@ -193,11 +193,6 @@ class BP_Next extends BP_Theme_Compat {
 			'messages_markunread'           => 'bp_legacy_theme_ajax_message_markunread',
 		);
 
-		// Conditional actions.
-		if ( bp_is_active( 'messages', 'star' ) ) {
-			$actions['messages_star'] = 'bp_legacy_theme_ajax_messages_star_handler';
-		}
-
 		/**
 		 * Register all of these AJAX handlers.
 		 *
@@ -2174,37 +2169,6 @@ function bp_legacy_theme_ajax_messages_autocomplete_results() {
 }
 
 /**
- * AJAX callback to set a message's star status.
- *
- * @since 2.3.0
- */
-function bp_legacy_theme_ajax_messages_star_handler() {
-	if ( false === bp_is_active( 'messages', 'star' ) || empty( $_POST['message_id'] ) ) {
-		return;
-	}
-
-	// Check nonce.
-	check_ajax_referer( 'bp-messages-star-' . (int) $_POST['message_id'], 'nonce' );
-
-	// Check capability.
-	if ( ! is_user_logged_in() || ! bp_core_can_edit_settings() ) {
-		return;
-	}
-
-	if ( true === bp_messages_star_set_action( array(
-		'action'     => $_POST['star_status'],
-		'message_id' => (int) $_POST['message_id'],
-		'bulk'       => ! empty( $_POST['bulk'] ) ? true : false
-	 ) ) ) {
-		echo '1';
-		die();
-	}
-
-	echo '-1';
-	die();
-}
-
-/**
  * BP Legacy's callback for the cover image feature.
  *
  * @since  2.4.0
@@ -2780,7 +2744,7 @@ function bp_next_get_user_message_threads() {
 	while ( bp_message_threads() ) : bp_message_thread();
 		$threads->threads[ $i ] = array(
 			'id'            => bp_get_message_thread_id(),
-			'message_id'    => $messages_template->thread->last_message_id,
+			'message_id'    => (int) $messages_template->thread->last_message_id,
 			'subject'       => html_entity_decode( bp_get_message_thread_subject() ),
 			'excerpt'       => html_entity_decode( bp_get_message_thread_excerpt() ),
 			'content'       => html_entity_decode( do_shortcode( bp_get_message_thread_content() ) ),
@@ -2824,7 +2788,19 @@ function bp_next_get_user_message_threads() {
 			) );
 
 			$threads->threads[ $i ]['star_link']  = $star_link;
-			$threads->threads[ $i ]['is_starred'] = array_search( 'unstar', explode( '/', $star_link ) );
+
+			$star_link_data = explode( '/', $star_link );
+			$threads->threads[ $i ]['is_starred'] = array_search( 'unstar', $star_link_data );
+
+			// Defaults to last
+			$sm_id = (int) $messages_template->thread->last_message_id;
+
+			if ( $threads->threads[ $i ]['is_starred'] ) {
+				$sm_id = (int) $star_link_data[ $threads->threads[ $i ]['is_starred'] + 1 ];
+			}
+
+			$threads->threads[ $i ]['star_nonce'] = wp_create_nonce( 'bp-messages-star-' . $sm_id );
+			$threads->threads[ $i ]['starred_id'] = $sm_id;
 		}
 
 		$i += 1;
@@ -2946,6 +2922,7 @@ function bp_next_get_thread_messages() {
 
 			$thread->messages[ $i ]['star_link']  = $star_link;
 			$thread->messages[ $i ]['is_starred'] = array_search( 'unstar', explode( '/', $star_link ) );
+			$thread->messages[ $i ]['star_nonce'] = wp_create_nonce( 'bp-messages-star-' . bp_get_the_thread_message_id() );
 		}
 
 		$i += 1;
@@ -2987,3 +2964,89 @@ function bp_next_delete_thread_messages() {
 	) );
 }
 add_action( 'wp_ajax_messages_delete', 'bp_next_delete_thread_messages' );
+
+function bp_next_star_thread_messages() {
+	if ( empty( $_POST['action'] ) ) {
+		wp_send_json_error();
+	}
+
+	$action = str_replace( 'messages_', '', $_POST['action'] );
+
+	$response = array(
+		'feedback' => sprintf( __( 'There was a problem marking your message(s) as %s. Please try again.', 'bp-next' ), $action ),
+		'type'     => 'error',
+	);
+
+	if ( false === bp_is_active( 'messages', 'star' ) || empty( $_POST['id'] ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// Check capability.
+	if ( ! is_user_logged_in() || ! bp_core_can_edit_settings() ) {
+		wp_send_json_error( $response );
+	}
+
+	$ids      = wp_parse_id_list( $_POST['id'] );
+	$messages = array();
+
+	// Use global nonce for bulk actions involving more than one id
+	if ( 1 !== count( $ids ) ) {
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+			wp_send_json_error( $response );
+		}
+
+		foreach ( $ids as $mid ) {
+			if ( 'star' === $action ) {
+				bp_messages_star_set_action( array(
+					'action'     => 'star',
+					'message_id' => $mid,
+				) );
+			} else {
+				$thread_id = messages_get_message_thread_id( $mid );
+
+				bp_messages_star_set_action( array(
+					'action'    => 'unstar',
+					'thread_id' => $thread_id,
+					'bulk'      => true
+				) );
+			}
+
+			$messages[ $mid ] = array(
+				'star_link' => bp_get_the_message_star_action_link( array(
+					'message_id' => $mid,
+					'url_only'  => true,
+				) ),
+				'is_starred' => 'star' === $action,
+			);
+		}
+
+	// Use global start nonce for bulk actions involving one id or regular action
+	} else {
+		$id = reset( $ids );
+
+		if ( empty( $_POST['star_nonce'] ) || ! wp_verify_nonce( $_POST['star_nonce'], 'bp-messages-star-' . $id ) ) {
+			wp_send_json_error( $response );
+		}
+
+		bp_messages_star_set_action( array(
+			'action'     => $action,
+			'message_id' => $id,
+		) );
+
+		$messages[] = array(
+			'star_link' => bp_get_the_message_star_action_link( array(
+				'message_id' => $id,
+				'url_only'  => true,
+			) ),
+			'is_starred' => 'star' === $action,
+		);
+	}
+
+	wp_send_json_success( array(
+		'feedback' => sprintf( __( 'Message(s) mark as %s', 'bp-next' ), $action ),
+		'type'     => 'success',
+		'messages' => $messages,
+	) );
+}
+add_action( 'wp_ajax_messages_star', 'bp_next_star_thread_messages' );
+add_action( 'wp_ajax_messages_unstar', 'bp_next_star_thread_messages' );
