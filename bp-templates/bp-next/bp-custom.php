@@ -818,6 +818,10 @@ function bp_next_messages_adjust_nav() {
 add_action( 'bp_messages_setup_nav', 'bp_next_messages_adjust_nav' );
 
 function bp_next_messages_adjust_admin_nav( $admin_nav ) {
+	if ( empty( $admin_nav ) ) {
+		return $admin_nav;
+	}
+
 	$user_messages_link = trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() );
 
 	foreach ( $admin_nav as $nav_iterator => $nav ) {

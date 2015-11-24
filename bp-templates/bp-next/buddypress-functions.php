@@ -188,9 +188,7 @@ class BP_Next extends BP_Theme_Compat {
 			'request_membership'  => 'bp_next_ajax_joinleave_group',
 
 			// Messages.
-			'messages_autocomplete_results' => 'bp_legacy_theme_ajax_messages_autocomplete_results',
 			'messages_close_notice'         => 'bp_legacy_theme_ajax_close_notice',
-			'messages_delete'               => 'bp_legacy_theme_ajax_messages_delete',
 			'messages_markread'             => 'bp_legacy_theme_ajax_message_markread',
 			'messages_markunread'           => 'bp_legacy_theme_ajax_message_markunread',
 		);
@@ -2958,3 +2956,34 @@ function bp_next_get_thread_messages() {
 	wp_send_json_success( $thread );
 }
 add_action( 'wp_ajax_messages_get_thread_messages', 'bp_next_get_thread_messages' );
+
+function bp_next_delete_thread_messages() {
+	$response = array(
+		'feedback' => __( 'There was a problem deleting your message(s). Please try again.', 'bp-next' ),
+		'type'     => 'error',
+	);
+
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+		wp_send_json_error( $response );
+	}
+
+	if ( empty( $_POST['id'] ) ) {
+		wp_send_json_error( $response );
+	}
+
+	$thread_ids = wp_parse_id_list( $_POST['id'] );
+
+	foreach ( $thread_ids as $thread_id ) {
+		if ( ! messages_check_thread_access( $thread_id ) && ! bp_current_user_can( 'bp_moderate' ) ) {
+			wp_send_json_error( $response );
+		}
+
+		messages_delete_thread( $thread_id );
+	}
+
+	wp_send_json_success( array(
+		'feedback' => __( 'Message(s) deleted', 'bp-next' ),
+		'type'     => 'success',
+	) );
+}
+add_action( 'wp_ajax_messages_delete', 'bp_next_delete_thread_messages' );

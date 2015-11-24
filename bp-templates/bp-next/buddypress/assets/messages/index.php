@@ -154,18 +154,18 @@
 
 			<div class="actions">
 
-				<a href="#" class="message-action-delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-next' );?>">
+				<a href="#" class="message-action-delete" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-next' );?>">
 					<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-next' );?></span>
 				</a>
 
 				<# if ( undefined !== data.star_link ) { #>
 
 					<# if ( false !== data.is_starred ) { #>
-						<a href="{{data.star_link}}" class="message-action-unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-next' );?>">
+						<a href="{{data.star_link}}" class="message-action-unstar" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-next' );?>">
 							<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-next' );?></span>
 						</a>
 					<# } else { #>
-						<a href="{{data.star_link}}" class="message-action-star" title="<?php esc_attr_e( 'Star Conversation', 'bp-next' );?>">
+						<a href="{{data.star_link}}" class="message-action-star" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-next' );?>">
 							<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-next' );?></span>
 						</a>
 					<# } #>
@@ -200,7 +200,7 @@
 
 	<div class="actions">
 
-		<a href="#" class="message-action-delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-next' );?>">
+		<a href="#" class="message-action-delete" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-next' );?>">
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-next' );?></span>
 		</a>
 
@@ -239,11 +239,11 @@
 				<?php $test = 1; ?>
 
 				<# if ( false !== data.is_starred ) { #>
-					<a href="{{data.star_link}}" class="message-action-unstar" title="<?php esc_attr_e( 'Unstar Message', 'bp-next' );?>">
+					<a href="{{data.star_link}}" class="message-action-unstar" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Message', 'bp-next' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Message', 'bp-next' );?></span>
 					</a>
 				<# } else { #>
-					<a href="{{data.star_link}}" class="message-action-star" title="<?php esc_attr_e( 'Star Message', 'bp-next' );?>">
+					<a href="{{data.star_link}}" class="message-action-star" data-bp-action="star" title="<?php esc_attr_e( 'Star Message', 'bp-next' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Message', 'bp-next' );?></span>
 					</a>
 				<# } #>
