@@ -812,7 +812,12 @@ function bp_next_messages_adjust_nav() {
 	}
 
 	foreach ( $bp->bp_options_nav[ bp_get_messages_slug() ] as $nav_id => $nav_item ) {
-		$bp->bp_options_nav[ bp_get_messages_slug() ][ $nav_id ]['link'] = '#' . $nav_id;
+		if ( $nav_id === 'notices' ) {
+			bp_core_remove_subnav_item( bp_get_messages_slug(), $nav_id );
+		} else {
+			$bp->bp_options_nav[ bp_get_messages_slug() ][ $nav_id ]['link'] = '#' . $nav_id;
+		}
+
 	}
 }
 add_action( 'bp_messages_setup_nav', 'bp_next_messages_adjust_nav' );
@@ -828,13 +833,281 @@ function bp_next_messages_adjust_admin_nav( $admin_nav ) {
 		$nav_id = str_replace( 'my-account-messages-', '', $nav['id'] );
 
 		if ( 'my-account-messages' !== $nav_id ) {
-			$admin_nav[ $nav_iterator ]['href'] = $user_messages_link . '#' . trim( $nav_id );
+			if ( 'notices' === $nav_id ) {
+				$admin_nav[ $nav_iterator ]['href'] = esc_url( add_query_arg( array( 'page' => 'bp-notices' ), bp_get_admin_url( 'users.php' ) ) );
+			} else {
+				$admin_nav[ $nav_iterator ]['href'] = $user_messages_link . '#' . trim( $nav_id );
+			}
 		}
 	}
 
 	return $admin_nav;
 }
 add_filter( 'bp_messages_admin_nav', 'bp_next_messages_adjust_admin_nav', 10, 1 );
+
+if ( class_exists( 'WP_List_Table' ) ) :
+
+class BP_Next_Notices_List_Table extends WP_List_Table {
+	public function __construct( $args = array() ) {
+		parent::__construct( array(
+			'plural' => 'notices',
+			'singular' => 'notice',
+			'ajax' => true,
+			'screen' => isset( $args['screen'] ) ? $args['screen'] : null,
+		) );
+	}
+
+	public function ajax_user_can() {
+		return bp_current_user_can( 'bp_moderate' );
+	}
+
+	public function prepare_items() {
+		$page     = $this->get_pagenum();
+		$per_page = $this->get_items_per_page( 'bp_next_notices_per_page' );
+
+		$this->items = BP_Messages_Notice::get_notices( array(
+			'pag_num'  => $per_page,
+			'pag_page' => $page
+		) );
+
+		$this->set_pagination_args( array(
+			'total_items' => BP_Messages_Notice::get_total_notice_count(),
+			'per_page' => $per_page,
+		) );
+	}
+
+	public function get_columns() {
+		return apply_filters( 'bp_next_notices_list_table_get_columns', array(
+			'subject'   => _x( 'Subject', 'Admin Notices column header', 'bp-next' ),
+			'message'   => _x( 'Content', 'Admin Notices column header', 'bp-next' ),
+			'date_sent' => _x( 'Created', 'Admin Notices column header', 'bp-next' ),
+		) );
+	}
+
+	public function single_row( $item ) {
+		$class = '';
+
+		if ( ! empty( $item->is_active ) ) {
+			$class = ' class="notice-active"';
+		}
+
+		echo "<tr{$class}>";
+		$this->single_row_columns( $item );
+		echo '</tr>';
+	}
+
+	public function column_subject( $item ) {
+		$actions = array(
+			'activate_deactivate' => '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
+				'page' => 'bp-notices',
+				'activate' => $item->id
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_activate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="activate">' . esc_html__( 'Activate Notice', 'bp-next' ) . '</a>',
+			'delete' => '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
+				'page' => 'bp-notices',
+				'delete' => $item->id
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_delete_thread' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="delete">' . esc_html__( 'Delete Notice', 'bp-next' ) . '</a>',
+		);
+
+		if ( ! empty( $item->is_active ) ) {
+			$actions['activate_deactivate'] = '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
+				'page' => 'bp-notices',
+				'deactivate' => $item->id
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_deactivate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="deactivate">' . esc_html__( 'Deactivate Notice', 'bp-next' ) . '</a>';
+		}
+
+		echo '<strong>' . apply_filters( 'bp_get_message_notice_subject', $item->subject ) . '</strong> ' . $this->row_actions( $actions );
+	}
+
+	public function column_message( $item ) {
+		echo apply_filters( 'bp_get_message_notice_text', $item->message );
+	}
+
+	public function column_date_sent( $item ) {
+		echo apply_filters( 'bp_get_message_notice_post_date', bp_format_time( strtotime( $item->date_sent ) ) );
+	}
+}
+
+endif;
+
+class BP_Next_Admin_Notices {
+
+	public static function register_notices_admin() {
+		if ( ! is_admin() || ! bp_is_active( 'messages' ) ) {
+			return;
+		}
+
+		$bp = buddypress();
+
+		if ( empty( $bp->messages->admin ) ) {
+			$bp->messages->admin = new self;
+		}
+
+		return $bp->messages->admin;
+	}
+
+	/**
+	 * Constructor method.
+	 *
+	 * @since 2.0.0
+	 */
+	public function __construct() {
+		$this->setup_globals();
+		$this->setup_actions();
+	}
+
+	private function setup_globals() {
+		$this->screen_id = '';
+		$this->url       = add_query_arg( array( 'page' => 'bp-notices' ), bp_get_admin_url( 'users.php' ) );
+	}
+
+	private function setup_actions() {
+		add_action( bp_core_admin_hook(), array( $this, 'admin_menu' ) );
+	}
+
+	public function admin_menu() {
+		// Bail if current user cannot moderate community.
+		if ( ! bp_current_user_can( 'bp_moderate' ) || ! bp_is_active( 'messages' ) ) {
+			return false;
+		}
+
+		$this->screen_id = add_users_page(
+			_x( 'All Member Notices', 'Notices admin page title', 'bp-next' ),
+			_x( 'All Member Notices', 'Admin Users menu', 'bp-next' ),
+			'manage_options',
+			'bp-notices',
+			array( $this, 'admin_index' )
+		);
+
+		add_action( 'load-' . $this->screen_id, array( $this, 'admin_load' ) );
+	}
+
+	public function admin_load() {
+		if ( ! empty( $_POST['bp_notice']['send'] ) ) {
+			$notice = wp_parse_args( $_POST['bp_notice'], array(
+				'subject' => '',
+				'content' => ''
+			) );
+
+			if ( messages_send_notice( $notice['subject'], $notice['content'] ) ) {
+				$redirect_to = add_query_arg( 'success', 1, $this->url );
+
+			// Notice could not be sent.
+			} else {
+				$redirect_to = add_query_arg( 'error', 1, $this->url );
+			}
+
+			wp_safe_redirect( $redirect_to );
+			exit();
+		}
+
+		$this->list_table = new BP_Next_Notices_List_Table( array( 'screen' => get_current_screen()->id ) );
+	}
+
+	public function admin_index() {
+		$this->list_table->prepare_items();
+		?>
+		<div class="wrap">
+
+			<h1>
+				<?php echo esc_html_x( 'All Member Notices', 'Notices admin page title', 'bp-next' ); ?>
+				<a id="add_notice" class="add-new-h2" href="#"><?php esc_html_e( 'Add New Notice', 'bp-next' ); ?></a>
+			</h1>
+
+			<form action=<?php echo esc_url( $this->url ); ?> method="post">
+				<table class="widefat">
+					<tr>
+						<td><label for="bp_notice_subject"><?php esc_html_e( 'Subject', 'bp-next' ); ?></label></td>
+						<td><input type="text" class="widefat" id="bp_notice_subject" name="bp_notice[subject]"/></td>
+					</tr>
+					<tr>
+						<td><label for="bp_notice_content"><?php esc_html_e( 'Content', 'bp-next' ); ?></label></td>
+						<td><textarea class="widefat" id="bp_notice_content" name="bp_notice[content]"></textarea></td>
+					</tr>
+					<tr class="submit">
+						<td>&nbsp;</td>
+						<td style="float:right">
+							<input type="reset" value="<?php esc_attr_e( 'Cancel Notice', 'bp-next' ); ?>" class="button-secondary">
+							<input type="submit" value="<?php esc_attr_e( 'Save Notice', 'bp-next' ); ?>" name="bp_notice[send]" class="button-primary">
+						</td>
+					</tr>
+				</table>
+			<form>
+
+			<?php if ( isset( $_GET['success'] ) || isset( $_GET['error'] ) ) : ?>
+
+				<div id="message" class="<?php echo isset( $_GET['success'] ) ? 'updated' : 'error' ; ?>">
+
+					<p>
+						<?php if ( isset( $_GET['error'] ) ) :
+							esc_html_e( 'Notice was not created. Please try again.', 'bp-next' );
+						else:
+							esc_html_e( 'Notice successfully created.', 'bp-next' );
+						endif; ?>
+					</p>
+
+				</div>
+
+			<?php endif; ?>
+
+			<?php $this->list_table->display(); ?>
+
+		</div>
+		<?php
+	}
+}
+add_action( 'bp_init', array( 'BP_Next_Admin_Notices', 'register_notices_admin' ) );
+
+function bp_next_add_notice_notification_for_user( $notifications, $user_id ) {
+	if ( ! bp_is_active( 'messages' ) || ! doing_action( 'admin_bar_menu' ) ) {
+		return $notifications;
+	}
+
+	$notice = BP_Messages_Notice::get_active();
+
+	if ( empty( $notice->id ) ) {
+		return $notifications;
+	}
+
+	$closed_notices = bp_get_user_meta( bp_loggedin_user_id(), 'closed_notices', true );
+
+	if ( empty( $closed_notices ) ) {
+		$closed_notices = array();
+	}
+
+	if ( in_array( $notice->id, $closed_notices ) ) {
+		return $notifications;
+	}
+
+	$notice_notification = new stdClass;
+	$notice_notification->id                = 0;
+	$notice_notification->user_id           = bp_loggedin_user_id();
+	$notice_notification->item_id           = $notice->id;
+	$notice_notification->secondary_item_id = '';
+	$notice_notification->component_name    = 'messages';
+	$notice_notification->component_action  = 'new_notice';
+	$notice_notification->date_notified     = $notice->date_sent;
+	$notice_notification->is_new            = '1';
+
+	return array_merge( $notifications, array( $notice_notification ) );
+}
+add_filter( 'bp_notifications_get_all_notifications_for_user', 'bp_next_add_notice_notification_for_user', 10, 2 );
+
+function bp_next_format_notice_notification_for_user( $array ) {
+	if ( ! empty( $array['text'] ) || ! doing_action( 'admin_bar_menu' ) ) {
+		return $array;
+	}
+
+	return array(
+		'text' => esc_html__( 'New site wide notice', 'bp-next' ),
+		'link' => bp_loggedin_user_domain(),
+	);
+}
+add_filter( 'bp_messages_single_new_message_notification', 'bp_next_format_notice_notification_for_user', 10, 1 );
+
+function bp_next_unregister_notices_widget() {
+	unregister_widget( 'BP_Messages_Sitewide_Notices_Widget' );
+}
+add_action( 'widgets_init', 'bp_next_unregister_notices_widget' );
 
 function bp_next_mce_buttons( $buttons = array() ) {
 	$remove_buttons = array(

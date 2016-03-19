@@ -139,8 +139,8 @@ class BP_Next extends BP_Theme_Compat {
 
 		// Only hook the 'sitewide_notices' overlay if the Sitewide
 		// Notices widget is not in use (to avoid duplicate content).
-		if ( bp_is_active( 'messages' ) && ! is_active_widget( false, false, 'bp_messages_sitewide_notices_widget', true ) ) {
-			add_action( 'wp_footer', array( $this, 'sitewide_notices' ), 9999 );
+		if ( bp_is_active( 'messages' ) ) {
+			add_action( 'template_notices', array( $this, 'sitewide_notices' ), 9999 );
 		}
 
 		/** Ajax **************************************************************/
@@ -188,7 +188,6 @@ class BP_Next extends BP_Theme_Compat {
 			'request_membership'  => 'bp_next_ajax_joinleave_group',
 
 			// Messages.
-			'messages_close_notice'         => 'bp_legacy_theme_ajax_close_notice',
 			'messages_markread'             => 'bp_legacy_theme_ajax_message_markread',
 			'messages_markunread'           => 'bp_legacy_theme_ajax_message_markunread',
 		);
@@ -663,15 +662,39 @@ class BP_Next extends BP_Theme_Compat {
 	 */
 	public function sitewide_notices() {
 		// Do not show notices if user is not logged in.
-		if ( ! is_user_logged_in() )
+		if ( ! is_user_logged_in() || ! bp_is_user() ) {
 			return;
+		}
 
-		// Add a class to determine if the admin bar is on or not.
-		$class = did_action( 'admin_bar_menu' ) ? 'admin-bar-on' : 'admin-bar-off';
+		$notice = BP_Messages_Notice::get_active();
 
-		echo '<div id="sitewide-notice" class="' . $class . '">';
-		bp_message_get_notices();
-		echo '</div>';
+		if ( empty( $notice ) ) {
+			return false;
+		}
+
+		$user_id = bp_loggedin_user_id();
+
+		$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
+
+		if ( empty( $closed_notices ) ) {
+			$closed_notices = array();
+		}
+
+		if ( is_array( $closed_notices ) ) {
+			if ( ! in_array( $notice->id, $closed_notices ) && $notice->id ) {
+				?>
+				<div class="clear"></div>
+				<div class="bp-feedback info" rel="n-<?php echo esc_attr( $notice->id ); ?>">
+					<strong><?php echo stripslashes( wp_filter_kses( $notice->subject ) ) ?></strong><br />
+					<?php echo stripslashes( wp_filter_kses( $notice->message) ) ?>
+				</div>
+				<?php
+
+				// Add the notice to closed ones
+				$closed_notices[] = (int) $notice->id;
+				bp_update_user_meta( $user_id, 'closed_notices', $closed_notices );
+			}
+		}
 	}
 
 	/**
@@ -1960,32 +1983,6 @@ function bp_next_ajax_joinleave_group() {
 }
 
 /**
- * Close and keep closed site wide notices from an admin in the sidebar, via a POST request.
- *
- * @since 1.2.0
- *
- * @return mixed String on error, void on success.
- */
-function bp_legacy_theme_ajax_close_notice() {
-	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
-
-	if ( ! isset( $_POST['notice_id'] ) ) {
-		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem closing the notice.', 'bp-next' ) . '</p></div>';
-
-	} else {
-		$user_id      = get_current_user_id();
-		$notice_ids   = bp_get_user_meta( $user_id, 'closed_notices', true );
-		$notice_ids[] = (int) $_POST['notice_id'];
-
-		bp_update_user_meta( $user_id, 'closed_notices', $notice_ids );
-	}
-
-	exit;
-}
-
-/**
  * Send a private message reply to a thread via a POST request.
  *
  * @since 1.2.0
@@ -3020,7 +3017,7 @@ function bp_next_star_thread_messages() {
 			);
 		}
 
-	// Use global start nonce for bulk actions involving one id or regular action
+	// Use global star nonce for bulk actions involving one id or regular action
 	} else {
 		$id = reset( $ids );
 
@@ -3033,7 +3030,7 @@ function bp_next_star_thread_messages() {
 			'message_id' => $id,
 		) );
 
-		$messages[] = array(
+		$messages[ $id ] = array(
 			'star_link' => bp_get_the_message_star_action_link( array(
 				'message_id' => $id,
 				'url_only'  => true,
@@ -3050,3 +3047,65 @@ function bp_next_star_thread_messages() {
 }
 add_action( 'wp_ajax_messages_star', 'bp_next_star_thread_messages' );
 add_action( 'wp_ajax_messages_unstar', 'bp_next_star_thread_messages' );
+
+function bp_next_readunread_thread_messages() {
+	if ( empty( $_POST['action'] ) ) {
+		wp_send_json_error();
+	}
+
+	$action = str_replace( 'messages_', '', $_POST['action'] );
+
+	$response = array(
+		'feedback' => __( 'There was a problem marking your message(s) as read. Please try again.', 'bp-next' ),
+		'type'     => 'error',
+	);
+
+	if ( 'unread' === $action ) {
+		$response = array(
+			'feedback' => __( 'There was a problem marking your message(s) as unread. Please try again.', 'bp-next' ),
+			'type'     => 'error',
+		);
+	}
+
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+		wp_send_json_error( $response );
+	}
+
+	if ( empty( $_POST['id'] ) ) {
+		wp_send_json_error( $response );
+	}
+
+	$thread_ids = wp_parse_id_list( $_POST['id'] );
+
+	$response['messages'] = array();
+
+	if ( 'unread' === $action ) {
+		$response['feedback'] = __( 'Message(s) marked as unread.', 'bp-next' );
+	} else {
+		$response['feedback'] = __( 'Message(s) marked as read.', 'bp-next' );
+	}
+
+	foreach ( $thread_ids as $thread_id ) {
+		if ( ! messages_check_thread_access( $thread_id ) && ! bp_current_user_can( 'bp_moderate' ) ) {
+			wp_send_json_error( $response );
+		}
+
+		if ( 'unread' === $action ) {
+			// Mark unread
+			messages_mark_thread_unread( $thread_id );
+		} else {
+			// Mark read
+			messages_mark_thread_read( $thread_id );
+		}
+
+		$response['messages'][ $thread_id ] = array(
+			'unread' => 'unread' === $action,
+		);
+	}
+
+	$response['type'] = 'success';
+
+	wp_send_json_success( $response );
+}
+add_action( 'wp_ajax_messages_read',   'bp_next_readunread_thread_messages' );
+add_action( 'wp_ajax_messages_unread', 'bp_next_readunread_thread_messages' );
