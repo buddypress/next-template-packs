@@ -335,6 +335,8 @@ class Next_Template_Packs {
 		$current_theme_package_id = bp_get_theme_package_id();
 		?>
 		<div class="wrap">
+			<h1><?php esc_html_e( 'BuddyPress Settings', 'next-template-packs' ); ?></h1>
+
 			<h2 class="nav-tab-wrapper"><?php bp_core_admin_tabs( __( 'Templates', 'next-template-packs' ) ); ?></h2>
 
 			<form action="" method="post" id="bp-admin-template-pack-form">
