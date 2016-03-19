@@ -185,8 +185,6 @@ class Next_Template_Packs {
 	 * Hook bp_admin_enqueue_scripts when on plugin's page
 	 */
 	public function admin_load() {
-		add_action( 'bp_admin_enqueue_scripts', array( $this, 'inline_style' ) );
-
 		if ( ! empty( $_POST['bp_tpl_pack']['dir'] ) ) {
 			$tpl_dir = wp_unslash( $_POST['bp_tpl_pack']['dir'] );
 
@@ -240,24 +238,6 @@ class Next_Template_Packs {
 	}
 
 	/**
-	 * Add inline style
-	 */
-	public function inline_style() {
-		wp_add_inline_style( 'bp-admin-common-css', '
-			#bp-template-checker-outdated a,
-			#bp-template-checker-outdated a:hover {
-				text-decoration:none;
-				border:none;
-				color:#555;
-			}
-
-			#bp-template-checker-outdated tr.attention {
-			 	color:#0073aa;
-			 }
-		' );
-	}
-
-	/**
 	 * Modify highlighted menu
 	 */
 	public function modify_highlight() {
@@ -279,7 +259,7 @@ class Next_Template_Packs {
 			$class = "nav-tab-active";
 		}
 		?>
-		<a href="<?php echo esc_url( bp_get_admin_url( add_query_arg( array( 'page' => 'template-packs' ), 'admin.php' ) ) );?>" class="nav-tab <?php echo $class;?>" style="margin-left:-6px"><?php esc_html_e( 'Template Packs', 'next-template-packs' );?></a>
+		<a href="<?php echo esc_url( bp_get_admin_url( add_query_arg( array( 'page' => 'template-packs' ), 'admin.php' ) ) );?>" class="nav-tab <?php echo $class;?>"><?php esc_html_e( 'Template Packs', 'next-template-packs' );?></a>
 		<?php
 	}
 
