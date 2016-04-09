@@ -1,0 +1,99 @@
+# Copyright (C) 2016 Next Template Packs
+# This file is distributed under the same license as the Next Template Packs package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Next Template Packs 1.0.0-alpha\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/next-template-packs\n"
+"POT-Creation-Date: 2016-04-09 10:11:28+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: next-template-packs.php:121 next-template-packs.php:220
+msgid "Template Packs"
+msgstr ""
+
+#: next-template-packs.php:122
+msgid "Templates Packs"
+msgstr ""
+
+#: next-template-packs.php:231
+msgid "Version %s"
+msgstr ""
+
+#: next-template-packs.php:235
+msgid "By %s"
+msgstr ""
+
+#: next-template-packs.php:241
+msgid "Visit Template Pack site"
+msgstr ""
+
+#: next-template-packs.php:254
+msgid "No informations about supports provided."
+msgstr ""
+
+#: next-template-packs.php:305
+msgid "BuddyPress Settings"
+msgstr ""
+
+#: next-template-packs.php:307
+msgid "Templates"
+msgstr ""
+
+#: next-template-packs.php:393
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: next-template-packs.php:401 next-template-packs.php:410
+msgid "Name"
+msgstr ""
+
+#: next-template-packs.php:402 next-template-packs.php:411
+msgid "Description"
+msgstr ""
+
+#: next-template-packs.php:403 next-template-packs.php:412
+msgid "Supports"
+msgstr ""
+
+#: next-template-packs.php:462
+msgid "No template packs found ???"
+msgstr ""
+
+#: next-template-packs.php:471
+msgid "Save Settings"
+msgstr ""
+
+#: next-template-packs.php:505
+msgid "%s requires at least version %s of BuddyPress."
+msgstr ""
+
+#: next-template-packs.php:509
+msgid "%s and BuddyPress need to share the same network configuration."
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "Next Template Packs"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/imath/next-template-packs"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Adds a BuddyPress Admin Tab to manage BuddyPress template pack"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "imath"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://imathi.eu"
+msgstr ""

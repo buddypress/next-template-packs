@@ -604,6 +604,7 @@ add_filter( 'bp_get_activity_delete_link', 'bp_next_get_activity_delete_link', 1
  * be able to search into their activity mentions.
  *
  * @see https://buddypress.trac.wordpress.org/ticket/6713
+ * Hooks are now commmented, as 6713 is now fixed!
  *
  * @since 1.0.0
  *
@@ -657,9 +658,9 @@ function bp_next_activity_filter_mentions_scope( $retval = array(), $filter = ar
 
 	return $retval;
 }
-add_filter( 'bp_activity_set_mentions_scope_args', 'bp_next_activity_filter_mentions_scope', 10, 2 );
+//add_filter( 'bp_activity_set_mentions_scope_args', 'bp_next_activity_filter_mentions_scope', 10, 2 );
 // Remove Core filter as it's not possible to search inside mentions otherwise
-remove_filter( 'bp_activity_set_mentions_scope_args', 'bp_activity_filter_mentions_scope', 10, 2 );
+//remove_filter( 'bp_activity_set_mentions_scope_args', 'bp_activity_filter_mentions_scope', 10, 2 );
 
 // I don't see any reason why to restrict group invites to friends..
 function bp_next_group_invites_create_steps( $steps = array() ) {

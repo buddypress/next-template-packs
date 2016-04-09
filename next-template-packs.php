@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds a BuddyPress Admin Tab to manage BuddyPress template pack
+ * Adds a BuddyPress Admin Tab to manage BuddyPress template packs
  *
  *
  * @package   Next Template Packs
@@ -78,50 +78,9 @@ class Next_Template_Packs {
 		$this->lang_dir      = trailingslashit( $this->plugin_dir . 'languages' );
 		$this->templates_dir = $this->plugin_dir . 'bp-templates';
 		$this->templates_url = $this->plugin_url . 'bp-templates';
-		$this->plugin_js     = trailingslashit( $this->plugin_url . 'js' );
-		$this->plugin_css    = trailingslashit( $this->plugin_url . 'css' );
 
 		/** Plugin config **********************************/
 		$this->config = $this->network_check();
-	}
-
-	/**
-	 * Checks BuddyPress version
-	 */
-	public function version_check() {
-		// taking no risk
-		if ( ! function_exists( 'bp_get_db_version' ) ) {
-			return false;
-		}
-
-		return self::$bp_db_version_required <= bp_get_db_version();
-	}
-
-	/**
-	 * Checks if current blog is the one where BuddyPress is activated
-	 */
-	public function network_check() {
-		/*
-		 * network_active : this plugin is activated on the network
-		 * network_status : BuddyPress & this plugin share the same network status
-		 */
-		$config = array( 'network_active' => false, 'network_status' => true );
-		$network_plugins = get_site_option( 'active_sitewide_plugins', array() );
-
-		// No Network plugins
-		if ( empty( $network_plugins ) ) {
-			return $config;
-		}
-
-		$check = array( buddypress()->basename, $this->basename );
-		$network_active = array_diff( $check, array_keys( $network_plugins ) );
-
-		if ( count( $network_active ) == 1 )
-			$config['network_status'] = false;
-
-		$config['network_active'] = isset( $network_plugins[ $this->basename ] );
-
-		return $config;
 	}
 
 	/**
@@ -189,8 +148,7 @@ class Next_Template_Packs {
 			$tpl_dir = wp_unslash( $_POST['bp_tpl_pack']['dir'] );
 
 			if ( ! is_dir( $tpl_dir ) || ! file_exists( $tpl_dir . '/buddypress-functions.php' ) ) {
-				var_dump( $tpl_dir );
-				wp_die();
+				return false;
 			}
 
 			if ( 'bp-legacy' === wp_basename( $tpl_dir ) ) {
@@ -207,7 +165,7 @@ class Next_Template_Packs {
 				) );
 
 				if ( empty( $tp_data['id'] ) ) {
-					wp_die();
+					return false;
 				}
 
 				if ( ! empty( $tp_data['support'] ) ) {
@@ -291,6 +249,14 @@ class Next_Template_Packs {
 		echo implode( ' | ', $tp_meta );
 	}
 
+	public static function get_template_pack_supports( $tp = null ) {
+		if ( empty( $tp->supports ) ) {
+			esc_html_e( 'No informations about supports provided.', 'next-template-packs' );
+		}
+
+		echo $tp->supports;
+	}
+
 	public static function translate_template_pack_data( $template_pack_data = null ) {
 		if ( ! empty( $template_pack_data->text_domain ) ) {
 			if ( ! empty( $template_pack_data->domain_path ) && ! empty( $template_pack_data->dir ) ) {
@@ -300,7 +266,7 @@ class Next_Template_Packs {
 			}
 
 			if ( ! empty( $translation ) ) {
-				foreach ( array( 'name', 'version', 'description', 'author', 'link' ) as $field ) {
+				foreach ( array( 'name', 'version', 'description', 'author', 'link', 'supports' ) as $field ) {
 					$template_pack_data->{$field} = translate( $template_pack_data->{$field}, $template_pack_data->text_domain );
 				}
 			}
@@ -321,9 +287,10 @@ class Next_Template_Packs {
 		$template_pack_data->author      = wp_kses( $template_pack_data->author, $allowed_tags );
 
 		$template_pack_data->description = wptexturize( wp_kses( $template_pack_data->description, $allowed_tags ) );
-		$template_pack_data->version     = wp_kses( $template_pack_data->version,     $allowed_tags );
+		$template_pack_data->version     = wp_kses( $template_pack_data->version, $allowed_tags );
 
 		$template_pack_data->link        = esc_url( $template_pack_data->link );
+		$template_pack_data->supports    = esc_html( $template_pack_data->supports );
 
 		return $template_pack_data;
 	}
@@ -391,6 +358,7 @@ class Next_Template_Packs {
 							'description' => 'The BuddyPress legacy template pack',
 							'author'      => 'The BuddyPress community',
 							'link'        => 'http://buddypress.org',
+							'supports'    => 'activity, blogs, friends, groups, messages, notifications, retired-forums, settings, xprofile',
 							'text_domain' => 'buddypress',
 						);
 					} else {
@@ -401,6 +369,7 @@ class Next_Template_Packs {
 							'description' => 'Description',
 							'author'      => 'Author',
 							'link'        => 'Template Pack Link',
+							'supports'    => 'Template Pack Supports',
 							'text_domain' => 'Text Domain',
 							'domain_path' => 'Domain Path'
 						) );
@@ -431,6 +400,7 @@ class Next_Template_Packs {
 							<th scope="col" id="cb" class="manage-column column-cb check-column">&nbsp;</th>
 							<th scope="col" id="name" class="manage-column column-name" style="width: 190px;"><?php _e( 'Name', 'next-template-packs' ); ?></th>
 							<th scope="col" id="description" class="manage-column column-description"><?php _e( 'Description', 'next-template-packs' ); ?></th>
+							<th scope="col" id="supports" class="manage-column column-supports" style="width: 190px;"><?php _e( 'Supports', 'next-template-packs' ); ?></th>
 						</tr>
 					</thead>
 
@@ -439,6 +409,7 @@ class Next_Template_Packs {
 							<th scope="col" class="manage-column column-cb check-column">&nbsp;</th>
 							<th scope="col" class="manage-column column-name" style="width: 190px;"><?php _e( 'Name', 'next-template-packs' ); ?></th>
 							<th scope="col" class="manage-column column-description"><?php _e( 'Description', 'next-template-packs' ); ?></th>
+							<th scope="col" class="manage-column column-supports" style="width: 190px;"><?php _e( 'Supports', 'next-template-packs' ); ?></th>
 						</tr>
 					</tfoot>
 
@@ -475,6 +446,12 @@ class Next_Template_Packs {
 											<?php self::get_template_pack_meta( $tp_pack ) ; ?>
 										</div>
 									</td>
+
+									<td class="column-supports desc">
+										<p class="description">
+											<?php self::get_template_pack_supports( $tp_pack ) ;?>
+										</p>
+									</td>
 								</tr>
 
 							<?php endforeach ?>
@@ -498,6 +475,24 @@ class Next_Template_Packs {
 			</form>
 		</div>
 		<?php
+	}
+
+	public function register_theme_package() {
+		if ( 'legacy' === bp_get_theme_package_id() ) {
+			return;
+		}
+
+		$this->pack_data = bp_get_option( '_next_template_packs_package_data', array() );
+
+		if ( ! empty( $this->pack_data ) ) {
+			bp_register_theme_package( $this->pack_data );
+		}
+	}
+
+	public function load_features() {
+		if ( ! empty( $this->pack_data ) && file_exists( $this->pack_data['dir'] . '/bp-custom.php' ) ) {
+			include( $this->pack_data['dir'] . '/bp-custom.php' );
+		}
 	}
 
 	/**
@@ -525,25 +520,43 @@ class Next_Template_Packs {
 		endif;
 	}
 
-	public function register_theme_package() {
-		if ( 'legacy' === bp_get_theme_package_id() ) {
-			return;
+	/**
+	 * Checks BuddyPress version
+	 */
+	public function version_check() {
+		// taking no risk
+		if ( ! function_exists( 'bp_get_db_version' ) ) {
+			return false;
 		}
 
-		$this->pack_data = bp_get_option( '_next_template_packs_package_data', array() );
-
-		if ( empty( $this->pack_data ) ) {
-			// User legacy ???
-			wp_die( 'oops' );
-		}
-
-		bp_register_theme_package( $this->pack_data );
+		return self::$bp_db_version_required <= bp_get_db_version();
 	}
 
-	public function load_features() {
-		if ( ! empty( $this->pack_data ) && file_exists( $this->pack_data['dir'] . '/bp-custom.php' ) ) {
-			include( $this->pack_data['dir'] . '/bp-custom.php' );
+	/**
+	 * Checks if current blog is the one where BuddyPress is activated
+	 */
+	public function network_check() {
+		/*
+		 * network_active : this plugin is activated on the network
+		 * network_status : BuddyPress & this plugin share the same network status
+		 */
+		$config = array( 'network_active' => false, 'network_status' => true );
+		$network_plugins = get_site_option( 'active_sitewide_plugins', array() );
+
+		// No Network plugins
+		if ( empty( $network_plugins ) ) {
+			return $config;
 		}
+
+		$check = array( buddypress()->basename, $this->basename );
+		$network_active = array_diff( $check, array_keys( $network_plugins ) );
+
+		if ( count( $network_active ) == 1 )
+			$config['network_status'] = false;
+
+		$config['network_active'] = isset( $network_plugins[ $this->basename ] );
+
+		return $config;
 	}
 
 	/**

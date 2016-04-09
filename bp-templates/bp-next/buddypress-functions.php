@@ -14,7 +14,8 @@
  * Text Domain:        bp-next
  * Domain Path:        /languages/
  * Author:             imath
- * Template Pack Link: http://imathi.eu
+ * Template Pack Link: https://github.com/imath/next-template-packs
+ * Template Pack Supports: activity, blogs, friends, groups, messages, notifications, settings, xprofile
  * }}
  */
 
