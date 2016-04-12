@@ -46,9 +46,9 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
 		<ul>
-			<li class="dir-search" role="search" data-bp-search="groups">
-				<?php bp_directory_groups_search_form(); ?>
-			</li>
+
+				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
+
 			<?php
 
 			/**

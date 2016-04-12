@@ -50,9 +50,8 @@ do_action( 'bp_before_directory_activity' ); ?>
 	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 		<ul>
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
-			<li class="dir-search" role="search" data-bp-search="activity">
-				<?php bp_directory_activity_search_form(); ?>
-			</li>
+
+				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
 
 			<?php
 

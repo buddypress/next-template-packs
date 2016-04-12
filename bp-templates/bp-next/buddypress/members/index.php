@@ -51,9 +51,9 @@ do_action( 'bp_before_directory_members_page' ); ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
 		<ul>
-			<li class="dir-search" role="search" data-bp-search="members">
-				<?php bp_directory_members_search_form(); ?>
-			</li>
+
+				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
+
 			<?php
 
 			/**
