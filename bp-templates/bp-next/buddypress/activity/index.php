@@ -43,7 +43,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 
 	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
 
-		<?php bp_get_template_part( 'activity/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/object-nav' ); ?>
 
 	<?php endif; ?>
 

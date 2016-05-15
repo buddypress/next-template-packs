@@ -40,7 +40,7 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 
 	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
 
-		<?php bp_get_template_part( 'groups/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/object-nav' ); ?>
 
 	<?php endif; ?>
 
