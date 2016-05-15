@@ -21,3 +21,5 @@ npm-debug.log
 
 # The build directory.
 build
+/*.sublime-project
+/*.sublime-workspace
