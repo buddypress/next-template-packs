@@ -43,10 +43,8 @@ switch($component) {
 	break;
 
 }
-
 ?>
 
-<div><?php var_dump(bp_current_component() ) ?></div>
 <menu class="component-nav-wrapper">
 	<ul class="component-dir-links" role="navigation">
 		<li class="selected" id="<?php echo $component; ?>-all" data-bp-scope="all" data-bp-object="<?php echo $component; ?>">
