@@ -1,15 +1,3 @@
-// This is copy of the existing buddypress.css styles
-// These will be pulled out and rebuilding will begin
-// for more modular - pattern styles.
-//
-
-/*
-* This is copy of the existing buddypress.css styles
-*
-* These BP primary styles are now compiled from 'sass/' dir buddypress.scss
-* These existing styles will be removed and rebuilt from top down in due course.
-* /
-
 /*--------------------------------------------------------------
 Hello, this is the BuddyPress Legacy stylesheet.
 
@@ -1816,10 +1804,12 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	padding: 0;
 }
 
-#buddypress div.item-list-tabs ul li {
+#buddypress div.item-list-tabs ul li,
+#buddypress menu.subnav li {
 	float: left;
 	margin: 0;
 	list-style: none;
+	width: 40%;
 }
 
 #buddypress div.item-list-tabs#subnav ul li,
@@ -2588,6 +2578,16 @@ body.register #buddypress div.page ul {
 .widget.buddypress #friends-list li {
 	clear: both;
 	list-style-type: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
 }
 
 /*--------------------------------------------------------------

@@ -1,14 +1,4 @@
 
-
-/* built from scss file compile you fucking cunt crap file*/
-/* FUCK ME FUCK ME FUCK ME */
-body {
-	#buddypress {
-	background: blue;
-	color: red;
-	display: inline;
-	}
-}
 /*--------------------------------------------------------------
 Hello, this is the BuddyPress Legacy stylesheet.
 
@@ -1588,10 +1578,12 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	margin: 0;
 	padding: 0;
 }
-#buddypress div.item-list-tabs ul li {
+#buddypress div.item-list-tabs ul li,
+#buddypress  menu.subnav li {
 	float: left;
 	margin: 0;
 	list-style: none;
+	width: 40%;
 }
 #buddypress div.item-list-tabs#subnav ul li,
 #buddypress div.item-list-tabs#subsubnav ul li {
@@ -2315,6 +2307,14 @@ body.register #buddypress div.page ul {
 	list-style-type: none;
 }
 
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
 /*--------------------------------------------------------------
 4.0 - Media Queries
 --------------------------------------------------------------*/

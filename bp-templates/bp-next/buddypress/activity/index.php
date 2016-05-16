@@ -48,10 +48,13 @@ do_action( 'bp_before_directory_activity' ); ?>
 	<?php endif; ?>
 
 	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-		<ul>
+
+		<menu type="list" class="subnav clearfix">
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
 
 				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
+
+		</menu>
 
 			<?php
 
@@ -62,25 +65,8 @@ do_action( 'bp_before_directory_activity' ); ?>
 			 */
 			do_action( 'bp_activity_syndication_options' ); ?>
 
-			<li id="activity-filter-select" class="last filter">
-				<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-next' ); ?></span></label>
-				<select id="activity-filter-by" data-bp-filter="activity">
-					<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
+			<?php bp_get_template_part( 'common/component-filters' ); ?>
 
-					<?php bp_activity_show_filters(); ?>
-
-					<?php
-
-					/**
-					 * Fires inside the select input for activity filter by options.
-					 *
-					 * @since 1.2.0
-					 */
-					do_action( 'bp_activity_filter_options' ); ?>
-
-				</select>
-			</li>
-		</ul>
 	</div><!-- .item-list-tabs -->
 
 	<?php

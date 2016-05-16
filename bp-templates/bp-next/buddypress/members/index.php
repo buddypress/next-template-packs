@@ -50,11 +50,14 @@ do_action( 'bp_before_directory_members_page' ); ?>
 	<?php endif; ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
-		<ul>
+
+		<menu type="list" class="subnav clearfix">
 
 				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
 
-			<?php
+		</menu>
+
+		<?php
 
 			/**
 			 * Fires inside the members directory member sub-types.
@@ -63,27 +66,9 @@ do_action( 'bp_before_directory_members_page' ); ?>
 			 */
 			do_action( 'bp_members_directory_member_sub_types' ); ?>
 
-			<li id="members-order-select" class="last filter">
-				<label for="members-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
-				<select id="members-order-by" data-bp-filter="members">
-					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-					<option value="newest"><?php _e( 'Newest Registered', 'bp-next' ); ?></option>
+			<?php bp_get_template_part( 'common/component-filters' ); ?>
 
-					<?php if ( bp_is_active( 'xprofile' ) ) : ?>
-						<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
-					<?php endif; ?>
 
-					<?php
-
-					/**
-					 * Fires inside the members directory member order options.
-					 *
-					 * @since 1.2.0
-					 */
-					do_action( 'bp_members_directory_order_options' ); ?>
-				</select>
-			</li>
-		</ul>
 	</div>
 
 	<div id="members-dir-list" class="members dir-list" data-bp-list="members">

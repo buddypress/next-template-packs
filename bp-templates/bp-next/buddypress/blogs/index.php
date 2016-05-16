@@ -51,7 +51,7 @@ do_action( 'bp_before_directory_blogs_page' ); ?>
 		<?php bp_get_template_part( 'common/object-nav' ); ?>
 
 		<div class="item-list-tabs" id="subnav" role="navigation">
-			<ul>
+			<menu type="list" class="subnav clearfix">
 
 				<?php
 
@@ -61,27 +61,10 @@ do_action( 'bp_before_directory_blogs_page' ); ?>
 				 * @since 1.5.0
 				 */
 				do_action( 'bp_blogs_directory_blog_sub_types' ); ?>
+			</menu>
 
-				<li id="blogs-order-select" class="last filter">
+			<?php bp_get_template_part( 'common/component-filters' ); ?>
 
-					<label for="blogs-order-by"><?php _e( 'Order By:', 'bp-next' ); ?></label>
-					<select id="blogs-order-by">
-						<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-						<option value="newest"><?php _e( 'Newest', 'bp-next' ); ?></option>
-						<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
-
-						<?php
-
-						/**
-						 * Fires inside the select input listing blogs orderby options.
-						 *
-						 * @since 1.2.0
-						 */
-						do_action( 'bp_blogs_directory_order_options' ); ?>
-
-					</select>
-				</li>
-			</ul>
 		</div>
 
 		<div id="blogs-dir-list" class="blogs dir-list">

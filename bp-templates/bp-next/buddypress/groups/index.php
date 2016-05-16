@@ -45,9 +45,10 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 	<?php endif; ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
-		<ul>
 
+		<menu type="list" class="subnav clearfix">
 				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
+		</menu>
 
 			<?php
 
@@ -58,27 +59,8 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 			 */
 			do_action( 'bp_groups_directory_group_types' ); ?>
 
-			<li id="groups-order-select" class="last filter">
+			<?php bp_get_template_part( 'common/component-filters' ); ?>
 
-				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
-
-				<select id="groups-order-by" data-bp-filter="groups">
-					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-					<option value="popular"><?php _e( 'Most Members', 'bp-next' ); ?></option>
-					<option value="newest"><?php _e( 'Newly Created', 'bp-next' ); ?></option>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
-
-					<?php
-
-					/**
-					 * Fires inside the groups directory group order options.
-					 *
-					 * @since 1.2.0
-					 */
-					do_action( 'bp_groups_directory_order_options' ); ?>
-				</select>
-			</li>
-		</ul>
 	</div>
 
 	<div id="groups-dir-list" class="groups dir-list" data-bp-list="groups">
