@@ -30,8 +30,8 @@ switch($component) {
 	break;
 
 	case 'blogs' :
-		$component_name      = __( 'All Sites', 'bp-next' );
-		$component_permalink = bp_root_domain() . '/' .  bp_blogs_root_slug();
+		$component_name      = __( 'Sites', 'bp-next' );
+		$component_permalink = bp_get_root_domain() . '/' .  bp_get_blogs_root_slug();
 		$component_count     = bp_get_total_blog_count();
 		$my_blog_count       = bp_get_total_blog_count_for_user( bp_loggedin_user_id() );
 		$my_comp_count       = '<span class="my-blogs-count">' . $my_blog_count  . '</span>';
@@ -56,8 +56,8 @@ switch($component) {
 }
 ?>
 
-<menu class="component-nav-wrapper">
-	<ul class="component-dir-links" role="navigation">
+<menu type="list" class="component-navigation <?php echo $component; ?>-nav">
+
 		<li class="selected" id="<?php echo $component; ?>-all" data-bp-scope="all" data-bp-object="<?php echo $component; ?>">
 			<a href="<?php echo $component_permalink; ?>">
 				<?php printf( __( 'All %1$s %2$s', 'bp-next' ), $component, $component_count ); ?>
@@ -159,5 +159,4 @@ switch($component) {
 				break;
 			} ?>
 
-	</ul>
 </menu><!-- .component-nav-wrapper -->
