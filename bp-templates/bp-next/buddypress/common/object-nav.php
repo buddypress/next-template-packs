@@ -23,22 +23,33 @@ switch($component) {
 		$component_name      = __('Friends', 'bp-next');
 		$component_permalink = bp_get_members_directory_permalink();
 		$component_count     = bp_get_total_member_count();
-		$my_comp_count       = '<span class="my-friends-count">' . $user_comp_count  . '</span>';
+		$friend_count        = bp_get_total_friend_count( bp_loggedin_user_id() );
+		$my_comp_count       = '<span class="my-friends-count">' . $friend_count  . '</span>';
 		$user_account_comp_link = bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/';
-		$personal_items  = ( bp_is_active( 'friends' ) && bp_get_total_friend_count( bp_loggedin_user_id() )) ? true : false;
+		$personal_items  = ( bp_is_active( 'friends' ) && $friend_count ) ? true : false;
+	break;
+
+	case 'blogs' :
+		$component_name      = __( 'All Sites', 'bp-next' );
+		$component_permalink = bp_root_domain() . '/' .  bp_blogs_root_slug();
+		$component_count     = bp_get_total_blog_count();
+		$my_blog_count       = bp_get_total_blog_count_for_user( bp_loggedin_user_id() );
+		$my_comp_count       = '<span class="my-blogs-count">' . $my_blog_count  . '</span>';
+		$user_account_comp_link = bp_loggedin_user_domain() . bp_get_blogs_slug() ;
+		$personal_items   = ( $my_blog_count ) ? true : false;
 	break;
 
 	case 'activity' :
-		$component_name      = $component;
-		$component_permalink = bp_get_activity_directory_permalink();
+		$component_name          = $component;
+		$component_count         = '';
+		$component_permalink     = bp_get_activity_directory_permalink();
 		$my_account_friends_link = bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_friends_slug() . '/';
-		//$component_count     = bp_get_total_member_count();
-		$my_comp_count       = '<span class="my-friends-count">' . $user_comp_count  . '</span>';
+		$friend_count            = bp_get_total_friend_count( bp_loggedin_user_id() );
+		$my_comp_count           = '<span class="my-friends-count">' . $friend_count  . '</span>';
 		$my_fav_count     = bp_get_total_favorite_count_for_user( bp_loggedin_user_id() ) ;
-		$my_friends_count = bp_get_total_friend_count( bp_loggedin_user_id() );
 		$user_account_comp_link = bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/';
 		// Too many variences this doesn't work now as activity has personal groups and friends.
-		$personal_items_groups  = ( bp_is_active( 'groups' ) && bp_get_total_friend_count( bp_loggedin_user_id() )) ? true : false;
+		$personal_items_groups  = ( bp_is_active( 'groups' ) && $friend_count ) ? true : false;
 		$my_groups_count = bp_get_total_group_count_for_user( bp_loggedin_user_id() );
 	break;
 
@@ -57,14 +68,6 @@ switch($component) {
 
 			<?php // Activity specific list items ?>
 			<?php if( 'activity' == $component ) : ?>
-
-				<li id="activity-friends" class="dynamic" data-bp-scope="friends" data-bp-object="activity">
-					<a href="<?php echo bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_friends_slug() . '/'; ?>" title="<?php esc_attr_e( 'The activity of my friends only.', 'bp-next' ); ?>">
-						<?php esc_html_e( 'My Friends', 'bp-next' ); ?>
-							<?php /* Following empty span will contain the number of newest activities corresponding to this scope */ ?>
-							<span></span>
-					</a>
-				</li>
 
 				<?php if( bp_is_active( 'friends' ) && $my_friends_count ) : ?>
 					<li id="activity-friends" class="dynamic" data-bp-scope="friends" data-bp-object="<?php echo $component; ?>">
