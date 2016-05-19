@@ -1,5 +1,7 @@
 # Next Template Packs
 
+*bp-nouveau*
+
 This is a work in progress to illustrate what i have in mind for a next BuddyPress Template Pack. *DO NOT USE* on a live website! I repeat: *DO NOT USE* on a live website!
 
 ## Some notes about my progess so far...
