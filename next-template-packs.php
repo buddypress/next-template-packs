@@ -484,13 +484,13 @@ class Next_Template_Packs {
 
 		$this->pack_data = bp_get_option( '_next_template_packs_package_data', array() );
 
-		if ( ! empty( $this->pack_data ) ) {
+		if ( ! empty( $this->pack_data['dir'] ) && is_dir( $this->pack_data['dir'] ) ) {
 			bp_register_theme_package( $this->pack_data );
 		}
 	}
 
 	public function load_features() {
-		if ( ! empty( $this->pack_data ) && file_exists( $this->pack_data['dir'] . '/bp-custom.php' ) ) {
+		if ( ! empty( $this->pack_data['dir'] ) && file_exists( $this->pack_data['dir'] . '/bp-custom.php' ) ) {
 			include( $this->pack_data['dir'] . '/bp-custom.php' );
 		}
 	}

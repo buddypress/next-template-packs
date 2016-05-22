@@ -1,0 +1,38 @@
+<?php
+/**
+ * BuddyPress Members Main Navigation
+ *
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
+ */
+?>
+
+
+<div class="item-list-tabs" role="navigation">
+	<ul>
+		<li id="members-all" data-bp-scope="all" data-bp-object="members">
+			<a href="<?php bp_members_directory_permalink(); ?>">
+				<?php printf( __( 'All Members %s', 'bp-nouveau' ), '<span>' . bp_get_total_member_count() . '</span>' ); ?>
+			</a>
+		</li>
+
+		<?php if ( is_user_logged_in() && bp_is_active( 'friends' ) && bp_get_total_friend_count( bp_loggedin_user_id() ) ) : ?>
+			<li id="members-personal" data-bp-scope="personal" data-bp-object="members">
+				<a href="<?php echo bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/'; ?>">
+					<?php printf( __( 'My Friends %s', 'bp-nouveau' ), '<span>' . bp_get_total_friend_count( bp_loggedin_user_id() ) . '</span>' ); ?>
+				</a>
+			</li>
+		<?php endif; ?>
+
+		<?php
+
+		/**
+		 * Fires inside the members directory member types.
+		 *
+		 * @since 1.2.0
+		 */
+		do_action( 'bp_members_directory_member_types' ); ?>
+
+	</ul>
+</div><!-- .item-list-tabs -->

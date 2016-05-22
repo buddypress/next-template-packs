@@ -9,8 +9,8 @@
  * 2/ run the command
  * php bp-makepot.php bp-templatepack /absolute/path/to/template/pack/folder /absolute/path/to/template/pack/folder/tempate-pack-name.pot
  *
- * For the included BP Next Template pack, the command is
- * php bp-makepot.php bp-templatepack ~/pathtoplugin/next-template-packs/bp-templates/bp-next ~/pathtoplugin/next-template-packs/bp-templates/bp-next/languages/bp-next.pot
+ * For the included BP Nouveau Template pack, the command is
+ * php bp-makepot.php bp-templatepack ~/pathtoplugin/next-template-packs/bp-templates/bp-nouveau ~/pathtoplugin/next-template-packs/bp-templates/bp-nouveau/languages/bp-nouveau.pot
  */
 
 require_once getenv( 'WP_DEVELOP_DIR' ) . '/tools/i18n/not-gettexted.php';
