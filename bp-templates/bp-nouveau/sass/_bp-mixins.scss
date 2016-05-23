@@ -1,5 +1,88 @@
 //
 // BuddyPress scss Mixins
 //
-//
 
+// This file provides some basic mixins for BP elements such as box sizing
+// radius, calc etc
+
+// font size decs are used with caution BP doesn't manage
+// layout sizes & must take care to work with layout sizes
+@mixin font-size($font-size: 16) {
+	$rem-font-value: ($font-size / 10);
+	font-size: ($font-size * 1px);
+	font-size: $rem-font-value + rem;
+}
+
+// Box model
+
+@mixin box-model($box-type) {
+	-webkit-box-sizing: $box-type;
+	-moz-box-sizing: $box-type;
+	box-sizing: $box-type;
+}
+
+// Border radius
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-top-radius($radius) {
+	-webkit-border-top-right-radius: $radius;
+	border-top-right-radius: $radius;
+	-webkit-border-top-left-radius: $radius;
+	border-top-left-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-right-radius($radius) {
+	-webkit-border-bottom-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+	-webkit-border-top-right-radius: $radius;
+	border-top-right-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-bottom-radius($radius) {
+	-webkit-border-bottom-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+	-webkit-border-bottom-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-left-radius($radius) {
+	-webkit-border-bottom-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+	-webkit-border-top-left-radius: $radius;
+	border-top-left-radius: $radius;
+	background-clip: padding-box;
+}
+
+// Calc e.g (100% - 10px)
+@mixin calc($property, $expression) {
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: -moz-calc(#{$expression});
+	#{$property}: calc(#{$expression});
+}
+
+// BP message boxes
+// Creates a message box with border, background color
+// If  no text-color passed in then the background used for
+// text darkened by 50%
+@mixin message-box($background, $text-color: null) {
+
+	@if $text-color {
+		// if a param was passed through
+		$text-color: $text-color;
+	} @else {
+		$text-color: darken($background, 50%);
+	}
+
+	background: lighten($background, 10%);
+	border: 1px solid darken($background, 10%);
+	color: $text-color;
+}
