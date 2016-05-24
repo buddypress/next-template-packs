@@ -38,22 +38,22 @@
 		<?php if ( bp_account_was_activated() ) : ?>
 
 			<?php if ( isset( $_GET['e'] ) ) : ?>
-				<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'bp-next' ); ?></p>
+				<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'bp-nouveau' ); ?></p>
 			<?php else : ?>
-				<p><?php printf( __( 'Your account was activated successfully! You can now <a href="%s">log in</a> with the username and password you provided when you signed up.', 'bp-next' ), wp_login_url( bp_get_root_domain() ) ); ?></p>
+				<p><?php printf( __( 'Your account was activated successfully! You can now <a href="%s">log in</a> with the username and password you provided when you signed up.', 'bp-nouveau' ), wp_login_url( bp_get_root_domain() ) ); ?></p>
 			<?php endif; ?>
 
 		<?php else : ?>
 
-			<p><?php _e( 'Please provide a valid activation key.', 'bp-next' ); ?></p>
+			<p><?php _e( 'Please provide a valid activation key.', 'bp-nouveau' ); ?></p>
 
 			<form action="" method="get" class="standard-form" id="activation-form">
 
-				<label for="key"><?php _e( 'Activation Key:', 'bp-next' ); ?></label>
+				<label for="key"><?php _e( 'Activation Key:', 'bp-nouveau' ); ?></label>
 				<input type="text" name="key" id="key" value="" />
 
 				<p class="submit">
-					<input type="submit" name="submit" value="<?php esc_attr_e( 'Activate', 'bp-next' ); ?>" />
+					<input type="submit" name="submit" value="<?php esc_attr_e( 'Activate', 'bp-nouveau' ); ?>" />
 				</p>
 
 			</form>

@@ -12,10 +12,10 @@
 		<thead>
 			<tr>
 				<th class="icon"></th>
-				<th class="bulk-select-all"><input id="select-all-notifications" type="checkbox"><label class="bp-screen-reader-text" for="select-all-notifications"><?php _e( 'Select all', 'bp-next' ); ?></label></th>
-				<th class="title"><?php _e( 'Notification', 'bp-next' ); ?></th>
-				<th class="date"><?php _e( 'Date Received', 'bp-next' ); ?></th>
-				<th class="actions"><?php _e( 'Actions',    'bp-next' ); ?></th>
+				<th class="bulk-select-all"><input id="select-all-notifications" type="checkbox"><label class="bp-screen-reader-text" for="select-all-notifications"><?php _e( 'Select all', 'bp-nouveau' ); ?></label></th>
+				<th class="title"><?php _e( 'Notification', 'bp-nouveau' ); ?></th>
+				<th class="date"><?php _e( 'Date Received', 'bp-nouveau' ); ?></th>
+				<th class="actions"><?php _e( 'Actions',    'bp-nouveau' ); ?></th>
 			</tr>
 		</thead>
 
@@ -25,7 +25,7 @@
 
 				<tr>
 					<td></td>
-					<td class="bulk-select-check"><label for="<?php bp_the_notification_id(); ?>"><input id="<?php bp_the_notification_id(); ?>" type="checkbox" name="notifications[]" value="<?php bp_the_notification_id(); ?>" class="notification-check"><span class="bp-screen-reader-text"><?php _e( 'Select this notification', 'bp-next' ); ?></span></label></td>
+					<td class="bulk-select-check"><label for="<?php bp_the_notification_id(); ?>"><input id="<?php bp_the_notification_id(); ?>" type="checkbox" name="notifications[]" value="<?php bp_the_notification_id(); ?>" class="notification-check"><span class="bp-screen-reader-text"><?php _e( 'Select this notification', 'bp-nouveau' ); ?></span></label></td>
 					<td class="notification-description"><?php bp_the_notification_description();  ?></td>
 					<td class="notification-since"><?php bp_the_notification_time_since();   ?></td>
 					<td class="notification-actions"><?php bp_the_notification_action_links(); ?></td>

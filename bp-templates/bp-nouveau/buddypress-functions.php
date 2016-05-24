@@ -1,20 +1,20 @@
 <?php
 /**
- * Functions of BuddyPress's Next template pack.
+ * Functions of BuddyPress's "Nouveau" template pack.
  *
  * @since 1.0.0
  *
- * @package BP Next
+ * @package BP Nouveau
  *
  * @buddypress-template-pack {
- * Template Pack ID:   next
- * Template Pack Name: BP Next
+ * Template Pack ID:   nouveau
+ * Template Pack Name: BP Nouveau
  * Version:            1.0.0
- * Description:        The next template pack for BuddyPress!
- * Text Domain:        bp-next
+ * Description:        A new template pack for BuddyPress!
+ * Text Domain:        bp-nouveau
  * Domain Path:        /languages/
  * Author:             imath
- * Template Pack Link: https://github.com/imath/next-template-packs
+ * Template Pack Link: https://github.com/buddypress/next-template-packs
  * Template Pack Supports: activity, blogs, friends, groups, messages, notifications, settings, xprofile
  * }}
  */
@@ -24,28 +24,28 @@ defined( 'ABSPATH' ) || exit;
 
 /** Theme Setup ***************************************************************/
 
-if ( ! class_exists( 'BP_Next' ) ) :
+if ( ! class_exists( 'BP_Nouveau' ) ) :
 
 /**
- * Loads BuddyPress Next Template pack functionality.
+ * Loads BuddyPress Nouveau Template pack functionality.
  *
  * See @link BP_Theme_Compat() for more.
  *
  * @since 1.0.0
  *
- * @package BP Next
+ * @package BP Nouveau
  */
-class BP_Next extends BP_Theme_Compat {
+class BP_Nouveau extends BP_Theme_Compat {
 
 	/** Functions *************************************************************/
 
 	/**
-	 * The main BP Next Loader.
+	 * The main BP Nouveau Loader.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @uses BP_Next::setup_globals()
-	 * @uses BP_Next::setup_actions()
+	 * @uses BP_Nouveau::setup_globals()
+	 * @uses BP_Nouveau::setup_actions()
 	 */
 	public function __construct() {
 		parent::start();
@@ -65,11 +65,11 @@ class BP_Next extends BP_Theme_Compat {
 	protected function setup_globals() {
 		$bp = buddypress();
 
-		if ( ! isset( $bp->theme_compat->packages['next'] ) ) {
-			wp_die( __( 'Something is going wrong, please deactivate any plugin having an impact on the BP Theme Compat API', 'bp-next' ) );
+		if ( ! isset( $bp->theme_compat->packages['nouveau'] ) ) {
+			wp_die( __( 'Something is going wrong, please deactivate any plugin having an impact on the BP Theme Compat API', 'bp-nouveau' ) );
 		}
 
-		foreach ( $bp->theme_compat->packages['next'] as $property => $value ) {
+		foreach ( $bp->theme_compat->packages['nouveau'] as $property => $value ) {
 			$this->{$property} = $value;
 		}
 	}
@@ -162,31 +162,31 @@ class BP_Next extends BP_Theme_Compat {
 			'accept_friendship'     => 'bp_legacy_theme_ajax_accept_friendship',
 			'reject_friendship' => 'bp_legacy_theme_ajax_reject_friendship',
 
-			'friends_remove_friend'       => 'bp_next_ajax_addremove_friend',
-			'friends_add_friend'          => 'bp_next_ajax_addremove_friend',
-			'friends_withdraw_friendship' => 'bp_next_ajax_addremove_friend',
+			'friends_remove_friend'       => 'bp_nouveau_ajax_addremove_friend',
+			'friends_add_friend'          => 'bp_nouveau_ajax_addremove_friend',
+			'friends_withdraw_friendship' => 'bp_nouveau_ajax_addremove_friend',
 
 
 			// Activity.
 			'activity_get_older_updates'  => 'bp_legacy_theme_activity_template_loader',
-			'activity_mark_fav'           => 'bp_next_mark_activity_favorite',
-			'activity_mark_unfav'         => 'bp_next_unmark_activity_favorite',
-			'activity_clear_new_mentions' => 'bp_next_clear_new_mentions',
+			'activity_mark_fav'           => 'bp_nouveau_mark_activity_favorite',
+			'activity_mark_unfav'         => 'bp_nouveau_unmark_activity_favorite',
+			'activity_clear_new_mentions' => 'bp_nouveau_clear_new_mentions',
 			'activity_widget_filter'      => 'bp_legacy_theme_activity_template_loader',
-			'delete_activity'             => 'bp_next_delete_activity',
+			'delete_activity'             => 'bp_nouveau_delete_activity',
 			'delete_activity_comment'     => 'bp_legacy_theme_delete_activity_comment',
-			'get_single_activity_content' => 'bp_next_get_single_activity_content',
-			'new_activity_comment'        => 'bp_next_new_activity_comment',
+			'get_single_activity_content' => 'bp_nouveau_get_single_activity_content',
+			'new_activity_comment'        => 'bp_nouveau_new_activity_comment',
 			'post_update'                 => 'bp_legacy_theme_post_update',
 			'bp_spam_activity'            => 'bp_legacy_theme_spam_activity',
 			'bp_spam_activity_comment'    => 'bp_legacy_theme_spam_activity',
 
 			// Groups.
-			'groups_join_group'   => 'bp_next_ajax_joinleave_group',
-			'groups_leave_group'  => 'bp_next_ajax_joinleave_group',
-			'groups_accept_invite'  => 'bp_next_ajax_joinleave_group',
-			'groups_reject_invite'  => 'bp_next_ajax_joinleave_group',
-			'request_membership'  => 'bp_next_ajax_joinleave_group',
+			'groups_join_group'   => 'bp_nouveau_ajax_joinleave_group',
+			'groups_leave_group'  => 'bp_nouveau_ajax_joinleave_group',
+			'groups_accept_invite'  => 'bp_nouveau_ajax_joinleave_group',
+			'groups_reject_invite'  => 'bp_nouveau_ajax_joinleave_group',
+			'request_membership'  => 'bp_nouveau_ajax_joinleave_group',
 
 			// Messages.
 			'messages_markread'             => 'bp_legacy_theme_ajax_message_markread',
@@ -204,7 +204,7 @@ class BP_Next extends BP_Theme_Compat {
 			add_action( 'wp_ajax_nopriv_' . $name, $function );
 		}
 
-		add_filter( 'bp_ajax_querystring', 'bp_next_ajax_querystring', 10, 2 );
+		add_filter( 'bp_ajax_querystring', 'bp_nouveau_ajax_querystring', 10, 2 );
 
 		/** Override **********************************************************/
 
@@ -258,10 +258,10 @@ class BP_Next extends BP_Theme_Compat {
 	 */
 	public function enqueue_styles() {
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		$css_dependencies = apply_filters( 'bp_next_css_dependencies', array( 'dashicons' ) );
+		$css_dependencies = apply_filters( 'bp_nouveau_css_dependencies', array( 'dashicons' ) );
 
 		// Locate the BP stylesheet.
-		$ltr = $this->locate_asset_in_stack( "buddypress{$min}.css", 'css', 'bp-next' );
+		$ltr = $this->locate_asset_in_stack( "buddypress{$min}.css", 'css', 'bp-nouveau' );
 
 		// LTR.
 		if ( ! is_rtl() && isset( $ltr['location'], $ltr['handle'] ) ) {
@@ -274,7 +274,7 @@ class BP_Next extends BP_Theme_Compat {
 
 		// RTL.
 		if ( is_rtl() ) {
-			$rtl = $this->locate_asset_in_stack( "buddypress-rtl{$min}.css", 'css', 'bp-next-rtl' );
+			$rtl = $this->locate_asset_in_stack( "buddypress-rtl{$min}.css", 'css', 'bp-nouveau-rtl' );
 
 			if ( isset( $rtl['location'], $rtl['handle'] ) ) {
 				$rtl['handle'] = str_replace( '-css', '-css-rtl', $rtl['handle'] );  // Backwards compatibility.
@@ -287,7 +287,7 @@ class BP_Next extends BP_Theme_Compat {
 		}
 
 		if ( bp_is_user_messages() ) {
-			wp_enqueue_style( 'bp-next-at-message', buddypress()->plugin_url . "bp-activity/css/mentions{$min}.css", array(), bp_get_version() );
+			wp_enqueue_style( 'bp-nouveau-at-message', buddypress()->plugin_url . "bp-activity/css/mentions{$min}.css", array(), bp_get_version() );
 		}
 	}
 
@@ -298,14 +298,14 @@ class BP_Next extends BP_Theme_Compat {
 	 */
 	public function register_scripts() {
 		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		$main = $this->locate_asset_in_stack( "buddypress{$min}.js", 'js', 'bp-next' );
+		$main = $this->locate_asset_in_stack( "buddypress{$min}.js", 'js', 'bp-nouveau' );
 
 		if ( isset( $main['location'], $main['handle'] ) ) {
 			wp_register_script( $main['handle'], $main['location'], bp_core_get_js_dependencies(), $this->version, true );
 		}
 
 		if ( bp_is_active( 'activity' ) && isset( $main['handle'] ) ) {
-			$activity = $this->locate_asset_in_stack( "buddypress-activity{$min}.js", 'js', 'bp-next-activity' );
+			$activity = $this->locate_asset_in_stack( "buddypress-activity{$min}.js", 'js', 'bp-nouveau-activity' );
 
 			if ( isset( $activity['location'], $activity['handle'] ) ) {
 				$this->activity_handle = $activity['handle'];
@@ -315,7 +315,7 @@ class BP_Next extends BP_Theme_Compat {
 		}
 
 		if ( bp_is_active( 'groups' ) && isset( $main['handle'] ) ) {
-			$groups = $this->locate_asset_in_stack( "buddypress-group-invites{$min}.js", 'js', 'bp-next-group-invites' );
+			$groups = $this->locate_asset_in_stack( "buddypress-group-invites{$min}.js", 'js', 'bp-nouveau-group-invites' );
 
 			if ( isset( $groups['location'], $groups['handle'] ) ) {
 				$this->groups_handle = $groups['handle'];
@@ -325,7 +325,7 @@ class BP_Next extends BP_Theme_Compat {
 		}
 
 		if ( bp_is_active( 'messages' ) && isset( $main['handle'] ) ) {
-			$messages = $this->locate_asset_in_stack( "buddypress-messages{$min}.js", 'js', 'bp-next-messages' );
+			$messages = $this->locate_asset_in_stack( "buddypress-messages{$min}.js", 'js', 'bp-nouveau-messages' );
 
 			if ( isset( $messages['location'], $messages['handle'] ) ) {
 				$this->message_handle = $messages['handle'];
@@ -340,7 +340,7 @@ class BP_Next extends BP_Theme_Compat {
 		}
 
 		if ( ( bp_is_active( 'settings' ) || bp_get_signup_allowed() ) && isset( $main['handle'] ) ) {
-			$password = $this->locate_asset_in_stack( "password-verify{$min}.js", 'js', 'bp-next-password-verify' );
+			$password = $this->locate_asset_in_stack( "password-verify{$min}.js", 'js', 'bp-nouveau-password-verify' );
 
 			if ( isset( $password['location'], $password['handle'] ) ) {
 				$this->password_handle = $password['handle'];
@@ -357,24 +357,24 @@ class BP_Next extends BP_Theme_Compat {
 	 */
 	public function enqueue_scripts() {
 		// Always enqueue the common javascript file
-		wp_enqueue_script( 'bp-next' );
+		wp_enqueue_script( 'bp-nouveau' );
 
 		if ( bp_is_activity_component() || bp_is_group_activity() ) {
-			wp_enqueue_script( 'bp-next-activity' );
+			wp_enqueue_script( 'bp-nouveau-activity' );
 		}
 
 		if ( bp_is_register_page() || ( function_exists( 'bp_is_user_settings_general' ) && bp_is_user_settings_general() ) ) {
-			wp_enqueue_script( 'bp-next-password-verify' );
+			wp_enqueue_script( 'bp-nouveau-password-verify' );
 		}
 
 		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
-			wp_enqueue_script( 'bp-next-group-invites' );
+			wp_enqueue_script( 'bp-nouveau-group-invites' );
 		}
 
 		if ( bp_is_user_messages() ) {
-			wp_enqueue_script( 'bp-next-messages' );
+			wp_enqueue_script( 'bp-nouveau-messages' );
 
-			add_filter( 'tiny_mce_before_init', 'bp_next_messages_at_on_tinymce_init', 10, 2 );
+			add_filter( 'tiny_mce_before_init', 'bp_nouveau_messages_at_on_tinymce_init', 10, 2 );
 		}
 
 		// Maybe enqueue comment reply JS.
@@ -513,37 +513,37 @@ class BP_Next extends BP_Theme_Compat {
 	public function localize_scripts() {
 		// First global params
 		$params = array(
-			'accepted'            => __( 'Accepted', 'bp-next' ),
-			'close'               => __( 'Close', 'bp-next' ),
-			'comments'            => __( 'comments', 'bp-next' ),
-			'leave_group_confirm' => __( 'Are you sure you want to leave this group?', 'bp-next' ),
-			'my_favs'             => __( 'My Favorites', 'bp-next' ),
-			'rejected'            => __( 'Rejected', 'bp-next' ),
-			'show_all'            => __( 'Show all', 'bp-next' ),
-			'show_all_comments'   => __( 'Show all comments for this thread', 'bp-next' ),
-			'show_x_comments'     => __( 'Show all %d comments', 'bp-next' ),
-			'unsaved_changes'     => __( 'Your profile has unsaved changes. If you leave the page, the changes will be lost.', 'bp-next' ),
-			'view'                => __( 'View', 'bp-next' ),
+			'accepted'            => __( 'Accepted', 'bp-nouveau' ),
+			'close'               => __( 'Close', 'bp-nouveau' ),
+			'comments'            => __( 'comments', 'bp-nouveau' ),
+			'leave_group_confirm' => __( 'Are you sure you want to leave this group?', 'bp-nouveau' ),
+			'my_favs'             => __( 'My Favorites', 'bp-nouveau' ),
+			'rejected'            => __( 'Rejected', 'bp-nouveau' ),
+			'show_all'            => __( 'Show all', 'bp-nouveau' ),
+			'show_all_comments'   => __( 'Show all comments for this thread', 'bp-nouveau' ),
+			'show_x_comments'     => __( 'Show all %d comments', 'bp-nouveau' ),
+			'unsaved_changes'     => __( 'Your profile has unsaved changes. If you leave the page, the changes will be lost.', 'bp-nouveau' ),
+			'view'                => __( 'View', 'bp-nouveau' ),
 			'object_nav_parent'   => '#buddypress',
 			'time_since'        => array(
-				'sometime'  => _x( 'sometime', 'javascript time since', 'bp-next' ),
-				'now'       => _x( 'right now', 'javascript time since', 'bp-next' ),
-				'ago'       => _x( '% ago', 'javascript time since', 'bp-next' ),
-				'separator' => _x( ',', 'Separator in javascript time since', 'bp-next' ),
-				'year'      => _x( '% year', 'javascript time since singular', 'bp-next' ),
-				'years'     => _x( '% years', 'javascript time since plural', 'bp-next' ),
-				'month'     => _x( '% month', 'javascript time since singular', 'bp-next' ),
-				'months'    => _x( '% months', 'javascript time since plural', 'bp-next' ),
-				'week'      => _x( '% week', 'javascript time since singular', 'bp-next' ),
-				'weeks'     => _x( '% weeks', 'javascript time since plural', 'bp-next' ),
-				'day'       => _x( '% day', 'javascript time since singular', 'bp-next' ),
-				'days'      => _x( '% days', 'javascript time since plural', 'bp-next' ),
-				'hour'      => _x( '% hour', 'javascript time since singular', 'bp-next' ),
-				'hours'     => _x( '% hours', 'javascript time since plural', 'bp-next' ),
-				'minute'    => _x( '% minute', 'javascript time since singular', 'bp-next' ),
-				'minutes'   => _x( '% minutes', 'javascript time since plural', 'bp-next' ),
-				'second'    => _x( '% second', 'javascript time since singular', 'bp-next' ),
-				'seconds'   => _x( '% seconds', 'javascript time since plural', 'bp-next' ),
+				'sometime'  => _x( 'sometime', 'javascript time since', 'bp-nouveau' ),
+				'now'       => _x( 'right now', 'javascript time since', 'bp-nouveau' ),
+				'ago'       => _x( '% ago', 'javascript time since', 'bp-nouveau' ),
+				'separator' => _x( ',', 'Separator in javascript time since', 'bp-nouveau' ),
+				'year'      => _x( '% year', 'javascript time since singular', 'bp-nouveau' ),
+				'years'     => _x( '% years', 'javascript time since plural', 'bp-nouveau' ),
+				'month'     => _x( '% month', 'javascript time since singular', 'bp-nouveau' ),
+				'months'    => _x( '% months', 'javascript time since plural', 'bp-nouveau' ),
+				'week'      => _x( '% week', 'javascript time since singular', 'bp-nouveau' ),
+				'weeks'     => _x( '% weeks', 'javascript time since plural', 'bp-nouveau' ),
+				'day'       => _x( '% day', 'javascript time since singular', 'bp-nouveau' ),
+				'days'      => _x( '% days', 'javascript time since plural', 'bp-nouveau' ),
+				'hour'      => _x( '% hour', 'javascript time since singular', 'bp-nouveau' ),
+				'hours'     => _x( '% hours', 'javascript time since plural', 'bp-nouveau' ),
+				'minute'    => _x( '% minute', 'javascript time since singular', 'bp-nouveau' ),
+				'minutes'   => _x( '% minutes', 'javascript time since plural', 'bp-nouveau' ),
+				'second'    => _x( '% second', 'javascript time since singular', 'bp-nouveau' ),
+				'seconds'   => _x( '% seconds', 'javascript time since plural', 'bp-nouveau' ),
 				'time_chunks' => array(
 					'a_year'   => YEAR_IN_SECONDS,
 					'b_month'  => 30 * DAY_IN_SECONDS,
@@ -558,12 +558,12 @@ class BP_Next extends BP_Theme_Compat {
 		);
 
 		// If the Object/Item nav are in the sidebar
-		if ( bp_next_is_object_nav_in_sidebar() ) {
+		if ( bp_nouveau_is_object_nav_in_sidebar() ) {
 			$params['object_nav_parent'] = '.buddypress_object_nav';
 		}
 
 		// Set the supported components
-		$supported_objects = (array) apply_filters( 'bp_next_supported_components', bp_core_get_packaged_component_ids() );
+		$supported_objects = (array) apply_filters( 'bp_nouveau_supported_components', bp_core_get_packaged_component_ids() );
 		$object_nonces     = array();
 
 		foreach ( $supported_objects as $key_object => $object ) {
@@ -576,7 +576,7 @@ class BP_Next extends BP_Theme_Compat {
 				$supported_objects[] = 'group_members';
 			}
 
-			$object_nonces[ $object ] = wp_create_nonce( 'bp_next_' . $object );
+			$object_nonces[ $object ] = wp_create_nonce( 'bp_nouveau_' . $object );
 		}
 
 		// Add components & nonces
@@ -586,27 +586,27 @@ class BP_Next extends BP_Theme_Compat {
 		if ( bp_is_user_messages() ) {
 			$params['messages'] = array(
 				'errors' => array(
-					'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'bp-next' ),
-					'subject'         => __( 'Please add a subject to your message.', 'bp-next' ),
-					'message_content' => __( 'Please add some content to your message.', 'bp-next' ),
+					'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'bp-nouveau' ),
+					'subject'         => __( 'Please add a subject to your message.', 'bp-nouveau' ),
+					'message_content' => __( 'Please add some content to your message.', 'bp-nouveau' ),
 				),
 				'nonces' => array(
 					'send' => wp_create_nonce( 'messages_send_message' ),
 				),
-				'loading' => __( 'Loading messages, please wait.', 'bp-next' ),
-				'bulk_actions' => bp_next_messages_get_bulk_actions(),
+				'loading' => __( 'Loading messages, please wait.', 'bp-nouveau' ),
+				'bulk_actions' => bp_nouveau_messages_get_bulk_actions(),
 			);
 
 			// Star private messages.
 			if ( bp_is_active( 'messages', 'star' ) ) {
 				$params['messages'] = array_merge( $params['messages'], array(
 					'strings' => array(
-						'text_unstar'  => __( 'Unstar', 'bp-next' ),
-						'text_star'    => __( 'Star', 'bp-next' ),
-						'title_unstar' => __( 'Starred', 'bp-next' ),
-						'title_star'   => __( 'Not starred', 'bp-next' ),
-						'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-next' ),
-						'title_star_thread'   => __( 'Star the first message in this thread', 'bp-next' ),
+						'text_unstar'  => __( 'Unstar', 'bp-nouveau' ),
+						'text_star'    => __( 'Star', 'bp-nouveau' ),
+						'title_unstar' => __( 'Starred', 'bp-nouveau' ),
+						'title_star'   => __( 'Not starred', 'bp-nouveau' ),
+						'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-nouveau' ),
+						'title_star_thread'   => __( 'Star the first message in this thread', 'bp-nouveau' ),
 					),
 					'is_single_thread' => (int) bp_is_messages_conversation(),
 					'star_counter'     => 0,
@@ -620,21 +620,21 @@ class BP_Next extends BP_Theme_Compat {
 
 			// Init the Group invites nav
 			$invites_nav = array(
-				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-next' ), 'order' => 0 ),
-				'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-next' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
-				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-next' ), 'order' => 100, 'hide' => 1 ),
+				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-nouveau' ), 'order' => 0 ),
+				'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-nouveau' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
+				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-nouveau' ), 'order' => 100, 'hide' => 1 ),
 			);
 
 			if ( bp_is_active( 'friends' ) ) {
-				$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-next' ), 'order' => 5 );
+				$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-nouveau' ), 'order' => 5 );
 			}
 
 			$params['group_invites'] = array(
 				'nav'                => bp_sort_by_key( $invites_nav, 'order', 'num' ),
-				'loading'            => __( 'Loading members, please wait.', 'bp-next' ),
-				'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-next' ),
-				'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'bp-next' ),
-				'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-next' ),
+				'loading'            => __( 'Loading members, please wait.', 'bp-nouveau' ),
+				'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-nouveau' ),
+				'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'bp-nouveau' ),
+				'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-nouveau' ),
 				'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
 				'is_group_create'    => bp_is_group_create(),
 				'nonces'             => array(
@@ -651,7 +651,7 @@ class BP_Next extends BP_Theme_Compat {
 		 *
 		 * @param array $value Array of key/value pairs for AJAX usage.
 		 */
-		wp_localize_script( 'bp-next', 'BP_Next', apply_filters( 'bp_core_get_js_strings', $params ) );
+		wp_localize_script( 'bp-nouveau', 'BP_Nouveau', apply_filters( 'bp_core_get_js_strings', $params ) );
 	}
 
 	/**
@@ -807,7 +807,7 @@ class BP_Next extends BP_Theme_Compat {
 		return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $button->id . '">' . $button->link_text . '</a>' . $after;
 	}
 }
-new BP_Next();
+new BP_Nouveau();
 endif;
 
 /**
@@ -888,7 +888,7 @@ function bp_legacy_theme_blog_create_nav() {
  * @return string Query string for the component loops
  * @since 1.2.0
  */
-function bp_next_ajax_querystring( $query_string, $object ) {
+function bp_nouveau_ajax_querystring( $query_string, $object ) {
 	if ( empty( $object ) ) {
 		return '';
 	}
@@ -990,7 +990,7 @@ function bp_next_ajax_querystring( $query_string, $object ) {
 	 * @param string $search_terms The current object search terms.
 	 * @param string $extras       The current object extras.
 	 */
-	return apply_filters( 'bp_next_ajax_querystring', $query_string, $object, $filter, $scope, $page, $search_terms, $extras );
+	return apply_filters( 'bp_nouveau_ajax_querystring', $query_string, $object, $filter, $scope, $page, $search_terms, $extras );
 }
 
 /**
@@ -1198,7 +1198,7 @@ function bp_legacy_theme_post_update() {
 		exit( '-1' );
 
 	if ( empty( $_POST['content'] ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'Please enter some content to post.', 'bp-next' ) . '</p></div>' );
+		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'Please enter some content to post.', 'bp-nouveau' ) . '</p></div>' );
 
 	$activity_id = 0;
 	$item_id     = 0;
@@ -1234,7 +1234,7 @@ function bp_legacy_theme_post_update() {
 	}
 
 	if ( empty( $activity_id ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem posting your update. Please try again.', 'bp-next' ) . '</p></div>' );
+		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem posting your update. Please try again.', 'bp-nouveau' ) . '</p></div>' );
 
 	$last_recorded = ! empty( $_POST['since'] ) ? date( 'Y-m-d H:i:s', intval( $_POST['since'] ) ) : 0;
 	if ( $last_recorded ) {
@@ -1268,14 +1268,14 @@ function bp_legacy_theme_post_update() {
  *
  * @return string HTML
  */
-function bp_next_new_activity_comment() {
+function bp_nouveau_new_activity_comment() {
 	global $activities_template;
 	$bp = buddypress();
 
 	$response = array(
 		'feedback' => sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'There was an error posting your reply. Please try again.', 'bp-next' )
+			esc_html__( 'There was an error posting your reply. Please try again.', 'bp-nouveau' )
 		)
 	);
 
@@ -1296,7 +1296,7 @@ function bp_next_new_activity_comment() {
 	if ( empty( $_POST['content'] ) ) {
 		wp_send_json_error( array( 'feedback' => sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'Please do not leave the comment area blank.', 'bp-next' )
+			esc_html__( 'Please do not leave the comment area blank.', 'bp-nouveau' )
 		) ) );
 	}
 
@@ -1366,11 +1366,11 @@ function bp_next_new_activity_comment() {
  *
  * @return mixed String on error, void on success.
  */
-function bp_next_delete_activity() {
+function bp_nouveau_delete_activity() {
 	$response = array(
 		'feedback' => sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'There was a problem when deleting. Please try again.', 'bp-next' )
+			esc_html__( 'There was a problem when deleting. Please try again.', 'bp-nouveau' )
 		)
 	);
 
@@ -1443,7 +1443,7 @@ function bp_legacy_theme_delete_activity_comment() {
 	do_action( 'bp_activity_before_action_delete_activity', $_POST['id'], $comment->user_id );
 
 	if ( ! bp_activity_delete_comment( $comment->item_id, $comment->id ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem when deleting. Please try again.', 'bp-next' ) . '</p></div>' );
+		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem when deleting. Please try again.', 'bp-nouveau' ) . '</p></div>' );
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_action_delete_activity', $_POST['id'], $comment->user_id );
@@ -1503,27 +1503,27 @@ function bp_legacy_theme_spam_activity() {
  *
  * @return string HTML
  */
-function bp_next_mark_activity_favorite() {
+function bp_nouveau_mark_activity_favorite() {
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 		wp_send_json_error();
 	}
 
 	// Nonce check!
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_activity' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_activity' ) ) {
 		wp_send_json_error();
 	}
 
 	if ( bp_activity_add_user_favorite( $_POST['id'] ) ) {
-		$response = array( 'content' => __( 'Remove Favorite', 'bp-next' ) );
+		$response = array( 'content' => __( 'Remove Favorite', 'bp-nouveau' ) );
 
 		if ( ! bp_is_user() ) {
 			$fav_count = (int) bp_get_total_favorite_count_for_user( bp_loggedin_user_id() );
 
 			if ( 1 === $fav_count ) {
 				$response['directory_tab'] = '<li id="activity-favorites" data-bp-scope="favorites" data-bp-object="activity">
-					<a href="' . bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/" title="' . esc_attr__( "The activity I've marked as a favorite.", 'bp-next' ) . '">
-						' . esc_html__( 'My Favorites', 'bp-next' ) . '
+					<a href="' . bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/" title="' . esc_attr__( "The activity I've marked as a favorite.", 'bp-nouveau' ) . '">
+						' . esc_html__( 'My Favorites', 'bp-nouveau' ) . '
 					</a>
 				</li>';
 			} else {
@@ -1544,25 +1544,25 @@ function bp_next_mark_activity_favorite() {
  *
  * @return string HTML
  */
-function bp_next_unmark_activity_favorite() {
+function bp_nouveau_unmark_activity_favorite() {
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 		wp_send_json_error();
 	}
 
 	// Nonce check!
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_activity' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_activity' ) ) {
 		wp_send_json_error();
 	}
 
 	if ( bp_activity_remove_user_favorite( $_POST['id'] ) ) {
-		$response = array( 'content' => __( 'Favorite', 'bp-next' ) );
+		$response = array( 'content' => __( 'Favorite', 'bp-nouveau' ) );
 
 		$fav_count = (int) bp_get_total_favorite_count_for_user( bp_loggedin_user_id() );
 
 		if ( 0 === $fav_count ) {
 			$response['no_favorite'] = '<li id="activity-stream-message" class="info">
-				<p>' . __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-next' ) . '</p>
+				<p>' . __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ) . '</p>
 			</li>';
 		} else {
 			$response['fav_count'] = $fav_count;
@@ -1574,14 +1574,14 @@ function bp_next_unmark_activity_favorite() {
 	}
 }
 
-function bp_next_clear_new_mentions() {
+function bp_nouveau_clear_new_mentions() {
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 		wp_send_json_error();
 	}
 
 	// Nonce check!
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_activity' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_activity' ) ) {
 		wp_send_json_error();
 	}
 
@@ -1597,11 +1597,11 @@ function bp_next_clear_new_mentions() {
  *
  * @return string HTML
  */
-function bp_next_get_single_activity_content() {
+function bp_nouveau_get_single_activity_content() {
 	$response = array(
 		'feedback' => sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'There was a problem displaying the content. Please try again.', 'bp-next' )
+			esc_html__( 'There was a problem displaying the content. Please try again.', 'bp-nouveau' )
 		)
 	);
 
@@ -1611,7 +1611,7 @@ function bp_next_get_single_activity_content() {
 	}
 
 	// Nonce check!
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_activity' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_activity' ) ) {
 		wp_send_json_error( $response );
 	}
 
@@ -1633,7 +1633,7 @@ function bp_next_get_single_activity_content() {
 	 *
 	 * @param string $activity Activity content. Passed by reference.
 	 */
-	do_action_ref_array( 'bp_next_get_single_activity_content', array( &$activity ) );
+	do_action_ref_array( 'bp_nouveau_get_single_activity_content', array( &$activity ) );
 
 	// Activity content retrieved through AJAX should run through normal filters, but not be truncated.
 	remove_filter( 'bp_get_activity_content_body', 'bp_activity_truncate_entry', 5 );
@@ -1651,11 +1651,11 @@ function bp_next_get_single_activity_content() {
  *
  * @return string HTML
  */
-function bp_next_ajax_addremove_friend() {
+function bp_nouveau_ajax_addremove_friend() {
 	$response = array(
 		'feedback' => sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-next' )
+			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-nouveau' )
 		)
 	);
 
@@ -1670,7 +1670,7 @@ function bp_next_ajax_addremove_friend() {
 
 	// Use default nonce
 	$nonce = $_POST['nonce'];
-	$check = 'bp_next_friends';
+	$check = 'bp_nouveau_friends';
 
 	// Use a specific one for actions needed it
 	if ( ! empty( $_POST['_wpnonce'] ) && ! empty( $_POST['action'] ) ) {
@@ -1691,7 +1691,7 @@ function bp_next_ajax_addremove_friend() {
 		if ( ! friends_remove_friend( bp_loggedin_user_id(), $friend_id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-				esc_html__( 'Friendship could not be canceled.', 'bp-next' )
+				esc_html__( 'Friendship could not be canceled.', 'bp-nouveau' )
 			);
 
 			wp_send_json_error( $response );
@@ -1704,7 +1704,7 @@ function bp_next_ajax_addremove_friend() {
 		if ( ! friends_add_friend( bp_loggedin_user_id(), $friend_id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-				esc_html__( 'Friendship could not be requested.', 'bp-next' )
+				esc_html__( 'Friendship could not be requested.', 'bp-nouveau' )
 			);
 
 			wp_send_json_error( $response );
@@ -1719,7 +1719,7 @@ function bp_next_ajax_addremove_friend() {
 		} else {
 			$response['feedback'] = sprintf(
 				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-				esc_html__( 'Friendship request could not be cancelled.', 'bp-next' )
+				esc_html__( 'Friendship request could not be cancelled.', 'bp-nouveau' )
 			);
 
 			wp_send_json_error( $response );
@@ -1729,7 +1729,7 @@ function bp_next_ajax_addremove_friend() {
 	} else {
 		$response['feedback'] = sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'Request Pending', 'bp-next' )
+			esc_html__( 'Request Pending', 'bp-nouveau' )
 		);
 
 		wp_send_json_error( $response );
@@ -1751,7 +1751,7 @@ function bp_legacy_theme_ajax_accept_friendship() {
 	check_admin_referer( 'friends_accept_friendship' );
 
 	if ( ! friends_accept_friendship( (int) $_POST['id'] ) )
-		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem accepting that request. Please try again.', 'bp-next' ) . '</p></div>';
+		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem accepting that request. Please try again.', 'bp-nouveau' ) . '</p></div>';
 
 	exit;
 }
@@ -1771,7 +1771,7 @@ function bp_legacy_theme_ajax_reject_friendship() {
 	check_admin_referer( 'friends_reject_friendship' );
 
 	if ( ! friends_reject_friendship( (int) $_POST['id'] ) )
-		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem rejecting that request. Please try again.', 'bp-next' ) . '</p></div>';
+		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem rejecting that request. Please try again.', 'bp-nouveau' ) . '</p></div>';
 
 	exit;
 }
@@ -1783,11 +1783,11 @@ function bp_legacy_theme_ajax_reject_friendship() {
  *
  * @return string HTML
  */
-function bp_next_ajax_joinleave_group() {
+function bp_nouveau_ajax_joinleave_group() {
 	$response = array(
 		'feedback' => sprintf(
 			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-next' )
+			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-nouveau' )
 		)
 	);
 
@@ -1802,7 +1802,7 @@ function bp_next_ajax_joinleave_group() {
 
 	// Use default nonce
 	$nonce = $_POST['nonce'];
-	$check = 'bp_next_groups';
+	$check = 'bp_nouveau_groups';
 
 	// Use a specific one for actions needed it
 	if ( ! empty( $_POST['_wpnonce'] ) && ! empty( $_POST['action'] ) ) {
@@ -1821,7 +1821,7 @@ function bp_next_ajax_joinleave_group() {
 	if ( groups_is_user_banned( bp_loggedin_user_id(), $group_id ) ) {
 		$response['feedback'] = sprintf(
 			'<div class="bp-feedback error"><p>%s</p></div>',
-			esc_html__( 'You cannot join this group.', 'bp-next' )
+			esc_html__( 'You cannot join this group.', 'bp-nouveau' )
 		);
 
 		wp_send_json_error( $response );
@@ -1847,7 +1847,7 @@ function bp_next_ajax_joinleave_group() {
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback error">%s</div>',
-						esc_html__( 'Group invite could not be accepted', 'bp-next' )
+						esc_html__( 'Group invite could not be accepted', 'bp-nouveau' )
 					),
 					'type'     => 'error'
 				);
@@ -1861,7 +1861,7 @@ function bp_next_ajax_joinleave_group() {
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback success">%s</div>',
-						esc_html__( 'Group invite accepted', 'bp-next' )
+						esc_html__( 'Group invite accepted', 'bp-nouveau' )
 					),
 					'type'     => 'success',
 					'is_user'  => bp_is_user(),
@@ -1874,7 +1874,7 @@ function bp_next_ajax_joinleave_group() {
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback error">%s</div>',
-						esc_html__( 'Group invite could not be rejected', 'bp-next' )
+						esc_html__( 'Group invite could not be rejected', 'bp-nouveau' )
 					),
 					'type'     => 'error'
 				);
@@ -1882,7 +1882,7 @@ function bp_next_ajax_joinleave_group() {
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback success">%s</div>',
-						esc_html__( 'Group invite rejected', 'bp-next' )
+						esc_html__( 'Group invite rejected', 'bp-nouveau' )
 					),
 					'type'     => 'success',
 					'is_user'  => bp_is_user(),
@@ -1903,7 +1903,7 @@ function bp_next_ajax_joinleave_group() {
 			if ( ! groups_join_group( $group->id ) ) {
 				$response['feedback'] = sprintf(
 					'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-					esc_html__( 'Error joining group', 'bp-next' )
+					esc_html__( 'Error joining group', 'bp-nouveau' )
 				);
 
 				wp_send_json_error( $response );
@@ -1926,7 +1926,7 @@ function bp_next_ajax_joinleave_group() {
 				if ( ! groups_accept_invite( bp_loggedin_user_id(), $group->id ) ) {
 					$response['feedback'] = sprintf(
 						'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-						esc_html__( 'Error requesting membership', 'bp-next' )
+						esc_html__( 'Error requesting membership', 'bp-nouveau' )
 					);
 
 					wp_send_json_error( $response );
@@ -1946,7 +1946,7 @@ function bp_next_ajax_joinleave_group() {
 				if ( ! groups_send_membership_request( bp_loggedin_user_id(), $group->id ) ) {
 					$response['feedback'] = sprintf(
 						'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-						esc_html__( 'Error requesting membership', 'bp-next' )
+						esc_html__( 'Error requesting membership', 'bp-nouveau' )
 					);
 
 					wp_send_json_error( $response );
@@ -1967,7 +1967,7 @@ function bp_next_ajax_joinleave_group() {
 		if ( ! groups_leave_group( $group->id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-				esc_html__( 'Error leaving group', 'bp-next' )
+				esc_html__( 'Error leaving group', 'bp-nouveau' )
 			);
 
 			wp_send_json_error( $response );
@@ -2033,7 +2033,7 @@ function bp_legacy_theme_ajax_messages_send_reply() {
 		bp_thread_messages();
 
 	} else {
-		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem sending that reply. Please try again.', 'bp-next' ) . '</p></div>';
+		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem sending that reply. Please try again.', 'bp-nouveau' ) . '</p></div>';
 	}
 
 	exit;
@@ -2052,7 +2052,7 @@ function bp_legacy_theme_ajax_message_markunread() {
 		return;
 
 	if ( ! isset($_POST['thread_ids']) ) {
-		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem marking messages as unread.', 'bp-next' ) . '</p></div>';
+		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem marking messages as unread.', 'bp-nouveau' ) . '</p></div>';
 
 	} else {
 		$thread_ids = explode( ',', $_POST['thread_ids'] );
@@ -2078,7 +2078,7 @@ function bp_legacy_theme_ajax_message_markread() {
 		return;
 
 	if ( ! isset($_POST['thread_ids']) ) {
-		echo "-1<div id='message' class='error'><p>" . __('There was a problem marking messages as read.', 'bp-next' ) . '</p></div>';
+		echo "-1<div id='message' class='error'><p>" . __('There was a problem marking messages as read.', 'bp-nouveau' ) . '</p></div>';
 
 	} else {
 		$thread_ids = explode( ',', $_POST['thread_ids'] );
@@ -2104,13 +2104,13 @@ function bp_legacy_theme_ajax_messages_delete() {
 		return;
 
 	if ( ! isset($_POST['thread_ids']) ) {
-		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem deleting messages.', 'bp-next' ) . '</p></div>';
+		echo "-1<div id='message' class='error'><p>" . __( 'There was a problem deleting messages.', 'bp-nouveau' ) . '</p></div>';
 
 	} else {
 		$thread_ids = wp_parse_id_list( $_POST['thread_ids'] );
 		messages_delete_thread( $thread_ids );
 
-		_e( 'Messages deleted.', 'bp-next' );
+		_e( 'Messages deleted.', 'bp-nouveau' );
 	}
 
 	exit;
@@ -2340,11 +2340,11 @@ function bp_legacy_theme_cover_image( $params = array() ) {
 	';
 }
 
-function bp_next_get_users_to_invite() {
+function bp_nouveau_get_users_to_invite() {
 	$bp = buddypress();
 
 	$response = array(
-		'feedback' => esc_html__( 'There was a problem performing this action. Please try again.', 'bp-next' ),
+		'feedback' => esc_html__( 'There was a problem performing this action. Please try again.', 'bp-nouveau' ),
 		'type'     => 'error',
 	);
 
@@ -2354,7 +2354,7 @@ function bp_next_get_users_to_invite() {
 
 	// Use default nonce
 	$nonce = $_POST['nonce'];
-	$check = 'bp_next_groups';
+	$check = 'bp_nouveau_groups';
 
 	// Use a specific one for actions needed it
 	if ( ! empty( $_POST['_wpnonce'] ) && ! empty( $_POST['action'] ) ) {
@@ -2372,45 +2372,45 @@ function bp_next_get_users_to_invite() {
 	) );
 
 	$bp->groups->invites_scope = 'members';
-	$message = __( 'You can invite members using the + button, a new nav will appear to let you send your invites', 'bp-next' );
+	$message = __( 'You can invite members using the + button, a new nav will appear to let you send your invites', 'bp-nouveau' );
 
 	if ( 'friends' === $request['scope'] ) {
 		$request['user_id'] = bp_loggedin_user_id();
 		$bp->groups->invites_scope = 'friends';
-		$message = __( 'You can invite friends using the + button, a new nav will appear to let you send your invites', 'bp-next' );
+		$message = __( 'You can invite friends using the + button, a new nav will appear to let you send your invites', 'bp-nouveau' );
 	}
 
 	if ( 'invited' === $request['scope'] ) {
 
 		if ( ! bp_group_has_invites( array( 'user_id' => 'any' ) ) ) {
 			wp_send_json_error( array(
-				'feedback' => __( 'No pending invites found.', 'bp-next' ),
+				'feedback' => __( 'No pending invites found.', 'bp-nouveau' ),
 				'type'     => 'info',
 			) );
 		}
 
 		$request['is_confirmed'] = false;
 		$bp->groups->invites_scope = 'invited';
-		$message = __( 'You can view all the group\'s pending invites from this screen.', 'bp-next' );
+		$message = __( 'You can view all the group\'s pending invites from this screen.', 'bp-nouveau' );
 	}
 
-	$potential_invites = bp_next_get_group_potential_invites( $request );
+	$potential_invites = bp_nouveau_get_group_potential_invites( $request );
 
 	if ( empty( $potential_invites->users ) ) {
 		$error = array(
-			'feedback' => __( 'No members were found, try another filter.', 'bp-next' ),
+			'feedback' => __( 'No members were found, try another filter.', 'bp-nouveau' ),
 			'type'     => 'info',
 		);
 
 		if ( 'friends' === $bp->groups->invites_scope ) {
 			$error = array(
-				'feedback' => __( 'All your friends are already members of this group or already received an invite to join this group.', 'bp-next' ),
+				'feedback' => __( 'All your friends are already members of this group or already received an invite to join this group.', 'bp-nouveau' ),
 				'type'     => 'info',
 			);
 
 			if ( 0 === (int) bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
 				$error = array(
-					'feedback' => __( 'You have no friends!', 'bp-next' ),
+					'feedback' => __( 'You have no friends!', 'bp-nouveau' ),
 					'type'     => 'info',
 				);
 			}
@@ -2422,7 +2422,7 @@ function bp_next_get_users_to_invite() {
 		wp_send_json_error( $error );
 	}
 
-	$potential_invites->users = array_map( 'bp_next_prepare_group_potential_invites_for_js', array_values( $potential_invites->users ) );
+	$potential_invites->users = array_map( 'bp_nouveau_prepare_group_potential_invites_for_js', array_values( $potential_invites->users ) );
 	$potential_invites->users = array_filter( $potential_invites->users );
 
 	// Set a message to explain use of the current scope
@@ -2432,9 +2432,9 @@ function bp_next_get_users_to_invite() {
 
 	wp_send_json_success( $potential_invites );
 }
-add_action( 'wp_ajax_groups_get_group_potential_invites', 'bp_next_get_users_to_invite' );
+add_action( 'wp_ajax_groups_get_group_potential_invites', 'bp_nouveau_get_users_to_invite' );
 
-function bp_next_groups_invites_custom_message( $message = '' ) {
+function bp_nouveau_groups_invites_custom_message( $message = '' ) {
 	if ( empty( $message ) ) {
 		return $message;
 	}
@@ -2454,17 +2454,17 @@ function bp_next_groups_invites_custom_message( $message = '' ) {
 	return $message;
 }
 
-function bp_next_send_group_invites() {
+function bp_nouveau_send_group_invites() {
 	$bp = buddypress();
 
 	$response = array(
-		'feedback' => __( 'Invites could not be sent, please try again.', 'bp-next' ),
+		'feedback' => __( 'Invites could not be sent, please try again.', 'bp-nouveau' ),
 	);
 
 	// Verify nonce
 	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'groups_send_invites' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Invites could not be sent, please try again.', 'bp-next' ),
+			'feedback' => __( 'Invites could not be sent, please try again.', 'bp-nouveau' ),
 			'type'     => 'error',
 		) );
 	}
@@ -2477,7 +2477,7 @@ function bp_next_send_group_invites() {
 
 	if ( ! bp_groups_user_can_send_invites( $group_id ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'You are not allowed to send invites for this group.', 'bp-next' ),
+			'feedback' => __( 'You are not allowed to send invites for this group.', 'bp-nouveau' ),
 			'type'     => 'error',
 		) );
 	}
@@ -2496,7 +2496,7 @@ function bp_next_send_group_invites() {
 	if ( ! empty( $_POST['message'] ) ) {
 		$bp->groups->invites_message = wp_kses( wp_unslash( $_POST['message'] ), array() );
 
-		add_filter( 'groups_notification_group_invites_message', 'bp_next_groups_invites_custom_message', 10, 1 );
+		add_filter( 'groups_notification_group_invites_message', 'bp_nouveau_groups_invites_custom_message', 10, 1 );
 	}
 
 	// Send the invites.
@@ -2505,39 +2505,39 @@ function bp_next_send_group_invites() {
 	if ( ! empty( $_POST['message'] ) ) {
 		unset( $bp->groups->invites_message );
 
-		remove_filter( 'groups_notification_group_invites_message', 'bp_next_groups_invites_custom_message', 10, 1 );
+		remove_filter( 'groups_notification_group_invites_message', 'bp_nouveau_groups_invites_custom_message', 10, 1 );
 	}
 
 	if ( array_search( false, $invited ) ) {
 		$errors = array_keys( $invited, false );
 
 		wp_send_json_error( array(
-			'feedback' => sprintf( __( 'Invites failed for %d user(s).', 'bp-next' ), count( $errors ) ),
+			'feedback' => sprintf( __( 'Invites failed for %d user(s).', 'bp-nouveau' ), count( $errors ) ),
 			'users'    => $errors,
 			'type'     => 'error',
 		) );
 	}
 
 	wp_send_json_success( array(
-		'feedback' => __( 'Invites sent.', 'bp-next' )
+		'feedback' => __( 'Invites sent.', 'bp-nouveau' )
 	) );
 }
-add_action( 'wp_ajax_groups_send_group_invites', 'bp_next_send_group_invites' );
+add_action( 'wp_ajax_groups_send_group_invites', 'bp_nouveau_send_group_invites' );
 
-function bp_next_remove_group_invite() {
+function bp_nouveau_remove_group_invite() {
 	$user_id  = $_POST['user'];
 	$group_id = bp_get_current_group_id();
 
 	// Verify nonce
 	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'groups_invite_uninvite_user' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Invites could not be removed, please try again.', 'bp-next' ),
+			'feedback' => __( 'Invites could not be removed, please try again.', 'bp-nouveau' ),
 		) );
 	}
 
 	if ( BP_Groups_Member::check_for_membership_request( $user_id, $group_id ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Too late, the user is now a member of the group.', 'bp-next' ),
+			'feedback' => __( 'Too late, the user is now a member of the group.', 'bp-nouveau' ),
 			'code'     => 1,
 		) );
 	}
@@ -2545,21 +2545,21 @@ function bp_next_remove_group_invite() {
 	// Remove the unsent invitation.
 	if ( ! groups_uninvite_user( $user_id, $group_id ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Removing the invite for the user failed.', 'bp-next' ),
+			'feedback' => __( 'Removing the invite for the user failed.', 'bp-nouveau' ),
 			'code'     => 0,
 		) );
 	}
 
 	wp_send_json_success( array(
-		'feedback'    => __( 'No more pending invites for the group.', 'bp-next' ),
+		'feedback'    => __( 'No more pending invites for the group.', 'bp-nouveau' ),
 		'has_invites' => bp_group_has_invites( array( 'user_id' => 'any' ) ),
 	) );
 }
-add_action( 'wp_ajax_groups_delete_group_invite', 'bp_next_remove_group_invite' );
+add_action( 'wp_ajax_groups_delete_group_invite', 'bp_nouveau_remove_group_invite' );
 
-function bp_next_messages_send_message() {
+function bp_nouveau_messages_send_message() {
 	$response = array(
-		'feedback' => __( 'Your message could not be sent, please try again.', 'bp-next' ),
+		'feedback' => __( 'Your message could not be sent, please try again.', 'bp-nouveau' ),
 		'type'     => 'error',
 	);
 
@@ -2571,9 +2571,9 @@ function bp_next_messages_send_message() {
 	// Validate subject and message content
 	if ( empty( $_POST['subject'] ) || empty( $_POST['message_content'] ) ) {
 		if ( empty( $_POST['subject'] ) ) {
-			$response['feedback'] = __( 'Your message was not sent. Please enter a subject line.', 'bp-next' );
+			$response['feedback'] = __( 'Your message was not sent. Please enter a subject line.', 'bp-nouveau' );
 		} else {
-			$response['feedback'] = __( 'Your message was not sent. Please enter some content.', 'bp-next' );
+			$response['feedback'] = __( 'Your message was not sent. Please enter some content.', 'bp-nouveau' );
 		}
 
 		wp_send_json_error( $response );
@@ -2581,7 +2581,7 @@ function bp_next_messages_send_message() {
 
 	// Validate recipients
 	if ( empty( $_POST['send_to'] ) || ! is_array( $_POST['send_to'] ) ) {
-		$response['feedback'] = __( 'Your message was not sent. Please enter at least one @username.', 'bp-next' );
+		$response['feedback'] = __( 'Your message was not sent. Please enter at least one @username.', 'bp-nouveau' );
 
 		wp_send_json_error( $response );
 	}
@@ -2600,7 +2600,7 @@ function bp_next_messages_send_message() {
 	// Send the message.
 	if ( true === is_int( $send ) ) {
 		wp_send_json_success( array(
-			'feedback' => __( 'Message successfully sent.', 'bp-next' ),
+			'feedback' => __( 'Message successfully sent.', 'bp-nouveau' ),
 			'type'     => 'success',
 		) );
 
@@ -2611,11 +2611,11 @@ function bp_next_messages_send_message() {
 		wp_send_json_error( $response );
 	}
 }
-add_action( 'wp_ajax_messages_send_message', 'bp_next_messages_send_message' );
+add_action( 'wp_ajax_messages_send_message', 'bp_nouveau_messages_send_message' );
 
-function bp_next_messages_send_reply() {
+function bp_nouveau_messages_send_reply() {
 	$response = array(
-		'feedback' => __( 'There was a problem sending your reply. Please try again.', 'bp-next' ),
+		'feedback' => __( 'There was a problem sending your reply. Please try again.', 'bp-nouveau' ),
 		'type'     => 'error',
 	);
 
@@ -2625,7 +2625,7 @@ function bp_next_messages_send_reply() {
 	}
 
 	if ( empty( $_POST['content'] ) || empty( $_POST['thread_id'] ) ) {
-		$response['feedback'] = __( 'Your reply was not sent. Please enter some content.', 'bp-next' );
+		$response['feedback'] = __( 'Your reply was not sent. Please enter some content.', 'bp-nouveau' );
 
 		wp_send_json_error( $response );
 	}
@@ -2694,18 +2694,18 @@ function bp_next_messages_send_reply() {
 
 	wp_send_json_success( array(
 		'messages' => array( $reply ),
-		'feedback' => __( 'Your reply was sent successfully', 'bp-next' ),
+		'feedback' => __( 'Your reply was sent successfully', 'bp-nouveau' ),
 		'type'     => 'success',
 	) );
 }
-add_action( 'wp_ajax_messages_send_reply', 'bp_next_messages_send_reply' );
+add_action( 'wp_ajax_messages_send_reply', 'bp_nouveau_messages_send_reply' );
 
-function bp_next_get_user_message_threads() {
+function bp_nouveau_get_user_message_threads() {
 	global $messages_template;
 
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Unauthorized request.', 'bp-next' ),
+			'feedback' => __( 'Unauthorized request.', 'bp-nouveau' ),
 			'type'     => 'error'
 		) );
 	}
@@ -2720,7 +2720,7 @@ function bp_next_get_user_message_threads() {
 	// Simulate the loop.
 	if ( ! bp_has_message_threads( bp_ajax_querystring( 'messages' ) ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Sorry, no messages were found.', 'bp-next' ),
+			'feedback' => __( 'Sorry, no messages were found.', 'bp-nouveau' ),
 			'type'     => 'info'
 		) );
 	}
@@ -2759,7 +2759,7 @@ function bp_next_get_user_message_threads() {
 			) ) ),
 			'count'         => bp_get_message_thread_total_count(),
 			'date'          => strtotime( bp_get_message_thread_last_post_date_raw() ) * 1000,
-			'display_date'  => bp_next_get_message_date( bp_get_message_thread_last_post_date_raw() ),
+			'display_date'  => bp_nouveau_get_message_date( bp_get_message_thread_last_post_date_raw() ),
 		);
 
 		if ( is_array( $messages_template->thread->recipients ) ) {
@@ -2808,10 +2808,10 @@ function bp_next_get_user_message_threads() {
 
 	wp_send_json_success( $threads );
 }
-add_action( 'wp_ajax_messages_get_user_message_threads', 'bp_next_get_user_message_threads' );
+add_action( 'wp_ajax_messages_get_user_message_threads', 'bp_nouveau_get_user_message_threads' );
 
-function bp_next_messages_thread_read() {
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+function bp_nouveau_messages_thread_read() {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error();
 	}
 
@@ -2836,20 +2836,20 @@ function bp_next_messages_thread_read() {
 
 	wp_send_json_success();
 }
-add_action( 'wp_ajax_messages_thread_read', 'bp_next_messages_thread_read' );
+add_action( 'wp_ajax_messages_thread_read', 'bp_nouveau_messages_thread_read' );
 
-function bp_next_get_thread_messages() {
+function bp_nouveau_get_thread_messages() {
 	global $thread_template;
 
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Unauthorized request.', 'bp-next' ),
+			'feedback' => __( 'Unauthorized request.', 'bp-nouveau' ),
 			'type'     => 'error'
 		) );
 	}
 
 	$response = array(
-		'feedback' => __( 'Sorry, no messages were found.', 'bp-next' ),
+		'feedback' => __( 'Sorry, no messages were found.', 'bp-nouveau' ),
 		'type'     => 'info'
 	);
 
@@ -2930,15 +2930,15 @@ function bp_next_get_thread_messages() {
 
 	wp_send_json_success( $thread );
 }
-add_action( 'wp_ajax_messages_get_thread_messages', 'bp_next_get_thread_messages' );
+add_action( 'wp_ajax_messages_get_thread_messages', 'bp_nouveau_get_thread_messages' );
 
-function bp_next_delete_thread_messages() {
+function bp_nouveau_delete_thread_messages() {
 	$response = array(
-		'feedback' => __( 'There was a problem deleting your message(s). Please try again.', 'bp-next' ),
+		'feedback' => __( 'There was a problem deleting your message(s). Please try again.', 'bp-nouveau' ),
 		'type'     => 'error',
 	);
 
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( $response );
 	}
 
@@ -2957,13 +2957,13 @@ function bp_next_delete_thread_messages() {
 	}
 
 	wp_send_json_success( array(
-		'feedback' => __( 'Message(s) deleted', 'bp-next' ),
+		'feedback' => __( 'Message(s) deleted', 'bp-nouveau' ),
 		'type'     => 'success',
 	) );
 }
-add_action( 'wp_ajax_messages_delete', 'bp_next_delete_thread_messages' );
+add_action( 'wp_ajax_messages_delete', 'bp_nouveau_delete_thread_messages' );
 
-function bp_next_star_thread_messages() {
+function bp_nouveau_star_thread_messages() {
 	if ( empty( $_POST['action'] ) ) {
 		wp_send_json_error();
 	}
@@ -2971,7 +2971,7 @@ function bp_next_star_thread_messages() {
 	$action = str_replace( 'messages_', '', $_POST['action'] );
 
 	$response = array(
-		'feedback' => sprintf( __( 'There was a problem marking your message(s) as %s. Please try again.', 'bp-next' ), $action ),
+		'feedback' => sprintf( __( 'There was a problem marking your message(s) as %s. Please try again.', 'bp-nouveau' ), $action ),
 		'type'     => 'error',
 	);
 
@@ -2989,7 +2989,7 @@ function bp_next_star_thread_messages() {
 
 	// Use global nonce for bulk actions involving more than one id
 	if ( 1 !== count( $ids ) ) {
-		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 			wp_send_json_error( $response );
 		}
 
@@ -3041,15 +3041,15 @@ function bp_next_star_thread_messages() {
 	}
 
 	wp_send_json_success( array(
-		'feedback' => sprintf( __( 'Message(s) mark as %s', 'bp-next' ), $action ),
+		'feedback' => sprintf( __( 'Message(s) mark as %s', 'bp-nouveau' ), $action ),
 		'type'     => 'success',
 		'messages' => $messages,
 	) );
 }
-add_action( 'wp_ajax_messages_star', 'bp_next_star_thread_messages' );
-add_action( 'wp_ajax_messages_unstar', 'bp_next_star_thread_messages' );
+add_action( 'wp_ajax_messages_star', 'bp_nouveau_star_thread_messages' );
+add_action( 'wp_ajax_messages_unstar', 'bp_nouveau_star_thread_messages' );
 
-function bp_next_readunread_thread_messages() {
+function bp_nouveau_readunread_thread_messages() {
 	if ( empty( $_POST['action'] ) ) {
 		wp_send_json_error();
 	}
@@ -3057,18 +3057,18 @@ function bp_next_readunread_thread_messages() {
 	$action = str_replace( 'messages_', '', $_POST['action'] );
 
 	$response = array(
-		'feedback' => __( 'There was a problem marking your message(s) as read. Please try again.', 'bp-next' ),
+		'feedback' => __( 'There was a problem marking your message(s) as read. Please try again.', 'bp-nouveau' ),
 		'type'     => 'error',
 	);
 
 	if ( 'unread' === $action ) {
 		$response = array(
-			'feedback' => __( 'There was a problem marking your message(s) as unread. Please try again.', 'bp-next' ),
+			'feedback' => __( 'There was a problem marking your message(s) as unread. Please try again.', 'bp-nouveau' ),
 			'type'     => 'error',
 		);
 	}
 
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_next_messages' ) ) {
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( $response );
 	}
 
@@ -3081,9 +3081,9 @@ function bp_next_readunread_thread_messages() {
 	$response['messages'] = array();
 
 	if ( 'unread' === $action ) {
-		$response['feedback'] = __( 'Message(s) marked as unread.', 'bp-next' );
+		$response['feedback'] = __( 'Message(s) marked as unread.', 'bp-nouveau' );
 	} else {
-		$response['feedback'] = __( 'Message(s) marked as read.', 'bp-next' );
+		$response['feedback'] = __( 'Message(s) marked as read.', 'bp-nouveau' );
 	}
 
 	foreach ( $thread_ids as $thread_id ) {
@@ -3108,5 +3108,5 @@ function bp_next_readunread_thread_messages() {
 
 	wp_send_json_success( $response );
 }
-add_action( 'wp_ajax_messages_read',   'bp_next_readunread_thread_messages' );
-add_action( 'wp_ajax_messages_unread', 'bp_next_readunread_thread_messages' );
+add_action( 'wp_ajax_messages_read',   'bp_nouveau_readunread_thread_messages' );
+add_action( 'wp_ajax_messages_unread', 'bp_nouveau_readunread_thread_messages' );

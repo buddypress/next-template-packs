@@ -139,7 +139,7 @@ do_action( 'bp_before_members_loop' ); ?>
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( "Sorry, no members were found.", 'bp-next' ); ?></p>
+		<p><?php _e( "Sorry, no members were found.", 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif; ?>

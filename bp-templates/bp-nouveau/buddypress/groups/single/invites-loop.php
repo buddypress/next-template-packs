@@ -71,7 +71,7 @@
 				do_action( 'bp_group_send_invites_item' ); ?>
 
 				<div class="action">
-					<a class="button remove" href="<?php bp_group_invite_user_remove_invite_url(); ?>" id="<?php bp_group_invite_item_id(); ?>"><?php _e( 'Remove Invite', 'bp-next' ); ?></a>
+					<a class="button remove" href="<?php bp_group_invite_user_remove_invite_url(); ?>" id="<?php bp_group_invite_item_id(); ?>"><?php _e( 'Remove Invite', 'bp-nouveau' ); ?></a>
 
 					<?php
 
@@ -107,7 +107,7 @@
 	<?php else : ?>
 
 		<div id="message" class="info">
-			<p><?php _e( 'Select friends to invite.', 'bp-next' ); ?></p>
+			<p><?php _e( 'Select friends to invite.', 'bp-nouveau' ); ?></p>
 		</div>
 
 	<?php endif; ?>

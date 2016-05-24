@@ -59,7 +59,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 			<div class="item">
 				<div class="item-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></div>
-				<div class="item-meta"><span class="activity"><?php printf( __( 'active %s', 'bp-next' ), bp_get_group_last_active() ); ?></span></div>
+				<div class="item-meta"><span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span></div>
 
 				<div class="item-desc"><?php bp_group_description_excerpt(); ?></div>
 
@@ -128,7 +128,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'There were no groups found.', 'bp-next' ); ?></p>
+		<p><?php _e( 'There were no groups found.', 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif; ?>

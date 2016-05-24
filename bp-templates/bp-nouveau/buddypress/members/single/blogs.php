@@ -15,11 +15,11 @@
 
 		<li id="blogs-order-select" class="last filter">
 
-			<label for="blogs-order-by"><?php _e( 'Order By:', 'bp-next' ); ?></label>
+			<label for="blogs-order-by"><?php _e( 'Order By:', 'bp-nouveau' ); ?></label>
 			<select id="blogs-order-by">
-				<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-				<option value="newest"><?php _e( 'Newest', 'bp-next' ); ?></option>
-				<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
+				<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
+				<option value="newest"><?php _e( 'Newest', 'bp-nouveau' ); ?></option>
+				<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
 
 				<?php
 

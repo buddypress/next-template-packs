@@ -36,10 +36,10 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	 */
 	do_action( 'bp_before_group_details_admin' ); ?>
 
-	<label for="group-name"><?php _e( 'Group Name (required)', 'bp-next' ); ?></label>
+	<label for="group-name"><?php _e( 'Group Name (required)', 'bp-nouveau' ); ?></label>
 	<input type="text" name="group-name" id="group-name" value="<?php bp_group_name(); ?>" aria-required="true" />
 
-	<label for="group-desc"><?php _e( 'Group Description (required)', 'bp-next' ); ?></label>
+	<label for="group-desc"><?php _e( 'Group Description (required)', 'bp-nouveau' ); ?></label>
 	<textarea name="group-desc" id="group-desc" aria-required="true"><?php bp_group_description_editable(); ?></textarea>
 
 	<?php
@@ -53,7 +53,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 
 	<p>
 		<label for="group-notify-members">
-			<input type="checkbox" name="group-notify-members" id="group-notify-members" value="1" /> <?php _e( 'Notify group members of these changes via email', 'bp-next' ); ?>
+			<input type="checkbox" name="group-notify-members" id="group-notify-members" value="1" /> <?php _e( 'Notify group members of these changes via email', 'bp-nouveau' ); ?>
 		</label>
 	</p>
 
@@ -66,7 +66,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	 */
 	do_action( 'bp_after_group_details_admin' ); ?>
 
-	<p><input type="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-next' ); ?>" id="save" name="save" /></p>
+	<p><input type="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-nouveau' ); ?>" id="save" name="save" /></p>
 	<?php wp_nonce_field( 'groups_edit_group_details' ); ?>
 
 <?php endif; ?>
@@ -83,49 +83,49 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	 */
 	do_action( 'bp_before_group_settings_admin' ); ?>
 
-	<h4><?php _e( 'Privacy Options', 'bp-next' ); ?></h4>
+	<h4><?php _e( 'Privacy Options', 'bp-nouveau' ); ?></h4>
 
 	<div class="radio">
 
-		<label for="group-status-public"><input type="radio" name="group-status" id="group-status-public" value="public"<?php if ( 'public' == bp_get_new_group_status() || !bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="public-group-description" /> <?php _e( 'This is a public group', 'bp-next' ); ?></label>
+		<label for="group-status-public"><input type="radio" name="group-status" id="group-status-public" value="public"<?php if ( 'public' == bp_get_new_group_status() || !bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="public-group-description" /> <?php _e( 'This is a public group', 'bp-nouveau' ); ?></label>
 
 		<ul id="public-group-description">
-			<li><?php _e( 'Any site member can join this group.', 'bp-next' ); ?></li>
-			<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'bp-next' ); ?></li>
-			<li><?php _e( 'Group content and activity will be visible to any site member.', 'bp-next' ); ?></li>
+			<li><?php _e( 'Any site member can join this group.', 'bp-nouveau' ); ?></li>
+			<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'bp-nouveau' ); ?></li>
+			<li><?php _e( 'Group content and activity will be visible to any site member.', 'bp-nouveau' ); ?></li>
 		</ul>
 
-		<label for="group-status-private"><input type="radio" name="group-status" id="group-status-private" value="private"<?php if ( 'private' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="private-group-description" /> <?php _e( 'This is a private group', 'bp-next' ); ?></label>
+		<label for="group-status-private"><input type="radio" name="group-status" id="group-status-private" value="private"<?php if ( 'private' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="private-group-description" /> <?php _e( 'This is a private group', 'bp-nouveau' ); ?></label>
 
 		<ul id="private-group-description">
-			<li><?php _e( 'Only users who request membership and are accepted can join the group.', 'bp-next' ); ?></li>
-			<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'bp-next' ); ?></li>
-			<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'bp-next' ); ?></li>
+			<li><?php _e( 'Only users who request membership and are accepted can join the group.', 'bp-nouveau' ); ?></li>
+			<li><?php _e( 'This group will be listed in the groups directory and in search results.', 'bp-nouveau' ); ?></li>
+			<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'bp-nouveau' ); ?></li>
 		</ul>
 
-		<label for="group-status-hidden"><input type="radio" name="group-status" id="group-status-hidden" value="hidden"<?php if ( 'hidden' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="hidden-group-description" /> <?php _e('This is a hidden group', 'bp-next' ); ?></label>
+		<label for="group-status-hidden"><input type="radio" name="group-status" id="group-status-hidden" value="hidden"<?php if ( 'hidden' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="hidden-group-description" /> <?php _e('This is a hidden group', 'bp-nouveau' ); ?></label>
 
 		<ul id="hidden-group-description">
-			<li><?php _e( 'Only users who are invited can join the group.', 'bp-next' ); ?></li>
-			<li><?php _e( 'This group will not be listed in the groups directory or search results.', 'bp-next' ); ?></li>
-			<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'bp-next' ); ?></li>
+			<li><?php _e( 'Only users who are invited can join the group.', 'bp-nouveau' ); ?></li>
+			<li><?php _e( 'This group will not be listed in the groups directory or search results.', 'bp-nouveau' ); ?></li>
+			<li><?php _e( 'Group content and activity will only be visible to members of the group.', 'bp-nouveau' ); ?></li>
 		</ul>
 
 	</div>
 
 	<hr />
 
-	<h4><?php _e( 'Group Invitations', 'bp-next' ); ?></h4>
+	<h4><?php _e( 'Group Invitations', 'bp-nouveau' ); ?></h4>
 
-	<p><?php _e( 'Which members of this group are allowed to invite others?', 'bp-next' ); ?></p>
+	<p><?php _e( 'Which members of this group are allowed to invite others?', 'bp-nouveau' ); ?></p>
 
 	<div class="radio">
 
-		<label for="group-invite-status-members"><input type="radio" name="group-invite-status" id="group-invite-status-members" value="members"<?php bp_group_show_invite_status_setting( 'members' ); ?> /> <?php _e( 'All group members', 'bp-next' ); ?></label>
+		<label for="group-invite-status-members"><input type="radio" name="group-invite-status" id="group-invite-status-members" value="members"<?php bp_group_show_invite_status_setting( 'members' ); ?> /> <?php _e( 'All group members', 'bp-nouveau' ); ?></label>
 
-		<label for="group-invite-status-mods"><input type="radio" name="group-invite-status" id="group-invite-status-mods" value="mods"<?php bp_group_show_invite_status_setting( 'mods' ); ?> /> <?php _e( 'Group admins and mods only', 'bp-next' ); ?></label>
+		<label for="group-invite-status-mods"><input type="radio" name="group-invite-status" id="group-invite-status-mods" value="mods"<?php bp_group_show_invite_status_setting( 'mods' ); ?> /> <?php _e( 'Group admins and mods only', 'bp-nouveau' ); ?></label>
 
-		<label for="group-invite-status-admins"><input type="radio" name="group-invite-status" id="group-invite-status-admins" value="admins"<?php bp_group_show_invite_status_setting( 'admins' ); ?> /> <?php _e( 'Group admins only', 'bp-next' ); ?></label>
+		<label for="group-invite-status-admins"><input type="radio" name="group-invite-status" id="group-invite-status-admins" value="admins"<?php bp_group_show_invite_status_setting( 'admins' ); ?> /> <?php _e( 'Group admins only', 'bp-nouveau' ); ?></label>
 
  	</div>
 
@@ -140,7 +140,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	 */
 	do_action( 'bp_after_group_settings_admin' ); ?>
 
-	<p><input type="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-next' ); ?>" id="save" name="save" /></p>
+	<p><input type="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-nouveau' ); ?>" id="save" name="save" /></p>
 	<?php wp_nonce_field( 'groups_edit_group_settings' ); ?>
 
 <?php endif; ?>
@@ -150,20 +150,20 @@ do_action( 'bp_before_group_admin_content' ); ?>
 
 	<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 
-			<p><?php _e("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-next' ); ?></p>
+			<p><?php _e("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
 
 			<p>
-				<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-next' ); ?></label>
+				<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-nouveau' ); ?></label>
 				<input type="file" name="file" id="file" />
-				<input type="submit" name="upload" id="upload" value="<?php esc_attr_e( 'Upload Image', 'bp-next' ); ?>" />
+				<input type="submit" name="upload" id="upload" value="<?php esc_attr_e( 'Upload Image', 'bp-nouveau' ); ?>" />
 				<input type="hidden" name="action" id="action" value="bp_avatar_upload" />
 			</p>
 
 			<?php if ( bp_get_group_has_avatar() ) : ?>
 
-				<p><?php _e( "If you'd like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.", 'bp-next' ); ?></p>
+				<p><?php _e( "If you'd like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.", 'bp-nouveau' ); ?></p>
 
-				<?php bp_button( array( 'id' => 'delete_group_avatar', 'component' => 'groups', 'wrapper_id' => 'delete-group-avatar-button', 'link_class' => 'edit', 'link_href' => bp_get_group_avatar_delete_link(), 'link_title' => __( 'Delete Group Profile Photo', 'bp-next' ), 'link_text' => __( 'Delete Group Profile Photo', 'bp-next' ) ) ); ?>
+				<?php bp_button( array( 'id' => 'delete_group_avatar', 'component' => 'groups', 'wrapper_id' => 'delete-group-avatar-button', 'link_class' => 'edit', 'link_href' => bp_get_group_avatar_delete_link(), 'link_title' => __( 'Delete Group Profile Photo', 'bp-nouveau' ), 'link_text' => __( 'Delete Group Profile Photo', 'bp-nouveau' ) ) ); ?>
 
 			<?php endif; ?>
 
@@ -181,15 +181,15 @@ do_action( 'bp_before_group_admin_content' ); ?>
 
 	<?php if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 
-		<h4><?php _e( 'Crop Profile Photo', 'bp-next' ); ?></h4>
+		<h4><?php _e( 'Crop Profile Photo', 'bp-nouveau' ); ?></h4>
 
-		<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php esc_attr_e( 'Profile photo to crop', 'bp-next' ); ?>" />
+		<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php esc_attr_e( 'Profile photo to crop', 'bp-nouveau' ); ?>" />
 
 		<div id="avatar-crop-pane">
-			<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-crop-preview" class="avatar" alt="<?php esc_attr_e( 'Profile photo preview', 'bp-next' ); ?>" />
+			<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-crop-preview" class="avatar" alt="<?php esc_attr_e( 'Profile photo preview', 'bp-nouveau' ); ?>" />
 		</div>
 
-		<input type="submit" name="avatar-crop-submit" id="avatar-crop-submit" value="<?php esc_attr_e( 'Crop Image', 'bp-next' ); ?>" />
+		<input type="submit" name="avatar-crop-submit" id="avatar-crop-submit" value="<?php esc_attr_e( 'Crop Image', 'bp-nouveau' ); ?>" />
 
 		<input type="hidden" name="image_src" id="image_src" value="<?php bp_avatar_to_crop_src(); ?>" />
 		<input type="hidden" id="x" name="x" />
@@ -206,7 +206,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 <?php /* Group Cover image Settings */ ?>
 <?php if ( bp_is_group_admin_screen( 'group-cover-image' ) ) : ?>
 
-	<h4><?php _e( 'Change Cover Image', 'bp-next' ); ?></h4>
+	<h4><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
 
 	<?php
 
@@ -217,7 +217,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	 */
 	do_action( 'bp_before_group_settings_cover_image' ); ?>
 
-	<p><?php _e( 'The Cover Image will be used to customize the header of your group.', 'bp-next' ); ?></p>
+	<p><?php _e( 'The Cover Image will be used to customize the header of your group.', 'bp-nouveau' ); ?></p>
 
 	<?php bp_attachments_get_template_part( 'cover-images/index' ); ?>
 
@@ -245,7 +245,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	do_action( 'bp_before_group_manage_members_admin' ); ?>
 
 	<div class="bp-widget">
-		<h4><?php _e( 'Administrators', 'bp-next' ); ?></h4>
+		<h4><?php _e( 'Administrators', 'bp-nouveau' ); ?></h4>
 
 		<?php if ( bp_has_members( '&include='. bp_group_admin_ids() ) ) : ?>
 
@@ -253,12 +253,12 @@ do_action( 'bp_before_group_admin_content' ); ?>
 
 			<?php while ( bp_members() ) : bp_the_member(); ?>
 			<li>
-				<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-next' ), bp_get_member_name() ) ) ); ?>
+				<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
 				<h5>
 					<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 					<?php if ( count( bp_group_admin_ids( false, 'array' ) ) > 1 ) : ?>
 					<span class="small">
-						<a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-next' ); ?></a>
+						<a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-nouveau' ); ?></a>
 					</span>
 					<?php endif; ?>
 				</h5>
@@ -273,19 +273,19 @@ do_action( 'bp_before_group_admin_content' ); ?>
 
 	<?php if ( bp_group_has_moderators() ) : ?>
 		<div class="bp-widget">
-			<h4><?php _e( 'Moderators', 'bp-next' ); ?></h4>
+			<h4><?php _e( 'Moderators', 'bp-nouveau' ); ?></h4>
 
 			<?php if ( bp_has_members( '&include=' . bp_group_mod_ids() ) ) : ?>
 				<ul id="mods-list" class="item-list single-line">
 
 					<?php while ( bp_members() ) : bp_the_member(); ?>
 					<li>
-						<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-next' ), bp_get_member_name() ) ) ); ?>
+						<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
 						<h5>
 							<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 							<span class="small">
-								<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin" title="<?php esc_attr_e( 'Promote to Admin', 'bp-next' ); ?>"><?php _e( 'Promote to Admin', 'bp-next' ); ?></a>
-								<a class="button confirm mod-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-next' ); ?></a>
+								<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin" title="<?php esc_attr_e( 'Promote to Admin', 'bp-nouveau' ); ?>"><?php _e( 'Promote to Admin', 'bp-nouveau' ); ?></a>
+								<a class="button confirm mod-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-nouveau' ); ?></a>
 							</span>
 						</h5>
 					</li>
@@ -328,23 +328,23 @@ do_action( 'bp_before_group_admin_content' ); ?>
 						<h5>
 							<?php bp_group_member_link(); ?>
 
-							<?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-next' ); ?>
+							<?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?>
 
 							<span class="small">
 
 							<?php if ( bp_get_group_member_is_banned() ) : ?>
 
-								<a href="<?php bp_group_member_unban_link(); ?>" class="button confirm member-unban" title="<?php esc_attr_e( 'Unban this member', 'bp-next' ); ?>"><?php _e( 'Remove Ban', 'bp-next' ); ?></a>
+								<a href="<?php bp_group_member_unban_link(); ?>" class="button confirm member-unban" title="<?php esc_attr_e( 'Unban this member', 'bp-nouveau' ); ?>"><?php _e( 'Remove Ban', 'bp-nouveau' ); ?></a>
 
 							<?php else : ?>
 
-								<a href="<?php bp_group_member_ban_link(); ?>" class="button confirm member-ban" title="<?php esc_attr_e( 'Kick and ban this member', 'bp-next' ); ?>"><?php _e( 'Kick &amp; Ban', 'bp-next' ); ?></a>
-								<a href="<?php bp_group_member_promote_mod_link(); ?>" class="button confirm member-promote-to-mod" title="<?php esc_attr_e( 'Promote to Mod', 'bp-next' ); ?>"><?php _e( 'Promote to Mod', 'bp-next' ); ?></a>
-								<a href="<?php bp_group_member_promote_admin_link(); ?>" class="button confirm member-promote-to-admin" title="<?php esc_attr_e( 'Promote to Admin', 'bp-next' ); ?>"><?php _e( 'Promote to Admin', 'bp-next' ); ?></a>
+								<a href="<?php bp_group_member_ban_link(); ?>" class="button confirm member-ban" title="<?php esc_attr_e( 'Kick and ban this member', 'bp-nouveau' ); ?>"><?php _e( 'Kick &amp; Ban', 'bp-nouveau' ); ?></a>
+								<a href="<?php bp_group_member_promote_mod_link(); ?>" class="button confirm member-promote-to-mod" title="<?php esc_attr_e( 'Promote to Mod', 'bp-nouveau' ); ?>"><?php _e( 'Promote to Mod', 'bp-nouveau' ); ?></a>
+								<a href="<?php bp_group_member_promote_admin_link(); ?>" class="button confirm member-promote-to-admin" title="<?php esc_attr_e( 'Promote to Admin', 'bp-nouveau' ); ?>"><?php _e( 'Promote to Admin', 'bp-nouveau' ); ?></a>
 
 							<?php endif; ?>
 
-								<a href="<?php bp_group_member_remove_link(); ?>" class="button confirm" title="<?php esc_attr_e( 'Remove this member', 'bp-next' ); ?>"><?php _e( 'Remove from group', 'bp-next' ); ?></a>
+								<a href="<?php bp_group_member_remove_link(); ?>" class="button confirm" title="<?php esc_attr_e( 'Remove this member', 'bp-nouveau' ); ?>"><?php _e( 'Remove from group', 'bp-nouveau' ); ?></a>
 
 								<?php
 
@@ -365,7 +365,7 @@ do_action( 'bp_before_group_admin_content' ); ?>
 		<?php else: ?>
 
 			<div id="message" class="info">
-				<p><?php _e( 'This group has no members.', 'bp-next' ); ?></p>
+				<p><?php _e( 'This group has no members.', 'bp-nouveau' ); ?></p>
 			</div>
 
 		<?php endif; ?>
@@ -436,10 +436,10 @@ do_action( 'groups_custom_edit_steps' ); ?>
 	do_action( 'bp_before_group_delete_admin' ); ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'bp-next' ); ?></p>
+		<p><?php _e( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'bp-nouveau' ); ?></p>
 	</div>
 
-	<label for="delete-group-understand"><input type="checkbox" name="delete-group-understand" id="delete-group-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-group-button').disabled = ''; } else { document.getElementById('delete-group-button').disabled = 'disabled'; }" /> <?php _e( 'I understand the consequences of deleting this group.', 'bp-next' ); ?></label>
+	<label for="delete-group-understand"><input type="checkbox" name="delete-group-understand" id="delete-group-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-group-button').disabled = ''; } else { document.getElementById('delete-group-button').disabled = 'disabled'; }" /> <?php _e( 'I understand the consequences of deleting this group.', 'bp-nouveau' ); ?></label>
 
 	<?php
 
@@ -451,7 +451,7 @@ do_action( 'groups_custom_edit_steps' ); ?>
 	do_action( 'bp_after_group_delete_admin' ); ?>
 
 	<div class="submit">
-		<input type="submit" disabled="disabled" value="<?php esc_attr_e( 'Delete Group', 'bp-next' ); ?>" id="delete-group-button" name="delete-group-button" />
+		<input type="submit" disabled="disabled" value="<?php esc_attr_e( 'Delete Group', 'bp-nouveau' ); ?>" id="delete-group-button" name="delete-group-button" />
 	</div>
 
 	<?php wp_nonce_field( 'groups_delete_group' ); ?>

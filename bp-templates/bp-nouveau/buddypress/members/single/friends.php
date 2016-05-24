@@ -16,11 +16,11 @@
 
 			<li id="members-order-select" class="last filter">
 
-				<label for="members-friends"><?php _e( 'Order By:', 'bp-next' ); ?></label>
+				<label for="members-friends"><?php _e( 'Order By:', 'bp-nouveau' ); ?></label>
 				<select id="members-friends">
-					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-					<option value="newest"><?php _e( 'Newest Registered', 'bp-next' ); ?></option>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
+					<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
+					<option value="newest"><?php _e( 'Newest Registered', 'bp-nouveau' ); ?></option>
+					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
 
 					<?php
 

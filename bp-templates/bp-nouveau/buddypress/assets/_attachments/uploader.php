@@ -13,16 +13,16 @@
 ?>
 <script type="text/html" id="tmpl-upload-window">
 	<?php if ( ! _device_can_upload() ) : ?>
-		<h3 class="upload-instructions"><?php esc_html_e( 'The web browser on your device cannot be used to upload files.', 'bp-next' ); ?></h3>
+		<h3 class="upload-instructions"><?php esc_html_e( 'The web browser on your device cannot be used to upload files.', 'bp-nouveau' ); ?></h3>
 	<?php elseif ( is_multisite() && ! is_upload_space_available() ) : ?>
-		<h3 class="upload-instructions"><?php esc_html_e( 'Upload Limit Exceeded', 'bp-next' ); ?></h3>
+		<h3 class="upload-instructions"><?php esc_html_e( 'Upload Limit Exceeded', 'bp-nouveau' ); ?></h3>
 	<?php else : ?>
 		<div id="{{data.container}}">
 			<div id="{{data.drop_element}}">
 				<div class="drag-drop-inside">
-					<p class="drag-drop-info"><?php esc_html_e( 'Drop your file here', 'bp-next' ); ?></p>
-					<p><?php _ex( 'or', 'Uploader: Drop your file here - or - Select your File', 'bp-next' ); ?></p>
-					<p class="drag-drop-buttons"><label for="{{data.browse_button}}" class="<?php echo is_admin() ? 'screen-reader-text' : 'bp-screen-reader-text' ;?>"><?php esc_html_e( 'Select your File', 'bp-next' ); ?></label><input id="{{data.browse_button}}" type="button" value="<?php esc_attr_e( 'Select your File', 'bp-next' ); ?>" class="button" /></p>
+					<p class="drag-drop-info"><?php esc_html_e( 'Drop your file here', 'bp-nouveau' ); ?></p>
+					<p><?php _ex( 'or', 'Uploader: Drop your file here - or - Select your File', 'bp-nouveau' ); ?></p>
+					<p class="drag-drop-buttons"><label for="{{data.browse_button}}" class="<?php echo is_admin() ? 'screen-reader-text' : 'bp-screen-reader-text' ;?>"><?php esc_html_e( 'Select your File', 'bp-nouveau' ); ?></label><input id="{{data.browse_button}}" type="button" value="<?php esc_attr_e( 'Select your File', 'bp-nouveau' ); ?>" class="button" /></p>
 				</div>
 			</div>
 		</div>

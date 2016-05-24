@@ -25,7 +25,7 @@ do_action( 'bp_before_member_settings_template' ); ?>
 					<thead>
 						<tr>
 							<th class="title field-group-name"><?php bp_the_profile_group_name(); ?></th>
-							<th class="title"><?php _e( 'Visibility', 'bp-next' ); ?></th>
+							<th class="title"><?php _e( 'Visibility', 'bp-nouveau' ); ?></th>
 						</tr>
 					</thead>
 
@@ -59,7 +59,7 @@ do_action( 'bp_before_member_settings_template' ); ?>
 	do_action( 'bp_core_xprofile_settings_before_submit' ); ?>
 
 	<div class="submit">
-		<input id="submit" type="submit" name="xprofile-settings-submit" value="<?php esc_attr_e( 'Save Settings', 'bp-next' ); ?>" class="auto" />
+		<input id="submit" type="submit" name="xprofile-settings-submit" value="<?php esc_attr_e( 'Save Settings', 'bp-nouveau' ); ?>" class="auto" />
 	</div>
 
 	<?php

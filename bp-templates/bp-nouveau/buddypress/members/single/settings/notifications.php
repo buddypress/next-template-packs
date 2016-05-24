@@ -10,7 +10,7 @@
 do_action( 'bp_before_member_settings_template' ); ?>
 
 <form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/notifications'; ?>" method="post" class="standard-form" id="settings-form">
-	<p><?php _e( 'Send an email notice when:', 'bp-next' ); ?></p>
+	<p><?php _e( 'Send an email notice when:', 'bp-nouveau' ); ?></p>
 
 	<?php
 
@@ -31,7 +31,7 @@ do_action( 'bp_before_member_settings_template' ); ?>
 	do_action( 'bp_members_notification_settings_before_submit' ); ?>
 
 	<div class="submit">
-		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-next' ); ?>" id="submit" class="auto" />
+		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-nouveau' ); ?>" id="submit" class="auto" />
 	</div>
 
 	<?php

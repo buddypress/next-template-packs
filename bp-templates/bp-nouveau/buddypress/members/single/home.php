@@ -34,7 +34,7 @@
 
 	</div><!-- #item-header -->
 
-	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
+	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
 		<?php bp_get_template_part( 'members/single/item-nav' ); ?>
 

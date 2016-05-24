@@ -13,19 +13,19 @@ do_action( 'bp_before_member_settings_template' ); ?>
 
 	<?php if ( !is_super_admin() ) : ?>
 
-		<label for="pwd"><?php _e( 'Current Password <span>(required to update email or change current password)</span>', 'bp-next' ); ?></label>
-		<input type="password" name="pwd" id="pwd" size="16" value="" class="settings-input small" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<a href="<?php echo wp_lostpassword_url(); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'bp-next' ); ?>"><?php _e( 'Lost your password?', 'bp-next' ); ?></a>
+		<label for="pwd"><?php _e( 'Current Password <span>(required to update email or change current password)</span>', 'bp-nouveau' ); ?></label>
+		<input type="password" name="pwd" id="pwd" size="16" value="" class="settings-input small" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<a href="<?php echo wp_lostpassword_url(); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'bp-nouveau' ); ?>"><?php _e( 'Lost your password?', 'bp-nouveau' ); ?></a>
 
 	<?php endif; ?>
 
-	<label for="email"><?php _e( 'Account Email', 'bp-next' ); ?></label>
+	<label for="email"><?php _e( 'Account Email', 'bp-nouveau' ); ?></label>
 	<input type="email" name="email" id="email" value="<?php echo bp_get_displayed_user_email(); ?>" class="settings-input" <?php bp_form_field_attributes( 'email' ); ?>/>
 
-	<label for="pass1"><?php _e( 'Change Password <span>(leave blank for no change)</span>', 'bp-next' ); ?></label>
-	<input type="password" name="pass1" id="pass1" size="16" value="" class="settings-input small password-entry" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'New Password', 'bp-next' ); ?><br />
+	<label for="pass1"><?php _e( 'Change Password <span>(leave blank for no change)</span>', 'bp-nouveau' ); ?></label>
+	<input type="password" name="pass1" id="pass1" size="16" value="" class="settings-input small password-entry" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'New Password', 'bp-nouveau' ); ?><br />
 	<div id="pass-strength-result"></div>
-	<label for="pass2" class="bp-screen-reader-text"><?php _e( 'Repeat New Password', 'bp-next' ); ?></label>
-	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'Repeat New Password', 'bp-next' ); ?>
+	<label for="pass2" class="bp-screen-reader-text"><?php _e( 'Repeat New Password', 'bp-nouveau' ); ?></label>
+	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'Repeat New Password', 'bp-nouveau' ); ?>
 
 	<?php
 
@@ -37,7 +37,7 @@ do_action( 'bp_before_member_settings_template' ); ?>
 	do_action( 'bp_core_general_settings_before_submit' ); ?>
 
 	<div class="submit">
-		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-next' ); ?>" id="submit" class="auto" />
+		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-nouveau' ); ?>" id="submit" class="auto" />
 	</div>
 
 	<?php

@@ -10,7 +10,7 @@ I mainly focused on Javascript and Ajax actions, by trying to split the huge bud
 
 ### This is actually a template pack and tools to manage template packs!
 
-Once activated, this plugin will first create a new Admin tabs in the BuddyPress settings *Template Packs*. It displays a list of the available template packs for the site and it helped me to come back to Legacy while building the "BP Next" one. This screenshot will explain itself what this UI could bring to the user...
+Once activated, this plugin will first create a new Admin tabs in the BuddyPress settings *Template Packs*. It displays a list of the available template packs for the site and it helped me to come back to Legacy while building the "BP Nouveau" one. This screenshot will explain itself what this UI could bring to the user...
 ![The Primary Nav Widget](https://cldup.com/bAj2DOrkq7.png)
 
 The supports column is there to inform what components are supported by the template pack. For instance, the "Retired" forums component is not supported by this template pack (for now...)

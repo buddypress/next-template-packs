@@ -42,9 +42,9 @@ do_action( 'bp_after_member_activity_post_form' ); ?>
 			<?php bp_directory_activity_search_form(); ?>
 		</li>
 		<li id="activity-filter-select" class="last filter">
-			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-next' ); ?></span></label>
+			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
 			<select id="activity-filter-by" data-bp-filter="activity">
-				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
+				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-nouveau' ); ?></option>
 
 				<?php bp_activity_show_filters(); ?>
 
@@ -74,7 +74,7 @@ do_action( 'bp_before_member_activity_content' ); ?>
 
 	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		<li id="bp-ajax-loader"><?php esc_html_e( 'Loading your updates, please wait.', 'bp-next' ) ;?></li>
+		<li id="bp-ajax-loader"><?php esc_html_e( 'Loading your updates, please wait.', 'bp-nouveau' ) ;?></li>
 
 	</ul>
 

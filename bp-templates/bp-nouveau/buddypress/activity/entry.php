@@ -56,7 +56,7 @@ do_action( 'bp_before_activity_entry' ); ?>
 
 			<?php if ( bp_get_activity_type() == 'activity_comment' ) : ?>
 
-				<a href="<?php bp_activity_thread_permalink(); ?>" class="button view bp-secondary-action" title="<?php esc_attr_e( 'View Conversation', 'bp-next' ); ?>"><?php _e( 'View Conversation', 'bp-next' ); ?></a>
+				<a href="<?php bp_activity_thread_permalink(); ?>" class="button view bp-secondary-action" title="<?php esc_attr_e( 'View Conversation', 'bp-nouveau' ); ?>"><?php _e( 'View Conversation', 'bp-nouveau' ); ?></a>
 
 			<?php endif; ?>
 
@@ -64,7 +64,7 @@ do_action( 'bp_before_activity_entry' ); ?>
 
 				<?php if ( bp_activity_can_comment() ) : ?>
 
-					<a href="<?php bp_activity_comment_link(); ?>" class="button acomment-reply bp-primary-action" id="acomment-comment-<?php bp_activity_id(); ?>" title="<?php esc_attr_e( 'Comment', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php esc_html_e( 'Comment', 'bp-next' ); ?></span> <span class="comment-count"><?php bp_activity_comment_count(); ?></span></a>
+					<a href="<?php bp_activity_comment_link(); ?>" class="button acomment-reply bp-primary-action" id="acomment-comment-<?php bp_activity_id(); ?>" title="<?php esc_attr_e( 'Comment', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php esc_html_e( 'Comment', 'bp-nouveau' ); ?></span> <span class="comment-count"><?php bp_activity_comment_count(); ?></span></a>
 
 				<?php endif; ?>
 
@@ -72,11 +72,11 @@ do_action( 'bp_before_activity_entry' ); ?>
 
 					<?php if ( !bp_get_activity_is_favorite() ) : ?>
 
-						<a href="<?php bp_activity_favorite_link(); ?>" class="button fav bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Favorite', 'bp-next' ); ?></span></a>
+						<a href="<?php bp_activity_favorite_link(); ?>" class="button fav bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Favorite', 'bp-nouveau' ); ?></span></a>
 
 					<?php else : ?>
 
-						<a href="<?php bp_activity_unfavorite_link(); ?>" class="button unfav bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Remove Favorite', 'bp-next' ); ?></span></a>
+						<a href="<?php bp_activity_unfavorite_link(); ?>" class="button unfav bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Remove Favorite', 'bp-nouveau' ); ?></span></a>
 
 					<?php endif; ?>
 
@@ -120,10 +120,10 @@ do_action( 'bp_before_activity_entry' ); ?>
 					<div class="ac-reply-avatar"><?php bp_loggedin_user_avatar( 'width=' . BP_AVATAR_THUMB_WIDTH . '&height=' . BP_AVATAR_THUMB_HEIGHT ); ?></div>
 					<div class="ac-reply-content">
 						<div class="ac-textarea">
-							<label for="ac-input-<?php bp_activity_id(); ?>" class="bp-screen-reader-text"><?php _e( 'Comment', 'bp-next' ); ?></label>
+							<label for="ac-input-<?php bp_activity_id(); ?>" class="bp-screen-reader-text"><?php _e( 'Comment', 'bp-nouveau' ); ?></label>
 							<textarea id="ac-input-<?php bp_activity_id(); ?>" class="ac-input bp-suggestions" name="ac_input_<?php bp_activity_id(); ?>"></textarea>
 						</div>
-						<input type="submit" name="ac_form_submit" value="<?php esc_attr_e( 'Post', 'bp-next' ); ?>" /> &nbsp; <a href="#" class="ac-reply-cancel"><?php _e( 'Cancel', 'bp-next' ); ?></a>
+						<input type="submit" name="ac_form_submit" value="<?php esc_attr_e( 'Post', 'bp-nouveau' ); ?>" /> &nbsp; <a href="#" class="ac-reply-cancel"><?php _e( 'Cancel', 'bp-nouveau' ); ?></a>
 						<input type="hidden" name="comment_form_id" value="<?php bp_activity_id(); ?>" />
 					</div>
 

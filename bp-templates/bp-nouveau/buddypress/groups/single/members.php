@@ -9,7 +9,7 @@
 
 <?php if ( empty( $_POST ) ) : ?>
 
-	<div id="bp-ajax-loader"><?php esc_html_e( 'Requesting the group members, please wait.', 'bp-next' ) ;?></div>
+	<div id="bp-ajax-loader"><?php esc_html_e( 'Requesting the group members, please wait.', 'bp-nouveau' ) ;?></div>
 
 <?php elseif ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
 
@@ -131,7 +131,7 @@
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'No members were found.', 'bp-next' ); ?></p>
+		<p><?php _e( 'No members were found.', 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif; ?>

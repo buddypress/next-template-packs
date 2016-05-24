@@ -117,7 +117,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'Sorry, there were no sites found.', 'bp-next' ); ?></p>
+		<p><?php _e( 'Sorry, there were no sites found.', 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif; ?>

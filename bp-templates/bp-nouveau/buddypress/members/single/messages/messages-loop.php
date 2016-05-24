@@ -51,9 +51,9 @@ do_action( 'bp_before_member_messages_loop' ); ?>
 
 			<thead>
 				<tr>
-					<th scope="col" class="thread-checkbox bulk-select-all"><input id="select-all-messages" type="checkbox"><label class="bp-screen-reader-text" for="select-all-messages"><?php _e( 'Select all', 'bp-next' ); ?></label></th>
-					<th scope="col" class="thread-from"><?php _e( 'From', 'bp-next' ); ?></th>
-					<th scope="col" class="thread-info"><?php _e( 'Subject', 'bp-next' ); ?></th>
+					<th scope="col" class="thread-checkbox bulk-select-all"><input id="select-all-messages" type="checkbox"><label class="bp-screen-reader-text" for="select-all-messages"><?php _e( 'Select all', 'bp-nouveau' ); ?></label></th>
+					<th scope="col" class="thread-from"><?php _e( 'From', 'bp-nouveau' ); ?></th>
+					<th scope="col" class="thread-info"><?php _e( 'Subject', 'bp-nouveau' ); ?></th>
 
 					<?php
 
@@ -68,10 +68,10 @@ do_action( 'bp_before_member_messages_loop' ); ?>
 					do_action( 'bp_messages_inbox_list_header' ); ?>
 
 					<?php if ( bp_is_active( 'messages', 'star' ) ) : ?>
-						<th scope="col" class="thread-star"><span class="message-action-star"><span class="icon"></span> <span class="screen-reader-text"><?php _e( 'Star', 'bp-next' ); ?></span></span></th>
+						<th scope="col" class="thread-star"><span class="message-action-star"><span class="icon"></span> <span class="screen-reader-text"><?php _e( 'Star', 'bp-nouveau' ); ?></span></span></th>
 					<?php endif; ?>
 
-					<th scope="col" class="thread-options"><?php _e( 'Actions', 'bp-next' ); ?></th>
+					<th scope="col" class="thread-options"><?php _e( 'Actions', 'bp-nouveau' ); ?></th>
 				</tr>
 			</thead>
 
@@ -81,20 +81,20 @@ do_action( 'bp_before_member_messages_loop' ); ?>
 
 					<tr id="m-<?php bp_message_thread_id(); ?>" class="<?php bp_message_css_class(); ?><?php if ( bp_message_thread_has_unread() ) : ?> unread<?php else: ?> read<?php endif; ?>">
 						<td class="bulk-select-check">
-							<label for="bp-message-thread-<?php bp_message_thread_id(); ?>"><input type="checkbox" name="message_ids[]" id="bp-message-thread-<?php bp_message_thread_id(); ?>" class="message-check" value="<?php bp_message_thread_id(); ?>" /><span class="bp-screen-reader-text"><?php _e( 'Select this message', 'bp-next' ); ?></span></label>
+							<label for="bp-message-thread-<?php bp_message_thread_id(); ?>"><input type="checkbox" name="message_ids[]" id="bp-message-thread-<?php bp_message_thread_id(); ?>" class="message-check" value="<?php bp_message_thread_id(); ?>" /><span class="bp-screen-reader-text"><?php _e( 'Select this message', 'bp-nouveau' ); ?></span></label>
 						</td>
 
 						<?php if ( 'sentbox' != bp_current_action() ) : ?>
 							<td class="thread-from">
 								<?php bp_message_thread_avatar( array( 'width' => 25, 'height' => 25 ) ); ?>
-								<span class="from"><?php _e( 'From:', 'bp-next' ); ?></span> <?php bp_message_thread_from(); ?>
+								<span class="from"><?php _e( 'From:', 'bp-nouveau' ); ?></span> <?php bp_message_thread_from(); ?>
 								<?php bp_message_thread_total_and_unread_count(); ?>
 								<span class="activity"><?php bp_message_thread_last_post_date(); ?></span>
 							</td>
 						<?php else: ?>
 							<td class="thread-from">
 								<?php bp_message_thread_avatar( array( 'width' => 25, 'height' => 25 ) ); ?>
-								<span class="to"><?php _e( 'To:', 'bp-next' ); ?></span> <?php bp_message_thread_to(); ?>
+								<span class="to"><?php _e( 'To:', 'bp-nouveau' ); ?></span> <?php bp_message_thread_to(); ?>
 								<?php bp_message_thread_total_and_unread_count(); ?>
 								<span class="activity"><?php bp_message_thread_last_post_date(); ?></span>
 							</td>
@@ -125,12 +125,12 @@ do_action( 'bp_before_member_messages_loop' ); ?>
 
 						<td class="thread-options">
 							<?php if ( bp_message_thread_has_unread() ) : ?>
-								<a class="read" href="<?php bp_the_message_thread_mark_read_url();?>"><?php _e( 'Read', 'bp-next' ); ?></a>
+								<a class="read" href="<?php bp_the_message_thread_mark_read_url();?>"><?php _e( 'Read', 'bp-nouveau' ); ?></a>
 							<?php else : ?>
-								<a class="unread" href="<?php bp_the_message_thread_mark_unread_url();?>"><?php _e( 'Unread', 'bp-next' ); ?></a>
+								<a class="unread" href="<?php bp_the_message_thread_mark_unread_url();?>"><?php _e( 'Unread', 'bp-nouveau' ); ?></a>
 							<?php endif; ?>
 							 |
-							<a class="delete" href="<?php bp_message_thread_delete_link(); ?>"><?php _e( 'Delete', 'bp-next' ); ?></a>
+							<a class="delete" href="<?php bp_message_thread_delete_link(); ?>"><?php _e( 'Delete', 'bp-nouveau' ); ?></a>
 						</td>
 					</tr>
 
@@ -168,7 +168,7 @@ do_action( 'bp_before_member_messages_loop' ); ?>
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'Sorry, no messages were found.', 'bp-next' ); ?></p>
+		<p><?php _e( 'Sorry, no messages were found.', 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif;?>

@@ -1,11 +1,11 @@
-/* global wp, bp, BP_Next, ajaxurl */
+/* global wp, bp, BP_Nouveau, ajaxurl */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
 ( function( exports, $ ) {
 
 	// Bail if not set
-	if ( typeof BP_Next === 'undefined' ) {
+	if ( typeof BP_Nouveau === 'undefined' ) {
 		return;
 	}
 
@@ -15,13 +15,13 @@ window.bp = window.bp || {};
 	bp.Collections = bp.Collections || {};
 	bp.Views       = bp.Views || {};
 
-	bp.Next = bp.Next || {};
+	bp.Nouveau = bp.Nouveau || {};
 
 	/**
-	 * [Next description]
+	 * [Nouveau description]
 	 * @type {Object}
 	 */
-	bp.Next.Messages = {
+	bp.Nouveau.Messages = {
 		/**
 		 * [start description]
 		 * @return {[type]} [description]
@@ -30,7 +30,7 @@ window.bp = window.bp || {};
 			this.views    = new Backbone.Collection();
 			this.threads  = new bp.Collections.Threads();
 			this.messages = new bp.Collections.Messages();
-			this.router   = new bp.Next.Messages.Router();
+			this.router   = new bp.Nouveau.Messages.Router();
 			this.box      = 'inbox';
 
 			this.setupNav();
@@ -194,7 +194,7 @@ window.bp = window.bp || {};
 				'page'         : 1,
 				'total_page'   : 0,
 				'search_terms' : '',
-				'search_icon'  : BP_Next.search_icon,
+				'search_icon'  : BP_Nouveau.search_icon,
 				'box'          : this.box,
 			} );
 
@@ -238,7 +238,7 @@ window.bp = window.bp || {};
 
 			var sent = bp.ajax.post( 'messages_send_message', _.extend(
 				{
-					nonce: BP_Next.messages.nonces.send
+					nonce: BP_Nouveau.messages.nonces.send
 				},
 				this.attributes
 			) );
@@ -272,7 +272,7 @@ window.bp = window.bp || {};
 				_.pick( this.attributes, ['id', 'message_id'] ),
 				{
 					action : 'messages_thread_read',
-					nonce  : BP_Next.nonces.messages
+					nonce  : BP_Nouveau.nonces.messages
 				}
 			);
 
@@ -306,7 +306,7 @@ window.bp = window.bp || {};
 			options.data    = options.data || {};
 
 			// Add generic nonce
-			options.data.nonce = BP_Next.nonces.messages;
+			options.data.nonce = BP_Nouveau.nonces.messages;
 
 			if ( 'read' === method ) {
 				options.data = _.extend( options.data, {
@@ -350,8 +350,8 @@ window.bp = window.bp || {};
 				this.options.total_page = resp.meta.total_page;
 			}
 
-			if ( bp.Next.Messages.box ) {
-				this.options.box = bp.Next.Messages.box
+			if ( bp.Nouveau.Messages.box ) {
+				this.options.box = bp.Nouveau.Messages.box
 			}
 
 			return resp.threads;
@@ -364,7 +364,7 @@ window.bp = window.bp || {};
 
 			options.data = _.extend( options.data, {
 				action: 'messages_' + action,
-				nonce : BP_Next.nonces.messages,
+				nonce : BP_Nouveau.nonces.messages,
 				id    : ids
 			} );
 
@@ -382,7 +382,7 @@ window.bp = window.bp || {};
 			options.data    = options.data || {};
 
 			// Add generic nonce
-			options.data.nonce = BP_Next.nonces.messages;
+			options.data.nonce = BP_Nouveau.nonces.messages;
 
 			if ( 'read' === method ) {
 				options.data = _.extend( options.data, {
@@ -395,7 +395,7 @@ window.bp = window.bp || {};
 			if ( 'create' === method ) {
 				options.data = _.extend( options.data, {
 					action : 'messages_send_reply',
-					nonce  : BP_Next.messages.nonces.send
+					nonce  : BP_Nouveau.messages.nonces.send
 				}, model || {} );
 
 				return bp.ajax.send( options );
@@ -404,7 +404,7 @@ window.bp = window.bp || {};
 			/*if ( 'delete' === method ) {
 				options.data = _.extend( options.data, {
 					action     : 'groups_delete_group_invite',
-					'_wpnonce' : BP_Next.group_invites.nonces.uninvite
+					'_wpnonce' : BP_Nouveau.group_invites.nonces.uninvite
 				} );
 
 				if ( model ) {
@@ -449,7 +449,7 @@ window.bp = window.bp || {};
 	} );
 
 	// Extend wp.Backbone.View with .prepare() and .inject()
-	bp.Next.Messages.View = bp.Backbone.View.extend( {
+	bp.Nouveau.Messages.View = bp.Backbone.View.extend( {
 		inject: function( selector ) {
 			this.render();
 			$(selector).html( this.el );
@@ -466,7 +466,7 @@ window.bp = window.bp || {};
 	} );
 
 	// Feedback view
-	bp.Views.Feedback = bp.Next.Messages.View.extend( {
+	bp.Views.Feedback = bp.Nouveau.Messages.View.extend( {
 		tagName: 'div',
 		className: 'bp-feedback',
 
@@ -484,7 +484,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.messageEditor = bp.Next.Messages.View.extend( {
+	bp.Views.messageEditor = bp.Nouveau.Messages.View.extend( {
 		template  : bp.template( 'bp-messages-editor' ),
 
 		initialize: function() {
@@ -498,7 +498,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.messageForm = bp.Next.Messages.View.extend( {
+	bp.Views.messageForm = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'form',
 		id        : 'send_message_form',
 		className : 'standard-form',
@@ -553,7 +553,7 @@ window.bp = window.bp || {};
 			var meta = {}, errors = [], self = this;
 			event.preventDefault();
 
-			bp.Next.Messages.removeFeedback();
+			bp.Nouveau.Messages.removeFeedback();
 
 			// Set the content and meta
 			_.each( this.$el.serializeArray(), function( pair ) {
@@ -612,10 +612,10 @@ window.bp = window.bp || {};
 			if ( errors.length ) {
 				var feedback = '';
 				_.each( errors, function( e ) {
-					feedback += BP_Next.messages.errors[ e ] + '<br/>';
+					feedback += BP_Nouveau.messages.errors[ e ] + '<br/>';
 				} );
 
-				bp.Next.Messages.displayFeedback( feedback, 'error' );
+				bp.Nouveau.Messages.displayFeedback( feedback, 'error' );
 				return;
 			}
 
@@ -627,20 +627,20 @@ window.bp = window.bp || {};
 				// Reset the model
 				self.model.set( self.resetModel );
 
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 
 				// Remove tinyMCE
-				bp.Next.Messages.removeTinyMCE();
+				bp.Nouveau.Messages.removeTinyMCE();
 
 				// Remove the form view
-				var form = bp.Next.Messages.views.get( 'compose' );
+				var form = bp.Nouveau.Messages.views.get( 'compose' );
 				form.get( 'view' ).remove();
-				bp.Next.Messages.views.remove( { id: 'compose', view: form } );
+				bp.Nouveau.Messages.views.remove( { id: 'compose', view: form } );
 
-				bp.Next.Messages.router.navigate( 'sentbox', { trigger: true } );
+				bp.Nouveau.Messages.router.navigate( 'sentbox', { trigger: true } );
 			} ).fail( function( response ) {
 				if ( response.feedback ) {
-					bp.Next.Messages.displayFeedback( response.feedback, response.type );
+					bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 				}
 			} );
 		},
@@ -652,7 +652,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.userThreads = bp.Next.Messages.View.extend( {
+	bp.Views.userThreads = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'div',
 
 		events: {
@@ -662,7 +662,7 @@ window.bp = window.bp || {};
 
 		initialize: function() {
 			// Add the threads parent view
-			this.views.add( new bp.Next.Messages.View( { tagName: 'ul', id: 'message-threads' } ) );
+			this.views.add( new bp.Nouveau.Messages.View( { tagName: 'ul', id: 'message-threads' } ) );
 
 			// Add the preview Active Thread view
 			this.views.add( new bp.Views.previewThread( { collection: this.collection } ) );
@@ -677,7 +677,7 @@ window.bp = window.bp || {};
 		requestThreads: function() {
 			this.collection.reset();
 
-			bp.Next.Messages.displayFeedback( BP_Next.messages.loading, 'loading' );
+			bp.Nouveau.Messages.displayFeedback( BP_Nouveau.messages.loading, 'loading' );
 
 			this.collection.fetch( {
 				data    : _.pick( this.options, 'box' ),
@@ -687,11 +687,11 @@ window.bp = window.bp || {};
 		},
 
 		threadsFetched: function( collection, response ) {
-			bp.Next.Messages.removeFeedback();
+			bp.Nouveau.Messages.removeFeedback();
 		},
 
 		threadsFetchError: function( collection, response ) {
-			bp.Next.Messages.displayFeedback( response.feedback, response.type );
+			bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 		},
 
 		cleanContent: function() {
@@ -745,11 +745,11 @@ window.bp = window.bp || {};
 
 			var id = target.data( 'thread-id' );
 
-			bp.Next.Messages.router.navigate( 'view/' + id, { trigger: true } );
+			bp.Nouveau.Messages.router.navigate( 'view/' + id, { trigger: true } );
 		}
 	} );
 
-	bp.Views.userThread = bp.Next.Messages.View.extend( {
+	bp.Views.userThread = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'li',
 		template  : bp.template( 'bp-messages-thread' ),
 		className : 'thread-item',
@@ -821,7 +821,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.previewThread = bp.Next.Messages.View.extend( {
+	bp.Views.previewThread = bp.Nouveau.Messages.View.extend( {
 		tagName: 'div',
 		id: 'thread-preview',
 		template  : bp.template( 'bp-messages-preview' ),
@@ -843,7 +843,7 @@ window.bp = window.bp || {};
 				return;
 			}
 
-			bp.Next.Messages.View.prototype.render.apply( this, arguments );
+			bp.Nouveau.Messages.View.prototype.render.apply( this, arguments );
 		},
 
 		setPreview: function( model ) {
@@ -896,7 +896,7 @@ window.bp = window.bp || {};
 			}
 
 			this.collection.doAction( action, mid, options ).done( function( response ) {
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 
 				if ( 'delete' === action || ( 'starred' === self.collection.options.box && 'unstar' === action ) ) {
 					// Remove from the list of messages
@@ -910,18 +910,18 @@ window.bp = window.bp || {};
 					model.set( _.first( response.messages ) );
 				}
 			} ).fail( function( response ) {
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 			} );
 		}
 	} );
 
-	bp.Views.Pagination = bp.Next.Messages.View.extend( {
+	bp.Views.Pagination = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'li',
 		className : 'last',
 		template  :  bp.template( 'bp-messages-paginate' )
 	} );
 
-	bp.Views.BulkActions = bp.Next.Messages.View.extend( {
+	bp.Views.BulkActions = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'div',
 		template  :  bp.template( 'bp-bulk-actions' ),
 
@@ -985,7 +985,7 @@ window.bp = window.bp || {};
 			} ) );
 
 			this.collection.doAction( action, ids, options ).done( function( response ) {
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 
 				if ( 'delete' === action || ( 'starred' === self.collection.options.box && 'unstar' === action ) ) {
 					// Remove from the list of messages
@@ -1003,12 +1003,12 @@ window.bp = window.bp || {};
 					} );
 				}
 			} ).fail( function( response ) {
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 			} );
 		}
 	} );
 
-	bp.Views.messageFilters = bp.Next.Messages.View.extend( {
+	bp.Views.messageFilters = bp.Nouveau.Messages.View.extend( {
 		tagName: 'ul',
 		template:  bp.template( 'bp-messages-filters' ),
 
@@ -1036,13 +1036,13 @@ window.bp = window.bp || {};
 			this.views.add( new bp.Views.Pagination( { model: new Backbone.Model( collection.options ) } ) );
 
 			this.views.add( '.user-messages-bulk-actions', new bp.Views.BulkActions( {
-				model: new Backbone.Model( BP_Next.messages.bulk_actions ),
+				model: new Backbone.Model( BP_Nouveau.messages.bulk_actions ),
 				collection : collection
 			} ) );
 		},
 
 		filterThreads: function( filter ) {
-			bp.Next.Messages.displayFeedback( BP_Next.messages.loading, 'loading' );
+			bp.Nouveau.Messages.displayFeedback( BP_Nouveau.messages.loading, 'loading' );
 
 			this.options.threads.reset();
 			_.extend( this.options.threads.options, _.pick( this.model.attributes, ['box', 'search_terms'] ) );
@@ -1055,11 +1055,11 @@ window.bp = window.bp || {};
 		},
 
 		threadsFiltered: function() {
-			bp.Next.Messages.removeFeedback();
+			bp.Nouveau.Messages.removeFeedback();
 		},
 
 		threadsFilterError: function( collection, response ) {
-			bp.Next.Messages.displayFeedback( response.feedback, response.type );
+			bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 		},
 
 		displaySrcBtn: function( event ) {
@@ -1110,7 +1110,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.userMessagesHeader = bp.Next.Messages.View.extend( {
+	bp.Views.userMessagesHeader = bp.Nouveau.Messages.View.extend( {
 		tagName  : 'div',
 		template : bp.template( 'bp-messages-single-header' ),
 
@@ -1137,18 +1137,18 @@ window.bp = window.bp || {};
 				};
 			}
 
-			bp.Next.Messages.threads.doAction( action, this.model.get( 'id' ), options ).done( function( response ) {
+			bp.Nouveau.Messages.threads.doAction( action, this.model.get( 'id' ), options ).done( function( response ) {
 				// Remove all views
 				if ( 'delete' === action ) {
-					bp.Next.Messages.clearViews();
+					bp.Nouveau.Messages.clearViews();
 				} else if ( response.messages ) {
 					self.model.set( _.first( response.messages ) );
 				}
 				// Display the feedback
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 
 			} ).fail( function( response ) {
-				bp.Next.Messages.displayFeedback( response.feedback, response.type );
+				bp.Nouveau.Messages.displayFeedback( response.feedback, response.type );
 			} );
 		}
 	} );
@@ -1174,7 +1174,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Views.userMessages = bp.Next.Messages.View.extend( {
+	bp.Views.userMessages = bp.Nouveau.Messages.View.extend( {
 		tagName  : 'div',
 		template : bp.template( 'bp-messages-single' ),
 
@@ -1200,7 +1200,7 @@ window.bp = window.bp || {};
 
 			this.collection.reset();
 
-			bp.Next.Messages.displayFeedback( BP_Next.messages.loading, 'loading' );
+			bp.Nouveau.Messages.displayFeedback( BP_Nouveau.messages.loading, 'loading' );
 
 			if ( _.isUndefined( this.options.thread.attributes ) ) {
 				data.id = this.options.thread.id;
@@ -1222,7 +1222,7 @@ window.bp = window.bp || {};
 				this.options.thread = new Backbone.Model( response.thread );
 			}
 
-			bp.Next.Messages.removeFeedback();
+			bp.Nouveau.Messages.removeFeedback();
 
 			this.views.add( '#bp-message-thread-header', new bp.Views.userMessagesHeader( { model: this.options.thread } ) );
 		},
@@ -1274,7 +1274,7 @@ window.bp = window.bp || {};
 		}
 	} );
 
-	bp.Next.Messages.Router = Backbone.Router.extend( {
+	bp.Nouveau.Messages.Router = Backbone.Router.extend( {
 		routes: {
 			'compose' : 'composeMessage',
 			'view/:id': 'viewMessage',
@@ -1285,7 +1285,7 @@ window.bp = window.bp || {};
 		},
 
 		composeMessage: function() {
-			bp.Next.Messages.composeView();
+			bp.Nouveau.Messages.composeView();
 		},
 
 		viewMessage: function( thread_id ) {
@@ -1294,33 +1294,33 @@ window.bp = window.bp || {};
 			}
 
 			// Try to get the corresponding thread
-			var thread = bp.Next.Messages.threads.get( thread_id );
+			var thread = bp.Nouveau.Messages.threads.get( thread_id );
 
 			if ( undefined === thread ) {
 				thread    = {};
 				thread.id = thread_id;
 			}
 
-			bp.Next.Messages.singleView( thread );
+			bp.Nouveau.Messages.singleView( thread );
 		},
 
 		sentboxView: function() {
-			bp.Next.Messages.box = 'sentbox';
-			bp.Next.Messages.threadsView();
+			bp.Nouveau.Messages.box = 'sentbox';
+			bp.Nouveau.Messages.threadsView();
 		},
 
 		starredView: function() {
-			bp.Next.Messages.box = 'starred';
-			bp.Next.Messages.threadsView();
+			bp.Nouveau.Messages.box = 'starred';
+			bp.Nouveau.Messages.threadsView();
 		},
 
 		inboxView: function() {
-			bp.Next.Messages.box = 'inbox';
-			bp.Next.Messages.threadsView();
+			bp.Nouveau.Messages.box = 'inbox';
+			bp.Nouveau.Messages.threadsView();
 		}
 	} );
 
-	// Launch BP Next Groups
-	bp.Next.Messages.start();
+	// Launch BP Nouveau Groups
+	bp.Nouveau.Messages.start();
 
 } )( bp, jQuery );

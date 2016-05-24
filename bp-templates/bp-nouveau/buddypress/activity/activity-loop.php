@@ -24,7 +24,7 @@ do_action( 'bp_before_activity_loop' ); ?>
 	<?php if ( bp_activity_has_more_items() ) : ?>
 
 		<li class="load-more">
-			<a href="<?php bp_activity_load_more_link() ?>"><?php _e( 'Load More', 'bp-next' ); ?></a>
+			<a href="<?php bp_activity_load_more_link() ?>"><?php _e( 'Load More', 'bp-nouveau' ); ?></a>
 		</li>
 
 	<?php endif; ?>
@@ -32,7 +32,7 @@ do_action( 'bp_before_activity_loop' ); ?>
 <?php else : ?>
 
 	<li id="activity-stream-message" class="info">
-		<p><?php _e( 'Sorry, there was no activity found. Please try a different filter.', 'bp-next' ); ?></p>
+		<p><?php _e( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ); ?></p>
 	</li>
 
 <?php endif; ?>

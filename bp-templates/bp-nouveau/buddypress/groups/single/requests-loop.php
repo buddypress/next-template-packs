@@ -45,9 +45,9 @@
 
 				<div class="action">
 
-					<?php bp_button( array( 'id' => 'group_membership_accept', 'component' => 'groups', 'wrapper_class' => 'accept', 'link_href' => bp_get_group_request_accept_link(), 'link_title' => __( 'Accept', 'bp-next' ), 'link_text' => __( 'Accept', 'bp-next' ) ) ); ?>
+					<?php bp_button( array( 'id' => 'group_membership_accept', 'component' => 'groups', 'wrapper_class' => 'accept', 'link_href' => bp_get_group_request_accept_link(), 'link_title' => __( 'Accept', 'bp-nouveau' ), 'link_text' => __( 'Accept', 'bp-nouveau' ) ) ); ?>
 
-					<?php bp_button( array( 'id' => 'group_membership_reject', 'component' => 'groups', 'wrapper_class' => 'reject', 'link_href' => bp_get_group_request_reject_link(), 'link_title' => __( 'Reject', 'bp-next' ), 'link_text' => __( 'Reject', 'bp-next' ) ) ); ?>
+					<?php bp_button( array( 'id' => 'group_membership_reject', 'component' => 'groups', 'wrapper_class' => 'reject', 'link_href' => bp_get_group_request_reject_link(), 'link_title' => __( 'Reject', 'bp-nouveau' ), 'link_text' => __( 'Reject', 'bp-nouveau' ) ) ); ?>
 
 					<?php
 
@@ -83,7 +83,7 @@
 	<?php else: ?>
 
 		<div id="message" class="info">
-			<p><?php _e( 'There are no pending membership requests.', 'bp-next' ); ?></p>
+			<p><?php _e( 'There are no pending membership requests.', 'bp-nouveau' ); ?></p>
 		</div>
 
 	<?php endif; ?>

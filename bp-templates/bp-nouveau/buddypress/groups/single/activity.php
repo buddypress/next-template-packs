@@ -34,7 +34,7 @@ do_action( 'bp_after_group_activity_post_form' ); ?>
 
 <div class="item-list-tabs" id="subnav" role="navigation">
 	<ul>
-		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
+		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
 		<li class="group-search" role="search" data-bp-search="activity">
 			<?php bp_directory_activity_search_form(); ?>
@@ -50,9 +50,9 @@ do_action( 'bp_after_group_activity_post_form' ); ?>
 		do_action( 'bp_group_activity_syndication_options' ); ?>
 
 		<li id="activity-filter-select" class="last filter">
-			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-next' ); ?></span></label>
+			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
 			<select id="activity-filter-by" data-bp-filter="activity">
-				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-next' ); ?></option>
+				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-nouveau' ); ?></option>
 
 				<?php bp_activity_show_filters( 'group' ); ?>
 

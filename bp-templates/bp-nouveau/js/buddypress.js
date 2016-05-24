@@ -1,19 +1,19 @@
-/* global wp, bp, BP_Next, ajaxurl */
+/* global wp, bp, BP_Nouveau, ajaxurl */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
 ( function( exports, $ ) {
 
 	// Bail if not set
-	if ( typeof BP_Next === 'undefined' ) {
+	if ( typeof BP_Nouveau === 'undefined' ) {
 		return;
 	}
 
 	/**
-	 * [Next description]
+	 * [Nouveau description]
 	 * @type {Object}
 	 */
-	bp.Next = {
+	bp.Nouveau = {
 		/**
 		 * [start description]
 		 * @return {[type]} [description]
@@ -43,9 +43,9 @@ window.bp = window.bp || {};
 			this.ajax_request           = null;
 
 			// Object Globals
-			this.objects                = $.map( BP_Next.objects, function( value, key ) { return value; } );
-			this.objectNavParent        = BP_Next.object_nav_parent;
-			this.time_since             = BP_Next.time_since;
+			this.objects                = $.map( BP_Nouveau.objects, function( value, key ) { return value; } );
+			this.objectNavParent        = BP_Nouveau.object_nav_parent;
+			this.time_since             = BP_Nouveau.time_since;
 
 			// HeartBeat Global
 			this.heartbeat              = wp.heartbeat || {};
@@ -94,7 +94,7 @@ window.bp = window.bp || {};
 				// Add a title attribute and use an icon for the search submit button
 				search_title = $( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value' );
 				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'title', search_title );
-				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value', BP_Next.search_icon );
+				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value', BP_Nouveau.search_icon );
 			}
 		},
 
@@ -183,7 +183,7 @@ window.bp = window.bp || {};
 			}
 
 			// Extend posted data with stored data and object nonce
-			$.extend( post_data, bp.Next.getStorage( 'bp-' + object ), { nonce: BP_Next.nonces[object] } );
+			$.extend( post_data, bp.Nouveau.getStorage( 'bp-' + object ), { nonce: BP_Nouveau.nonces[object] } );
 
 			this.ajax_request = $.post( ajaxurl, post_data, 'json' );
 
@@ -437,11 +437,11 @@ window.bp = window.bp || {};
 		 * [setHeartBeat description]
 		 */
 		setHeartBeat: function() {
-			if ( typeof BP_Next.pulse === 'undefined' || ! this.heartbeat ) {
+			if ( typeof BP_Nouveau.pulse === 'undefined' || ! this.heartbeat ) {
 				return;
 			}
 
-			this.heartbeat.interval( Number( BP_Next.pulse ) );
+			this.heartbeat.interval( Number( BP_Nouveau.pulse ) );
 
 			// Extend "send" with BuddyPress namespace
 			$.fn.extend( {
@@ -680,7 +680,7 @@ window.bp = window.bp || {};
 			// Stop event propagation
 			event.preventDefault();
 
-			if ( ( undefined !== BP_Next[ action + '_confirm'] && false === confirm( BP_Next[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
+			if ( ( undefined !== BP_Nouveau[ action + '_confirm'] && false === confirm( BP_Nouveau[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
 				return false;
 			}
 
@@ -749,7 +749,7 @@ window.bp = window.bp || {};
 		}
 	}
 
-	// Launch BP Next
-	bp.Next.start();
+	// Launch BP Nouveau
+	bp.Nouveau.start();
 
 } )( bp, jQuery );

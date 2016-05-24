@@ -54,8 +54,8 @@ do_action( 'bp_before_member_friend_requests_content' ); ?>
 				</div>
 
 				<div class="action">
-					<a class="button accept" href="<?php bp_friend_accept_request_link(); ?>"><?php _e( 'Accept', 'bp-next' ); ?></a> &nbsp;
-					<a class="button reject" href="<?php bp_friend_reject_request_link(); ?>"><?php _e( 'Reject', 'bp-next' ); ?></a>
+					<a class="button accept" href="<?php bp_friend_accept_request_link(); ?>"><?php _e( 'Accept', 'bp-nouveau' ); ?></a> &nbsp;
+					<a class="button reject" href="<?php bp_friend_reject_request_link(); ?>"><?php _e( 'Reject', 'bp-nouveau' ); ?></a>
 
 					<?php
 
@@ -99,7 +99,7 @@ do_action( 'bp_before_member_friend_requests_content' ); ?>
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'You have no pending friendship requests.', 'bp-next' ); ?></p>
+		<p><?php _e( 'You have no pending friendship requests.', 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif;?>

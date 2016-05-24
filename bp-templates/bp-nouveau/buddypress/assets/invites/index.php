@@ -1,13 +1,13 @@
 <?php
 /**
- * BP Next Invites main template.
+ * BP Nouveau Invites main template.
  *
  * This template is used to inject the BuddyPress Backbone views
  * dealing with invites.
  *
  * @since 1.0.0
  *
- * @package BP Next
+ * @package BP Nouveau
  */
 ?>
 <div class="item-list-tabs bp-invites-nav" id="subnav"></div>
@@ -33,15 +33,15 @@
 			<div class="item-meta">
 				<span class="status">
 					<# if ( false === data.is_sent ) { #>
-						<?php esc_html_e( 'The invite has not been sent yet.', 'bp-next' ); ?>
+						<?php esc_html_e( 'The invite has not been sent yet.', 'bp-nouveau' ); ?>
 					<# } else { #>
-						<?php esc_html_e( 'The invite has been sent.', 'bp-next' ); ?>
+						<?php esc_html_e( 'The invite has been sent.', 'bp-nouveau' ); ?>
 					<# } #>
 				</span>
 
 				<# if ( undefined !== data.invited_by ) { #>
 					<ul class="group-inviters">
-						<li><?php esc_html_e( 'Invited by:', 'bp-next' ); ?></li>
+						<li><?php esc_html_e( 'Invited by:', 'bp-nouveau' ); ?></li>
 						<# for ( i in data.invited_by ) { #>
 							<li><a href="{{data.invited_by[i].user_link}}" title="{{data.invited_by[i].user_name}}"><img src="{{data.invited_by[i].avatar}}" width="20px" class="avatar mini"></a></li>
 						<# } #>
@@ -53,14 +53,14 @@
 
 	<div class="action">
 		<# if ( undefined === data.is_sent || ( false === data.is_sent && true === data.can_edit ) ) { #>
-			<a href="#" class="button invite-button group-add-remove-invite-button" title="<?php esc_attr_e( 'Invite / Uninvite', 'bp-next' );?>">
-				<span class="bp-screen-reader-text"><?php esc_html_e( 'Invite/Uninvite', 'bp-next' );?></span>
+			<a href="#" class="button invite-button group-add-remove-invite-button" title="<?php esc_attr_e( 'Invite / Uninvite', 'bp-nouveau' );?>">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Invite/Uninvite', 'bp-nouveau' );?></span>
 			</a>
 		<# } #>
 
 		<# if ( undefined !== data.can_edit && true === data.can_edit ) { #>
-			<a href="#" class="button invite-button group-remove-invite-button" title="<?php esc_attr_e( 'Remove', 'bp-next' );?>">
-				<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove', 'bp-next' );?></span>
+			<a href="#" class="button invite-button group-remove-invite-button" title="<?php esc_attr_e( 'Remove', 'bp-nouveau' );?>">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove', 'bp-nouveau' );?></span>
 			</a>
 		<# } #>
 	</div>
@@ -75,11 +75,11 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-form">
-	<textarea placeholder="<?php esc_attr_e( 'Optional: add a message to your invite.', 'bp-next' ); ?>"></textarea>
+	<textarea placeholder="<?php esc_attr_e( 'Optional: add a message to your invite.', 'bp-nouveau' ); ?>"></textarea>
 
 	<div class="action">
-		<input type="button" id="bp-invites-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Cancel', 'bp-next' ); ?>"/>
-		<input type="button" id="bp-invites-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-next' ); ?>"/>
+		<input type="button" id="bp-invites-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Cancel', 'bp-nouveau' ); ?>"/>
+		<input type="button" id="bp-invites-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-nouveau' ); ?>"/>
 	</div>
 </script>
 
@@ -87,23 +87,23 @@
 	<li class="group-invites-search" role="search" data-bp-search="{{data.scope}}">
 		<form action="" method="get" id="group_invites_search_form">
 			<label for="group_invites_search">
-				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-next' ) ); ?>"/>
+				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
 			</label>
-			<input type="submit" id="group_invites_search_submit" title="<?php esc_attr_e( 'Search', 'bp-next' ); ?>" value="{{data.search_icon}}" />
+			<input type="submit" id="group_invites_search_submit" title="<?php esc_attr_e( 'Search', 'bp-nouveau' ); ?>" value="{{data.search_icon}}" />
 		</form>
 	</li>
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-paginate">
 	<# if ( 1 !== data.page ) { #>
-		<a href="#" id="bp-invites-prev-page" title="<?php esc_attr_e( 'Prev', 'bp-next' );?>" class="button invite-button">
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'bp-next' );?></span>
+		<a href="#" id="bp-invites-prev-page" title="<?php esc_attr_e( 'Prev', 'bp-nouveau' );?>" class="button invite-button">
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'bp-nouveau' );?></span>
 		</a>
 	<# } #>
 
 	<# if ( data.total_page !== data.page ) { #>
-		<a href="#" id="bp-invites-next-page" title="<?php esc_attr_e( 'Next', 'bp-next' );?>" class="button invite-button">
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'bp-next' );?></span>
+		<a href="#" id="bp-invites-next-page" title="<?php esc_attr_e( 'Next', 'bp-nouveau' );?>" class="button invite-button">
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'bp-nouveau' );?></span>
 		</a>
 	<# } #>
 </script>

@@ -25,12 +25,12 @@
 			</li>
 			<li id="groups-order-select" class="last filter">
 
-				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
+				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
 				<select id="groups-order-by" data-bp-filter="groups">
-					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-					<option value="popular"><?php _e( 'Most Members', 'bp-next' ); ?></option>
-					<option value="newest"><?php _e( 'Newly Created', 'bp-next' ); ?></option>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
+					<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
+					<option value="popular"><?php _e( 'Most Members', 'bp-nouveau' ); ?></option>
+					<option value="newest"><?php _e( 'Newly Created', 'bp-nouveau' ); ?></option>
+					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
 
 					<?php
 
@@ -64,7 +64,7 @@ switch ( bp_current_action() ) :
 
 		<div class="groups mygroups" data-bp-list="groups">
 
-			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the groups you are a member of, please wait.', 'bp-next' ) ;?></div>
+			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the groups you are a member of, please wait.', 'bp-nouveau' ) ;?></div>
 
 		</div>
 

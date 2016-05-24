@@ -60,7 +60,7 @@ do_action( 'bp_before_notices_loop' ); ?>
 
 					<?php endif; ?>
 
-					<span class="activity"><?php _e( 'Sent:', 'bp-next' ); ?> <?php bp_message_notice_post_date(); ?></span>
+					<span class="activity"><?php _e( 'Sent:', 'bp-nouveau' ); ?> <?php bp_message_notice_post_date(); ?></span>
 				</td>
 
 				<?php
@@ -92,7 +92,7 @@ do_action( 'bp_before_notices_loop' ); ?>
 <?php else: ?>
 
 	<div id="message" class="info">
-		<p><?php _e( 'Sorry, no notices were found.', 'bp-next' ); ?></p>
+		<p><?php _e( 'Sorry, no notices were found.', 'bp-nouveau' ); ?></p>
 	</div>
 
 <?php endif;?>

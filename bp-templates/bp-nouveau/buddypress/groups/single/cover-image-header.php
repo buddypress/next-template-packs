@@ -59,7 +59,7 @@ do_action( 'bp_before_group_header' ); ?>
 				do_action( 'bp_group_header_meta' ); ?>
 
 				<span class="highlight"><?php bp_group_type(); ?></span>
-				<span class="activity"><?php printf( __( 'active %s', 'bp-next' ), bp_get_group_last_active() ); ?></span>
+				<span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span>
 
 				<?php bp_group_description(); ?>
 
@@ -70,7 +70,7 @@ do_action( 'bp_before_group_header' ); ?>
 
 			<?php if ( bp_group_is_visible() ) : ?>
 
-				<h3><?php _e( 'Group Admins', 'bp-next' ); ?></h3>
+				<h3><?php _e( 'Group Admins', 'bp-nouveau' ); ?></h3>
 
 				<?php bp_group_list_admins();
 
@@ -90,7 +90,7 @@ do_action( 'bp_before_group_header' ); ?>
 					 */
 					do_action( 'bp_before_group_menu_mods' ); ?>
 
-					<h3><?php _e( 'Group Mods' , 'bp-next' ); ?></h3>
+					<h3><?php _e( 'Group Mods' , 'bp-nouveau' ); ?></h3>
 
 					<?php bp_group_list_mods();
 

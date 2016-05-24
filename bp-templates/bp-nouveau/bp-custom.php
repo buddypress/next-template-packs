@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Next_Object_Nav_Widget' ) ) :
+if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
 /**
  * BP Sidebar Item Nav_Widget
  *
@@ -13,7 +13,7 @@ if ( ! class_exists( 'BP_Next_Object_Nav_Widget' ) ) :
  *
  * @uses   WP_Widget
  */
-class BP_Next_Object_Nav_Widget extends WP_Widget {
+class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 
 	/**
 	 * Constructor
@@ -25,13 +25,13 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 	public function __construct() {
 
 		$widget_ops = array(
-			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-next' ),
+			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-nouveau' ),
 			'classname'   => 'widget_nav_menu buddypress_object_nav'
 		);
 
 		parent::__construct(
-			'bp_next_sidebar_object_nav_widget',
-			__( '(BuddyPress) Primary nav', 'bp-next' ),
+			'bp_nouveau_sidebar_object_nav_widget',
+			__( '(BuddyPress) Primary nav', 'bp-nouveau' ),
 			$widget_ops
 		);
 	}
@@ -44,7 +44,7 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 	 * @uses   register_widget() to register the widget
 	 */
 	public static function register_widget() {
-		register_widget( 'BP_Next_Object_Nav_Widget' );
+		register_widget( 'BP_Nouveau_Object_Nav_Widget' );
 	}
 
 	/**
@@ -60,13 +60,13 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 			return;
 		}
 
-		$item_nav_args = wp_parse_args( $instance, apply_filters( 'bp_next_object_nav_widget_args', array(
-			'bp_next_widget_title' => true,
+		$item_nav_args = wp_parse_args( $instance, apply_filters( 'bp_nouveau_object_nav_widget_args', array(
+			'bp_nouveau_widget_title' => true,
 		) ) );
 
 		$title = '';
 
-		if ( ! empty( $item_nav_args[ 'bp_next_widget_title' ] ) ) {
+		if ( ! empty( $item_nav_args[ 'bp_nouveau_widget_title' ] ) ) {
 			$title = '';
 
 			if ( bp_is_active( 'groups' ) && bp_get_current_group_name() ) {
@@ -113,7 +113,7 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
-		$instance['bp_next_widget_title'] = (bool) $new_instance['bp_next_widget_title'];
+		$instance['bp_nouveau_widget_title'] = (bool) $new_instance['bp_nouveau_widget_title'];
 
 		return $instance;
 	}
@@ -128,17 +128,17 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$defaults = array(
-			'bp_next_widget_title' => true,
+			'bp_nouveau_widget_title' => true,
 		);
 
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
-		$bp_next_widget_title = (bool) $instance['bp_next_widget_title'];
+		$bp_nouveau_widget_title = (bool) $instance['bp_nouveau_widget_title'];
 		?>
 
 		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $bp_next_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_next_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_next_widget_title' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'bp_next_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-next' ); ?></label>
+			<input class="checkbox" type="checkbox" <?php checked( $bp_nouveau_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_nouveau_widget_title' ); ?>" />
+			<label for="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-nouveau' ); ?></label>
 		</p>
 
 		<?php
@@ -147,20 +147,20 @@ class BP_Next_Object_Nav_Widget extends WP_Widget {
 
 endif;
 
-add_action( 'bp_widgets_init', array( 'BP_Next_Object_Nav_Widget', 'register_widget' ) );
+add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
 
-if ( ! class_exists( 'BP_Next_Group_Invite_Query' ) ) :
+if ( ! class_exists( 'BP_Nouveau_Group_Invite_Query' ) ) :
 /**
  * Query to get members that are not already members of the group
  *
  * @since 1.0
  */
-class BP_Next_Group_Invite_Query extends BP_User_Query {
+class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	/**
 	 * Array of group member ids, cached to prevent redundant lookups
 	 *
 	 * @var null|array Null if not yet defined, otherwise an array of ints
-	 * @package BP Next
+	 * @package BP Nouveau
 	 * @since 1.0
 	 */
 	protected $group_member_ids;
@@ -168,7 +168,7 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 	/**
 	 * Set up action hooks
 	 *
-	 * @package BP Next
+	 * @package BP Nouveau
 	 * @since 1.0
 	 */
 	public function setup_hooks() {
@@ -179,7 +179,7 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 	 * Exclude group members from the user query
 	 * as it's not needed to invite members to join the group
 	 *
-	 * @package BP Next
+	 * @package BP Nouveau
 	 * @since 1.0
 	 */
 	public function build_exclude_args() {
@@ -206,7 +206,7 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 	/**
 	 * Get the members of the queried group
 	 *
-	 * @package BP Next
+	 * @package BP Nouveau
 	 * @since 1.0
 	 *
 	 * @return array $ids User IDs of relevant group member ids
@@ -264,15 +264,15 @@ class BP_Next_Group_Invite_Query extends BP_User_Query {
 
 endif;
 
-function bp_next_groups_get_inviter_ids( $user_id, $group_id ) {
+function bp_nouveau_groups_get_inviter_ids( $user_id, $group_id ) {
 	if ( empty( $user_id ) || empty( $group_id ) ) {
 		return false;
 	}
 
-	return BP_Next_Group_Invite_Query::get_inviter_ids( $user_id, $group_id );
+	return BP_Nouveau_Group_Invite_Query::get_inviter_ids( $user_id, $group_id );
 }
 
-function bp_next_prepare_group_potential_invites_for_js( $user ) {
+function bp_nouveau_prepare_group_potential_invites_for_js( $user ) {
 	$bp = buddypress();
 
 	$response = array(
@@ -292,7 +292,7 @@ function bp_next_prepare_group_potential_invites_for_js( $user ) {
 	if ( ! empty( $bp->groups->invites_scope ) && 'invited' === $bp->groups->invites_scope ) {
 		$response['is_sent']  = (bool) groups_check_user_has_invite( $user->ID, bp_get_current_group_id() );
 
-		$inviter_ids = bp_next_groups_get_inviter_ids( $user->ID, bp_get_current_group_id() );
+		$inviter_ids = bp_nouveau_groups_get_inviter_ids( $user->ID, bp_get_current_group_id() );
 
 		foreach ( $inviter_ids as $inviter_id ) {
 			$class = false;
@@ -323,10 +323,10 @@ function bp_next_prepare_group_potential_invites_for_js( $user ) {
 		}
 	}
 
-	return apply_filters( 'bp_next_prepare_group_potential_invites_for_js', $response, $user );
+	return apply_filters( 'bp_nouveau_prepare_group_potential_invites_for_js', $response, $user );
 }
 
-function bp_next_get_group_potential_invites( $args = array() ) {
+function bp_nouveau_get_group_potential_invites( $args = array() ) {
 	$r = bp_parse_args( $args, array(
 		'group_id'     => bp_get_current_group_id(),
 		'type'         => 'alphabetical',
@@ -342,7 +342,7 @@ function bp_next_get_group_potential_invites( $args = array() ) {
 		return false;
 	}
 
-	$query = new BP_Next_Group_Invite_Query( $r );
+	$query = new BP_Nouveau_Group_Invite_Query( $r );
 
 	$response = new stdClass();
 
@@ -363,8 +363,8 @@ function bp_next_get_group_potential_invites( $args = array() ) {
 	return $response;
 }
 
-function bp_next_is_object_nav_in_sidebar() {
-	return is_active_widget( false, false, 'bp_next_sidebar_object_nav_widget', true );
+function bp_nouveau_is_object_nav_in_sidebar() {
+	return is_active_widget( false, false, 'bp_nouveau_sidebar_object_nav_widget', true );
 }
 
 if ( ! function_exists( 'bp_directory_activity_search_form' ) ) :
@@ -376,7 +376,7 @@ function bp_directory_activity_search_form() {
 
 	$search_form_html = '<form action="" method="get" id="search-activity-form">
 		<label for="activity_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="activity_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="activity_search_submit" name="activity_search_submit" value="'. __( 'Search', 'bp-next' ) .'" />
+		<input type="submit" id="activity_search_submit" name="activity_search_submit" value="'. __( 'Search', 'bp-nouveau' ) .'" />
 	</form>';
 
 	/**
@@ -397,14 +397,14 @@ endif;
  *
  * @todo filter group members / sites ... well anywhere :)
  */
-function bp_next_directory_groups_search_form( $search_form_html = '' ) {
+function bp_nouveau_directory_groups_search_form( $search_form_html = '' ) {
 
 	$query_arg   = bp_core_get_component_search_query_arg( 'groups' );
 	$placeholder = bp_get_search_default_text( 'groups' );
 
 	$search_form_html = '<form action="" method="get" id="search-groups-form">
 		<label for="groups_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="groups_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="groups_search_submit" name="groups_search_submit" value="'. __( 'Search', 'bp-next' ) .'" />
+		<input type="submit" id="groups_search_submit" name="groups_search_submit" value="'. __( 'Search', 'bp-nouveau' ) .'" />
 	</form>';
 
 	/**
@@ -414,12 +414,12 @@ function bp_next_directory_groups_search_form( $search_form_html = '' ) {
 	 *
 	 * @param string $search_form_html HTML markup for the search form.
 	 */
-	echo apply_filters( 'bp_next_directory_groups_search_form', $search_form_html );
+	echo apply_filters( 'bp_nouveau_directory_groups_search_form', $search_form_html );
 
 }
-add_filter( 'bp_directory_groups_search_form', 'bp_next_directory_groups_search_form', 10, 1 );
+add_filter( 'bp_directory_groups_search_form', 'bp_nouveau_directory_groups_search_form', 10, 1 );
 
-function bp_next_get_component_search_query_arg( $query_arg, $component = '' ) {
+function bp_nouveau_get_component_search_query_arg( $query_arg, $component = '' ) {
 	if ( 'members' === $component ) {
 		$query_arg = str_replace( '_s', '_search', $query_arg );
 
@@ -430,9 +430,9 @@ function bp_next_get_component_search_query_arg( $query_arg, $component = '' ) {
 
 	return $query_arg;
 }
-add_filter( 'bp_core_get_component_search_query_arg', 'bp_next_get_component_search_query_arg', 10, 2 );
+add_filter( 'bp_core_get_component_search_query_arg', 'bp_nouveau_get_component_search_query_arg', 10, 2 );
 
-function bp_next_directory_members_search_form() {
+function bp_nouveau_directory_members_search_form() {
 
 	$query_arg = bp_core_get_component_search_query_arg( 'members' );
 
@@ -440,7 +440,7 @@ function bp_next_directory_members_search_form() {
 
 	$search_form_html = '<form action="" method="get" id="search-members-form">
 		<label for="members_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="members_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="members_search_submit" name="members_search_submit" value="' . __( 'Search', 'bp-next' ) . '" />
+		<input type="submit" id="members_search_submit" name="members_search_submit" value="' . __( 'Search', 'bp-nouveau' ) . '" />
 	</form>';
 
 	/**
@@ -450,11 +450,11 @@ function bp_next_directory_members_search_form() {
 	 *
 	 * @param string $search_form_html HTML markup for the member search form.
 	 */
-	echo apply_filters( 'bp_next_directory_members_search_form', $search_form_html );
+	echo apply_filters( 'bp_nouveau_directory_members_search_form', $search_form_html );
 }
-add_filter( 'bp_directory_members_search_form', 'bp_next_directory_members_search_form', 10, 1 );
+add_filter( 'bp_directory_members_search_form', 'bp_nouveau_directory_members_search_form', 10, 1 );
 
-function bp_next_message_search_form() {
+function bp_nouveau_message_search_form() {
 	$query_arg = bp_core_get_component_search_query_arg( 'messages' );
 
 	// Get the default search text.
@@ -462,7 +462,7 @@ function bp_next_message_search_form() {
 
 	$search_form_html = '<form action="" method="get" id="search-messages-form">
 		<label for="messages_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="messages_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . __( 'Search', 'bp-next' ) . '" />
+		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . __( 'Search', 'bp-nouveau' ) . '" />
 	</form>';
 
 	/**
@@ -472,11 +472,11 @@ function bp_next_message_search_form() {
 	 *
 	 * @param string $search_form_html HTML markup for the message search form.
 	 */
-	echo apply_filters( 'bp_next_message_search_form', $search_form_html );
+	echo apply_filters( 'bp_nouveau_message_search_form', $search_form_html );
 }
-add_filter( 'bp_message_search_form', 'bp_next_message_search_form', 10, 1 );
+add_filter( 'bp_message_search_form', 'bp_nouveau_message_search_form', 10, 1 );
 
-function bp_next_activity_scope_newest_class( $classes = '' ) {
+function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 	if ( ! is_user_logged_in() ) {
 		return $classes;
 	}
@@ -490,7 +490,7 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 	/**
 	 * HeartBeat requests will transport the scope
 	 *
-	 * @see bp_next_ajax_querystring()
+	 * @see bp_nouveau_ajax_querystring()
 	 */
 	$scope = '';
 
@@ -544,7 +544,7 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 		/**
 		 * Leave other components do their specific stuff if needed.
 		 */
-		$myclasses = (array) apply_filters( 'bp_next_activity_scope_newest_class', $my_classes, $scope );
+		$myclasses = (array) apply_filters( 'bp_nouveau_activity_scope_newest_class', $my_classes, $scope );
 
 		if ( ! empty( $my_classes ) ) {
 			$classes .= ' ' . join( ' ', $my_classes );
@@ -553,23 +553,23 @@ function bp_next_activity_scope_newest_class( $classes = '' ) {
 
 	return $classes;
 }
-add_filter( 'bp_get_activity_css_class', 'bp_next_activity_scope_newest_class', 10, 1 );
+add_filter( 'bp_get_activity_css_class', 'bp_nouveau_activity_scope_newest_class', 10, 1 );
 
-function bp_next_activity_time_since( $time_since, $activity = null ) {
+function bp_nouveau_activity_time_since( $time_since, $activity = null ) {
 	if ( ! isset ( $activity->date_recorded ) ) {
 		return $time_since;
 	}
 
-	return apply_filters( 'bp_next_activity_time_since', sprintf(
+	return apply_filters( 'bp_nouveau_activity_time_since', sprintf(
 		'<time class="time-since" datetime="%1$s" data-bp-timestamp="%2$d">%3$s</time>',
 		esc_attr( $activity->date_recorded ),
 		esc_attr( strtotime( $activity->date_recorded ) ),
 		esc_attr( bp_core_time_since( $activity->date_recorded ) )
 	) );
 }
-add_filter( 'bp_activity_time_since', 'bp_next_activity_time_since', 10, 2 );
+add_filter( 'bp_activity_time_since', 'bp_nouveau_activity_time_since', 10, 2 );
 
-function bp_next_activity_allowed_tags( $activity_allowedtags = array() ) {
+function bp_nouveau_activity_allowed_tags( $activity_allowedtags = array() ) {
 	$activity_allowedtags['time'] = array();
 	$activity_allowedtags['time']['class'] = array();
 	$activity_allowedtags['time']['datetime'] = array();
@@ -577,9 +577,9 @@ function bp_next_activity_allowed_tags( $activity_allowedtags = array() ) {
 
 	return $activity_allowedtags;
 }
-add_filter( 'bp_activity_allowed_tags', 'bp_next_activity_allowed_tags', 10, 1 );
+add_filter( 'bp_activity_allowed_tags', 'bp_nouveau_activity_allowed_tags', 10, 1 );
 
-function bp_next_get_activity_delete_link( $delete_link = '' ) {
+function bp_nouveau_get_activity_delete_link( $delete_link = '' ) {
 	preg_match( '/<a\s[^>]*href=\"([^\"]*)\"[^>]*>(.*)<\/a>/siU', $delete_link, $matches );
 
 	if ( empty( $matches[0] ) || empty( $matches[1] ) || empty( $matches[2] ) ) {
@@ -592,9 +592,9 @@ function bp_next_get_activity_delete_link( $delete_link = '' ) {
 		esc_html( $matches[2] )
 	), $delete_link );
 
-	return apply_filters( 'bp_next_get_activity_delete_link', $delete_link );
+	return apply_filters( 'bp_nouveau_get_activity_delete_link', $delete_link );
 }
-add_filter( 'bp_get_activity_delete_link', 'bp_next_get_activity_delete_link', 10, 1 );
+add_filter( 'bp_get_activity_delete_link', 'bp_nouveau_get_activity_delete_link', 10, 1 );
 
 /**
  * Allow members to search inside their activity mentions
@@ -612,7 +612,7 @@ add_filter( 'bp_get_activity_delete_link', 'bp_next_get_activity_delete_link', 1
  * @param array $filter Current activity arguments.
  * @return array $retval
  */
-function bp_next_activity_filter_mentions_scope( $retval = array(), $filter = array() ) {
+function bp_nouveau_activity_filter_mentions_scope( $retval = array(), $filter = array() ) {
 
 	// Are mentions disabled?
 	if ( ! bp_activity_do_mentions() ) {
@@ -658,29 +658,29 @@ function bp_next_activity_filter_mentions_scope( $retval = array(), $filter = ar
 
 	return $retval;
 }
-//add_filter( 'bp_activity_set_mentions_scope_args', 'bp_next_activity_filter_mentions_scope', 10, 2 );
+//add_filter( 'bp_activity_set_mentions_scope_args', 'bp_nouveau_activity_filter_mentions_scope', 10, 2 );
 // Remove Core filter as it's not possible to search inside mentions otherwise
 //remove_filter( 'bp_activity_set_mentions_scope_args', 'bp_activity_filter_mentions_scope', 10, 2 );
 
 // I don't see any reason why to restrict group invites to friends..
-function bp_next_group_invites_create_steps( $steps = array() ) {
+function bp_nouveau_group_invites_create_steps( $steps = array() ) {
 	if ( bp_is_active( 'friends' ) && isset( $steps['group-invites'] ) ) {
 		// Simply change the name
-		$steps['group-invites']['name'] = _x( 'Invites',  'Group screen nav', 'bp-next' );
+		$steps['group-invites']['name'] = _x( 'Invites',  'Group screen nav', 'bp-nouveau' );
 		return $steps;
 	}
 
 	// Add the create step if friends component is not active
 	$steps['group-invites'] = array(
-		'name'     => _x( 'Invites',  'Group screen nav', 'bp-next' ),
+		'name'     => _x( 'Invites',  'Group screen nav', 'bp-nouveau' ),
 		'position' => 30
 	);
 
 	return $steps;
 }
-add_filter( 'groups_create_group_steps', 'bp_next_group_invites_create_steps', 10, 1 );
+add_filter( 'groups_create_group_steps', 'bp_nouveau_group_invites_create_steps', 10, 1 );
 
-function bp_next_group_setup_nav() {
+function bp_nouveau_group_setup_nav() {
 	if ( ! bp_is_group() || ! bp_groups_user_can_send_invites() ) {
 		return;
 	}
@@ -689,8 +689,23 @@ function bp_next_group_setup_nav() {
 	if ( bp_is_active( 'friends' ) ) {
 		$bp = buddypress();
 
-		if ( isset( $bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites'] ) ) {
-			$bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites']['name'] = _x( 'Invites', 'My Group screen nav', 'bp-next' );
+		/**
+		 * Since BuddyPress 2.6.0
+		 *
+		 * Direct access to bp_nav or bp_options_nav is deprecated.
+		 */
+		if ( class_exists( 'BP_Core_Nav' ) ) {
+			$bp->groups->nav->edit_nav(
+				array( 'name' => _x( 'Invites', 'My Group screen nav', 'bp-nouveau' ) ),
+				'send-invites',
+				bp_get_current_group_slug()
+			);
+
+		// We shouldn't do backcompat and bump BuddyPress required version to 2.6
+		} else {
+			if ( isset( $bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites'] ) ) {
+				$bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites']['name'] = _x( 'Invites', 'My Group screen nav', 'bp-nouveau' );
+			}
 		}
 
 	// Create the Subnav item for the group
@@ -699,7 +714,7 @@ function bp_next_group_setup_nav() {
 		$group_link    = bp_get_group_permalink( $current_group );
 
 		bp_core_new_subnav_item( array(
-			'name'            => _x( 'Invites', 'My Group screen nav', 'bp-next' ),
+			'name'            => _x( 'Invites', 'My Group screen nav', 'bp-nouveau' ),
 			'slug'            => 'send-invites',
 			'parent_url'      => $group_link,
 			'parent_slug'     => $current_group->slug,
@@ -711,7 +726,7 @@ function bp_next_group_setup_nav() {
 		) );
 	}
 }
-add_action( 'groups_setup_nav', 'bp_next_group_setup_nav' );
+add_action( 'groups_setup_nav', 'bp_nouveau_group_setup_nav' );
 
 if ( ! function_exists( 'bp_group_accept_invite_button' ) ) :
 
@@ -749,8 +764,8 @@ function bp_get_group_accept_invite_button( $group = false ) {
 		'block_self'        => false,
 		'wrapper'           => false,
 		'link_href'         => bp_get_group_accept_invite_link(),
-		'link_text'         => __( 'Accept', 'bp-next' ),
-		'link_title'        => __( 'Accept', 'bp-next' ),
+		'link_text'         => __( 'Accept', 'bp-nouveau' ),
+		'link_title'        => __( 'Accept', 'bp-nouveau' ),
 		'link_class'        => 'button accept group-button accept-invite',
 	);
 
@@ -795,8 +810,8 @@ function bp_get_group_reject_invite_button( $group = false ) {
 		'block_self'        => false,
 		'wrapper'           => false,
 		'link_href'         => bp_get_group_reject_invite_link(),
-		'link_text'         => __( 'Reject', 'bp-next' ),
-		'link_title'        => __( 'Reject', 'bp-next' ),
+		'link_text'         => __( 'Reject', 'bp-nouveau' ),
+		'link_title'        => __( 'Reject', 'bp-nouveau' ),
 		'link_class'        => 'button reject group-button reject-invite',
 	);
 
@@ -805,25 +820,52 @@ function bp_get_group_reject_invite_button( $group = false ) {
 
 endif;
 
-function bp_next_messages_adjust_nav() {
+function bp_nouveau_messages_adjust_nav() {
 	$bp = buddypress();
 
-	if ( ! isset( $bp->bp_options_nav[ bp_get_messages_slug() ] ) ) {
-		return;
-	}
+	/**
+	 * Since BuddyPress 2.6.0
+	 *
+	 * Direct access to bp_nav or bp_options_nav is deprecated.
+	 */
+	if ( class_exists( 'BP_Core_Nav' ) ) {
+		$secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => bp_get_messages_slug() ), false );
 
-	foreach ( $bp->bp_options_nav[ bp_get_messages_slug() ] as $nav_id => $nav_item ) {
-		if ( $nav_id === 'notices' ) {
-			bp_core_remove_subnav_item( bp_get_messages_slug(), $nav_id );
-		} else {
-			$bp->bp_options_nav[ bp_get_messages_slug() ][ $nav_id ]['link'] = '#' . $nav_id;
+		if ( ! $secondary_nav_items ) {
+			return;
 		}
 
+		foreach ( $secondary_nav_items as $secondary_nav_item ) {
+			if ( empty( $secondary_nav_item->slug ) ) {
+				continue;
+			}
+
+			if ( 'notices' === $secondary_nav_item->slug ) {
+				bp_core_remove_subnav_item( bp_get_messages_slug(), $secondary_nav_item->slug, 'members' );
+			} else {
+				$bp->members->nav->edit_nav( array( 'link' => '#' . $secondary_nav_item->slug ), $secondary_nav_item->slug, bp_get_messages_slug() );
+			}
+		}
+
+	// We shouldn't do backcompat and bump BuddyPress required version to 2.6
+	} else {
+		if ( ! isset( $bp->bp_options_nav[ bp_get_messages_slug() ] ) ) {
+			return;
+		}
+
+		foreach ( $bp->bp_options_nav[ bp_get_messages_slug() ] as $nav_id => $nav_item ) {
+			if ( $nav_id === 'notices' ) {
+				bp_core_remove_subnav_item( bp_get_messages_slug(), $nav_id );
+			} else {
+				$bp->bp_options_nav[ bp_get_messages_slug() ][ $nav_id ]['link'] = '#' . $nav_id;
+			}
+
+		}
 	}
 }
-add_action( 'bp_messages_setup_nav', 'bp_next_messages_adjust_nav' );
+add_action( 'bp_messages_setup_nav', 'bp_nouveau_messages_adjust_nav' );
 
-function bp_next_messages_adjust_admin_nav( $admin_nav ) {
+function bp_nouveau_messages_adjust_admin_nav( $admin_nav ) {
 	if ( empty( $admin_nav ) ) {
 		return $admin_nav;
 	}
@@ -844,11 +886,11 @@ function bp_next_messages_adjust_admin_nav( $admin_nav ) {
 
 	return $admin_nav;
 }
-add_filter( 'bp_messages_admin_nav', 'bp_next_messages_adjust_admin_nav', 10, 1 );
+add_filter( 'bp_messages_admin_nav', 'bp_nouveau_messages_adjust_admin_nav', 10, 1 );
 
 if ( class_exists( 'WP_List_Table' ) ) :
 
-class BP_Next_Notices_List_Table extends WP_List_Table {
+class BP_Nouveau_Notices_List_Table extends WP_List_Table {
 	public function __construct( $args = array() ) {
 		parent::__construct( array(
 			'plural' => 'notices',
@@ -864,7 +906,7 @@ class BP_Next_Notices_List_Table extends WP_List_Table {
 
 	public function prepare_items() {
 		$page     = $this->get_pagenum();
-		$per_page = $this->get_items_per_page( 'bp_next_notices_per_page' );
+		$per_page = $this->get_items_per_page( 'bp_nouveau_notices_per_page' );
 
 		$this->items = BP_Messages_Notice::get_notices( array(
 			'pag_num'  => $per_page,
@@ -878,10 +920,10 @@ class BP_Next_Notices_List_Table extends WP_List_Table {
 	}
 
 	public function get_columns() {
-		return apply_filters( 'bp_next_notices_list_table_get_columns', array(
-			'subject'   => _x( 'Subject', 'Admin Notices column header', 'bp-next' ),
-			'message'   => _x( 'Content', 'Admin Notices column header', 'bp-next' ),
-			'date_sent' => _x( 'Created', 'Admin Notices column header', 'bp-next' ),
+		return apply_filters( 'bp_nouveau_notices_list_table_get_columns', array(
+			'subject'   => _x( 'Subject', 'Admin Notices column header', 'bp-nouveau' ),
+			'message'   => _x( 'Content', 'Admin Notices column header', 'bp-nouveau' ),
+			'date_sent' => _x( 'Created', 'Admin Notices column header', 'bp-nouveau' ),
 		) );
 	}
 
@@ -902,18 +944,18 @@ class BP_Next_Notices_List_Table extends WP_List_Table {
 			'activate_deactivate' => '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
 				'page' => 'bp-notices',
 				'activate' => $item->id
-			), bp_get_admin_url( 'users.php' ) ) ), 'messages_activate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="activate">' . esc_html__( 'Activate Notice', 'bp-next' ) . '</a>',
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_activate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="activate">' . esc_html__( 'Activate Notice', 'bp-nouveau' ) . '</a>',
 			'delete' => '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
 				'page' => 'bp-notices',
 				'delete' => $item->id
-			), bp_get_admin_url( 'users.php' ) ) ), 'messages_delete_thread' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="delete">' . esc_html__( 'Delete Notice', 'bp-next' ) . '</a>',
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_delete_thread' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="delete">' . esc_html__( 'Delete Notice', 'bp-nouveau' ) . '</a>',
 		);
 
 		if ( ! empty( $item->is_active ) ) {
 			$actions['activate_deactivate'] = '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
 				'page' => 'bp-notices',
 				'deactivate' => $item->id
-			), bp_get_admin_url( 'users.php' ) ) ), 'messages_deactivate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="deactivate">' . esc_html__( 'Deactivate Notice', 'bp-next' ) . '</a>';
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_deactivate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="deactivate">' . esc_html__( 'Deactivate Notice', 'bp-nouveau' ) . '</a>';
 		}
 
 		echo '<strong>' . apply_filters( 'bp_get_message_notice_subject', $item->subject ) . '</strong> ' . $this->row_actions( $actions );
@@ -930,7 +972,7 @@ class BP_Next_Notices_List_Table extends WP_List_Table {
 
 endif;
 
-class BP_Next_Admin_Notices {
+class BP_Nouveau_Admin_Notices {
 
 	public static function register_notices_admin() {
 		if ( ! is_admin() || ! bp_is_active( 'messages' ) ) {
@@ -972,8 +1014,8 @@ class BP_Next_Admin_Notices {
 		}
 
 		$this->screen_id = add_users_page(
-			_x( 'All Member Notices', 'Notices admin page title', 'bp-next' ),
-			_x( 'All Member Notices', 'Admin Users menu', 'bp-next' ),
+			_x( 'All Member Notices', 'Notices admin page title', 'bp-nouveau' ),
+			_x( 'All Member Notices', 'Admin Users menu', 'bp-nouveau' ),
 			'manage_options',
 			'bp-notices',
 			array( $this, 'admin_index' )
@@ -1001,7 +1043,7 @@ class BP_Next_Admin_Notices {
 			exit();
 		}
 
-		$this->list_table = new BP_Next_Notices_List_Table( array( 'screen' => get_current_screen()->id ) );
+		$this->list_table = new BP_Nouveau_Notices_List_Table( array( 'screen' => get_current_screen()->id ) );
 	}
 
 	public function admin_index() {
@@ -1010,25 +1052,25 @@ class BP_Next_Admin_Notices {
 		<div class="wrap">
 
 			<h1>
-				<?php echo esc_html_x( 'All Member Notices', 'Notices admin page title', 'bp-next' ); ?>
-				<a id="add_notice" class="add-new-h2" href="#"><?php esc_html_e( 'Add New Notice', 'bp-next' ); ?></a>
+				<?php echo esc_html_x( 'All Member Notices', 'Notices admin page title', 'bp-nouveau' ); ?>
+				<a id="add_notice" class="add-new-h2" href="#"><?php esc_html_e( 'Add New Notice', 'bp-nouveau' ); ?></a>
 			</h1>
 
 			<form action=<?php echo esc_url( $this->url ); ?> method="post">
 				<table class="widefat">
 					<tr>
-						<td><label for="bp_notice_subject"><?php esc_html_e( 'Subject', 'bp-next' ); ?></label></td>
+						<td><label for="bp_notice_subject"><?php esc_html_e( 'Subject', 'bp-nouveau' ); ?></label></td>
 						<td><input type="text" class="widefat" id="bp_notice_subject" name="bp_notice[subject]"/></td>
 					</tr>
 					<tr>
-						<td><label for="bp_notice_content"><?php esc_html_e( 'Content', 'bp-next' ); ?></label></td>
+						<td><label for="bp_notice_content"><?php esc_html_e( 'Content', 'bp-nouveau' ); ?></label></td>
 						<td><textarea class="widefat" id="bp_notice_content" name="bp_notice[content]"></textarea></td>
 					</tr>
 					<tr class="submit">
 						<td>&nbsp;</td>
 						<td style="float:right">
-							<input type="reset" value="<?php esc_attr_e( 'Cancel Notice', 'bp-next' ); ?>" class="button-secondary">
-							<input type="submit" value="<?php esc_attr_e( 'Save Notice', 'bp-next' ); ?>" name="bp_notice[send]" class="button-primary">
+							<input type="reset" value="<?php esc_attr_e( 'Cancel Notice', 'bp-nouveau' ); ?>" class="button-secondary">
+							<input type="submit" value="<?php esc_attr_e( 'Save Notice', 'bp-nouveau' ); ?>" name="bp_notice[send]" class="button-primary">
 						</td>
 					</tr>
 				</table>
@@ -1040,9 +1082,9 @@ class BP_Next_Admin_Notices {
 
 					<p>
 						<?php if ( isset( $_GET['error'] ) ) :
-							esc_html_e( 'Notice was not created. Please try again.', 'bp-next' );
+							esc_html_e( 'Notice was not created. Please try again.', 'bp-nouveau' );
 						else:
-							esc_html_e( 'Notice successfully created.', 'bp-next' );
+							esc_html_e( 'Notice successfully created.', 'bp-nouveau' );
 						endif; ?>
 					</p>
 
@@ -1056,9 +1098,9 @@ class BP_Next_Admin_Notices {
 		<?php
 	}
 }
-add_action( 'bp_init', array( 'BP_Next_Admin_Notices', 'register_notices_admin' ) );
+add_action( 'bp_init', array( 'BP_Nouveau_Admin_Notices', 'register_notices_admin' ) );
 
-function bp_next_add_notice_notification_for_user( $notifications, $user_id ) {
+function bp_nouveau_add_notice_notification_for_user( $notifications, $user_id ) {
 	if ( ! bp_is_active( 'messages' ) || ! doing_action( 'admin_bar_menu' ) ) {
 		return $notifications;
 	}
@@ -1091,26 +1133,26 @@ function bp_next_add_notice_notification_for_user( $notifications, $user_id ) {
 
 	return array_merge( $notifications, array( $notice_notification ) );
 }
-add_filter( 'bp_notifications_get_all_notifications_for_user', 'bp_next_add_notice_notification_for_user', 10, 2 );
+add_filter( 'bp_notifications_get_all_notifications_for_user', 'bp_nouveau_add_notice_notification_for_user', 10, 2 );
 
-function bp_next_format_notice_notification_for_user( $array ) {
+function bp_nouveau_format_notice_notification_for_user( $array ) {
 	if ( ! empty( $array['text'] ) || ! doing_action( 'admin_bar_menu' ) ) {
 		return $array;
 	}
 
 	return array(
-		'text' => esc_html__( 'New site wide notice', 'bp-next' ),
+		'text' => esc_html__( 'New site wide notice', 'bp-nouveau' ),
 		'link' => bp_loggedin_user_domain(),
 	);
 }
-add_filter( 'bp_messages_single_new_message_notification', 'bp_next_format_notice_notification_for_user', 10, 1 );
+add_filter( 'bp_messages_single_new_message_notification', 'bp_nouveau_format_notice_notification_for_user', 10, 1 );
 
-function bp_next_unregister_notices_widget() {
+function bp_nouveau_unregister_notices_widget() {
 	unregister_widget( 'BP_Messages_Sitewide_Notices_Widget' );
 }
-add_action( 'widgets_init', 'bp_next_unregister_notices_widget' );
+add_action( 'widgets_init', 'bp_nouveau_unregister_notices_widget' );
 
-function bp_next_mce_buttons( $buttons = array() ) {
+function bp_nouveau_mce_buttons( $buttons = array() ) {
 	$remove_buttons = array(
 		'wp_more',
 		'spellchecker',
@@ -1127,10 +1169,10 @@ function bp_next_mce_buttons( $buttons = array() ) {
 	return $buttons;
 }
 
-function bp_next_messages_at_on_tinymce_init( $settings, $editor_id ) {
+function bp_nouveau_messages_at_on_tinymce_init( $settings, $editor_id ) {
 	// We only apply the mentions init to the visual post editor in the WP dashboard.
 	if ( 'message_content' === $editor_id ) {
-		$settings['init_instance_callback'] = 'window.bp.Next.Messages.tinyMCEinit';
+		$settings['init_instance_callback'] = 'window.bp.Nouveau.Messages.tinyMCEinit';
 	}
 
 	return $settings;
@@ -1151,7 +1193,7 @@ add_filter( 'bp_get_message_thread_content', 'convert_chars' );
 add_filter( 'bp_get_message_thread_content', 'make_clickable', 9 );
 add_filter( 'bp_get_message_thread_content', 'wpautop' );
 
-function bp_next_get_message_date( $date ) {
+function bp_nouveau_get_message_date( $date ) {
 	$now = bp_core_current_time( true, 'timestamp' );
 	$date = strtotime( $date );
 
@@ -1182,10 +1224,10 @@ function bp_next_get_message_date( $date ) {
 		$date_format = 'M j';
 	}
 
-	return apply_filters( 'bp_next_get_message_date', date_i18n( $date_format, $calculated_time, true ), $calculated_time, $date, $date_format );
+	return apply_filters( 'bp_nouveau_get_message_date', date_i18n( $date_format, $calculated_time, true ), $calculated_time, $date, $date_format );
 }
 
-function bp_next_messages_get_bulk_actions() {
+function bp_nouveau_messages_get_bulk_actions() {
 	ob_start();
 	bp_messages_bulk_management_dropdown();
 

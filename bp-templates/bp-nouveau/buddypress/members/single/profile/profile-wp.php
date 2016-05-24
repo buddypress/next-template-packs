@@ -25,14 +25,14 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 	do_action( 'bp_before_profile_field_content' ); ?>
 
 	<div class="bp-widget wp-profile">
-		<h4><?php bp_is_my_profile() ? _e( 'My Profile', 'bp-next' ) : printf( __( "%s's Profile", 'bp-next' ), bp_get_displayed_user_fullname() ); ?></h4>
+		<h4><?php bp_is_my_profile() ? _e( 'My Profile', 'bp-nouveau' ) : printf( __( "%s's Profile", 'bp-nouveau' ), bp_get_displayed_user_fullname() ); ?></h4>
 
 		<table class="wp-profile-fields">
 
 			<?php if ( $ud->display_name ) : ?>
 
 				<tr id="wp_displayname">
-					<td class="label"><?php _e( 'Name', 'bp-next' ); ?></td>
+					<td class="label"><?php _e( 'Name', 'bp-nouveau' ); ?></td>
 					<td class="data"><?php echo $ud->display_name; ?></td>
 				</tr>
 
@@ -41,7 +41,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 			<?php if ( $ud->user_description ) : ?>
 
 				<tr id="wp_desc">
-					<td class="label"><?php _e( 'About Me', 'bp-next' ); ?></td>
+					<td class="label"><?php _e( 'About Me', 'bp-nouveau' ); ?></td>
 					<td class="data"><?php echo $ud->user_description; ?></td>
 				</tr>
 
@@ -50,7 +50,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 			<?php if ( $ud->user_url ) : ?>
 
 				<tr id="wp_website">
-					<td class="label"><?php _e( 'Website', 'bp-next' ); ?></td>
+					<td class="label"><?php _e( 'Website', 'bp-nouveau' ); ?></td>
 					<td class="data"><?php echo make_clickable( $ud->user_url ); ?></td>
 				</tr>
 
@@ -59,7 +59,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 			<?php if ( $ud->jabber ) : ?>
 
 				<tr id="wp_jabber">
-					<td class="label"><?php _e( 'Jabber', 'bp-next' ); ?></td>
+					<td class="label"><?php _e( 'Jabber', 'bp-nouveau' ); ?></td>
 					<td class="data"><?php echo $ud->jabber; ?></td>
 				</tr>
 
@@ -68,7 +68,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 			<?php if ( $ud->aim ) : ?>
 
 				<tr id="wp_aim">
-					<td class="label"><?php _e( 'AOL Messenger', 'bp-next' ); ?></td>
+					<td class="label"><?php _e( 'AOL Messenger', 'bp-nouveau' ); ?></td>
 					<td class="data"><?php echo $ud->aim; ?></td>
 				</tr>
 
@@ -77,7 +77,7 @@ do_action( 'bp_before_profile_loop_content' ); ?>
 			<?php if ( $ud->yim ) : ?>
 
 				<tr id="wp_yim">
-					<td class="label"><?php _e( 'Yahoo Messenger', 'bp-next' ); ?></td>
+					<td class="label"><?php _e( 'Yahoo Messenger', 'bp-nouveau' ); ?></td>
 					<td class="data"><?php echo $ud->yim; ?></td>
 				</tr>
 
