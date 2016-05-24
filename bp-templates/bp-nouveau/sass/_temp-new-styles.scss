@@ -1,0 +1,23 @@
+//
+// Temporary styles are styles for new components or visual styles
+// Added here to avoid them getting mixed in with  legacy css styles
+// ahead of legacy styles being removed and re-written.
+//
+// Once the main scss stylesheet is underway styles / rulesets in this file can be
+// moved over and into position in correct sections.
+//
+
+
+// Please clearly comment out begining and end of rules.
+
+/* ======= New rules for {insert name here} begin ========= */
+
+#obviously {
+	a {
+		.made-up-selector {
+			color: #ff0000;
+		}
+	}
+}
+
+/* ============ Ends rules for {insert name here} ==========*/

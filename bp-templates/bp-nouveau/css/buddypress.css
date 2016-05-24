@@ -2686,3 +2686,10 @@ body.register #buddypress div.page ul {
 		margin: 10px 0 20px;
 	}
 }
+
+/* ======= New rules for {insert name here} begin ========= */
+#obviously a .made-up-selector {
+	color: #ff0000;
+}
+
+/* ============ Ends rules for {insert name here} ==========*/
