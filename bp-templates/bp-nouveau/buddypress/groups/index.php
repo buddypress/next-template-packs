@@ -38,16 +38,16 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 	/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
 	do_action( 'template_notices' ); ?>
 
-	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
+	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
-		<?php bp_get_template_part( 'common/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/nav/object-nav' ); ?>
 
 	<?php endif; ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
 
 		<menu type="list" class="subnav clearfix">
-				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
+				<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
 		</menu>
 
 			<?php
@@ -59,7 +59,7 @@ do_action( 'bp_before_directory_groups_page' ); ?>
 			 */
 			do_action( 'bp_groups_directory_group_types' ); ?>
 
-			<?php bp_get_template_part( 'common/component-filters' ); ?>
+			<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
 
 	</div>
 

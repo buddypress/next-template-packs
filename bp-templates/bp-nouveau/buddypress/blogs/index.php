@@ -48,7 +48,7 @@ do_action( 'bp_before_directory_blogs_page' ); ?>
 
 	<form action="" method="post" id="blogs-directory-form" class="dir-form">
 
-		<?php bp_get_template_part( 'common/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/nav/object-nav' ); ?>
 
 		<div class="item-list-tabs" id="subnav" role="navigation">
 			<menu type="list" class="subnav clearfix">
@@ -63,7 +63,7 @@ do_action( 'bp_before_directory_blogs_page' ); ?>
 				do_action( 'bp_blogs_directory_blog_sub_types' ); ?>
 			</menu>
 
-			<?php bp_get_template_part( 'common/component-filters' ); ?>
+			<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
 
 		</div>
 

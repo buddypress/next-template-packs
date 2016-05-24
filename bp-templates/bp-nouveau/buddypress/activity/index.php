@@ -41,9 +41,9 @@ do_action( 'bp_before_directory_activity' ); ?>
 	 */
 	do_action( 'template_notices' ); ?>
 
-	<?php if ( ! bp_next_is_object_nav_in_sidebar() ) : ?>
+	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
-		<?php bp_get_template_part( 'common/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/nav/object-nav' ); ?>
 
 	<?php endif; ?>
 
@@ -52,7 +52,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 		<menu type="list" class="subnav clearfix">
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
 
-				<?php bp_get_template_part( 'common/dir-search-form' ); ?>
+				<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
 
 		</menu>
 
@@ -65,7 +65,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 			 */
 			do_action( 'bp_activity_syndication_options' ); ?>
 
-			<?php bp_get_template_part( 'common/component-filters' ); ?>
+			<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
 
 	</div><!-- .item-list-tabs -->
 
