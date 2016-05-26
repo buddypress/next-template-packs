@@ -3,7 +3,7 @@
  * BuddyPress - Groups Request Membership
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 /**

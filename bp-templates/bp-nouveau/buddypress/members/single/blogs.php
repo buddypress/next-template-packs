@@ -3,7 +3,7 @@
  * BuddyPress - Users Blogs
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

@@ -3,7 +3,7 @@
  * BuddyPress - Groups Cover Image Header.
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 /**

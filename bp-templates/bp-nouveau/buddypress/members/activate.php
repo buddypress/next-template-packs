@@ -3,7 +3,7 @@
  * BuddyPress - Members Activate
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

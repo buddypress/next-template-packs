@@ -3,7 +3,7 @@
  * BuddyPress - Members Profile Change Cover Image
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

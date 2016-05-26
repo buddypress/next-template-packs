@@ -3,7 +3,7 @@
  * BuddyPress - Members
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 /**

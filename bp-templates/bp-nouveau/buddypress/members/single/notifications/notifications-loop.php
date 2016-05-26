@@ -3,7 +3,7 @@
  * BuddyPress - Members Notifications Loop
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

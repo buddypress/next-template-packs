@@ -3,7 +3,7 @@
  * BuddyPress - Members Read Notifications
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

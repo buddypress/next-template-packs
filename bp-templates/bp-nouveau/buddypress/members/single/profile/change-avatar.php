@@ -3,7 +3,7 @@
  * BuddyPress - Members Profile Change Avatar
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

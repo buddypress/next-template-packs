@@ -6,7 +6,7 @@
  * support to their plugins for the members component.
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 		/**

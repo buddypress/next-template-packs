@@ -3,7 +3,7 @@
  * BuddyPress - Members Settings Delete Account
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 /** This action is documented in bp-templates/bp-legacy/buddypress/members/single/settings/profile.php */

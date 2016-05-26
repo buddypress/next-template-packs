@@ -3,7 +3,7 @@
  * BuddyPress - Groups Send Invites
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 /**

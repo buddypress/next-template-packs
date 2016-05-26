@@ -3,7 +3,7 @@ bp_adminbar_account_menu<?php
  * BuddyPress - Blogs
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 /**

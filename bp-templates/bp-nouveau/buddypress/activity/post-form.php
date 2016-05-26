@@ -3,7 +3,7 @@
  * BuddyPress - Activity Post Form
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

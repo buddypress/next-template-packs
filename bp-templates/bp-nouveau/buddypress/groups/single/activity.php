@@ -3,7 +3,7 @@
  * BuddyPress - Groups Activity
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

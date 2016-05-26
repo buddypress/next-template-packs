@@ -3,7 +3,7 @@
  * BuddyPress - Group Invites Loop
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>

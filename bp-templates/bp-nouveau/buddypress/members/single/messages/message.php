@@ -8,7 +8,7 @@
  * @since 2.4.0
  *
  * @package BuddyPress
- * @subpackage bp-legacy
+ * @subpackage bp-nouveau
  */
 
 ?>
