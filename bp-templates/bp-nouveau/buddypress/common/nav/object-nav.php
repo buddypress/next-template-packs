@@ -20,7 +20,7 @@ switch($component) {
 	break;
 
 	case 'members' :
-		$component_name      = __('Friends', 'bp-next');
+		$component_name      = __('Friends', 'bp-nouveau');
 		$component_permalink = bp_get_members_directory_permalink();
 		$component_count     = bp_get_total_member_count();
 		$friend_count        = bp_get_total_friend_count( bp_loggedin_user_id() );
@@ -30,7 +30,7 @@ switch($component) {
 	break;
 
 	case 'blogs' :
-		$component_name      = __( 'Sites', 'bp-next' );
+		$component_name      = __( 'Sites', 'bp-nouveau' );
 		$component_permalink = bp_get_root_domain() . '/' .  bp_get_blogs_root_slug();
 		$component_count     = bp_get_total_blog_count();
 		$my_blog_count       = bp_get_total_blog_count_for_user( bp_loggedin_user_id() );
@@ -60,7 +60,7 @@ switch($component) {
 
 		<li class="selected" id="<?php echo $component; ?>-all" data-bp-scope="all" data-bp-object="<?php echo $component; ?>">
 			<a href="<?php echo $component_permalink; ?>">
-				<?php printf( __( 'All %1$s %2$s', 'bp-next' ), $component, $component_count ); ?>
+				<?php printf( __( 'All %1$s %2$s', 'bp-nouveau' ), $component, $component_count ); ?>
 			</a>
 		</li>
 
@@ -71,8 +71,8 @@ switch($component) {
 
 				<?php if( bp_is_active( 'friends' ) && $my_friends_count ) : ?>
 					<li id="activity-friends" class="dynamic" data-bp-scope="friends" data-bp-object="<?php echo $component; ?>">
-						<a href="<?php echo $my_account_friends_link ?>" title="<?php esc_attr_e( 'The activity of my friends only.', 'bp-next' ); ?>">
-							<?php esc_html_e( 'My Friends', 'bp-next' ); ?>
+						<a href="<?php echo $my_account_friends_link ?>" title="<?php esc_attr_e( 'The activity of my friends only.', 'bp-nouveau' ); ?>">
+							<?php esc_html_e( 'My Friends', 'bp-nouveau' ); ?>
 							<?php /* Following empty span will contain the number of newest activities corresponding to this scope */ ?>
 							<span></span>
 						</a>
@@ -88,8 +88,8 @@ switch($component) {
 				do_action( 'bp_before_activity_type_tab_groups' ); ?>
 
 					<li id="activity-groups" class="dynamic" data-bp-scope="groups" data-bp-object="activity">
-						<a href="<?php echo bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_groups_slug() . '/'; ?>" title="<?php esc_attr_e( 'The activity of groups I am a member of.', 'bp-next' ); ?>">
-							<?php esc_html_e( 'My Groups', 'bp-next' ); ?>
+						<a href="<?php echo bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_groups_slug() . '/'; ?>" title="<?php esc_attr_e( 'The activity of groups I am a member of.', 'bp-nouveau' ); ?>">
+							<?php esc_html_e( 'My Groups', 'bp-nouveau' ); ?>
 							<?php /* Following empty span will contain the number of newest activities corresponding to this scope */ ?>
 							<span></span>
 						</a>
@@ -105,8 +105,8 @@ switch($component) {
 				do_action( 'bp_before_activity_type_tab_mentions' ); ?>
 
 				<li id="activity-mentions" class="dynamic" data-bp-scope="mentions" data-bp-object="activity">
-					<a href="<?php echo bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/'; ?>" title="<?php esc_attr_e( 'Activity that I have been mentioned in.', 'bp-next' ); ?>">
-						<?php _e( 'Mentions', 'bp-next' ); ?>
+					<a href="<?php echo bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/'; ?>" title="<?php esc_attr_e( 'Activity that I have been mentioned in.', 'bp-nouveau' ); ?>">
+						<?php _e( 'Mentions', 'bp-nouveau' ); ?>
 						<?php /* Following empty span will contain the number of newest activities corresponding to this scope */ ?>
 						<span><?php if ( bp_get_total_mention_count_for_user( bp_loggedin_user_id() ) ) bp_total_mention_count_for_user( bp_loggedin_user_id() ) ; ?></span>
 					</a>
@@ -119,7 +119,7 @@ switch($component) {
 
 				<li id="<?php echo $component; ?>-personal" data-bp-scope="personal" data-bp-object="<?php $component ;?>">
 					<a href="<?php echo $user_account_comp_link; ?>">
-						<?php printf( __( 'My %1$s %2$s', 'bp-next' ), $component_name, $my_comp_count ); ?>
+						<?php printf( __( 'My %1$s %2$s', 'bp-nouveau' ), $component_name, $my_comp_count ); ?>
 					</a>
 				</li>
 
