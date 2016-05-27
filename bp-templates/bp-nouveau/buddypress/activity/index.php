@@ -50,7 +50,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 
 		<menu type="list" class="subnav clearfix">
-			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-next' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-next' ); ?></span></a></li>
+			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
 				<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
 
@@ -82,7 +82,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 
 		<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Loading the community updates, please wait.', 'bp-next' ) ;?></li>
+		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Loading the community updates, please wait.', 'bp-nouveau' ) ;?></li>
 
 		</ul>
 

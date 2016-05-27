@@ -19,13 +19,13 @@ switch( $component ) {
 	case 'members': ?>
 
 		<li id="members-order-select" class="last filter">
-			<label for="members-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
+			<label for="members-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
 			<select id="members-order-by" data-bp-filter="members">
-				<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-				<option value="newest"><?php _e( 'Newest Registered', 'bp-next' ); ?></option>
+				<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
+				<option value="newest"><?php _e( 'Newest Registered', 'bp-nouveau' ); ?></option>
 
 				<?php if ( bp_is_active( 'xprofile' ) ) : ?>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
+					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
 				<?php endif; ?>
 
 				<?php
@@ -46,13 +46,13 @@ switch( $component ) {
 
 			<li id="groups-order-select" class="last filter">
 
-				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-next' ); ?></span></label>
+				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
 
 				<select id="groups-order-by" data-bp-filter="groups">
-					<option value="active"><?php _e( 'Last Active', 'bp-next' ); ?></option>
-					<option value="popular"><?php _e( 'Most Members', 'bp-next' ); ?></option>
-					<option value="newest"><?php _e( 'Newly Created', 'bp-next' ); ?></option>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-next' ); ?></option>
+					<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
+					<option value="popular"><?php _e( 'Most Members', 'bp-nouveau' ); ?></option>
+					<option value="newest"><?php _e( 'Newly Created', 'bp-nouveau' ); ?></option>
+					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
 
 					<?php
 
