@@ -23,10 +23,14 @@ switch($component) {
 		$component_name      = __('Friends', 'bp-nouveau');
 		$component_permalink = bp_get_members_directory_permalink();
 		$component_count     = bp_get_total_member_count();
+
+		if( bp_is_active( 'friends' ) ) :
 		$friend_count        = bp_get_total_friend_count( bp_loggedin_user_id() );
 		$my_comp_count       = '<span class="my-friends-count">' . $friend_count  . '</span>';
 		$user_account_comp_link = bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/';
 		$personal_items  = ( bp_is_active( 'friends' ) && $friend_count ) ? true : false;
+		endif;
+
 	break;
 
 	case 'blogs' :
