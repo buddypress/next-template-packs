@@ -43,16 +43,20 @@ switch($component) {
 		$component_name          = $component;
 		$component_count         = '';
 		$component_permalink     = bp_get_activity_directory_permalink();
+
+		if( bp_is_active( 'friends' ) ) :
 		$my_account_friends_link = bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_friends_slug() . '/';
 		$friend_count            = bp_get_total_friend_count( bp_loggedin_user_id() );
 		$my_comp_count           = '<span class="my-friends-count">' . $friend_count  . '</span>';
-		$my_fav_count     = bp_get_total_favorite_count_for_user( bp_loggedin_user_id() ) ;
 		$user_account_comp_link = bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/';
+		endif;
+
+		$my_fav_count     = bp_get_total_favorite_count_for_user( bp_loggedin_user_id() ) ;
+
 		// Too many variences this doesn't work now as activity has personal groups and friends.
 		$personal_items_groups  = ( bp_is_active( 'groups' ) && $friend_count ) ? true : false;
 		$my_groups_count = bp_get_total_group_count_for_user( bp_loggedin_user_id() );
 	break;
-
 }
 ?>
 
@@ -69,7 +73,7 @@ switch($component) {
 			<?php // Activity specific list items ?>
 			<?php if( 'activity' == $component ) : ?>
 
-				<?php if( bp_is_active( 'friends' ) && $my_friends_count ) : ?>
+				<?php if( bp_is_active( 'friends' ) && $friend_count ) : ?>
 					<li id="activity-friends" class="dynamic" data-bp-scope="friends" data-bp-object="<?php echo $component; ?>">
 						<a href="<?php echo $my_account_friends_link ?>" title="<?php esc_attr_e( 'The activity of my friends only.', 'bp-nouveau' ); ?>">
 							<?php esc_html_e( 'My Friends', 'bp-nouveau' ); ?>
