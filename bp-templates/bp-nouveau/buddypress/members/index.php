@@ -51,11 +51,9 @@ do_action( 'bp_before_directory_members_page' ); ?>
 
 	<div class="item-list-tabs" id="subnav" role="navigation">
 
-		<menu type="list" class="subnav clearfix">
-
+		<ul type="list" class="subnav clearfix">
 				<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
-
-		</menu>
+		</ul>
 
 		<?php
 
@@ -78,10 +76,10 @@ do_action( 'bp_before_directory_members_page' ); ?>
 	<?php
 
 	/**
-		 * Fires and displays the members content.
-		 *
-		 * @since 1.1.0
-		 */
+	 * Fires and displays the members content.
+	 *
+	 * @since 1.1.0
+	 */
 	do_action( 'bp_directory_members_content' ); ?>
 
 	<?php wp_nonce_field( 'directory_members', '_wpnonce-member-filter' ); ?>

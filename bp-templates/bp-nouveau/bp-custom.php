@@ -69,7 +69,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 		if ( ! empty( $item_nav_args[ 'bp_nouveau_widget_title' ] ) ) {
 			$title = '';
 
-			if ( bp_is_active( 'groups' ) && bp_get_current_group_name() ) {
+			if ( bp_is_group() ) {
 				$title = bp_get_current_group_name();
 			} elseif ( bp_is_user() ) {
 				$title = bp_get_displayed_user_fullname();
@@ -86,14 +86,10 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
-		if ( bp_is_activity_directory() ) {
-			bp_get_template_part( 'activity/object-nav' );
-		} elseif ( bp_is_members_directory() ) {
-			bp_get_template_part( 'members/object-nav' );
+		if ( bp_is_activity_directory() || bp_is_members_directory() || bp_is_groups_directory() ) {
+			bp_get_template_part( 'common/nav/object-nav' );
 		} elseif ( bp_is_user() ) {
 			bp_get_template_part( 'members/single/item-nav' );
-		} elseif ( bp_is_groups_directory() ) {
-			bp_get_template_part( 'groups/object-nav' );
 		} elseif ( bp_is_group() ) {
 			bp_get_template_part( 'groups/single/item-nav' );
 		}

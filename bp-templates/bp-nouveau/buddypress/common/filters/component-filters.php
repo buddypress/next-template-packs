@@ -8,7 +8,7 @@
  */
 $component = bp_current_component();
 ?>
-<menu id="dir-filters" class="dir-component-filters clearfix">
+<ul id="dir-filters" class="dir-component-filters clearfix">
 
 <?php
 switch( $component ) {
@@ -73,4 +73,4 @@ switch( $component ) {
 	break;
 } ?>
 
-</menu><!-- // menu.dir-component-filters -->
+</ul><!-- // menu.dir-component-filters -->
