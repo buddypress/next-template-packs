@@ -115,6 +115,14 @@ Hello, this is the BuddyPress Legacy stylesheet.
 	margin: 5px 0;
 }
 
+#buddypress #bp-nouveau-activity-form {
+	overflow: hidden;
+}
+
+#buddypress #bp-nouveau-activity-form #message {
+	clear: both;
+}
+
 #buddypress #item-body form#whats-new-form {
 	margin: 0;
 	padding: 0;
@@ -156,6 +164,36 @@ body.no-js #buddypress form#whats-new-form textarea {
 	height: 50px;
 }
 
+#buddypress #bp-nouveau-activity-form #whats-new-actions,
+#buddypress #bp-nouveau-activity-form #whats-new-options {
+	margin-bottom: 1em;
+}
+
+#buddypress #bp-nouveau-activity-form #whats-new-actions ul#whats-new-buttons {
+	margin: 0;
+}
+
+#buddypress #bp-nouveau-activity-form #whats-new-actions ul#whats-new-buttons li.whats-new-button {
+	display:inline-block;
+	margin: 1em 0.3em;
+}
+
+#buddypress #bp-nouveau-activity-form #whats-new-actions ul#whats-new-buttons li.whats-new-button a.button {
+ 	padding:5px 10px;
+ 	float:none;
+ 	width:auto;
+ 	height:auto;
+}
+
+#buddypress #bp-nouveau-activity-form #whats-new-actions ul#whats-new-buttons li.whats-new-button.active a.button {
+ 	background:#555;
+ 	color:#FFF;
+}
+
+#buddypress #bp-nouveau-activity-form #whats-new-actions ul#whats-new-buttons li.whats-new-button a.dashicons:before {
+	font-size: 20px;
+}
+
 #buddypress form#whats-new-form #whats-new-options select {
 	max-width: 200px;
 	margin-top: 12px;
@@ -164,6 +202,19 @@ body.no-js #buddypress form#whats-new-form textarea {
 #buddypress form#whats-new-form #whats-new-submit {
 	float: right;
 	margin-top: 12px;
+	margin-bottom: 1em;
+	overflow: hidden;
+}
+
+#buddypress #bp-nouveau-activity-form #whats-new-submit input {
+	margin-left: 1em;
+}
+
+#buddypress #bp-nouveau-activity-form a.bp-remove-item {
+	text-decoration: none;
+	border:none;
+	display:block;
+	float:right;
 }
 
 #buddypress #whats-new-options:after {

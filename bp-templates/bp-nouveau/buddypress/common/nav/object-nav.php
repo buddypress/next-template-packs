@@ -81,16 +81,22 @@ switch($component) {
 <div class="item-list-tabs <?php echo esc_attr( $component ); ?>-type-tabs" role="navigation">
 	<ul type="list" class="component-navigation <?php echo esc_attr( $component ); ?>-nav">
 
-			<li class="selected" id="<?php echo esc_attr( $component ); ?>-all" data-bp-scope="all" data-bp-object="<?php echo esc_attr( $component ); ?>">
+			<li class="selected <?php echo ( 'activity' === $component ) ? 'dynamic' : ''; ?>" id="<?php echo esc_attr( $component ); ?>-all" data-bp-scope="all" data-bp-object="<?php echo esc_attr( $component ); ?>">
 				<a href="<?php echo esc_url( $component_permalink ); ?>">
-					<?php printf( __( 'All %1$s %2$s', 'bp-nouveau' ), $component, $component_count ); ?>
+					<?php if ( 'activity' === $component ) :?>
+						<?php esc_html_e( 'All Members', 'bp-nouveau' ); ?>
+						<?php /* Following empty span will contain the number of newest activities corresponding to this scope */ ?>
+						<span></span>
+					<?php else : ?>
+						<?php printf( __( 'All %1$s %2$s', 'bp-nouveau' ), $component, $component_count ); ?>
+					<?php endif; ?>
 				</a>
 			</li>
 
 			<?php if ( is_user_logged_in() ) : ?>
 
 				<?php // Activity specific list items ?>
-				<?php if ( 'activity' == $component ) : ?>
+				<?php if ( 'activity' === $component ) : ?>
 
 					<?php if( bp_is_active( 'friends' ) && $friend_count ) : ?>
 						<li id="activity-friends" class="dynamic" data-bp-scope="friends" data-bp-object="<?php echo esc_attr( $component ); ?>">

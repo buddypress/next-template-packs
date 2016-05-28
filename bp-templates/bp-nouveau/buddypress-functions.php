@@ -159,7 +159,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 			'requests_filter' => 'bp_legacy_theme_requests_template_loader',
 
 			// Friends.
-			'accept_friendship'     => 'bp_legacy_theme_ajax_accept_friendship',
+			'accept_friendship' => 'bp_legacy_theme_ajax_accept_friendship',
 			'reject_friendship' => 'bp_legacy_theme_ajax_reject_friendship',
 
 			'friends_remove_friend'       => 'bp_nouveau_ajax_addremove_friend',
@@ -168,29 +168,30 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 
 			// Activity.
-			'activity_get_older_updates'  => 'bp_legacy_theme_activity_template_loader',
-			'activity_mark_fav'           => 'bp_nouveau_mark_activity_favorite',
-			'activity_mark_unfav'         => 'bp_nouveau_unmark_activity_favorite',
-			'activity_clear_new_mentions' => 'bp_nouveau_clear_new_mentions',
-			'activity_widget_filter'      => 'bp_legacy_theme_activity_template_loader',
-			'delete_activity'             => 'bp_nouveau_delete_activity',
-			'delete_activity_comment'     => 'bp_legacy_theme_delete_activity_comment',
-			'get_single_activity_content' => 'bp_nouveau_get_single_activity_content',
-			'new_activity_comment'        => 'bp_nouveau_new_activity_comment',
-			'post_update'                 => 'bp_legacy_theme_post_update',
-			'bp_spam_activity'            => 'bp_legacy_theme_spam_activity',
-			'bp_spam_activity_comment'    => 'bp_legacy_theme_spam_activity',
+			'activity_get_older_updates'      => 'bp_legacy_theme_activity_template_loader',
+			'activity_mark_fav'               => 'bp_nouveau_mark_activity_favorite',
+			'activity_mark_unfav'             => 'bp_nouveau_unmark_activity_favorite',
+			'activity_clear_new_mentions'     => 'bp_nouveau_clear_new_mentions',
+			'activity_widget_filter'          => 'bp_legacy_theme_activity_template_loader',
+			'delete_activity'                 => 'bp_nouveau_delete_activity',
+			'delete_activity_comment'         => 'bp_legacy_theme_delete_activity_comment',
+			'get_single_activity_content'     => 'bp_nouveau_get_single_activity_content',
+			'new_activity_comment'            => 'bp_nouveau_new_activity_comment',
+			'bp_nouveau_get_activity_objects' => 'bp_nouveau_get_activity_objects',
+			'post_update'                     => 'bp_nouveau_post_update',
+			'bp_spam_activity'                => 'bp_legacy_theme_spam_activity',
+			'bp_spam_activity_comment'        => 'bp_legacy_theme_spam_activity',
 
 			// Groups.
-			'groups_join_group'   => 'bp_nouveau_ajax_joinleave_group',
-			'groups_leave_group'  => 'bp_nouveau_ajax_joinleave_group',
-			'groups_accept_invite'  => 'bp_nouveau_ajax_joinleave_group',
-			'groups_reject_invite'  => 'bp_nouveau_ajax_joinleave_group',
-			'request_membership'  => 'bp_nouveau_ajax_joinleave_group',
+			'groups_join_group'    => 'bp_nouveau_ajax_joinleave_group',
+			'groups_leave_group'   => 'bp_nouveau_ajax_joinleave_group',
+			'groups_accept_invite' => 'bp_nouveau_ajax_joinleave_group',
+			'groups_reject_invite' => 'bp_nouveau_ajax_joinleave_group',
+			'request_membership'   => 'bp_nouveau_ajax_joinleave_group',
 
 			// Messages.
-			'messages_markread'             => 'bp_legacy_theme_ajax_message_markread',
-			'messages_markunread'           => 'bp_legacy_theme_ajax_message_markunread',
+			'messages_markread'   => 'bp_legacy_theme_ajax_message_markread',
+			'messages_markunread' => 'bp_legacy_theme_ajax_message_markunread',
 		);
 
 		/**
@@ -311,6 +312,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 				$this->activity_handle = $activity['handle'];
 
 				wp_register_script( $activity['handle'], $activity['location'], array( $main['handle'] ), $this->version, true );
+				wp_register_script( 'bp-nouveau-activity-post-form', trailingslashit( bp_get_theme_compat_url() ) . "js/buddypress-activity-post-form{$min}.js", array( $main['handle'], 'json2', 'wp-backbone' ), $this->version, true );
 			}
 		}
 
@@ -641,6 +643,111 @@ class BP_Nouveau extends BP_Theme_Compat {
 					'uninvite'     => wp_create_nonce( 'groups_invite_uninvite_user' ),
 					'send_invites' => wp_create_nonce( 'groups_send_invites' )
 				),
+			);
+		}
+
+		if ( bp_is_current_component( 'activity' ) || bp_is_group_activity() ) {
+			$activity_params = array(
+				'user_id'     => bp_loggedin_user_id(),
+				'object'      => 'user',
+				'backcompat'  => (bool) has_action( 'bp_activity_post_form_options' ),
+				'post_nonce'  => wp_create_nonce( 'post_update', '_wpnonce_post_update' ),
+			);
+
+			$user_displayname = bp_get_loggedin_user_fullname();
+
+			if ( buddypress()->avatar->show_avatars ) {
+				$width  = bp_core_avatar_thumb_width();
+				$height = bp_core_avatar_thumb_height();
+				$activity_params = array_merge( $activity_params, array(
+					'avatar_url'    => bp_get_loggedin_user_avatar( array(
+						'width'  => $width,
+						'height' => $height,
+						'html'   => false,
+					) ),
+					'avatar_width'  => $width,
+					'avatar_height' => $height,
+					'avatar_alt'    => sprintf( __( 'Profile photo of %s', 'bp-nouveau' ), $user_displayname ),
+					'user_domain'   => bp_loggedin_user_domain()
+				) );
+			}
+
+			/**
+			 * Filter here to include specific Action buttons.
+			 *
+			 * @param array $value The array containing the button params. Must look like:
+			 * array( 'buttonid' => array(
+			 *  'id'      => 'buttonid',                            // Id for your action
+			 *  'caption' => __( 'Button caption', 'text-domain' ),
+			 *  'icon'    => 'dashicons-*',                         // The dashicon to use
+			 *  'order'   => 0,
+			 *  'handle'  => 'button-script-handle',                // The handle of the registered script to enqueue
+			 * );
+			 */
+			$activity_buttons = apply_filters( 'bp_nouveau_activity_buttons', array() );
+
+			if ( ! empty( $activity_buttons ) ) {
+				// Sort buttons
+				$activity_params['buttons'] = bp_sort_by_key( $activity_buttons, 'order', 'num' );
+
+				// Enqueue Buttons scripts and styles
+				foreach ( $activity_params['buttons'] as $key_button => $buttons ) {
+					if ( empty( $buttons['handle'] ) ) {
+						continue;
+					}
+
+					// Enqueue the button style if registered
+					if ( wp_style_is( $buttons['handle'], 'registered' ) ) {
+						wp_enqueue_style( $buttons['handle'] );
+					}
+
+					// Enqueue the button script if registered
+					if ( wp_script_is( $buttons['handle'], 'registered' ) ) {
+						wp_enqueue_script( $buttons['handle'] );
+					}
+
+					// Finally remove the handle parameter
+					unset( $activity_params['buttons'][ $key_button ]['handle'] );
+				}
+			}
+
+			// Activity Objects
+			if ( ! bp_is_single_item() && ! bp_is_user() ) {
+				$activity_objects = array(
+					'profile' => array(
+						'text'                     => __( 'Post in: Profile', 'bp-nouveau' ),
+						'autocomplete_placeholder' => '',
+						'priority'                 => 5,
+					),
+				);
+
+				// the groups component is active & the current user is at least a member of 1 group
+				if ( bp_is_active( 'groups' ) && bp_has_groups( array( 'user_id' => bp_loggedin_user_id(), 'max' => 1 ) ) ) {
+					$activity_objects['group'] = array(
+						'text'                     => __( 'Post in: Group', 'bp-nouveau' ),
+						'autocomplete_placeholder' => __( 'Start typing the group name...', 'bp-nouveau' ),
+						'priority'                 => 10,
+					);
+				}
+
+				$activity_params['objects'] = apply_filters( 'bp_nouveau_activity_objects', $activity_objects );
+			}
+
+			$activity_strings = array(
+				'whatsnewPlaceholder' => sprintf( __( "What's new, %s?", 'bp-nouveau' ), bp_get_user_firstname( $user_displayname ) ),
+				'whatsnewLabel'       => __( 'Post what\'s new', 'bp-nouveau' ),
+				'whatsnewpostinLabel' => __( 'Post in', 'bp-nouveau' ),
+			);
+
+			if ( bp_is_group() ) {
+				$activity_params = array_merge( $activity_params,
+					array( 'object' => 'group', 'item_id' => bp_get_current_group_id() )
+				);
+			}
+
+			$params['activity'] = array(
+				'params'  => $activity_params,
+				'strings' => $activity_strings,
 			);
 		}
 
@@ -1184,25 +1291,23 @@ function bp_legacy_theme_activity_template_loader() {
  * @return string HTML
  * @since 1.2.0
  */
-function bp_legacy_theme_post_update() {
+function bp_nouveau_post_update() {
 	$bp = buddypress();
 
-	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
+	if ( ! is_user_logged_in() || empty( $_POST['_wpnonce_post_update'] ) || ! wp_verify_nonce( $_POST['_wpnonce_post_update'], 'post_update' ) ) {
+		wp_send_json_error();
+	}
 
-	// Check the nonce.
-	check_admin_referer( 'post_update', '_wpnonce_post_update' );
-
-	if ( ! is_user_logged_in() )
-		exit( '-1' );
-
-	if ( empty( $_POST['content'] ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'Please enter some content to post.', 'bp-nouveau' ) . '</p></div>' );
+	if ( empty( $_POST['content'] ) ) {
+		wp_send_json_error( array(
+			'message' => __( 'Please enter some content to post.', 'bp-nouveau' ),
+		) );
+	}
 
 	$activity_id = 0;
 	$item_id     = 0;
 	$object      = '';
+	$is_private  = false;
 
 
 	// Try to get the item id from posted variables.
@@ -1217,15 +1322,29 @@ function bp_legacy_theme_post_update() {
 	// If the object is not set and we're in a group, set the item id and the object
 	} elseif ( bp_is_group() ) {
 		$item_id = bp_get_current_group_id();
-		$object = 'groups';
+		$object = 'group';
+		$status = groups_get_current_group()->status;
 	}
 
-	if ( ! $object && bp_is_active( 'activity' ) ) {
+	if ( 'user' === $object && bp_is_active( 'activity' ) ) {
 		$activity_id = bp_activity_post_update( array( 'content' => $_POST['content'] ) );
 
-	} elseif ( 'groups' === $object ) {
-		if ( $item_id && bp_is_active( 'groups' ) )
+	} elseif ( 'group' === $object ) {
+		if ( $item_id && bp_is_active( 'groups' ) ) {
+			// This function is setting the current group!
 			$activity_id = groups_post_update( array( 'content' => $_POST['content'], 'group_id' => $item_id ) );
+
+			if ( empty( $status ) ) {
+				if ( ! empty( $bp->groups->current_group->status ) ) {
+					$status = $bp->groups->current_group->status;
+				} else {
+					$group  = groups_get_group( array( 'group_id' => $group_id ) );
+					$status = $group->status;
+				}
+
+				$is_private = 'public' !== $status;
+			}
+		}
 
 	} else {
 
@@ -1233,30 +1352,29 @@ function bp_legacy_theme_post_update() {
 		$activity_id = apply_filters( 'bp_activity_custom_update', false, $object, $item_id, $_POST['content'] );
 	}
 
-	if ( empty( $activity_id ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem posting your update. Please try again.', 'bp-nouveau' ) . '</p></div>' );
-
-	$last_recorded = ! empty( $_POST['since'] ) ? date( 'Y-m-d H:i:s', intval( $_POST['since'] ) ) : 0;
-	if ( $last_recorded ) {
-		$activity_args = array( 'since' => $last_recorded );
-		$bp->activity->last_recorded = $last_recorded;
-		add_filter( 'bp_get_activity_css_class', 'bp_activity_newest_class', 10, 1 );
-	} else {
-		$activity_args = array( 'include' => $activity_id );
+	if ( empty( $activity_id ) ) {
+		wp_send_json_error( array(
+			'message' => __( 'There was a problem posting your update. Please try again.', 'bp-nouveau' ),
+		) );
 	}
 
-	if ( bp_has_activities ( $activity_args ) ) {
+	ob_start();
+	if ( bp_has_activities( array( 'include' => $activity_id, 'show_hidden' => $is_private ) ) ) {
 		while ( bp_activities() ) {
 			bp_the_activity();
 			bp_get_template_part( 'activity/entry' );
 		}
 	}
+	$acivity = ob_get_contents();
+	ob_end_clean();
 
-	if ( ! empty( $last_recorded ) ) {
-		remove_filter( 'bp_get_activity_css_class', 'bp_activity_newest_class', 10, 1 );
-	}
-
-	exit;
+	wp_send_json_success( array(
+		'id'           => $activity_id,
+		'message'      => sprintf( __( 'Update posted <a href="%s" class="just-posted">View activity</a>', 'bp-nouveau' ), esc_url( bp_activity_get_permalink( $activity_id ) ) ),
+		'activity'     => $acivity,
+		'is_private'   => apply_filters( 'bp_nouveau_post_update_is_private', $is_private ),
+		'is_directory' => bp_is_activity_directory(),
+	) );
 }
 
 /**
@@ -3110,3 +3228,73 @@ function bp_nouveau_readunread_thread_messages() {
 }
 add_action( 'wp_ajax_messages_read',   'bp_nouveau_readunread_thread_messages' );
 add_action( 'wp_ajax_messages_unread', 'bp_nouveau_readunread_thread_messages' );
+
+function bp_nouveau_current_user_can( $capability = '' ) {
+	return apply_filters( 'bp_nouveau_current_user_can', is_user_logged_in(), $capability, bp_loggedin_user_id() );
+}
+
+function bp_nouveau_before_activity_post_form() {
+	// Enqueue needed script.
+	if ( bp_nouveau_current_user_can( 'publish_activity' ) ) {
+		wp_enqueue_script( 'bp-nouveau-activity-post-form' );
+	}
+
+	do_action( 'bp_before_activity_post_form' );
+}
+
+function bp_nouveau_after_activity_post_form() {
+	bp_get_template_part( 'assets/activity/form' );
+
+	do_action( 'bp_after_activity_post_form' );
+}
+
+/**
+ * Format a Group for a json reply
+ */
+function bp_nouveau_prepare_group_for_js( $item ) {
+	if ( empty( $item->id ) ) {
+		return array();
+	}
+
+	$item_avatar_url = bp_core_fetch_avatar( array(
+		'item_id'    => $item->id,
+		'object'     => 'group',
+		'type'       => 'thumb',
+		'html'       => false
+	) );
+
+	return array(
+		'id'          => $item->id,
+		'name'        => $item->name,
+		'avatar_url'  => $item_avatar_url,
+		'object_type' => 'group',
+		'is_public'   => 'public' === $item->status,
+	);
+}
+
+function bp_nouveau_get_activity_objects() {
+	$response = array();
+
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_activity' ) ) {
+		wp_send_json_error( $response );
+	}
+
+	if ( 'group' === $_POST['type'] ) {
+		$groups = groups_get_groups( array(
+			'user_id'           => bp_loggedin_user_id(),
+			'search_terms'      => $_POST['search'],
+			'show_hidden'       => true,
+			'per_page'          => 2,
+		) );
+
+		wp_send_json_success( array_map( 'bp_nouveau_prepare_group_for_js', $groups['groups'] ) );
+	} else {
+		$response = apply_filters( 'bp_nouveau_get_activity_custom_objects', $response, $_POST['type'] );
+	}
+
+	if ( empty( $response ) ) {
+		wp_send_json_error( array( 'error' => __( 'No items were found.', 'bp-nouveau' ) ) );
+	} else {
+		wp_send_json_success( $response );
+	}
+}
