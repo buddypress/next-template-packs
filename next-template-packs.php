@@ -6,7 +6,7 @@
  * @package   Next Template Packs
  * @author    The BuddyPress Community
  * @license   GPL-2.0+
- * @link      http://imathi.eu
+ * @link      https://buddypress.org
  *
  * @buddypress-plugin
  * Plugin Name:       Next Template Packs
