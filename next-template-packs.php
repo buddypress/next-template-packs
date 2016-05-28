@@ -4,22 +4,22 @@
  *
  *
  * @package   Next Template Packs
- * @author    imath
+ * @author    The BuddyPress Community
  * @license   GPL-2.0+
  * @link      http://imathi.eu
  *
  * @buddypress-plugin
  * Plugin Name:       Next Template Packs
- * Plugin URI:        https://github.com/imath/next-template-packs
+ * Plugin URI:        https://github.com/buddypress/next-template-packs
  * Description:       Adds a BuddyPress Admin Tab to manage BuddyPress template pack
  * Version:           1.0.0-alpha
- * Author:            imath
- * Author URI:        http://imathi.eu
+ * Author:            The BuddyPress Community
+ * Author URI:        https://buddypress.org
  * Text Domain:       next-template-packs
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /languages/
- * GitHub Plugin URI: https://github.com/imath/next-template-packs
+ * GitHub Plugin URI: https://github.com/buddypress/next-template-packs
  */
 
 // Exit if accessed directly

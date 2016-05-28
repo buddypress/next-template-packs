@@ -13,8 +13,8 @@
  * Description:        A new template pack for BuddyPress!
  * Text Domain:        bp-nouveau
  * Domain Path:        /languages/
- * Author:             imath
- * Template Pack Link: https://github.com/buddypress/next-template-packs
+ * Author:             The BuddyPress community
+ * Template Pack Link: https://github.com/buddypress/next-template-packs/bp-templates/bp-nouveau
  * Template Pack Supports: activity, blogs, friends, groups, messages, notifications, settings, xprofile
  * }}
  */
