@@ -159,9 +159,11 @@ class Next_Template_Packs {
 				bp_delete_option( '_next_template_packs_package_data' );
 			} else {
 				$tp_data = get_file_data( $tpl_dir . '/buddypress-functions.php', array(
-					'id'          => 'Template Pack ID',
-					'name'        => 'Template Pack Name',
-					'version'     => 'Version',
+					'id'                  => 'Template Pack ID',
+					'name'                => 'Template Pack Name',
+					'version'             => 'Version',
+					'wp_required_version' => 'WP required version',
+					'bp_required_version' => 'BP required version'
 				) );
 
 				if ( empty( $tp_data['id'] ) ) {
@@ -286,13 +288,38 @@ class Next_Template_Packs {
 		$template_pack_data->name        = wp_kses( $template_pack_data->name,   $allowed_tags_in_links );
 		$template_pack_data->author      = wp_kses( $template_pack_data->author, $allowed_tags );
 
-		$template_pack_data->description = wptexturize( wp_kses( $template_pack_data->description, $allowed_tags ) );
-		$template_pack_data->version     = wp_kses( $template_pack_data->version, $allowed_tags );
+		$template_pack_data->description         = wptexturize( wp_kses( $template_pack_data->description, $allowed_tags ) );
+		$template_pack_data->version             = wp_kses( $template_pack_data->version, $allowed_tags );
+
+		if ( isset( $template_pack_data->wp_required_version ) ) {
+			$template_pack_data->wp_required_version = esc_html( $template_pack_data->wp_required_version );
+		}
+
+		if ( isset( $template_pack_data->bp_required_version ) ) {
+			$template_pack_data->bp_required_version = esc_html( $template_pack_data->bp_required_version );
+		}
 
 		$template_pack_data->link        = esc_url( $template_pack_data->link );
 		$template_pack_data->supports    = esc_html( $template_pack_data->supports );
 
 		return $template_pack_data;
+	}
+
+	public function check_versions( $versions = array() ) {
+		$retval = true;
+		if ( empty( $versions ) ) {
+			return $retval;
+		}
+
+		if ( ! empty( $versions['bp_required_version'] ) && version_compare( bp_get_version(), $versions['bp_required_version'], '<' ) ) {
+			$retval = false;
+		}
+
+		if ( ! empty( $versions['wp_required_version'] ) && version_compare( bp_get_major_wp_version(), $versions['wp_required_version'], '<' ) ) {
+			$retval = false;
+		}
+
+		return $retval;
 	}
 
 	/**
@@ -363,15 +390,17 @@ class Next_Template_Packs {
 						);
 					} else {
 						$tp_headers = get_file_data( $template_pack->dir . '/buddypress-functions.php', array(
-							'id'          => 'Template Pack ID',
-							'name'        => 'Template Pack Name',
-							'version'     => 'Version',
-							'description' => 'Description',
-							'author'      => 'Author',
-							'link'        => 'Template Pack Link',
-							'supports'    => 'Template Pack Supports',
-							'text_domain' => 'Text Domain',
-							'domain_path' => 'Domain Path'
+							'id'                  => 'Template Pack ID',
+							'name'                => 'Template Pack Name',
+							'version'             => 'Version',
+							'wp_required_version' => 'WP required version',
+							'bp_required_version' => 'BP required version',
+							'description'         => 'Description',
+							'author'              => 'Author',
+							'link'                => 'Template Pack Link',
+							'supports'            => 'Template Pack Supports',
+							'text_domain'         => 'Text Domain',
+							'domain_path'         => 'Domain Path'
 						) );
 					}
 
@@ -419,12 +448,19 @@ class Next_Template_Packs {
 
 							<?php foreach ( $template_packs as $tp_pack ) : ?>
 
-								<?php  $class = ( $tp_pack->id === $current_theme_package_id ) ? 'active' : 'inactive'; ?>
+								<?php
+									$class               = ( $tp_pack->id === $current_theme_package_id ) ? 'active' : 'inactive';
+									$config_is_supported = true;
+									$versions             = array_intersect_key( (array) $tp_pack, array( 'wp_required_version' => '', 'bp_required_version' => '' ) );
+									$config_is_supported = $this->check_versions( $versions );
+								?>
 
 								<tr id="<?php echo esc_attr( $tp_pack->id ); ?>" class="<?php echo esc_attr( $tp_pack->id ) . ' ' . esc_attr( $class ); ?>">
 									<th scope="row">
 
-										<input type="radio" id="bp_tpl_pack-<?php echo esc_attr( $tp_pack->id ); ?>" name="bp_tpl_pack[dir]" value="<?php echo esc_attr( $tp_pack->dir );?>"<?php checked( ( $tp_pack->id === $current_theme_package_id ) ); ?> />
+										<?php if ( $config_is_supported ) : ?>
+											<input type="radio" id="bp_tpl_pack-<?php echo esc_attr( $tp_pack->id ); ?>" name="bp_tpl_pack[dir]" value="<?php echo esc_attr( $tp_pack->dir );?>"<?php checked( ( $tp_pack->id === $current_theme_package_id ) ); ?> />
+										<?php endif ;?>
 
 									</th>
 									<td class="plugin-title" style="width: 190px;">
@@ -434,7 +470,6 @@ class Next_Template_Packs {
 										</label>
 
 										<div class="row-actions-visible">
-
 										</div>
 									</td>
 
@@ -445,6 +480,23 @@ class Next_Template_Packs {
 										<div class="active second plugin-version-author-uri">
 											<?php self::get_template_pack_meta( $tp_pack ) ; ?>
 										</div>
+
+										<?php if ( ! $config_is_supported ) : ?>
+											<div class="attention">
+												<?php
+													$warnings = array();
+													if ( ! empty( $tp_pack->wp_required_version ) ) {
+														$warnings[] = sprintf( esc_html__( 'WordPress required version is %s.', 'next-template-packs' ), $tp_pack->wp_required_version );
+													}
+
+													if ( ! empty( $tp_pack->bp_required_version ) ) {
+														$warnings[] = sprintf( esc_html__( 'BuddyPress required version is %s.', 'next-template-packs' ), $tp_pack->bp_required_version );
+													}
+
+													echo join( ' ', $warnings );
+												;?>
+											</div>
+										<?php endif ; ?>
 									</td>
 
 									<td class="column-supports desc">
