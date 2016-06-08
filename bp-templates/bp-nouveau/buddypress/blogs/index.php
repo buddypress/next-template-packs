@@ -13,7 +13,7 @@ bp_adminbar_account_menu<?php
  */
 do_action( 'bp_before_directory_blogs_page' ); ?>
 
-<div id="buddypress">
+<div id="buddypress" class="buddypress">
 
 	<?php
 

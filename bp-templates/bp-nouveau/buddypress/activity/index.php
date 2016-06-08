@@ -7,15 +7,17 @@
  * @package BuddyPress
  * @subpackage bp-nouveau
  */
+?>
 
-/**
- * Fires before the activity directory listing.
- *
- * @since 1.5.0
- */
-do_action( 'bp_before_directory_activity' ); ?>
+<div id="buddypress" class="buddypress">
 
-<div id="buddypress">
+	<?php
+	/**
+	 * Fires at the begining of the templates BP injected content.
+	 *
+	 * @since 2.3.0
+	 */
+	do_action( 'bp_before_directory_activity' ); ?>
 
 	<?php
 
@@ -79,7 +81,7 @@ do_action( 'bp_before_directory_activity' ); ?>
 
 	<div class="activity">
 
-		<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
+		<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
 		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Loading the community updates, please wait.', 'bp-nouveau' ) ;?></li>
 

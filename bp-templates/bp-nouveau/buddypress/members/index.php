@@ -6,14 +6,18 @@
  * @subpackage bp-nouveau
  */
 
+?>
+
+<div id="buddypress" class="buddypress">
+
+<?php
 /**
- * Fires at the top of the members directory template file.
+ * Fires at the begining of the templates BP injected content.
  *
- * @since 1.5.0
+ * @since 2.3.0
  */
 do_action( 'bp_before_directory_members_page' ); ?>
 
-<div id="buddypress">
 
 	<?php
 
@@ -102,13 +106,15 @@ do_action( 'bp_before_directory_members_page' ); ?>
 	 */
 	do_action( 'bp_after_directory_members' ); ?>
 
-</div><!-- #buddypress -->
 
-<?php
 
-/**
- * Fires at the bottom of the members directory template file.
- *
- * @since 1.5.0
- */
-do_action( 'bp_after_directory_members_page' );
+	<?php
+
+	/**
+	 * Fires at the bottom of the members directory template file.
+	 *
+	 * @since 1.5.0
+	 */
+	do_action( 'bp_after_directory_members_page' ); ?>
+
+</div><!-- //.buddypress -->
