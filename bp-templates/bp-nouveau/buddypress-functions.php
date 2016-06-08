@@ -915,9 +915,87 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Add span bp-screen-reader-text class
 		return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $button->id . '">' . $button->link_text . '</a>' . $after;
 	}
+
+
+
 }
 new BP_Nouveau();
 endif;
+
+
+/**
+ * Directory pagination
+ */
+	function bp_pagination( $position = null ) {
+
+	$component = bp_current_component();
+
+/* @todo  Need a dedicated check for pagination links to remove the markup */
+?>
+
+	<div class="pagination <?php echo $position; ?>">
+
+		<div class="pag-count <?php echo $component; ?>-dir-count-<?php echo $position; ?>" id="">
+
+			<?php switch( $component ) {
+
+				case 'blogs' :
+
+					bp_blogs_pagination_count();
+
+				break;
+
+				case 'members' :
+
+					bp_members_pagination_count();
+
+				break;
+
+				case 'groups' :
+
+				bp_groups_pagination_count();
+
+				break;
+			}
+
+			?>
+
+		</div>
+
+		<div class="pagination-links <?php echo $component; ?>-dir-pag-<?php echo $position; ?>">
+
+			<?php switch( $component ) {
+
+				case 'blogs' :
+
+					bp_blogs_pagination_links();
+
+				break;
+
+				case 'members' :
+
+					bp_members_pagination_links();
+
+				break;
+
+				case 'groups' :
+
+					bp_groups_pagination_links();
+
+				break;
+			}
+
+			?>
+
+		</div>
+
+	</div>
+
+	<?php
+
+	return;
+
+	}
 
 /**
  * Add the Create a Group button to the Groups directory title.

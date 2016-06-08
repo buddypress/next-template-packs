@@ -17,17 +17,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 <?php if ( bp_has_blogs( bp_ajax_querystring( 'blogs' ) ) ) : ?>
 
-	<div id="pag-top" class="pagination">
-
-		<div class="pag-count" id="blog-dir-count-top">
-			<?php bp_blogs_pagination_count(); ?>
-		</div>
-
-		<div class="pagination-links" id="blog-dir-pag-top">
-			<?php bp_blogs_pagination_links(); ?>
-		</div>
-
-	</div>
+<?php echo bp_pagination('top'); ?>
 
 	<?php
 
@@ -98,21 +88,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 	<?php bp_blog_hidden_fields(); ?>
 
-	<div id="pag-bottom" class="pagination">
-
-		<div class="pag-count" id="blog-dir-count-bottom">
-
-			<?php bp_blogs_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="blog-dir-pag-bottom">
-
-			<?php bp_blogs_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php echo bp_pagination('bottom'); ?>
 
 <?php else: ?>
 
