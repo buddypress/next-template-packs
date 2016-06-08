@@ -1,0 +1,135 @@
+//
+// BuddyPress scss Mixins
+//
+
+// This file provides some basic mixins for BP elements such as box sizing
+// radius, calc etc
+
+// font size decs are used with caution BP doesn't manage
+// layout sizes & must take care to work with layout sizes
+@mixin font-size($font-size: 16) {
+	$rem-font-value: ($font-size / 10);
+	font-size: ($font-size * 1px);
+	font-size: $rem-font-value + rem;
+}
+
+// Essential em based breakpoints
+// mixin wraps rulesets or properties.
+// written as:
+// @include medium-up {
+//  body {property: value;}
+// }
+//
+
+@mixin small-up {
+	@media screen and (min-width: 24em) {
+		@content;
+	}
+}
+
+@mixin medium-up {
+	@media screen and (min-width: 46.8em) {
+		@content;
+	}
+}
+
+@mixin large-up {
+	@media screen and (min-width: 75em) {
+		@content;
+	}
+}
+
+
+// To allow mixins to pass VendorPrefix scss-lint tests we disable lint-test
+// for specific blocks / rulesets
+// until such time as exemption lists can be built for the scss-lint.yml?
+// Any vendor prefix properties / mixins need to be in this block
+
+// scss-lint:disable VendorPrefix
+
+
+// Box model - defaults to value 'border-box'
+// Vendor prefixes are  pretty much redundent for this property,
+// consider removing
+@mixin box-model($box-type: null) {
+
+	@if $box-type {
+		// if a param was passed through
+		$box-type: $box-type;
+	} @else {
+		$box-type: "border-box";
+	}
+
+	-webkit-box-sizing: $box-type;
+	-moz-box-sizing: $box-type;
+	box-sizing: $box-type;
+}
+
+// Border radius
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-top-radius($radius) {
+	-webkit-border-top-right-radius: $radius;
+	border-top-right-radius: $radius;
+	-webkit-border-top-left-radius: $radius;
+	border-top-left-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-right-radius($radius) {
+	-webkit-border-bottom-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+	-webkit-border-top-right-radius: $radius;
+	border-top-right-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-bottom-radius($radius) {
+	-webkit-border-bottom-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+	-webkit-border-bottom-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+	background-clip: padding-box;
+}
+
+@mixin border-left-radius($radius) {
+	-webkit-border-bottom-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+	-webkit-border-top-left-radius: $radius;
+	border-top-left-radius: $radius;
+	background-clip: padding-box;
+}
+
+// Calc e.g (100% - 10px)
+@mixin calc($property, $expression) {
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: -moz-calc(#{$expression});
+	#{$property}: calc(#{$expression});
+}
+
+// Re-enable the VendorPrefix lint test
+// scss-lint:enable VendorPrefix
+
+// BP message boxes
+// Creates a message box with border, background color
+// If  no text-color passed in then the background used for
+// text is darkened by 50%.
+@mixin message-box($background, $text-color: null) {
+
+	@if $text-color {
+		// if a param was passed through
+		$text-color: $text-color;
+	} @else {
+		$text-color: darken($background, 50%);
+	}
+
+	background: lighten($background, 10%);
+	border: 1px solid darken($background, 10%);
+	color: $text-color;
+}

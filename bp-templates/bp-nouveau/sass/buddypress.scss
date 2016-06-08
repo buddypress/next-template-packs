@@ -1,6 +1,6 @@
 // Import our partials mixins & variables files
-@import 'bp-variables';
-@import 'bp-mixins';
+@import '../../shared/styles/_bp-variables';
+@import '../../shared/styles/_bp-mixins';
 
 
 // This is copy of the existing buddypress.css styles
@@ -111,6 +111,9 @@ Hello, this is the BuddyPress Legacy stylesheet.
 /*--------------------------------------------------------------
 3.1 - Activity
 --------------------------------------------------------------*/
+
+@import '../../shared/styles/_bp_lists';
+
 #buddypress #activity-stream {
 	margin-top: -5px;
 }
