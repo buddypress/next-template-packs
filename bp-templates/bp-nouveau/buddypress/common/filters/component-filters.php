@@ -4,7 +4,7 @@
 *
 * @since 1.0.0
 *
-* @package BP Next
+* @package BP Nouveau
  */
 $component = bp_current_component();
 ?>
