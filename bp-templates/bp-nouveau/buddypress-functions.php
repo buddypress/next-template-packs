@@ -929,65 +929,53 @@ endif;
 	function bp_pagination( $position = null ) {
 
 	$component = bp_current_component();
+	$screen = ( bp_is_user() )? 'user' : 'dir';
+	switch( $component ) {
 
-/* @todo  Need a dedicated check for pagination links to remove the markup */
+		case 'blogs' :
+
+			$bp_pag_count = bp_get_blogs_pagination_count();
+			$bp_pag_links = bp_get_blogs_pagination_links();
+
+		break;
+
+		case 'members' || 'friends' :
+
+			$bp_pag_count =	bp_get_members_pagination_count();
+			$bp_pag_links = bp_get_members_pagination_links();
+
+		break;
+
+		case 'groups' :
+
+			$bp_pag_count =	bp_get_groups_pagination_count();
+			$bp_pag_links = bp_get_groups_pagination_links();
+
+		break;
+	}
 ?>
 
-	<div class="pagination <?php echo $position; ?>">
+	<div class="pagination <?php echo $position; ?>" data-bp-nav="pagination">
 
-		<div class="pag-count <?php echo $component; ?>-dir-count-<?php echo $position; ?>" id="">
+		<?php if( $bp_pag_count ) : ?>
+		<div class="pag-count <?php echo $component; ?>-<?php echo $screen; ?>-count-<?php echo $position; ?>">
 
-			<?php switch( $component ) {
-
-				case 'blogs' :
-
-					bp_blogs_pagination_count();
-
-				break;
-
-				case 'members' :
-
-					bp_members_pagination_count();
-
-				break;
-
-				case 'groups' :
-
-				bp_groups_pagination_count();
-
-				break;
-			}
-
-			?>
+			<p class="pag-data">
+				<?php echo $bp_pag_count; ?>
+			</p>
 
 		</div>
+		<?php endif; ?>
 
-		<div class="pagination-links <?php echo $component; ?>-dir-pag-<?php echo $position; ?>">
+		<?php if( $bp_pag_links ) : ?>
+		<div class="pagination-links <?php echo $component; ?>-<?php echo $screen; ?>-links-<?php echo $position; ?>">
 
-			<?php switch( $component ) {
-
-				case 'blogs' :
-
-					bp_blogs_pagination_links();
-
-				break;
-
-				case 'members' :
-
-					bp_members_pagination_links();
-
-				break;
-
-				case 'groups' :
-
-					bp_groups_pagination_links();
-
-				break;
-			}
-
-			?>
+			<p class="pag-data">
+				<?php echo $bp_pag_links; ?>
+			</p>
 
 		</div>
+		<?php endif; ?>
 
 	</div>
 
