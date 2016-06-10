@@ -1247,3 +1247,227 @@ function bp_nouveau_messages_get_bulk_actions() {
 
 	return $bulk_actions;
 }
+
+function bp_nouveau_groups_invites_custom_message( $message = '' ) {
+	if ( empty( $message ) ) {
+		return $message;
+	}
+
+	$bp = buddypress();
+
+	if ( empty( $bp->groups->invites_message ) ) {
+		return $message;
+	}
+
+	$message = str_replace( '---------------------', "
+---------------------\n
+" . $bp->groups->invites_message . "\n
+---------------------
+	", $message );
+
+	return $message;
+}
+
+function bp_nouveau_current_user_can( $capability = '' ) {
+	return apply_filters( 'bp_nouveau_current_user_can', is_user_logged_in(), $capability, bp_loggedin_user_id() );
+}
+
+/**
+ * Format a Group for a json reply
+ */
+function bp_nouveau_prepare_group_for_js( $item ) {
+	if ( empty( $item->id ) ) {
+		return array();
+	}
+
+	$item_avatar_url = bp_core_fetch_avatar( array(
+		'item_id'    => $item->id,
+		'object'     => 'group',
+		'type'       => 'thumb',
+		'html'       => false
+	) );
+
+	return array(
+		'id'          => $item->id,
+		'name'        => $item->name,
+		'avatar_url'  => $item_avatar_url,
+		'object_type' => 'group',
+		'is_public'   => 'public' === $item->status,
+	);
+}
+
+/**
+ * BP Nouveau's callback for the cover image feature.
+ *
+ * @todo implement the cover image for this template pack!
+ *
+ * @since  2.4.0
+ *
+ * @param  array $params the current component's feature parameters.
+ * @return array          an array to inform about the css handle to attach the css rules to
+ */
+function bp_nouveau_theme_cover_image( $params = array() ) {
+	if ( empty( $params ) ) {
+		return;
+	}
+
+	// Avatar height - padding - 1/2 avatar height.
+	$avatar_offset = $params['height'] - 5 - round( (int) bp_core_avatar_full_height() / 2 );
+
+	// Header content offset + spacing.
+	$top_offset  = bp_core_avatar_full_height() - 10;
+	$left_offset = bp_core_avatar_full_width() + 20;
+
+	$cover_image = isset( $params['cover_image'] ) ? 'background-image: url(' . $params['cover_image'] . ');' : '';
+
+	$hide_avatar_style = '';
+
+	// Adjust the cover image header, in case avatars are completely disabled.
+	if ( ! buddypress()->avatar->show_avatars ) {
+		$hide_avatar_style = '
+			#buddypress #item-header-cover-image #item-header-avatar {
+				display:  none;
+			}
+		';
+
+		if ( bp_is_user() ) {
+			$hide_avatar_style = '
+				#buddypress #item-header-cover-image #item-header-avatar a {
+					display: block;
+					height: ' . $top_offset . 'px;
+					margin: 0 15px 19px 0;
+				}
+
+				#buddypress div#item-header #item-header-cover-image #item-header-content {
+					margin-left:auto;
+				}
+			';
+		}
+	}
+
+	return '
+		/* Cover image */
+		#buddypress #header-cover-image {
+			height: ' . $params["height"] . 'px;
+			' . $cover_image . '
+		}
+
+		#buddypress #create-group-form #header-cover-image {
+			position: relative;
+			margin: 1em 0;
+		}
+
+		.bp-user #buddypress #item-header {
+			padding-top: 0;
+		}
+
+		#buddypress #item-header-cover-image #item-header-avatar {
+			margin-top: '. $avatar_offset .'px;
+			float: left;
+			overflow: visible;
+			width:auto;
+		}
+
+		#buddypress div#item-header #item-header-cover-image #item-header-content {
+			clear: both;
+			float: left;
+			margin-left: ' . $left_offset . 'px;
+			margin-top: -' . $top_offset . 'px;
+			width:auto;
+		}
+
+		body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-header-content,
+		body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-actions {
+			margin-top: ' . $params["height"] . 'px;
+			margin-left: 0;
+			clear: none;
+			max-width: 50%;
+		}
+
+		body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-actions {
+			padding-top: 20px;
+			max-width: 20%;
+		}
+
+		' . $hide_avatar_style . '
+
+		#buddypress div#item-header-cover-image h2 a,
+		#buddypress div#item-header-cover-image h2 {
+			color: #FFF;
+			text-rendering: optimizelegibility;
+			text-shadow: 0px 0px 3px rgba( 0, 0, 0, 0.8 );
+			margin: 0 0 .6em;
+			font-size:200%;
+		}
+
+		#buddypress #item-header-cover-image #item-header-avatar img.avatar {
+			border: solid 2px #FFF;
+			background: rgba( 255, 255, 255, 0.8 );
+		}
+
+		#buddypress #item-header-cover-image #item-header-avatar a {
+			border: none;
+			text-decoration: none;
+		}
+
+		#buddypress #item-header-cover-image #item-buttons {
+			margin: 0 0 10px;
+			padding: 0 0 5px;
+		}
+
+		#buddypress #item-header-cover-image #item-buttons:after {
+			clear: both;
+			content: "";
+			display: table;
+		}
+
+		@media screen and (max-width: 782px) {
+			#buddypress #item-header-cover-image #item-header-avatar,
+			.bp-user #buddypress #item-header #item-header-cover-image #item-header-avatar,
+			#buddypress div#item-header #item-header-cover-image #item-header-content {
+				width:100%;
+				text-align:center;
+			}
+
+			#buddypress #item-header-cover-image #item-header-avatar a {
+				display:inline-block;
+			}
+
+			#buddypress #item-header-cover-image #item-header-avatar img {
+				margin:0;
+			}
+
+			#buddypress div#item-header #item-header-cover-image #item-header-content,
+			body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-header-content,
+			body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-actions {
+				margin:0;
+			}
+
+			body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-header-content,
+			body.single-item.groups #buddypress div#item-header #item-header-cover-image #item-actions {
+				max-width: 100%;
+			}
+
+			#buddypress div#item-header-cover-image h2 a,
+			#buddypress div#item-header-cover-image h2 {
+				color: inherit;
+				text-shadow: none;
+				margin:25px 0 0;
+				font-size:200%;
+			}
+
+			#buddypress #item-header-cover-image #item-buttons div {
+				float:none;
+				display:inline-block;
+			}
+
+			#buddypress #item-header-cover-image #item-buttons:before {
+				content:"";
+			}
+
+			#buddypress #item-header-cover-image #item-buttons {
+				margin: 5px 0;
+			}
+		}
+	';
+}
