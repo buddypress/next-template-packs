@@ -17,7 +17,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 <?php if ( bp_has_blogs( bp_ajax_querystring( 'blogs' ) ) ) : ?>
 
-<?php echo bp_pagination('top'); ?>
+	<?php bp_pagination( 'top' ); ?>
 
 	<?php
 
@@ -88,7 +88,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 	<?php bp_blog_hidden_fields(); ?>
 
-	<?php echo bp_pagination('bottom'); ?>
+	<?php bp_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 

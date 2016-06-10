@@ -11,63 +11,72 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Directory pagination
+ * Pagination for loops
+ *
+ * @since 1.0.0
  */
 function bp_pagination( $position = null ) {
 	$component = bp_current_component();
-	$screen = ( bp_is_user() )? 'user' : 'dir';
+
+	$screen = 'dir';
+	if ( bp_is_user() ) {
+		$screen = 'user';
+	}
 
 	switch( $component ) {
 
 		case 'blogs' :
 
-			$bp_pag_count = bp_get_blogs_pagination_count();
-			$bp_pag_links = bp_get_blogs_pagination_links();
+			$pag_count = bp_get_blogs_pagination_count();
+			$pag_links = bp_get_blogs_pagination_links();
 
 		break;
 
-		case 'members' || 'friends' :
+		case 'members' :
+		case 'friends' :
 
-			$bp_pag_count =	bp_get_members_pagination_count();
-			$bp_pag_links = bp_get_members_pagination_links();
+			$pag_count = bp_get_members_pagination_count();
+			$pag_links = bp_get_members_pagination_links();
 
 		break;
 
 		case 'groups' :
 
-			$bp_pag_count =	bp_get_groups_pagination_count();
-			$bp_pag_links = bp_get_groups_pagination_links();
+			$pag_count = bp_get_groups_pagination_count();
+			$pag_links = bp_get_groups_pagination_links();
 
 		break;
 	}
+
+	$count_class = sprintf( '%1$s-%2$s-count-%3$s', $component, $screen, $position );
+	$links_class = sprintf( '%1$s-%2$s-links-%3$s', $component, $screen, $position );
 	?>
 
-	<div class="pagination <?php echo $position; ?>" data-bp-nav="pagination">
+	<div class="pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-nav="pagination">
 
-		<?php if( $bp_pag_count ) : ?>
-		<div class="pag-count <?php echo $component; ?>-<?php echo $screen; ?>-count-<?php echo $position; ?>">
+		<?php if ( $pag_count ) : ?>
+			<div class="pag-count <?php echo sanitize_html_class( $count_class ); ?>">
 
-			<p class="pag-data">
-				<?php echo $bp_pag_count; ?>
-			</p>
+				<p class="pag-data">
+					<?php echo $pag_count; ?>
+				</p>
 
-		</div>
+			</div>
 		<?php endif; ?>
 
-		<?php if( $bp_pag_links ) : ?>
-		<div class="pagination-links <?php echo $component; ?>-<?php echo $screen; ?>-links-<?php echo $position; ?>">
+		<?php if ( $pag_links ) : ?>
+			<div class="pagination-links <?php echo sanitize_html_class( $links_class ); ?>">
 
-			<p class="pag-data">
-				<?php echo $bp_pag_links; ?>
-			</p>
+				<p class="pag-data">
+					<?php echo $pag_links; ?>
+				</p>
 
-		</div>
+			</div>
 		<?php endif; ?>
 
 	</div>
 
 	<?php
-
 	return;
 }
 
