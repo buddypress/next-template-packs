@@ -1247,3 +1247,51 @@ function bp_nouveau_messages_get_bulk_actions() {
 
 	return $bulk_actions;
 }
+
+function bp_nouveau_groups_invites_custom_message( $message = '' ) {
+	if ( empty( $message ) ) {
+		return $message;
+	}
+
+	$bp = buddypress();
+
+	if ( empty( $bp->groups->invites_message ) ) {
+		return $message;
+	}
+
+	$message = str_replace( '---------------------', "
+---------------------\n
+" . $bp->groups->invites_message . "\n
+---------------------
+	", $message );
+
+	return $message;
+}
+
+function bp_nouveau_current_user_can( $capability = '' ) {
+	return apply_filters( 'bp_nouveau_current_user_can', is_user_logged_in(), $capability, bp_loggedin_user_id() );
+}
+
+/**
+ * Format a Group for a json reply
+ */
+function bp_nouveau_prepare_group_for_js( $item ) {
+	if ( empty( $item->id ) ) {
+		return array();
+	}
+
+	$item_avatar_url = bp_core_fetch_avatar( array(
+		'item_id'    => $item->id,
+		'object'     => 'group',
+		'type'       => 'thumb',
+		'html'       => false
+	) );
+
+	return array(
+		'id'          => $item->id,
+		'name'        => $item->name,
+		'avatar_url'  => $item_avatar_url,
+		'object_type' => 'group',
+		'is_public'   => 'public' === $item->status,
+	);
+}
