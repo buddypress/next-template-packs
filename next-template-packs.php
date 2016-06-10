@@ -99,8 +99,6 @@ class Next_Template_Packs {
 
 			add_action( 'bp_register_theme_packages', array( $this, 'register_theme_package' ) );
 
-			add_action( 'bp_setup_theme', array( $this, 'load_features' ) );
-
 		} else {
 			add_action( $this->config['network_active'] ? 'network_admin_notices' : 'admin_notices', array( $this, 'admin_warning' ) );
 		}
@@ -538,12 +536,6 @@ class Next_Template_Packs {
 
 		if ( ! empty( $this->pack_data['dir'] ) && is_dir( $this->pack_data['dir'] ) ) {
 			bp_register_theme_package( $this->pack_data );
-		}
-	}
-
-	public function load_features() {
-		if ( ! empty( $this->pack_data['dir'] ) && file_exists( $this->pack_data['dir'] . '/bp-custom.php' ) ) {
-			include( $this->pack_data['dir'] . '/bp-custom.php' );
 		}
 	}
 

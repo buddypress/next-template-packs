@@ -21,7 +21,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 <?php if ( bp_has_members( bp_ajax_querystring( 'members' ) ) ) : ?>
 
-<?php echo bp_pagination('top'); ?>
+	<?php bp_pagination( 'top' ); ?>
 
 	<?php
 
@@ -106,7 +106,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 	<?php bp_member_hidden_fields(); ?>
 
-	<?php echo bp_pagination('bottom'); ?>
+	<?php bp_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 

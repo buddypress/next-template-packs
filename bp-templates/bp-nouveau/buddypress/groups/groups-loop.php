@@ -21,7 +21,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 <?php if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) : ?>
 
-	<?php echo bp_pagination('top'); ?>
+	<?php bp_pagination( 'top' ); ?>
 
 	<?php
 
@@ -95,7 +95,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 	 */
 	do_action( 'bp_after_directory_groups_list' ); ?>
 
-	<?php echo bp_pagination('bottom'); ?>
+	<?php bp_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 
