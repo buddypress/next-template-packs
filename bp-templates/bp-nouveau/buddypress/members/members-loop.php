@@ -106,7 +106,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 	<?php bp_member_hidden_fields(); ?>
 
-<?php echo bp_pagination('bottom'); ?>
+	<?php echo bp_pagination('bottom'); ?>
 
 <?php else: ?>
 

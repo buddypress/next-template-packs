@@ -5,15 +5,18 @@ bp_adminbar_account_menu<?php
  * @package BuddyPress
  * @subpackage bp-nouveau
  */
+?>
 
+<div id="buddypress" class="buddypress">
+
+<?php
 /**
- * Fires at the top of the blogs directory template file.
+ * Fires at the begining of the templates BP injected content.
  *
  * @since 2.3.0
  */
-do_action( 'bp_before_directory_blogs_page' ); ?>
+	do_action( 'bp_before_directory_blogs_page' ); ?>
 
-<div id="buddypress" class="buddypress">
 
 	<?php
 
@@ -104,13 +107,15 @@ do_action( 'bp_before_directory_blogs_page' ); ?>
 	 */
 	do_action( 'bp_after_directory_blogs' ); ?>
 
-</div>
 
-<?php
 
-/**
- * Fires at the bottom of the blogs directory template file.
- *
- * @since 2.3.0
- */
-do_action( 'bp_after_directory_blogs_page' );
+	<?php
+
+	/**
+	 * Fires at the bottom of the blogs directory template file.
+	 *
+	 * @since 2.3.0
+	 */
+	do_action( 'bp_after_directory_blogs_page' ); ?>
+
+</div><!-- //.buddypress -->
