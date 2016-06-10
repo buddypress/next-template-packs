@@ -52,8 +52,20 @@ class BP_Nouveau extends BP_Theme_Compat {
 	public function __construct() {
 		parent::start();
 
+		// Include needed files
+		$this->includes();
+
 		// Add custom filters
 		$this->setup_filters();
+	}
+
+	/**
+	 * Includes!
+	 *
+	 * @since 1.0.0
+	 */
+	private function includes() {
+		require( trailingslashit( bp_get_theme_compat_dir() ) . 'includes/functions.php' );
 	}
 
 	/**
