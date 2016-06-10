@@ -97,6 +97,10 @@
 	opacity: 1;
 }
 
+.buddypress .pagination p {
+	margin: 0;
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 3.0 - BP Lists / Loops Generic
