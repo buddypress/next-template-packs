@@ -86,12 +86,12 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
-		if ( bp_is_activity_directory() || bp_is_members_directory() || bp_is_groups_directory() ) {
-			bp_get_template_part( 'common/nav/object-nav' );
-		} elseif ( bp_is_user() ) {
+		if ( bp_is_user() ) {
 			bp_get_template_part( 'members/single/item-nav' );
 		} elseif ( bp_is_group() ) {
 			bp_get_template_part( 'groups/single/item-nav' );
+		} elseif ( bp_is_directory() ) {
+			bp_get_template_part( 'common/nav/directory-nav' );
 		}
 
 		echo $args['after_widget'];
@@ -1294,6 +1294,249 @@ function bp_nouveau_prepare_group_for_js( $item ) {
 		'object_type' => 'group',
 		'is_public'   => 'public' === $item->status,
 	);
+}
+
+function bp_nouveau_get_members_directory_nav_items() {
+	$nav_items = array();
+
+	$nav_items['all'] = array(
+		'component' => 'members',
+		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
+		'li_class'  => array(),
+		'link'      => bp_get_members_directory_permalink(),
+		'title'     => __( 'The members of your community.', 'bp-nouveau' ),
+		'text'      => __( 'All Members', 'bp-nouveau' ),
+		'count'     => bp_get_total_member_count(),
+		'position'  => 5,
+	);
+
+	if ( is_user_logged_in() ) {
+
+		// If friends component is active and the user has friends
+		if ( bp_is_active( 'friends' ) && bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
+			$nav_items['personal'] = array(
+				'component' => 'members',
+				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array(),
+				'link'      => bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/',
+				'title'     => __( 'The members I\'m friend with.', 'bp-nouveau' ),
+				'text'      => __( 'My Friends', 'bp-nouveau' ),
+				'count'     => bp_get_total_friend_count( bp_loggedin_user_id() ),
+				'position'  => 15,
+			);
+		}
+	}
+
+	/**
+	 * Use this filter to introduce your custom nav items for the members directory.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array $nav_items The list of the members directory nav items.
+	 */
+	return apply_filters( 'bp_nouveau_get_members_directory_nav_items', $nav_items );
+}
+
+function bp_nouveau_get_activity_directory_nav_items() {
+	$nav_items = array();
+
+	$nav_items['all'] = array(
+		'component' => 'activity',
+		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
+		'li_class'  => array( 'dynamic' ),
+		'link'      => bp_get_activity_directory_permalink(),
+		'title'     => __( 'The public activity for everyone on this site.', 'bp-nouveau' ),
+		'text'      => __( 'All Members', 'bp-nouveau' ),
+		'count'     => '',
+		'position'  => 5,
+	);
+
+	if ( is_user_logged_in() ) {
+
+		// If the user has favorite create a nav item
+		if ( bp_get_total_favorite_count_for_user( bp_loggedin_user_id() ) ) {
+			$nav_items['favorites'] = array(
+				'component' => 'activity',
+				'slug'      => 'favorites', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array(),
+				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/',
+				'title'     => __( 'The activity I\'ve marked as a favorite.', 'bp-nouveau' ),
+				'text'      => __( 'My Favorites', 'bp-nouveau' ),
+				'count'     => false,
+				'position'  => 15,
+			);
+		}
+
+		// The friends component is active and user has friends
+		if ( bp_is_active( 'friends' ) && bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
+			$nav_items['friends'] = array(
+				'component' => 'activity',
+				'slug'      => 'friends', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array( 'dynamic' ),
+				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_friends_slug() . '/',
+				'title'     => __( 'The activity of my friends only.', 'bp-nouveau' ),
+				'text'      => __( 'My Friends', 'bp-nouveau' ),
+				'count'     => '',
+				'position'  => 25,
+			);
+		}
+
+		// The groups component is active and user has groups
+		if ( bp_is_active( 'groups' ) && bp_get_total_group_count_for_user( bp_loggedin_user_id() ) ) {
+			$nav_items['groups'] = array(
+				'component' => 'activity',
+				'slug'      => 'groups', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array( 'dynamic' ),
+				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_groups_slug() . '/',
+				'title'     => __( 'The activity of groups I am a member of.', 'bp-nouveau' ),
+				'text'      => __( 'My Groups', 'bp-nouveau' ),
+				'count'     => '',
+				'position'  => 35,
+			);
+		}
+
+		// Mentions are allowed
+		if ( bp_activity_do_mentions() ) {
+			$count = '';
+			if ( bp_get_total_mention_count_for_user( bp_loggedin_user_id() ) ) {
+				$count = bp_total_mention_count_for_user( bp_loggedin_user_id() );
+			}
+
+			$nav_items['mentions'] = array(
+				'component' => 'activity',
+				'slug'      => 'mentions', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array( 'dynamic' ),
+				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/',
+				'title'     => __( 'Activity that I have been mentioned in.', 'bp-nouveau' ),
+				'text'      => __( 'Mentions', 'bp-nouveau' ),
+				'count'     => $count,
+				'position'  => 45,
+			);
+		}
+	}
+
+	/**
+	 * Use this filter to introduce your custom nav items for the activity directory.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array $nav_items The list of the activity directory nav items.
+	 */
+	return apply_filters( 'bp_nouveau_get_activity_directory_nav_items', $nav_items );
+}
+
+function bp_nouveau_get_groups_directory_nav_items() {
+	$nav_items = array();
+
+	$nav_items['all'] = array(
+		'component' => 'groups',
+		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
+		'li_class'  => array( 'selected' ),
+		'link'      => bp_get_groups_directory_permalink(),
+		'title'     => __( 'The public and private groups of this site.', 'bp-nouveau' ),
+		'text'      => __( 'All Groups', 'bp-nouveau' ),
+		'count'     => bp_get_total_group_count(),
+		'position'  => 5,
+	);
+
+	if ( is_user_logged_in() ) {
+
+		$my_groups_count = bp_get_total_group_count_for_user( bp_loggedin_user_id() );
+
+		// If the user has groups create a nav item
+		if ( $my_groups_count ) {
+			$nav_items['personal'] = array(
+				'component' => 'groups',
+				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array(),
+				'link'      => bp_loggedin_user_domain() . bp_get_groups_slug() . '/my-groups/',
+				'title'     => __( 'The groups I\'m a member of.', 'bp-nouveau' ),
+				'text'      => __( 'My Groups', 'bp-nouveau' ),
+				'count'     => $my_groups_count,
+				'position'  => 15,
+			);
+		}
+
+		// If the user can create groups, add the create nav
+		if ( bp_user_can_create_groups() ) {
+			$nav_items['create'] = array(
+				'component' => 'groups',
+				'slug'      => 'create', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array( 'no-ajax' ),
+				'link'      => trailingslashit( bp_get_groups_directory_permalink() . 'create' ),
+				'title'     => __( 'Create a Group', 'bp-nouveau' ),
+				'text'      => __( 'Create a Group', 'bp-nouveau' ),
+				'count'     => false,
+				'position'  => 999,
+			);
+		}
+	}
+
+	/**
+	 * Use this filter to introduce your custom nav items for the groups directory.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array $nav_items The list of the groups directory nav items.
+	 */
+	return apply_filters( 'bp_nouveau_get_groups_directory_nav_items', $nav_items );
+}
+
+function bp_nouveau_get_blogs_directory_nav_items() {
+	$nav_items = array();
+
+	$nav_items['all'] = array(
+		'component' => 'blogs',
+		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
+		'li_class'  => array( 'selected' ),
+		'link'      => bp_get_root_domain() . '/' . bp_get_blogs_root_slug(),
+		'title'     => __( 'The public sites of this network.', 'bp-nouveau' ),
+		'text'      => __( 'All Sites', 'bp-nouveau' ),
+		'count'     => bp_get_total_blog_count(),
+		'position'  => 5,
+	);
+
+	if ( is_user_logged_in() ) {
+
+		$my_blogs_count = bp_get_total_blog_count_for_user( bp_loggedin_user_id() );
+
+		// If the user has blogs create a nav item
+		if ( $my_blogs_count ) {
+			$nav_items['personal'] = array(
+				'component' => 'blogs',
+				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array(),
+				'link'      => bp_loggedin_user_domain() . bp_get_blogs_slug(),
+				'title'     => __( 'The sites I\'m a contributor of.', 'bp-nouveau' ),
+				'text'      => __( 'My Sites', 'bp-nouveau' ),
+				'count'     => $my_blogs_count,
+				'position'  => 15,
+			);
+		}
+
+		// If the user can create blogs, add the create nav
+		if ( bp_blog_signup_enabled() ) {
+			$nav_items['create'] = array(
+				'component' => 'blogs',
+				'slug'      => 'create', // slug is used because BP_Core_Nav requires it, but it's the scope
+				'li_class'  => array( 'no-ajax' ),
+				'link'      => trailingslashit( bp_get_blogs_directory_permalink() . 'create' ),
+				'title'     => __( 'Create a Site', 'bp-nouveau' ),
+				'text'      => __( 'Create a Site', 'bp-nouveau' ),
+				'count'     => false,
+				'position'  => 999,
+			);
+		}
+	}
+
+	/**
+	 * Use this filter to introduce your custom nav items for the blogs directory.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array $nav_items The list of the blogs directory nav items.
+	 */
+	return apply_filters( 'bp_nouveau_get_blogs_directory_nav_items', $nav_items );
 }
 
 /**

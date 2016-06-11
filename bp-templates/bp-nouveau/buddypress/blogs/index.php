@@ -51,7 +51,7 @@ bp_adminbar_account_menu<?php
 
 	<form action="" method="post" id="blogs-directory-form" class="dir-form">
 
-		<?php bp_get_template_part( 'common/nav/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/nav/directory-nav' ); ?>
 
 		<div class="item-list-tabs" id="subnav" role="navigation">
 			<menu type="list" class="subnav clearfix">
