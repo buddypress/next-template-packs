@@ -296,7 +296,7 @@ do_action( 'bp_before_create_group_page' ); ?>
 				 */
 				do_action( 'bp_before_group_invites_creation_step' ); ?>
 
-				<?php bp_get_template_part( 'assets/invites/index' ); ;?>
+				<?php bp_get_template_part( '_accessoires/invites/index' ); ;?>
 
 				<?php wp_nonce_field( 'groups_create_save_group-invites' ); ?>
 

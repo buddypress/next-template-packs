@@ -13,7 +13,7 @@
  */
 do_action( 'bp_before_group_send_invites_content' ); ?>
 
-<?php bp_get_template_part( 'assets/invites/index' ); ;?>
+<?php bp_get_template_part( '_accessoires/invites/index' ); ;?>
 
 <?php
 

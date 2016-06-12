@@ -90,7 +90,7 @@ function bp_nouveau_before_activity_post_form() {
 }
 
 function bp_nouveau_after_activity_post_form() {
-	bp_get_template_part( 'assets/activity/form' );
+	bp_get_template_part( '_accessoires/activity/form' );
 
 	do_action( 'bp_after_activity_post_form' );
 }

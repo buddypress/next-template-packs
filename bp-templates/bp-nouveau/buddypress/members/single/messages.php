@@ -30,7 +30,7 @@ else :
 	do_action( 'bp_before_member_messages_content' );
 
 	// Load the Private messages UI
-	bp_get_template_part( 'assets/messages/index' );
+	bp_get_template_part( '_accessoires/messages/index' );
 
 	/**
 	 * Fires after the member messages content.
