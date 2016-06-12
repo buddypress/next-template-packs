@@ -1296,6 +1296,63 @@ function bp_nouveau_prepare_group_for_js( $item ) {
 	);
 }
 
+/**
+ * BP Nouveau will not use this hooks anymore
+ *
+ * @since  1.0.0
+ *
+ * @return array the list of disused legacy hooks
+ */
+function bp_nouveau_get_forsaken_hooks() {
+	return array(
+		'bp_members_directory_member_types' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_members_directory_member_types&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_members_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_all' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_all&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_friends' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_friends&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_groups' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_groups&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_favorites' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_favorites&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_mentions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_mentions&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_activity_type_tabs' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_activity_type_tabs&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_groups_directory_group_filter' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_groups_directory_group_filter&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_blogs_directory_blog_types' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_blogs_directory_blog_types&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+	);
+}
+
 function bp_nouveau_get_members_directory_nav_items() {
 	$nav_items = array();
 

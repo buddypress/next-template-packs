@@ -145,11 +145,17 @@ class BP_Nouveau extends BP_Theme_Compat {
 				add_action( 'bp_directory_groups_actions',      'bp_group_join_button'              );
 				add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',  5 );
 				add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button', 10 );
+
+				// Avoid Notices for BuddyPress Legacy Backcompat
+				remove_action( 'bp_groups_directory_group_filter', 'bp_group_backcompat_create_nav_item', 1000 );
 			}
 
 			// Blog button.
 			if ( bp_is_active( 'blogs' ) ) {
 				add_action( 'bp_directory_blogs_actions', 'bp_blogs_visit_blog_button' );
+
+				// Avoid Notices for BuddyPress Legacy Backcompat
+				remove_action( 'bp_blogs_directory_blog_types', 'bp_blog_backcompat_create_nav_item', 1000 );
 			}
 		}
 
@@ -248,9 +254,13 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		add_filter( 'bp_ajax_querystring', 'bp_nouveau_ajax_querystring', 10, 2 );
 
-
 		// Register directory nav items
 		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
+
+		// Feedbacks for developers
+		if ( WP_DEBUG ) {
+			add_action( 'wp_footer', array( $this, 'developer_feedbacks' ), 0 );
+		}
 
 		/** Override **********************************************************/
 
@@ -989,6 +999,46 @@ class BP_Nouveau extends BP_Theme_Compat {
 			// Define the primary nav for the current component's directory
 			buddypress()->theme_compat->theme->directory_nav->add_nav( $nav_item );
 		}
+	}
+
+	/**
+	 * Inform developers about the Legacy hooks
+	 * we are not using.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string HTML Output
+	 */
+	public function developer_feedbacks() {
+		$forsaken_hooks = bp_nouveau_get_forsaken_hooks();
+		$notices        = array();
+
+		foreach ( $forsaken_hooks as $hook => $feedback ) {
+			if ( 'action' === $feedback['hook_type'] ) {
+				if ( ! has_action( $hook ) ) {
+					continue;
+				}
+
+			} elseif ( 'filter' === $feedback['hook_type'] ) {
+				if ( ! has_filter( $hook ) ) {
+					continue;
+				}
+			}
+
+			$notices[] = sprintf( '<div class="bp-feedback %1$s"><p>%2$s</p></div>', $feedback['message_type'], esc_html( $feedback['message'] ) );
+		}
+
+		if ( empty( $notices ) ) {
+			return;
+		}
+
+		?>
+		<div id="developer-feedbacks">
+			<?php foreach ( $notices as $notice ) {
+				echo $notice;
+			} ;?>
+		</div>
+		<?php
 	}
 }
 new BP_Nouveau();
