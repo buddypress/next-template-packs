@@ -114,6 +114,10 @@ Hello, this is the BuddyPress Legacy stylesheet.
 /*
 * This commet arrives via the scss partial bp_lists
 */
+.buddypress .bp-list {
+	list-style: none;
+}
+
 #buddypress #activity-stream {
 	margin-top: -5px;
 }

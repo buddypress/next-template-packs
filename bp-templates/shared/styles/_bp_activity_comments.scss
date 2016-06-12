@@ -1,0 +1,85 @@
+// BP activity comment entries in response to activity loop entries
+
+.activity-comments {
+	clear: both;
+	margin: 0 0 0 $marg-lrg;
+	overflow: hidden;
+	position: relative;
+	width: auto;
+
+	ul {
+		clear: both;
+		margin: 0;
+		padding: 0 0 0 $pad-med;
+
+		li {
+			border-top: 1px solid $bp-border-color;
+			padding: $pad-med 0 0;
+		}
+
+		li:first-child {
+			border-top: 0;
+		}
+
+		li:last-child {
+			margin-bottom: 0;
+		}
+	} // close ul
+
+
+	.acomment-avatar {
+		img {
+			border-width: 1px;
+			float: left;
+			height: 25px;
+			margin-right: 10px;
+			width: 25px;
+		}
+	}
+
+	.acomment-options {
+		float: left;
+		margin: $marg-sml 0 $marg-sml $marg-lrg;
+
+		a {
+			color: #999;
+
+			&:focus,
+			&:hover {
+				color: inherit;
+			}
+		}
+
+	} // close .acomment-options
+
+} // close .activity-comments
+
+// Activity li.mini Comments
+
+.mini {
+
+	.activity-comments {
+		clear: none;
+		margin-top: 0;
+	}
+
+}
+
+// Single Activity Comment Entry View
+body.activity-permalink {
+	.activity-comments {
+		background: none;
+		//margin-left: 170px;
+		width: auto;
+
+		> ul {
+			padding: 0 $pad-sml 0 $pad-med;
+		}
+
+		ul li > ul {
+			margin-top: $marg-sml;
+		}
+
+	}
+
+} //close .activity-permalink

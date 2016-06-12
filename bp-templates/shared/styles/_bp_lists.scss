@@ -3,8 +3,11 @@
 * This commet arrives via the scss partial bp_lists
 */
 
-//.buddypress {
-//	.bp-list {
-//		@include box-model();
-//	}
-//}
+.buddypress {
+	.bp-list {
+		//@include box-model();
+		list-style: none;
+
+	}
+
+}

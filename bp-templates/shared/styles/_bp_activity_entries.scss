@@ -1,0 +1,85 @@
+// BP Activity Entries - activity loop
+
+.activity-list {
+
+	.activity-item {
+
+		// The header elements: date stamp, author etc;
+		.activity-header {
+
+			a.activity-time-since {
+				color: #aaa;
+				text-decoration: none;
+
+				&:hover {
+					color: #888;
+					text-decoration: underline;
+				}
+			}
+
+		} // close .activity-header
+
+		// The footer elements, buttons etc
+		.activity-meta {
+
+			a {
+				padding: 4px 8px;
+			}
+
+			.button:before {
+				font-family: dashicons;
+				font-size: 18px;
+				vertical-align: bottom;
+			}
+
+			a.acomment-reply:before {
+				content: "\f101";
+			}
+
+			a.fav:before {
+				content: "\f154";
+			}
+
+			a.unfav:before {
+				content: "\f155";
+			}
+
+			a.delete-activity:before {
+				content: "\f153";
+			}
+
+			a.delete-activity:hover {
+				color: #800;
+			}
+
+			.button {
+				span {
+					background: none;
+					color: #555;
+					font-weight: bold;
+				}
+			}
+
+		} // close .activity-meta
+
+	} // close .activity-item
+
+} // close .activity-list
+
+
+// Single Activity Entry View
+body.activity-permalink {
+
+	.activity-list {
+
+		li {
+			border-width: 1px;
+			padding: $pad-med 0 0 0;
+		}
+
+		.activity-meta {
+			margin-bottom: 6px;
+		}
+
+	}
+}

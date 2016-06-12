@@ -1,0 +1,55 @@
+// BP Directory Search elements
+
+.buddypress {
+
+	[data-bp-search] {
+
+		form {
+
+			input[type="search"],
+			input[type=text] {
+				float: left;
+				font-size: 90%;
+				padding: 5px 10px;
+				width: 65%;
+			}
+
+			input[type="submit"] {
+//			border-left: none; why??
+				display: none;
+				float: left;
+				font-size: 90%;
+//			font-weight: normal; why??
+				line-height: inherit;
+				padding: 5px 10px;
+				text-align: center;
+//			text-transform: none; why??
+				width: auto;
+			}
+
+			input[type="search"]::-webkit-search-cancel-button {
+				-webkit-appearance: searchfield-cancel-button;
+			}
+
+			input[type="search"]::-webkit-search-results-button,
+			input[type="search"]::-webkit-search-results-decoration {
+				display: none;
+			}
+
+			input[type="submit"] { // why seperate add to above ruleset?
+				font-family: dashicons;
+			}
+
+		} // close form
+
+	} // close [data-bp-search]
+
+	.current-member-type {
+		font-style: italic;
+	}
+
+	.dir-form {
+		clear: both;
+	}
+
+} // close .buddypress
