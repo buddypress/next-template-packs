@@ -49,7 +49,7 @@ do_action( 'bp_before_directory_members_page' ); ?>
 
 	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
-		<?php bp_get_template_part( 'common/nav/object-nav' ); ?>
+		<?php bp_get_template_part( 'common/nav/directory-nav' ); ?>
 
 	<?php endif; ?>
 

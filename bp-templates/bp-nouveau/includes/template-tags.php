@@ -80,28 +80,6 @@ function bp_pagination( $position = null ) {
 	return;
 }
 
-/**
- * Add the Create a Group nav to the Groups directory navigation.
- *
- * @since 1.0.0
- *
- * @uses   bp_group_create_nav_item() to output the create a Group nav item.
- */
-function bp_nouveau_group_create_nav() {
-	bp_group_create_nav_item();
-}
-
-/**
- * Add the Create a Site nav to the Sites directory navigation.
- *
- * @since 1.0.0
- *
- * @uses   bp_blog_create_nav_item() to output the Create a Site nav item
- */
-function bp_nouveau_blog_create_nav() {
-	bp_blog_create_nav_item();
-}
-
 function bp_nouveau_before_activity_post_form() {
 	// Enqueue needed script.
 	if ( bp_nouveau_current_user_can( 'publish_activity' ) ) {
@@ -116,3 +94,153 @@ function bp_nouveau_after_activity_post_form() {
 
 	do_action( 'bp_after_activity_post_form' );
 }
+
+/** Template tags for the Directory navs **************************************/
+
+function bp_nouveau_component_directory_type_tabs_class() {
+	echo bp_nouveau_get_component_directory_type_tabs_class();
+}
+
+	function bp_nouveau_get_component_directory_type_tabs_class() {
+		$class = sprintf( '%s-type-tabs', bp_current_component() );
+
+		return sanitize_html_class( $class );
+	}
+
+function bp_nouveau_component_directory_list_class() {
+	echo bp_nouveau_get_component_directory_list_class();
+}
+
+	function bp_nouveau_get_component_directory_list_class() {
+		$class = sprintf( '%s-nav', bp_current_component() );
+
+		return sanitize_html_class( $class );
+	}
+
+function bp_nouveau_component_directory_has_nav() {
+	$bp = buddypress();
+
+	$bp->theme_compat->theme->sorted_dir_nav = array_values( $bp->theme_compat->theme->directory_nav->get_primary() );
+
+	if ( 0 === count( $bp->theme_compat->theme->sorted_dir_nav ) ) {
+		unset( $bp->theme_compat->theme->sorted_dir_nav );
+
+		return false;
+	}
+
+	$bp->theme_compat->theme->current_dir_nav_index = 0;
+	return true;
+}
+
+function bp_nouveau_component_directory_nav_items() {
+	$bp = buddypress();
+
+	if ( isset( $bp->theme_compat->theme->sorted_dir_nav[ $bp->theme_compat->theme->current_dir_nav_index ] ) ) {
+		return true;
+	}
+
+	$bp->theme_compat->theme->current_dir_nav_index = 0;
+	unset( $bp->theme_compat->theme->current_dir_nav_item );
+
+	return false;
+}
+
+function bp_nouveau_component_directory_nav_item() {
+	$bp = buddypress();
+
+	$bp->theme_compat->theme->current_dir_nav_item = $bp->theme_compat->theme->sorted_dir_nav[ $bp->theme_compat->theme->current_dir_nav_index ];
+	$bp->theme_compat->theme->current_dir_nav_index += 1;
+}
+
+function bp_nouveau_component_directory_nav_id() {
+	echo bp_nouveau_get_component_directory_nav_id();
+}
+
+	function bp_nouveau_get_component_directory_nav_id() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$id = sprintf( '%1$s-%2$s', $nav_item->component, $nav_item->slug );
+
+		return esc_attr( $id );
+	}
+
+function bp_nouveau_component_directory_nav_classes() {
+	echo bp_nouveau_get_component_directory_nav_classes();
+}
+
+	function bp_nouveau_get_component_directory_nav_classes() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		if ( empty( $nav_item->li_class ) ) {
+			return;
+		}
+
+		$classes = array_map( 'sanitize_html_class', (array) $nav_item->li_class );
+
+		return join( ' ', $classes );
+	}
+
+function bp_nouveau_component_directory_nav_scope() {
+	echo bp_nouveau_get_component_directory_nav_scope();
+}
+
+	function bp_nouveau_get_component_directory_nav_scope() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		return esc_attr( $nav_item->slug );
+	}
+
+function bp_nouveau_component_directory_nav_object() {
+	echo bp_nouveau_get_component_directory_nav_object();
+}
+
+	function bp_nouveau_get_component_directory_nav_object() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		return esc_attr( $nav_item->component );
+	}
+
+function bp_nouveau_component_directory_nav_link() {
+	echo bp_nouveau_get_component_directory_nav_link();
+}
+
+	function bp_nouveau_get_component_directory_nav_link() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		return esc_url( $nav_item->link );
+	}
+
+function bp_nouveau_component_directory_nav_title() {
+	echo bp_nouveau_get_component_directory_nav_title();
+}
+
+	function bp_nouveau_get_component_directory_nav_title() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		return esc_attr( $nav_item->title );
+	}
+
+function bp_nouveau_component_directory_nav_text() {
+	echo bp_nouveau_get_component_directory_nav_text();
+}
+
+	function bp_nouveau_get_component_directory_nav_text() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		return esc_html( $nav_item->text );
+	}
+
+function bp_nouveau_component_directory_nav_has_count() {
+	$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+	return false !== $nav_item->count;
+}
+
+function bp_nouveau_component_directory_nav_count() {
+	echo bp_nouveau_get_component_directory_nav_count();
+}
+
+	function bp_nouveau_get_component_directory_nav_count() {
+		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+
+		return esc_attr( $nav_item->count );
+	}

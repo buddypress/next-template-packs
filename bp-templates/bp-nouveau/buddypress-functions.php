@@ -88,6 +88,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		foreach ( $bp->theme_compat->packages['nouveau'] as $property => $value ) {
 			$this->{$property} = $value;
 		}
+
+		// Set the Directory Nav
+		$bp->theme_compat->theme->directory_nav = new BP_Core_Nav();
 	}
 
 	/**
@@ -137,18 +140,16 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 			// Group buttons.
 			if ( bp_is_active( 'groups' ) ) {
-				add_action( 'bp_group_header_actions',          'bp_group_join_button',            5 );
-				add_action( 'bp_group_header_actions',          'bp_group_new_topic_button',      20 );
-				add_action( 'bp_directory_groups_actions',      'bp_group_join_button'               );
-				add_action( 'bp_groups_directory_group_filter', 'bp_nouveau_group_create_nav',   999 );
-				add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',   5 );
-				add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button',  10 );
+				add_action( 'bp_group_header_actions',          'bp_group_join_button',           5 );
+				add_action( 'bp_group_header_actions',          'bp_group_new_topic_button',     20 );
+				add_action( 'bp_directory_groups_actions',      'bp_group_join_button'              );
+				add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',  5 );
+				add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button', 10 );
 			}
 
 			// Blog button.
 			if ( bp_is_active( 'blogs' ) ) {
-				add_action( 'bp_directory_blogs_actions',    'bp_blogs_visit_blog_button'      );
-				add_action( 'bp_blogs_directory_blog_types', 'bp_nouveau_blog_create_nav', 999 );
+				add_action( 'bp_directory_blogs_actions', 'bp_blogs_visit_blog_button' );
 			}
 		}
 
@@ -246,6 +247,10 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		add_filter( 'bp_ajax_querystring', 'bp_nouveau_ajax_querystring', 10, 2 );
+
+
+		// Register directory nav items
+		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
 
 		/** Override **********************************************************/
 
@@ -954,8 +959,37 @@ class BP_Nouveau extends BP_Theme_Compat {
 		return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $button->id . '">' . $button->link_text . '</a>' . $after;
 	}
 
+	/**
+	 * Define the directory nav items
+	 *
+	 * @since 1.0.0
+	 */
+	public function setup_directory_nav() {
+		$nav_items = array();
 
+		if ( bp_is_members_directory() ) {
+			$nav_items = bp_nouveau_get_members_directory_nav_items();
+		} elseif ( bp_is_activity_directory() ) {
+			$nav_items = bp_nouveau_get_activity_directory_nav_items();
+		} elseif ( bp_is_groups_directory() ) {
+			$nav_items = bp_nouveau_get_groups_directory_nav_items();
+		} elseif ( bp_is_blogs_directory() ) {
+			$nav_items = bp_nouveau_get_blogs_directory_nav_items();
+		}
 
+		if ( empty( $nav_items ) ) {
+			return;
+		}
+
+		foreach ( $nav_items as $nav_item ) {
+			if ( empty( $nav_item['component'] ) || $nav_item['component'] !== bp_current_component() ) {
+				continue;
+			}
+
+			// Define the primary nav for the current component's directory
+			buddypress()->theme_compat->theme->directory_nav->add_nav( $nav_item );
+		}
+	}
 }
 new BP_Nouveau();
 endif;
