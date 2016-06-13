@@ -1,4 +1,4 @@
-bp_adminbar_account_menu<?php
+<?php
 /**
  * BuddyPress - Blogs
  *
@@ -9,14 +9,13 @@ bp_adminbar_account_menu<?php
 
 <div id="buddypress" class="buddypress">
 
-<?php
-/**
- * Fires at the begining of the templates BP injected content.
- *
- * @since 2.3.0
- */
+	<?php
+	/**
+	 * Fires at the begining of the templates BP injected content.
+	 *
+	 * @since 2.3.0
+	 */
 	do_action( 'bp_before_directory_blogs_page' ); ?>
-
 
 	<?php
 
@@ -36,10 +35,6 @@ bp_adminbar_account_menu<?php
 	 */
 	do_action( 'bp_before_directory_blogs_content' ); ?>
 
-	<div id="blog-dir-search" class="dir-search" role="search">
-		<?php bp_directory_blogs_search_form(); ?>
-	</div><!-- #blog-dir-search -->
-
 	<?php
 
 	/**
@@ -49,54 +44,50 @@ bp_adminbar_account_menu<?php
 	 */
 	do_action( 'bp_before_directory_blogs_tabs' ); ?>
 
-	<form action="" method="post" id="blogs-directory-form" class="dir-form">
+	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
 		<?php bp_get_template_part( 'common/nav/directory-nav' ); ?>
 
-		<div class="item-list-tabs" id="subnav" role="navigation">
-			<menu type="list" class="subnav clearfix">
+	<?php endif; ?>
 
-				<?php
+	<div class="item-list-tabs" id="subnav" role="navigation">
+		<ul type="list" class="subnav clearfix">
+			<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
+			<?php
 
-				/**
-				 * Fires inside the unordered list displaying blog sub-types.
-				 *
-				 * @since 1.5.0
-				 */
-				do_action( 'bp_blogs_directory_blog_sub_types' ); ?>
-			</menu>
+			/**
+			 * Fires inside the unordered list displaying blog sub-types.
+			 *
+			 * @since 1.5.0
+			 */
+			do_action( 'bp_blogs_directory_blog_sub_types' ); ?>
+		</ul>
 
-			<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
+		<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
 
-		</div>
+	</div>
 
-		<div id="blogs-dir-list" class="blogs dir-list">
+	<div id="blogs-dir-list" class="blogs dir-list" data-bp-list="blogs">
+		<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the sites of the network, please wait.', 'bp-nouveau' ) ;?></div>
+	</div><!-- #blogs-dir-list -->
 
-			<?php bp_get_template_part( 'blogs/blogs-loop' ); ?>
+	<?php
 
-		</div><!-- #blogs-dir-list -->
+	/**
+	 * Fires inside and displays the blogs content.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_directory_blogs_content' ); ?>
 
-		<?php
+	<?php
 
-		/**
-		 * Fires inside and displays the blogs content.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_directory_blogs_content' ); ?>
-
-		<?php wp_nonce_field( 'directory_blogs', '_wpnonce-blogs-filter' ); ?>
-
-		<?php
-
-		/**
-		 * Fires after the display of the blogs listing content.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_after_directory_blogs_content' ); ?>
-
-	</form><!-- #blogs-directory-form -->
+	/**
+	 * Fires after the display of the blogs listing content.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_after_directory_blogs_content' ); ?>
 
 	<?php
 
@@ -106,8 +97,6 @@ bp_adminbar_account_menu<?php
 	 * @since 1.5.0
 	 */
 	do_action( 'bp_after_directory_blogs' ); ?>
-
-
 
 	<?php
 

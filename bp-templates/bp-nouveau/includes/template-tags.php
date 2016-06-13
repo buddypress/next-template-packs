@@ -27,7 +27,16 @@ function bp_pagination( $position = null ) {
 
 		case 'blogs' :
 
-			$pag_count = bp_get_blogs_pagination_count();
+			/**
+			 * bp_get_blogs_pagination_count() doesn't exist in BuddyPress
+			 * @see https://buddypress.trac.wordpress.org/ticket/7118
+			 *
+			 * So we're doing this workaround for now, and will update this part
+			 * when/if 7118 is fixed.
+			 */
+			ob_start();
+			bp_blogs_pagination_count();
+			$pag_count = ob_get_clean();
 			$pag_links = bp_get_blogs_pagination_links();
 
 		break;
