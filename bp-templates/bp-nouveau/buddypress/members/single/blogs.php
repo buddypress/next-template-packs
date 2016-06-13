@@ -38,9 +38,9 @@ switch ( bp_current_action() ) :
 		 */
 		do_action( 'bp_before_member_blogs_content' ); ?>
 
-		<div class="blogs myblogs">
+		<div class="blogs myblogs" data-bp-list="blogs">
 
-			<?php bp_get_template_part( 'blogs/blogs-loop' ) ?>
+			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the blogs you are a contributor of, please wait.', 'bp-nouveau' ) ;?></div>
 
 		</div><!-- .blogs.myblogs -->
 
