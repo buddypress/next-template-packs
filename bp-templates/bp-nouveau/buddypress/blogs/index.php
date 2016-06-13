@@ -9,40 +9,7 @@
 
 <div id="buddypress" class="buddypress">
 
-	<?php
-	/**
-	 * Fires at the begining of the templates BP injected content.
-	 *
-	 * @since 2.3.0
-	 */
-	do_action( 'bp_before_directory_blogs_page' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the blogs.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_before_directory_blogs' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the blogs listing content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_blogs_content' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the blogs list tabs.
-	 *
-	 * @since 2.3.0
-	 */
-	do_action( 'bp_before_directory_blogs_tabs' ); ?>
+	<?php bp_nouveau_before_blogs_directory_content() ;?>
 
 	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
@@ -71,40 +38,6 @@
 		<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the sites of the network, please wait.', 'bp-nouveau' ) ;?></div>
 	</div><!-- #blogs-dir-list -->
 
-	<?php
-
-	/**
-	 * Fires inside and displays the blogs content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_directory_blogs_content' ); ?>
-
-	<?php
-
-	/**
-	 * Fires after the display of the blogs listing content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_blogs_content' ); ?>
-
-	<?php
-
-	/**
-	 * Fires at the bottom of the blogs directory template file.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_after_directory_blogs' ); ?>
-
-	<?php
-
-	/**
-	 * Fires at the bottom of the blogs directory template file.
-	 *
-	 * @since 2.3.0
-	 */
-	do_action( 'bp_after_directory_blogs_page' ); ?>
+	<?php bp_nouveau_after_blogs_directory_content() ;?>
 
 </div><!-- //.buddypress -->
