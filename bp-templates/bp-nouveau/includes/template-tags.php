@@ -386,11 +386,11 @@ function bp_nouveau_directory_filter_component() {
 	echo esc_attr( bp_current_component() );
 }
 
-function bp_nouveau_directory_filter_options() {
-	echo bp_nouveau_get_directory_filter_options();
+function bp_nouveau_filter_options() {
+	echo bp_nouveau_get_filter_options();
 }
 
-	function bp_nouveau_get_directory_filter_options() {
+	function bp_nouveau_get_filter_options() {
 		$filters = bp_nouveau_get_component_filters();
 		$output = '';
 

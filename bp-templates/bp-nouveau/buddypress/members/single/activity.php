@@ -44,18 +44,8 @@ do_action( 'bp_after_member_activity_post_form' ); ?>
 		<li id="activity-filter-select" class="last filter">
 			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
 			<select id="activity-filter-by" data-bp-filter="activity">
-				<option value="-1"><?php _e( '&mdash; Everything &mdash;', 'bp-nouveau' ); ?></option>
 
-				<?php bp_activity_show_filters(); ?>
-
-				<?php
-
-				/**
-				 * Fires inside the select input for member activity filter options.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_member_activity_filter_options' ); ?>
+				<?php bp_nouveau_filter_options() ;?>
 
 			</select>
 		</li>

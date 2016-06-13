@@ -15,7 +15,7 @@
 		</label>
 		<select id="<?php bp_nouveau_directory_filter_id(); ?>" data-bp-filter="<?php bp_nouveau_directory_filter_component(); ?>">
 
-			<?php bp_nouveau_directory_filter_options(); ?>
+			<?php bp_nouveau_filter_options(); ?>
 
 		</select>
 	</li>
