@@ -96,11 +96,6 @@ window.bp = window.bp || {};
 				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'title', search_title );
 				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value', BP_Nouveau.search_icon );
 			}
-
-			// Make sure the developer will see dev notices
-			if ( $( '#developer-feedbacks' ).length ) {
-				window.location.hash = '#developer-feedbacks';
-			}
 		},
 
 		/** Helpers *******************************************************************/

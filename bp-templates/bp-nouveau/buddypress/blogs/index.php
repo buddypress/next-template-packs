@@ -30,7 +30,7 @@
 			do_action( 'bp_blogs_directory_blog_sub_types' ); ?>
 		</ul>
 
-		<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
+		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
 	</div>
 

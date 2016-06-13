@@ -325,3 +325,82 @@ function bp_nouveau_directory_nav_count() {
 
 		return esc_attr( $nav_item->count );
 	}
+
+/** Template tags for the directory filters **********************************/
+
+function bp_nouveau_directory_filter_container_id() {
+	echo bp_nouveau_get_directory_filter_container_id();
+}
+
+	function bp_nouveau_get_directory_filter_container_id() {
+		$ids = array(
+			'members'  => 'members-order-select',
+			'activity' => 'activity-filter-select',
+			'groups'   => 'groups-order-select',
+			'blogs'    => 'blogs-order-select',
+		);
+
+		$component = bp_current_component();
+
+		if ( isset( $ids[ $component ] ) ) {
+			return esc_attr( apply_filters( 'bp_nouveau_get_directory_filter_container_id', $ids[ $component ] ) );
+		}
+	}
+
+function bp_nouveau_directory_filter_id() {
+	echo bp_nouveau_get_directory_filter_id();
+}
+
+	function bp_nouveau_get_directory_filter_id() {
+		$ids = array(
+			'members'  => 'members-order-by',
+			'activity' => 'activity-filter-by',
+			'groups'   => 'groups-order-by',
+			'blogs'    => 'blogs-order-by',
+		);
+
+		$component = bp_current_component();
+
+		if ( isset( $ids[ $component ] ) ) {
+			return esc_attr( apply_filters( 'bp_nouveau_get_directory_filter_id', $ids[ $component ] ) );
+		}
+	}
+
+function bp_nouveau_directory_filter_label() {
+	echo bp_nouveau_get_directory_filter_label();
+}
+
+	function bp_nouveau_get_directory_filter_label() {
+		$component = bp_current_component();
+
+		$label = __( 'Order By:', 'bp-nouveau' );
+
+		if ( 'activity' === $component ) {
+			$label = __( 'Show:', 'bp-nouveau' );
+		}
+
+		return esc_html( apply_filters( 'bp_nouveau_get_directory_filter_label', $label ) );
+	}
+
+function bp_nouveau_directory_filter_component() {
+	echo esc_attr( bp_current_component() );
+}
+
+function bp_nouveau_directory_filter_options() {
+	echo bp_nouveau_get_directory_filter_options();
+}
+
+	function bp_nouveau_get_directory_filter_options() {
+		$filters = bp_nouveau_get_component_filters();
+		$output = '';
+
+		foreach ( $filters as $key => $value ) {
+			$output .= sprintf( '<option value="%1$s">%2$s</option>%3$s',
+				esc_attr( $key ),
+				esc_html( $value ),
+				"\n"
+			);
+		}
+
+		return $output;
+	}
