@@ -1,0 +1,55 @@
+// BP Whats new form handles user updates to groups or profiles
+
+.item-body {
+	.activity-update-form {
+		.activity-form {
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
+
+.activity-update-form {
+
+	.activity-form { // #whats-new-form
+
+		// This ruleset may be redundent!
+		p.activity-greeting {
+			line-height: 0.5em;
+			margin-bottom: $marg-med;
+			margin-left: 75px;
+		}
+
+	}
+
+	.user-avatar { //whats-new-avatar
+		float: left;
+	}
+
+	.content-wrap { // #whats-new-content
+		margin-left: 55px;
+		padding: 0 0 $marg-lrg $marg-lrg;
+	}
+
+	.textarea-wrap { // #whats-new-textarea
+		textarea {
+			background: #fff;
+			@include box-model();
+			color: #333;
+			font-family: inherit;
+			font-size: medium;
+			height: 2.2em;
+			line-height: 1.4;
+			padding: $pad-med;
+			width: 100%;
+		}
+	}
+
+	.post-to { //#whats-new-post-in-box
+
+	}
+
+	.submit-update { // #whats-new-submit
+
+	}
+}

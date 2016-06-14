@@ -124,6 +124,40 @@
 * @section 3.1.1 - Activity Whats New
 *-----------------------------------------------------
 */
+.item-body .activity-update-form .activity-form {
+	margin: 0;
+	padding: 0;
+}
+
+.activity-update-form .activity-form p.activity-greeting {
+	line-height: 0.5em;
+	margin-bottom: 15px;
+	margin-left: 75px;
+}
+
+.activity-update-form .user-avatar {
+	float: left;
+}
+
+.activity-update-form .content-wrap {
+	margin-left: 55px;
+	padding: 0 0 20px 20px;
+}
+
+.activity-update-form .textarea-wrap textarea {
+	background: #fff;
+	-webkit-box-sizing: "border-box";
+	-moz-box-sizing: "border-box";
+	box-sizing: "border-box";
+	color: #333;
+	font-family: inherit;
+	font-size: medium;
+	height: 2.2em;
+	line-height: 1.4;
+	padding: 1em;
+	width: 100%;
+}
+
 /**
 *-----------------------------------------------------
 * @section 3.1.2 - Activity Entries

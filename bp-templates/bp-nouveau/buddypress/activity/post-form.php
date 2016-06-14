@@ -15,7 +15,7 @@
  */
 bp_nouveau_before_activity_post_form() ;?>
 
-<div id="bp-nouveau-activity-form"></div>
+<div id="bp-nouveau-activity-form" class="activity-update-form"></div>
 
 <?php
 /**
