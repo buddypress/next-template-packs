@@ -68,7 +68,7 @@ do_action( 'bp_before_directory_members_page' ); ?>
 			 */
 			do_action( 'bp_members_directory_member_sub_types' ); ?>
 
-			<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
+			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
 
 	</div>

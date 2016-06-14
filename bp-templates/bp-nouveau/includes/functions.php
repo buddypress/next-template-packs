@@ -1296,6 +1296,103 @@ function bp_nouveau_prepare_group_for_js( $item ) {
 	);
 }
 
+/**
+ * BP Nouveau will not use this hooks anymore
+ *
+ * @since  1.0.0
+ *
+ * @return array the list of disused legacy hooks
+ */
+function bp_nouveau_get_forsaken_hooks() {
+	return array(
+		'bp_members_directory_member_types' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_members_directory_member_types&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_members_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_all' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_all&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_friends' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_friends&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_groups' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_groups&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_favorites' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_favorites&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_before_activity_type_tab_mentions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_before_activity_type_tab_mentions&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_activity_type_tabs' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_activity_type_tabs&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_groups_directory_group_filter' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_groups_directory_group_filter&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_blogs_directory_blog_types' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'the &#39;bp_blogs_directory_blog_types&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_members_directory_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_members_directory_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_filters&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_activity_filter_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'Instead of using the &#39;bp_activity_filter_options&#39; action you should register your activity types using the function &#39;bp_activity_set_action&#39;', 'bp-nouveau' ),
+		),
+		'bp_member_activity_filter_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'Instead of using the &#39;bp_member_activity_filter_options&#39; action you should register your activity types using the function &#39;bp_activity_set_action&#39;', 'bp-nouveau' ),
+		),
+		'bp_group_activity_filter_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'Instead of using the &#39;bp_group_activity_filter_options&#39; action you should register your activity types using the function &#39;bp_activity_set_action&#39;', 'bp-nouveau' ),
+		),
+		'bp_groups_directory_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_groups_directory_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_groups_filters&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_member_group_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_member_group_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_groups_filters&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_member_blog_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_member_blog_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_blogs_filters&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_blogs_directory_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_blogs_directory_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_blogs_filters&#39; filter instead', 'bp-nouveau' ),
+		),
+	);
+}
+
 function bp_nouveau_get_members_directory_nav_items() {
 	$nav_items = array();
 
@@ -1537,6 +1634,258 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 	 * @param  array $nav_items The list of the blogs directory nav items.
 	 */
 	return apply_filters( 'bp_nouveau_get_blogs_directory_nav_items', $nav_items );
+}
+
+/**
+ * Run specific "select filter" hooks to catch the options and build an array out of them
+ *
+ * @since 1.0.0
+ *
+ * @param string $hook the do_action
+ * @param array  $filters the array of options
+ * @return array the filters
+ */
+function bp_nouveau_parse_hooked_options( $hook = '', $filters = array() ) {
+	if ( empty( $hook ) ) {
+		return $filters;
+	}
+
+	ob_start();
+	do_action( $hook );
+
+	$output = ob_get_clean();
+
+	preg_match_all( '/<option value="(.*?)"\s*>(.*?)<\/option>/', $output, $matches );
+
+	if ( ! empty( $matches[1] ) && ! empty( $matches[2] ) ) {
+		foreach ( $matches[1] as $ik => $key_action ) {
+			if ( ! empty( $matches[2][ $ik ] ) && ! isset( $filters[ $key_action ] ) ) {
+				$filters[ $key_action ] = $matches[2][ $ik ];
+			}
+		}
+	}
+
+	return $filters;
+}
+
+/**
+ * Get Dropdown filters for the members component
+ *
+ * @since 1.0.0
+ *
+ * @param string $context 'directory' see comment below
+ * @return array the filters
+ */
+function bp_nouveau_get_members_filters( $context = '' ) {
+	/**
+	 * The group context is managed in bp_groups_members_template_part()
+	 * This was done for backcompat reasons in BP Legacy.
+	 *
+	 * @todo We should probably bring back this template part into BP Nouveau
+	 * as we're building a brand new template pack. (Javascript would be more simple)
+	 */
+	if ( 'directory' !== $context ) {
+		return array();
+	}
+
+	$filters = array(
+		'active' => __( 'Last Active', 'bp-nouveau' ),
+		'newest' => __( 'Newest Registered', 'bp-nouveau' ),
+	);
+
+	if ( bp_is_active( 'xprofile' ) ) {
+		$filters['alphabetical'] = __( 'Alphabetical', 'bp-nouveau' );
+	}
+
+	/**
+	 * Recommended, filter here instead of adding an action to 'bp_members_directory_order_options'
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  the members filters.
+	 * @param string the context.
+	 */
+	$filters = apply_filters( 'bp_nouveau_get_members_filters', $filters, $context );
+
+	return bp_nouveau_parse_hooked_options( 'bp_members_directory_order_options', $filters );
+}
+
+/**
+ * Make sure bp_get_activity_show_filters() will return the filters and the context
+ * instead of the output.
+ *
+ * @since 1.0.0
+ *
+ * @param string $output string HTML output
+ * @param  'directory' see comment below
+ */
+function bp_nouveau_get_activity_filters_array( $output = '', $filters = array(), $context = '' ) {
+	return array( 'filters' => $filters, 'context' => $context );
+}
+
+/**
+ * Get Dropdown filters of the activity component
+ *
+ * @since 1.0.0
+ *
+ * @return array the filters
+ */
+function bp_nouveau_get_activity_filters() {
+	add_filter( 'bp_get_activity_show_filters', 'bp_nouveau_get_activity_filters_array', 10, 3 );
+
+	$filters_data = bp_get_activity_show_filters();
+
+	remove_filter( 'bp_get_activity_show_filters', 'bp_nouveau_get_activity_filters_array', 10, 3 );
+
+	$action = '';
+	if ( 'group' === $filters_data['context'] ) {
+		$action = 'bp_group_activity_filter_options';
+	} elseif ( 'member' === $filters_data['context'] || 'member_groups' === $filters_data['context'] ) {
+		$action = 'bp_member_activity_filter_options';
+	} else {
+		$action = 'bp_activity_filter_options';
+	}
+
+	$filters = $filters_data['filters'];
+
+	if ( $action ) {
+		return bp_nouveau_parse_hooked_options( $action, $filters );
+	}
+
+	return $filters;
+}
+
+/**
+ * Get Dropdown filters for the groups component
+ *
+ * @since 1.0.0
+ *
+ * @param string $context 'directory' or 'user'
+ * @return array the filters
+ */
+function bp_nouveau_get_groups_filters( $context = '' ) {
+	if ( empty( $context ) ) {
+		return array();
+	}
+
+	$action = '';
+	if ( 'user' === $context ) {
+		$action = 'bp_member_group_order_options';
+	} elseif ( 'directory' === $context ) {
+		$action = 'bp_groups_directory_order_options';
+	}
+
+	/**
+	 * Recommended, filter here instead of adding an action to 'bp_member_group_order_options'
+	 * or 'bp_groups_directory_order_options'
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  the members filters.
+	 * @param string the context.
+	 */
+	$filters = apply_filters( 'bp_nouveau_get_groups_filters', array(
+		'active'       => __( 'Last Active', 'bp-nouveau' ),
+		'popular'      => __( 'Most Members', 'bp-nouveau' ),
+		'newest'       => __( 'Newly Created', 'bp-nouveau' ),
+		'alphabetical' => __( 'Alphabetical', 'bp-nouveau' ),
+	), $context );
+
+	if ( $action ) {
+		return bp_nouveau_parse_hooked_options( $action, $filters );
+	}
+
+	return $filters;
+}
+
+/**
+ * Get Dropdown filters for the blogs component
+ *
+ * @since 1.0.0
+ *
+ * @param string $context 'directory' or 'user'
+ * @return array the filters
+ */
+function bp_nouveau_get_blogs_filters( $context = '' ) {
+	if ( empty( $context ) ) {
+		return array();
+	}
+
+	$action = '';
+	if ( 'user' === $context ) {
+		$action = 'bp_member_blog_order_options';
+	} elseif ( 'directory' === $context ) {
+		$action = 'bp_blogs_directory_order_options';
+	}
+
+	/**
+	 * Recommended, filter here instead of adding an action to 'bp_member_blog_order_options'
+	 * or 'bp_blogs_directory_order_options'
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  the blogs filters.
+	 * @param string the context.
+	 */
+	$filters = apply_filters( 'bp_nouveau_get_blogs_filters', array(
+		'active'       => __( 'Last Active', 'bp-nouveau' ),
+		'newest'       => __( 'Newest', 'bp-nouveau' ),
+		'alphabetical' => __( 'Alphabetical', 'bp-nouveau' ),
+	), $context );
+
+	if ( $action ) {
+		return bp_nouveau_parse_hooked_options( $action, $filters );
+	}
+
+	return $filters;
+}
+
+/**
+ * Get Dropdawn filters for the current component of the one passed in params
+ *
+ * @since 1.0.0
+ *
+ * @param string $context   'directory', 'user' or 'group'
+ * @param string $component The BuddyPress component ID
+ * @return array the dropdown filters
+ */
+function bp_nouveau_get_component_filters( $context = '', $component = '' ) {
+	$filters = array();
+
+	if ( empty( $context ) ) {
+		if ( bp_is_user() ) {
+			$context = 'user';
+		} elseif ( bp_is_group() ) {
+			$context = 'group';
+
+		// Defaults to directory
+		} else {
+			$context = 'directory';
+		}
+	}
+
+	if ( empty( $component ) ) {
+		if ( 'directory' === $context || 'user' === $context ) {
+			$component = bp_current_component();
+		} elseif ( 'group' === $context && bp_is_group_activity() ) {
+			$component = 'activity';
+		}
+	}
+
+	if ( 'members' === $component ) {
+		$filters = bp_nouveau_get_members_filters( $context );
+	} elseif ( 'activity' === $component ) {
+		$filters = bp_nouveau_get_activity_filters();
+
+		// Specific case for the activity dropdown
+		$filters = array_merge( array( '-1' => __( '&mdash; Everything &mdash;', 'bp-nouveau' ) ), $filters );
+	} elseif ( 'groups' === $component ) {
+		$filters = bp_nouveau_get_groups_filters( $context );
+	} elseif ( 'blogs' === $component ) {
+		$filters = bp_nouveau_get_blogs_filters( $context );
+	}
+
+	return $filters;
 }
 
 /**

@@ -92,8 +92,8 @@ switch( $component ) {
 
 		<li id="blogs-order-select" class="last filter">
 
-			<label for="blogs-order-by"><?php _e( 'Order By:', 'bp-nouveau' ); ?></label>
-			<select id="blogs-order-by">
+			<label for="blogs-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
+			<select id="blogs-order-by" data-bp-filter="blogs">
 				<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
 				<option value="newest"><?php _e( 'Newest', 'bp-nouveau' ); ?></option>
 				<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>

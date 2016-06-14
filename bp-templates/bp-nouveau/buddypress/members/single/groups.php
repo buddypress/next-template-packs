@@ -27,19 +27,8 @@
 
 				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
 				<select id="groups-order-by" data-bp-filter="groups">
-					<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
-					<option value="popular"><?php _e( 'Most Members', 'bp-nouveau' ); ?></option>
-					<option value="newest"><?php _e( 'Newly Created', 'bp-nouveau' ); ?></option>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
 
-					<?php
-
-					/**
-					 * Fires inside the members group order options select input.
-					 *
-					 * @since 1.2.0
-					 */
-					do_action( 'bp_member_group_order_options' ); ?>
+					<?php bp_nouveau_filter_options() ;?>
 
 				</select>
 			</li>

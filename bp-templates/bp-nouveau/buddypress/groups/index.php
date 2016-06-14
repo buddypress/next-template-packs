@@ -63,7 +63,7 @@
 			 */
 			do_action( 'bp_groups_directory_group_types' ); ?>
 
-			<?php bp_get_template_part( 'common/filters/component-filters' ); ?>
+			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
 	</div>
 

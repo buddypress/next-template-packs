@@ -15,20 +15,10 @@
 
 		<li id="blogs-order-select" class="last filter">
 
-			<label for="blogs-order-by"><?php _e( 'Order By:', 'bp-nouveau' ); ?></label>
-			<select id="blogs-order-by">
-				<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
-				<option value="newest"><?php _e( 'Newest', 'bp-nouveau' ); ?></option>
-				<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
+			<label for="blogs-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
+			<select id="blogs-order-by" data-bp-filter="blogs">
 
-				<?php
-
-				/**
-				 * Fires inside the members blogs order options select input.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_member_blog_order_options' ); ?>
+				<?php bp_nouveau_filter_options() ;?>
 
 			</select>
 		</li>
@@ -48,9 +38,9 @@ switch ( bp_current_action() ) :
 		 */
 		do_action( 'bp_before_member_blogs_content' ); ?>
 
-		<div class="blogs myblogs">
+		<div class="blogs myblogs" data-bp-list="blogs">
 
-			<?php bp_get_template_part( 'blogs/blogs-loop' ) ?>
+			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the blogs you are a contributor of, please wait.', 'bp-nouveau' ) ;?></div>
 
 		</div><!-- .blogs.myblogs -->
 
