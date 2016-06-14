@@ -11,7 +11,7 @@
  * Template Pack Name:     BP Nouveau
  * Version:                1.0.0
  * WP required version:    4.5
- * BP required version:    2.6.0-alpha
+ * BP required version:    2.6.0-beta1
  * Description:            A new template pack for BuddyPress!
  * Text Domain:            bp-nouveau
  * Domain Path:            /languages/
@@ -70,20 +70,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		// Include needed files
 		$this->includes();
-
-		// Add custom filters
-		$this->setup_filters();
-	}
-
-	/**
-	 * Includes!
-	 *
-	 * @since 1.0.0
-	 */
-	private function includes() {
-		require( trailingslashit( bp_get_theme_compat_dir() ) . 'includes/functions.php' );
-		require( trailingslashit( bp_get_theme_compat_dir() ) . 'includes/template-tags.php' );
-		require( trailingslashit( bp_get_theme_compat_dir() ) . 'includes/ajax.php' );
 	}
 
 	/**
@@ -102,8 +88,35 @@ class BP_Nouveau extends BP_Theme_Compat {
 			$this->{$property} = $value;
 		}
 
+		// Includes dir
+		$this->includes_dir = trailingslashit( $this->dir ) . 'includes';
+
 		// Set the Directory Nav
 		$this->directory_nav = new BP_Core_Nav();
+	}
+
+	/**
+	 * Includes!
+	 *
+	 * @since 1.0.0
+	 */
+	private function includes() {
+		require( trailingslashit( $this->includes_dir ) . 'functions.php' );
+		require( trailingslashit( $this->includes_dir ) . 'template-tags.php' );
+		require( trailingslashit( $this->includes_dir ) . 'ajax.php' );
+
+		foreach ( bp_core_get_packaged_component_ids() as $component ) {
+			$component_loader = trailingslashit( $this->includes_dir ) . $component . '/loader.php';
+
+			// Only load files for active components.
+			if ( ! bp_is_active( $component ) || ! file_exists( $component_loader ) ) {
+				continue;
+			}
+
+			require( $component_loader );
+		}
+
+		do_action_ref_array( 'bp_nouveau_includes', array( &$this ) );
 	}
 
 	/**
@@ -112,10 +125,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	protected function setup_actions() {
-
-		// Template Output.
-		add_filter( 'bp_get_activity_action_pre_meta', array( $this, 'secondary_avatars' ), 10, 2 );
-
 		// Filter BuddyPress template hierarchy and look for page templates.
 		add_filter( 'bp_get_buddypress_template', array( $this, 'theme_compat_page_templates' ), 10, 1 );
 
@@ -132,121 +141,19 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		add_filter( 'body_class', array( $this, 'add_nojs_body_class' ), 20, 1 );
 
-		/** Buttons ***********************************************************/
-
-		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			// Register buttons for the relevant component templates
-			// Friends button.
-			if ( bp_is_active( 'friends' ) )
-				add_action( 'bp_member_header_actions',    'bp_add_friend_button',           5 );
-
-			// Activity button.
-			if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() )
-				add_action( 'bp_member_header_actions',    'bp_send_public_message_button',  20 );
-
-			// Messages button.
-			if ( bp_is_active( 'messages' ) )
-				add_action( 'bp_member_header_actions',    'bp_send_private_message_button', 20 );
-
-			// Group buttons.
-			if ( bp_is_active( 'groups' ) ) {
-				add_action( 'bp_group_header_actions',          'bp_group_join_button',           5 );
-				add_action( 'bp_group_header_actions',          'bp_group_new_topic_button',     20 );
-				add_action( 'bp_directory_groups_actions',      'bp_group_join_button'              );
-				add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',  5 );
-				add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button', 10 );
-
-				// Avoid Notices for BuddyPress Legacy Backcompat
-				remove_action( 'bp_groups_directory_group_filter', 'bp_group_backcompat_create_nav_item', 1000 );
-			}
-
-			// Blog button.
-			if ( bp_is_active( 'blogs' ) ) {
-				add_action( 'bp_directory_blogs_actions', 'bp_blogs_visit_blog_button' );
-
-				// Avoid Notices for BuddyPress Legacy Backcompat
-				remove_action( 'bp_blogs_directory_blog_types', 'bp_blog_backcompat_create_nav_item', 1000 );
-			}
-		}
-
-		/** Notices ***********************************************************/
-
-		// Only hook the 'sitewide_notices' overlay if the Sitewide
-		// Notices widget is not in use (to avoid duplicate content).
-		if ( bp_is_active( 'messages' ) ) {
-			add_action( 'template_notices', array( $this, 'sitewide_notices' ), 9999 );
-		}
-
 		/** Ajax **************************************************************/
 
 		$actions = array(
 
 			// Directory filters.
-			'activity_filter' => 'bp_nouveau_ajax_object_template_loader',
-			'blogs_filter'    => 'bp_nouveau_ajax_object_template_loader',
-			'groups_filter'   => 'bp_nouveau_ajax_object_template_loader',
 			'members_filter'  => 'bp_nouveau_ajax_object_template_loader',
 
 			/**
 			 * @todo check if we still use these 3 actions, else remove it
 			 * and the corresponding functions
 			 */
-			'messages_filter' => 'bp_legacy_theme_messages_template_loader',
 			'invite_filter'   => 'bp_legacy_theme_invite_template_loader',
 			'requests_filter' => 'bp_legacy_theme_requests_template_loader',
-
-			/**
-			 * @todo check if we still use these 2 actions, else remove it
-			 * and the corresponding functions
-			 */
-			'accept_friendship' => 'bp_legacy_theme_ajax_accept_friendship',
-			'reject_friendship' => 'bp_legacy_theme_ajax_reject_friendship',
-
-			// Friends.
-			'friends_remove_friend'       => 'bp_nouveau_ajax_addremove_friend',
-			'friends_add_friend'          => 'bp_nouveau_ajax_addremove_friend',
-			'friends_withdraw_friendship' => 'bp_nouveau_ajax_addremove_friend',
-
-
-			// Activity.
-			'activity_get_older_updates'      => 'bp_nouveau_ajax_activity_template_loader',
-			'activity_mark_fav'               => 'bp_nouveau_ajax_mark_activity_favorite',
-			'activity_mark_unfav'             => 'bp_nouveau_ajax_unmark_activity_favorite',
-			'activity_clear_new_mentions'     => 'bp_nouveau_ajax_clear_new_mentions',
-			'activity_widget_filter'          => 'bp_nouveau_ajax_activity_template_loader',
-			'delete_activity'                 => 'bp_nouveau_ajax_delete_activity',
-
-			/**
-			 * @todo implement this action in buddypress-activity.js as it's missing
-			 * right now
-			 */
-			'delete_activity_comment'         => 'bp_nouveau_ajax_delete_activity_comment',
-
-			'get_single_activity_content'     => 'bp_nouveau_ajax_get_single_activity_content',
-			'new_activity_comment'            => 'bp_nouveau_ajax_new_activity_comment',
-			'bp_nouveau_get_activity_objects' => 'bp_nouveau_ajax_get_activity_objects',
-			'post_update'                     => 'bp_nouveau_ajax_post_update',
-
-			/**
-			 * @todo implement these 2 actions in buddypress-activity.js as they're missing
-			 * right now
-			 */
-			'bp_spam_activity'                => 'bp_nouveau_ajax_spam_activity',
-			'bp_spam_activity_comment'        => 'bp_nouveau_ajax_spam_activity',
-
-			// Groups.
-			'groups_join_group'    => 'bp_nouveau_ajax_joinleave_group',
-			'groups_leave_group'   => 'bp_nouveau_ajax_joinleave_group',
-			'groups_accept_invite' => 'bp_nouveau_ajax_joinleave_group',
-			'groups_reject_invite' => 'bp_nouveau_ajax_joinleave_group',
-			'request_membership'   => 'bp_nouveau_ajax_joinleave_group',
-
-			/**
-			 * @todo check if we still use these 2 actions, else remove it
-			 * and the corresponding functions
-			 */
-			'messages_markread'   => 'bp_legacy_theme_ajax_message_markread',
-			'messages_markunread' => 'bp_legacy_theme_ajax_message_markunread',
 		);
 
 		/**
@@ -282,36 +189,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		 * @param BP_Legacy $this Current BP_Legacy instance.
 		 */
 		do_action_ref_array( 'bp_theme_compat_actions', array( &$this ) );
-	}
-
-	protected function setup_filters() {
-		$buttons = array();
-
-		if ( bp_is_active( 'groups' ) ) {
-			$buttons = array(
-				'groups_leave_group',
-				'groups_join_group',
-				'groups_accept_invite',
-				'groups_reject_invite',
-				'groups_membership_requested',
-				'groups_request_membership',
-			);
-		}
-
-		if ( bp_is_active( 'friends' ) ) {
-			$buttons = array_merge( $buttons, array(
-				'friends_pending',
-				'friends_awaiting_response',
-				'friends_is_friend',
-				'friends_not_friends',
-			) );
-		}
-
-		if ( ! empty( $buttons ) ) {
-			foreach ( $buttons as $button ) {
-				add_filter( 'bp_button_' . $button, array( $this, 'ajax_button' ), 10, 4 );
-			}
-		}
 	}
 
 	/**
@@ -827,75 +704,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 	}
 
 	/**
-	 * Outputs sitewide notices markup in the footer.
-	 *
-	 * @since 1.7.0
-	 *
-	 * @see https://buddypress.trac.wordpress.org/ticket/4802
-	 */
-	public function sitewide_notices() {
-		// Do not show notices if user is not logged in.
-		if ( ! is_user_logged_in() || ! bp_is_user() ) {
-			return;
-		}
-
-		$notice = BP_Messages_Notice::get_active();
-
-		if ( empty( $notice ) ) {
-			return false;
-		}
-
-		$user_id = bp_loggedin_user_id();
-
-		$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
-
-		if ( empty( $closed_notices ) ) {
-			$closed_notices = array();
-		}
-
-		if ( is_array( $closed_notices ) ) {
-			if ( ! in_array( $notice->id, $closed_notices ) && $notice->id ) {
-				?>
-				<div class="clear"></div>
-				<div class="bp-feedback info" rel="n-<?php echo esc_attr( $notice->id ); ?>">
-					<strong><?php echo stripslashes( wp_filter_kses( $notice->subject ) ) ?></strong><br />
-					<?php echo stripslashes( wp_filter_kses( $notice->message) ) ?>
-				</div>
-				<?php
-
-				// Add the notice to closed ones
-				$closed_notices[] = (int) $notice->id;
-				bp_update_user_meta( $user_id, 'closed_notices', $closed_notices );
-			}
-		}
-	}
-
-	/**
-	 * Add secondary avatar image to this activity stream's record, if supported.
-	 *
-	 * @since 1.7.0
-	 *
-	 * @param string               $action   The text of this activity.
-	 * @param BP_Activity_Activity $activity Activity object.
-	 * @return string
-	 */
-	function secondary_avatars( $action, $activity ) {
-		switch ( $activity->component ) {
-			case 'groups' :
-			case 'friends' :
-				// Only insert avatar if one exists.
-				if ( $secondary_avatar = bp_get_activity_secondary_avatar() ) {
-					$reverse_content = strrev( $action );
-					$position        = strpos( $reverse_content, 'a<' );
-					$action          = substr_replace( $action, $secondary_avatar, -$position - 2, 0 );
-				}
-				break;
-		}
-
-		return $action;
-	}
-
-	/**
 	 * Filter the default theme compatibility root template hierarchy, and prepend
 	 * a page template to the front if it's set.
 	 *
@@ -968,15 +776,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		return $templates;
-	}
-
-	public function ajax_button( $output ='', $button = null, $before ='', $after = '' ) {
-		if ( empty( $button->component ) ) {
-			return $output;
-		}
-
-		// Add span bp-screen-reader-text class
-		return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $button->id . '">' . $button->link_text . '</a>' . $after;
 	}
 
 	/**
