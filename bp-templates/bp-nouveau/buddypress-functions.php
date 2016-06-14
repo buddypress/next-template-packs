@@ -38,16 +38,32 @@ if ( ! class_exists( 'BP_Nouveau' ) ) :
  * @package BP Nouveau
  */
 class BP_Nouveau extends BP_Theme_Compat {
+	/**
+	 * Instance of this class.
+	 */
+	protected static $instance = null;
 
 	/** Functions *************************************************************/
 
 	/**
-	 * The main BP Nouveau Loader.
+	 * Return the instance of this class.
 	 *
 	 * @since 1.0.0
+	 */
+	public static function get_instance() {
+
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * The BP Nouveau constructor.
 	 *
-	 * @uses BP_Nouveau::setup_globals()
-	 * @uses BP_Nouveau::setup_actions()
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		parent::start();
@@ -71,10 +87,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	}
 
 	/**
-	 * Component global variables.
-	 *
-	 * You'll want to customize the values in here, so they match whatever your
-	 * needs are.
+	 * BP Nouveau global variables.
 	 *
 	 * @since 1.0.0
 	 */
@@ -90,16 +103,13 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		// Set the Directory Nav
-		$bp->theme_compat->theme->directory_nav = new BP_Core_Nav();
+		$this->directory_nav = new BP_Core_Nav();
 	}
 
 	/**
-	 * Setup the theme hooks.
+	 * Setup the Template Pack common actions.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @uses add_filter() To add various filters
-	 * @uses add_action() To add various actions
 	 */
 	protected function setup_actions() {
 
@@ -997,7 +1007,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 			}
 
 			// Define the primary nav for the current component's directory
-			buddypress()->theme_compat->theme->directory_nav->add_nav( $nav_item );
+			$this->directory_nav->add_nav( $nav_item );
 		}
 	}
 
@@ -1041,5 +1051,20 @@ class BP_Nouveau extends BP_Theme_Compat {
 		<?php
 	}
 }
-new BP_Nouveau();
 endif;
+
+/**
+ * Get a unique instance of BP Nouveau
+ *
+ * @since  1.0.0
+ *
+ * @return BP_Nouveau the main instance of the class
+ */
+function bp_nouveau() {
+	return BP_Nouveau::get_instance();
+}
+
+/**
+ * Launch BP Nouveau!
+ */
+bp_nouveau();

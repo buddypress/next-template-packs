@@ -199,38 +199,38 @@ function bp_nouveau_directory_list_class() {
 	}
 
 function bp_nouveau_directory_has_nav() {
-	$bp = buddypress();
+	$bp_nouveau = bp_nouveau();
 
-	$bp->theme_compat->theme->sorted_dir_nav = array_values( $bp->theme_compat->theme->directory_nav->get_primary() );
+	$bp_nouveau->sorted_dir_nav = array_values( $bp_nouveau->directory_nav->get_primary() );
 
-	if ( 0 === count( $bp->theme_compat->theme->sorted_dir_nav ) ) {
-		unset( $bp->theme_compat->theme->sorted_dir_nav );
+	if ( 0 === count( $bp_nouveau->sorted_dir_nav ) ) {
+		unset( $bp_nouveau->sorted_dir_nav );
 
 		return false;
 	}
 
-	$bp->theme_compat->theme->current_dir_nav_index = 0;
+	$bp_nouveau->current_dir_nav_index = 0;
 	return true;
 }
 
 function bp_nouveau_directory_nav_items() {
-	$bp = buddypress();
+	$bp_nouveau = bp_nouveau();
 
-	if ( isset( $bp->theme_compat->theme->sorted_dir_nav[ $bp->theme_compat->theme->current_dir_nav_index ] ) ) {
+	if ( isset( $bp_nouveau->sorted_dir_nav[ $bp_nouveau->current_dir_nav_index ] ) ) {
 		return true;
 	}
 
-	$bp->theme_compat->theme->current_dir_nav_index = 0;
-	unset( $bp->theme_compat->theme->current_dir_nav_item );
+	$bp_nouveau->current_dir_nav_index = 0;
+	unset( $bp_nouveau->current_dir_nav_item );
 
 	return false;
 }
 
 function bp_nouveau_directory_nav_item() {
-	$bp = buddypress();
+	$bp_nouveau = bp_nouveau();
 
-	$bp->theme_compat->theme->current_dir_nav_item = $bp->theme_compat->theme->sorted_dir_nav[ $bp->theme_compat->theme->current_dir_nav_index ];
-	$bp->theme_compat->theme->current_dir_nav_index += 1;
+	$bp_nouveau->current_dir_nav_item   = $bp_nouveau->sorted_dir_nav[ $bp_nouveau->current_dir_nav_index ];
+	$bp_nouveau->current_dir_nav_index += 1;
 }
 
 function bp_nouveau_directory_nav_id() {
@@ -238,7 +238,7 @@ function bp_nouveau_directory_nav_id() {
 }
 
 	function bp_nouveau_get_directory_nav_id() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 		$id = sprintf( '%1$s-%2$s', $nav_item->component, $nav_item->slug );
 
 		return esc_attr( $id );
@@ -249,7 +249,7 @@ function bp_nouveau_directory_nav_classes() {
 }
 
 	function bp_nouveau_get_directory_nav_classes() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		if ( empty( $nav_item->li_class ) ) {
 			return;
@@ -265,7 +265,7 @@ function bp_nouveau_directory_nav_scope() {
 }
 
 	function bp_nouveau_get_directory_nav_scope() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		return esc_attr( $nav_item->slug );
 	}
@@ -275,7 +275,7 @@ function bp_nouveau_directory_nav_object() {
 }
 
 	function bp_nouveau_get_directory_nav_object() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		return esc_attr( $nav_item->component );
 	}
@@ -285,7 +285,7 @@ function bp_nouveau_directory_nav_link() {
 }
 
 	function bp_nouveau_get_directory_nav_link() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		return esc_url( $nav_item->link );
 	}
@@ -295,7 +295,7 @@ function bp_nouveau_directory_nav_title() {
 }
 
 	function bp_nouveau_get_directory_nav_title() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		return esc_attr( $nav_item->title );
 	}
@@ -305,13 +305,13 @@ function bp_nouveau_directory_nav_text() {
 }
 
 	function bp_nouveau_get_directory_nav_text() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		return esc_html( $nav_item->text );
 	}
 
 function bp_nouveau_directory_nav_has_count() {
-	$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+	$nav_item = bp_nouveau()->current_dir_nav_item;
 
 	return false !== $nav_item->count;
 }
@@ -321,7 +321,7 @@ function bp_nouveau_directory_nav_count() {
 }
 
 	function bp_nouveau_get_directory_nav_count() {
-		$nav_item = buddypress()->theme_compat->theme->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_dir_nav_item;
 
 		return esc_attr( $nav_item->count );
 	}
