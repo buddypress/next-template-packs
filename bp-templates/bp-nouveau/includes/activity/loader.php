@@ -118,7 +118,7 @@ endif;
  * @since 1.0.0
  */
 function bp_nouveau_activity( $bp_nouveau = null ) {
-	if ( is_null( $bp_nouveau) ) {
+	if ( is_null( $bp_nouveau ) ) {
 		return;
 	}
 
