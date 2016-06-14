@@ -113,7 +113,7 @@ Hello, this is the BuddyPress Legacy stylesheet.
 3.1 - Activity
 --------------------------------------------------------------*/
 
-@import '../../shared/styles/_bp_lists';
+//@import '../../shared/styles/_bp_lists';
 
 #buddypress #activity-stream {
 	margin-top: -5px;
@@ -272,6 +272,7 @@ body.activity-permalink #buddypress .activity-list li .activity-header > p {
 #buddypress .acomment-meta a {
 	text-decoration: none;
 }
+
 #buddypress .activity-list .activity-content .activity-header img.avatar {
 	float: none !important;
 	margin: 0 5px -8px 0 !important;

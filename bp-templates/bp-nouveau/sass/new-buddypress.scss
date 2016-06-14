@@ -31,7 +31,7 @@
 3.0 - BP Lists / Loops Generic
 	3.1 - Activity Loop
 		3.1.1 Whats New Activity
-		3.1.2 - Activity Listing
+		3.1.2 - Activity Entries
 		3.1.3 - Activity Comments
 	3.2 - Members Loop
 	3.3 - Groups Loop
@@ -133,13 +133,13 @@
 
 @import "../../shared/styles/_bp_activity_comments";
 
+@import "../../shared/styles/_bp_comment_form";
+
 /**
 *----------------------------------------------------------
 * @section 4.2 - Blogs Loop
 *----------------------------------------------------------
 */
-
-@import "../../shared/styles/_bp_comment_form";
 
 /**
 *----------------------------------------------------------

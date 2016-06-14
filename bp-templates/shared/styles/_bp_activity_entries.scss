@@ -2,10 +2,93 @@
 
 .activity-list {
 
-	.activity-item {
+	.activity-item { // li element
+		list-style: none;
+		overflow: hidden;
+		padding: $pad-med 0 0;
+
+		&.has-comments {
+			padding-bottom: $pad-med;
+		}
+
+		&.mini {
+			font-size: 80%;
+			position: relative;
+
+			.activity-avatar {
+				img.avatar,
+				img.FB_profile_pic {
+					height: 20px;
+					margin-left: 30px;  // change to $marg-med or...
+					width: 20px;
+				}
+			}
+
+		} // close .mini
+
+		&.new_forum_post,
+		&.new_forum_topic {
+			.activity-inner {
+				border-left: 2px solid #eaeaea;
+				margin-left: $marg-sml;
+				padding-left: $pad-med;
+			}
+		} // close li forum elements
+
+		&.load-more,
+		&.load-newest {
+			background: #f0f0f0;
+			font-size: 110%;
+			margin: 15px 0;
+			padding: 10px 15px;
+			text-align: center;
+
+			a {
+				color: #4d4d4d;
+			}
+		}
+
+		&.newest_mentions_activity,
+		&.newest_friends_activity,
+		&.newest_groups_activity,
+		&.newest_blogs_activity {
+			// why?
+			background: rgba(31, 179, 221, 0.1);
+		}
+
+// === review this block! ============================================
+		.activity-inreplyto {
+			color: #888;
+			font-size: 80%;
+
+			> p {
+				display: inline;
+				margin: 0;
+			}
+
+			blockquote,
+			.activity-inner {
+				background: none;
+				border: 0;
+				display: inline;
+				margin: 0;
+				overflow: hidden;
+				padding: 0;
+			}
+		}
+// ====== review this inreplyto block feels wrong and badly nested =====
+
+		.activity-avatar {
+			float: left;
+		}
+
+		img.avatar {
+			margin: 0 $marg-sml - $marg-med 0;
+		}
 
 		// The header elements: date stamp, author etc;
 		.activity-header {
+			margin-right: $marg-med;
 
 			a.activity-time-since {
 				color: #aaa;
@@ -18,6 +101,39 @@
 			}
 
 		} // close .activity-header
+
+		.activity-content {
+			margin: 0 0 0 70px;
+			position: relative;
+
+			.activity-header,
+			.comment-header {
+				color: #888;
+				line-height: 220%;
+			}
+
+			.activity-inner,
+			blockquote {
+				margin: $marg-med $marg-med $marg-sml 0;
+				overflow: hidden;
+			}
+
+			p {
+				margin: 0;
+			}
+
+		} // close .activity-content
+
+		.activity-inner {
+			p {
+				word-wrap: break-word;
+			}
+		}
+
+		.activity-read-more {
+			margin-left: 1em; // proportional to the text size please!
+			white-space: nowrap;
+		}
 
 		// The footer elements, buttons etc
 		.activity-meta {
@@ -75,10 +191,48 @@ body.activity-permalink {
 		li {
 			border-width: 1px;
 			padding: $pad-med 0 0 0;
+
+			&:first-child {
+				padding-top: 0;
+			}
+
+			&.has-comments {
+				padding-bottom: 0;
+			}
+
+			&.mini {
+				img.avatar,
+				img.FB_profile_pic {
+					height: auto;
+					margin-left: 0;
+					width: auto;
+				}
+			}
+
+		} // close li
+
+		.activity-header {
+			margin: 0;
+			padding: $pad-sml 0 0 0;
+		}
+
+		.activity-content {
+			border: 0;
+			font-size: 100%;
+			line-height: 150%;
+			margin-left: 170px;
+			margin-right: 0;
+			padding: 0;
+
+			.activity-inner,
+			blockquote {
+				margin-left: 0;
+				margin-top: $marg-sml;
+			}
 		}
 
 		.activity-meta {
-			margin-bottom: 6px;
+			margin: $marg-sml 0 $marg-sml;
 		}
 
 	}
