@@ -116,6 +116,6 @@ function bp_nouveau_friends( $bp_nouveau = null ) {
 		return;
 	}
 
-	$bp_nouveau->activity = new BP_Nouveau_Friends();
+	$bp_nouveau->friends = new BP_Nouveau_Friends();
 }
 add_action( 'bp_nouveau_includes', 'bp_nouveau_friends', 10, 1 );
