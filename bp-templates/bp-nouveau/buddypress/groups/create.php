@@ -43,10 +43,7 @@ do_action( 'bp_before_create_group_page' ); ?>
 			</ul>
 		</div>
 
-		<?php
-
-		/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-		do_action( 'template_notices' ); ?>
+		<?php bp_nouveau_template_notices(); ?>
 
 		<div class="item-body" id="group-create-body">
 

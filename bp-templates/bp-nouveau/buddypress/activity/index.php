@@ -34,14 +34,7 @@
 
 	<?php endif; ?>
 
-	<?php
-
-	/**
-	 * Fires towards the top of template pages for notice display.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'template_notices' ); ?>
+	<?php bp_nouveau_template_notices(); ?>
 
 	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
