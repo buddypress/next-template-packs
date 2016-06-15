@@ -31,7 +31,7 @@ do_action( 'bp_before_activity_loop' ); ?>
 
 <?php else : ?>
 
-	<li id="activity-stream-message" class="info">
+	<li id="activity-stream-message" class="bp-messages info">
 		<p><?php _e( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ); ?></p>
 	</li>
 

@@ -33,7 +33,7 @@ do_action( 'bp_before_create_blog_content' ); ?>
 
 <?php else: ?>
 
-	<div id="message" class="info">
+	<div id="message" class="bp-messages info">
 		<p><?php _e( 'Site registration is currently disabled', 'bp-nouveau' ); ?></p>
 	</div>
 

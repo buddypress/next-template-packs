@@ -99,7 +99,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 <?php else: ?>
 
-	<div id="message" class="info">
+	<div id="message" class="bp-messages info">
 		<p><?php _e( 'There were no groups found.', 'bp-nouveau' ); ?></p>
 	</div>
 

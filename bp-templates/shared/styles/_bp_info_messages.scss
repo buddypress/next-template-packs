@@ -1,0 +1,145 @@
+// Sitewide template error & info messages constructs.
+.buddypress {
+	.bp-messages {
+
+		margin: 0 0 $marg-med;
+
+		p,
+		.sitewide-notices {
+			font-size: 90%;
+			display: block;
+			padding: $pad-med;
+		}
+
+		// General info boxes
+		&.info {
+			margin-bottom: 0;
+		}
+
+		// Update success message boxes
+		&.updated {
+			clear: both;
+			display: block;
+		}
+
+		// Error message boxes
+		&.error {
+			p {
+
+			}
+		}
+
+		// Warning boxes
+		&.warning {
+			p {
+
+			}
+		}
+
+		&.sitewide-notice {
+			// rebuild these rules and classes
+		}
+
+	} // close .bp-messages
+
+	.bp-feedback {
+		position: relative;
+		padding: 1px 12px;
+		background-color: #fff;
+		-webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+		box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
+	 	margin: 10px 0;
+	 	padding: 10px 0 10px 30px;
+	}
+
+	.bp-feedback:before {
+		position:absolute;
+		left: 0;
+		top: 0;
+		font-family: dashicons;
+		font-size: 24px;
+		vertical-align: bottom;
+		color: #fff;
+		margin-right: 10px;
+		height:100%;
+		line-height: 200%;
+	}
+
+	.bp-feedback.info:before,
+	.bp-feedback.help:before {
+		content: "\f348";
+		background-color: #3388aa;
+	}
+
+	.bp-feedback.error:before,
+	.bp-feedback.warning:before {
+		content: "\f534";
+		background-color: #dd3333;
+	}
+
+	.bp-feedback.warning:before,
+	.bp-feedback.loading:before {
+		background-color: #ffd087;
+	}
+
+	.bp-feedback.loading:before {
+		content: "\f469";
+	}
+
+	.bp-feedback.success:before {
+		content: "\f147";
+		background-color: #88aa22;
+	}
+
+	.bp-feedback.help:before {
+		content: "\f468";
+	}
+
+	#pass-strength-result {
+		background-color: #eee;
+		border-color: #ddd;
+		border-style: solid;
+		border-width: 1px;
+		display: none;
+		margin: $marg-sml $marg-sml $marg-sml 0;
+		padding: $pad-sml;
+		text-align: center;
+		width: 150px;
+
+		&.error,
+		&.bad {
+			background-color: #ffb78c;
+			border-color: #ff853c;
+			display: block;
+		}
+
+		&.short {
+			background-color: #ffa0a0;
+			border-color: #f04040;
+			display: block;
+		}
+
+		&.strong {
+			background-color: #c3ff88;
+			border-color: #8dff1c;
+			display: block;
+		}
+
+	} // close #pass-strength-result
+
+	.standard-form#signup_form div div.error {
+		background: #faa;
+		color: #a00;
+		margin: 0 0 $marg-sml 0;
+		padding: $pad-sml;
+		width: 90%;
+	}
+
+	// these two are really helpful???!!
+	.accept,
+	.reject {
+		float: left;
+		margin-left: $marg-sml;
+	}
+
+} // close .buddypress

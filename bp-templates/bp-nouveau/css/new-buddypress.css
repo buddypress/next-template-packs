@@ -625,3 +625,119 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 * @section 8.0 - Classes - Messages, Ajax, Widgets
 *-------------------------------------------------------------------------------
 */
+.buddypress .bp-messages {
+	margin: 0 0 15px;
+}
+
+.buddypress .bp-messages p,
+.buddypress .bp-messages .sitewide-notices {
+	font-size: 90%;
+	display: block;
+	padding: 1em;
+}
+
+.buddypress .bp-messages.info {
+	margin-bottom: 0;
+}
+
+.buddypress .bp-messages.updated {
+	clear: both;
+	display: block;
+}
+
+.buddypress .bp-feedback {
+	position: relative;
+	padding: 1px 12px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+	margin: 10px 0;
+	padding: 10px 0 10px 30px;
+}
+
+.buddypress .bp-feedback:before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	font-family: dashicons;
+	font-size: 24px;
+	vertical-align: bottom;
+	color: #fff;
+	margin-right: 10px;
+	height: 100%;
+	line-height: 200%;
+}
+
+.buddypress .bp-feedback.info:before,
+.buddypress .bp-feedback.help:before {
+	content: "\f348";
+	background-color: #3388aa;
+}
+
+.buddypress .bp-feedback.error:before,
+.buddypress .bp-feedback.warning:before {
+	content: "\f534";
+	background-color: #dd3333;
+}
+
+.buddypress .bp-feedback.warning:before,
+.buddypress .bp-feedback.loading:before {
+	background-color: #ffd087;
+}
+
+.buddypress .bp-feedback.loading:before {
+	content: "\f469";
+}
+
+.buddypress .bp-feedback.success:before {
+	content: "\f147";
+	background-color: #88aa22;
+}
+
+.buddypress .bp-feedback.help:before {
+	content: "\f468";
+}
+
+.buddypress #pass-strength-result {
+	background-color: #eee;
+	border-color: #ddd;
+	border-style: solid;
+	border-width: 1px;
+	display: none;
+	margin: 10px 10px 10px 0;
+	padding: 0.5em;
+	text-align: center;
+	width: 150px;
+}
+
+.buddypress #pass-strength-result.error, .buddypress #pass-strength-result.bad {
+	background-color: #ffb78c;
+	border-color: #ff853c;
+	display: block;
+}
+
+.buddypress #pass-strength-result.short {
+	background-color: #ffa0a0;
+	border-color: #f04040;
+	display: block;
+}
+
+.buddypress #pass-strength-result.strong {
+	background-color: #c3ff88;
+	border-color: #8dff1c;
+	display: block;
+}
+
+.buddypress .standard-form#signup_form div div.error {
+	background: #faa;
+	color: #a00;
+	margin: 0 0 10px 0;
+	padding: 0.5em;
+	width: 90%;
+}
+
+.buddypress .accept,
+.buddypress .reject {
+	float: left;
+	margin-left: 10px;
+}
