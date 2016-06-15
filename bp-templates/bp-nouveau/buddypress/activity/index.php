@@ -11,22 +11,7 @@
 
 <div id="buddypress" class="buddypress">
 
-	<?php
-	/**
-	 * Fires at the begining of the templates BP injected content.
-	 *
-	 * @since 2.3.0
-	 */
-	do_action( 'bp_before_directory_activity' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the activity directory display content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_before_directory_activity_content' ); ?>
+	<?php bp_nouveau_before_activity_directory_content(); ?>
 
 	<?php if ( is_user_logged_in() ) : ?>
 
@@ -47,8 +32,7 @@
 		<ul type="list" class="subnav clearfix">
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
-				<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
-		</ul>
+			<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
 
 			<?php
 
@@ -58,8 +42,9 @@
 			 * @since 1.2.0
 			 */
 			do_action( 'bp_activity_syndication_options' ); ?>
+		</ul>
 
-			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
+		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
 	</div><!-- .item-list-tabs -->
 
@@ -82,38 +67,6 @@
 
 	</div><!-- .activity -->
 
-	<?php
-
-	/**
-	 * Fires after the display of the activity list.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_after_directory_activity_list' ); ?>
-
-	<?php
-
-	/**
-	 * Fires inside and displays the activity directory display content.
-	 */
-	do_action( 'bp_directory_activity_content' ); ?>
-
-	<?php
-
-	/**
-	 * Fires after the activity directory display content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_after_directory_activity_content' ); ?>
-
-	<?php
-
-	/**
-	 * Fires after the activity directory listing.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_after_directory_activity' ); ?>
+	<?php bp_nouveau_after_activity_directory_content() ;?>
 
 </div>
