@@ -112,10 +112,10 @@ endif;
  * @since 1.0.0
  */
 function bp_nouveau_friends( $bp_nouveau = null ) {
-	if ( is_null( $bp_nouveau) ) {
+	if ( is_null( $bp_nouveau ) ) {
 		return;
 	}
 
-	$bp_nouveau->activity = new BP_Nouveau_Friends();
+	$bp_nouveau->friends = new BP_Nouveau_Friends();
 }
 add_action( 'bp_nouveau_includes', 'bp_nouveau_friends', 10, 1 );

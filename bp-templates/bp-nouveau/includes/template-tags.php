@@ -11,6 +11,20 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Template tags to display feedback notices to users
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_template_notices() {
+	/**
+	 * Fires towards the top of template pages for notice display.
+	 *
+	 * @since 1.0.0 (BuddyPress)
+	 */
+	do_action( 'template_notices' );
+}
+
+/**
  * Pagination for loops
  *
  * @since 1.0.0

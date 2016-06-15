@@ -24,10 +24,9 @@
 		<form action="" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
 
 		<?php if ( 'registration-disabled' == bp_get_current_signup_step() ) : ?>
-			<?php
 
-			/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-			do_action( 'template_notices' ); ?>
+			<?php bp_nouveau_template_notices(); ?>
+
 			<?php
 
 			/**
@@ -51,10 +50,7 @@
 
 		<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
 
-			<?php
-
-			/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-			do_action( 'template_notices' ); ?>
+			<?php bp_nouveau_template_notices(); ?>
 
 			<p><?php _e( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'bp-nouveau' ); ?></p>
 
@@ -359,10 +355,8 @@
 
 		<?php if ( 'completed-confirmation' == bp_get_current_signup_step() ) : ?>
 
-			<?php
+			<?php bp_nouveau_template_notices(); ?>
 
-			/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-			do_action( 'template_notices' ); ?>
 			<?php
 
 			/**

@@ -283,19 +283,3 @@ function bp_nouveau_activity_allowed_tags( $activity_allowedtags = array() ) {
 
 	return $activity_allowedtags;
 }
-
-function bp_nouveau_get_activity_delete_link( $delete_link = '' ) {
-	preg_match( '/<a\s[^>]*href=\"([^\"]*)\"[^>]*>(.*)<\/a>/siU', $delete_link, $matches );
-
-	if ( empty( $matches[0] ) || empty( $matches[1] ) || empty( $matches[2] ) ) {
-		return $delete_link;
-	}
-
-	$delete_link = str_replace( '>' . $matches[2], sprintf(
-		' title="%1$s"><span class="bp-screen-reader-text">%2$s</span>',
-		esc_attr( $matches[2] ),
-		esc_html( $matches[2] )
-	), $delete_link );
-
-	return apply_filters( 'bp_nouveau_get_activity_delete_link', $delete_link );
-}

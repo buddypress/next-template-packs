@@ -21,10 +21,7 @@
 
 	<div class="page" id="activate-page">
 
-		<?php
-
-		/** This action is documented in bp-templates/bp-legacy/buddypress/activity/index.php */
-		do_action( 'template_notices' ); ?>
+		<?php bp_nouveau_template_notices(); ?>
 
 		<?php
 

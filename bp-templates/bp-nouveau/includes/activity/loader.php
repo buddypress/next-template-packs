@@ -106,7 +106,6 @@ class BP_Nouveau_Activity {
 		add_filter( 'bp_get_activity_css_class',       'bp_nouveau_activity_scope_newest_class', 10, 1 );
 		add_filter( 'bp_activity_time_since',          'bp_nouveau_activity_time_since',         10, 2 );
 		add_filter( 'bp_activity_allowed_tags',        'bp_nouveau_activity_allowed_tags',       10, 1 );
-		add_filter( 'bp_get_activity_delete_link',     'bp_nouveau_get_activity_delete_link',    10, 1 );
 	}
 }
 
@@ -118,7 +117,7 @@ endif;
  * @since 1.0.0
  */
 function bp_nouveau_activity( $bp_nouveau = null ) {
-	if ( is_null( $bp_nouveau) ) {
+	if ( is_null( $bp_nouveau ) ) {
 		return;
 	}
 
