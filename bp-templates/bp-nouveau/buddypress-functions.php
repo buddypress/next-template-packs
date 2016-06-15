@@ -101,9 +101,10 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require( trailingslashit( $this->includes_dir ) . 'functions.php' );
+		require( trailingslashit( $this->includes_dir ) . 'functions.php'     );
+		require( trailingslashit( $this->includes_dir ) . 'classes.php'       );
 		require( trailingslashit( $this->includes_dir ) . 'template-tags.php' );
-		require( trailingslashit( $this->includes_dir ) . 'ajax.php' );
+		require( trailingslashit( $this->includes_dir ) . 'ajax.php'          );
 
 		foreach ( bp_core_get_packaged_component_ids() as $component ) {
 			$component_loader = trailingslashit( $this->includes_dir ) . $component . '/loader.php';

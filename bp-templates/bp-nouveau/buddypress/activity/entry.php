@@ -54,46 +54,7 @@ do_action( 'bp_before_activity_entry' ); ?>
 
 		<div class="activity-meta">
 
-			<?php if ( bp_get_activity_type() == 'activity_comment' ) : ?>
-
-				<a href="<?php bp_activity_thread_permalink(); ?>" class="button view bp-secondary-action" title="<?php esc_attr_e( 'View Conversation', 'bp-nouveau' ); ?>"><?php _e( 'View Conversation', 'bp-nouveau' ); ?></a>
-
-			<?php endif; ?>
-
-			<?php if ( is_user_logged_in() ) : ?>
-
-				<?php if ( bp_activity_can_comment() ) : ?>
-
-					<a href="<?php bp_activity_comment_link(); ?>" class="button acomment-reply bp-primary-action" id="acomment-comment-<?php bp_activity_id(); ?>" title="<?php esc_attr_e( 'Comment', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php esc_html_e( 'Comment', 'bp-nouveau' ); ?></span> <span class="comment-count"><?php bp_activity_comment_count(); ?></span></a>
-
-				<?php endif; ?>
-
-				<?php if ( bp_activity_can_favorite() ) : ?>
-
-					<?php if ( !bp_get_activity_is_favorite() ) : ?>
-
-						<a href="<?php bp_activity_favorite_link(); ?>" class="button fav bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Favorite', 'bp-nouveau' ); ?></span></a>
-
-					<?php else : ?>
-
-						<a href="<?php bp_activity_unfavorite_link(); ?>" class="button unfav bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'Remove Favorite', 'bp-nouveau' ); ?></span></a>
-
-					<?php endif; ?>
-
-				<?php endif; ?>
-
-				<?php if ( bp_activity_user_can_delete() ) bp_activity_delete_link(); ?>
-
-				<?php
-
-				/**
-				 * Fires at the end of the activity entry meta data area.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_activity_entry_meta' ); ?>
-
-			<?php endif; ?>
+			<?php bp_nouveau_activity_entry_buttons();  ?>
 
 		</div>
 
