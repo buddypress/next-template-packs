@@ -1,13 +1,12 @@
 // Sitewide template error & info messages constructs.
 .buddypress {
 	.bp-messages {
-
 		margin: 0 0 $marg-med;
 
 		p,
 		.sitewide-notices {
-			font-size: 90%;
 			display: block;
+			font-size: 90%;
 			padding: $pad-med;
 		}
 
@@ -25,14 +24,14 @@
 		// Error message boxes
 		&.error {
 			p {
-
+				// oh linter you're too boringly pedantic, there will be properties!
 			}
 		}
 
 		// Warning boxes
 		&.warning {
 			p {
-
+				// oh linter you're too boringly pedantic, there will be properties!
 			}
 		}
 
@@ -43,38 +42,37 @@
 	} // close .bp-messages
 
 	.bp-feedback {
-		position: relative;
-		padding: 1px 12px;
 		background-color: #fff;
-		-webkit-box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
-		box-shadow: 0 1px 1px 1px rgba(0,0,0,0.1);
-	 	margin: 10px 0;
-	 	padding: 10px 0 10px 30px;
+	//	padding: 1px $pad-med; // ?????
+		@include box-shadow(0 1px 1px 1px rgba(0, 0, 0, 0.1));
+		margin: 10px 0;
+		padding: 10px 0 10px 30px;
+		position: relative;
 	}
 
 	.bp-feedback:before {
-		position:absolute;
-		left: 0;
-		top: 0;
+		color: #fff;
 		font-family: dashicons;
 		font-size: 24px;
-		vertical-align: bottom;
-		color: #fff;
-		margin-right: 10px;
-		height:100%;
+		height: 100%;
+		left: 0;
 		line-height: 200%;
+		margin-right: 10px;
+		position: absolute;
+		top: 0;
+		vertical-align: bottom;
 	}
 
 	.bp-feedback.info:before,
 	.bp-feedback.help:before {
+		background-color: #38a;
 		content: "\f348";
-		background-color: #3388aa;
 	}
 
 	.bp-feedback.error:before,
 	.bp-feedback.warning:before {
+		background-color: #d33;
 		content: "\f534";
-		background-color: #dd3333;
 	}
 
 	.bp-feedback.warning:before,
@@ -87,8 +85,8 @@
 	}
 
 	.bp-feedback.success:before {
+		background-color: #8a2;
 		content: "\f147";
-		background-color: #88aa22;
 	}
 
 	.bp-feedback.help:before {

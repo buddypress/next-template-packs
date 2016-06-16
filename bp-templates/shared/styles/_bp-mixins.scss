@@ -106,6 +106,14 @@
 	background-clip: padding-box;
 }
 
+// very basic box-shadow mixin  - this needs to be
+// updated & improved
+@mixin box-shadow($values) {
+	-webkit-box-shadow: $values;
+	-moz-box-shadow: $values;
+	box-shadow: $values;
+}
+
 // Calc e.g (100% - 10px)
 @mixin calc($property, $expression) {
 	#{$property}: -webkit-calc(#{$expression});

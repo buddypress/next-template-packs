@@ -1,0 +1,105 @@
+// BP Forms Elements Global Styles
+
+.buddypress {
+	.standard-form {
+
+		textarea,
+		input[type=text],
+		input[type=color],
+		input[type=date],
+ 	input[type=datetime],
+ 	input[type=datetime-local],
+ 	input[type=email],
+ 	input[type=month],
+ 	input[type=number],
+ 	input[type=range],
+ 	input[type=search],
+ 	input[type=tel],
+ 	input[type=time],
+ 	input[type=url],
+ 	input[type=week],
+ 	select,
+		input[type=password],
+		[data-bp-search] input[type=search],
+		[data-bp-search] input[type=text],
+		.groups-members-search input[type=search],
+		.groups-members-search input[type=text] {
+			background: $off-white;
+			border: 1px solid $form-border-color;
+			border-radius: 0;
+			color: $form-text;
+			font: inherit;
+			font-size: 100%;
+			padding: $pad-sml;
+		}
+
+		select {
+			padding: 3px;
+		}
+
+		input[type=password] {
+			margin-bottom: $marg-xsml;
+		}
+
+		label,
+		span.label {
+			display: block;
+			font-weight: bold;
+			margin: $marg-med 0 $marg-xsml;
+			width: auto;
+		}
+
+		p label,
+		#invite-list label {
+			font-weight: normal;
+			margin: auto;
+		}
+
+		div.checkbox label:nth-child(n+2),
+		div.radio div label {
+			color: $form-text;
+			font-size: 100%;
+			font-weight: normal;
+			margin: $marg-xsml 0 0;
+		}
+
+		&#sidebar-login-form {
+
+			label {
+				margin-top: $marg-xsml;
+			}
+
+			input[type=text],
+			input[type=password] {
+				padding: 4px;
+				width: 95%;
+			}
+		} // close &#sidebar-login-form
+
+		// These ID's need to be changed
+		#basic-details-section {
+			input[type=password],
+			input#signup_blog_url {
+				width: 35%;
+			}
+		}
+
+		// more ID's to change
+		&#signup_form,
+		.form-allowed-tags,
+		#commentform {
+			width: 90%;
+		}
+
+		&#signup_form {
+			.submit {
+				float: right;
+			}
+		}
+
+	} // close .standard-form
+
+
+} // close .buddypress
+
+
