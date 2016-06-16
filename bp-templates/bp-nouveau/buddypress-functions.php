@@ -145,12 +145,8 @@ class BP_Nouveau extends BP_Theme_Compat {
 		/** Ajax **************************************************************/
 
 		$actions = array(
-
-			// Directory filters.
-			'members_filter'  => 'bp_nouveau_ajax_object_template_loader',
-
 			/**
-			 * @todo check if we still use these 3 actions, else remove it
+			 * @todo check if we still use these 2 actions, else remove it
 			 * and the corresponding functions
 			 */
 			'invite_filter'   => 'bp_legacy_theme_invite_template_loader',
