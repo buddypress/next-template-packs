@@ -10,6 +10,39 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Register Scripts for the Groups component
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $scripts  The array of scripts to register
+ * @return array  The same array with the specific groups scripts.
+ */
+function bp_nouveau_groups_register_scripts( $scripts = array() ) {
+	if ( ! isset( $scripts['bp-nouveau'] ) ) {
+		return $scripts;
+	}
+
+	return array_merge( $scripts, array(
+		'bp-nouveau-group-invites' => array(
+			'file' => 'js/buddypress-group-invites%s.js', 'dependencies' => array( 'bp-nouveau', 'json2', 'wp-backbone' ), 'footer' => true,
+		),
+	) );
+}
+
+/**
+ * Enqueue the groups scripts
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_groups_enqueue_scripts() {
+	if ( ! bp_is_group_invites() && ! ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
+		return;
+	}
+
+	wp_enqueue_script( 'bp-nouveau-group-invites' );
+}
+
 function bp_nouveau_groups_get_inviter_ids( $user_id, $group_id ) {
 	if ( empty( $user_id ) || empty( $group_id ) ) {
 		return false;

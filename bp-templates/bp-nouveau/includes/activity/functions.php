@@ -10,6 +10,42 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Register Scripts for the Activity component
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $scripts  The array of scripts to register
+ * @return array  The same array with the specific activity scripts.
+ */
+function bp_nouveau_activity_register_scripts( $scripts = array() ) {
+	if ( ! isset( $scripts['bp-nouveau'] ) ) {
+		return $scripts;
+	}
+
+	return array_merge( $scripts, array(
+		'bp-nouveau-activity' => array(
+			'file' => 'js/buddypress-activity%s.js', 'dependencies' => array( 'bp-nouveau' ), 'footer' => true,
+		),
+		'bp-nouveau-activity-post-form' => array(
+			'file' => 'js/buddypress-activity-post-form%s.js', 'dependencies' => array( 'bp-nouveau-activity', 'json2', 'wp-backbone' ), 'footer' => true,
+		),
+	) );
+}
+
+/**
+ * Enqueue the activity scripts
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_enqueue_scripts() {
+	if ( ! bp_is_activity_component() && ! bp_is_group_activity() ) {
+		return;
+	}
+
+	wp_enqueue_script( 'bp-nouveau-activity' );
+}
+
 function bp_nouveau_get_activity_directory_nav_items() {
 	$nav_items = array();
 

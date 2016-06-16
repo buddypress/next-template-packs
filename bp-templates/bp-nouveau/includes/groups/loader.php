@@ -68,6 +68,9 @@ class BP_Nouveau_Groups {
 			add_action( 'groups_setup_nav',                 'bp_nouveau_group_setup_nav'        );
 		}
 
+		// Enqueue the scripts
+		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_groups_enqueue_scripts' );
+
 		// Avoid Notices for BuddyPress Legacy Backcompat
 		remove_action( 'bp_groups_directory_group_filter', 'bp_group_backcompat_create_nav_item', 1000 );
 
@@ -101,6 +104,9 @@ class BP_Nouveau_Groups {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
+		// Register groups scripts
+		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_groups_register_scripts', 10, 1 );
+
 		add_filter( 'groups_create_group_steps', 'bp_nouveau_group_invites_create_steps', 10, 1 );
 
 		$buttons = array(
