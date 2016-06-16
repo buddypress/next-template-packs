@@ -148,7 +148,7 @@ class BP_Buttons_Group {
 				unset( $this->group[ $key_button ] );
 			}
 
-			$buttons[] = bp_get_button( $button );
+			$buttons[ $button['id'] ] = bp_get_button( $button );
 		}
 
 		return $buttons;

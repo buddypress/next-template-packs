@@ -118,6 +118,7 @@ function bp_nouveau_activity_entry_buttons() {
 		}
 
 		$activity_id   = bp_get_activity_id();
+		$activity_type = bp_get_activity_type();
 
 		if ( empty( $activity_id ) ) {
 			return $buttons;
@@ -131,7 +132,7 @@ function bp_nouveau_activity_entry_buttons() {
 		 * for each entry of the loop, it's a convenient way to make
 		 * sure the right button will be displayed.
 		 */
-		if ( bp_get_activity_type() === 'activity_comment' ) {
+		if ( $activity_type === 'activity_comment' ) {
 			$buttons['activity_conversation'] =  array(
 				'id'                => 'activity_conversation',
 				'position'          => 5,
@@ -142,9 +143,13 @@ function bp_nouveau_activity_entry_buttons() {
 				'link_title'        => esc_attr__( 'View Conversation', 'bp-nouveau' ),
 				'link_text'         => esc_html__( 'View Conversation', 'bp-nouveau' ),
 			);
-		}
 
-		if ( bp_activity_can_comment() ) {
+		/**
+		 * We always create the Button to make sure
+		 * we always have the right numbers of buttons
+		 * no matter the previous activity had less
+		 */
+		} else {
 			$buttons['activity_conversation'] =  array(
 				'id'                => 'activity_conversation',
 				'position'          => 5,
@@ -281,6 +286,11 @@ function bp_nouveau_activity_entry_buttons() {
 
 		if ( ! $return ) {
 			return array();
+		}
+
+		// Remove the Comment button if the user can't comment
+		if ( ! bp_activity_can_comment() && $activity_type !== 'activity_comment' ) {
+			unset( $return['activity_conversation'] );
 		}
 
 		return $return;
