@@ -80,7 +80,7 @@ class BP_Buttons_Group {
 
 			// Set the wrapper to default value if a class or an id for it is defined.
 			if ( ( ! empty( $r['wrapper_class'] ) || ! empty( $r['wrapper_id'] ) ) && false === $r['wrapper'] ) {
-				$r['wrapper'] = '';
+				$r['wrapper'] = 'div';
 			}
 
 			$this->group[ $r['id'] ] = $r;

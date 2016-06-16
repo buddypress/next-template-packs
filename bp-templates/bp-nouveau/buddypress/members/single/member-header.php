@@ -56,14 +56,7 @@ do_action( 'bp_before_member_header' ); ?>
 
 		<div id="item-buttons">
 
-			<?php
-
-			/**
-			 * Fires in the member header actions section.
-			 *
-			 * @since 1.2.6
-			 */
-			do_action( 'bp_member_header_actions' ); ?>
+			<?php bp_nouveau_member_header_buttons(); ?>
 
 		</div><!-- #item-buttons -->
 

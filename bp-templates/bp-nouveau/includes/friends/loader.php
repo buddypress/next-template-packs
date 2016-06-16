@@ -57,10 +57,6 @@ class BP_Nouveau_Friends {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
-		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			add_action( 'bp_member_header_actions', 'bp_add_friend_button', 5 );
-		}
-
 		$ajax_actions = array(
 			array( 'friends_remove_friend'       => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
 			array( 'friends_add_friend'          => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),

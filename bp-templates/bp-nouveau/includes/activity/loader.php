@@ -59,11 +59,8 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
-		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			if ( bp_activity_do_mentions() ) {
-				add_action( 'bp_member_header_actions', 'bp_send_public_message_button',  20 );
-			}
-		}
+		// Enqueue the scripts
+		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_activity_enqueue_scripts' );
 
 		$ajax_actions = array(
 			array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
@@ -102,6 +99,9 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
+		// Register activity scripts
+		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_activity_register_scripts', 10, 1 );
+
 		add_filter( 'bp_get_activity_action_pre_meta', 'bp_nouveau_activity_secondary_avatars',  10, 2 );
 		add_filter( 'bp_get_activity_css_class',       'bp_nouveau_activity_scope_newest_class', 10, 1 );
 		add_filter( 'bp_activity_time_since',          'bp_nouveau_activity_time_since',         10, 2 );

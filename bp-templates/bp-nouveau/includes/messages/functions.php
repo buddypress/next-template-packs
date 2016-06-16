@@ -10,6 +10,45 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Register Scripts for the Messages component
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $scripts  The array of scripts to register
+ * @return array  The same array with the specific messages scripts.
+ */
+function bp_nouveau_messages_register_scripts( $scripts = array() ) {
+	if ( ! isset( $scripts['bp-nouveau'] ) ) {
+		return $scripts;
+	}
+
+	return array_merge( $scripts, array(
+		'bp-nouveau-messages-at' => array(
+			'file' => buddypress()->plugin_url . 'bp-activity/js/mentions%s.js', 'dependencies' => array( 'jquery', 'jquery-atwho' ), 'version' => bp_get_version(), 'footer' => true,
+		),
+		'bp-nouveau-messages' => array(
+			'file' => 'js/buddypress-messages%s.js', 'dependencies' => array( 'bp-nouveau', 'json2', 'wp-backbone', 'bp-nouveau-messages-at' ), 'footer' => true,
+		),
+	) );
+}
+
+/**
+ * Enqueue the messages scripts
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_messages_enqueue_scripts() {
+	if ( ! bp_is_user_messages() ) {
+		return;
+	}
+
+	wp_enqueue_script( 'bp-nouveau-messages' );
+
+	// Add The tiny MCE init specific function.
+	add_filter( 'tiny_mce_before_init', 'bp_nouveau_messages_at_on_tinymce_init', 10, 2 );
+}
+
 function bp_nouveau_sitewide_notices() {
 	// Do not show notices if user is not logged in.
 	if ( ! is_user_logged_in() || ! bp_is_user() ) {

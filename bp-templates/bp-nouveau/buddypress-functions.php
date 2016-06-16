@@ -237,56 +237,49 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	public function register_scripts() {
-		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		$main = $this->locate_asset_in_stack( "buddypress{$min}.js", 'js', 'bp-nouveau' );
+		$min = bp_core_get_minified_asset_suffix();
 
-		if ( isset( $main['location'], $main['handle'] ) ) {
-			wp_register_script( $main['handle'], $main['location'], bp_core_get_js_dependencies(), $this->version, true );
-		}
+		$scripts = apply_filters( 'bp_nouveau_register_scripts', array(
+			'bp-nouveau' => array(
+				'file' => 'js/buddypress%s.js', 'dependencies' => bp_core_get_js_dependencies(), 'version' => $this->version, 'footer' => true,
+			),
+		) );
 
-		if ( bp_is_active( 'activity' ) && isset( $main['handle'] ) ) {
-			$activity = $this->locate_asset_in_stack( "buddypress-activity{$min}.js", 'js', 'bp-nouveau-activity' );
+		if ( $scripts ) {
 
-			if ( isset( $activity['location'], $activity['handle'] ) ) {
-				$this->activity_handle = $activity['handle'];
-
-				wp_register_script( $activity['handle'], $activity['location'], array( $main['handle'] ), $this->version, true );
-				wp_register_script( 'bp-nouveau-activity-post-form', trailingslashit( bp_get_theme_compat_url() ) . "js/buddypress-activity-post-form{$min}.js", array( $main['handle'], 'json2', 'wp-backbone' ), $this->version, true );
-			}
-		}
-
-		if ( bp_is_active( 'groups' ) && isset( $main['handle'] ) ) {
-			$groups = $this->locate_asset_in_stack( "buddypress-group-invites{$min}.js", 'js', 'bp-nouveau-group-invites' );
-
-			if ( isset( $groups['location'], $groups['handle'] ) ) {
-				$this->groups_handle = $groups['handle'];
-
-				wp_register_script( $groups['handle'], $groups['location'], array( $main['handle'], 'json2', 'wp-backbone' ), $this->version, true );
-			}
-		}
-
-		if ( bp_is_active( 'messages' ) && isset( $main['handle'] ) ) {
-			$messages = $this->locate_asset_in_stack( "buddypress-messages{$min}.js", 'js', 'bp-nouveau-messages' );
-
-			if ( isset( $messages['location'], $messages['handle'] ) ) {
-				$this->message_handle = $messages['handle'];
-
-				// Use the activity mentions script
-				wp_register_script( $messages['handle'] . '-at', buddypress()->plugin_url . "bp-activity/js/mentions{$min}.js", array( 'jquery', 'jquery-atwho' ), bp_get_version(), true );
-				wp_register_script( $messages['handle'], $messages['location'], array( $main['handle'], 'json2', 'wp-backbone', $messages['handle'] . '-at' ), $this->version, true );
+			// Add The password verify if needed.
+			if ( bp_is_active( 'settings' ) || bp_get_signup_allowed() ) {
+				$scripts['bp-nouveau-password-verify'] = array(
+					'file' => 'js/password-verify%s.js', 'dependencies' => array( 'bp-nouveau', 'password-strength-meter' ), 'footer' => true,
+				);
 			}
 
-			// Remove deprecated scripts
-			remove_action( 'bp_enqueue_scripts', 'messages_add_autocomplete_js' );
-		}
+			foreach ( $scripts as $handle => $script ) {
+				if ( ! isset( $script['file'] ) ) {
+					continue;
+				}
 
-		if ( ( bp_is_active( 'settings' ) || bp_get_signup_allowed() ) && isset( $main['handle'] ) ) {
-			$password = $this->locate_asset_in_stack( "password-verify{$min}.js", 'js', 'bp-nouveau-password-verify' );
+				// Eventually use the minified version.
+				$file = sprintf( $script['file'], $min );
 
-			if ( isset( $password['location'], $password['handle'] ) ) {
-				$this->password_handle = $password['handle'];
+				// Locate the asset if needed.
+				if ( false === strpos( $script['file'], '://' ) ) {
+					$asset = bp_locate_template_asset( $file );
 
-				wp_register_script( $password['handle'], $password['location'], array( $main['handle'], 'password-strength-meter' ), $this->version, true );
+					if ( empty( $asset['uri'] ) || false === strpos( $asset['uri'], '://' ) ) {
+						continue;
+					}
+
+					$file = $asset['uri'];
+				}
+
+				$data = wp_parse_args( $script, array(
+					'dependencies' => array(),
+					'version'      => $this->version,
+					'footer'       => false,
+				) );
+
+				wp_register_script( $handle, $file, $data['dependencies'], $data['version'], $data['footer'] );
 			}
 		}
 	}
@@ -300,28 +293,20 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Always enqueue the common javascript file
 		wp_enqueue_script( 'bp-nouveau' );
 
-		if ( bp_is_activity_component() || bp_is_group_activity() ) {
-			wp_enqueue_script( 'bp-nouveau-activity' );
-		}
-
+		// Maybe enqueue Password Verify
 		if ( bp_is_register_page() || ( function_exists( 'bp_is_user_settings_general' ) && bp_is_user_settings_general() ) ) {
 			wp_enqueue_script( 'bp-nouveau-password-verify' );
-		}
-
-		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
-			wp_enqueue_script( 'bp-nouveau-group-invites' );
-		}
-
-		if ( bp_is_user_messages() ) {
-			wp_enqueue_script( 'bp-nouveau-messages' );
-
-			add_filter( 'tiny_mce_before_init', 'bp_nouveau_messages_at_on_tinymce_init', 10, 2 );
 		}
 
 		// Maybe enqueue comment reply JS.
 		if ( is_singular() && bp_is_blog_page() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
+
+		/**
+		 * Let specific scripts to components to be enqueued
+		 */
+		do_action( 'bp_nouveau_enqueue_scripts' );
 	}
 
 	/**

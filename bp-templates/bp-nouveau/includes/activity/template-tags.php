@@ -277,5 +277,11 @@ function bp_nouveau_activity_entry_buttons() {
 			bp_nouveau()->activity->entry_buttons->update( $buttons_group );
 		}
 
-		return bp_nouveau()->activity->entry_buttons->get( $sort );
+		$return = bp_nouveau()->activity->entry_buttons->get( $sort );
+
+		if ( ! $return ) {
+			return array();
+		}
+
+		return $return;
 	}

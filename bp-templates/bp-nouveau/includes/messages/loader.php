@@ -59,16 +59,18 @@ class BP_Nouveau_Messages {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
-		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			add_action( 'bp_member_header_actions', 'bp_send_private_message_button', 20 );
-		}
-
 		// Notices
 		add_action( 'widgets_init',     'bp_nouveau_unregister_notices_widget'       );
 		add_action( 'template_notices', 'bp_nouveau_sitewide_notices',          9999 );
 
 		// Messages
-		add_action( 'bp_messages_setup_nav', 'bp_nouveau_messages_adjust_nav' );;
+		add_action( 'bp_messages_setup_nav', 'bp_nouveau_messages_adjust_nav' );
+
+		// Remove deprecated scripts
+		remove_action( 'bp_enqueue_scripts', 'messages_add_autocomplete_js' );
+
+		// Enqueue the scripts for the new UI
+		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_messages_enqueue_scripts' );
 
 		$ajax_actions = array(
 			array( 'messages_send_message'             => array( 'function' => 'bp_nouveau_ajax_messages_send_message',      'nopriv' => false ) ),
@@ -100,6 +102,9 @@ class BP_Nouveau_Messages {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
+		// Register messages scripts
+		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_messages_register_scripts', 10, 1 );
+
 		// Notices
 		add_filter( 'bp_messages_single_new_message_notification', 'bp_nouveau_format_notice_notification_for_user',  10, 1 );
 		add_filter( 'bp_notifications_get_all_notifications_for_user', 'bp_nouveau_add_notice_notification_for_user', 10, 2 );
