@@ -59,10 +59,6 @@ class BP_Nouveau_Messages {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
-		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			add_action( 'bp_member_header_actions', 'bp_send_private_message_button', 20 );
-		}
-
 		// Notices
 		add_action( 'widgets_init',     'bp_nouveau_unregister_notices_widget'       );
 		add_action( 'template_notices', 'bp_nouveau_sitewide_notices',          9999 );

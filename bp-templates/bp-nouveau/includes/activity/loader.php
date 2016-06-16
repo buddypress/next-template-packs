@@ -59,12 +59,6 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
-		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			if ( bp_activity_do_mentions() ) {
-				add_action( 'bp_member_header_actions', 'bp_send_public_message_button',  20 );
-			}
-		}
-
 		$ajax_actions = array(
 			array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
 			array( 'get_single_activity_content'     => array( 'function' => 'bp_nouveau_ajax_get_single_activity_content', 'nopriv' => true ) ),

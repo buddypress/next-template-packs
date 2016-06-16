@@ -119,3 +119,22 @@ function bp_nouveau_get_members_filters( $context = '' ) {
 
 	return bp_nouveau_parse_hooked_options( 'bp_members_directory_order_options', $filters );
 }
+
+/**
+ * Catch the arguments for buttons
+ *
+ * @since 1.0.0
+ *
+ * @param  array $buttons The arguments of the button that BuddyPress is about to create.
+ * @return array An empty array to stop the button creation process.
+ */
+function bp_nouveau_members_catch_button_args( $button = array() ) {
+	/**
+	 * Globalize the arguments so that we can use it
+	 * in bp_nouveau_get_member_header_buttons().
+	 */
+	bp_nouveau()->members->button_args = $button;
+
+	// return an empty array to stop the button creation process
+	return array();
+}
