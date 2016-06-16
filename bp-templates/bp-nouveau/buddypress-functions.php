@@ -11,7 +11,7 @@
  * Template Pack Name:     BP Nouveau
  * Version:                1.0.0
  * WP required version:    4.5
- * BP required version:    2.6.0-beta1
+ * BP required version:    2.6.0-rc1
  * Description:            A new template pack for BuddyPress!
  * Text Domain:            bp-nouveau
  * Domain Path:            /languages/
