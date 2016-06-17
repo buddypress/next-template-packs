@@ -37,8 +37,24 @@
 			padding: 3px;
 		}
 
+		textarea {
+			height: 120px; // bad rule! ?
+			width: 75%;
+		}
+
+		textarea#message_content {
+			height: 200px; // bad rule! ?
+		}
+
 		input[type=password] {
 			margin-bottom: $marg-xsml;
+		}
+
+		input:focus,
+		textarea:focus,
+		select:focus {
+			background: $off-white;
+			color: $bp-text;
 		}
 
 		label,
@@ -49,10 +65,44 @@
 			width: auto;
 		}
 
+		.radio ul {
+			list-style: disc;
+			margin: $marg-sml 0 $marg-med $marg-xlrg;
+
+			li {
+				margin: $marg-xsml;
+			}
+		}
+
+		a.clear-value {
+			display: block;
+			margin-top: $marg-xsml;
+			outline: none;
+		}
+
+		.submit {
+			clear: both;
+			padding: $marg-med 0 0;
+		}
+
+		p.submit {
+			margin-bottom: 0;
+		}
+
+		div.submit input {
+			margin-right: $marg-med;
+		}
+
 		p label,
 		#invite-list label {
 			font-weight: normal;
 			margin: auto;
+		}
+
+		p.description {
+			color: $form-text;
+			font-size: 80%;
+			margin: $marg-xsml 0;
 		}
 
 		div.checkbox label:nth-child(n+2),
@@ -61,6 +111,12 @@
 			font-size: 100%;
 			font-weight: normal;
 			margin: $marg-xsml 0 0;
+		}
+
+		&#send-reply {
+			textarea {
+				width: 97.5%;
+			}
 		}
 
 		&#sidebar-login-form {
@@ -97,9 +153,86 @@
 			}
 		}
 
-	} // close .standard-form
+		#signup-avatar img {
+			margin: 0 $marg-med $marg-sml 0;
+		}
 
+		@include medium-up() {
+
+			// ID's need sorting out, replace with classes.
+			#basic-details-section,
+			#blog-details-section,
+			#profile-details-section {
+				float: left;
+				width: 48%;
+			}
+
+			#profile-details-section {
+				float: right;
+			}
+
+			#blog-details-section {
+				clear: left;
+			}
+
+				// The Group invites form lists (not required if Ajax templates in use)
+
+			.left-menu {
+				float: left;
+			}
+
+			#invite-list ul {
+				list-style: none;
+				margin: 1%;
+
+				li {
+					margin: 0 0 0 1%;
+				}
+			}
+
+			.main-column {
+				margin-left: 190px;
+
+				ul#friend-list {
+					clear: none;
+					float: left;
+				}
+
+				ul#friend-list h4 {
+					clear: none;
+				}
+			}
+
+		} // close @media
+
+	} // close .standard-form
 
 } // close .buddypress
 
+// These rules do not belong here really but it's where original styles placed them
+body.no-js {
+	.buddypress {
 
+		#notifications-bulk-management #select-all-notifications,
+		label[for="message-type-select"],
+		#message-type-select,
+		#delete_inbox_messages,
+		#delete_sentbox_messages,
+		#messages-bulk-management #select-all-messages {
+			display: none;
+		}
+	}
+}
+
+/* Overrides for embedded WP editors */
+.buddypress {
+	.wp-editor-wrap {
+		a.button,
+		.wp-editor-wrap button,
+		.wp-editor-wrap input[type=submit],
+		.wp-editor-wrap input[type=button],
+		input[type=reset] {
+			padding: 0 8px 1px;
+		}
+	}
+}

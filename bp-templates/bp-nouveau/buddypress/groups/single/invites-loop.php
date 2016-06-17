@@ -47,12 +47,11 @@
 				<?php bp_group_invite_pagination_links(); ?>
 
 			</div>
-
+ggssehgseh
 		</div>
 
 		<?php /* The ID 'friend-list' is important for AJAX support. */ ?>
 		<ul id="friend-list" class="item-list">
-
 		<?php while ( bp_group_invites() ) : bp_group_the_invite(); ?>
 
 			<li id="<?php bp_group_invite_item_id(); ?>">

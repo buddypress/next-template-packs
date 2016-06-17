@@ -46,7 +46,8 @@
 	5.2 - Item Body: Global
 		5.2.1 - item-body: Groups
 			5.2.1.1 - Management settings screens
-			5.2.1.2 - Group members list
+			5.2.1.2 - Group Members list
+			5.2.1.3 - Group Invite list
 		5.2.2 - item-body: User Accounts
 			5.2.2.1 - classes, pag, filters
 			5.2.2.2 - Extended Profiles
@@ -60,7 +61,7 @@
 
 7.0 - Tables -  General
 
-8.0 - Classes - Messages, Ajax, Widgets
+8.0 - Classes - Messages, Ajax, Widgets, Buttons
 
 --------------------------------------------------------------*/
 
@@ -205,15 +206,20 @@
 
 /**
 *-----------------------------------------
-* @subsection 5.2.1.1 - Group Management
+* @subsection 5.2.1.1 - Management Settings Screens
 *-----------------------------------------
 */
 /**
 *-----------------------------------------
-* @subsection 5.2.1.2 - Group members
+* @subsection 5.2.1.2 - Group Members List
 *-----------------------------------------
 */
 
+/*
+*-----------------------------------------
+* @subsection 5.2.1.3 - Group Invites List
+*-----------------------------------------
+*/
 
 /**
 *-----------------------------------------------------
@@ -279,9 +285,23 @@
 
 /**
 *-------------------------------------------------------------------------------
-* @section 8.0 - Classes - Messages, Ajax, Widgets
+* @section 8.0 - Classes - Messages, Ajax, Widgets, Buttons
 *-------------------------------------------------------------------------------
 */
+
+.bp-screen-reader-text {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+// Import Buttons styles
+@import "../../shared/styles/_bp_buttons";
 
 // Import Messages/info dialogues
 @import "../../shared/styles/_bp_info_messages";

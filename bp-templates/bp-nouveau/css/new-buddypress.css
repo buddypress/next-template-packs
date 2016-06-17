@@ -25,7 +25,8 @@
 	5.2 - Item Body: Global
 		5.2.1 - item-body: Groups
 			5.2.1.1 - Management settings screens
-			5.2.1.2 - Group members list
+			5.2.1.2 - Group Members list
+			5.2.1.3 - Group Invite list
 		5.2.2 - item-body: User Accounts
 			5.2.2.1 - classes, pag, filters
 			5.2.2.2 - Extended Profiles
@@ -39,7 +40,7 @@
 
 7.0 - Tables -  General
 
-8.0 - Classes - Messages, Ajax, Widgets
+8.0 - Classes - Messages, Ajax, Widgets, Buttons
 
 --------------------------------------------------------------*/
 /**
@@ -524,12 +525,17 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 */
 /**
 *-----------------------------------------
-* @subsection 5.2.1.1 - Group Management
+* @subsection 5.2.1.1 - Management Settings Screens
 *-----------------------------------------
 */
 /**
 *-----------------------------------------
-* @subsection 5.2.1.2 - Group members
+* @subsection 5.2.1.2 - Group Members List
+*-----------------------------------------
+*/
+/*
+*-----------------------------------------
+* @subsection 5.2.1.3 - Group Invites List
 *-----------------------------------------
 */
 /**
@@ -603,8 +609,24 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	padding: 3px;
 }
 
+.buddypress .standard-form textarea {
+	height: 120px;
+	width: 75%;
+}
+
+.buddypress .standard-form textarea#message_content {
+	height: 200px;
+}
+
 .buddypress .standard-form input[type=password] {
 	margin-bottom: 5px;
+}
+
+.buddypress .standard-form input:focus,
+.buddypress .standard-form textarea:focus,
+.buddypress .standard-form select:focus {
+	background: #fafafa;
+	color: #555;
 }
 
 .buddypress .standard-form label,
@@ -615,10 +637,44 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	width: auto;
 }
 
+.buddypress .standard-form .radio ul {
+	list-style: disc;
+	margin: 10px 0 15px 30px;
+}
+
+.buddypress .standard-form .radio ul li {
+	margin: 5px;
+}
+
+.buddypress .standard-form a.clear-value {
+	display: block;
+	margin-top: 5px;
+	outline: none;
+}
+
+.buddypress .standard-form .submit {
+	clear: both;
+	padding: 15px 0 0;
+}
+
+.buddypress .standard-form p.submit {
+	margin-bottom: 0;
+}
+
+.buddypress .standard-form div.submit input {
+	margin-right: 15px;
+}
+
 .buddypress .standard-form p label,
 .buddypress .standard-form #invite-list label {
 	font-weight: normal;
 	margin: auto;
+}
+
+.buddypress .standard-form p.description {
+	color: #888;
+	font-size: 80%;
+	margin: 5px 0;
 }
 
 .buddypress .standard-form div.checkbox label:nth-child(n+2),
@@ -627,6 +683,10 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	font-size: 100%;
 	font-weight: normal;
 	margin: 5px 0 0;
+}
+
+.buddypress .standard-form#send-reply textarea {
+	width: 97.5%;
 }
 
 .buddypress .standard-form#sidebar-login-form label {
@@ -652,6 +712,63 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 
 .buddypress .standard-form#signup_form .submit {
 	float: right;
+}
+
+.buddypress .standard-form #signup-avatar img {
+	margin: 0 15px 10px 0;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .standard-form #basic-details-section,
+	.buddypress .standard-form #blog-details-section,
+	.buddypress .standard-form #profile-details-section {
+		float: left;
+		width: 48%;
+	}
+	.buddypress .standard-form #profile-details-section {
+		float: right;
+	}
+	.buddypress .standard-form #blog-details-section {
+		clear: left;
+	}
+	.buddypress .standard-form .left-menu {
+		float: left;
+	}
+	.buddypress .standard-form #invite-list ul {
+		list-style: none;
+		margin: 1%;
+	}
+	.buddypress .standard-form #invite-list ul li {
+		margin: 0 0 0 1%;
+	}
+	.buddypress .standard-form .main-column {
+		margin-left: 190px;
+	}
+	.buddypress .standard-form .main-column ul#friend-list {
+		clear: none;
+		float: left;
+	}
+	.buddypress .standard-form .main-column ul#friend-list h4 {
+		clear: none;
+	}
+}
+
+body.no-js .buddypress #notifications-bulk-management #select-all-notifications,
+body.no-js .buddypress label[for="message-type-select"],
+body.no-js .buddypress #message-type-select,
+body.no-js .buddypress #delete_inbox_messages,
+body.no-js .buddypress #delete_sentbox_messages,
+body.no-js .buddypress #messages-bulk-management #select-all-messages {
+	display: none;
+}
+
+/* Overrides for embedded WP editors */
+.buddypress .wp-editor-wrap a.button,
+.buddypress .wp-editor-wrap .wp-editor-wrap button,
+.buddypress .wp-editor-wrap .wp-editor-wrap input[type=submit],
+.buddypress .wp-editor-wrap .wp-editor-wrap input[type=button],
+.buddypress .wp-editor-wrap input[type=reset] {
+	padding: 0 8px 1px;
 }
 
 /**
@@ -707,9 +824,59 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 */
 /**
 *-------------------------------------------------------------------------------
-* @section 8.0 - Classes - Messages, Ajax, Widgets
+* @section 8.0 - Classes - Messages, Ajax, Widgets, Buttons
 *-------------------------------------------------------------------------------
 */
+.bp-screen-reader-text {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.buddypress button,
+.buddypress a.button,
+.buddypress input[type=submit],
+.buddypress input[type=button],
+.buddypress input[type=reset],
+.buddypress ul.button-nav li a,
+.buddypress .generic-button a,
+.buddypress .comment-reply-link,
+.buddypress a.bp-title-button {
+	background: #fff;
+	/* Old browsers */
+	border: 1px solid #ccc;
+	color: #777;
+	cursor: pointer;
+	font-size: small;
+	outline: none;
+	padding: 4px 10px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.buddypress button:hover,
+.buddypress button:hover,
+.buddypress button:focus,
+.buddypress input[type=submit]:hover,
+.buddypress input[type=button]:hover,
+.buddypress input[type=reset]:hover,
+.buddypress .button-nav li a:hover,
+.buddypress .button-nav li.current a,
+.buddypress div.generic-button a:hover,
+.buddypress .comment-reply-link:hover {
+	background: #ededed;
+	border: 1px solid #bbb;
+	color: #555;
+	outline: none;
+	text-decoration: none;
+}
+
 .buddypress .bp-messages {
 	margin: 0 0 15px;
 }

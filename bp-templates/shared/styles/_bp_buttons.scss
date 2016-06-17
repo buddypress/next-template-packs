@@ -1,0 +1,45 @@
+// BP Buttons, Submits, and general clicky things styling.
+
+.buddypress {
+
+	button,
+	a.button,
+	input[type=submit],
+	input[type=button],
+	input[type=reset],
+	ul.button-nav li a,
+	.generic-button a,
+	.comment-reply-link,
+	a.bp-title-button {
+		background: #fff; /* Old browsers */
+		border: 1px solid #ccc;
+		color: #777;
+		cursor: pointer;
+		font-size: small;
+		outline: none;
+		padding: 4px 10px;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	button:hover,
+	button:hover,
+	button:focus,
+	input[type=submit]:hover,
+	input[type=button]:hover,
+	input[type=reset]:hover,
+	.button-nav li a:hover,
+	.button-nav li.current a,
+ div.generic-button a:hover,
+ .comment-reply-link:hover {
+		background: #ededed;
+		border: 1px solid #bbb;
+		color: $bp-text;
+		outline: none;
+		text-decoration: none;
+	}
+
+}
+
+
+
