@@ -47,7 +47,7 @@
 				<?php bp_group_invite_pagination_links(); ?>
 
 			</div>
-ggssehgseh
+
 		</div>
 
 		<?php /* The ID 'friend-list' is important for AJAX support. */ ?>

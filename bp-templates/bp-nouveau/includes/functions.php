@@ -17,7 +17,7 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 
 	$data_attribute = $button->id;
 
-	if ( 'member_profile_friendship' === $button->id ) {
+	if ( 'member_friendship' === $button->id ) {
 		$parse_class = explode( ' ', $button->link_class );
 
 		if ( false !== $parse_class ) {
@@ -307,7 +307,12 @@ function bp_nouveau_get_forsaken_hooks() {
 		'bp_member_header_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_member_header_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_member_header_buttons&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The &#39;bp_member_header_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_buttons&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_directory_members_actions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_directory_members_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_buttons&#39; filter instead', 'bp-nouveau' ),
 		),
 	);
 }
