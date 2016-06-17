@@ -77,14 +77,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 			<div class="action">
 
-				<?php
-
-				/**
-				 * Fires inside the members action HTML markup to display actions.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_directory_members_actions' ); ?>
+				<?php bp_nouveau_members_loop_buttons(); ?>
 
 			</div>
 

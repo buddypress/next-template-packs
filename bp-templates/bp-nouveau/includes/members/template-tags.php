@@ -88,7 +88,7 @@ function bp_nouveau_after_members_directory_content() {
  * @since 1.0.0
  */
 function bp_nouveau_member_header_buttons() {
-	echo join( ' ', bp_nouveau_get_member_header_buttons() );
+	echo join( ' ', bp_nouveau_get_members_buttons() );
 
 	/**
 	 * Fires in the member header actions section.
@@ -98,19 +98,39 @@ function bp_nouveau_member_header_buttons() {
 	do_action( 'bp_member_header_actions' );
 }
 
+function bp_nouveau_members_loop_buttons() {
+	if ( empty( $GLOBALS['members_template'] ) ) {
+		return;
+	}
+
+	echo join( ' ', bp_nouveau_get_members_buttons( 'directory' ) );
+
+	/**
+	 * Fires inside the members action HTML markup to display actions.
+	 *
+	 * @since 1.1.0 (BuddyPress)
+	 */
+	do_action( 'bp_directory_members_actions' );
+}
+
 	/**
 	 * Get the action buttons for the displayed user profile
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_member_header_buttons() {
+	function bp_nouveau_get_members_buttons( $type = 'profile' ) {
 		// Not really sure why BP Legacy needed to do this...
-		if ( is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		if ( 'profile' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return;
 		}
 
 		$buttons = array();
-		$user_id = bp_displayed_user_id();
+
+		if ( 'directory' === $type ) {
+			$user_id = bp_get_member_user_id();
+		} else {
+			$user_id = bp_displayed_user_id();
+		}
 
 		if ( ! $user_id ) {
 			return $buttons;
@@ -125,13 +145,13 @@ function bp_nouveau_member_header_buttons() {
 			 */
 			add_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-			bp_get_add_friend_button();
+			bp_get_add_friend_button( $user_id );
 
 			remove_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
 			if ( ! empty( bp_nouveau()->members->button_args ) ) {
-				$buttons['member_profile_friendship'] = wp_parse_args( array(
-					'id'       => 'member_profile_friendship',
+				$buttons['member_friendship'] = wp_parse_args( array(
+					'id'       => 'member_friendship',
 					'position' => 5,
 				), bp_nouveau()->members->button_args );
 
@@ -139,48 +159,51 @@ function bp_nouveau_member_header_buttons() {
 			}
 		}
 
-		if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) {
-			/**
-			 * This filter workaround is waiting for a core adaptation
-			 * so that we can directly get the public message button arguments
-			 * instead of the button.
-			 * @see https://buddypress.trac.wordpress.org/ticket/7126
-			 */
-			add_filter( 'bp_get_send_public_message_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
+		// Only add The public and private messages when not in a loop
+		if ( 'directory' !== $type ) {
+			if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) {
+				/**
+				 * This filter workaround is waiting for a core adaptation
+				 * so that we can directly get the public message button arguments
+				 * instead of the button.
+				 * @see https://buddypress.trac.wordpress.org/ticket/7126
+				 */
+				add_filter( 'bp_get_send_public_message_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-			bp_get_send_public_message_button();
+				bp_get_send_public_message_button();
 
-			remove_filter( 'bp_get_send_public_message_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
+				remove_filter( 'bp_get_send_public_message_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-			if ( ! empty( bp_nouveau()->members->button_args ) ) {
-				$buttons['public_message'] = wp_parse_args( array(
-					'position' => 15,
-				), bp_nouveau()->members->button_args );
+				if ( ! empty( bp_nouveau()->members->button_args ) ) {
+					$buttons['public_message'] = wp_parse_args( array(
+						'position' => 15,
+					), bp_nouveau()->members->button_args );
 
-				unset( bp_nouveau()->members->button_args );
+					unset( bp_nouveau()->members->button_args );
+				}
 			}
-		}
 
-		if ( bp_is_active( 'messages' ) ) {
-			/**
-			 * This filter workaround is waiting for a core adaptation
-			 * so that we can directly get the private messages button arguments
-			 * instead of the button.
-			 * @see https://buddypress.trac.wordpress.org/ticket/7126
-			 */
-			add_filter( 'bp_get_send_message_button_args', 'bp_nouveau_members_catch_button_args', 100, 1 );
+			if ( bp_is_active( 'messages' ) ) {
+				/**
+				 * This filter workaround is waiting for a core adaptation
+				 * so that we can directly get the private messages button arguments
+				 * instead of the button.
+				 * @see https://buddypress.trac.wordpress.org/ticket/7126
+				 */
+				add_filter( 'bp_get_send_message_button_args', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-			bp_get_send_message_button();
+				bp_get_send_message_button();
 
-			remove_filter( 'bp_get_send_message_button_args', 'bp_nouveau_members_catch_button_args', 100, 1 );
+				remove_filter( 'bp_get_send_message_button_args', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-			if ( ! empty( bp_nouveau()->members->button_args ) ) {
-				$buttons['private_message'] = wp_parse_args( array(
-					'position'  => 25,
-					'link_href' => esc_url( trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ) ),
-				), bp_nouveau()->members->button_args );
+				if ( ! empty( bp_nouveau()->members->button_args ) ) {
+					$buttons['private_message'] = wp_parse_args( array(
+						'position'  => 25,
+						'link_href' => esc_url( trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ) ),
+					), bp_nouveau()->members->button_args );
 
-				unset( bp_nouveau()->members->button_args );
+					unset( bp_nouveau()->members->button_args );
+				}
 			}
 		}
 
@@ -189,18 +212,28 @@ function bp_nouveau_member_header_buttons() {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param array $buttons The list of buttons.
-		 * @param int   $user_id The displayed user ID.
+		 * @param array  $buttons The list of buttons.
+		 * @param int    $user_id The displayed user ID.
+		 * @parem string $type    Whether we're displaying a members loop or a user's page
 		 */
-		$buttons_group = apply_filters( 'bp_nouveau_get_member_header_buttons', $buttons, $user_id );
+		$buttons_group = apply_filters( 'bp_nouveau_get_members_buttons', $buttons, $user_id, $type );
 
 		if ( empty( $buttons_group ) ) {
 			return $buttons;
 		}
 
-		bp_nouveau()->members->profile_buttons = new BP_Buttons_Group( $buttons_group );
+		// It's the first entry of the loop, so build the Group and sort it
+		if ( ! isset( bp_nouveau()->members->member_buttons ) || false === is_a( bp_nouveau()->members->member_buttons, 'BP_Buttons_Group' ) ) {
+			$sort = true;
+			bp_nouveau()->members->member_buttons = new BP_Buttons_Group( $buttons_group );
 
-		$return = bp_nouveau()->members->profile_buttons->get();
+		// It's not the first entry, the order is set, we simply need to update the Buttons Group
+		} else {
+			$sort = false;
+			bp_nouveau()->members->member_buttons->update( $buttons_group );
+		}
+
+		$return = bp_nouveau()->members->member_buttons->get( $sort );
 
 		if ( ! $return ) {
 			return array();

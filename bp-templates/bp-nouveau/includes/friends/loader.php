@@ -57,6 +57,9 @@ class BP_Nouveau_Friends {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
+		// Remove BuddyPress action for the members loop
+		remove_action( 'bp_directory_members_actions', 'bp_member_add_friend_button' );
+
 		$ajax_actions = array(
 			array( 'friends_remove_friend'       => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
 			array( 'friends_add_friend'          => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
@@ -92,7 +95,7 @@ class BP_Nouveau_Friends {
 			'friends_awaiting_response',
 			'friends_is_friend',
 			'friends_not_friends',
-			'friends_member_profile_friendship',
+			'friends_member_friendship',
 		);
 
 		foreach ( $buttons as $button ) {
