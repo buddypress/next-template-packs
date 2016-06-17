@@ -743,7 +743,7 @@ window.bp = window.bp || {};
 						$( self.objectNavParent + ' [data-bp-scope="personal"] span' ).html( personal_count );
 					}
 
-					target.replaceWith( response.data.contents );
+					target.parent().replaceWith( response.data.contents );
 				}
 			} );
 		}

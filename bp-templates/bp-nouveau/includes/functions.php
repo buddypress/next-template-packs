@@ -15,8 +15,31 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 		return $output;
 	}
 
+	$data_attribute = $button->id;
+
+	if ( 'member_profile_friendship' === $button->id ) {
+		$parse_class = explode( ' ', $button->link_class );
+
+		if ( false !== $parse_class ) {
+			$find_id = array_intersect( $parse_class, array(
+				'pending_friend',
+				'awaiting_response_friend',
+				'is_friend',
+				'not_friends',
+			) );
+
+			if ( 1 === count( $find_id ) ) {
+				$data_attribute = reset( $find_id );
+
+				if ( in_array( $data_attribute, array( 'pending_friend', 'awaiting_response_friend' ) ) ) {
+					$data_attribute = str_replace( '_friend', '', $data_attribute );
+				}
+			}
+		}
+	}
+
 	// Add span bp-screen-reader-text class
-	return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $button->id . '">' . $button->link_text . '</a>' . $after;
+	return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $data_attribute . '">' . $button->link_text . '</a>' . $after;
 }
 
 if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
