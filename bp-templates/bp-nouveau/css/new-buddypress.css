@@ -822,6 +822,125 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * @section 7.0 - Tables - General
 *-------------------------------------------------------------------------------
 */
+.buddypress table.notifications,
+.buddypress table.notifications-settings,
+.buddypress table.profile-settings,
+.buddypress table.profile-fields,
+.buddypress table.wp-profile-fields,
+.buddypress table.messages-notices,
+.buddypress table.forum {
+	width: 100%;
+}
+
+.buddypress table.notifications thead tr,
+.buddypress table.notifications-settings thead tr,
+.buddypress table.profile-settings thead tr,
+.buddypress table.profile-fields thead tr,
+.buddypress table.wp-profile-fields thead tr,
+.buddypress table.messages-notices thead tr,
+.buddypress table.forum thead tr {
+	background: #eaeaea;
+}
+
+.buddypress table.notifications tr td,
+.buddypress table.notifications-settings tr td,
+.buddypress table.profile-settings tr td,
+.buddypress table.profile-fields tr td,
+.buddypress table.wp-profile-fields tr td,
+.buddypress table.messages-notices tr td,
+.buddypress table.forum tr td,
+.buddypress table.notifications tr th,
+.buddypress table.notifications-settings tr th,
+.buddypress table.profile-fields tr th,
+.buddypress table.wp-profile-fields tr th,
+.buddypress table.messages-notices tr th,
+.buddypress table.forum tr th {
+	padding: 0.5em;
+	vertical-align: middle;
+}
+
+.buddypress table.notifications tr td.label,
+.buddypress table.notifications-settings tr td.label,
+.buddypress table.profile-fields tr td.label,
+.buddypress table.wp-profile-fields tr td.label,
+.buddypress table.messages-notices tr td.label,
+.buddypress table.forum tr td.label {
+	border-right: 1px solid #eaeaea;
+	font-weight: bold;
+	width: 25%;
+}
+
+.buddypress table.notifications-settings tr.alt td,
+.buddypress table.profile-settings tr.alt td,
+.buddypress table.profile-fields tr.alt td,
+.buddypress table.wp-profile-fields tr.alt td,
+.buddypress table.messages-notices tr.alt td {
+	background: #fafafa;
+}
+
+.buddypress table.notification-settings {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.buddypress #groups-notification-settings {
+	margin-bottom: 0;
+}
+
+.buddypress table.notifications th.icon,
+.buddypress table.notifications td:first-child,
+.buddypress table.notification-settings th.icon,
+.buddypress table.notification-settings td:first-child {
+	display: none;
+}
+
+.buddypress table.notification-settings th.title,
+.buddypress table.profile-settings th.title {
+	width: 80%;
+}
+
+.buddypress table.notification-settings .no,
+.buddypress table.notification-settings .yes,
+.buddypress table.notification-settings .no,
+.buddypress table.notification-settings .yes {
+	text-align: center;
+	width: 40px;
+}
+
+.buddypress table#message-threads {
+	clear: both;
+}
+
+.buddypress table#message-threads .thread-info {
+	min-width: 40%;
+}
+
+.buddypress table#message-threads .thread-info p {
+	margin: 0;
+}
+
+.buddypress table#message-threads .thread-info p.thread-excerpt {
+	color: #888;
+	font-size: 80%;
+	margin-top: 3px;
+}
+
+.buddypress table.profile-fields {
+	margin-bottom: 20px;
+}
+
+.buddypress table.profile-fields:last-child {
+	margin-bottom: 0;
+}
+
+.buddypress table.profile-fields p {
+	margin: 0;
+}
+
+.buddypress table.profile-fields p:last-child {
+	margin-top: 0;
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 8.0 - Classes - Messages, Ajax, Widgets, Buttons
@@ -992,4 +1111,42 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .reject {
 	float: left;
 	margin-left: 10px;
+}
+
+.buddypress a.loading,
+.buddypress input.loading {
+	-webkit-animation: loader-pulsate .5s infinite ease-in-out alternate;
+	-moz-animation: loader-pulsate .5s infinite ease-in-out alternate;
+	border-color: #aaa;
+}
+
+@-webkit-keyframes loader-pulsate {
+	from {
+		border-color: #aaa;
+		-webkit-box-shadow: 0 0 6px #ccc;
+		box-shadow: 0 0 6px #ccc;
+	}
+	to {
+		border-color: #ccc;
+		-webkit-box-shadow: 0 0 6px #f8f8f8;
+		box-shadow: 0 0 6px #f8f8f8;
+	}
+}
+
+@-moz-keyframes loader-pulsate {
+	from {
+		border-color: #aaa;
+		-moz-box-shadow: 0 0 6px #ccc;
+		box-shadow: 0 0 6px #ccc;
+	}
+	to {
+		border-color: #ccc;
+		-moz-box-shadow: 0 0 6px #f8f8f8;
+		box-shadow: 0 0 6px #f8f8f8;
+	}
+}
+
+.buddypress a.loading:hover,
+.buddypress input.loading:hover {
+	color: #777;
 }

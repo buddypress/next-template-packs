@@ -1,0 +1,126 @@
+// BP default/generic Table styles.
+.buddypress {
+
+	table.notifications,
+	table.notifications-settings,
+	table.profile-settings,
+	table.profile-fields,
+	table.wp-profile-fields,
+	table.messages-notices,
+	table.forum {
+		width: 100%;
+	}
+
+	table.notifications thead tr,
+	table.notifications-settings thead tr,
+	table.profile-settings thead tr,
+	table.profile-fields thead tr,
+	table.wp-profile-fields thead tr,
+	table.messages-notices thead tr,
+	table.forum thead tr {
+		background: $light-grey;
+	}
+
+	table.notifications tr td,
+	table.notifications-settings tr td,
+	table.profile-settings tr td,
+	table.profile-fields tr td,
+	table.wp-profile-fields tr td,
+	table.messages-notices tr td,
+	table.forum tr td,
+	table.notifications tr th,
+	table.notifications-settings tr th,
+	table.profile-fields tr th,
+	table.wp-profile-fields tr th,
+	table.messages-notices tr th,
+	table.forum tr th {
+		padding: $pad-sml;
+		vertical-align: middle;
+	}
+
+	table.notifications tr td.label,
+	table.notifications-settings tr td.label,
+	table.profile-fields tr td.label,
+	table.wp-profile-fields tr td.label,
+	table.messages-notices tr td.label,
+	table.forum tr td.label {
+		border-right: 1px solid $light-grey;
+		font-weight: bold;
+		width: 25%;
+	}
+
+	table.notifications-settings,
+	table.profile-settings,
+	table.profile-fields,
+	table.wp-profile-fields,
+	table.messages-notices {
+		tr.alt td {
+			background: $off-white;
+		}
+	}
+
+	table.notification-settings {
+		margin-bottom: 20px;
+		text-align: left;
+	}
+
+	#groups-notification-settings {
+		margin-bottom: 0;
+	}
+
+	table.notifications th.icon,
+	table.notifications td:first-child,
+	table.notification-settings th.icon,
+	table.notification-settings td:first-child {
+		display: none;
+	}
+
+	table.notification-settings,
+	table.profile-settings {
+		th.title {
+			width: 80%;
+		}
+	}
+
+	table.notification-settings ,
+	table.notification-settings {
+		.no,
+		.yes {
+			text-align: center;
+			width: 40px;
+		}
+	}
+
+	table#message-threads {
+		clear: both;
+
+		.thread-info {
+			min-width: 40%;
+
+			p { margin: 0; }
+			p.thread-excerpt {
+				color: $form-text;
+				font-size: 80%;
+				margin-top: 3px;
+			}
+		}
+	}
+
+	table.profile-fields {
+		margin-bottom: 20px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	table.profile-fields p {
+		margin: 0;
+
+		&:last-child {
+			margin-top: 0;
+		}
+	}
+
+} // close .buddypress
+
