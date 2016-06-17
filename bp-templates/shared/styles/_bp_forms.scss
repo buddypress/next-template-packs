@@ -33,6 +33,11 @@
 			padding: $pad-sml;
 		}
 
+		*[disabled="disabled"] {
+			cursor: default;
+			opacity: 0.4;
+		}
+
 		select {
 			padding: 3px;
 		}

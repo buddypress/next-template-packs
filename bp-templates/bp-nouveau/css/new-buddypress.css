@@ -159,6 +159,11 @@
 	width: 100%;
 }
 
+.activity-update-form .textarea-wrap:focus {
+	border-color: rgba(31, 179, 221, 0.9);
+	outline-color: rgba(31, 179, 221, 0.9);
+}
+
 /**
 *-----------------------------------------------------
 * @section 3.1.2 - Activity Entries
@@ -437,6 +442,24 @@ form.ac-form {
 	padding: 1em;
 }
 
+form.ac-form .ac-reply-avatar {
+	float: left;
+}
+
+form.ac-form .ac-reply-avatar img {
+	border: 1px solid #eee;
+}
+
+form.ac-form .ac-reply-content {
+	color: #888;
+	margin-left: 20px;
+	padding-left: 1em;
+}
+
+form.ac-form .ac-reply-content a {
+	text-decoration: none;
+}
+
 form.ac-form .ac-reply-content .ac-textarea {
 	background: #fff;
 	border: 1px inset #ccc;
@@ -456,6 +479,10 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	outline: none;
 	padding: 0;
 	width: 100%;
+}
+
+form.ac-form .ac-reply-content input {
+	margin-top: 10px;
 }
 
 .activity-comments li form.ac-form {
@@ -497,6 +524,128 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
+.single-item-header span.activity {
+	display: inline-block;
+	font-size: small;
+	opacity: 0.8;
+	padding: 0;
+}
+
+.single-item-header span.user-nicename {
+	color: #777;
+	display: inline-block;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.single-item-header div#message p,
+.single-item-header #sitewide-notice p {
+	background-color: #ffd;
+	border: 1px solid #cb2;
+	color: #440;
+	font-weight: normal;
+	margin-top: 3px;
+	text-decoration: none;
+}
+
+.single-item-header div#item-header-content {
+	float: left;
+	margin-left: 0;
+}
+
+.single-item-header h2 {
+	line-height: 120%;
+	margin: 0 0 5px;
+}
+
+.single-item-header h2 a {
+	color: #777;
+	text-decoration: none;
+}
+
+.single-item-header h2 span.highlight {
+	display: inline-block;
+	font-size: 60%;
+	font-weight: normal;
+	line-height: 170%;
+	vertical-align: middle;
+}
+
+.single-item-header h2 span.highlight span {
+	background: #a1dcfa;
+	color: #fff;
+	cursor: pointer;
+	font-size: 80%;
+	font-weight: bold;
+	margin-bottom: 2px;
+	padding: 1px 4px;
+	position: relative;
+	right: -2px;
+	top: -2px;
+	vertical-align: middle;
+}
+
+.single-item-header img.avatar {
+	float: left;
+	margin: 0 15px 19px 0;
+}
+
+.single-item-header div#item-meta {
+	color: #aaa;
+	font-size: 80%;
+	margin: 15px 0 5px 0;
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+
+.single-item-header div#item-actions {
+	float: right;
+	margin: 0 0 15px 15px;
+	text-align: right;
+	width: 20%;
+}
+
+.single-item-header div#item-actions h3 {
+	margin: 0 0 5px 0;
+}
+
+.single-item-header ul {
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+
+.single-item-header ul h5,
+.single-item-header ul span,
+.single-item-header ul hr {
+	display: none;
+}
+
+.single-item-header ul li {
+	float: right;
+	list-style: none;
+}
+
+.single-item-header img.avatar,
+.single-item-header ul.avatars img.avatar {
+	height: 30px;
+	margin: 2px;
+	width: 30px;
+}
+
+.single-item-header div.generic-button,
+.single-item-header a.button {
+	float: left;
+	margin: 10px 10px 0 0;
+}
+
+.single-item-header div#message.info {
+	line-height: 80%;
+}
+
+body.no-js .single-item-header .js-self-profile-button {
+	display: none;
+}
+
 /**
 *-----------------------------------------------------
 * @subsection 5.1.1 - item-header Groups
@@ -516,6 +665,10 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 * @subsection 5.2 - Item Body: Global
 *-----------------------------------------------------------
 */
+.buddypress .item-body {
+	margin: 20px 0;
+}
+
 /**
 *----------------------------------------------------
 * @subsection 5.2.1 - Item Body Groups
@@ -603,6 +756,11 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	font: inherit;
 	font-size: 100%;
 	padding: 0.5em;
+}
+
+.buddypress .standard-form *[disabled="disabled"] {
+	cursor: default;
+	opacity: 0.4;
 }
 
 .buddypress .standard-form select {
@@ -958,6 +1116,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	word-wrap: normal !important;
 }
 
+.clearfix:before, .clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
 .buddypress button,
 .buddypress a.button,
 .buddypress input[type=submit],
@@ -994,6 +1161,35 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	color: #555;
 	outline: none;
 	text-decoration: none;
+}
+
+.buddypress input[type="submit"].pending,
+.buddypress input[type="button"].pending,
+.buddypress input[type="reset"].pending,
+.buddypress input[type="button"].disabled,
+.buddypress input[type="reset"].disabled,
+.buddypress input[type="submit"][disabled=disabled],
+.buddypress button.pending,
+.buddypress button.disabled,
+.buddypress div.pending a,
+.buddypress a.disabled {
+	border-color: #eee;
+	color: #bbb;
+	cursor: default;
+}
+
+.buddypress input[type="submit"]:hover.pending,
+.buddypress input[type="button"]:hover.pending,
+.buddypress input[type="reset"]:hover.pending,
+.buddypress input[type="submit"]:hover.disabled,
+.buddypress input[type="button"]:hover.disabled,
+.buddypress input[type="reset"]:hover.disabled,
+.buddypress button.pending:hover,
+.buddypress button.disabled:hover,
+.buddypress div.pending a:hover,
+.buddypress a.disabled:hover {
+	border-color: #eee;
+	color: #bbb;
 }
 
 .buddypress .bp-messages {
@@ -1115,8 +1311,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress a.loading,
 .buddypress input.loading {
-	-webkit-animation: loader-pulsate .5s infinite ease-in-out alternate;
-	-moz-animation: loader-pulsate .5s infinite ease-in-out alternate;
+	-moz-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
+	-webkit-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
 	border-color: #aaa;
 }
 

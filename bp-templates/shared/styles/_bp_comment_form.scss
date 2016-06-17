@@ -4,10 +4,22 @@ form.ac-form {
 	padding: $pad-med;
 
 	.ac-reply-avatar {
-		// not empty
+		float: left;
+
+		img {
+			border: 1px solid #eee;
+		}
 	}
 
 	.ac-reply-content {
+		color: #888;
+		margin-left: $marg-lrg;
+		padding-left: $pad-med;
+
+		a {
+			text-decoration: none;
+		}
+
 		.ac-textarea {
 			background: #fff;
 			border: 1px inset #ccc;
@@ -29,6 +41,9 @@ form.ac-form {
 			}
 		}
 
+		input {
+			margin-top: $marg-sml;
+		}
 	}
 
 }

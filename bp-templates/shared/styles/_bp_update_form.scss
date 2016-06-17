@@ -43,6 +43,12 @@
 			padding: $pad-med;
 			width: 100%;
 		}
+
+		// Do we want this?
+		&:focus {
+			border-color: rgba(31, 179, 221, 0.9);
+			outline-color: rgba(31, 179, 221, 0.9);
+		}
 	}
 
 	.post-to { //#whats-new-post-in-box

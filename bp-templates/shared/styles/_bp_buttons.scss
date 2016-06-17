@@ -30,13 +30,42 @@
 	input[type=reset]:hover,
 	.button-nav li a:hover,
 	.button-nav li.current a,
- div.generic-button a:hover,
- .comment-reply-link:hover {
+	div.generic-button a:hover,
+	.comment-reply-link:hover {
 		background: #ededed;
 		border: 1px solid #bbb;
 		color: $bp-text;
 		outline: none;
 		text-decoration: none;
+	}
+
+	input[type="submit"].pending,
+	input[type="button"].pending,
+	input[type="reset"].pending,
+	input[type="button"].disabled,
+	input[type="reset"].disabled,
+	input[type="submit"][disabled=disabled],
+	button.pending,
+	button.disabled,
+	div.pending a,
+	a.disabled {
+		border-color: #eee;
+		color: #bbb;
+		cursor: default;
+	}
+
+	input[type="submit"]:hover.pending,
+	input[type="button"]:hover.pending,
+	input[type="reset"]:hover.pending,
+	input[type="submit"]:hover.disabled,
+	input[type="button"]:hover.disabled,
+	input[type="reset"]:hover.disabled,
+	button.pending:hover,
+	button.disabled:hover,
+	div.pending a:hover,
+	a.disabled:hover {
+		border-color: #eee;
+		color: #bbb;
 	}
 
 }
