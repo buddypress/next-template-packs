@@ -1,0 +1,25 @@
+// BP General CLasses: screen reader, clearfix etc.
+
+.bp-screen-reader-text {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.clearfix {
+	&:before,
+	&:after {
+	content: " ";
+	display: table;
+	}
+}
+
+.clearfix:after {
+	clear: both;
+}

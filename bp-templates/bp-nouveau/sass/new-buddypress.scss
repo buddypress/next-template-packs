@@ -174,6 +174,9 @@
 *-----------------------------------------------------------
 */
 
+// Import general global styles for single screen headers
+@import "../../shared/styles/_bp_item_header_general";
+
 /**
 *-----------------------------------------------------
 * @subsection 5.1.1 - item-header Groups
@@ -195,6 +198,9 @@
 * @subsection 5.2 - Item Body: Global
 *-----------------------------------------------------------
 */
+
+// Import general global styles for single screen item-body
+@import "../../shared/styles/_bp_item_body_general";
 
 /**
 *----------------------------------------------------
@@ -291,18 +297,8 @@
 * @section 8.0 - Classes - Messages, Ajax, Widgets, Buttons
 *-------------------------------------------------------------------------------
 */
-
-.bp-screen-reader-text {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 1px;
-	word-wrap: normal !important;
-}
+// Import General useful classes: clearfix, screen-reader etc
+@import "../../shared/styles/_bp_general_classes";
 
 // Import Buttons styles
 @import "../../shared/styles/_bp_buttons";
@@ -311,31 +307,38 @@
 @import "../../shared/styles/_bp_info_messages";
 
 // Ajax Animations and styles
+// scss-lint:disable VendorPrefix
 .buddypress {
-		a.loading,
+	a.loading,
 	input.loading {
-		-webkit-animation: loader-pulsate .5s infinite ease-in-out alternate;
-		-moz-animation: loader-pulsate .5s infinite ease-in-out alternate;
+		-moz-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
+		-webkit-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
 		border-color: #aaa;
 	}
+
 	@-webkit-keyframes loader-pulsate {
+
 		from {
 			border-color: #aaa;
 			-webkit-box-shadow: 0 0 6px #ccc;
 			box-shadow: 0 0 6px #ccc;
 		}
+
 		to {
 			border-color: #ccc;
+
 			-webkit-box-shadow: 0 0 6px #f8f8f8;
 			box-shadow: 0 0 6px #f8f8f8;
 		}
 	}
 	@-moz-keyframes loader-pulsate {
+
 		from {
 			border-color: #aaa;
 			-moz-box-shadow: 0 0 6px #ccc;
 			box-shadow: 0 0 6px #ccc;
 		}
+
 		to {
 			border-color: #ccc;
 			-moz-box-shadow: 0 0 6px #f8f8f8;
@@ -349,3 +352,4 @@
 	}
 
 }
+// scss-lint:enable VendorPrefix
