@@ -92,6 +92,7 @@ class BP_Nouveau_Friends {
 			'friends_awaiting_response',
 			'friends_is_friend',
 			'friends_not_friends',
+			'friends_member_profile_friendship',
 		);
 
 		foreach ( $buttons as $button ) {
