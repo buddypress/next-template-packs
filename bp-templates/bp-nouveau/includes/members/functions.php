@@ -138,3 +138,85 @@ function bp_nouveau_members_catch_button_args( $button = array() ) {
 	// return an empty array to stop the button creation process
 	return array();
 }
+
+/**
+ * Locate a single member template into a specific hierarchy.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $template The template part to get (eg: activity, groups...).
+ * @return string The located template.
+ */
+function bp_nouveau_member_locate_template_part( $template = '' ) {
+	$displayed_user = bp_get_displayed_user();
+	$bp_nouveau     = bp_nouveau();
+
+	if ( ! $template || empty( $displayed_user->id ) ) {
+		return false;
+	}
+
+	// Use a global to avoid requesting the hierarchy for each template
+	if ( ! isset( $bp_nouveau->members->displayed_user_hierarchy ) ) {
+		$bp_nouveau->members->displayed_user_hierarchy = array(
+			'members/single/%s-id-' . sanitize_file_name( $displayed_user->id ) . '.php',
+			'members/single/%s-nicename-' . sanitize_file_name( $displayed_user->userdata->user_nicename ) . '.php',
+		);
+
+		/**
+		 * Check for member types and add it to the hierarchy
+		 *
+		 * Make sure to register your member
+		 * type using the hook 'bp_register_member_types'
+		 */
+		if ( bp_get_member_types() ) {
+			$displayed_user_member_type = bp_get_member_type( $displayed_user->id );
+			if ( ! $displayed_user_member_type ) {
+				$displayed_user_member_type = 'none';
+			}
+
+			$bp_nouveau->members->displayed_user_hierarchy[] = 'members/single/%s-member-type-' . sanitize_file_name( $displayed_user_member_type )   . '.php';
+		}
+
+		// And the regular one
+		$bp_nouveau->members->displayed_user_hierarchy[] = 'members/single/%s.php';
+	}
+
+	// Init the templates
+	$templates = array();
+
+	// Loop in the hierarchy to fill it for the requested template part
+	foreach ( $bp_nouveau->members->displayed_user_hierarchy as $part ) {
+		$templates[] = sprintf( $part, $template );
+	}
+
+	return bp_locate_template( apply_filters( 'bp_nouveau_member_locate_template_part', $templates ), false, true );
+}
+
+/**
+ * Load a single member template part
+ *
+ * @since  1.0.0
+ *
+ * @param  string $template The template part to get (eg: activity, groups...).
+ * @return string HTML output.
+ */
+function bp_nouveau_member_get_template_part( $template = '' ) {
+	$located = bp_nouveau_member_locate_template_part( $template );
+
+	if ( false !== $located ) {
+		$slug = str_replace( '.php', '', $located );
+		$name = null;
+
+		/**
+		 * Let plugins adding an action to bp_get_template_part get it from here
+		 *
+		 * @param string $slug Template part slug requested.
+		 * @param string $name Template part name requested.
+		 */
+		do_action( 'get_template_part_' . $slug, $slug, $name );
+
+		load_template( $located, true );
+	}
+
+	return $located;
+}

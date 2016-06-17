@@ -241,3 +241,52 @@ function bp_nouveau_members_loop_buttons() {
 
 		return $return;
 	}
+
+/**
+ * Load the appropriate content for the single member pages
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_member_template_part() {
+	/**
+	 * Fires before the display of member body content.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_before_member_body' );
+
+	if ( bp_is_user_front() ) {
+		bp_displayed_user_front_template_part();
+	} else {
+		$template = 'plugins';
+
+		if ( bp_is_user_activity() ) {
+			$template = 'activity';
+		} elseif ( bp_is_user_blogs() ) {
+			$template = 'blogs';
+		} elseif ( bp_is_user_friends() ) {
+			$template = 'friends';
+		} elseif ( bp_is_user_groups() ) {
+			$template = 'groups';
+		} elseif ( bp_is_user_messages() ) {
+			$template = 'messages';
+		} elseif ( bp_is_user_profile() ) {
+			$template = 'profile';
+		} elseif ( bp_is_user_notifications() ) {
+			$template = 'notifications';
+		} elseif ( bp_is_user_settings() ) {
+			$template = 'settings';
+		}
+
+		bp_nouveau_member_get_template_part( $template );
+	}
+
+	/**
+	 * Fires after the display of member body content.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_after_member_body' );
+}
