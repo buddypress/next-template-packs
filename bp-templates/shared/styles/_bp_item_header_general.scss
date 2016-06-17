@@ -1,0 +1,118 @@
+// BP Single Screens Item Header General Styles.
+
+.single-item-header {
+
+ span.activity {
+	display: inline-block;
+	font-size: small;
+	opacity: 0.8;
+	padding: 0;
+}
+
+ span.user-nicename {
+	color: #777;
+	display: inline-block;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+div#message p,
+#sitewide-notice p {
+	font-weight: normal;
+	margin-top: 3px;
+	text-decoration: none;
+	background-color: #ffd;
+	border: 1px solid #cb2;
+	color: #440;
+}
+
+
+ div#item-header div#item-header-content {
+	float: left;
+	margin-left: 0;
+}
+ div#item-header h2 {
+	line-height: 120%;
+	margin: 0 0 15px 0;
+}
+ div#item-header h2 a {
+	color: #777;
+	text-decoration: none;
+}
+ div#item-header img.avatar {
+	float: left;
+	margin: 0 15px 19px 0;
+}
+ div#item-header h2 {
+	margin-bottom: 5px;
+}
+ div#item-header h2 span.highlight {
+	font-size: 60%;
+	font-weight: normal;
+	line-height: 170%;
+	vertical-align: middle;
+	display: inline-block;
+}
+ div#item-header h2 span.highlight span {
+	background: #a1dcfa;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 80%;
+	margin-bottom: 2px;
+	padding: 1px 4px;
+	position: relative;
+	right: -2px;
+	top: -2px;
+	vertical-align: middle;
+}
+ div#item-header div#item-meta {
+	font-size: 80%;
+	color: #aaa;
+	overflow: hidden;
+	margin: 15px 0 5px 0;
+	padding-bottom: 10px;
+}
+ div#item-header div#item-actions {
+	float: right;
+	margin: 0 0 15px 15px;
+	text-align: right;
+	width: 20%;
+}
+ div#item-header div#item-actions h3 {
+	margin: 0 0 5px 0;
+}
+ div#item-header ul {
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+ div#item-header ul h5,
+ div#item-header ul span,
+ div#item-header ul hr {
+	display: none;
+}
+ div#item-header ul li {
+	float: right;
+	list-style: none;
+}
+ div#item-header ul img.avatar,
+ div#item-header ul.avatars img.avatar {
+	height: 30px;
+	margin: 2px;
+	width: 30px;
+}
+ div#item-header div.generic-button,
+ div#item-header a.button {
+	float: left;
+	margin: 10px 10px 0 0;
+}
+body.no-js  div#item-header .js-self-profile-button {
+	display:none;
+}
+ div#item-header div#message.info {
+	line-height: 80%;
+}
+
+} // close .buddypress
+
+
