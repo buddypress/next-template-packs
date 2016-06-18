@@ -40,7 +40,6 @@ function bp_nouveau_sitewide_notices() {
 	if ( is_array( $closed_notices ) ) {
 		if ( ! in_array( $notice->id, $closed_notices ) && $notice->id ) {
 			?>
-			<div class="clear"></div>
 			<div class="bp-feedback info" rel="n-<?php echo esc_attr( $notice->id ); ?>">
 				<strong><?php echo stripslashes( wp_filter_kses( $notice->subject ) ) ?></strong><br />
 				<?php echo stripslashes( wp_filter_kses( $notice->message) ) ?>

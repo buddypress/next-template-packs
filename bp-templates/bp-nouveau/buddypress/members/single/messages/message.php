@@ -81,6 +81,4 @@
 				 */
 				do_action( 'bp_after_message_content' ); ?>
 
-				<div class="clear"></div>
-
 			</div><!-- .message-box -->
