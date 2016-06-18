@@ -65,7 +65,6 @@
 		<# } #>
 	</div>
 
-	<div class="clear"></div>
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-selection">
