@@ -8,12 +8,7 @@
  * @subpackage bp-nouveau
  */
 
-/**
- * Fires before the display of the members loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_members_loop' ); ?>
+bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_get_current_member_type() ) : ?>
 	<p class="current-member-type"><?php bp_current_member_type_message() ?></p>
@@ -88,11 +83,4 @@ do_action( 'bp_before_members_loop' ); ?>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires after the display of the members loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_members_loop' ); ?>
+<?php bp_nouveau_after_loop(); ?>

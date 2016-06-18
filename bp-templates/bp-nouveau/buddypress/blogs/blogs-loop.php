@@ -8,12 +8,7 @@
  * @subpackage bp-nouveau
  */
 
-/**
- * Fires before the start of the blogs loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_blogs_loop' ); ?>
+bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_has_blogs( bp_ajax_querystring( 'blogs' ) ) ) : ?>
 
@@ -77,11 +72,4 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires after the display of the blogs loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_blogs_loop' ); ?>
+<?php bp_nouveau_after_loop(); ?>

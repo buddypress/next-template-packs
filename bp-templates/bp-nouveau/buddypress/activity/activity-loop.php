@@ -6,12 +6,7 @@
  * @subpackage bp-nouveau
  */
 
-/**
- * Fires before the start of the activity loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_activity_loop' ); ?>
+bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_has_activities( bp_ajax_querystring( 'activity' ) ) ) : ?>
 
@@ -37,11 +32,4 @@ do_action( 'bp_before_activity_loop' ); ?>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires after the finish of the activity loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_activity_loop' ); ?>
+<?php bp_nouveau_after_loop(); ?>

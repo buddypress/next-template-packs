@@ -8,16 +8,7 @@
  * @subpackage bp-nouveau
  */
 
-?>
-
-<?php
-
-/**
- * Fires before the display of groups from the groups loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_groups_loop' ); ?>
+bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) : ?>
 
@@ -90,11 +81,4 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires after the display of groups from the groups loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_groups_loop' ); ?>
+<?php bp_nouveau_after_loop(); ?>

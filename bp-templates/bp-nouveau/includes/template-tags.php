@@ -25,6 +25,38 @@ function bp_nouveau_template_notices() {
 }
 
 /**
+ * Template tag to wrap the before component loop
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_before_loop() {
+	$component = bp_current_component();
+
+	/**
+	 * Fires before the start of the component loop.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( "bp_before_{$component}_loop" );
+}
+
+/**
+ * Template tag to wrap the after component loop
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_after_loop() {
+	$component = bp_current_component();
+
+	/**
+	 * Fires after the finish of the component loop.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( "bp_after_{$component}_loop" );
+}
+
+/**
  * Pagination for loops
  *
  * @since 1.0.0
