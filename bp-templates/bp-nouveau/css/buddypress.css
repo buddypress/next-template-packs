@@ -2229,6 +2229,7 @@ a.message-action-star:hover {
 	border-bottom: 1px solid #eaeaea;
 	padding: 5px 0;
 	margin: 0;
+	overflow: hidden;
 }
 
 #buddypress ul#message-threads li.selected {
