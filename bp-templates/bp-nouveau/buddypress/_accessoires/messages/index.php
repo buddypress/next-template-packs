@@ -135,8 +135,6 @@
 			<time datetime="{{data.date.toISOString()}}">{{data.display_date}}</time>
 		</div>
 	</div>
-
-	<div class="clear"></div>
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-preview">
@@ -177,8 +175,6 @@
 				</a>
 			</div>
 
-			<div class="clear"></div>
-
 			<div class='preview-message'>
 				<# print( data.content ) #>
 			</div>
@@ -213,7 +209,6 @@
 		do_action( 'bp_after_message_thread_header_actions' ); ?>
 	</div>
 
-	<div class="clear"></div>
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single-list">
@@ -279,7 +274,6 @@
 	 */
 	do_action( 'bp_after_message_content' ); ?>
 
-	<div class="clear"></div>
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single">

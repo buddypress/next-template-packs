@@ -2383,6 +2383,9 @@ a.message-action-star:hover {
 	padding-top: 1em;
 	overflow: hidden;
 }
+#buddypress .bp-messages-content #thread-preview .preview-message {
+	clear: both;
+}
 
 #buddypress .bp-messages-content #thread-preview .preview-message ul,
 #buddypress .bp-messages-content #thread-preview .preview-message ol,
@@ -2702,3 +2705,12 @@ body.register #buddypress div.page ul {
 }
 
 /* ============ Ends rules for {insert name here} ==========*/
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {
+	clear: both;
+}
