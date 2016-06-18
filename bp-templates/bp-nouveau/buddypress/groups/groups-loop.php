@@ -71,11 +71,15 @@ do_action( 'bp_before_groups_loop' ); ?>
 				 */
 				do_action( 'bp_directory_groups_actions' ); ?>
 
-				<div class="meta">
+				<?php if ( bp_nouveau_group_has_meta() ) : ?>
 
-					<?php bp_group_type(); ?> / <?php bp_group_member_count(); ?>
+					<div class="meta">
 
-				</div>
+						<?php bp_nouveau_group_meta(); ?>
+
+					</div>
+
+				<?php endif; ?>
 
 			</div>
 

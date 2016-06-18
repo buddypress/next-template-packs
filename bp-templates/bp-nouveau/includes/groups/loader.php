@@ -50,6 +50,7 @@ class BP_Nouveau_Groups {
 	private function includes() {
 		require( trailingslashit( $this->dir ) . 'functions.php'     );
 		require( trailingslashit( $this->dir ) . 'classes.php'       );
+		require( trailingslashit( $this->dir ) . 'template-tags.php' );
 		require( trailingslashit( $this->dir ) . 'ajax.php'          );
 	}
 

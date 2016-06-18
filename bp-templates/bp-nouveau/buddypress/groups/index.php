@@ -1,41 +1,16 @@
 <?php
 /**
- * BuddyPress - Groups
+ * BP Nouveau - Groups Directory
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
-
 ?>
 
 <div id="buddypress" class="buddypress">
 
-<?php
-/**
- * Fires at the begining of the templates BP injected content.
- *
- * @since 2.3.0
- */
-
-	do_action( 'bp_before_directory_groups_page' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the groups.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_groups' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the groups content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_groups_content' ); ?>
+    <?php bp_nouveau_before_groups_directory_content(); ?>
 
 	<?php bp_nouveau_template_notices(); ?>
 
@@ -48,8 +23,7 @@
 	<div class="item-list-tabs" id="subnav" role="navigation">
 
 		<ul type="list" class="subnav clearfix">
-				<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
-		</ul>
+			<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
 
 			<?php
 
@@ -59,8 +33,9 @@
 			 * @since 1.2.0
 			 */
 			do_action( 'bp_groups_directory_group_types' ); ?>
+		</ul>
 
-			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
+		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
 	</div>
 
@@ -68,42 +43,6 @@
 		<div id="bp-ajax-loader">loading</div>
 	</div><!-- #groups-dir-list -->
 
-	<?php
-
-	/**
-	 * Fires and displays the group content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_directory_groups_content' ); ?>
-
-	<?php wp_nonce_field( 'directory_groups', '_wpnonce-groups-filter' ); ?>
-
-	<?php
-
-	/**
-	 * Fires after the display of the groups content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_groups_content' ); ?>
-
-	<?php
-
-	/**
-	 * Fires after the display of the groups.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_groups' ); ?>
-
-	<?php
-
-	/**
-	 * Fires at the bottom of the groups directory template file.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_after_directory_groups_page' ); ?>
+	<?php bp_nouveau_after_groups_directory_content(); ?>
 
 </div><!-- //.buddypress -->
