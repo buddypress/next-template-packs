@@ -1143,6 +1143,7 @@ a.bp-title-button {
 	margin: 20px 0 0 0;
 	padding: 1px 0 0 0;
 }
+//======================== tables ===========
 #buddypress table.notifications,
 #buddypress table.notifications-settings,
 #buddypress table.profile-settings,
@@ -1570,7 +1571,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 #buddypress .bp-invites-content #send-invites-editor.bp-hide {
 	display:none;
 }
-
+// ====================================================
 #buddypress .bp-invites-content #send-invites-editor ul li a:hover:before {
 	display: block;
 }
@@ -1660,6 +1661,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	text-align: center;
 	vertical-align: middle;
 }
+// ==============================================
 .buddypress_object_nav div.item-list-tabs ul li.selected a,
 .buddypress_object_nav div.item-list-tabs ul li.current a,
 #buddypress div.item-list-tabs ul li.selected a,
