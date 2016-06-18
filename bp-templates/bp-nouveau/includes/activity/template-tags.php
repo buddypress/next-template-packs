@@ -90,6 +90,33 @@ function bp_nouveau_after_activity_post_form() {
 }
 
 /**
+ * Display the displayed user activity post form if needed
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Outpur
+ */
+function bp_nouveau_activity_member_post_form() {
+	/**
+	 * Fires before the display of the member activity post form.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_before_member_activity_post_form' );
+
+	if ( is_user_logged_in() && bp_is_my_profile() && ( ! bp_current_action() || bp_is_current_action( 'just-me' ) ) ) {
+		bp_get_template_part( 'activity/post-form' );
+	}
+
+	/**
+	 * Fires after the display of the member activity post form.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_after_member_activity_post_form' );
+}
+
+/**
  * Output the action buttons inside an Activity Loop
  *
  * @since 1.0.0

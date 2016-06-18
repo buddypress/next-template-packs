@@ -49,43 +49,6 @@ function bp_nouveau_messages_enqueue_scripts() {
 	add_filter( 'tiny_mce_before_init', 'bp_nouveau_messages_at_on_tinymce_init', 10, 2 );
 }
 
-function bp_nouveau_sitewide_notices() {
-	// Do not show notices if user is not logged in.
-	if ( ! is_user_logged_in() || ! bp_is_user() ) {
-		return;
-	}
-
-	$notice = BP_Messages_Notice::get_active();
-
-	if ( empty( $notice ) ) {
-		return false;
-	}
-
-	$user_id = bp_loggedin_user_id();
-
-	$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
-
-	if ( empty( $closed_notices ) ) {
-		$closed_notices = array();
-	}
-
-	if ( is_array( $closed_notices ) ) {
-		if ( ! in_array( $notice->id, $closed_notices ) && $notice->id ) {
-			?>
-			<div class="clear"></div>
-			<div class="bp-feedback info" rel="n-<?php echo esc_attr( $notice->id ); ?>">
-				<strong><?php echo stripslashes( wp_filter_kses( $notice->subject ) ) ?></strong><br />
-				<?php echo stripslashes( wp_filter_kses( $notice->message) ) ?>
-			</div>
-			<?php
-
-			// Add the notice to closed ones
-			$closed_notices[] = (int) $notice->id;
-			bp_update_user_meta( $user_id, 'closed_notices', $closed_notices );
-		}
-	}
-}
-
 function bp_nouveau_message_search_form() {
 	$query_arg = bp_core_get_component_search_query_arg( 'messages' );
 

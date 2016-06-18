@@ -22,21 +22,6 @@
 
 else :
 
-	/**
-	 * Fires before the member messages content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_before_member_messages_content' );
-
-	// Load the Private messages UI
-	bp_get_template_part( '_accessoires/messages/index' );
-
-	/**
-	 * Fires after the member messages content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_after_member_messages_content' );
+	bp_nouveau_messages_member_interface();
 
 endif ;?>
