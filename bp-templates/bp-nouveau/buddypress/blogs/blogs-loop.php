@@ -70,7 +70,6 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 			</div>
 
-			<div class="clear"></div>
 		</li>
 
 	<?php endwhile; ?>

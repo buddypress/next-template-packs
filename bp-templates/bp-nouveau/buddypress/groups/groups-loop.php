@@ -83,7 +83,6 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 			</div>
 
-			<div class="clear"></div>
 		</li>
 
 	<?php endwhile; ?>

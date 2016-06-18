@@ -81,7 +81,6 @@ do_action( 'bp_before_members_loop' ); ?>
 
 			</div>
 
-			<div class="clear"></div>
 		</li>
 
 	<?php endwhile; ?>
