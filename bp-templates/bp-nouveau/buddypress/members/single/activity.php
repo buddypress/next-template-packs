@@ -16,7 +16,7 @@
 	</ul>
 </div><!-- .item-list-tabs#subnav -->
 
-<?php bp_nouveau_member_activity_post_form() ;?>
+<?php bp_nouveau_activity_member_post_form() ;?>
 
 <div class="item-list-tabs no-ajax" id="subsubnav">
 	<ul>
