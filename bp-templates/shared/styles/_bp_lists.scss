@@ -1,13 +1,67 @@
-// This file provides the BP Lists global styles.
-/*
-* This commet arrives via the scss partial bp_lists
-*/
+// BP Lists Global Styles.
 
 .buddypress {
 	.bp-list {
 		//@include box-model();
+		border-top: 1px solid $light-grey;
+		clear: both;
 		list-style: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
 
+		li {
+			border-bottom: 1px solid $light-grey;
+			list-style: none;
+			margin: 0;
+			padding: $marg-med 0;
+			position: relative;
+
+			img.avatar {
+				float: left;
+				margin: 0 $marg-sml 0 0;
+			}
+
+			.item-title {
+				font-size: 90%;
+				font-weight: normal;
+				margin: 0;
+				width: 75%;
+
+				span {
+					color: #999;
+					font-size: 80%;
+				}
+			} // close item-title
+
+			.item-desc {
+				color: #888;
+				font-size: 80%;
+				margin: $marg-sml 0 0 60px;
+				width: 50%;
+			}
+
+			div.action {
+				position: absolute;
+				right: 0;
+				text-align: right;
+				top: 15px;
+			}
+		} // close li
+
+		li.group-no-avatar div.item-desc {
+			margin-left: 0;
+		}
+
+	} // close .bp-list
+
+}
+
+// body class: single act items screens.
+.activity-permalink {
+
+	.item-list,
+	.item-list li.activity-item {
+		border: 0;
 	}
-
 }

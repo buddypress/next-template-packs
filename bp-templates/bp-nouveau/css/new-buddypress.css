@@ -108,11 +108,61 @@
 * @section 3.0 - BP Lists / Loops Generic
 *-------------------------------------------------------------------------------
 */
-/*
-* This commet arrives via the scss partial bp_lists
-*/
 .buddypress .bp-list {
+	border-top: 1px solid #eaeaea;
+	clear: both;
 	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.buddypress .bp-list li {
+	border-bottom: 1px solid #eaeaea;
+	list-style: none;
+	margin: 0;
+	padding: 15px 0;
+	position: relative;
+}
+
+.buddypress .bp-list li img.avatar {
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+.buddypress .bp-list li .item-title {
+	font-size: 90%;
+	font-weight: normal;
+	margin: 0;
+	width: 75%;
+}
+
+.buddypress .bp-list li .item-title span {
+	color: #999;
+	font-size: 80%;
+}
+
+.buddypress .bp-list li .item-desc {
+	color: #888;
+	font-size: 80%;
+	margin: 10px 0 0 60px;
+	width: 50%;
+}
+
+.buddypress .bp-list li div.action {
+	position: absolute;
+	right: 0;
+	text-align: right;
+	top: 15px;
+}
+
+.buddypress .bp-list li.group-no-avatar div.item-desc {
+	margin-left: 0;
+}
+
+.activity-permalink .item-list,
+.activity-permalink .item-list li.activity-item {
+	border: 0;
 }
 
 /**
@@ -691,6 +741,95 @@ body.no-js .single-item-header .js-self-profile-button {
 * @subsection 5.2.1.3 - Group Invites List
 *-----------------------------------------
 */
+/*
+* bp-nouveau styling: invite members, sent invites
+* */
+.buddypress .bp-invites-content ul.item-list li {
+	border: 1px solid #eaeaea;
+	float: left;
+	margin: 0.5%;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 49%;
+}
+
+.buddypress .bp-invites-content ul.item-list li .item-title {
+	width: auto;
+}
+
+.buddypress .bp-invites-content ul.item-list li.selected {
+	-webkit-box-shadow: 0 0 0 4px #1fb3dd;
+	-moz-box-shadow: 0 0 0 4px #1fb3dd;
+	box-shadow: 0 0 0 4px #1fb3dd;
+}
+
+.buddypress .bp-invites-content .item-list .item-meta span,
+.buddypress .bp-invites-content .group-inviters li {
+	color: #999;
+	font-size: 80%;
+}
+
+.buddypress .bp-invites-content .group-inviters {
+	clear: both;
+}
+
+.buddypress .bp-invites-content .group-inviters li {
+	border: 0;
+	float: left;
+	width: inherit;
+}
+
+.buddypress .bp-invites-content #send-invites-editor {
+	overflow: hidden;
+}
+
+.buddypress .bp-invites-content #send-invites-editor textarea {
+	width: 100%;
+}
+
+.buddypress .bp-invites-content #send-invites-editor ul {
+	clear: both;
+	list-style: none;
+	overflow: hidden;
+}
+
+.buddypress .bp-invites-content #send-invites-editor ul li {
+	float: left;
+	margin: 0.5%;
+	max-height: 50px;
+	max-width: 50px;
+}
+
+.buddypress .bp-invites-content #send-invites-editor ul .action {
+	float: right;
+	margin-top: 1em;
+}
+
+.buddypress .bp-invites-content #send-invites-editor ul a {
+	border: 0;
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
+}
+
+.buddypress .bp-invites-content #send-invites-editor ul a:before {
+	color: rgba(170, 0, 0, 0.7);
+	content: "\f153";
+	display: none;
+	font-family: dashicons;
+	font-size: 50px;
+	left: 0;
+	line-height: 50px;
+	position: absolute;
+	top: 0;
+	vertical-align: top;
+}
+
+.buddypress .bp-invites-content #send-invites-editor.bp-hide {
+	display: none;
+}
+
+/* End nuoveau invites */
 /**
 *-----------------------------------------------------
 * @subsection 5.2.2 - Item Body User Accounts
