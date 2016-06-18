@@ -468,3 +468,29 @@ function bp_nouveau_get_groups_filters( $context = '' ) {
 
 	return $filters;
 }
+
+/**
+ * Catch the content hooked to the 'bp_group_header_meta' action
+ *
+ * @since  1.0.0
+ *
+ * @return string|bool HTML Output if hooked. False otherwise.
+ */
+function bp_nouveau_get_hooked_group_meta() {
+	ob_start();
+
+	/**
+	 * Fires after inside the group header item meta section.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_group_header_meta' );
+
+	$output = ob_get_clean();
+
+	if ( ! empty( $output ) ) {
+		return $output;
+	}
+
+	return false;
+}

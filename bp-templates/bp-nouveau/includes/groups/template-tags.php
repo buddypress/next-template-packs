@@ -96,8 +96,13 @@ function bp_nouveau_group_has_meta() {
 function bp_nouveau_group_meta() {
 	$meta = bp_nouveau_get_group_meta();
 
-	echo join( ' / ', array_map( 'esc_html', (array) $meta ) );
+	if ( ! bp_is_group() ) {
+		echo join( ' / ', array_map( 'esc_html', (array) $meta ) );
+	} else {
+		echo join( "\n", $meta );
+	}
 }
+
 	/**
 	 * Get the group meta.
 	 *
@@ -106,7 +111,8 @@ function bp_nouveau_group_meta() {
 	 * @return array The group meta.
 	 */
 	function bp_nouveau_get_group_meta() {
-		$meta = array();
+		$meta     = array();
+		$is_group = bp_is_group();
 
 		if ( ! empty( $GLOBALS['groups_template']->group ) ) {
 			$group = $GLOBALS['groups_template']->group;
@@ -117,23 +123,38 @@ function bp_nouveau_group_meta() {
 		}
 
 		if ( empty( $group->template_meta ) ) {
+			// It's a single group
+			if ( $is_group ) {
+				$meta = array(
+					'description' => bp_get_group_description(),
+				);
+
+				// Make sure to include hooked meta.
+				$extra_meta = bp_nouveau_get_hooked_group_meta();
+
+				if ( $extra_meta ) {
+					$meta['extra'] = $extra_meta;
+				}
+
+			// We're in the groups loop
+			} else {
+				$meta = array(
+					'status' => bp_get_group_type(),
+					'count'  => bp_get_group_member_count(),
+				);
+			}
+
 			/**
 			 * Filter here to add/remove Group meta.
 			 *
 			 * @since  1.0.0
 			 *
-			 * @param array  $value The list of meta to output.
-			 * @param object $group The current Group of the loop object.
+			 * @param array  $meta     The list of meta to output.
+			 * @param object $group    The current Group of the loop object.
+			 * @param bool   $is_group True if a single group is displayed. False otherwise.
 			 */
-			$meta = apply_filters( 'bp_nouveau_get_group_meta', array(
-				bp_get_group_type(),
-				bp_get_group_member_count(),
-			), $group );
-
-			$group->template_meta = $meta;
-		} else {
-			$meta = $group->template_meta;
+			$group->template_meta = apply_filters( 'bp_nouveau_get_group_meta', $meta, $group, $is_group );
 		}
 
-		return $meta;
+		return $group->template_meta;
 	}

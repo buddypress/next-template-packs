@@ -71,17 +71,17 @@ do_action( 'bp_before_groups_loop' ); ?>
 				 */
 				do_action( 'bp_directory_groups_actions' ); ?>
 
-				<?php if ( bp_nouveau_group_has_meta() ) : ?>
-
-					<div class="meta">
-
-						<?php bp_nouveau_group_meta(); ?>
-
-					</div>
-
-				<?php endif; ?>
-
 			</div>
+
+			<?php if ( bp_nouveau_group_has_meta() ) : ?>
+
+				<div class="meta">
+
+					<?php bp_nouveau_group_meta(); ?>
+
+				</div>
+
+			<?php endif; ?>
 
 		</li>
 

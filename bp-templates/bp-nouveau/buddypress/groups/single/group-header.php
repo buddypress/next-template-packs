@@ -79,33 +79,26 @@ do_action( 'bp_before_group_header' );
 	 */
 	do_action( 'bp_before_group_header_meta' ); ?>
 
-	<div id="item-meta">
+	<?php if ( bp_nouveau_group_has_meta() ): ?>
+		<div id="item-meta">
 
-		<?php bp_group_description(); ?>
+			<?php bp_nouveau_group_meta(); ?>
 
-		<div id="item-buttons">
+		</div><!-- #item-meta -->
+	<?php endif; ?>
 
-			<?php
-
-			/**
-			 * Fires in the group header actions section.
-			 *
-			 * @since 1.2.6
-			 */
-			do_action( 'bp_group_header_actions' ); ?>
-
-		</div><!-- #item-buttons -->
+	<div id="item-buttons">
 
 		<?php
 
 		/**
-		 * Fires after the group header actions section.
+		 * Fires in the group header actions section.
 		 *
-		 * @since 1.2.0
+		 * @since 1.2.6
 		 */
-		do_action( 'bp_group_header_meta' ); ?>
+		do_action( 'bp_group_header_actions' ); ?>
 
-	</div>
+	</div><!-- #item-buttons -->
 </div><!-- #item-header-content -->
 
 <?php

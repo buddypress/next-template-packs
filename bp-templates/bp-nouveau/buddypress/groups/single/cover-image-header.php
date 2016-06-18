@@ -38,6 +38,9 @@ do_action( 'bp_before_group_header' ); ?>
 				 */
 				do_action( 'bp_group_header_actions' ); ?></div><!-- #item-buttons -->
 
+			<span class="highlight"><?php bp_group_type(); ?></span>
+			<span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span>
+
 			<?php
 
 			/**
@@ -47,23 +50,14 @@ do_action( 'bp_before_group_header' ); ?>
 			 */
 			do_action( 'bp_before_group_header_meta' ); ?>
 
-			<div id="item-meta">
+			<?php if ( bp_nouveau_group_has_meta() ): ?>
+				<div id="item-meta">
 
-				<?php
+					<?php bp_nouveau_group_meta(); ?>
 
-				/**
-				 * Fires after the group header actions section.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_group_header_meta' ); ?>
+				</div><!-- #item-meta -->
+			<?php endif; ?>
 
-				<span class="highlight"><?php bp_group_type(); ?></span>
-				<span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span>
-
-				<?php bp_group_description(); ?>
-
-			</div>
 		</div><!-- #item-header-content -->
 
 		<div id="item-actions">
