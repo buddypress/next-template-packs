@@ -8,12 +8,7 @@
  * @subpackage bp-nouveau
  */
 
-/**
- * Fires before the display of the members loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_members_loop' ); ?>
+bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_get_current_member_type() ) : ?>
 	<p class="current-member-type"><?php bp_current_member_type_message() ?></p>
@@ -21,16 +16,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 <?php if ( bp_has_members( bp_ajax_querystring( 'members' ) ) ) : ?>
 
-	<?php bp_pagination( 'top' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the members list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_members_list' ); ?>
+	<?php bp_nouveau_pagination( 'top' ); ?>
 
 	<ul id="members-list" class="item-list">
 
@@ -87,18 +73,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 	</ul>
 
-	<?php
-
-	/**
-	 * Fires after the display of the members list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_members_list' ); ?>
-
-	<?php bp_member_hidden_fields(); ?>
-
-	<?php bp_pagination( 'bottom' ); ?>
+	<?php bp_nouveau_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 
@@ -108,11 +83,4 @@ do_action( 'bp_before_members_loop' ); ?>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires after the display of the members loop.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_members_loop' ); ?>
+<?php bp_nouveau_after_loop(); ?>
