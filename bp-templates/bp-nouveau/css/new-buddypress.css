@@ -53,6 +53,61 @@
 * @section 2.0 - Navigation - General
 *-------------------------------------------------------------------------------
 */
+.buddypress .item-list-tabs {
+	background: transparent;
+	clear: left;
+	overflow: hidden;
+}
+
+.buddypress .item-list-tabs ul {
+	margin: 0;
+	padding: 0;
+}
+
+.buddypress .item-list-tabs ul li {
+	float: left;
+	list-style: none;
+	margin: 0;
+}
+
+.buddypress .item-list-tabs ul li.last {
+	float: right;
+	margin: 7px 0 0;
+}
+
+.buddypress .item-list-tabs ul li.last select {
+	max-width: 185px;
+}
+
+.buddypress .item-list-tabs ul li a,
+.buddypress .item-list-tabs ul li span {
+	border: 0;
+	display: block;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+
+.buddypress .item-list-tabs.bp-invites-filters ul li a, .buddypress .item-list-tabs.bp-messages-filters ul li a {
+	border: 1px solid #ccc;
+	display: inline-block;
+}
+
+.buddypress .item-list-tabs#subnav ul li,
+.buddypress .item-list-tabs#subsubnav ul li {
+	margin-top: 0;
+}
+
+.buddypress .item-list-tabs#subnav ul li.last,
+.buddypress .item-list-tabs#subsubnav ul li.last {
+	margin-top: 4px;
+}
+
+.buddypress .item-list-tabs.bp-invites-nav#subnav ul li.last,
+.buddypress .item-list-tabs.bp-invites-filters#subsubnav ul li.last,
+.buddypress .item-list-tabs.bp-messages-filters#subsubnav ul li.last {
+	margin-top: 0;
+}
+
 /**
 *----------------------------------------------------------
 * @section 2.1 - Navs Object Nav / Sub Nav (item-list-tabs)
