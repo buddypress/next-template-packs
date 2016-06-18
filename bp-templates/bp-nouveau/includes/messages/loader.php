@@ -48,9 +48,10 @@ class BP_Nouveau_Messages {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require( trailingslashit( $this->dir ) . 'classes.php'   );
-		require( trailingslashit( $this->dir ) . 'functions.php' );
-		require( trailingslashit( $this->dir ) . 'ajax.php'      );
+		require( trailingslashit( $this->dir ) . 'classes.php'       );
+		require( trailingslashit( $this->dir ) . 'functions.php'     );
+		require( trailingslashit( $this->dir ) . 'template-tags.php' );
+		require( trailingslashit( $this->dir ) . 'ajax.php'          );
 	}
 
 	/**
