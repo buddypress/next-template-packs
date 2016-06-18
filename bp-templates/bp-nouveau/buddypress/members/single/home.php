@@ -2,8 +2,10 @@
 /**
  * BuddyPress - Members Home
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since    1.0.0
+ * @version  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -21,16 +23,7 @@
 
 	<div id="item-header" role="complementary" data-bp-item-id="<?php echo bp_displayed_user_id(); ?>" data-bp-item-component="members" class="users-header single-item-header">
 
-		<?php
-		/**
-		 * If the cover image feature is enabled, use a specific header
-		 */
-		if ( bp_displayed_user_use_cover_image_header() ) :
-			bp_get_template_part( 'members/single/cover-image-header' );
-		else :
-			bp_get_template_part( 'members/single/member-header' );
-		endif;
-		?>
+		<?php bp_nouveau_member_header_template_part() ;?>
 
 	</div><!-- #item-header -->
 

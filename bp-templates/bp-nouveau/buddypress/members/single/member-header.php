@@ -2,20 +2,13 @@
 /**
  * BuddyPress - Users Header
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since    1.0.0
+ * @version  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
-
-<?php
-
-/**
- * Fires before the display of a member's header.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_member_header' ); ?>
 
 <div id="item-header-avatar">
 	<a href="<?php bp_displayed_user_link(); ?>">
@@ -77,14 +70,3 @@ do_action( 'bp_before_member_header' ); ?>
 	</div><!-- #item-meta -->
 
 </div><!-- #item-header-content -->
-
-<?php
-
-/**
- * Fires after the display of a member's header.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_member_header' );
-
-bp_nouveau_template_notices(); ?>

@@ -290,3 +290,38 @@ function bp_nouveau_member_template_part() {
 	 */
 	do_action( 'bp_after_member_body' );
 }
+
+/**
+ * Use the appropriate Member header and enjoy a template hierarchy
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_member_header_template_part() {
+	$template = 'member-header';
+
+	if ( bp_displayed_user_use_cover_image_header() ) {
+		$template = 'cover-image-header';
+	}
+
+	/**
+	 * Fires before the display of a member's header.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_before_member_header' );
+
+	// Get the template part for the header
+	bp_nouveau_member_get_template_part( $template );
+
+	/**
+	 * Fires after the display of a member's header.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_after_member_header' );
+
+	// Display template notices if any
+	bp_nouveau_template_notices();
+}
