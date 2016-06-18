@@ -74,3 +74,66 @@ function bp_nouveau_after_groups_directory_content() {
 	 */
 	do_action( 'bp_after_directory_groups_page' );
 }
+
+/**
+ * Does the group has meta.
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if the group has meta. False otherwise.
+ */
+function bp_nouveau_group_has_meta() {
+	return (bool) bp_nouveau_get_group_meta();
+}
+
+/**
+ * Display the group meta.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_meta() {
+	$meta = bp_nouveau_get_group_meta();
+
+	echo join( ' / ', array_map( 'esc_html', (array) $meta ) );
+}
+	/**
+	 * Get the group meta.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return array The group meta.
+	 */
+	function bp_nouveau_get_group_meta() {
+		$meta = array();
+
+		if ( ! empty( $GLOBALS['groups_template']->group ) ) {
+			$group = $GLOBALS['groups_template']->group;
+		}
+
+		if ( empty( $group->id ) ) {
+			return $meta;
+		}
+
+		if ( empty( $group->template_meta ) ) {
+			/**
+			 * Filter here to add/remove Group meta.
+			 *
+			 * @since  1.0.0
+			 *
+			 * @param array  $value The list of meta to output.
+			 * @param object $group The current Group of the loop object.
+			 */
+			$meta = apply_filters( 'bp_nouveau_get_group_meta', array(
+				bp_get_group_type(),
+				bp_get_group_member_count(),
+			), $group );
+
+			$group->template_meta = $meta;
+		} else {
+			$meta = $group->template_meta;
+		}
+
+		return $meta;
+	}
