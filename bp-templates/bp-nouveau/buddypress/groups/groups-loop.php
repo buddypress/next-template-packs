@@ -21,16 +21,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 <?php if ( bp_has_groups( bp_ajax_querystring( 'groups' ) ) ) : ?>
 
-	<?php bp_pagination( 'top' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the listing of the groups list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_groups_list' ); ?>
+	<?php bp_nouveau_pagination( 'top' ); ?>
 
 	<ul id="groups-list" class="item-list bp-list">
 
@@ -89,16 +80,7 @@ do_action( 'bp_before_groups_loop' ); ?>
 
 	</ul>
 
-	<?php
-
-	/**
-	 * Fires after the listing of the groups list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_groups_list' ); ?>
-
-	<?php bp_pagination( 'bottom' ); ?>
+	<?php bp_nouveau_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 

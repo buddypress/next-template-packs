@@ -29,7 +29,7 @@ function bp_nouveau_template_notices() {
  *
  * @since 1.0.0
  */
-function bp_pagination( $position = null ) {
+function bp_nouveau_pagination( $position = null ) {
 	$component = bp_current_component();
 
 	$screen = 'dir';
@@ -50,23 +50,29 @@ function bp_pagination( $position = null ) {
 			 */
 			ob_start();
 			bp_blogs_pagination_count();
-			$pag_count = ob_get_clean();
-			$pag_links = bp_get_blogs_pagination_links();
+			$pag_count   = ob_get_clean();
+			$pag_links   = bp_get_blogs_pagination_links();
+			$top_hook    = 'bp_before_directory_blogs_list';
+			$bottom_hook = 'bp_after_directory_blogs_list';
 
 		break;
 
 		case 'members' :
 		case 'friends' :
 
-			$pag_count = bp_get_members_pagination_count();
-			$pag_links = bp_get_members_pagination_links();
+			$pag_count   = bp_get_members_pagination_count();
+			$pag_links   = bp_get_members_pagination_links();
+			$top_hook    = 'bp_before_directory_members_list';
+			$bottom_hook = 'bp_after_directory_members_list';
 
 		break;
 
 		case 'groups' :
 
-			$pag_count = bp_get_groups_pagination_count();
-			$pag_links = bp_get_groups_pagination_links();
+			$pag_count   = bp_get_groups_pagination_count();
+			$pag_links   = bp_get_groups_pagination_links();
+			$top_hook    = 'bp_before_directory_groups_list';
+			$bottom_hook = 'bp_after_directory_groups_list';
 
 		break;
 	}
@@ -74,6 +80,15 @@ function bp_pagination( $position = null ) {
 	$count_class = sprintf( '%1$s-%2$s-count-%3$s', $component, $screen, $position );
 	$links_class = sprintf( '%1$s-%2$s-links-%3$s', $component, $screen, $position );
 	?>
+
+	<?php if ( 'bottom' === $position && isset( $bottom_hook ) ) {
+		/**
+		 * Fires after the component directory list.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( $bottom_hook );
+	};?>
 
 	<div class="pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-nav="pagination">
 
@@ -98,6 +113,15 @@ function bp_pagination( $position = null ) {
 		<?php endif; ?>
 
 	</div>
+
+	<?php if ( 'top' === $position && isset( $top_hook ) ) {
+		/**
+		 * Fires before the component directory list.
+		 *
+		 * @since 1.1.0 (BuddyPress)
+		 */
+		do_action( $top_hook );
+	};?>
 
 	<?php
 	return;

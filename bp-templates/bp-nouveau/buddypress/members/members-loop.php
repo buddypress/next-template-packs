@@ -21,16 +21,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 <?php if ( bp_has_members( bp_ajax_querystring( 'members' ) ) ) : ?>
 
-	<?php bp_pagination( 'top' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the display of the members list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_members_list' ); ?>
+	<?php bp_nouveau_pagination( 'top' ); ?>
 
 	<ul id="members-list" class="item-list">
 
@@ -87,18 +78,7 @@ do_action( 'bp_before_members_loop' ); ?>
 
 	</ul>
 
-	<?php
-
-	/**
-	 * Fires after the display of the members list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_members_list' ); ?>
-
-	<?php bp_member_hidden_fields(); ?>
-
-	<?php bp_pagination( 'bottom' ); ?>
+	<?php bp_nouveau_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 

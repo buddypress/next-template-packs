@@ -17,16 +17,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 <?php if ( bp_has_blogs( bp_ajax_querystring( 'blogs' ) ) ) : ?>
 
-	<?php bp_pagination( 'top' ); ?>
-
-	<?php
-
-	/**
-	 * Fires before the blogs directory list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_directory_blogs_list' ); ?>
+	<?php bp_nouveau_pagination( 'top' ); ?>
 
 	<ul id="blogs-list" class="item-list">
 
@@ -76,18 +67,7 @@ do_action( 'bp_before_blogs_loop' ); ?>
 
 	</ul>
 
-	<?php
-
-	/**
-	 * Fires after the blogs directory list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_directory_blogs_list' ); ?>
-
-	<?php bp_blog_hidden_fields(); ?>
-
-	<?php bp_pagination( 'bottom' ); ?>
+	<?php bp_nouveau_pagination( 'bottom' ); ?>
 
 <?php else: ?>
 
