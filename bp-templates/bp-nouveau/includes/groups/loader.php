@@ -124,6 +124,12 @@ class BP_Nouveau_Groups {
 		foreach ( $buttons as $button ) {
 			add_filter( 'bp_button_' . $button, 'bp_nouveau_ajax_button', 10, 4 );
 		}
+
+		/**
+		 * This filter is there to add the Group Type to the Group's front.php template hierarchy
+		 * as i'm not sure https://buddypress.trac.wordpress.org/ticket/7129 will be part of 2.6
+		 */
+		add_filter( 'bp_groups_get_front_template', 'bp_nouveau_group_reset_front_template', 10, 1 );
 	}
 }
 

@@ -158,3 +158,115 @@ function bp_nouveau_group_meta() {
 
 		return $group->template_meta;
 	}
+
+/**
+ * Load the appropriate content for the single group pages
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_template_part() {
+	/**
+	 * Fires before the display of the group home body.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_before_group_body' );
+
+	$bp_is_group_home = bp_is_group_home();
+
+	if ( $bp_is_group_home && ! bp_group_is_visible() ) {
+		/**
+		 * Fires before the display of the group status message.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_before_group_status_message' ); ?>
+
+		<div id="message" class="info">
+			<p><?php bp_group_status_message(); ?></p>
+		</div>
+
+		<?php
+
+		/**
+		 * Fires after the display of the group status message.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_after_group_status_message' );
+
+	// We have a front template, Use BuddyPress function to load it.
+	} elseif ( $bp_is_group_home && false !== bp_groups_get_front_template() ) {
+		bp_groups_front_template_part();
+
+	// Otherwise use BP_Nouveau template hierarchy
+	} else {
+		$template = 'plugins';
+
+		// the home page
+		if ( $bp_is_group_home ) {
+			if ( bp_is_active( 'activity' ) ) {
+				$template = 'activity';
+			} else {
+				$template = 'members';
+			}
+
+		// Not the home page
+		} elseif ( bp_is_group_admin_page() ) {
+			$template = 'admin';
+		} elseif ( bp_is_group_activity() ) {
+			$template = 'activity';
+		} elseif ( bp_is_group_members() ) {
+			$template = 'members';
+		} elseif ( bp_is_group_invites() ) {
+			$template = 'send-invites';
+		} elseif ( bp_is_group_membership_request() ) {
+			$template = 'request-membership';
+		}
+
+		bp_nouveau_group_get_template_part( $template );
+	}
+
+	/**
+	 * Fires after the display of the group home body.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_after_group_body' );
+}
+
+/**
+ * Use the appropriate Group header and enjoy a template hierarchy
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_group_header_template_part() {
+	$template = 'group-header';
+
+	if ( bp_group_use_cover_image_header() ) {
+		$template = 'cover-image-header';
+	}
+
+	/**
+	 * Fires before the display of a group's header.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_before_group_header' );
+
+	// Get the template part for the header
+	bp_nouveau_group_get_template_part( $template );
+
+	/**
+	 * Fires after the display of a group's header.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_after_group_header' );
+
+	bp_nouveau_template_notices();
+}

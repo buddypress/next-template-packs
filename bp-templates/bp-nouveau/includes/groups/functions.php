@@ -537,3 +537,116 @@ function bp_nouveau_get_hooked_group_meta() {
 
 	return false;
 }
+
+/**
+ * So 2.6 forgot to update the Group's front hierarchy so that it includes the Group Type
+ * This filter will be removed when https://buddypress.trac.wordpress.org/ticket/7129 will
+ * be fixed.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $templates The list of templates for the front.php template part.
+ * @return array  The same list making sure the Group type has been added to the hierarchy.
+ */
+function bp_nouveau_group_reset_front_template( $templates = array() ) {
+	$group = groups_get_current_group();
+
+	if ( empty( $group->id ) || ! bp_groups_get_group_types() ) {
+		return $templates;
+	}
+
+	$group_type = bp_groups_get_group_type( $group->id );
+	if ( ! $group_type ) {
+		$group_type = 'none';
+	}
+
+	$group_type_template = 'groups/single/front-group-type-' . sanitize_file_name( $group_type )   . '.php';
+
+	// Insert the group type template if not in the hierarchy
+	if ( ! in_array( $group_type_template, $templates ) ) {
+		array_splice( $templates, 2, 0, array( $group_type_template ) );
+	}
+
+	return $templates;
+}
+
+/**
+ * Locate a single group template into a specific hierarchy.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $template The template part to get (eg: activity, members...).
+ * @return string The located template.
+ */
+function bp_nouveau_group_locate_template_part( $template = '' ) {
+	$current_group = groups_get_current_group();
+	$bp_nouveau     = bp_nouveau();
+
+	if ( ! $template || empty( $current_group->id ) ) {
+		return false;
+	}
+
+	// Use a global to avoid requesting the hierarchy for each template
+	if ( ! isset( $bp_nouveau->groups->current_group_hierarchy ) ) {
+		$bp_nouveau->groups->current_group_hierarchy = array(
+			'groups/single/%s-id-' . sanitize_file_name( $current_group->id ) . '.php',
+			'groups/single/%s-slug-' . sanitize_file_name( $current_group->slug ) . '.php',
+		);
+
+		/**
+		 * Check for group types and add it to the hierarchy
+		 */
+		if ( bp_groups_get_group_types() ) {
+			$current_group_type = bp_groups_get_group_type( $current_group->id );
+			if ( ! $current_group_type ) {
+				$current_group_type = 'none';
+			}
+
+			$bp_nouveau->groups->current_group_hierarchy[] = 'groups/single/%s-group-type-' . sanitize_file_name( $current_group_type )   . '.php';
+		}
+
+		$bp_nouveau->groups->current_group_hierarchy = array_merge( $bp_nouveau->groups->current_group_hierarchy, array(
+			'groups/single/%s-status-' . sanitize_file_name( $current_group->status ) . '.php',
+			'groups/single/%s.php'
+		) );
+	}
+
+	// Init the templates
+	$templates = array();
+
+	// Loop in the hierarchy to fill it for the requested template part
+	foreach ( $bp_nouveau->groups->current_group_hierarchy as $part ) {
+		$templates[] = sprintf( $part, $template );
+	}
+
+	return bp_locate_template( apply_filters( 'bp_nouveau_group_locate_template_part', $templates ), false, true );
+}
+
+/**
+ * Load a single group template part
+ *
+ * @since  1.0.0
+ *
+ * @param  string $template The template part to get (eg: activity, members...).
+ * @return string HTML output.
+ */
+function bp_nouveau_group_get_template_part( $template = '' ) {
+	$located = bp_nouveau_group_locate_template_part( $template );
+
+	if ( false !== $located ) {
+		$slug = str_replace( '.php', '', $located );
+		$name = null;
+
+		/**
+		 * Let plugins adding an action to bp_get_template_part get it from here
+		 *
+		 * @param string $slug Template part slug requested.
+		 * @param string $name Template part name requested.
+		 */
+		do_action( 'get_template_part_' . $slug, $slug, $name );
+
+		load_template( $located, true );
+	}
+
+	return $located;
+}
