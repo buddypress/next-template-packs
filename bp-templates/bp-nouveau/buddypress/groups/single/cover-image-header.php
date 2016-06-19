@@ -5,13 +5,7 @@
  * @package BuddyPress
  * @subpackage bp-nouveau
  */
-
-/**
- * Fires before the display of a group's header.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_group_header' ); ?>
+?>
 
 <div id="cover-image-container">
 	<a id="header-cover-image" href="<?php bp_group_permalink(); ?>"></a>
@@ -103,14 +97,3 @@ do_action( 'bp_before_group_header' ); ?>
 
 	</div><!-- #item-header-cover-image -->
 </div><!-- #cover-image-container -->
-
-<?php
-
-/**
- * Fires after the display of a group's header.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_group_header' );
-
-bp_nouveau_template_notices(); ?>

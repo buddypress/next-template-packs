@@ -1,4 +1,4 @@
-/* global wp, bp, BP_Nouveau, ajaxurl */
+/* global wp, bp, BP_Nouveau */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 

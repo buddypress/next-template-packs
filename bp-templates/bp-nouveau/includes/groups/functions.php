@@ -43,6 +43,49 @@ function bp_nouveau_groups_enqueue_scripts() {
 	wp_enqueue_script( 'bp-nouveau-group-invites' );
 }
 
+/**
+ * Localize the strings needed for the Group's Invite UI
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $params Associative array containing the JS Strings needed by scripts
+ * @return array          The same array with specific strings for the Group's Invite UI if needed.
+ */
+function bp_nouveau_groups_localize_scripts( $params = array() ) {
+	if ( ! bp_is_group_invites() && ! ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
+		return $params;
+	}
+
+	$show_pending = bp_group_has_invites( array( 'user_id' => 'any' ) ) && ! bp_is_group_create();
+
+	// Init the Group invites nav
+	$invites_nav = array(
+		'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-nouveau' ), 'order' => 0 ),
+		'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-nouveau' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
+		'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-nouveau' ), 'order' => 100, 'hide' => 1 ),
+	);
+
+	if ( bp_is_active( 'friends' ) ) {
+		$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-nouveau' ), 'order' => 5 );
+	}
+
+	$params['group_invites'] = array(
+		'nav'                => bp_sort_by_key( $invites_nav, 'order', 'num' ),
+		'loading'            => __( 'Loading members, please wait.', 'bp-nouveau' ),
+		'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-nouveau' ),
+		'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'bp-nouveau' ),
+		'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-nouveau' ),
+		'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
+		'is_group_create'    => bp_is_group_create(),
+		'nonces'             => array(
+			'uninvite'     => wp_create_nonce( 'groups_invite_uninvite_user' ),
+			'send_invites' => wp_create_nonce( 'groups_send_invites' )
+		),
+	);
+
+	return $params;
+}
+
 function bp_nouveau_groups_get_inviter_ids( $user_id, $group_id ) {
 	if ( empty( $user_id ) || empty( $group_id ) ) {
 		return false;
@@ -493,4 +536,117 @@ function bp_nouveau_get_hooked_group_meta() {
 	}
 
 	return false;
+}
+
+/**
+ * So 2.6 forgot to update the Group's front hierarchy so that it includes the Group Type
+ * This filter will be removed when https://buddypress.trac.wordpress.org/ticket/7129 will
+ * be fixed.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $templates The list of templates for the front.php template part.
+ * @return array  The same list making sure the Group type has been added to the hierarchy.
+ */
+function bp_nouveau_group_reset_front_template( $templates = array() ) {
+	$group = groups_get_current_group();
+
+	if ( empty( $group->id ) || ! bp_groups_get_group_types() ) {
+		return $templates;
+	}
+
+	$group_type = bp_groups_get_group_type( $group->id );
+	if ( ! $group_type ) {
+		$group_type = 'none';
+	}
+
+	$group_type_template = 'groups/single/front-group-type-' . sanitize_file_name( $group_type )   . '.php';
+
+	// Insert the group type template if not in the hierarchy
+	if ( ! in_array( $group_type_template, $templates ) ) {
+		array_splice( $templates, 2, 0, array( $group_type_template ) );
+	}
+
+	return $templates;
+}
+
+/**
+ * Locate a single group template into a specific hierarchy.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $template The template part to get (eg: activity, members...).
+ * @return string The located template.
+ */
+function bp_nouveau_group_locate_template_part( $template = '' ) {
+	$current_group = groups_get_current_group();
+	$bp_nouveau     = bp_nouveau();
+
+	if ( ! $template || empty( $current_group->id ) ) {
+		return false;
+	}
+
+	// Use a global to avoid requesting the hierarchy for each template
+	if ( ! isset( $bp_nouveau->groups->current_group_hierarchy ) ) {
+		$bp_nouveau->groups->current_group_hierarchy = array(
+			'groups/single/%s-id-' . sanitize_file_name( $current_group->id ) . '.php',
+			'groups/single/%s-slug-' . sanitize_file_name( $current_group->slug ) . '.php',
+		);
+
+		/**
+		 * Check for group types and add it to the hierarchy
+		 */
+		if ( bp_groups_get_group_types() ) {
+			$current_group_type = bp_groups_get_group_type( $current_group->id );
+			if ( ! $current_group_type ) {
+				$current_group_type = 'none';
+			}
+
+			$bp_nouveau->groups->current_group_hierarchy[] = 'groups/single/%s-group-type-' . sanitize_file_name( $current_group_type )   . '.php';
+		}
+
+		$bp_nouveau->groups->current_group_hierarchy = array_merge( $bp_nouveau->groups->current_group_hierarchy, array(
+			'groups/single/%s-status-' . sanitize_file_name( $current_group->status ) . '.php',
+			'groups/single/%s.php'
+		) );
+	}
+
+	// Init the templates
+	$templates = array();
+
+	// Loop in the hierarchy to fill it for the requested template part
+	foreach ( $bp_nouveau->groups->current_group_hierarchy as $part ) {
+		$templates[] = sprintf( $part, $template );
+	}
+
+	return bp_locate_template( apply_filters( 'bp_nouveau_group_locate_template_part', $templates ), false, true );
+}
+
+/**
+ * Load a single group template part
+ *
+ * @since  1.0.0
+ *
+ * @param  string $template The template part to get (eg: activity, members...).
+ * @return string HTML output.
+ */
+function bp_nouveau_group_get_template_part( $template = '' ) {
+	$located = bp_nouveau_group_locate_template_part( $template );
+
+	if ( false !== $located ) {
+		$slug = str_replace( '.php', '', $located );
+		$name = null;
+
+		/**
+		 * Let plugins adding an action to bp_get_template_part get it from here
+		 *
+		 * @param string $slug Template part slug requested.
+		 * @param string $name Template part name requested.
+		 */
+		do_action( 'get_template_part_' . $slug, $slug, $name );
+
+		load_template( $located, true );
+	}
+
+	return $located;
 }

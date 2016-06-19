@@ -81,10 +81,9 @@ class BP_Nouveau_Groups {
 			array( 'groups_leave_group'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_accept_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_reject_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'request_membership'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+			array( 'groups_request_membership'          => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_get_group_potential_invites' => array( 'function' => 'bp_nouveau_ajax_get_users_to_invite',    'nopriv' => false ) ),
 			array( 'groups_send_group_invites'          => array( 'function' => 'bp_nouveau_ajax_send_group_invites',     'nopriv' => false ) ),
-			array( 'groups_delete_group_invite'         => array( 'function' => 'bp_nouveau_ajax_remove_group_invite',    'nopriv' => false ) ),
 			array( 'groups_delete_group_invite'         => array( 'function' => 'bp_nouveau_ajax_remove_group_invite',    'nopriv' => false ) ),
 		);
 
@@ -108,6 +107,9 @@ class BP_Nouveau_Groups {
 		// Register groups scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_groups_register_scripts', 10, 1 );
 
+		// Localize Scripts
+		add_filter( 'bp_core_get_js_strings', 'bp_nouveau_groups_localize_scripts', 10, 1 );
+
 		add_filter( 'groups_create_group_steps', 'bp_nouveau_group_invites_create_steps', 10, 1 );
 
 		$buttons = array(
@@ -122,6 +124,12 @@ class BP_Nouveau_Groups {
 		foreach ( $buttons as $button ) {
 			add_filter( 'bp_button_' . $button, 'bp_nouveau_ajax_button', 10, 4 );
 		}
+
+		/**
+		 * This filter is there to add the Group Type to the Group's front.php template hierarchy
+		 * as i'm not sure https://buddypress.trac.wordpress.org/ticket/7129 will be part of 2.6
+		 */
+		add_filter( 'bp_groups_get_front_template', 'bp_nouveau_group_reset_front_template', 10, 1 );
 	}
 }
 

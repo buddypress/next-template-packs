@@ -46,6 +46,127 @@ function bp_nouveau_activity_enqueue_scripts() {
 	wp_enqueue_script( 'bp-nouveau-activity' );
 }
 
+/**
+ * Localize the strings needed for the Activity Post form UI
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $params Associative array containing the JS Strings needed by scripts
+ * @return array          The same array with specific strings for the Activity Post form UI if needed.
+ */
+function bp_nouveau_activity_localize_scripts( $params = array() ) {
+	if ( ! bp_is_activity_component() && ! bp_is_group_activity() ) {
+		return $params;
+	}
+
+	$activity_params = array(
+		'user_id'     => bp_loggedin_user_id(),
+		'object'      => 'user',
+		'backcompat'  => (bool) has_action( 'bp_activity_post_form_options' ),
+		'post_nonce'  => wp_create_nonce( 'post_update', '_wpnonce_post_update' ),
+	);
+
+	$user_displayname = bp_get_loggedin_user_fullname();
+
+	if ( buddypress()->avatar->show_avatars ) {
+		$width  = bp_core_avatar_thumb_width();
+		$height = bp_core_avatar_thumb_height();
+		$activity_params = array_merge( $activity_params, array(
+			'avatar_url'    => bp_get_loggedin_user_avatar( array(
+				'width'  => $width,
+				'height' => $height,
+				'html'   => false,
+			) ),
+			'avatar_width'  => $width,
+			'avatar_height' => $height,
+			'avatar_alt'    => sprintf( __( 'Profile photo of %s', 'bp-nouveau' ), $user_displayname ),
+			'user_domain'   => bp_loggedin_user_domain()
+		) );
+	}
+
+	/**
+	 * Filter here to include specific Action buttons.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param array $value The array containing the button params. Must look like:
+	 * array( 'buttonid' => array(
+	 *  'id'      => 'buttonid',                            // Id for your action
+	 *  'caption' => __( 'Button caption', 'text-domain' ),
+	 *  'icon'    => 'dashicons-*',                         // The dashicon to use
+	 *  'order'   => 0,
+	 *  'handle'  => 'button-script-handle',                // The handle of the registered script to enqueue
+	 * );
+	 */
+	$activity_buttons = apply_filters( 'bp_nouveau_activity_buttons', array() );
+
+	if ( ! empty( $activity_buttons ) ) {
+		// Sort buttons
+		$activity_params['buttons'] = bp_sort_by_key( $activity_buttons, 'order', 'num' );
+
+		// Enqueue Buttons scripts and styles
+		foreach ( $activity_params['buttons'] as $key_button => $buttons ) {
+			if ( empty( $buttons['handle'] ) ) {
+				continue;
+			}
+
+			// Enqueue the button style if registered
+			if ( wp_style_is( $buttons['handle'], 'registered' ) ) {
+				wp_enqueue_style( $buttons['handle'] );
+			}
+
+			// Enqueue the button script if registered
+			if ( wp_script_is( $buttons['handle'], 'registered' ) ) {
+				wp_enqueue_script( $buttons['handle'] );
+			}
+
+			// Finally remove the handle parameter
+			unset( $activity_params['buttons'][ $key_button ]['handle'] );
+		}
+	}
+
+	// Activity Objects
+	if ( ! bp_is_single_item() && ! bp_is_user() ) {
+		$activity_objects = array(
+			'profile' => array(
+				'text'                     => __( 'Post in: Profile', 'bp-nouveau' ),
+				'autocomplete_placeholder' => '',
+				'priority'                 => 5,
+			),
+		);
+
+		// the groups component is active & the current user is at least a member of 1 group
+		if ( bp_is_active( 'groups' ) && bp_has_groups( array( 'user_id' => bp_loggedin_user_id(), 'max' => 1 ) ) ) {
+			$activity_objects['group'] = array(
+				'text'                     => __( 'Post in: Group', 'bp-nouveau' ),
+				'autocomplete_placeholder' => __( 'Start typing the group name...', 'bp-nouveau' ),
+				'priority'                 => 10,
+			);
+		}
+
+		$activity_params['objects'] = apply_filters( 'bp_nouveau_activity_objects', $activity_objects );
+	}
+
+	$activity_strings = array(
+		'whatsnewPlaceholder' => sprintf( __( "What's new, %s?", 'bp-nouveau' ), bp_get_user_firstname( $user_displayname ) ),
+		'whatsnewLabel'       => __( 'Post what\'s new', 'bp-nouveau' ),
+		'whatsnewpostinLabel' => __( 'Post in', 'bp-nouveau' ),
+	);
+
+	if ( bp_is_group() ) {
+		$activity_params = array_merge( $activity_params,
+			array( 'object' => 'group', 'item_id' => bp_get_current_group_id() )
+		);
+	}
+
+	$params['activity'] = array(
+		'params'  => $activity_params,
+		'strings' => $activity_strings,
+	);
+
+	return $params;
+}
+
 function bp_nouveau_get_activity_directory_nav_items() {
 	$nav_items = array();
 

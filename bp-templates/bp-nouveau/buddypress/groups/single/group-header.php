@@ -5,14 +5,6 @@
  * @package BuddyPress
  * @subpackage bp-nouveau
  */
-
-/**
- * Fires before the display of a group's header.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_group_header' );
-
 ?>
 
 <div id="item-actions">
@@ -100,14 +92,3 @@ do_action( 'bp_before_group_header' );
 
 	</div><!-- #item-buttons -->
 </div><!-- #item-header-content -->
-
-<?php
-
-/**
- * Fires after the display of a group's header.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_group_header' );
-
-bp_nouveau_template_notices(); ?>

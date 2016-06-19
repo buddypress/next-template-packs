@@ -1,4 +1,4 @@
-/* global bp, BP_Nouveau, ajaxurl */
+/* global bp, BP_Nouveau */
 window.bp = window.bp || {};
 
 ( function( exports, $ ) {
