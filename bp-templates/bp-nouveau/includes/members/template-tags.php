@@ -88,7 +88,17 @@ function bp_nouveau_after_members_directory_content() {
  * @since 1.0.0
  */
 function bp_nouveau_member_header_buttons() {
+	$bp_nouveau = bp_nouveau();
+
 	echo join( ' ', bp_nouveau_get_members_buttons() );
+
+	/**
+	 * On the member's header we need to reset the group button's global
+	 * once displayed as the friends component will use the member's loop
+	 */
+	if ( ! empty( $bp_nouveau->members->member_buttons ) ) {
+		unset( $bp_nouveau->members->member_buttons );
+	}
 
 	/**
 	 * Fires in the member header actions section.
@@ -103,7 +113,7 @@ function bp_nouveau_members_loop_buttons() {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_members_buttons( 'directory' ) );
+	echo join( ' ', bp_nouveau_get_members_buttons( 'loop' ) );
 
 	/**
 	 * Fires inside the members action HTML markup to display actions.
@@ -126,7 +136,7 @@ function bp_nouveau_members_loop_buttons() {
 
 		$buttons = array();
 
-		if ( 'directory' === $type ) {
+		if ( 'loop' === $type ) {
 			$user_id = bp_get_member_user_id();
 		} else {
 			$user_id = bp_displayed_user_id();
@@ -160,7 +170,7 @@ function bp_nouveau_members_loop_buttons() {
 		}
 
 		// Only add The public and private messages when not in a loop
-		if ( 'directory' !== $type ) {
+		if ( 'loop' !== $type ) {
 			if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) {
 				/**
 				 * This filter workaround is waiting for a core adaptation
