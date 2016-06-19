@@ -81,10 +81,9 @@ class BP_Nouveau_Groups {
 			array( 'groups_leave_group'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_accept_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_reject_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'request_membership'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+			array( 'groups_request_membership'          => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_get_group_potential_invites' => array( 'function' => 'bp_nouveau_ajax_get_users_to_invite',    'nopriv' => false ) ),
 			array( 'groups_send_group_invites'          => array( 'function' => 'bp_nouveau_ajax_send_group_invites',     'nopriv' => false ) ),
-			array( 'groups_delete_group_invite'         => array( 'function' => 'bp_nouveau_ajax_remove_group_invite',    'nopriv' => false ) ),
 			array( 'groups_delete_group_invite'         => array( 'function' => 'bp_nouveau_ajax_remove_group_invite',    'nopriv' => false ) ),
 		);
 

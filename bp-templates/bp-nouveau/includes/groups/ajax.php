@@ -30,7 +30,7 @@ function bp_nouveau_ajax_joinleave_group() {
 		wp_send_json_error( $response );
 	}
 
-	if ( empty( $_POST['nonce'] ) || empty( $_POST['item_id'] )  || ! bp_is_active( 'groups' ) ) {
+	if ( empty( $_POST['nonce'] ) || empty( $_POST['item_id'] ) || ! bp_is_active( 'groups' ) ) {
 		wp_send_json_error( $response );
 	}
 
@@ -52,11 +52,13 @@ function bp_nouveau_ajax_joinleave_group() {
 	// Cast gid as integer.
 	$group_id = (int) $_POST['item_id'];
 
+	$errors = array(
+		'cannot' => sprintf( '<div class="bp-feedback error"><p>%s</p></div>', esc_html__( 'You cannot join this group.', 'bp-nouveau' ) ),
+		'member' => sprintf( '<div class="feedback error bp-ajax-message"><p>%s</p></div>', esc_html__( 'You are already a member of the group.', 'bp-nouveau' ) ),
+	);
+
 	if ( groups_is_user_banned( bp_loggedin_user_id(), $group_id ) ) {
-		$response['feedback'] = sprintf(
-			'<div class="bp-feedback error"><p>%s</p></div>',
-			esc_html__( 'You cannot join this group.', 'bp-nouveau' )
-		);
+		$response['feedback'] = $errors['cannot'];
 
 		wp_send_json_error( $response );
 	}
@@ -68,12 +70,7 @@ function bp_nouveau_ajax_joinleave_group() {
 		wp_send_json_error( $response );
 	}
 
-	/**
-	 *
-
-	 Every action should be handled here
-
-	 */
+	// Manage all button's possible actions here.
 	switch ( $_POST['action'] ) {
 
 		case 'groups_accept_invite' :
@@ -81,7 +78,7 @@ function bp_nouveau_ajax_joinleave_group() {
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback error">%s</div>',
-						esc_html__( 'Group invite could not be accepted', 'bp-nouveau' )
+						esc_html__( 'Group invite could not be accepted.', 'bp-nouveau' )
 					),
 					'type'     => 'error'
 				);
@@ -92,13 +89,18 @@ function bp_nouveau_ajax_joinleave_group() {
 					'item_id' => $group->id
 				) );
 
+				// User is now a member of the group
+				$group->is_member = '1';
+
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback success">%s</div>',
-						esc_html__( 'Group invite accepted', 'bp-nouveau' )
+						esc_html__( 'Group invite accepted.', 'bp-nouveau' )
 					),
 					'type'     => 'success',
 					'is_user'  => bp_is_user(),
+					'contents' => bp_get_group_join_button( $group ),
+					'is_group' => bp_is_group()
 				);
 			}
 			break;
@@ -123,98 +125,101 @@ function bp_nouveau_ajax_joinleave_group() {
 				);
 			}
 			break;
-	}
 
-	if ( 'error' === $response['type'] ) {
-		wp_send_json_error( $response );
-	} else {
-		wp_send_json_success( $response );
-	}
-
-	if ( ! groups_is_user_member( bp_loggedin_user_id(), $group->id ) ) {
-		if ( 'public' == $group->status ) {
-
-			if ( ! groups_join_group( $group->id ) ) {
-				$response['feedback'] = sprintf(
-					'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-					esc_html__( 'Error joining group', 'bp-nouveau' )
+		case 'groups_join_group' :
+			if ( groups_is_user_member( bp_loggedin_user_id(), $group->id ) ) {
+				$response = array(
+					'feedback' => $errors['member'],
+					'type'     => 'error',
 				);
-
-				wp_send_json_error( $response );
+			} elseif ( 'public' !== $group->status ) {
+				$response = array(
+					'feedback' => $errors['cannot'],
+					'type'     => 'error',
+				);
+			} elseif ( ! groups_join_group( $group->id ) ) {
+				$response = array(
+					'feedback' => sprintf(
+						'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+						esc_html__( 'Error joining this group.', 'bp-nouveau' )
+					),
+					'type'     => 'error',
+				);
 			} else {
 				// User is now a member of the group
 				$group->is_member = '1';
 
-				wp_send_json_success( array(
+				$response = array(
 					'contents' => bp_get_group_join_button( $group ),
-					'is_group' => bp_is_group()
-				) );
+					'is_group' => bp_is_group(),
+					'type'     => 'success',
+				);
 			}
+			break;
 
-		} elseif ( 'private' == $group->status ) {
-
-			// If the user has already been invited, then this is
-			// an Accept Invitation button.
-			if ( groups_check_user_has_invite( bp_loggedin_user_id(), $group->id ) ) {
-
-				if ( ! groups_accept_invite( bp_loggedin_user_id(), $group->id ) ) {
-					$response['feedback'] = sprintf(
-						'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-						esc_html__( 'Error requesting membership', 'bp-nouveau' )
-					);
-
-					wp_send_json_error( $response );
-				} else {
-					// User is now a member of the group
-					$group->is_member = '1';
-
-					wp_send_json_success( array(
-						'contents' => bp_get_group_join_button( $group ),
-						'is_group' => bp_is_group()
-					) );
-				}
-
-			// Otherwise, it's a Request Membership button.
-			} else {
-
+			case 'groups_request_membership' :
 				if ( ! groups_send_membership_request( bp_loggedin_user_id(), $group->id ) ) {
-					$response['feedback'] = sprintf(
-						'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-						esc_html__( 'Error requesting membership', 'bp-nouveau' )
+					$response = array(
+						'feedback' => sprintf(
+							'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+							esc_html__( 'Error requesting membership.', 'bp-nouveau' )
+						),
+						'type'     => 'error',
 					);
-
-					wp_send_json_error( $response );
 				} else {
 					// Request is pending
 					$group->is_pending = '1';
 
-					wp_send_json_success( array(
+					$response = array(
 						'contents' => bp_get_group_join_button( $group ),
-						'is_group' => bp_is_group()
-					) );
+						'is_group' => bp_is_group(),
+						'type'     => 'success',
+					);
 				}
-			}
-		}
+				break;
 
-	} else {
+			case 'groups_leave_group' :
+				if ( ! groups_leave_group( $group->id ) ) {
+					$response = array(
+						'feedback' => sprintf(
+							'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+							esc_html__( 'Error leaving group.', 'bp-nouveau' )
+						),
+						'type'     => 'error',
+					);
+				} else {
+					// User is no more a member of the group
+					$group->is_member = '0';
+					$bp               = buddypress();
 
-		if ( ! groups_leave_group( $group->id ) ) {
-			$response['feedback'] = sprintf(
-				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
-				esc_html__( 'Error leaving group', 'bp-nouveau' )
-			);
+					/**
+					 * When inside the group or in the user's group memberships screen
+					 * we need to reload the page.
+					 */
+					$bp_is_group = bp_is_group() || bp_is_user_groups();
 
-			wp_send_json_error( $response );
-		} else {
-			// User is no more a member of the group
-			$group->is_member = '0';
+					$response = array(
+						'contents' => bp_get_group_join_button( $group ),
+						'is_group' => $bp_is_group,
+						'type'     => 'success',
+					);
 
-			wp_send_json_success( array(
-				'contents' => bp_get_group_join_button( $group ),
-				'is_group' => bp_is_group()
-			) );
-		}
+					// Reset the message if not in a Group or in a user's group memberships one!
+					if ( ! $bp_is_group && isset( $bp->template_message ) && isset( $bp->template_message_type ) ) {
+						unset( $bp->template_message, $bp->template_message_type );
+
+						@setcookie( 'bp-message', false, time() - 1000, COOKIEPATH, COOKIE_DOMAIN, is_ssl() );
+						@setcookie( 'bp-message-type', false, time() - 1000, COOKIEPATH, COOKIE_DOMAIN, is_ssl() );
+					}
+				}
+				break;
 	}
+
+	if ( 'error' === $response['type'] ) {
+		wp_send_json_error( $response );
+	}
+
+	wp_send_json_success( $response );
 }
 
 function bp_nouveau_ajax_get_users_to_invite() {
@@ -281,7 +286,7 @@ function bp_nouveau_ajax_get_users_to_invite() {
 
 		if ( 'friends' === $bp->groups->invites_scope ) {
 			$error = array(
-				'feedback' => __( 'All your friends are already members of this group or already received an invite to join this group.', 'bp-nouveau' ),
+				'feedback' => __( 'All your friends are already members of this group or already received an invite to join this group or requested to join it.', 'bp-nouveau' ),
 				'type'     => 'info',
 			);
 

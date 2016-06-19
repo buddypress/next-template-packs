@@ -95,6 +95,7 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 
 		if ( false === $this->query_vars['is_confirmed'] ) {
 			$sql['where'][] = $wpdb->prepare( "is_confirmed = %d", (int) $this->query_vars['is_confirmed'] );
+			$sql['where'][] = "inviter_id != 0";
 		}
 
 		// Join the query part
