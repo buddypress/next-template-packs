@@ -1,87 +1,237 @@
 // BP Primary & secondary directory and single screen navigation
 
-.buddypress {
+.item-list-tabs {
+	background: transparent;
+	clear: left;
+	overflow: hidden;
 
-	.item-list-tabs {
-		background: transparent;
-		clear: left;
-		overflow: hidden;
+	ul {
+		margin: 0;
+		padding: 0;
 
-		ul {
+		li {
+			float: left;
+			list-style: none;
 			margin: 0;
-			padding: 0;
+		}
 
-			li {
-				float: left;
-				list-style: none;
-				margin: 0;
+		li.last {
+			float: right;
+			margin: 7px 0 0;
+
+			select {
+				max-width: 185px;
+			}
+		}
+
+		li {
+			a,
+			span {
+				border: 0;
+				display: block;
+				padding: 5px 10px;
+				text-decoration: none;
 			}
 
-			li.last {
-				float: right;
-				margin: 7px 0 0;
-
-				select {
-					max-width: 185px;
-				}
-			}
-
-			li {
-				a,
-				span {
-					border: 0;
-					display: block;
-					padding: 5px 10px;
-					text-decoration: none;
-				}
-			}
-
-		} // close ul
-
-		&.bp-invites-filters,
-		&.bp-messages-filters {
-			ul li a {
+			span {
+				background: #eee;
 				border: 1px solid #ccc;
-				display: inline-block;
+				border-radius: 50%;
+				color: #999;
+				display: inline;
+				font-size: 70%;
+				margin-left: 2px;
+				padding: 3px 6px;
+				text-align: center;
+				vertical-align: middle;
+			}
+		}
+		// these selected/current should apply to all navs
+		// if not pull out & move to end.
+		li.selected,
+		li.current {
+			a {
+				background-color: #eee;
+				color: #555;
+				font-weight: bold;
+				opacity: 0.8;
 			}
 		}
 
-	} // close item-list-tabs
+	} // close ul
 
-	.item-list-tabs#subnav,
-	.item-list-tabs#subsubnav {
+	&.bp-invites-filters,
+	&.bp-messages-filters {
+		ul li a {
+			border: 1px solid #ccc;
+			display: inline-block;
+		}
+	}
+
+} // close item-list-tabs
+
+#buddypress div#item-nav ul li.loading a {
+	background-position: 88% 50%;
+}
+
+.item-list-tabs#subnav,
+.item-list-tabs#subsubnav {
+	ul {
+		li {
+			margin-top: 0;
+
+			&.last {
+				margin-top: 4px;
+			}
+		}
+	}
+}
+
+.item-list-tabs.bp-invites-nav#subnav,
+.item-list-tabs.bp-invites-filters#subsubnav,
+.item-list-tabs.bp-messages-filters#subsubnav {
+	ul {
+		li.last {
+			margin-top: 0;
+		}
+	}
+}
+
+.buddypress .item-list-tabs#subnav,
+.buddyoress .item-list-tabs#subsubnav {
+	background: transparent;
+	margin: 10px 0 10px;
+	overflow: hidden;
+}
+
+// The selected, current, hover states, psuedo elements etc - stuff!
+.buddypress_object_nav .item-list-tabs  li a:hover span,
+.buddypress  .item-list-tabs  li.selected a span,
+.buddypress  .item-list-tabs  li.current a span,
+.buddypress  .item-list-tabs  li a:hover span {
+	background-color: $grey;
+}
+
+.buddypress_object_nav .item-list-tabs  li.selected a span,
+.buddypress_object_nav .item-list-tabs  li.current a span,
+.buddypress .item-list-tabs  li.selected a span,
+.buddypress .item-list-tabs  li.current a span {
+	background-color: $white;
+}
+
+.buddypress_object_nav .item-list-tabs  li.dynamic a span,
+.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
+.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
+.buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
+.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
+.buddypress .item-list-tabs  li.dynamic a span,
+.buddypress .item-list-tabs  li.dynamic a:hover span,
+.buddypress .item-list-tabs  li.dynamic.selected a span,
+.buddypress .item-list-tabs  li.dynamic.current a span,
+.buddypress .item-list-tabs  li.dynamic a:hover span {
+	background-color: #1fb3dd;
+	border: 0;
+	color: #fff;
+}
+
+
+.buddypress_object_nav .item-list-tabs  li a span:empty,
+.buddypress .item-list-tabs  li a span:empty {
+	display: none;
+}
+
+.buddypress .item-list-tabs  li.filter label:before,
+.buddypress .item-list-tabs  li.feed a:before,
+.buddypress .bp-invites-content .item-list li a.invite-button:before,
+.buddypress .bp-invites-filters  li a.invite-button:before,
+.buddypress .bp-messages-filters li a.messages-button:before {
+	font-family: dashicons;
+	font-size: 18px;
+}
+
+.buddypress .bp-invites-content .item-list li a.invite-button:before {
+	font-size: 32px;
+}
+
+// Icons
+.buddypress div.item-list-tabs ul li.filter label:before {
+	content: "\f536";
+}
+
+.buddypress div.item-list-tabs ul li.feed a:before {
+	content: "\f303";
+}
+
+.buddypress .bp-invites-content ul.item-list li a.invite-button:not(.group-remove-invite-button):before {
+	content: "\f502";
+}
+
+.buddypress .bp-invites-content ul.item-list li.selected a.invite-button:before,
+.buddypress .bp-invites-content ul.item-list li a.group-remove-invite-button:before {
+	content: "\f153";
+}
+
+.buddypress .bp-invites-filters ul li a#bp-invites-next-page:before,
+.buddypress .bp-messages-filters ul li a#bp-messages-next-page:before {
+	content: "\f345";
+}
+
+.buddypress .bp-invites-filters ul li a#bp-invites-prev-page:before,
+.buddypress .bp-messages-filters ul li a#bp-messages-prev-page:before {
+	content: "\f341";
+}
+
+.buddypress .bp-messages-filters ul li a.messages-button.bulk-apply:before {
+	content: "\f147";
+	font-size: 18px;
+}
+
+.item-list-tabs.bp-messages-filters ul li a.bulk-apply {
+	border-left: 0;
+	border-radius: none;
+	font-weight: normal;
+	line-height: inherit;
+	margin: 0;
+	padding: 2.5px 10px;
+	text-align: center;
+	text-transform: none;
+	vertical-align: baseline;
+	width: auto;
+}
+
+.buddypress_object_nav .item-list-tabs  li.dynamic a span,
+.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
+.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
+.buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
+.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
+.buddypress .item-list-tabs  li.dynamic a span,
+.buddypress .item-list-tabs  li.dynamic a:hover span,
+.buddypress .item-list-tabs  li.dynamic.selected a span,
+.buddypress .item-list-tabs  li.dynamic.current a span,
+.buddypress .item-list-tabs  li.dynamic a:hover span {
+	background-color: #1fb3dd;
+	border: 0;
+	color: #fff;
+}
+
+// Just buddypress_object_nav rules
+
+.buddypress_object_nav {
+	.item-list-tabs {
 		ul {
-			li {
-				margin-top: 0;
+			// yes it's empty, I know that!
+		}
 
-				&.last {
-					margin-top: 4px;
+		li {
+			a {
+				span {
+					display: inline-block;
+					float: right;
 				}
 			}
 		}
+
+
+
 	}
-
-	.item-list-tabs.bp-invites-nav#subnav,
-	.item-list-tabs.bp-invites-filters#subsubnav,
-	.item-list-tabs.bp-messages-filters#subsubnav {
-		ul {
-			li.last {
-				margin-top: 0;
-			}
-		}
-	}
-
-	.buddypress_object_nav {
-		.item-list-tabs {
-			ul {
-
-				li {
-
-
-				}
-			}
-
-		}
-	}
-
 }

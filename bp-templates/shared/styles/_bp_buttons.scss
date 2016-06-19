@@ -68,7 +68,31 @@
 		color: #bbb;
 	}
 
-}
+	.bp-invites-content {
+		ul.item-list {
+
+			li {
+				a.invite-button:hover {
+					color: #1fb3dd;
+				}
+			}
+
+			li.selected,
+			li {
+				a.invite-button:hover,
+				a.group-remove-invite-button:hover {
+					color: #a00;
+				}
+			}
+
+		}
+	}
+
+	#item-buttons:empty {
+		display: none;
+	}
+
+} // close .buddypress
 
 
 
