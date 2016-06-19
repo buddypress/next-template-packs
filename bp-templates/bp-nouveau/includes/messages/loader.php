@@ -103,8 +103,14 @@ class BP_Nouveau_Messages {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
+		// Enqueue specific styles
+		add_filter( 'bp_nouveau_enqueue_styles', 'bp_nouveau_messages_enqueue_styles', 10, 1 );
+
 		// Register messages scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_messages_register_scripts', 10, 1 );
+
+		// Localize Scripts
+		add_filter( 'bp_core_get_js_strings', 'bp_nouveau_messages_localize_scripts', 10, 1 );
 
 		// Notices
 		add_filter( 'bp_messages_single_new_message_notification', 'bp_nouveau_format_notice_notification_for_user',  10, 1 );

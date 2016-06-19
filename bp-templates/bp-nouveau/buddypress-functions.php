@@ -136,7 +136,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_styles'   ) ); // Enqueue theme CSS
 		add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_scripts'  ) ); // Enqueue theme JS
 		add_filter( 'bp_enqueue_scripts', array( $this, 'localize_scripts' ) ); // Enqueue theme script localization
-		add_action( 'bp_head',            array( $this, 'head_scripts'     ) ); // Output some extra JS in the <head>.
 
 		/** Body no-js Class **************************************************/
 
@@ -181,53 +180,67 @@ class BP_Nouveau extends BP_Theme_Compat {
 		/**
 		 * Fires after all of the BuddyPress theme compat actions have been added.
 		 *
-		 * @since 1.7.0
+		 * @since 1.0.0
 		 *
-		 * @param BP_Legacy $this Current BP_Legacy instance.
+		 * @param BP_Nouveau $this Current BP_Nouveau instance.
 		 */
 		do_action_ref_array( 'bp_theme_compat_actions', array( &$this ) );
 	}
 
 	/**
-	 * Load the theme CSS
+	 * Enqueue the template pack css files
 	 *
-	 * @since 1.7.0
-	 * @since 2.3.0 Support custom CSS file named after the current theme or parent theme.
-	 *
-	 * @uses wp_enqueue_style() To enqueue the styles
+	 * @since 1.0.0
 	 */
 	public function enqueue_styles() {
-		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$min = bp_core_get_minified_asset_suffix();
+		$rtl = '';
+
+		if ( is_rtl() ) {
+			$rtl = '-rtl';
+		}
+
 		$css_dependencies = apply_filters( 'bp_nouveau_css_dependencies', array( 'dashicons' ) );
 
-		// Locate the BP stylesheet.
-		$ltr = $this->locate_asset_in_stack( "buddypress{$min}.css", 'css', 'bp-nouveau' );
+		$styles = apply_filters( 'bp_nouveau_enqueue_styles', array(
+			'bp-nouveau' => array(
+				'file' => 'css/buddypress%1$s%2$s.css', 'dependencies' => $css_dependencies, 'version' => $this->version,
+			),
+		) );
 
-		// LTR.
-		if ( ! is_rtl() && isset( $ltr['location'], $ltr['handle'] ) ) {
-			wp_enqueue_style( $ltr['handle'], $ltr['location'], $css_dependencies, $this->version, 'screen' );
+		if ( $styles ) {
 
-			if ( $min ) {
-				wp_style_add_data( $ltr['handle'], 'suffix', $min );
-			}
-		}
+			foreach ( $styles as $handle => $style ) {
+				if ( ! isset( $style['file'] ) ) {
+					continue;
+				}
 
-		// RTL.
-		if ( is_rtl() ) {
-			$rtl = $this->locate_asset_in_stack( "buddypress-rtl{$min}.css", 'css', 'bp-nouveau-rtl' );
+				// Eventually use the rtl/minified version.
+				$file = sprintf( $style['file'], $rtl, $min );
 
-			if ( isset( $rtl['location'], $rtl['handle'] ) ) {
-				$rtl['handle'] = str_replace( '-css', '-css-rtl', $rtl['handle'] );  // Backwards compatibility.
-				wp_enqueue_style( $rtl['handle'], $rtl['location'], $css_dependencies, $this->version, 'screen' );
+				// Locate the asset if needed.
+				if ( false === strpos( $style['file'], '://' ) ) {
+					$asset = bp_locate_template_asset( $file );
+
+					if ( empty( $asset['uri'] ) || false === strpos( $asset['uri'], '://' ) ) {
+						continue;
+					}
+
+					$file = $asset['uri'];
+				}
+
+				$data = wp_parse_args( $style, array(
+					'dependencies' => array(),
+					'version'      => $this->version,
+					'type'         => 'screen',
+				) );
+
+				wp_enqueue_style( $handle, $file, $data['dependencies'], $data['version'], $data['type'] );
 
 				if ( $min ) {
-					wp_style_add_data( $rtl['handle'], 'suffix', $min );
+					wp_style_add_data( $handle, 'suffix', $min );
 				}
 			}
-		}
-
-		if ( bp_is_user_messages() ) {
-			wp_enqueue_style( 'bp-nouveau-at-message', buddypress()->plugin_url . "bp-activity/css/mentions{$min}.css", array(), bp_get_version() );
 		}
 	}
 
@@ -310,105 +323,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 	}
 
 	/**
-	 * Get the URL and handle of a web-accessible CSS or JS asset
-	 *
-	 * We provide two levels of customizability with respect to where CSS
-	 * and JS files can be stored: (1) the child theme/parent theme/theme
-	 * compat hierarchy, and (2) the "template stack" of /buddypress/css/,
-	 * /community/css/, and /css/. In this way, CSS and JS assets can be
-	 * overloaded, and default versions provided, in exactly the same way
-	 * as corresponding PHP templates.
-	 *
-	 * We are duplicating some of the logic that is currently found in
-	 * bp_locate_template() and the _template_stack() functions. Those
-	 * functions were built with PHP templates in mind, and will require
-	 * refactoring in order to provide "stack" functionality for assets
-	 * that must be accessible both using file_exists() (the file path)
-	 * and at a public URI.
-	 *
-	 * This method is marked private, with the understanding that the
-	 * implementation is subject to change or removal in an upcoming
-	 * release, in favor of a unified _template_stack() system. Plugin
-	 * and theme authors should not attempt to use what follows.
-	 *
-	 * @since 1.8.0
-	 * @param string $file A filename like buddypress.css.
-	 * @param string $type Optional. Either "js" or "css" (the default).
-	 * @param string $script_handle Optional. If set, used as the script name in `wp_enqueue_script`.
-	 * @return array An array of data for the wp_enqueue_* function:
-	 *   'handle' (eg 'bp-child-css') and a 'location' (the URI of the
-	 *   asset)
-	 */
-	private function locate_asset_in_stack( $file, $type = 'css', $script_handle = '' ) {
-		$locations = array();
-
-		// Ensure the assets can be located when running from /src/.
-		if ( defined( 'BP_SOURCE_SUBDIRECTORY' ) && BP_SOURCE_SUBDIRECTORY === 'src' ) {
-			$file = str_replace( '.min', '', $file );
-		}
-
-		// No need to check child if template == stylesheet.
-		if ( is_child_theme() ) {
-			$locations['bp-child'] = array(
-				'dir'  => get_stylesheet_directory(),
-				'uri'  => get_stylesheet_directory_uri(),
-				'file' => str_replace( '.min', '', $file ),
-			);
-		}
-
-		$locations['bp-parent'] = array(
-			'dir'  => get_template_directory(),
-			'uri'  => get_template_directory_uri(),
-			'file' => str_replace( '.min', '', $file ),
-		);
-
-		$locations['bp-legacy'] = array(
-			'dir'  => bp_get_theme_compat_dir(),
-			'uri'  => bp_get_theme_compat_url(),
-			'file' => $file,
-		);
-
-		// Subdirectories within the top-level $locations directories.
-		$subdirs = array(
-			'buddypress/' . $type,
-			'community/' . $type,
-			$type,
-		);
-
-		$retval = array();
-
-		foreach ( $locations as $location_type => $location ) {
-			foreach ( $subdirs as $subdir ) {
-				if ( file_exists( trailingslashit( $location['dir'] ) . trailingslashit( $subdir ) . $location['file'] ) ) {
-					$retval['location'] = trailingslashit( $location['uri'] ) . trailingslashit( $subdir ) . $location['file'];
-					$retval['handle']   = ( $script_handle ) ? $script_handle : "{$location_type}-{$type}";
-
-					break 2;
-				}
-			}
-		}
-
-		return $retval;
-	}
-
-	/**
-	 * Put some scripts in the header, like AJAX url for wp-lists.
-	 *
-	 * @since 1.7.0
-	 */
-	public function head_scripts() {
-	?>
-
-		<script type="text/javascript">
-			/* <![CDATA[ */
-			var ajaxurl = '<?php echo bp_core_ajax_url(); ?>';
-			/* ]]> */
-		</script>
-
-	<?php
-	}
-
-	/**
 	 * Adds the no-js class to the body tag.
 	 *
 	 * This function ensures that the <body> element will have the 'no-js' class by default. If you're
@@ -417,7 +331,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * The no-js class is removed by the JavaScript created in buddypress.js.
 	 *
-	 * @since 1.7.0
+	 * @since 1.0.0
 	 *
 	 * @param array $classes Array of classes to append to body tag.
 	 * @return array $classes
@@ -434,11 +348,12 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * These localizations require information that may not be loaded even by init.
 	 *
-	 * @since 1.7.0
+	 * @since 1.0.0
 	 */
 	public function localize_scripts() {
 		// First global params
 		$params = array(
+			'ajaxurl'             => bp_core_ajax_url(),
 			'accepted'            => __( 'Accepted', 'bp-nouveau' ),
 			'close'               => __( 'Close', 'bp-nouveau' ),
 			'comments'            => __( 'comments', 'bp-nouveau' ),
@@ -509,172 +424,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		$params['objects'] = $supported_objects;
 		$params['nonces']  = $object_nonces;
 
-		if ( bp_is_user_messages() ) {
-			$params['messages'] = array(
-				'errors' => array(
-					'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'bp-nouveau' ),
-					'subject'         => __( 'Please add a subject to your message.', 'bp-nouveau' ),
-					'message_content' => __( 'Please add some content to your message.', 'bp-nouveau' ),
-				),
-				'nonces' => array(
-					'send' => wp_create_nonce( 'messages_send_message' ),
-				),
-				'loading' => __( 'Loading messages, please wait.', 'bp-nouveau' ),
-				'bulk_actions' => bp_nouveau_messages_get_bulk_actions(),
-			);
-
-			// Star private messages.
-			if ( bp_is_active( 'messages', 'star' ) ) {
-				$params['messages'] = array_merge( $params['messages'], array(
-					'strings' => array(
-						'text_unstar'  => __( 'Unstar', 'bp-nouveau' ),
-						'text_star'    => __( 'Star', 'bp-nouveau' ),
-						'title_unstar' => __( 'Starred', 'bp-nouveau' ),
-						'title_star'   => __( 'Not starred', 'bp-nouveau' ),
-						'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-nouveau' ),
-						'title_star_thread'   => __( 'Star the first message in this thread', 'bp-nouveau' ),
-					),
-					'is_single_thread' => (int) bp_is_messages_conversation(),
-					'star_counter'     => 0,
-					'unstar_counter'   => 0
-				) );
-			}
-		}
-
-		if ( bp_is_group_invites() || ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
-			$show_pending = bp_group_has_invites( array( 'user_id' => 'any' ) ) && ! bp_is_group_create();
-
-			// Init the Group invites nav
-			$invites_nav = array(
-				'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-nouveau' ), 'order' => 0 ),
-				'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-nouveau' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
-				'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-nouveau' ), 'order' => 100, 'hide' => 1 ),
-			);
-
-			if ( bp_is_active( 'friends' ) ) {
-				$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-nouveau' ), 'order' => 5 );
-			}
-
-			$params['group_invites'] = array(
-				'nav'                => bp_sort_by_key( $invites_nav, 'order', 'num' ),
-				'loading'            => __( 'Loading members, please wait.', 'bp-nouveau' ),
-				'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-nouveau' ),
-				'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'bp-nouveau' ),
-				'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-nouveau' ),
-				'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
-				'is_group_create'    => bp_is_group_create(),
-				'nonces'             => array(
-					'uninvite'     => wp_create_nonce( 'groups_invite_uninvite_user' ),
-					'send_invites' => wp_create_nonce( 'groups_send_invites' )
-				),
-			);
-		}
-
-		if ( bp_is_current_component( 'activity' ) || bp_is_group_activity() ) {
-			$activity_params = array(
-				'user_id'     => bp_loggedin_user_id(),
-				'object'      => 'user',
-				'backcompat'  => (bool) has_action( 'bp_activity_post_form_options' ),
-				'post_nonce'  => wp_create_nonce( 'post_update', '_wpnonce_post_update' ),
-			);
-
-			$user_displayname = bp_get_loggedin_user_fullname();
-
-			if ( buddypress()->avatar->show_avatars ) {
-				$width  = bp_core_avatar_thumb_width();
-				$height = bp_core_avatar_thumb_height();
-				$activity_params = array_merge( $activity_params, array(
-					'avatar_url'    => bp_get_loggedin_user_avatar( array(
-						'width'  => $width,
-						'height' => $height,
-						'html'   => false,
-					) ),
-					'avatar_width'  => $width,
-					'avatar_height' => $height,
-					'avatar_alt'    => sprintf( __( 'Profile photo of %s', 'bp-nouveau' ), $user_displayname ),
-					'user_domain'   => bp_loggedin_user_domain()
-				) );
-			}
-
-			/**
-			 * Filter here to include specific Action buttons.
-			 *
-			 * @param array $value The array containing the button params. Must look like:
-			 * array( 'buttonid' => array(
-			 *  'id'      => 'buttonid',                            // Id for your action
-			 *  'caption' => __( 'Button caption', 'text-domain' ),
-			 *  'icon'    => 'dashicons-*',                         // The dashicon to use
-			 *  'order'   => 0,
-			 *  'handle'  => 'button-script-handle',                // The handle of the registered script to enqueue
-			 * );
-			 */
-			$activity_buttons = apply_filters( 'bp_nouveau_activity_buttons', array() );
-
-			if ( ! empty( $activity_buttons ) ) {
-				// Sort buttons
-				$activity_params['buttons'] = bp_sort_by_key( $activity_buttons, 'order', 'num' );
-
-				// Enqueue Buttons scripts and styles
-				foreach ( $activity_params['buttons'] as $key_button => $buttons ) {
-					if ( empty( $buttons['handle'] ) ) {
-						continue;
-					}
-
-					// Enqueue the button style if registered
-					if ( wp_style_is( $buttons['handle'], 'registered' ) ) {
-						wp_enqueue_style( $buttons['handle'] );
-					}
-
-					// Enqueue the button script if registered
-					if ( wp_script_is( $buttons['handle'], 'registered' ) ) {
-						wp_enqueue_script( $buttons['handle'] );
-					}
-
-					// Finally remove the handle parameter
-					unset( $activity_params['buttons'][ $key_button ]['handle'] );
-				}
-			}
-
-			// Activity Objects
-			if ( ! bp_is_single_item() && ! bp_is_user() ) {
-				$activity_objects = array(
-					'profile' => array(
-						'text'                     => __( 'Post in: Profile', 'bp-nouveau' ),
-						'autocomplete_placeholder' => '',
-						'priority'                 => 5,
-					),
-				);
-
-				// the groups component is active & the current user is at least a member of 1 group
-				if ( bp_is_active( 'groups' ) && bp_has_groups( array( 'user_id' => bp_loggedin_user_id(), 'max' => 1 ) ) ) {
-					$activity_objects['group'] = array(
-						'text'                     => __( 'Post in: Group', 'bp-nouveau' ),
-						'autocomplete_placeholder' => __( 'Start typing the group name...', 'bp-nouveau' ),
-						'priority'                 => 10,
-					);
-				}
-
-				$activity_params['objects'] = apply_filters( 'bp_nouveau_activity_objects', $activity_objects );
-			}
-
-			$activity_strings = array(
-				'whatsnewPlaceholder' => sprintf( __( "What's new, %s?", 'bp-nouveau' ), bp_get_user_firstname( $user_displayname ) ),
-				'whatsnewLabel'       => __( 'Post what\'s new', 'bp-nouveau' ),
-				'whatsnewpostinLabel' => __( 'Post in', 'bp-nouveau' ),
-			);
-
-			if ( bp_is_group() ) {
-				$activity_params = array_merge( $activity_params,
-					array( 'object' => 'group', 'item_id' => bp_get_current_group_id() )
-				);
-			}
-
-			$params['activity'] = array(
-				'params'  => $activity_params,
-				'strings' => $activity_strings,
-			);
-		}
-
 		/**
 		 * Filters core JavaScript strings for internationalization before AJAX usage.
 		 *
@@ -691,7 +440,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * @see https://buddypress.trac.wordpress.org/ticket/6065
 	 *
-	 * @since 2.2.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $templates Array of templates.
 	 * @uses   apply_filters() call 'bp_legacy_theme_compat_page_templates_directory_only' and return false

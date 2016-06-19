@@ -1,4 +1,4 @@
-/* global wp, bp, BP_Nouveau, ajaxurl */
+/* global wp, bp, BP_Nouveau */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
@@ -185,7 +185,7 @@ window.bp = window.bp || {};
 			// Extend posted data with stored data and object nonce
 			$.extend( post_data, bp.Nouveau.getStorage( 'bp-' + object ), { nonce: BP_Nouveau.nonces[object] } );
 
-			this.ajax_request = $.post( ajaxurl, post_data, 'json' );
+			this.ajax_request = $.post( BP_Nouveau.ajaxurl, post_data, 'json' );
 
 			return this.ajax_request;
 		},

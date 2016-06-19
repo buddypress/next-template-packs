@@ -11,6 +11,26 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Enqueue Styles for the Messages UI (mentions)
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $styles  The array of styles to enqueue
+ * @return array  The same array with the specific messages styles.
+ */
+function bp_nouveau_messages_enqueue_styles( $styles = array() ) {
+	if ( ! bp_is_user_messages() ) {
+		return $styles;
+	}
+
+	return array_merge( $styles, array(
+		'bp-nouveau-messages-at' => array(
+			'file' => buddypress()->plugin_url . 'bp-activity/css/mentions%1$s%2$s.css', 'version' => bp_get_version(),
+		),
+	) );
+}
+
+/**
  * Register Scripts for the Messages component
  *
  * @since  1.0.0
@@ -47,6 +67,52 @@ function bp_nouveau_messages_enqueue_scripts() {
 
 	// Add The tiny MCE init specific function.
 	add_filter( 'tiny_mce_before_init', 'bp_nouveau_messages_at_on_tinymce_init', 10, 2 );
+}
+
+/**
+ * Localize the strings needed for the messages UI
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $params Associative array containing the JS Strings needed by scripts
+ * @return array          The same array with specific strings for the messages UI if needed.
+ */
+function bp_nouveau_messages_localize_scripts( $params = array() ) {
+	if ( ! bp_is_user_messages() ) {
+		return $params;
+	}
+
+	$params['messages'] = array(
+		'errors' => array(
+			'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'bp-nouveau' ),
+			'subject'         => __( 'Please add a subject to your message.', 'bp-nouveau' ),
+			'message_content' => __( 'Please add some content to your message.', 'bp-nouveau' ),
+		),
+		'nonces' => array(
+			'send' => wp_create_nonce( 'messages_send_message' ),
+		),
+		'loading' => __( 'Loading messages, please wait.', 'bp-nouveau' ),
+		'bulk_actions' => bp_nouveau_messages_get_bulk_actions(),
+	);
+
+	// Star private messages.
+	if ( bp_is_active( 'messages', 'star' ) ) {
+		$params['messages'] = array_merge( $params['messages'], array(
+			'strings' => array(
+				'text_unstar'  => __( 'Unstar', 'bp-nouveau' ),
+				'text_star'    => __( 'Star', 'bp-nouveau' ),
+				'title_unstar' => __( 'Starred', 'bp-nouveau' ),
+				'title_star'   => __( 'Not starred', 'bp-nouveau' ),
+				'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-nouveau' ),
+				'title_star_thread'   => __( 'Star the first message in this thread', 'bp-nouveau' ),
+			),
+			'is_single_thread' => (int) bp_is_messages_conversation(),
+			'star_counter'     => 0,
+			'unstar_counter'   => 0
+		) );
+	}
+
+	return $params;
 }
 
 function bp_nouveau_message_search_form() {

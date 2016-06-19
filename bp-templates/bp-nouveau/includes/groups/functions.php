@@ -43,6 +43,49 @@ function bp_nouveau_groups_enqueue_scripts() {
 	wp_enqueue_script( 'bp-nouveau-group-invites' );
 }
 
+/**
+ * Localize the strings needed for the Group's Invite UI
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $params Associative array containing the JS Strings needed by scripts
+ * @return array          The same array with specific strings for the Group's Invite UI if needed.
+ */
+function bp_nouveau_groups_localize_scripts( $params = array() ) {
+	if ( ! bp_is_group_invites() && ! ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
+		return $params;
+	}
+
+	$show_pending = bp_group_has_invites( array( 'user_id' => 'any' ) ) && ! bp_is_group_create();
+
+	// Init the Group invites nav
+	$invites_nav = array(
+		'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-nouveau' ), 'order' => 0 ),
+		'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-nouveau' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
+		'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-nouveau' ), 'order' => 100, 'hide' => 1 ),
+	);
+
+	if ( bp_is_active( 'friends' ) ) {
+		$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-nouveau' ), 'order' => 5 );
+	}
+
+	$params['group_invites'] = array(
+		'nav'                => bp_sort_by_key( $invites_nav, 'order', 'num' ),
+		'loading'            => __( 'Loading members, please wait.', 'bp-nouveau' ),
+		'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'bp-nouveau' ),
+		'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'bp-nouveau' ),
+		'invites_sending'    => __( 'Sending the invites, please wait.', 'bp-nouveau' ),
+		'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
+		'is_group_create'    => bp_is_group_create(),
+		'nonces'             => array(
+			'uninvite'     => wp_create_nonce( 'groups_invite_uninvite_user' ),
+			'send_invites' => wp_create_nonce( 'groups_send_invites' )
+		),
+	);
+
+	return $params;
+}
+
 function bp_nouveau_groups_get_inviter_ids( $user_id, $group_id ) {
 	if ( empty( $user_id ) || empty( $group_id ) ) {
 		return false;
