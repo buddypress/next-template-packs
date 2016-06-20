@@ -4,8 +4,9 @@
  *
  * Querystring is set via AJAX in _inc/ajax.php - bp_legacy_theme_object_filter()
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 bp_nouveau_before_loop(); ?>
@@ -39,26 +40,14 @@ bp_nouveau_before_loop(); ?>
 
 				</div>
 
-				<div class="item-meta"><span class="activity"><?php bp_member_last_active(); ?></span></div>
+				<?php if ( bp_nouveau_member_has_meta() ) : ?>
+					<div class="item-meta">
 
-				<?php
+						<?php bp_nouveau_member_meta(); ?>
 
-				/**
-				 * Fires inside the display of a directory member item.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_directory_members_item' ); ?>
+					</div><!-- #item-meta -->
+				<?php endif ; ?>
 
-				<?php
-				 /***
-				  * If you want to show specific profile fields here you can,
-				  * but it'll add an extra query for each member in the loop
-				  * (only one regardless of the number of fields you show):
-				  *
-				  * bp_member_profile_data( 'field=the field name' );
-				  */
-				?>
 			</div>
 
 			<div class="action">

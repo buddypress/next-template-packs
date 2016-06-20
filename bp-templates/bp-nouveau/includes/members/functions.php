@@ -140,6 +140,47 @@ function bp_nouveau_members_catch_button_args( $button = array() ) {
 }
 
 /**
+ * Catch the content hooked to the do_action hooks in single member header
+ * and in the members loop
+ *
+ * @since  1.0.0
+ *
+ * @return string|bool HTML Output if hooked. False otherwise.
+ */
+function bp_nouveau_get_hooked_member_meta() {
+	ob_start();
+
+	if ( ! empty( $GLOBALS['members_template'] ) ) {
+		/**
+		 * Fires inside the display of a directory member item.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_directory_members_item' );
+
+	// It's the user's header
+	} else {
+		/**
+		 * Fires after the group header actions section.
+		 *
+		 * If you'd like to show specific profile fields here use:
+		 * bp_member_profile_data( 'field=About Me' ); -- Pass the name of the field
+		 *
+		 * @since 1.2.0
+		 */
+		do_action( 'bp_profile_header_meta' );
+	}
+
+	$output = ob_get_clean();
+
+	if ( ! empty( $output ) ) {
+		return $output;
+	}
+
+	return false;
+}
+
+/**
  * Locate a single member template into a specific hierarchy.
  *
  * @since  1.0.0

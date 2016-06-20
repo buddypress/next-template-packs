@@ -253,6 +253,86 @@ function bp_nouveau_members_loop_buttons() {
 	}
 
 /**
+ * Does the member has meta.
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if the member has meta. False otherwise.
+ */
+function bp_nouveau_member_has_meta() {
+	return (bool) bp_nouveau_get_member_meta();
+}
+
+/**
+ * Display the member meta.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_member_meta() {
+	$meta = bp_nouveau_get_member_meta();
+
+	echo join( "\n", $meta );
+}
+
+	/**
+	 * Get the member meta.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return array The member meta.
+	 */
+	function bp_nouveau_get_member_meta() {
+		$meta     = array();
+		$is_loop  = false;
+
+		if ( ! empty( $GLOBALS['members_template']->member ) ) {
+			$member = $GLOBALS['members_template']->member;
+			$is_loop = true;
+		} else {
+			$member = bp_get_displayed_user();
+		}
+
+		if ( empty( $member->id ) ) {
+			return $meta;
+		}
+
+		if ( empty( $member->template_meta ) ) {
+			// It's a single user's header
+			if ( ! $is_loop ) {
+				$meta['last_activity'] = sprintf( '<span class="activity">%s</span>', bp_get_last_activity( bp_displayed_user_id() ) );
+
+			// We're in the members loop
+			} else {
+				$meta = array(
+					'last_activity' => sprintf( '<span class="activity">%s</span>', bp_get_member_last_active() ),
+				);
+			}
+
+			// Make sure to include hooked meta.
+			$extra_meta = bp_nouveau_get_hooked_member_meta();
+
+			if ( $extra_meta ) {
+				$meta['extra'] = $extra_meta;
+			}
+
+			/**
+			 * Filter here to add/remove Member meta.
+			 *
+			 * @since  1.0.0
+			 *
+			 * @param array  $meta     The list of meta to output.
+			 * @param object $member   The member object
+			 * @param bool   $is_loop  True if in the members loop. False otherwise.
+			 */
+			$member->template_meta = apply_filters( 'bp_nouveau_get_member_meta', $meta, $member, $is_loop );
+		}
+
+		return $member->template_meta;
+	}
+
+/**
  * Load the appropriate content for the single member pages
  *
  * @since  1.0.0
