@@ -440,3 +440,28 @@ function bp_nouveau_activity_allowed_tags( $activity_allowedtags = array() ) {
 
 	return $activity_allowedtags;
 }
+
+/**
+ * Get the activity query args for the widget.
+ *
+ * @since  1.0.0
+ *
+ * @return array The activity arguments.
+ */
+function bp_nouveau_activity_widget_query() {
+	$args       = array();
+	$bp_nouveau = bp_nouveau();
+
+	if ( isset( $bp_nouveau->activity->widget_args ) ) {
+		$args = $bp_nouveau->activity->widget_args;
+	}
+
+	/**
+	 * Filter here to edit the activity widget arguments
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array $args The activity arguments.
+	 */
+	return apply_filters( 'bp_nouveau_activity_widget_query', $args );
+}
