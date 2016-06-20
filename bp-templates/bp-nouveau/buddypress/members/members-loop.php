@@ -19,7 +19,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="members-list" class="item-list">
+	<ul id="members-list" class="item-list bp-list">
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
 
