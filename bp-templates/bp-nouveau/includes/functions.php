@@ -319,6 +319,16 @@ function bp_nouveau_get_forsaken_hooks() {
 			'message_type' => 'warning',
 			'message'      => __( 'The &#39;bp_group_header_meta&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_group_meta&#39; filter instead', 'bp-nouveau' ),
 		),
+		'bp_directory_members_item' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_directory_members_item&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_member_meta&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_profile_header_meta' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_profile_header_meta&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_member_meta&#39; filter instead', 'bp-nouveau' ),
+		),
 	);
 }
 

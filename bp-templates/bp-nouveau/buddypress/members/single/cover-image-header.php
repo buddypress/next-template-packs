@@ -2,12 +2,10 @@
 /**
  * BuddyPress - Users Cover Image Header
  *
- * @since    1.0.0
- * @version  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
-
 ?>
 
 <div id="cover-image-container">
@@ -30,8 +28,6 @@
 
 			<div id="item-buttons"><?php bp_nouveau_member_header_buttons(); ?></div><!-- #item-buttons -->
 
-			<span class="activity"><?php bp_last_activity( bp_displayed_user_id() ); ?></span>
-
 			<?php
 
 			/**
@@ -41,33 +37,13 @@
 			 */
 			do_action( 'bp_before_member_header_meta' ); ?>
 
-			<div id="item-meta">
+			<?php if ( bp_nouveau_member_has_meta() ) : ?>
+				<div class="item-meta">
 
-				<?php if ( bp_is_active( 'activity' ) ) : ?>
+					<?php bp_nouveau_member_meta(); ?>
 
-					<div id="latest-update">
-
-						<?php bp_activity_latest_update( bp_displayed_user_id() ); ?>
-
-					</div>
-
-				<?php endif; ?>
-
-				<?php
-
-				 /**
-				  * Fires after the group header actions section.
-				  *
-				  * If you'd like to show specific profile fields here use:
-				  * bp_member_profile_data( 'field=About Me' ); -- Pass the name of the field
-				  *
-				  * @since 1.2.0
-				  */
-				 do_action( 'bp_profile_header_meta' );
-
-				 ?>
-
-			</div><!-- #item-meta -->
+				</div><!-- #item-meta -->
+			<?php endif ; ?>
 
 		</div><!-- #item-header-content -->
 
