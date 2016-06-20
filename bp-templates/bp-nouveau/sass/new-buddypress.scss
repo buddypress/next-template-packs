@@ -357,21 +357,31 @@
 * @subsection 5.2.2.1 - classes, pag, filters
 *--------------------------------------------
 */
+
 /**
 	*-------------------------------------------
 	* @subsection 5.2.2.2 - Extended Profiles
 	*-------------------------------------------
 	*/
+
+// Import User Profile
+@import "../../shared/styles/_bp_user_profile";
+
 /**
 	*-------------------------------------------
 	* @subsection 5.2.2.3 - Groups
 	*-------------------------------------------
 	*/
+
 /**
 	*-------------------------------------------
 	* @subsection 5.2.2.5 - Private Messaging
 	*-------------------------------------------
 	*/
+
+// Import Messages module
+@import "../../shared/styles/_bp_messages_module";
+
 /**
 	*------------------------------------------
 	* @subsection 5.2.2.6 - Settings
