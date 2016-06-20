@@ -33,9 +33,9 @@
 		3.1.1 Whats New Activity
 		3.1.2 - Activity Entries
 		3.1.3 - Activity Comments
-	3.2 - Members Loop
+	3.2 - Blogs Loop
 	3.3 - Groups Loop
-	3.4 - Blogs Loop
+	3.4 - Members Loop
 
 4.0 - Directories - Members, Groups, Blogs, Register, activation
 
@@ -143,19 +143,19 @@
 
 /**
 *----------------------------------------------------------
-* @section 4.2 - Blogs Loop
+* @section 3.2 - Blogs Loop
 *----------------------------------------------------------
 */
 
 /**
 *----------------------------------------------------------
-* @section 4.2 - Groups Loop
+* @section 3.2 - Groups Loop
 *----------------------------------------------------------
 */
 
 /**
 *----------------------------------------------------------
-* @section 4.2 - Members Loop
+* @section 3.2 - Members Loop
 *----------------------------------------------------------
 */
 
@@ -179,6 +179,9 @@
 
 // Import general global styles for single screen headers
 @import "../../shared/styles/_bp_item_header_general";
+
+// Import Cover Image container defaults
+@import "../../shared/styles/_bp_cover_image";
 
 /**
 *-----------------------------------------------------
