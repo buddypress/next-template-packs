@@ -2,7 +2,7 @@
 
 .item-list-tabs {
 	background: transparent;
-	clear: left;
+	clear: both;
 	overflow: hidden;
 
 	ul {
@@ -72,6 +72,10 @@
 
 #buddypress div#item-nav ul li.loading a {
 	background-position: 88% 50%;
+}
+
+#subnav {
+	width: 100%;
 }
 
 .item-list-tabs#subnav,
@@ -201,7 +205,7 @@
 
 .buddypress_object_nav .item-list-tabs  li.dynamic a span,
 .buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
+.buddypress_object_nv .item-list-tabs  li.dynamic.selected a span,
 .buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
 .buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
 .buddypress .item-list-tabs  li.dynamic a span,
@@ -230,8 +234,6 @@
 				}
 			}
 		}
-
-
 
 	}
 }

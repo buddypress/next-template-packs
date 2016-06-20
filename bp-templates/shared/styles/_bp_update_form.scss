@@ -10,6 +10,7 @@
 }
 
 .activity-update-form {
+	margin: $marg-med 0;
 
 	.activity-form { // #whats-new-form
 
@@ -22,16 +23,23 @@
 
 	}
 
-	.user-avatar { //whats-new-avatar
+	#whats-new-avatar {
 		float: left;
+		margin-right: $marg-sml;
 	}
 
-	.content-wrap { // #whats-new-content
+	// these ID's need replacing with this!
+	//.content-wrap { // #whats-new-content
+
+		#whats-new-content {
 		margin-left: 55px;
 		padding: 0 0 $marg-lrg $marg-lrg;
 	}
 
-	.textarea-wrap { // #whats-new-textarea
+	// these ID's need replacing with this!
+	//.textarea-wrap { // #whats-new-textarea
+
+	#whats-new-textarea {
 		textarea {
 			background: #fff;
 			@include box-model();
@@ -40,7 +48,7 @@
 			font-size: medium;
 			height: 2.2em;
 			line-height: 1.4;
-			padding: $pad-med;
+			padding: 6px;
 			width: 100%;
 		}
 

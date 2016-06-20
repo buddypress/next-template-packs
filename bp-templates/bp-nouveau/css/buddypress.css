@@ -1,8 +1,3 @@
-/*
-* BP Primary stylesheet
-*
-*/
-
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -67,7 +62,7 @@
 */
 .item-list-tabs {
 	background: transparent;
-	clear: left;
+	clear: both;
 	overflow: hidden;
 }
 
@@ -127,6 +122,10 @@
 
 #buddypress div#item-nav ul li.loading a {
 	background-position: 88% 50%;
+}
+
+#subnav {
+	width: 100%;
 }
 
 .item-list-tabs#subnav ul li,
@@ -246,7 +245,7 @@
 
 .buddypress_object_nav .item-list-tabs li.dynamic a span,
 .buddypress_object_nav .item-list-tabs li.dynamic a:hover span,
-.buddypress_object_nav .item-list-tabs li.dynamic.selected a span,
+.buddypress_object_nv .item-list-tabs li.dynamic.selected a span,
 .buddypress_object_nav .item-list-tabs li.dynamic.current a span,
 .buddypress_object_nav .item-list-tabs li.dynamic a:hover span,
 .buddypress .item-list-tabs li.dynamic a span,
@@ -384,22 +383,27 @@
 	padding: 0;
 }
 
+.activity-update-form {
+	margin: 15px 0;
+}
+
 .activity-update-form .activity-form p.activity-greeting {
 	line-height: 0.5em;
 	margin-bottom: 15px;
 	margin-left: 75px;
 }
 
-.activity-update-form .user-avatar {
+.activity-update-form #whats-new-avatar {
 	float: left;
+	margin-right: 10px;
 }
 
-.activity-update-form .content-wrap {
+.activity-update-form #whats-new-content {
 	margin-left: 55px;
 	padding: 0 0 20px 20px;
 }
 
-.activity-update-form .textarea-wrap textarea {
+.activity-update-form #whats-new-textarea textarea {
 	background: #fff;
 	-webkit-box-sizing: "border-box";
 	-moz-box-sizing: "border-box";
@@ -409,11 +413,11 @@
 	font-size: medium;
 	height: 2.2em;
 	line-height: 1.4;
-	padding: 1em;
+	padding: 6px;
 	width: 100%;
 }
 
-.activity-update-form .textarea-wrap:focus {
+.activity-update-form #whats-new-textarea:focus {
 	border-color: rgba(31, 179, 221, 0.9);
 	outline-color: rgba(31, 179, 221, 0.9);
 }
@@ -1331,6 +1335,10 @@ a.message-action-star:hover {
 	content: "\f464";
 }
 
+#buddypress .bp-messages-content {
+	margin: 15px 0;
+}
+
 #buddypress ul#message-threads {
 	border-top: 1px solid #eaeaea;
 	clear: both;
@@ -1346,6 +1354,7 @@ a.message-action-star:hover {
 #buddypress ul#message-threads li {
 	border-bottom: 1px solid #eaeaea;
 	margin: 0;
+	overflow: hidden;
 	padding: 5px 0;
 }
 
@@ -1448,6 +1457,10 @@ a.message-action-star:hover {
 #buddypress .bp-messages-content #thread-preview {
 	border: 1px solid #eaeaea;
 	margin-top: 0.5em;
+}
+
+#buddypress .bp-messages-content #thread-preview .preview-message {
+	clear: both;
 }
 
 #buddypress ul#message-threads:empty,
