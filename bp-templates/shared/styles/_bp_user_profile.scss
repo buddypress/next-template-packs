@@ -1,4 +1,4 @@
-
+// BP User Profiles screen
 
 #buddypress div.profile h4 {
 	margin-bottom: auto;
@@ -8,6 +8,7 @@
 #buddypress #profile-edit-form ul.button-nav {
 	margin-top: 15px;
 }
+
 body.no-js #buddypress .field-visibility-settings-toggle,
 body.no-js #buddypress .field-visibility-settings-close {
 	display: none;
@@ -17,13 +18,14 @@ body.no-js #buddypress .field-visibility-settings-close {
 	display: none;
 	margin-top: 10px;
 }
-	body.no-js #buddypress .field-visibility-settings {
-		display: block;
-	}
+
+body.no-js #buddypress .field-visibility-settings {
+	display: block;
+}
 
 #buddypress .current-visibility-level {
-	font-weight: bold;
 	font-style: normal;
+	font-weight: bold;
 }
 
 #buddypress .field-visibility-settings,
@@ -36,13 +38,14 @@ body.no-js #buddypress .field-visibility-settings-close {
 #buddypress .field-visibility-settings a {
 	font-size: 80%;
 }
+
 body.register #buddypress div.page ul {
 	list-style: none;
 }
 
 #buddypress .standard-form .field-visibility-settings label {
-	margin: 0;
 	font-weight: normal;
+	margin: 0;
 }
 
 #buddypress .field-visibility-settings legend,
@@ -64,21 +67,22 @@ body.register #buddypress div.page ul {
 }
 
 #buddypress .html-active button.switch-html {
+	background: #f5f5f5;
 	border-bottom-color: transparent;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
-	background: #f5f5f5;
 }
 
 #buddypress .tmce-active button.switch-tmce {
+	background: #f5f5f5;
 	border-bottom-color: transparent;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
-	background: #f5f5f5;
+
 }
 
 #buddypress .standard-form .wp-editor-container textarea {
-	width: 100%;
-	padding-top: 0;
 	padding-bottom: 0;
+	padding-top: 0;
+	width: 100%;
 }
