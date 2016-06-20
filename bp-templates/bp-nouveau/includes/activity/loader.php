@@ -51,6 +51,7 @@ class BP_Nouveau_Activity {
 		require( trailingslashit( $this->dir ) . 'functions.php'     );
 		require( trailingslashit( $this->dir ) . 'template-tags.php' );
 		require( trailingslashit( $this->dir ) . 'ajax.php'          );
+		require( trailingslashit( $this->dir ) . 'widgets.php'       );
 	}
 
 	/**
@@ -61,6 +62,9 @@ class BP_Nouveau_Activity {
 	private function setup_actions() {
 		// Enqueue the scripts
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_activity_enqueue_scripts' );
+
+		// Register the Activity Widget.
+		add_action( 'bp_widgets_init', array( 'BP_Latest_Activities', 'register_widget' ) );
 
 		$ajax_actions = array(
 			array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
