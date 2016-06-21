@@ -1288,23 +1288,35 @@ a.message-action-star:hover {
 }
 
 .message-action-star span.icon:before,
+.message-action-unstar span.icon:before {
+	font-family: dashicons;
+	font-size: 18px;
+}
+
+.message-action-star span.icon:before {
+	color: #aaa;
+	content: "\f154";
+}
+
+.message-action-unstar span.icon:before {
+	color: #fcdd77;
+	content: "\f155";
+}
+
 .message-action-star:before,
 .message-action-unstar:before,
-.message-action-unstar span.icon:before,
-#buddypress div.item-list-tabs ul li#compose-personal-li a#compose:before,
+.item-list-tabs ul li#compose-personal-li a#compose:before,
 .message-action-view:before,
 .message-action-delete:before {
 	font-family: dashicons;
 	font-size: 18px;
 }
 
-.message-action-star span.icon:before,
 .message-action-star:before {
 	color: #aaa;
 	content: "\f154";
 }
 
-.message-action-unstar span.icon:before,
 .message-action-unstar:before {
 	color: #fcdd77;
 	content: "\f155";
@@ -1322,24 +1334,28 @@ a.message-action-star:hover {
 	color: #a00;
 }
 
-#buddypress div.item-list-tabs#subnav ul li#compose-personal-li.last {
+.preview-content .actions a {
+	text-decoration: none;
+}
+
+li#compose-personal-li.last {
 	margin-top: 0;
 }
 
-#buddypress div.item-list-tabs ul li#compose-personal-li a#compose {
+li#compose-personal-li a#compose {
 	border: 1px solid #ccc;
 	display: inline-block;
 }
 
-#buddypress div.item-list-tabs ul li#compose-personal-li a#compose:before {
+li#compose-personal-li a#compose:before {
 	content: "\f464";
 }
 
-#buddypress .bp-messages-content {
+.bp-messages-content {
 	margin: 15px 0;
 }
 
-#buddypress ul#message-threads {
+.bp-messages-content #message-threads {
 	border-top: 1px solid #eaeaea;
 	clear: both;
 	list-style: none;
@@ -1351,44 +1367,183 @@ a.message-action-star:hover {
 	width: 100%;
 }
 
-#buddypress ul#message-threads li {
+.bp-messages-content #message-threads li {
 	border-bottom: 1px solid #eaeaea;
 	margin: 0;
 	overflow: hidden;
 	padding: 5px 0;
 }
 
-#buddypress ul#message-threads li.selected {
+.bp-messages-content #message-threads li.selected {
 	background-color: #eaeaea;
 }
 
-#buddypress div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
-	margin-right: 15px;
-	max-width: 42.5%;
+.bp-messages-content #message-threads li .thread-content {
+	float: left;
+	width: 95%;
 }
 
-#buddypress ul#message-threads .thread-cb {
+.bp-messages-content #message-threads li .thread-content .thread-from,
+.bp-messages-content #message-threads li .thread-content .thread-subject,
+.bp-messages-content #message-threads li .thread-content .thread-date {
+	float: left;
+	height: 32px;
+	overflow: hidden;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-subject,
+.bp-messages-content #message-threads li .thread-content .thread-date {
+	font-weight: bold;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-from {
+	width: 35%;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-from img.avatar {
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-subject {
+	width: 48%;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-date {
+	padding-right: 5px;
+	text-align: right;
+	width: 17%;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-subject span.excerpt,
+.bp-messages-content #message-threads li .thread-content .thread-date time {
+	color: #888;
+	font-size: 80%;
+}
+
+.bp-messages-content #message-threads li:not(.selected) .thread-content {
+	cursor: s-resize;
+}
+
+.bp-messages-content #message-threads .thread-cb {
 	float: left;
 	text-align: center;
 	width: 5%;
 }
 
-#buddypress .bp-messages-filters .user-messages-bulk-actions div.bulk-actions,
-#buddypress .bp-messages-filters .user-messages-bulk-actions label {
-	float: left;
+.bp-messages-content .actions {
+	float: right;
+	max-width: 30%;
 }
 
-#buddypress .bp-messages-filters .user-messages-bulk-actions .bulk-actions.bp-hide {
+.bp-messages-content .actions a {
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.bp-messages-content .actions a:before {
+	font-size: 28px;
+}
+
+.bp-messages-content #thread-preview {
+	border: 1px solid #eaeaea;
+	margin-top: 0.5em;
+	overflow: hidden;
+}
+
+.bp-messages-content #thread-preview .preview-message {
+	clear: both;
+}
+
+.bp-messages-content #thread-preview .preview-content {
+	margin: 0.5em;
+}
+
+.bp-messages-content #thread-preview .preview-content .thread-participants {
+	float: left;
+	list-style: none;
+	margin: 5px 0;
+	overflow: hidden;
+	width: 70%;
+}
+
+.bp-messages-content #thread-preview .preview-content .thread-participants li {
+	float: left;
+	margin-left: 5px;
+}
+
+.bp-messages-content #thread-preview .preview-message ul,
+.bp-messages-content #thread-preview .preview-message ol,
+.bp-messages-content #thread-preview .preview-message blockquote,
+.bp-messages-content #bp-message-thread-list li .message-content ul,
+.bp-messages-content #bp-message-thread-list li .message-content ol,
+.bp-messages-content #bp-message-thread-list li .message-content blockquote {
+	list-style-position: inside;
+	margin-left: 0;
+}
+
+.bp-messages-content #thread-preview .preview-message,
+.bp-messages-content ul#bp-message-thread-list {
+	border-top: 1px solid #eaeaea;
+	overflow: hidden;
+	padding: 5px;
+	padding-top: 1em;
+}
+
+.bp-messages-content ul#message-threads:empty,
+.bp-messages-content #thread-preview:empty {
 	display: none;
 }
 
-#buddypress .bp-messages-filters .user-messages-bulk-actions label {
+.bp-messages-content #thread-preview h4:first-child,
+.bp-messages-content #bp-message-thread-header h4:first-child {
+	background-color: #eaeaea;
+	color: #555;
+	margin: 0;
+	padding: 0.5em;
+}
+
+.bp-messages-content #message-threads .thread-content a,
+.bp-messages-content #bp-message-thread-list li a.user-link {
+	border: 0;
+	text-decoration: none;
+}
+
+.bp-messages-content #bp-message-thread-list message-content {
+	margin-top: 1em;
+}
+
+.bp-messages-content #bp-message-thread-list img.avatar {
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+.bp-messages-content #bp-message-thread-list .actions a:before {
+	font-size: 18px;
+}
+
+.bp-messages-content #bp-message-thread-list time {
+	color: #888;
+	font-size: 80%;
+}
+
+div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
+	margin-right: 15px;
+	max-width: 42.5%;
+}
+
+.bp-messages-filters .user-messages-bulk-actions .bulk-actions,
+.bp-messages-filters .user-messages-bulk-actions label {
+	float: left;
+}
+
+.bp-messages-filters .user-messages-bulk-actions label {
 	padding: 5px 0;
 	text-align: center;
 	width: 30px;
 }
 
-#buddypress .bp-messages-filters li.user-messages-bulk-actions div select {
+.bp-messages-filters .user-messages-bulk-actions div select {
 	-webkit-appearance: textfield;
 	border: 1px solid #ccc;
 	color: #888;
@@ -1400,149 +1555,8 @@ a.message-action-star:hover {
 	padding: 2.5px 10px;
 }
 
-#buddypress ul#message-threads li .thread-content {
-	float: left;
-	width: 95%;
-}
-
-#buddypress ul#message-threads li:not(.selected) .thread-content {
-	cursor: s-resize;
-}
-
-#buddypress ul#message-threads .thread-content a,
-#buddypress .bp-messages-content ul#bp-message-thread-list li a.user-link {
-	border: 0;
-	text-decoration: none;
-}
-
-#buddypress ul#message-threads .thread-content .thread-from,
-#buddypress ul#message-threads .thread-content .thread-subject,
-#buddypress ul#message-threads .thread-content .thread-date {
-	float: left;
-	height: 32px;
-	overflow: hidden;
-}
-
-#buddypress ul#message-threads .unread .thread-content .thread-subject,
-#buddypress ul#message-threads .unread .thread-content .thread-date {
-	font-weight: bold;
-}
-
-#buddypress ul#message-threads .thread-content .thread-from {
-	width: 35%;
-}
-
-#buddypress ul#message-threads .thread-content .thread-from img.avatar {
-	float: left;
-	margin: 0 10px 0 0;
-}
-
-#buddypress ul#message-threads .thread-content .thread-subject {
-	width: 48%;
-}
-
-#buddypress ul#message-threads .thread-content .thread-date {
-	padding-right: 5px;
-	text-align: right;
-	width: 17%;
-}
-
-#buddypress ul#message-threads .thread-content .thread-date time,
-#buddypress .bp-messages-content ul#bp-message-thread-list time,
-#buddypress ul#message-threads .thread-content .thread-subject span.excerpt {
-	color: #888;
-	font-size: 80%;
-}
-
-#buddypress .bp-messages-content #thread-preview {
-	border: 1px solid #eaeaea;
-	margin-top: 0.5em;
-}
-
-#buddypress .bp-messages-content #thread-preview .preview-message {
-	clear: both;
-}
-
-#buddypress ul#message-threads:empty,
-#buddypress .bp-messages-content #thread-preview:empty {
+.bp-messages-filters .user-messages-bulk-actions .bulk-actions.bp-hide {
 	display: none;
-}
-
-#buddypress .bp-messages-content #thread-preview h4:first-child,
-#buddypress .bp-messages-content #bp-message-thread-header h4:first-child {
-	background-color: #eaeaea;
-	color: #555;
-	margin: 0;
-	padding: 0.5em;
-}
-
-#buddypress .bp-messages-content #thread-preview .preview-content {
-	margin: 0.5em;
-}
-
-#buddypress .bp-messages-content ul.thread-participants {
-	float: left;
-	list-style: none;
-	margin: 5px 0;
-	overflow: hidden;
-	width: 70%;
-}
-
-#buddypress .bp-messages-content ul.thread-participants li {
-	float: left;
-	margin-left: 5px;
-}
-
-#buddypress .bp-messages-content .actions {
-	float: right;
-	max-width: 30%;
-}
-
-#buddypress .bp-messages-content .actions a:before {
-	font-size: 28px;
-}
-
-#buddypress .bp-messages-content .actions a {
-	display: inline-block;
-	margin: 0 5px;
-}
-
-#buddypress .bp-messages-content #thread-preview .preview-message,
-#buddypress .bp-messages-content ul#bp-message-thread-list {
-	border-top: 1px solid #eaeaea;
-	overflow: hidden;
-	padding: 5px;
-	padding-top: 1em;
-}
-
-.bp-messages-content #thread-preview .preview-message ul,
-.bp-messages-content #thread-preview .preview-message ol,
-.bp-messages-content #thread-preview .preview-message blockquote,
-.bp-messages-content ul#bp-message-thread-list li .message-content ul,
-.bp-messages-content ul#bp-message-thread-list li .message-content ol,
-.bp-messages-content ul#bp-message-thread-list li .message-content blockquote {
-	list-style-position: inside;
-	margin-left: 0;
-}
-
-.bp-messages-content ul#bp-message-thread-list li {
-	border-bottom: 1px solid #eaeaea;
-	list-style: none;
-	overflow: hidden;
-	padding: 15px 0 0;
-}
-
-.bp-messages-content ul#bp-message-thread-list li .message-content {
-	margin-top: 1em;
-}
-
-.bp-messages-content ul#bp-message-thread-list li img.avatar {
-	float: left;
-	margin: 0 10px 0 0;
-}
-
-.bp-messages-content ul#bp-message-thread-list .actions a:before {
-	font-size: 18px;
 }
 
 /**

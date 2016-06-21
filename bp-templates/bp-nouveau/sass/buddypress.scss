@@ -382,6 +382,9 @@
 // Import Messages module
 @import "../../shared/styles/_bp_messages";
 
+// Import Nouveau specific Messages module styles
+@import "_nouveau_messages";
+
 /**
 	*------------------------------------------
 	* @subsection 5.2.2.6 - Settings

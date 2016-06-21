@@ -1,0 +1,293 @@
+// Nouveau Messages styles.
+
+// Icon additions to default action star
+
+
+.message-action-star:before,
+.message-action-unstar:before,
+.item-list-tabs ul li#compose-personal-li a#compose:before,
+.message-action-view:before,
+.message-action-delete:before {
+	font-family: dashicons;
+	font-size: 18px;
+}
+
+.message-action-star:before {
+	color: #aaa;
+	content: "\f154";
+}
+
+.message-action-unstar:before {
+	color: #fcdd77;
+	content: "\f155";
+}
+
+.message-action-view:before {
+	content: "\f473";
+}
+
+.message-action-delete:before {
+	content: "\f153";
+}
+
+.message-action-delete:hover:before {
+	color: #a00;
+}
+
+.preview-content {
+ .actions {
+ 	a {
+ 		text-decoration: none;
+ 	}
+ }
+}
+
+// Compose Icon
+li#compose-personal-li {
+
+	&.last {
+		margin-top: 0;
+	}
+
+	a#compose {
+		border: 1px solid $bp-border-dark;
+		display: inline-block;
+	}
+
+	a#compose:before {
+		content: "\f464";
+	}
+
+} // close li#compose-personal-li
+
+// Visual message threads & preview pane styles
+
+.bp-messages-content {
+	margin: $marg-med 0;
+
+	#message-threads {
+		border-top: 1px solid #eaeaea;
+		clear: both;
+		list-style: none;
+		margin: 0;
+		max-height: 220px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		padding: 0;
+		width: 100%;
+
+		li {
+			border-bottom: 1px solid #eaeaea;
+			margin: 0;
+			overflow: hidden;
+			padding: 5px 0;
+
+			&.selected {
+				background-color: #eaeaea;
+			}
+
+			.thread-content {
+				float: left;
+				width: 95%;
+
+				.thread-from,
+				.thread-subject,
+				.thread-date {
+					float: left;
+					height: 32px;
+					overflow: hidden;
+				}
+
+				.thread-subject,
+				.thread-date {
+					font-weight: bold;
+				}
+
+				.thread-from {
+					width: 35%;
+
+					img.avatar {
+						float: left;
+						margin: 0 $marg-sml 0 0;
+					}
+				}
+
+				.thread-subject {
+					width: 48%;
+				}
+
+				.thread-date {
+					padding-right: 5px;
+					text-align: right;
+					width: 17%;
+				}
+
+				.thread-subject span.excerpt,
+				.thread-date time {
+					color: #888;
+					font-size: 80%;
+				}
+			} // close thread-content
+
+			&:not(.selected) .thread-content {
+				cursor: s-resize;
+			}
+
+		} // close li
+
+		.thread-cb {
+			float: left;
+			text-align: center;
+			width: 5%;
+		}
+
+	} // close message-threads
+
+	.actions {
+		float: right;
+		max-width: 30%;
+
+		a {
+			display: inline-block;
+			margin: 0 5px;
+
+			&:before {
+				font-size: 28px;
+			}
+		}
+	}
+
+	#thread-preview {
+		border: 1px solid #eaeaea;
+		margin-top: 0.5em;
+		overflow: hidden;
+
+		.preview-message {
+			clear: both;
+		}
+
+		.preview-content {
+				margin: 0.5em;
+
+			.thread-participants {
+				float: left;
+				list-style: none;
+				margin: 5px 0;
+				overflow: hidden;
+				width: 70%;
+
+				li {
+					float: left;
+					margin-left: 5px;
+				}
+			}
+
+		} // close .preview-content
+
+	} // close .thread-preview
+
+	#thread-preview .preview-message,
+	#bp-message-thread-list li .message-content {
+		ul,
+		ol,
+		blockquote {
+			list-style-position: inside;
+			margin-left: 0;
+		}
+	}
+
+	#thread-preview .preview-message,
+	ul#bp-message-thread-list {
+		border-top: 1px solid #eaeaea;
+		overflow: hidden;
+		padding: 5px;
+		padding-top: 1em;
+	}
+
+	ul#message-threads:empty,
+	#thread-preview:empty {
+		display: none;
+	}
+
+	#thread-preview h4:first-child,
+	#bp-message-thread-header h4:first-child {
+		background-color: #eaeaea;
+		color: #555;
+		margin: 0;
+		padding: 0.5em;
+	}
+
+	#message-threads .thread-content a,
+	#bp-message-thread-list li a.user-link {
+		border: 0;
+		text-decoration: none;
+	}
+
+	#bp-message-thread-list  {
+		message-content {
+			margin-top: 1em;
+		}
+
+		img.avatar {
+			float: left;
+			margin: 0 10px 0 0;
+		}
+
+		.actions {
+			a:before {
+				font-size: 18px;
+			}
+		}
+
+		time {
+			color: #888;
+			font-size: 80%;
+		}
+
+	} // close #bp-message-thread-list
+
+} // close .bp-messages-content
+
+// Bulk Message styles
+
+div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
+	margin-right: 15px;
+	max-width: 42.5%;
+}
+
+.bp-messages-filters {
+
+	.user-messages-bulk-actions {
+
+		.bulk-actions,
+		label {
+			float: left;
+		}
+
+		label {
+			padding: 5px 0;
+			text-align: center;
+			width: 30px;
+		}
+
+		div {
+			select {
+				-webkit-appearance: textfield;
+				border: 1px solid #ccc;
+				color: #888;
+				float: left;
+				font: inherit;
+				font-size: 90%;
+				line-height: inherit;
+				max-width: 80%;
+				padding: 2.5px 10px;
+			}
+		}
+
+		.bulk-actions.bp-hide {
+			display: none;
+		}
+
+	} // close .user-messages-bulk-actions
+
+}
