@@ -125,10 +125,16 @@ class BP_Nouveau_Groups {
 			add_filter( 'bp_button_' . $button, 'bp_nouveau_ajax_button', 10, 4 );
 		}
 
-		/**
-		 * This filter is there to add the Group Type to the Group's front.php template hierarchy
-		 * as i'm not sure https://buddypress.trac.wordpress.org/ticket/7129 will be part of 2.6
-		 */
+		// Add sections in the BP Template Pack panel of the customizer.
+		add_filter( 'bp_nouveau_customizer_sections', 'bp_nouveau_groups_customizer_sections', 10, 1 );
+
+		// Add settings into the Groups sections of the customizer.
+		add_filter( 'bp_nouveau_customizer_settings', 'bp_nouveau_groups_customizer_settings', 10, 1 );
+
+		// Add controls into the Groups sections of the customizer.
+		add_filter( 'bp_nouveau_customizer_controls', 'bp_nouveau_groups_customizer_controls', 10, 1 );
+
+		// Add the group's default front template to hieararchy if user enabled it (Enabled by default).
 		add_filter( 'bp_groups_get_front_template', 'bp_nouveau_group_reset_front_template', 10, 1 );
 	}
 }

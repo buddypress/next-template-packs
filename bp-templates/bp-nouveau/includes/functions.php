@@ -417,6 +417,136 @@ function bp_nouveau_get_component_filters( $context = '', $component = '' ) {
 }
 
 /**
+ * When previewing make sure to get the temporary setting of the customizer.
+ * This is necessary when we need to get these very early.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $option the index of the setting to get.
+ * @param  mixed  $retval the value to use as default.
+ * @return mixed          the value for the requested option.
+ */
+function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
+	if ( empty( $option ) || ! isset( $_POST['customized'] ) ) {
+		return $retval;
+	}
+
+	$temporary_setting = json_decode( wp_unslash( $_POST['customized'] ), true );
+
+	if ( isset( $temporary_setting['bp_nouveau_appearance[' . $option . ']'] ) ) {
+		$retval = $temporary_setting['bp_nouveau_appearance[' . $option . ']'];
+	}
+
+	return $retval;
+}
+
+/**
+ * Get the BP Nouveau Appearance settings.
+ *
+ * @since 1.0.0
+ *
+ * @param string $option Leave empty to get all settings, specify a value for a specific one.
+ * @param mixed          An array of settings, the value of the requested setting.
+ */
+function bp_nouveau_get_appearance_settings( $option = '' ) {
+	$default_args = array(
+		'user_front_page'   => 1,
+	);
+
+	if ( bp_is_active( 'groups' ) ) {
+		$default_args['group_front_page'] = 1;
+	}
+
+	$settings = bp_parse_args(
+		bp_get_option( 'bp_nouveau_appearance', array() ),
+		$default_args,
+		'nouveau_appearance_settings'
+	);
+
+	if ( ! empty( $option ) ) {
+		if ( isset( $settings[ $option ] ) ) {
+			return $settings[ $option ];
+		} else {
+			return false;
+		}
+	}
+
+	return $settings;
+}
+
+/**
+ * Add a specific panel for the BP Nouveau Template Pack.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Customize_Manager $wp_customize WordPress customizer.
+ */
+function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
+	if ( ! bp_is_root_blog() ) {
+		return;
+	}
+
+	$bp_nouveau_options = bp_nouveau_get_appearance_settings();
+
+	$wp_customize->add_panel( 'bp_nouveau_panel', array(
+		'description' => __( 'Customize the appearance of your BuddyPress Template pack.', 'bp-nouveau' ),
+		'title'       => _x( 'BuddyPress Template Pack', 'Customizer Panel', 'bp-nouveau' ),
+		'priority'    => 200,
+	) );
+
+	$sections = apply_filters( 'bp_nouveau_customizer_sections', array(
+		'bp_nouveau_user_front_page' => array(
+			'title'       => __( 'User\'s front page', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 10,
+			'description' => __( 'Activate or deactivate the default front page for your users.', 'bp-nouveau' ),
+		),
+	) );
+
+	// Add the sections to the customizer
+	foreach ( $sections as $id_section => $section_args ) {
+		$wp_customize->add_section( $id_section, $section_args );
+	}
+
+	$settings = apply_filters( 'bp_nouveau_customizer_settings', array(
+		'bp_nouveau_appearance[user_front_page]' => array(
+			'index'             => 'user_front_page',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+	) );
+
+	// Add the settings
+	foreach ( $settings as $id_setting => $setting_args ) {
+		$args = array();
+
+		if ( empty( $setting_args['index'] ) ) {
+			continue;
+		}
+
+		$args = array_merge( $setting_args, array( 'default' => $bp_nouveau_options[ $setting_args['index'] ] ) );
+
+		$wp_customize->add_setting( $id_setting, $args );
+	}
+
+	$controls = apply_filters( 'bp_nouveau_customizer_controls', array(
+		'user_front_page' => array(
+			'label'      => __( 'Enable default front page for user profiles.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_user_front_page',
+			'settings'   => 'bp_nouveau_appearance[user_front_page]',
+			'type'       => 'checkbox',
+		),
+	) );
+
+	// Add the controls to the customizer's section
+	foreach ( $controls as $id_control => $control_args ) {
+		$wp_customize->add_control( $id_control, $control_args );
+	}
+}
+
+/**
  * BP Nouveau's callback for the cover image feature.
  *
  * @todo implement the cover image for this template pack!
