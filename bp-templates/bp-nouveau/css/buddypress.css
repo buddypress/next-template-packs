@@ -312,10 +312,14 @@
 *-------------------------------------------------------------------------------
 */
 .buddypress .bp-list {
+	-webkit-box-sizing: "border-box";
+	-moz-box-sizing: "border-box";
+	box-sizing: "border-box";
 	border-top: 1px solid #eaeaea;
 	clear: both;
 	list-style: none;
-	margin: 0;
+	overflow: hidden;
+	margin: 15px 0;
 	padding: 0;
 	width: 100%;
 }
@@ -323,7 +327,7 @@
 .buddypress .bp-list li {
 	border-bottom: 1px solid #eaeaea;
 	list-style: none;
-	margin: 0;
+	margin: 10px 0;
 	padding: 15px 0;
 	position: relative;
 }
@@ -357,6 +361,12 @@
 	right: 0;
 	text-align: right;
 	top: 15px;
+}
+
+.buddypress .bp-list li .meta {
+	color: #888;
+	font-size: 80%;
+	margin-top: 10px;
 }
 
 .buddypress .bp-list li.group-no-avatar div.item-desc {
@@ -982,17 +992,35 @@ body.no-js .single-item-header .js-self-profile-button {
 /*
 * bp-nouveau styling: invite members, sent invites
 * */
+.buddypress .bp-invites-content ul.item-list {
+	border-top: 0;
+}
+
 .buddypress .bp-invites-content ul.item-list li {
 	border: 1px solid #eaeaea;
-	float: left;
-	margin: 0.5%;
+	margin: 0 0 1%;
+	overflow: hidden;
 	padding-left: 5px;
 	padding-right: 5px;
-	width: 49%;
+	width: auto;
 }
 
 .buddypress .bp-invites-content ul.item-list li .item-title {
 	width: auto;
+}
+
+.buddypress .bp-invites-content ul.item-list li .action {
+	position: inherit;
+	top: inherit;
+	right: inherit;
+}
+
+.buddypress .bp-invites-content ul.item-list li .action a.button.invite-button {
+	border: 0;
+}
+
+.buddypress .bp-invites-content ul.item-list li .action a.button.invite-button:focus, .buddypress .bp-invites-content ul.item-list li .action a.button.invite-button:hover {
+	color: #1fb3dd;
 }
 
 .buddypress .bp-invites-content ul.item-list li.selected {
@@ -1007,11 +1035,12 @@ body.no-js .single-item-header .js-self-profile-button {
 	font-size: 80%;
 }
 
-.buddypress .bp-invites-content .group-inviters {
+.buddypress .bp-invites-content li ul.group-inviters {
 	clear: both;
+	overflow: hidden;
 }
 
-.buddypress .bp-invites-content .group-inviters li {
+.buddypress .bp-invites-content li ul.group-inviters li {
 	border: 0;
 	float: left;
 	width: inherit;
@@ -1043,14 +1072,14 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin-top: 1em;
 }
 
-.buddypress .bp-invites-content #send-invites-editor ul a {
+.buddypress .bp-invites-content #send-invites-editor ul .action a {
 	border: 0;
 	display: inline-block;
 	position: relative;
 	text-decoration: none;
 }
 
-.buddypress .bp-invites-content #send-invites-editor ul a:before {
+.buddypress .bp-invites-content #send-invites-editor ul .action a:before {
 	color: rgba(170, 0, 0, 0.7);
 	content: "\f153";
 	display: none;
@@ -1065,6 +1094,32 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .buddypress .bp-invites-content #send-invites-editor.bp-hide {
 	display: none;
+}
+
+@media screen and (min-width: 32em) {
+	.buddypress .bp-invites-content ul.item-list > li {
+		-webkit-box-sizing: "border-box";
+		-moz-box-sizing: "border-box";
+		box-sizing: "border-box";
+		border: 1px solid #eaeaea;
+		float: left;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+		width: 49.5%;
+	}
+	.buddypress .bp-invites-content ul.item-list > li:nth-child(odd) {
+		margin-right: 0.5%;
+	}
+	.buddypress .bp-invites-content ul.item-list > li:nth-child(even) {
+		margin-left: 0.5%;
+	}
+	.buddypress .bp-invites-content ul.item-list ul.group-inviters {
+		float: left;
+		width: auto;
+	}
+	.buddypress .bp-invites-content ul.item-list .action {
+		float: right;
+	}
 }
 
 /* End nuoveau invites */

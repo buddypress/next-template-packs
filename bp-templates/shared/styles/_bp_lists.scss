@@ -2,18 +2,19 @@
 
 .buddypress {
 	.bp-list {
-		//@include box-model();
+		@include box-model();
 		border-top: 1px solid $light-grey;
 		clear: both;
 		list-style: none;
-		margin: 0;
+		overflow: hidden;
+		margin: $marg-med 0;
 		padding: 0;
 		width: 100%;
 
 		li {
 			border-bottom: 1px solid $light-grey;
 			list-style: none;
-			margin: 0;
+			margin: $marg-sml 0;
 			padding: $marg-med 0;
 			position: relative;
 
@@ -47,6 +48,13 @@
 				text-align: right;
 				top: 15px;
 			}
+
+			.meta {
+				color: #888;
+				font-size: 80%;
+				margin-top: $marg-sml;
+			}
+
 		} // close li
 
 		li.group-no-avatar div.item-desc {

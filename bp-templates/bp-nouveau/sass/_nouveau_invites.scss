@@ -1,0 +1,157 @@
+/*
+* bp-nouveau styling: invite members, sent invites
+* */
+.buddypress {
+	.bp-invites-content {
+
+		ul.item-list {
+			border-top: 0;
+
+			li {
+				border: 1px solid $light-grey;
+				margin: 0 0 1%;
+				overflow: hidden;
+				padding-left: 5px;
+				padding-right: 5px;
+				width: auto;
+
+				.item-title {
+					width: auto;
+				}
+
+				.action {
+					position: inherit;
+					top: inherit;
+					right: inherit;
+
+					a.button.invite-button {
+						border: 0;
+
+						&:focus,
+						&:hover {
+							color: #1fb3dd;
+						}
+					}
+				}
+
+			} // close li
+
+			li.selected {
+				@include box-shadow(0 0 0 4px #1fb3dd);
+			}
+
+		} // close ul
+
+		.item-list .item-meta span,
+		.group-inviters li {
+			color: #999;
+			font-size: 80%;
+		}
+
+		li {
+			ul.group-inviters {
+				clear: both;
+				overflow: hidden;
+
+				li {
+					border: 0;
+					float: left;
+					width: inherit;
+				}
+			} // close .group-inviters
+		} // close li
+
+		#send-invites-editor {
+			overflow: hidden;
+
+			textarea {
+				width: 100%;
+			}
+
+			ul {
+				clear: both;
+				list-style: none;
+				overflow: hidden;
+
+				li {
+					float: left;
+					margin: 0.5%;
+					max-height: 50px;
+					max-width: 50px;
+
+				}
+
+				.action {
+					float: right;
+					margin-top: 1em;
+				}
+
+			} // ul
+
+			ul {
+
+				.action {
+					a {
+						border: 0;
+						display: inline-block;
+						position: relative;
+						text-decoration: none;
+					}
+
+					a:before {
+						color: rgba(170, 0, 0, 0.7);
+						content: "\f153";
+						display: none;
+						font-family: dashicons;
+						font-size: 50px;
+						left: 0;
+						line-height: 50px;
+						position: absolute;
+						top: 0;
+						vertical-align: top;
+					}
+				}
+			} // ul
+
+		} // close #send-invites-editor
+
+		#send-invites-editor.bp-hide {
+			display: none;
+		}
+
+		@include medium-small-up() {
+
+			ul.item-list {
+				> li {
+					@include box-model();
+					border: 1px solid #eaeaea;
+					float: left;
+					padding-left: $pad-sml;
+					padding-right: $pad-sml;
+					width: 49.5%;
+
+					&:nth-child(odd) {
+						margin-right: 0.5%;
+					}
+
+					&:nth-child(even) {
+						margin-left: 0.5%;
+					}
+				} // close  li
+
+				ul.group-inviters {
+					float: left;
+					width: auto;
+				}
+				.action {
+					float: right;
+				}
+			} // ul
+
+		} // close @media
+
+	} // close bp-invites-content
+
+}
+
+/* End nuoveau invites */
