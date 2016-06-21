@@ -539,32 +539,106 @@ function bp_nouveau_get_hooked_group_meta() {
 }
 
 /**
- * So 2.6 forgot to update the Group's front hierarchy so that it includes the Group Type
- * This filter will be removed when https://buddypress.trac.wordpress.org/ticket/7129 will
- * be fixed.
+ * Add sections to the customizer for the groups component.
+ *
+ * @since 1.0.0
+ *
+ * @param  array $sections the Customizer sections to add.
+ * @return array           the Customizer sections to add.
+ */
+function bp_nouveau_groups_customizer_sections( $sections = array() ) {
+	return array_merge( $sections, array(
+		'bp_nouveau_group_front_page' => array(
+			'title'       => __( 'Group\'s front page', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 10,
+			'description' => __( 'Activate or deactivate the default front page for your groups.', 'bp-nouveau' ),
+		),
+	) );
+}
+
+/**
+ * Add settings to the customizer for the groups component.
+ *
+ * @since 1.0.0
+ *
+ * @param  array $settings the settings to add.
+ * @return array           the settings to add.
+ */
+function bp_nouveau_groups_customizer_settings( $settings = array() ) {
+	return array_merge( $settings, array(
+		'bp_nouveau_appearance[group_front_page]' => array(
+			'index'             => 'group_front_page',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+	) );
+}
+
+/**
+ * Add controls for the settings of the customizer for the groups component.
+ *
+ * @since 1.0.0
+ *
+ * @param  array $controls the controls to add.
+ * @return array           the controls to add.
+ */
+function bp_nouveau_groups_customizer_controls( $controls = array() ) {
+	return array_merge( $controls, array(
+		'group_front_page' => array(
+			'label'      => __( 'Enable default front page for groups.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_front_page',
+			'settings'   => 'bp_nouveau_appearance[group_front_page]',
+			'type'       => 'checkbox',
+		),
+	) );
+}
+
+/**
+ * Add the default group front template to the front template hierarchy.
  *
  * @since  1.0.0
  *
  * @param  array  $templates The list of templates for the front.php template part.
- * @return array  The same list making sure the Group type has been added to the hierarchy.
+ * @return array  The same list with the default front template if needed.
  */
 function bp_nouveau_group_reset_front_template( $templates = array() ) {
 	$group = groups_get_current_group();
 
-	if ( empty( $group->id ) || ! bp_groups_get_group_types() ) {
+	if ( empty( $group->id ) ) {
 		return $templates;
 	}
 
-	$group_type = bp_groups_get_group_type( $group->id );
-	if ( ! $group_type ) {
-		$group_type = 'none';
+	/**
+	 * So 2.6 forgot to update the Group's front hierarchy so that it includes the Group Type.
+	 * This filter will be removed when https://buddypress.trac.wordpress.org/ticket/7129 will
+	 * be fixed.
+	 */
+	if ( bp_groups_get_group_types() ) {
+		$group_type = bp_groups_get_group_type( $group->id );
+		if ( ! $group_type ) {
+			$group_type = 'none';
+		}
+
+		$group_type_template = 'groups/single/front-group-type-' . sanitize_file_name( $group_type )   . '.php';
+
+		// Insert the group type template if not in the hierarchy
+		if ( ! in_array( $group_type_template, $templates ) ) {
+			array_splice( $templates, 2, 0, array( $group_type_template ) );
+		}
 	}
 
-	$group_type_template = 'groups/single/front-group-type-' . sanitize_file_name( $group_type )   . '.php';
+	$use_default_front = bp_nouveau_get_appearance_settings( 'group_front_page' );
 
-	// Insert the group type template if not in the hierarchy
-	if ( ! in_array( $group_type_template, $templates ) ) {
-		array_splice( $templates, 2, 0, array( $group_type_template ) );
+	// Setting the front template happens too early, so we need this!
+	if ( is_customize_preview() ) {
+		$use_default_front = bp_nouveau_get_temporary_setting( 'group_front_page', $use_default_front );
+	}
+
+	if ( ! empty( $use_default_front ) ) {
+		array_push( $templates, 'groups/single/default-front.php' );
 	}
 
 	return $templates;

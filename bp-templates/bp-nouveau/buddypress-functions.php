@@ -175,6 +175,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 			add_action( 'wp_footer', array( $this, 'developer_feedbacks' ), 0 );
 		}
 
+		// BP Nouveau Customizer panel.
+		add_action( 'bp_customize_register', 'bp_nouveau_customize_register' );
+
 		/** Override **********************************************************/
 
 		/**

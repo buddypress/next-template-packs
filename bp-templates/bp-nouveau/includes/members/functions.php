@@ -181,6 +181,29 @@ function bp_nouveau_get_hooked_member_meta() {
 }
 
 /**
+ * Add the default user front template to the front template hierarchy
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $templates The list of templates for the front.php template part.
+ * @return array  The same list with the default front template if needed.
+ */
+function bp_nouveau_member_reset_front_template( $templates = array() ) {
+	$use_default_front = bp_nouveau_get_appearance_settings( 'user_front_page' );
+
+	// Setting the front template happens too early, so we need this!
+	if ( is_customize_preview() ) {
+		$use_default_front = bp_nouveau_get_temporary_setting( 'user_front_page', $use_default_front );
+	}
+
+	if ( ! empty( $use_default_front ) ) {
+		array_push( $templates, 'members/single/default-front.php' );
+	}
+
+	return $templates;
+}
+
+/**
  * Locate a single member template into a specific hierarchy.
  *
  * @since  1.0.0
