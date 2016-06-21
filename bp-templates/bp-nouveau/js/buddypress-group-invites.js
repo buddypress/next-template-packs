@@ -581,7 +581,7 @@ window.bp = window.bp || {};
 
 	bp.Views.inviteUsers = bp.Nouveau.GroupInvites.View.extend( {
 		tagName: 'ul',
-		className: 'item-list',
+		className: 'item-list bp-list',
 		id: 'members-list',
 
 		initialize: function() {
