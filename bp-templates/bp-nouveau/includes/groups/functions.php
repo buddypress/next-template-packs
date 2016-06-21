@@ -611,25 +611,6 @@ function bp_nouveau_group_reset_front_template( $templates = array() ) {
 		return $templates;
 	}
 
-	/**
-	 * So 2.6 forgot to update the Group's front hierarchy so that it includes the Group Type.
-	 * This filter will be removed when https://buddypress.trac.wordpress.org/ticket/7129 will
-	 * be fixed.
-	 */
-	if ( bp_groups_get_group_types() ) {
-		$group_type = bp_groups_get_group_type( $group->id );
-		if ( ! $group_type ) {
-			$group_type = 'none';
-		}
-
-		$group_type_template = 'groups/single/front-group-type-' . sanitize_file_name( $group_type )   . '.php';
-
-		// Insert the group type template if not in the hierarchy
-		if ( ! in_array( $group_type_template, $templates ) ) {
-			array_splice( $templates, 2, 0, array( $group_type_template ) );
-		}
-	}
-
 	$use_default_front = bp_nouveau_get_appearance_settings( 'group_front_page' );
 
 	// Setting the front template happens too early, so we need this!
