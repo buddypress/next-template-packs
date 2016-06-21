@@ -171,7 +171,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
 
 		// Feedbacks for developers
-		if ( WP_DEBUG ) {
+		if ( true === apply_filters( 'bp_nouveau_show_developer_warnings', WP_DEBUG ) ) {
 			add_action( 'wp_footer', array( $this, 'developer_feedbacks' ), 0 );
 		}
 
