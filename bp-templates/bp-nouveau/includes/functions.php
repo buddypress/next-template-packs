@@ -17,24 +17,41 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 
 	$data_attribute = $button->id;
 
-	if ( 'member_friendship' === $button->id ) {
-		$parse_class = explode( ' ', $button->link_class );
+	$reset_ids = array(
+		'member_friendship' => true,
+		'group_membership'  => true,
+	);
 
-		if ( false !== $parse_class ) {
-			$find_id = array_intersect( $parse_class, array(
-				'pending_friend',
-				'awaiting_response_friend',
-				'is_friend',
-				'not_friends',
-			) );
+	if ( ! empty( $reset_ids[ $button->id ] ) )  {
+		$parse_class = array_map( 'sanitize_html_class', explode( ' ', $button->link_class ) );
 
-			if ( 1 === count( $find_id ) ) {
-				$data_attribute = reset( $find_id );
+		if ( false === $parse_class ) {
+			return $output;
+		}
 
-				if ( in_array( $data_attribute, array( 'pending_friend', 'awaiting_response_friend' ) ) ) {
-					$data_attribute = str_replace( '_friend', '', $data_attribute );
-				}
-			}
+		$find_id = array_intersect( $parse_class, array(
+			'pending_friend',
+			'awaiting_response_friend',
+			'is_friend',
+			'not_friends',
+			'leave-group',
+			'join-group',
+			'accept-invite',
+			'membership-requested',
+			'request-membership',
+		) );
+
+		if ( 1 !== count( $find_id ) ) {
+			return $output;
+		}
+
+		$data_attribute = reset( $find_id );
+
+		if ( in_array( $data_attribute, array( 'pending_friend', 'awaiting_response_friend' ) ) ) {
+			$data_attribute = str_replace( '_friend', '', $data_attribute );
+
+		} elseif ( 'group_membership' === $button->id ) {
+			$data_attribute = str_replace( '-', '_', $data_attribute );
 		}
 	}
 
@@ -328,6 +345,16 @@ function bp_nouveau_get_forsaken_hooks() {
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
 			'message'      => __( 'The &#39;bp_profile_header_meta&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_member_meta&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_group_header_actions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_group_header_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_groups_buttons&#39; filter instead', 'bp-nouveau' ),
+		),
+		'bp_directory_groups_actions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_directory_groups_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_groups_buttons&#39; filter instead', 'bp-nouveau' ),
 		),
 	);
 }

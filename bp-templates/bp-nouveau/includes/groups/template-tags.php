@@ -76,6 +76,126 @@ function bp_nouveau_after_groups_directory_content() {
 }
 
 /**
+ * Output the action buttons for the displayed group
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_group_header_buttons() {
+	$bp_nouveau = bp_nouveau();
+
+	echo join( ' ', bp_nouveau_get_groups_buttons() );
+
+	/**
+	 * On the group's header we need to reset the group button's global
+	 */
+	if ( ! empty( $bp_nouveau->groups->group_buttons ) ) {
+		unset( $bp_nouveau->groups->group_buttons );
+	}
+
+	/**
+	 * Fires in the group header actions section.
+	 *
+	 * @since 1.2.6
+	 */
+	do_action( 'bp_group_header_actions' );
+}
+
+function bp_nouveau_groups_loop_buttons() {
+	if ( empty( $GLOBALS['groups_template'] ) ) {
+		return;
+	}
+
+	echo join( ' ', bp_nouveau_get_groups_buttons( 'loop' ) );
+
+	/**
+	 * Fires inside the action section of an individual group listing item.
+	 *
+	 * @since 1.1.0 (BuddyPress)
+	 */
+	do_action( 'bp_directory_groups_actions' );
+}
+
+	/**
+	 * Get the action buttons for the current group in the loop,
+	 * or the current displayed group
+	 *
+	 * @since 1.0.0
+	 */
+	function bp_nouveau_get_groups_buttons( $type = 'group' ) {
+		// Not really sure why BP Legacy needed to do this...
+		if ( 'group' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+			return;
+		}
+
+		$buttons = array();
+
+		if ( 'loop' === $type && isset( $GLOBALS['groups_template']->group ) ) {
+			$group = $GLOBALS['groups_template']->group;
+		} else {
+			$group = groups_get_current_group();
+		}
+
+		if ( empty( $group->id ) ) {
+			return $buttons;
+		}
+
+		/**
+		 * This filter workaround is waiting for a core adaptation
+		 * so that we can directly get the groups button arguments
+		 * instead of the button.
+		 * @see https://buddypress.trac.wordpress.org/ticket/7126
+		 */
+		add_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
+
+		bp_get_group_join_button( $group );
+
+		remove_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
+
+		if ( ! empty( bp_nouveau()->groups->button_args ) ) {
+			$buttons['group_membership'] = wp_parse_args( array(
+				'id'       => 'group_membership',
+				'position' => 5,
+			), bp_nouveau()->groups->button_args );
+
+			unset( bp_nouveau()->groups->button_args );
+		}
+
+		/**
+		 * Filter here to add your buttons, use the position argument to choose where to insert it.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $buttons The list of buttons.
+		 * @param int    $group   The current group object.
+		 * @parem string $type    Whether we're displaying a groups loop or a groups single item.
+		 */
+		$buttons_group = apply_filters( 'bp_nouveau_get_groups_buttons', $buttons, $group, $type );
+
+		if ( empty( $buttons_group ) ) {
+			return $buttons;
+		}
+
+		// It's the first entry of the loop, so build the Group and sort it
+		if ( ! isset( bp_nouveau()->groups->group_buttons ) || false === is_a( bp_nouveau()->groups->group_buttons, 'BP_Buttons_Group' ) ) {
+			$sort = true;
+			bp_nouveau()->groups->group_buttons = new BP_Buttons_Group( $buttons_group );
+
+		// It's not the first entry, the order is set, we simply need to update the Buttons Group
+		} else {
+			$sort = false;
+			bp_nouveau()->groups->group_buttons->update( $buttons_group );
+		}
+
+		$return = bp_nouveau()->groups->group_buttons->get( $sort );
+
+		if ( ! $return ) {
+			return array();
+		}
+
+		return $return;
+	}
+
+/**
  * Does the group has meta.
  *
  * @since  1.0.0

@@ -61,9 +61,6 @@ class BP_Nouveau_Groups {
 	 */
 	private function setup_actions() {
 		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			add_action( 'bp_group_header_actions',          'bp_group_join_button',           5 );
-			add_action( 'bp_group_header_actions',          'bp_group_new_topic_button',     20 );
-			add_action( 'bp_directory_groups_actions',      'bp_group_join_button'              );
 			add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',  5 );
 			add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button', 10 );
 			add_action( 'groups_setup_nav',                 'bp_nouveau_group_setup_nav'        );
@@ -119,6 +116,7 @@ class BP_Nouveau_Groups {
 			'groups_reject_invite',
 			'groups_membership_requested',
 			'groups_request_membership',
+			'groups_group_membership',
 		);
 
 		foreach ( $buttons as $button ) {

@@ -44,14 +44,7 @@ bp_nouveau_before_loop(); ?>
 
 			<div class="action">
 
-				<?php
-
-				/**
-				 * Fires inside the action section of an individual group listing item.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_directory_groups_actions' ); ?>
+				<?php bp_nouveau_groups_loop_buttons(); ?>
 
 			</div>
 

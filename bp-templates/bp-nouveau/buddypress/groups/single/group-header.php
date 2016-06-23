@@ -81,14 +81,7 @@
 
 	<div id="item-buttons">
 
-		<?php
-
-		/**
-		 * Fires in the group header actions section.
-		 *
-		 * @since 1.2.6
-		 */
-		do_action( 'bp_group_header_actions' ); ?>
+		<?php bp_nouveau_group_header_buttons(); ?>
 
 	</div><!-- #item-buttons -->
 </div><!-- #item-header-content -->
