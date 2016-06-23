@@ -115,6 +115,21 @@ function bp_nouveau_groups_loop_buttons() {
 	do_action( 'bp_directory_groups_actions' );
 }
 
+function bp_nouveau_groups_invite_buttons() {
+	if ( empty( $GLOBALS['groups_template'] ) ) {
+		return;
+	}
+
+	echo join( ' ', bp_nouveau_get_groups_buttons( 'invite' ) );
+
+	/**
+	 * Fires inside the member group item action markup.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_group_invites_item_action' );
+}
+
 	/**
 	 * Get the action buttons for the current group in the loop,
 	 * or the current displayed group
@@ -129,7 +144,7 @@ function bp_nouveau_groups_loop_buttons() {
 
 		$buttons = array();
 
-		if ( 'loop' === $type && isset( $GLOBALS['groups_template']->group ) ) {
+		if ( ( 'loop' === $type || 'invite' ===  $type ) && isset( $GLOBALS['groups_template']->group ) ) {
 			$group = $GLOBALS['groups_template']->group;
 		} else {
 			$group = groups_get_current_group();
@@ -139,25 +154,59 @@ function bp_nouveau_groups_loop_buttons() {
 			return $buttons;
 		}
 
-		/**
-		 * This filter workaround is waiting for a core adaptation
-		 * so that we can directly get the groups button arguments
-		 * instead of the button.
-		 * @see https://buddypress.trac.wordpress.org/ticket/7126
-		 */
-		add_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
+		// Invite buttons on member's invites screen
+		if ( 'invite' === $type ) {
+			// Don't show button if not logged in or previously banned
+			if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) || empty( $group->status ) ) {
+				return $buttons;
+			}
 
-		bp_get_group_join_button( $group );
+			// Setup Accept button attributes
+			$buttons['accept_invite'] =  array(
+				'id'                => 'accept_invite',
+				'position'          => 5,
+				'component'         => 'groups',
+				'must_be_logged_in' => true,
+				'link_href'         => esc_url( bp_get_group_accept_invite_link() ),
+				'link_class'        => 'button accept group-button accept-invite',
+				'link_title'        => esc_attr__( 'Accept', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
+			);
 
-		remove_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
+			// Setup Reject button attributes
+			$buttons['reject_invite'] = array(
+				'id'                => 'reject_invite',
+				'position'          => 15,
+				'component'         => 'groups',
+				'must_be_logged_in' => true,
+				'link_href'         => esc_url( bp_get_group_reject_invite_link() ),
+				'link_text'         => __( 'Reject', 'bp-nouveau' ),
+				'link_title'        => __( 'Reject', 'bp-nouveau' ),
+				'link_class'        => 'button reject group-button reject-invite',
+			);
 
-		if ( ! empty( bp_nouveau()->groups->button_args ) ) {
-			$buttons['group_membership'] = wp_parse_args( array(
-				'id'       => 'group_membership',
-				'position' => 5,
-			), bp_nouveau()->groups->button_args );
+		// Membership button on groups loop or single group's header
+		} else {
+			/**
+			 * This filter workaround is waiting for a core adaptation
+			 * so that we can directly get the groups button arguments
+			 * instead of the button.
+			 * @see https://buddypress.trac.wordpress.org/ticket/7126
+			 */
+			add_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
 
-			unset( bp_nouveau()->groups->button_args );
+			bp_get_group_join_button( $group );
+
+			remove_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
+
+			if ( ! empty( bp_nouveau()->groups->button_args ) ) {
+				$buttons['group_membership'] = wp_parse_args( array(
+					'id'       => 'group_membership',
+					'position' => 5,
+				), bp_nouveau()->groups->button_args );
+
+				unset( bp_nouveau()->groups->button_args );
+			}
 		}
 
 		/**

@@ -61,9 +61,7 @@ class BP_Nouveau_Groups {
 	 */
 	private function setup_actions() {
 		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			add_action( 'bp_group_invites_item_action',     'bp_group_accept_invite_button',  5 );
-			add_action( 'bp_group_invites_item_action',     'bp_group_reject_invite_button', 10 );
-			add_action( 'groups_setup_nav',                 'bp_nouveau_group_setup_nav'        );
+			add_action( 'groups_setup_nav', 'bp_nouveau_group_setup_nav' );
 		}
 
 		// Enqueue the scripts
