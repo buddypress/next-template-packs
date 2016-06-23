@@ -39,20 +39,13 @@ bp_nouveau_before_loop(); ?>
 
 			<div class="action">
 
-				<?php
+				<?php bp_nouveau_blogs_loop_buttons(); ?>
 
-				/**
-				 * Fires inside the blogs action listing area.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_directory_blogs_actions' ); ?>
+			</div>
 
-				<div class="meta">
+			<div class="meta">
 
-					<?php bp_blog_latest_post(); ?>
-
-				</div>
+				<?php bp_blog_latest_post(); ?>
 
 			</div>
 

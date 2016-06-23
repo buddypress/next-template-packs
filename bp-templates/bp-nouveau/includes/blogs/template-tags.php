@@ -81,3 +81,95 @@ function bp_nouveau_after_blogs_directory_content() {
 	 */
 	do_action( 'bp_after_directory_blogs_page' );
 }
+
+function bp_nouveau_blogs_loop_buttons() {
+	if ( empty( $GLOBALS['blogs_template'] ) ) {
+		return;
+	}
+
+	echo join( ' ', bp_nouveau_get_blogs_buttons() );
+
+	/**
+	 * Fires inside the blogs action listing area.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_directory_blogs_actions' );
+}
+
+	/**
+	 * Get the action buttons for the current blog in the loop.
+	 *
+	 * @since 1.0.0
+	 */
+	function bp_nouveau_get_blogs_buttons( $type = 'loop' ) {
+		// Not really sure why BP Legacy needed to do this...
+		if ( 'loop' !== $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+			return;
+		}
+
+		$buttons = array();
+
+		if ( isset( $GLOBALS['blogs_template']->blog ) ) {
+			$blog = $GLOBALS['blogs_template']->blog;
+		}
+
+		if ( empty( $blog->blog_id ) ) {
+			return $buttons;
+		}
+
+		/**
+		 * This filter workaround is waiting for a core adaptation
+		 * so that we can directly get the groups button arguments
+		 * instead of the button.
+		 * @see https://buddypress.trac.wordpress.org/ticket/7126
+		 */
+		add_filter( 'bp_get_blogs_visit_blog_button', 'bp_nouveau_blogs_catch_button_args', 100, 1 );
+
+		bp_get_blogs_visit_blog_button();
+
+		remove_filter( 'bp_get_blogs_visit_blog_button', 'bp_nouveau_blogs_catch_button_args', 100, 1 );
+
+		if ( ! empty( bp_nouveau()->blogs->button_args ) ) {
+			$buttons['visit_blog'] = wp_parse_args( array(
+				'id'       => 'visit_blog',
+				'position' => 5,
+			), bp_nouveau()->blogs->button_args );
+
+			unset( bp_nouveau()->blogs->button_args );
+		}
+
+		/**
+		 * Filter here to add your buttons, use the position argument to choose where to insert it.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $buttons The list of buttons.
+		 * @param object $blog    The current blog object.
+		 * @parem string $type    Whether we're displaying a blogs loop or a the blogs single item (in the future!).
+		 */
+		$buttons_group = apply_filters( 'bp_nouveau_get_blogs_buttons', $buttons, $blog, $type );
+
+		if ( empty( $buttons_group ) ) {
+			return $buttons;
+		}
+
+		// It's the first entry of the loop, so build the Group and sort it
+		if ( ! isset( bp_nouveau()->blogs->group_buttons ) || false === is_a( bp_nouveau()->blogs->group_buttons, 'BP_Buttons_Group' ) ) {
+			$sort = true;
+			bp_nouveau()->blogs->group_buttons = new BP_Buttons_Group( $buttons_group );
+
+		// It's not the first entry, the order is set, we simply need to update the Buttons Group
+		} else {
+			$sort = false;
+			bp_nouveau()->blogs->group_buttons->update( $buttons_group );
+		}
+
+		$return = bp_nouveau()->blogs->group_buttons->get( $sort );
+
+		if ( ! $return ) {
+			return array();
+		}
+
+		return $return;
+	}
