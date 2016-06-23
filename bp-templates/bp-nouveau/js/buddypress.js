@@ -482,6 +482,9 @@ window.bp = window.bp || {};
 
 			// Buttons
 			$( '#buddypress [data-bp-list], #buddypress #item-header' ).on( 'click', '[data-bp-btn-action]', this, this.buttonAction );
+
+			// Close notice
+			$( '#buddypress [data-bp-close]' ).on( 'click', this, this.closeNotice );
 		},
 
 		/** Event Callbacks ***********************************************************/
@@ -746,6 +749,33 @@ window.bp = window.bp || {};
 					target.parent().replaceWith( response.data.contents );
 				}
 			} );
+		},
+
+		/**
+		 * [closeNotice description]
+		 * @param  {[type]} event [description]
+		 * @return {[type]}       [description]
+		 */
+		closeNotice: function( event ) {
+			var closeBtn = $( event.currentTarget );
+
+			event.preventDefault();
+
+			// Make sure cookies are removed
+			if ( 'clear' === closeBtn.data( 'bp-close' ) ) {
+				if ( undefined !== $.cookie( 'bp-message' ) ) {
+					$.removeCookie( 'bp-message' );
+				}
+
+				if ( undefined !== $.cookie( 'bp-message-type' ) ) {
+					$.removeCookie( 'bp-message-type' );
+				}
+			}
+
+			// @todo other cases...
+
+			// Remove the notice
+			closeBtn.closest( '.bp-feedback' ).remove();
 		}
 	}
 

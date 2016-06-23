@@ -11,11 +11,99 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Template tags to display feedback notices to users
+ * Add a class to style the template notice
+ *
+ * @since  1.0.0
+ *
+ * @return string Css class Output
+ */
+function bp_nouveau_template_message_type() {
+	echo sanitize_html_class( bp_nouveau_get_template_message_type() );
+}
+
+	/**
+	 * Get the template notice type
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string the type of the notice. Defaults to error
+	 */
+	function bp_nouveau_get_template_message_type() {
+		$bp   = buddypress();
+		$type = 'error';
+
+		if ( ! empty( $bp->template_message_type ) ) {
+			$type = $bp->template_message_type;
+		}
+
+		return $type;
+	}
+
+/**
+ * Checks if a template notice is set
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if a template notice is set. False otherwise.
+ */
+function bp_nouveau_has_template_message() {
+	$bp = buddypress();
+
+	if ( empty( $bp->template_message ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Displays a template notice.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_template_message() {
+	echo bp_nouveau_get_template_message();
+}
+
+	/**
+	 * Get the template notice and make sure core filter is applyed.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string HTML Output.
+	 */
+	function bp_nouveau_get_template_message() {
+		/**
+		 * Filters the 'template_notices' feedback message content.
+		 *
+		 * @since 1.5.5 (BuddyPress)
+		 *
+		 * @param string $template_message Feedback message content.
+		 * @param string $type             The type of message being displayed.
+		 *                                 Either 'updated' or 'error'.
+		 */
+		return apply_filters( 'bp_core_render_message_content', buddypress()->template_message, bp_nouveau_get_template_message_type() );
+	}
+
+/**
+ * Template tag to display feedback notices to users, if there are to display
  *
  * @since 1.0.0
  */
 function bp_nouveau_template_notices() {
+	if ( bp_nouveau_has_template_message() ) {
+		bp_get_template_part( 'common/notices/template-notices' );
+
+		/**
+		 * Fires after the display of any template_notices feedback messages.
+		 *
+		 * @since 1.1.0 (BuddyPress)
+		 */
+		do_action( 'bp_core_render_message' );
+	}
+
 	/**
 	 * Fires towards the top of template pages for notice display.
 	 *
