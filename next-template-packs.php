@@ -40,7 +40,7 @@ class Next_Template_Packs {
 	/**
 	 * BuddyPress db version
 	 */
-	public static $bp_db_version_required = 10000;
+	public static $bp_version_required = '2.6.0';
 
 	/**
 	 * Initialize the plugin
@@ -546,7 +546,7 @@ class Next_Template_Packs {
 		$warnings = array();
 
 		if( ! $this->version_check() ) {
-			$warnings[] = sprintf( __( '%s requires at least version %s of BuddyPress.', 'next-template-packs' ), $this->name, '2.4.0-alpha' );
+			$warnings[] = sprintf( __( '%s requires at least version %s of BuddyPress.', 'next-template-packs' ), $this->name, bp_get_version() );
 		}
 
 		if ( bp_core_do_network_admin() && ! is_plugin_active_for_network( $this->basename ) ) {
@@ -573,7 +573,7 @@ class Next_Template_Packs {
 			return false;
 		}
 
-		return self::$bp_db_version_required <= bp_get_db_version();
+		return version_compare( bp_get_version(), self::$bp_version_required, '>=' );
 	}
 
 	/**
