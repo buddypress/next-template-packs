@@ -40,7 +40,7 @@ class Next_Template_Packs {
 	/**
 	 * BuddyPress db version
 	 */
-	public static $bp_version_required = '2.6.0';
+	public static $bp_version_required = '2.7-alpha';
 
 	/**
 	 * Initialize the plugin
@@ -546,7 +546,7 @@ class Next_Template_Packs {
 		$warnings = array();
 
 		if( ! $this->version_check() ) {
-			$warnings[] = sprintf( __( '%s requires at least version %s of BuddyPress.', 'next-template-packs' ), $this->name, bp_get_version() );
+			$warnings[] = sprintf( __( '%s requires at least version %s of BuddyPress.', 'next-template-packs' ), $this->name, self::$bp_version_required );
 		}
 
 		if ( bp_core_do_network_admin() && ! is_plugin_active_for_network( $this->basename ) ) {
