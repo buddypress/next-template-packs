@@ -322,6 +322,8 @@ window.bp = window.bp || {};
 
 			if ( 'friends' === data.object || 'group_members' === data.object ) {
 				data.object = 'members';
+			} else if ( 'group_requests' === data.object ) {
+				data.object = 'groups';
 			}
 
 			postdata = $.extend( {
@@ -414,7 +416,9 @@ window.bp = window.bp || {};
 					}
 
 					if ( 'group_members' === object ) {
-						$.extend( queryData, { template: 'groups/single/members-loop' } )
+						$.extend( queryData, { template: 'groups/single/members-loop' } );
+					} else if ( 'group_requests' === object ) {
+						$.extend( queryData, { template: 'groups/single/requests-loop' } );
 					}
 
 					// Populate the object list
@@ -475,6 +479,9 @@ window.bp = window.bp || {};
 
 			// Close notice
 			$( '#buddypress [data-bp-close]' ).on( 'click', this, this.closeNotice );
+
+			// Pagination
+			$( '#buddypress [data-bp-list]' ).on( 'click', '[data-bp-pagination] a', this, this.paginateAction );
 		},
 
 		/** Event Callbacks ***********************************************************/
@@ -766,6 +773,56 @@ window.bp = window.bp || {};
 
 			// Remove the notice
 			closeBtn.closest( '.bp-feedback' ).remove();
+		},
+
+		paginateAction: function( event ) {
+			var self  = event.data, navLink = $( event.currentTarget ), pagArg,
+			    scope = null, object, filter = null, search_terms = null;
+
+			pagArg = navLink.closest( '[data-bp-pagination]' ).data( 'bp-pagination' ) || null;
+
+			if ( null === pagArg ) {
+				return event;
+			}
+
+			event.preventDefault();
+
+			object = $( event.delegateTarget ).data( 'bp-list' ) || null;
+
+			// Set the scope & filter
+			if ( null !== object ) {
+				objectData = self.getStorage( 'bp-' + object );
+
+				if ( undefined !== objectData.scope ) {
+					scope = objectData.scope;
+				}
+
+				if ( undefined !== objectData.filter ) {
+					filter = objectData.filter;
+				}
+			}
+
+			// Set the search terms
+			if ( $( '#buddypress [data-bp-search="' + object + '"] input[type=search]' ).length ) {
+				search_terms = $( '#buddypress [data-bp-search="' + object + '"] input[type=search]' ).val();
+			}
+
+			var queryData = {
+				object       : object,
+				scope        : scope,
+				filter       : filter,
+				search_terms : search_terms,
+				page         : self.getLinkParams( navLink.prop( 'href' ), pagArg ) || 1
+			}
+
+			if ( 'group_members' === object ) {
+				$.extend( queryData, { template: 'groups/single/members-loop' } );
+			} else if ( 'group_requests' === object ) {
+				$.extend( queryData, { template: 'groups/single/requests-loop' } );
+			}
+
+			// Request the page
+			self.objectRequest( queryData );
 		}
 	}
 

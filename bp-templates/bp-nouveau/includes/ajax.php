@@ -225,15 +225,3 @@ function bp_nouveau_ajax_object_template_loader() {
 	// Locate the object template.
 	wp_send_json_success( $result );
 }
-
-/** @todo remove ??? **********************************************************/
-
-/**
- * Load group membership requests loop to handle pagination requests sent via AJAX.
- *
- * @since 2.0.0
- */
-function bp_legacy_theme_requests_template_loader() {
-	bp_get_template_part( 'groups/single/requests-loop' );
-	exit();
-}

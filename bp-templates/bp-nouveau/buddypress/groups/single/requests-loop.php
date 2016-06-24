@@ -10,7 +10,14 @@
 
 <?php if ( bp_group_has_membership_requests( bp_ajax_querystring( 'membership_requests' ) ) ) : ?>
 
-	<div id="pag-top" class="pagination">
+	<?php
+	/**
+	 *
+	 * @todo  create a template tag for $GLOBALS['requests_template']->pag_arg
+	 *
+	 */
+	?>
+	<div id="pag-top" class="pagination" data-bp-pagination="<?php echo esc_attr( $GLOBALS['requests_template']->pag_arg );?>">
 
 		<div class="pag-count" id="group-mem-requests-count-top">
 
@@ -63,8 +70,14 @@
 
 		<?php endwhile; ?>
 	</ul>
-
-	<div id="pag-bottom" class="pagination">
+	<?php
+	/**
+	 *
+	 * @todo  create a template tag for $GLOBALS['requests_template']->pag_arg
+	 *
+	 */
+	?>
+	<div id="pag-bottom" class="pagination" data-bp-pagination="<?php echo esc_attr( $GLOBALS['requests_template']->pag_arg );?>">
 
 		<div class="pag-count" id="group-mem-requests-count-bottom">
 

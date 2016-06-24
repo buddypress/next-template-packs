@@ -174,6 +174,7 @@ function bp_nouveau_pagination( $position = null ) {
 			$pag_links   = bp_get_blogs_pagination_links();
 			$top_hook    = 'bp_before_directory_blogs_list';
 			$bottom_hook = 'bp_after_directory_blogs_list';
+			$page_arg    = $GLOBALS['blogs_template']->pag_arg;
 
 		break;
 
@@ -184,6 +185,7 @@ function bp_nouveau_pagination( $position = null ) {
 			$pag_links   = bp_get_members_pagination_links();
 			$top_hook    = 'bp_before_directory_members_list';
 			$bottom_hook = 'bp_after_directory_members_list';
+			$page_arg    = $GLOBALS['members_template']->pag_arg;
 
 		break;
 
@@ -193,6 +195,7 @@ function bp_nouveau_pagination( $position = null ) {
 			$pag_links   = bp_get_groups_pagination_links();
 			$top_hook    = 'bp_before_directory_groups_list';
 			$bottom_hook = 'bp_after_directory_groups_list';
+			$page_arg    = $GLOBALS['groups_template']->pag_arg;
 
 		break;
 	}
@@ -210,7 +213,7 @@ function bp_nouveau_pagination( $position = null ) {
 		do_action( $bottom_hook );
 	};?>
 
-	<div class="pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-nav="pagination">
+	<div class="pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-pagination="<?php echo esc_attr( $page_arg ); ?>">
 
 		<?php if ( $pag_count ) : ?>
 			<div class="pag-count <?php echo sanitize_html_class( $count_class ); ?>">

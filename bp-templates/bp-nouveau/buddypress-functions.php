@@ -144,29 +144,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		add_filter( 'body_class', array( $this, 'add_nojs_body_class' ), 20, 1 );
 
-		/** Ajax **************************************************************/
-
-		$actions = array(
-			/**
-			 * @todo check if we still use these 2 actions, else remove it
-			 * and the corresponding functions
-			 */
-			'requests_filter' => 'bp_legacy_theme_requests_template_loader',
-		);
-
-		/**
-		 * Register all of these AJAX handlers.
-		 *
-		 * The "wp_ajax_" action is used for logged in users, and "wp_ajax_nopriv_"
-		 * executes for users that aren't logged in. This is for backpat with BP <1.6.
-		 *
-		 * @todo not all actions should be nopriv!
-		 */
-		foreach( $actions as $name => $function ) {
-			add_action( 'wp_ajax_'        . $name, $function );
-			add_action( 'wp_ajax_nopriv_' . $name, $function );
-		}
-
+		// Ajax querystring
 		add_filter( 'bp_ajax_querystring', 'bp_nouveau_ajax_querystring', 10, 2 );
 
 		// Register directory nav items
@@ -419,7 +397,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 			}
 
 			if ( 'groups' === $object ) {
-				$supported_objects[] = 'group_members';
+				$supported_objects = array_merge( $supported_objects, array( 'group_members', 'group_requests' ) );
 			}
 
 			$object_nonces[ $object ] = wp_create_nonce( 'bp_nouveau_' . $object );

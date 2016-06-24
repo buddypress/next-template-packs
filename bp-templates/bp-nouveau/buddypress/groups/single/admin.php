@@ -395,11 +395,11 @@ do_action( 'bp_before_group_admin_content' ); ?>
 	 */
 	do_action( 'bp_before_group_membership_requests_admin' ); ?>
 
-		<div class="requests">
+		<div class="requests" data-bp-list="group_requests">
 
-			<?php bp_get_template_part( 'groups/single/requests-loop' ); ?>
+			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the members who requested to join the group, please wait.', 'bp-nouveau' ) ;?></div>
 
-		</div>
+		</div><!-- .requests -->
 
 	<?php
 
