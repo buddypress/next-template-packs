@@ -16,13 +16,12 @@
 	</ul>
 </div><!-- .item-list-tabs -->
 
-<?php if ( !bp_is_current_action( 'invites' ) ) : ?>
+<?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 
 	<div class="item-list-tabs no-ajax" id="subsubnav">
 		<ul>
-			<li class="member-search" role="search" data-bp-search="groups">
-				<?php bp_directory_groups_search_form(); ?>
-			</li>
+			<?php bp_get_template_part( 'common/search/object-search-form' ); ?>
+
 			<li id="groups-order-select" class="last filter">
 
 				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>

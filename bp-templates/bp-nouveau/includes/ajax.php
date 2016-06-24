@@ -229,28 +229,6 @@ function bp_nouveau_ajax_object_template_loader() {
 /** @todo remove ??? **********************************************************/
 
 /**
- * Load messages template loop when searched on the private message page
- *
- * @since 1.6.0
- *
- * @return string Prints template loop for the Messages component.
- */
-function bp_legacy_theme_messages_template_loader() {
-	bp_get_template_part( 'members/single/messages/messages-loop' );
-	exit();
-}
-
-/**
- * Load group invitations loop to handle pagination requests sent via AJAX.
- *
- * @since 2.0.0
- */
-function bp_legacy_theme_invite_template_loader() {
-	bp_get_template_part( 'groups/single/invites-loop' );
-	exit();
-}
-
-/**
  * Load group membership requests loop to handle pagination requests sent via AJAX.
  *
  * @since 2.0.0

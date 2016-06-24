@@ -20,9 +20,8 @@
 
 <div class="item-list-tabs no-ajax" id="subsubnav">
 	<ul>
-		<li class="member-search" role="search" data-bp-search="activity">
-			<?php bp_directory_activity_search_form(); ?>
-		</li>
+		<?php bp_get_template_part( 'common/search/object-search-form' ); ?>
+
 		<li id="activity-filter-select" class="last filter">
 			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
 			<select id="activity-filter-by" data-bp-filter="activity">

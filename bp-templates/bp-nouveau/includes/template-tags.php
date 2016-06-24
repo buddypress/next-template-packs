@@ -397,6 +397,76 @@ function bp_nouveau_directory_nav_count() {
 		return esc_attr( $nav_item->count );
 	}
 
+/** Template tags for the object search **************************************/
+
+function bp_nouveau_get_single_primary_object( $object = '' ) {
+	if ( bp_is_user() ) {
+		$object = 'member';
+	} elseif ( bp_is_group() ) {
+		$object = 'group';
+	}
+
+	return $object;
+}
+
+function bp_nouveau_get_single_objects( $objects = array() ) {
+	$primary = bp_nouveau_get_single_primary_object();
+
+	if ( ! $primary ) {
+		return $objects;
+	}
+
+	$objects = array(
+		'primary' => $primary,
+	);
+
+	if ( 'member' === $primary ) {
+		$objects['secondary'] = bp_current_component();
+	} elseif( 'group' === $primary ) {
+		$objects['secondary'] = bp_current_action();
+	}
+
+	return $objects;
+}
+
+function bp_nouveau_search_object_data_attr( $attr = '' ) {
+	$object = bp_nouveau_get_single_objects();
+
+	if ( ! isset( $object['secondary'] ) ) {
+		return $attr;
+	}
+
+	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
+		$attr = join( '_', $object );
+	} else {
+		$attr = $object['secondary'];
+	}
+
+	echo esc_attr( $attr );
+}
+
+function bp_nouveau_search_object_id( $suffix = '', $sep = '-' ) {
+	$id = join( $sep, array_merge( bp_nouveau_get_single_objects(), (array) $suffix ) );
+
+	echo esc_attr( $id );
+}
+
+function bp_nouveau_search_object_name( $suffix = '', $sep = '_' ) {
+	$id = join( $sep, array_merge( bp_nouveau_get_single_objects(), (array) $suffix ) );
+
+	echo esc_attr( $id );
+}
+
+function bp_nouveau_search_object_default_text( $text = '' ) {
+	$object = bp_nouveau_get_single_objects();
+
+	if ( ! empty( $object['secondary'] ) ) {
+		$text = bp_get_search_default_text( $object['secondary'] );
+	}
+
+	echo esc_attr( $text );
+}
+
 /** Template tags for the directory filters **********************************/
 
 function bp_nouveau_directory_filter_container_id() {

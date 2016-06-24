@@ -113,6 +113,15 @@ function bp_nouveau_members_loop_buttons() {
 		return;
 	}
 
+	$type   = 'loop';
+	$action = 'bp_directory_members_actions';
+
+	// specific case for group members
+	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
+		$type   = 'group_member';
+		$action = 'bp_group_members_list_item_action';
+	}
+
 	echo join( ' ', bp_nouveau_get_members_buttons( 'loop' ) );
 
 	/**
@@ -120,7 +129,7 @@ function bp_nouveau_members_loop_buttons() {
 	 *
 	 * @since 1.1.0 (BuddyPress)
 	 */
-	do_action( 'bp_directory_members_actions' );
+	do_action( $action );
 }
 
 	/**
@@ -138,6 +147,8 @@ function bp_nouveau_members_loop_buttons() {
 
 		if ( 'loop' === $type ) {
 			$user_id = bp_get_member_user_id();
+		} elseif ( 'group_member' === $type ) {
+			$user_id = bp_get_group_member_id();
 		} else {
 			$user_id = bp_displayed_user_id();
 		}
@@ -170,7 +181,7 @@ function bp_nouveau_members_loop_buttons() {
 		}
 
 		// Only add The public and private messages when not in a loop
-		if ( 'loop' !== $type ) {
+		if ( 'profile' === $type ) {
 			if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) {
 				/**
 				 * This filter workaround is waiting for a core adaptation

@@ -331,6 +331,11 @@ function bp_nouveau_get_forsaken_hooks() {
 			'message_type' => 'warning',
 			'message'      => __( 'The &#39;bp_directory_members_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_buttons&#39; filter instead', 'bp-nouveau' ),
 		),
+		'bp_group_members_list_item_action' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The &#39;bp_group_members_list_item_action&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_buttons&#39; filter instead', 'bp-nouveau' ),
+		),
 		'bp_group_header_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',

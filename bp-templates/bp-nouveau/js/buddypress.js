@@ -81,16 +81,6 @@ window.bp = window.bp || {};
 				// Transform text field into search field
 				$( '#buddypress li[role="search"] input[type=text]' ).prop( 'type', 'search' );
 
-				// The group members search misses some attributes and we can't use Theme Compat here
-				if ( $( '#buddypress li[role="search"]' ).hasClass( 'groups-members-search' )  && $( '#members-group-list' ).length ) {
-					$( '#buddypress li[role="search"]' ).attr( 'data-bp-search', 'group_members' );
-					$( '#members-group-list' ).attr( 'data-bp-list', 'group_members' );
-					$( '#group_members-order-select label').html(
-						$( '<span></span>' ).html( $( '#group_members-order-select label').html() ).addClass( 'bp-screen-reader-text' )
-					);
-					$( 'select#group_members-order-by' ).attr( 'data-bp-filter', 'group_members' );
-				}
-
 				// Add a title attribute and use an icon for the search submit button
 				search_title = $( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value' );
 				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'title', search_title );
@@ -424,7 +414,7 @@ window.bp = window.bp || {};
 					}
 
 					if ( 'group_members' === object ) {
-						$.extend( queryData, { template: 'groups/single/members' } )
+						$.extend( queryData, { template: 'groups/single/members-loop' } )
 					}
 
 					// Populate the object list
@@ -578,7 +568,7 @@ window.bp = window.bp || {};
 
 			// On the Groups Members page, we specify a template
 			if ( 'group_members' === object ) {
-				template = 'groups/single/members';
+				template = 'groups/single/members-loop';
 			}
 
 			if ( 'friends' === object ) {
@@ -619,7 +609,7 @@ window.bp = window.bp || {};
 			}
 
 			if ( 'group_members' === object ) {
-				template = 'groups/single/members';
+				template = 'groups/single/members-loop';
 			}
 
 			self.objectRequest( {
@@ -638,7 +628,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		showSearchSubmit: function( event ) {
-			$( event.delegateTarget ).find( 'input[type=submit]' ).show();
+			$( event.delegateTarget ).find( '[type=submit]' ).show();
 		},
 
 		/**
@@ -648,7 +638,7 @@ window.bp = window.bp || {};
 		 */
 		hideSearchSubmit: function( event ) {
 			if ( ! $( event.target ).val() ) {
-				$( event.delegateTarget ).find( 'input[type=submit]' ).hide();
+				$( event.delegateTarget ).find( '[type=submit]' ).hide();
 			}
 		},
 
@@ -661,7 +651,7 @@ window.bp = window.bp || {};
 			if ( ! $( event.target ).val() ) {
 				$( event.delegateTarget ).submit();
 			} else {
-				$( event.delegateTarget ).find( 'input[type=submit]' ).show();
+				$( event.delegateTarget ).find( '[type=submit]' ).show();
 			}
 		},
 

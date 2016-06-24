@@ -151,7 +151,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 			 * @todo check if we still use these 2 actions, else remove it
 			 * and the corresponding functions
 			 */
-			'invite_filter'   => 'bp_legacy_theme_invite_template_loader',
 			'requests_filter' => 'bp_legacy_theme_requests_template_loader',
 		);
 
