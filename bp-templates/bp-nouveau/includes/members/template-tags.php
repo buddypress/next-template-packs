@@ -426,3 +426,35 @@ function bp_nouveau_member_header_template_part() {
 	// Display template notices if any
 	bp_nouveau_template_notices();
 }
+
+/**
+ * Get a link to set the Member's default front page and directly
+ * reach the Customizer section where it's possible to do it.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_members_get_customizer_option_link() {
+	return bp_nouveau_get_customizer_link( array(
+		'object'    => 'user',
+		'autofocus' => 'bp_nouveau_user_front_page',
+		'text'      => esc_html__( 'Members default front page', 'bp-nouveau' ),
+	) );
+}
+
+/**
+ * Get a link to set the Member's front page widgets and directly
+ * reach the Customizer section where it's possible to do it.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_members_get_customizer_widgets_link() {
+	return bp_nouveau_get_customizer_link( array(
+		'object'    => 'user',
+		'autofocus' => 'sidebar-widgets-sidebar-buddypress-members',
+		'text'      => esc_html__( '(BuddyPress) Widgets', 'bp-nouveau' ),
+	) );
+}

@@ -59,147 +59,71 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 	return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $data_attribute . '">' . $button->link_text . '</a>' . $after;
 }
 
-if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
 /**
- * BP Sidebar Item Nav_Widget
+ * Register the 2 sidebars for the Group & User default front page
  *
- * Adds a widget to move avatar/item nav into the sidebar
- *
- * @since  1.0
- *
- * @uses   WP_Widget
+ * @since  1.0.0
  */
-class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
+function bp_nouveau_register_sidebars() {
+	$default_fronts     = bp_nouveau_get_appearance_settings();
+	$default_user_front = 0;
+	$is_active_groups   = bp_is_active( 'groups' );
 
-	/**
-	 * Constructor
-	 *
-	 * @since  1.0
-	 *
-	 * @uses   WP_Widget::__construct() to init the widget
-	 */
-	public function __construct() {
+	if ( isset( $default_fronts['user_front_page'] ) ) {
+		$default_user_front = $default_fronts['user_front_page'];
+	}
 
-		$widget_ops = array(
-			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-nouveau' ),
-			'classname'   => 'widget_nav_menu buddypress_object_nav'
+	if ( $is_active_groups ) {
+		$default_group_front = 0;
+
+		if ( isset( $default_fronts['group_front_page'] ) ) {
+			$default_group_front = $default_fronts['group_front_page'];
+		}
+	}
+
+	// Setting the front template happens too early, so we need this!
+	if ( is_customize_preview() ) {
+		$default_user_front = bp_nouveau_get_temporary_setting( 'user_front_page', $default_user_front );
+
+		if ( $is_active_groups ) {
+			$default_group_front = bp_nouveau_get_temporary_setting( 'group_front_page', $default_group_front );
+		}
+	}
+
+	$sidebars = array();
+	if ( $default_user_front ) {
+		$sidebars[] = array(
+			'name'          => __( 'BuddyPress User\'s Home', 'bp-nouveau' ),
+			'id'            => 'sidebar-buddypress-members',
+			'description'   => __( 'Add widgets here to appear in the front page of each member of your community.', 'bp-nouveau' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
 		);
+	}
 
-		parent::__construct(
-			'bp_nouveau_sidebar_object_nav_widget',
-			__( '(BuddyPress) Primary nav', 'bp-nouveau' ),
-			$widget_ops
+	if ( $default_group_front ) {
+		$sidebars[] = array(
+			'name'          => __( 'BuddyPress Group\'s Home', 'bp-nouveau' ),
+			'id'            => 'sidebar-buddypress-groups',
+			'description'   => __( 'Add widgets here to appear in the front page of each group of your community.', 'bp-nouveau' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
 		);
 	}
 
-	/**
-	 * Register the widget
-	 *
-	 * @since  1.0
-	 *
-	 * @uses   register_widget() to register the widget
-	 */
-	public static function register_widget() {
-		register_widget( 'BP_Nouveau_Object_Nav_Widget' );
+	if ( empty( $sidebars ) ) {
+		return;
 	}
 
-	/**
-	 * Displays the output, the button to post new support topics
-	 *
-	 * @since  1.0
-	 *
-	 * @param  mixed $args Arguments
-	 * @return string html output
-	 */
-	public function widget( $args, $instance ) {
-		if ( ! is_buddypress() || bp_is_group_create() ) {
-			return;
-		}
-
-		$item_nav_args = wp_parse_args( $instance, apply_filters( 'bp_nouveau_object_nav_widget_args', array(
-			'bp_nouveau_widget_title' => true,
-		) ) );
-
-		$title = '';
-
-		if ( ! empty( $item_nav_args[ 'bp_nouveau_widget_title' ] ) ) {
-			$title = '';
-
-			if ( bp_is_group() ) {
-				$title = bp_get_current_group_name();
-			} elseif ( bp_is_user() ) {
-				$title = bp_get_displayed_user_fullname();
-			} elseif ( bp_get_directory_title( bp_current_component() ) ) {
-				$title = bp_get_directory_title( bp_current_component() );
-			}
-		}
-
-		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
-
-		echo $args['before_widget'];
-
-		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . $title . $args['after_title'];
-		}
-
-		if ( bp_is_user() ) {
-			bp_get_template_part( 'members/single/item-nav' );
-		} elseif ( bp_is_group() ) {
-			bp_get_template_part( 'groups/single/item-nav' );
-		} elseif ( bp_is_directory() ) {
-			bp_get_template_part( 'common/nav/directory-nav' );
-		}
-
-		echo $args['after_widget'];
-	}
-
-	/**
-	 * Update the new support topic widget options (title)
-	 *
-	 * @since  1.0
-	 *
-	 * @param  array $new_instance The new instance options
-	 * @param  array $old_instance The old instance options
-	 * @return array the instance
-	 */
-	public function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-
-		$instance['bp_nouveau_widget_title'] = (bool) $new_instance['bp_nouveau_widget_title'];
-
-		return $instance;
-	}
-
-	/**
-	 * Output the new support topic widget options form
-	 *
-	 * @since  1.0
-	 *
-	 * @param  $instance Instance
-	 * @return string HTML Output
-	 */
-	public function form( $instance ) {
-		$defaults = array(
-			'bp_nouveau_widget_title' => true,
-		);
-
-		$instance = wp_parse_args( (array) $instance, $defaults );
-
-		$bp_nouveau_widget_title = (bool) $instance['bp_nouveau_widget_title'];
-		?>
-
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $bp_nouveau_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_nouveau_widget_title' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-nouveau' ); ?></label>
-		</p>
-
-		<?php
+	// Register the sidebars if needed.
+	foreach ( $sidebars as $sidebar ) {
+		register_sidebar( $sidebar );
 	}
 }
-
-endif;
-
-add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
 
 function bp_nouveau_is_object_nav_in_sidebar() {
 	return is_active_widget( false, false, 'bp_nouveau_sidebar_object_nav_widget', true );

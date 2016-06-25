@@ -158,6 +158,12 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// BP Nouveau Customizer panel.
 		add_action( 'bp_customize_register', 'bp_nouveau_customize_register' );
 
+		// Register the Default front pages Dynamic Sidebars
+		add_action( 'widgets_init', 'bp_nouveau_register_sidebars', 11 );
+
+		// Register the Primary Object nav widget
+		add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
+
 		/** Override **********************************************************/
 
 		/**

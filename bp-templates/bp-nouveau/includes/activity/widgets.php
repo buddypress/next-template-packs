@@ -95,6 +95,7 @@ class BP_Latest_Activities extends WP_Widget {
 		 * @see bp_nouveau_activity_widget_query() to override
 		 */
 		$bp_nouveau->activity->widget_args = array(
+			'max'          => $max,
 			'scope'        => 'all',
 			'user_id'      => 0,
 			'object'       => false,

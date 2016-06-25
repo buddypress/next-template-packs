@@ -10,6 +10,26 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Enqueue the members scripts
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_members_enqueue_scripts() {
+	// Neutralize Ajax when using BuddyPress Groups & member widgets on default front page
+	if ( ! bp_is_user_front() || ! bp_nouveau_get_appearance_settings( 'user_front_page' ) ) {
+		return;
+	}
+
+	wp_add_inline_style( 'bp-nouveau', '
+		#member-front-widgets #groups-list-options,
+		#member-front-widgets #members-list-options,
+		#member-front-widgets #friends-list-options {
+			display: none;
+		}
+	' );
+}
+
 function bp_nouveau_members_directory_search_form() {
 	$query_arg = bp_core_get_component_search_query_arg( 'members' );
 
@@ -283,4 +303,88 @@ function bp_nouveau_member_get_template_part( $template = '' ) {
 	}
 
 	return $located;
+}
+
+/**
+ * Are we inside the Current user's default front page sidebar?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if in the group's home sidebar. False otherwise.
+ */
+function bp_nouveau_member_is_home_widgets() {
+	return true === bp_nouveau()->members->is_user_home_sidebar;
+}
+
+/**
+ * Filter the Latest activities Widget to only keep the one of displayed user
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Activities Template arguments.
+ * @return array        The Activities Template arguments.
+ */
+function bp_nouveau_member_activity_widget_overrides( $args = array() ) {
+	return array_merge( $args, array(
+		'user_id' => bp_displayed_user_id(),
+	) );
+}
+
+/**
+ * Filter the Groups widget to only keep the groups the displayed user is a member of.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Groups Template arguments.
+ * @return array        The Groups Template arguments.
+ */
+function bp_nouveau_member_groups_widget_overrides( $args = array() ) {
+	return array_merge( $args, array(
+		'user_id' => bp_displayed_user_id(),
+	) );
+}
+
+/**
+ * Filter the Members widgets to only keep members of the displayed group.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Members Template arguments.
+ * @return array        The Members Template arguments.
+ */
+function bp_nouveau_member_members_widget_overrides( $args = array() ) {
+	// Do nothing for the friends widget
+	if ( ! empty( $args['user_id'] ) && (int) $args['user_id'] === (int) bp_displayed_user_id() ) {
+		return $args;
+	}
+
+	return array_merge( $args, array(
+		'include' => bp_displayed_user_id(),
+	) );
+}
+
+/**
+ * Init the Member's default front page filters as we're in the sidebar
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_members_add_home_widget_filters() {
+	add_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_member_activity_widget_overrides', 10, 1 );
+	add_filter( 'bp_before_has_groups_parse_args',  'bp_nouveau_member_groups_widget_overrides',   10, 1 );
+	add_filter( 'bp_before_has_members_parse_args', 'bp_nouveau_member_members_widget_overrides',  10, 1 );
+
+	do_action( 'bp_nouveau_members_add_home_widget_filters' );
+}
+
+/**
+ * Remove the Member's default front page filters as we're no more in the sidebar
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_members_remove_home_widget_filters() {
+	remove_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_member_activity_widget_overrides', 10, 1 );
+	remove_filter( 'bp_before_has_groups_parse_args',  'bp_nouveau_member_groups_widget_overrides',   10, 1 );
+	remove_filter( 'bp_before_has_members_parse_args', 'bp_nouveau_member_members_widget_overrides',  10, 1 );
+
+	do_action( 'bp_nouveau_members_remove_home_widget_filters' );
 }

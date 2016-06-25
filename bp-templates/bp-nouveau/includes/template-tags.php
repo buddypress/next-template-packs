@@ -548,3 +548,58 @@ function bp_nouveau_filter_options() {
 
 		return $output;
 	}
+
+/** Template tags for the customizer ******************************************/
+
+/**
+ * Get a link to reach a specific section into the customizer
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The argument to customize the Customizer link
+ * @return string HTML Output
+ */
+function bp_nouveau_get_customizer_link( $args = array() ) {
+	$r = bp_parse_args( $args, array(
+		'capability' => 'bp_moderate',
+		'object'     => 'user',
+		'item_id'    => 0,
+		'autofocus'  => '',
+		'text'       => '',
+	), 'nouveau_get_customizer_link' );
+
+	if ( empty( $r['capability'] ) || empty( $r['autofocus'] ) || empty( $r['text'] ) ) {
+		return '';
+	}
+
+	if ( ! bp_current_user_can( $r['capability'] ) ) {
+		return '';
+	}
+
+	if ( bp_is_user() ) {
+		$url = rawurlencode( bp_displayed_user_domain() );
+	} elseif ( bp_is_group() ) {
+		$url = rawurlencode( bp_get_group_permalink( groups_get_current_group() ) );
+	} elseif ( ! empty( $r['object'] ) && ! empty( $r['item_id'] ) ) {
+		if ( 'user' === $r['object'] ) {
+			$url = rawurlencode( bp_core_get_user_domain( $r['item_id'] ) );
+		} elseif ( 'group' === $r['object'] ) {
+			$group = groups_get_group( array( 'group_id' => $r['item_id'] ) );
+
+			if ( ! empty( $group->id ) ) {
+				$url = rawurlencode( bp_get_group_permalink( $group ) );
+			}
+		}
+	}
+
+	if ( empty( $url ) ) {
+		return '';
+	}
+
+	$customizer_link = add_query_arg( array(
+		'autofocus[section]' => $r['autofocus'],
+		'url'                => $url,
+	), admin_url( 'customize.php' ) );
+
+	return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $customizer_link ), $r['text'] );
+}

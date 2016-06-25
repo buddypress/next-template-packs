@@ -36,6 +36,16 @@ function bp_nouveau_groups_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_groups_enqueue_scripts() {
+	// Neutralize Ajax when using BuddyPress Groups & member widgets on default front page
+	if ( bp_is_group_home() && bp_nouveau_get_appearance_settings( 'group_front_page' ) ) {
+		wp_add_inline_style( 'bp-nouveau', '
+			#group-front-widgets #groups-list-options,
+			#group-front-widgets #members-list-options {
+				display: none;
+			}
+		' );
+	}
+
 	if ( ! bp_is_group_invites() && ! ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
 		return;
 	}
@@ -631,4 +641,90 @@ function bp_nouveau_group_get_template_part( $template = '' ) {
 	}
 
 	return $located;
+}
+
+/**
+ * Are we inside the Current group's default front page sidebar?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if in the group's home sidebar. False otherwise.
+ */
+function bp_nouveau_group_is_home_widgets() {
+	return true === bp_nouveau()->groups->is_group_home_sidebar;
+}
+
+/**
+ * Filter the Latest activities Widget to only keep the one of the group displayed
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Activities Template arguments.
+ * @return array        The Activities Template arguments.
+ */
+function bp_nouveau_group_activity_widget_overrides( $args = array() ) {
+	return array_merge( $args, array(
+		'object'     => 'groups',
+		'primary_id' => bp_get_current_group_id(),
+	) );
+}
+
+/**
+ * Filter the Groups widget to only keep the displayed group.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Groups Template arguments.
+ * @return array        The Groups Template arguments.
+ */
+function bp_nouveau_group_groups_widget_overrides( $args = array() ) {
+	return array_merge( $args, array(
+		'include' => bp_get_current_group_id(),
+	) );
+}
+
+/**
+ * Filter the Members widgets to only keep members of the displayed group.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Members Template arguments.
+ * @return array        The Members Template arguments.
+ */
+function bp_nouveau_group_members_widget_overrides( $args = array() ) {
+	$group_members = groups_get_group_members( array( 'exclude_admins_mods' => false ) );
+
+	if ( empty( $group_members['members'] ) ) {
+		return $args;
+	}
+
+	return array_merge( $args, array(
+		'include' => wp_list_pluck( $group_members['members'], 'ID' ),
+	) );
+}
+
+/**
+ * Init the Group's default front page filters as we're in the sidebar
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_groups_add_home_widget_filters() {
+	add_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_group_activity_widget_overrides', 10, 1 );
+	add_filter( 'bp_before_has_groups_parse_args',  'bp_nouveau_group_groups_widget_overrides',   10, 1 );
+	add_filter( 'bp_before_has_members_parse_args', 'bp_nouveau_group_members_widget_overrides',  10, 1 );
+
+	do_action( 'bp_nouveau_groups_add_home_widget_filters' );
+}
+
+/**
+ * Remove the Group's default front page filters as we're no more in the sidebar
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_groups_remove_home_widget_filters() {
+	remove_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_group_activity_widget_overrides', 10, 1 );
+	remove_filter( 'bp_before_has_groups_parse_args',  'bp_nouveau_group_groups_widget_overrides',   10, 1 );
+	remove_filter( 'bp_before_has_members_parse_args', 'bp_nouveau_group_members_widget_overrides',  10, 1 );
+
+	do_action( 'bp_nouveau_groups_remove_home_widget_filters' );
 }
