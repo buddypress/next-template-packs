@@ -150,11 +150,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Register directory nav items
 		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
 
-		// Feedbacks for developers
-		if ( true === apply_filters( 'bp_nouveau_show_developer_warnings', WP_DEBUG ) ) {
-			add_action( 'wp_footer', array( $this, 'developer_feedbacks' ), 0 );
-		}
-
 		// BP Nouveau Customizer panel.
 		add_action( 'bp_customize_register', 'bp_nouveau_customize_register' );
 
@@ -416,6 +411,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		$params['objects'] = $supported_objects;
 		$params['nonces']  = $object_nonces;
 
+		// Add Warnings if any
+		$params['warnings'] = $this->developer_feedbacks();
+
 		/**
 		 * Filters core JavaScript strings for internationalization before AJAX usage.
 		 *
@@ -535,16 +533,26 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 	/**
 	 * Inform developers about the Legacy hooks
-	 * we are not using.
+	 * we are not using. This will be output as
+	 * warnings inside the Browser console to avoid
+	 * messing with the page display.
 	 *
 	 * @since  1.0.0
 	 *
 	 * @return string HTML Output
 	 */
 	public function developer_feedbacks() {
-		$forsaken_hooks = bp_nouveau_get_forsaken_hooks();
-		$notices        = array();
+		$notices = array();
 
+		// If debug is not on, stop!
+		if ( ! WP_DEBUG ) {
+			return;
+		}
+
+		// Get The forsaken hooks.
+		$forsaken_hooks = bp_nouveau_get_forsaken_hooks();
+
+		// Loop to check if deprecated hooks are used.
 		foreach ( $forsaken_hooks as $hook => $feedback ) {
 			if ( 'action' === $feedback['hook_type'] ) {
 				if ( ! has_action( $hook ) ) {
@@ -557,20 +565,10 @@ class BP_Nouveau extends BP_Theme_Compat {
 				}
 			}
 
-			$notices[] = sprintf( '<div class="bp-feedback %1$s"><p>%2$s</p></div>', $feedback['message_type'], esc_html( $feedback['message'] ) );
+			$notices[] = $feedback['message'];
 		}
 
-		if ( empty( $notices ) ) {
-			return;
-		}
-
-		?>
-		<div id="developer-feedbacks">
-			<?php foreach ( $notices as $notice ) {
-				echo $notice;
-			} ;?>
-		</div>
-		<?php
+		return $notices;
 	}
 }
 endif;

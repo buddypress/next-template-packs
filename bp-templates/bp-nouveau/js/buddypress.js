@@ -66,6 +66,13 @@ window.bp = window.bp || {};
 				$('body').removeClass( 'no-js' ).addClass( 'js' );
 			}
 
+			// Log Warnings into the console instead of the screen
+			if ( BP_Nouveau.warnings && 'undefined' !== typeof console && console.warn ) {
+				$.each( BP_Nouveau.warnings, function( w, warning ) {
+					console.warn( warning );
+				} );
+			}
+
 			// Remove the directory title if there's a widget containing it
 			if ( $( '.buddypress_object_nav .widget-title' ).length ) {
 				var text = $( '.buddypress_object_nav .widget-title' ).html();
