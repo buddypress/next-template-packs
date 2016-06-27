@@ -476,6 +476,32 @@ function bp_nouveau_get_hooked_group_meta() {
 }
 
 /**
+ * Display the Widgets of Group extensions into the default front page?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True to display. False otherwise.
+ */
+function bp_nouveau_groups_do_group_boxes() {
+	$group_settings = bp_nouveau_get_appearance_settings();
+
+	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_boxes'] );
+}
+
+/**
+ * Display description of the Group into the default front page?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True to display. False otherwise.
+ */
+function bp_nouveau_groups_front_page_description() {
+	$group_settings = bp_nouveau_get_appearance_settings();
+
+	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] );
+}
+
+/**
  * Add sections to the customizer for the groups component.
  *
  * @since 1.0.0
@@ -489,7 +515,7 @@ function bp_nouveau_groups_customizer_sections( $sections = array() ) {
 			'title'       => __( 'Group\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 10,
-			'description' => __( 'Activate or deactivate the default front page for your groups.', 'bp-nouveau' ),
+			'description' => __( 'Set your preferences for the groups default front page.', 'bp-nouveau' ),
 		),
 	) );
 }
@@ -506,6 +532,20 @@ function bp_nouveau_groups_customizer_settings( $settings = array() ) {
 	return array_merge( $settings, array(
 		'bp_nouveau_appearance[group_front_page]' => array(
 			'index'             => 'group_front_page',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[group_front_boxes]' => array(
+			'index'             => 'group_front_boxes',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[group_front_description]' => array(
+			'index'             => 'group_front_description',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -528,6 +568,18 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'label'      => __( 'Enable default front page for groups.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_group_front_page',
 			'settings'   => 'bp_nouveau_appearance[group_front_page]',
+			'type'       => 'checkbox',
+		),
+		'group_front_boxes' => array(
+			'label'      => __( 'Enable Group extensions widgets.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_front_page',
+			'settings'   => 'bp_nouveau_appearance[group_front_boxes]',
+			'type'       => 'checkbox',
+		),
+		'group_front_description' => array(
+			'label'      => __( 'Display the Group\'s description in the front page body.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_front_page',
+			'settings'   => 'bp_nouveau_appearance[group_front_description]',
 			'type'       => 'checkbox',
 		),
 	) );

@@ -158,6 +158,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// BP Nouveau Customizer panel.
 		add_action( 'bp_customize_register', 'bp_nouveau_customize_register' );
 
+		// Enqueue scripts for the BP Nouveau customizer panel.
+		add_action( 'customize_controls_enqueue_scripts', 'bp_nouveau_customizer_enqueue_scripts' );
+
 		// Register the Default front pages Dynamic Sidebars
 		add_action( 'widgets_init', 'bp_nouveau_register_sidebars', 11 );
 

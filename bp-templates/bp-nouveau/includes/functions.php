@@ -416,11 +416,16 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
-		'user_front_page'   => 1,
+		'user_front_page' => 1,
+		'user_front_bio'  => 0,
 	);
 
 	if ( bp_is_active( 'groups' ) ) {
-		$default_args['group_front_page'] = 1;
+		$default_args = array_merge( $default_args, array(
+			'group_front_page'        => 1,
+			'group_front_boxes'       => 1,
+			'group_front_description' => 0,
+		) );
 	}
 
 	$settings = bp_parse_args(
@@ -465,7 +470,7 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'title'       => __( 'User\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 10,
-			'description' => __( 'Activate or deactivate the default front page for your users.', 'bp-nouveau' ),
+			'description' => __( 'Set your preferences about the Users default front page.', 'bp-nouveau' ),
 		),
 	) );
 
@@ -477,6 +482,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	$settings = apply_filters( 'bp_nouveau_customizer_settings', array(
 		'bp_nouveau_appearance[user_front_page]' => array(
 			'index'             => 'user_front_page',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[user_front_bio]' => array(
+			'index'             => 'user_front_bio',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -504,12 +516,32 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'settings'   => 'bp_nouveau_appearance[user_front_page]',
 			'type'       => 'checkbox',
 		),
+		'user_front_bio' => array(
+			'label'      => __( 'Display the WordPress Biographical Info of the user.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_user_front_page',
+			'settings'   => 'bp_nouveau_appearance[user_front_bio]',
+			'type'       => 'checkbox',
+		),
 	) );
 
 	// Add the controls to the customizer's section
 	foreach ( $controls as $id_control => $control_args ) {
 		$wp_customize->add_control( $id_control, $control_args );
 	}
+}
+
+function bp_nouveau_customizer_enqueue_scripts() {
+	$min = bp_core_get_minified_asset_suffix();
+
+	wp_enqueue_script(
+		'bp-nouveau-customizer',
+		trailingslashit( bp_get_theme_compat_url() ) . "js/customizer{$min}.js",
+		array( 'customize-controls', 'iris', 'underscore', 'wp-util' ),
+		bp_nouveau()->version,
+		true
+	);
+
+	do_action( 'bp_nouveau_customizer_enqueue_scripts' );
 }
 
 /**

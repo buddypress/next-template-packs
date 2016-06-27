@@ -294,9 +294,15 @@ function bp_nouveau_group_meta() {
 		if ( empty( $group->template_meta ) ) {
 			// It's a single group
 			if ( $is_group ) {
-				$meta = array(
-					'description' => bp_get_group_description(),
-				);
+				/**
+				 * If the Group's default front page issn't set to display
+				 * the description inside it, include the description to metas
+				 */
+				if ( ! bp_nouveau_groups_front_page_description() ) {
+					$meta = array(
+						'description' => bp_get_group_description(),
+					);
+				}
 
 				// Make sure to include hooked meta.
 				$extra_meta = bp_nouveau_get_hooked_group_meta();
