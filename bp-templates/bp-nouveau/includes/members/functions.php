@@ -313,9 +313,9 @@ function bp_nouveau_member_get_template_part( $template = '' ) {
  * @return bool True to display. False otherwise.
  */
 function bp_nouveau_members_wp_bio_info() {
-	$group_settings = bp_nouveau_get_appearance_settings();
+	$user_settings = bp_nouveau_get_appearance_settings();
 
-	return ! empty( $group_settings['user_front_page'] ) && ! empty( $group_settings['user_front_bio'] );
+	return ! empty( $user_settings['user_front_page'] ) && ! empty( $user_settings['user_front_bio'] );
 }
 
 /**
