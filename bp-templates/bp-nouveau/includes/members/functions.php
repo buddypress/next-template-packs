@@ -88,6 +88,13 @@ function bp_nouveau_get_members_directory_nav_items() {
 		}
 	}
 
+	// Check for the deprecated hook :
+	$extra_nav_items = bp_nouveau_parse_hooked_dir_nav( 'bp_members_directory_member_types', 'members', 20 );
+
+	if ( ! empty( $extra_nav_items ) ) {
+		$nav_items = array_merge( $nav_items, $extra_nav_items );
+	}
+
 	/**
 	 * Use this filter to introduce your custom nav items for the members directory.
 	 *

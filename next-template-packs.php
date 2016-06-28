@@ -569,7 +569,7 @@ class Next_Template_Packs {
 	 */
 	public function version_check() {
 		// taking no risk
-		if ( ! function_exists( 'bp_get_db_version' ) ) {
+		if ( ! function_exists( 'bp_get_version' ) ) {
 			return false;
 		}
 

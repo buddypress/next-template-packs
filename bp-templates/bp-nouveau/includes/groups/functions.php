@@ -377,6 +377,13 @@ function bp_nouveau_get_groups_directory_nav_items() {
 		}
 	}
 
+	// Check for the deprecated hook :
+	$extra_nav_items = bp_nouveau_parse_hooked_dir_nav( 'bp_groups_directory_group_filter', 'groups', 20 );
+
+	if ( ! empty( $extra_nav_items ) ) {
+		$nav_items = array_merge( $nav_items, $extra_nav_items );
+	}
+
 	/**
 	 * Use this filter to introduce your custom nav items for the groups directory.
 	 *

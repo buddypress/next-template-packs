@@ -157,48 +157,48 @@ function bp_nouveau_get_forsaken_hooks() {
 	return array(
 		'bp_members_directory_member_types' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_members_directory_member_types\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_members_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_members_directory_member_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_members_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_all' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_before_activity_type_tab_all\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_all\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_friends' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_before_activity_type_tab_friends\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_friends\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_groups' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_before_activity_type_tab_groups\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_groups\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_favorites' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_before_activity_type_tab_favorites\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_favorites\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_mentions' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_before_activity_type_tab_mentions\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_mentions\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_activity_type_tabs' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_activity_type_tabs\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_activity_type_tabs\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_groups_directory_group_filter' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_groups_directory_group_filter\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_groups_directory_group_filter\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_blogs_directory_blog_types' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the \'bp_blogs_directory_blog_types\' action is not available in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_blogs_directory_blog_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_members_directory_order_options' => array(
 			'hook_type'    => 'action',
@@ -296,6 +296,73 @@ function bp_nouveau_get_forsaken_hooks() {
 			'message'      => __( 'The \'bp_directory_blogs_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_buttons\' filter instead', 'bp-nouveau' ),
 		),
 	);
+}
+
+/**
+ * Parse an html output to a list of component's directory nav item.
+ *
+ * @since  1.0.0
+ *
+ * @param  string  $hook      The hook to fire.
+ * @param  string  $component The component nav belongs to.
+ * @param  int     $position  The position of the nav item.
+ * @return array              A list of component's dir nav items
+ */
+function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position = 99 ) {
+	$extra_nav_items = array();
+
+	if ( empty( $hook ) || empty( $component ) || ! has_action( $hook ) ) {
+		return $extra_nav_items;
+	}
+
+	// Get the hook output.
+	ob_start();
+	do_action( $hook );
+	$output = ob_get_clean();
+
+	if ( ! empty( $output ) ) {
+		preg_match_all( "/<li\sid=\"{$component}\-(.*)\"[^>]*>/siU", $output, $lis );
+
+		if ( ! empty( $lis[1] ) ) {
+			$extra_nav_items = array_fill_keys( $lis[1], array( 'component' => $component, 'position' => $position ) );
+
+			preg_match_all( '/<a\s[^>]*>(.*)<\/a>/siU', $output, $as );
+
+			if ( ! empty( $as[0] ) ) {
+				foreach( $as[0] as $ka => $a ) {
+					$extra_nav_items[ $lis[1][ $ka ] ]['slug'] = $lis[1][ $ka ];
+					$extra_nav_items[ $lis[1][ $ka ] ]['text'] = $as[1][ $ka ];
+					preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $a, $attrs );
+
+					if ( ! empty( $attrs[1] ) ) {
+						foreach ( $attrs[1] as $katt => $att ) {
+							if ( 'href' === $att ) {
+								$extra_nav_items[ $lis[1][ $ka ] ]['link'] = trim( $attrs[2][ $katt ], '"' );
+							} else {
+								$extra_nav_items[ $lis[1][ $ka ] ][ $att ] = trim( $attrs[2][ $katt ], '"' );
+							}
+						}
+					}
+				}
+			}
+
+			if ( ! empty( $as[1] ) ) {
+				foreach( $as[1] as $ks => $s ) {
+					preg_match_all( '/<span>(.*)<\/span>/siU', $s, $spans );
+
+					if ( empty( $spans[0] ) ) {
+						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = false;
+					} elseif ( ! empty( $spans[1][0] ) ) {
+						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = (int) $spans[1][0];
+					} else {
+						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = '';
+					}
+				}
+			}
+		}
+	}
+
+	return $extra_nav_items;
 }
 
 /**
