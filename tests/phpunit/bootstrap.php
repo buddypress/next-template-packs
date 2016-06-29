@@ -61,5 +61,6 @@ tests_add_filter( 'pre_option__next_template_packs_package_data', '_set_template
 require getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit/includes/bootstrap.php';
 require BP_TESTS_DIR . '/includes/testcase.php';
 
-// include our testcase
+// include our testcases
 require( 'testcase.php' );
+require( 'testcase-ajax.php' );
