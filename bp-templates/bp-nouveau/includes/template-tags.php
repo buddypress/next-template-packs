@@ -393,18 +393,38 @@ function bp_nouveau_directory_nav_count() {
 
 /** Template tags for the object search **************************************/
 
-function bp_nouveau_get_single_primary_object( $object = '' ) {
+/**
+ * Get the search primary object
+ *
+ * @since 1.0.0
+ *
+ * @param  string $object The primary object.. Optionnal.
+ * @return string The primary object.
+ */
+function bp_nouveau_get_search_primary_object( $object = '' ) {
 	if ( bp_is_user() ) {
 		$object = 'member';
 	} elseif ( bp_is_group() ) {
 		$object = 'group';
+	} elseif ( bp_is_directory() ) {
+		$object = 'dir';
+	} else {
+		$object = apply_filters( 'bp_nouveau_get_search_primary_object', $object );
 	}
 
 	return $object;
 }
 
-function bp_nouveau_get_single_objects( $objects = array() ) {
-	$primary = bp_nouveau_get_single_primary_object();
+/**
+ * Get The list of search objects (Primary + secondary)
+ *
+ * @since 1.0.0
+ *
+ * @param  array $objects The list of objects. Optionnal.
+ * @return array The list of objects.
+ */
+function bp_nouveau_get_search_objects( $objects = array() ) {
+	$primary = bp_nouveau_get_search_primary_object();
 
 	if ( ! $primary ) {
 		return $objects;
@@ -414,51 +434,172 @@ function bp_nouveau_get_single_objects( $objects = array() ) {
 		'primary' => $primary,
 	);
 
-	if ( 'member' === $primary ) {
+	if ( 'member' === $primary || 'dir' === $primary ) {
 		$objects['secondary'] = bp_current_component();
 	} elseif( 'group' === $primary ) {
 		$objects['secondary'] = bp_current_action();
+	} else {
+		$objects = apply_filters( 'bp_nouveau_get_search_objects', $objects );
 	}
 
 	return $objects;
 }
 
-function bp_nouveau_search_object_data_attr( $attr = '' ) {
-	$object = bp_nouveau_get_single_objects();
+/**
+ * Output the search form container classes.
+ *
+ * @since 1.0.0
+ *
+ * @return string CSS classes.
+ */
+function bp_nouveau_search_container_class() {
+	$objects = bp_nouveau_get_search_objects();
 
-	if ( ! isset( $object['secondary'] ) ) {
+	echo join( '-search ', array_map( 'sanitize_html_class', $objects ) ) . '-search';
+}
+
+/**
+ * Output the search form data-bp attribute.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $attr The data-bp attribute.
+ * @return string The data-bp attribute.
+ */
+function bp_nouveau_search_object_data_attr( $attr = '' ) {
+	$objects = bp_nouveau_get_search_objects();
+
+	if ( ! isset( $objects['secondary'] ) ) {
 		return $attr;
 	}
 
 	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
-		$attr = join( '_', $object );
+		$attr = join( '_', $objects );
 	} else {
-		$attr = $object['secondary'];
+		$attr = $objects['secondary'];
 	}
 
 	echo esc_attr( $attr );
 }
 
-function bp_nouveau_search_object_id( $suffix = '', $sep = '-' ) {
-	$id = join( $sep, array_merge( bp_nouveau_get_single_objects(), (array) $suffix ) );
+/**
+ * Output a selector ID.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $suffix A string to append at the end of the ID.
+ * @param  string $sep    The separator to use between each token.
+ * @return string The selector ID.
+ */
+function bp_nouveau_search_selector_id( $suffix = '', $sep = '-' ) {
+	$id = join( $sep, array_merge( bp_nouveau_get_search_objects(), (array) $suffix ) );
 
 	echo esc_attr( $id );
 }
 
-function bp_nouveau_search_object_name( $suffix = '', $sep = '_' ) {
-	$id = join( $sep, array_merge( bp_nouveau_get_single_objects(), (array) $suffix ) );
+/**
+ * Output the name attribute of a selector.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $suffix A string to append at the end of the name.
+ * @param  string $sep    The separator to use between each token.
+ * @return string The name attribute of a selector.
+ */
+function bp_nouveau_search_selector_name( $suffix = '', $sep = '_' ) {
+	$objects = bp_nouveau_get_search_objects();
 
-	echo esc_attr( $id );
-}
-
-function bp_nouveau_search_object_default_text( $text = '' ) {
-	$object = bp_nouveau_get_single_objects();
-
-	if ( ! empty( $object['secondary'] ) ) {
-		$text = bp_get_search_default_text( $object['secondary'] );
+	if ( isset( $objects['secondary'] ) && empty( $suffix ) ) {
+		$name = bp_core_get_component_search_query_arg( $objects['secondary'] );
+	} else {
+		$name = join( $sep, array_merge( $objects, (array) $suffix ) );
 	}
 
-	echo esc_attr( $text );
+	echo esc_attr( $name );
+}
+
+/**
+ * Output the default search text for the search object
+ *
+ * @since 1.0.0
+ *
+ * @param  string $text    The default search text for the search object.
+ * @param  string $is_attr True if it's to be output inside an attribute. False Otherwise.
+ * @return string The default search text.
+ */
+function bp_nouveau_search_default_text( $text = '', $is_attr = true ) {
+	$objects = bp_nouveau_get_search_objects();
+
+	if ( ! empty( $objects['secondary'] ) ) {
+		$text = bp_get_search_default_text( $objects['secondary'] );
+	}
+
+	if ( $is_attr ) {
+		echo esc_attr( $text );
+	} else {
+		echo esc_html( $text );
+	}
+}
+
+/**
+ * Get the search form template part and fire some do_actions if needed.
+ *
+ * @since 1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_search_form() {
+	bp_get_template_part( 'common/search/search-form' );
+
+	$objects = bp_nouveau_get_search_objects();
+
+	if ( empty( $objects['primary'] ) || empty( $objects['secondary'] ) ) {
+		return;
+	}
+
+	if ( 'dir' === $objects['primary'] ) {
+
+		if ( 'activity' === $objects['secondary'] ) {
+			/**
+			 * Fires before the display of the activity syndication options.
+			 *
+			 * @since 1.2.0 (BuddyPress)
+			 */
+			do_action( 'bp_activity_syndication_options' );
+
+		} elseif ( 'blogs' === $objects['secondary'] ) {
+			/**
+			 * Fires inside the unordered list displaying blog sub-types.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			do_action( 'bp_blogs_directory_blog_sub_types' );
+
+		} elseif ( 'groups' === $objects['secondary'] ) {
+			/**
+			 * Fires inside the groups directory group types.
+			 *
+			 * @since 1.2.0 (BuddyPress)
+			 */
+			do_action( 'bp_groups_directory_group_types' );
+
+		} elseif ( 'members' === $objects['secondary'] ) {
+			/**
+			 * Fires inside the members directory member sub-types.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			do_action( 'bp_members_directory_member_sub_types' );
+		}
+
+	} elseif ( 'group' === $objects['primary'] && 'activity' === $objects['secondary'] ) {
+		/**
+		 * Fires inside the syndication options list, after the RSS option.
+		 *
+		 * @since 1.2.0 (BuddyPress)
+		 */
+		do_action( 'bp_group_activity_syndication_options' );
+	}
 }
 
 /** Template tags for the directory filters **********************************/

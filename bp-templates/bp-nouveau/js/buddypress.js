@@ -83,16 +83,6 @@ window.bp = window.bp || {};
 					}
 				} );
 			}
-
-			if ( $( '#buddypress li[role="search"] input[type=text]' ).length ) {
-				// Transform text field into search field
-				$( '#buddypress li[role="search"] input[type=text]' ).prop( 'type', 'search' );
-
-				// Add a title attribute and use an icon for the search submit button
-				search_title = $( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value' );
-				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'title', search_title );
-				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value', BP_Nouveau.search_icon );
-			}
 		},
 
 		/** Helpers *******************************************************************/

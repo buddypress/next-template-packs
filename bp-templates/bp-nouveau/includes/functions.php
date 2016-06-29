@@ -129,19 +129,6 @@ function bp_nouveau_is_object_nav_in_sidebar() {
 	return is_active_widget( false, false, 'bp_nouveau_sidebar_object_nav_widget', true );
 }
 
-function bp_nouveau_get_component_search_query_arg( $query_arg, $component = '' ) {
-	if ( 'members' === $component ) {
-		$query_arg = str_replace( '_s', '_search', $query_arg );
-
-		if ( bp_is_group() ) {
-			$query_arg = 'group_' . $query_arg;
-		}
-	}
-
-	return $query_arg;
-}
-add_filter( 'bp_core_get_component_search_query_arg', 'bp_nouveau_get_component_search_query_arg', 10, 2 );
-
 function bp_nouveau_current_user_can( $capability = '' ) {
 	return apply_filters( 'bp_nouveau_current_user_can', is_user_logged_in(), $capability, bp_loggedin_user_id() );
 }

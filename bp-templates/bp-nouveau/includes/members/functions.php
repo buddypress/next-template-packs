@@ -30,26 +30,6 @@ function bp_nouveau_members_enqueue_scripts() {
 	' );
 }
 
-function bp_nouveau_members_directory_search_form() {
-	$query_arg = bp_core_get_component_search_query_arg( 'members' );
-
-	$placeholder = bp_get_search_default_text( 'members' );
-
-	$search_form_html = '<form action="" method="get" id="search-members-form">
-		<label for="members_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="members_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="members_search_submit" name="members_search_submit" value="' . __( 'Search', 'bp-nouveau' ) . '" />
-	</form>';
-
-	/**
-	 * Filters the Members component search form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $search_form_html HTML markup for the member search form.
-	 */
-	echo apply_filters( 'bp_nouveau_members_directory_search_form', $search_form_html );
-}
-
 /**
  * Get the nav items for the Members directory
  *

@@ -327,31 +327,6 @@ function bp_nouveau_get_activity_filters() {
 	return $filters;
 }
 
-if ( ! function_exists( 'bp_directory_activity_search_form' ) ) :
-
-function bp_directory_activity_search_form() {
-
-	$query_arg = bp_core_get_component_search_query_arg( 'activity' );
-	$placeholder = bp_get_search_default_text( 'activity' );
-
-	$search_form_html = '<form action="" method="get" id="search-activity-form">
-		<label for="activity_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="activity_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="activity_search_submit" name="activity_search_submit" value="'. __( 'Search', 'bp-nouveau' ) .'" />
-	</form>';
-
-	/**
-	 * Filters the HTML markup for the groups search form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $search_form_html HTML markup for the search form.
-	 */
-	echo apply_filters( 'bp_directory_activity_search_form', $search_form_html );
-
-}
-
-endif;
-
 function bp_nouveau_activity_secondary_avatars( $action, $activity ) {
 	switch ( $activity->component ) {
 		case 'groups' :

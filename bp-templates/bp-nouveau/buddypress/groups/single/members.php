@@ -11,7 +11,7 @@
 <div class="item-list-tabs" id="subnav" role="navigation">
 	<ul class="subnav clearfix">
 
-		<?php bp_get_template_part( 'common/search/object-search-form' ); ?>
+		<?php bp_nouveau_search_form(); ?>
 
 		<?php bp_groups_members_filter(); ?>
 

@@ -32,16 +32,8 @@
 		<ul type="list" class="subnav clearfix">
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
-			<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
+			<?php bp_nouveau_search_form(); ?>
 
-			<?php
-
-			/**
-			 * Fires before the display of the activity syndication options.
-			 *
-			 * @since 1.2.0
-			 */
-			do_action( 'bp_activity_syndication_options' ); ?>
 		</ul>
 
 		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>

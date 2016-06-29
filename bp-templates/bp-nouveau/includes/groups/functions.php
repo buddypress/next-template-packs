@@ -195,33 +195,6 @@ function bp_nouveau_get_group_potential_invites( $args = array() ) {
 	return $response;
 }
 
-/**
- * Groups search form
- *
- * @todo Remove as there's now the common/search/dir-search-form.php ?
- */
-function bp_nouveau_directory_groups_search_form( $search_form_html = '' ) {
-
-	$query_arg   = bp_core_get_component_search_query_arg( 'groups' );
-	$placeholder = bp_get_search_default_text( 'groups' );
-
-	$search_form_html = '<form action="" method="get" id="search-groups-form">
-		<label for="groups_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="groups_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="groups_search_submit" name="groups_search_submit" value="'. __( 'Search', 'bp-nouveau' ) .'" />
-	</form>';
-
-	/**
-	 * Filters the HTML markup for the groups search form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $search_form_html HTML markup for the search form.
-	 */
-	echo apply_filters( 'bp_nouveau_directory_groups_search_form', $search_form_html );
-
-}
-add_filter( 'bp_directory_groups_search_form', 'bp_nouveau_directory_groups_search_form', 10, 1 );
-
 // I don't see any reason why to restrict group invites to friends..
 function bp_nouveau_group_invites_create_steps( $steps = array() ) {
 	if ( bp_is_active( 'friends' ) && isset( $steps['group-invites'] ) ) {

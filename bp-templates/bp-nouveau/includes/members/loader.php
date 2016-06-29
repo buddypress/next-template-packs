@@ -87,8 +87,6 @@ class BP_Nouveau_Members {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
-		add_filter( 'bp_directory_members_search_form', 'bp_nouveau_members_directory_search_form', 10, 1 );
-
 		// Add the default-front to User's front hierarchy if user enabled it (Enabled by default).
 		add_filter( 'bp_displayed_user_get_front_template', 'bp_nouveau_member_reset_front_template', 10, 1 );
 	}
