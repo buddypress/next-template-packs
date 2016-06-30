@@ -36,18 +36,7 @@ do_action( 'bp_after_group_activity_post_form' ); ?>
 	<ul>
 		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
-		<li class="group-search" role="search" data-bp-search="activity">
-			<?php bp_directory_activity_search_form(); ?>
-		</li>
-
-		<?php
-
-		/**
-		 * Fires inside the syndication options list, after the RSS option.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_group_activity_syndication_options' ); ?>
+		<?php bp_nouveau_search_form(); ?>
 
 		<li id="activity-filter-select" class="last filter">
 			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>

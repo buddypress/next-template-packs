@@ -23,14 +23,7 @@
 
 		<div id="item-header-content">
 
-			<div id="item-buttons"><?php
-
-				/**
-				 * Fires in the group header actions section.
-				 *
-				 * @since 1.2.6
-				 */
-				do_action( 'bp_group_header_actions' ); ?></div><!-- #item-buttons -->
+			<div id="item-buttons"><?php bp_nouveau_group_header_buttons(); ?></div><!-- #item-buttons -->
 
 			<span class="highlight"><?php bp_group_type(); ?></span>
 			<span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span>

@@ -43,14 +43,7 @@ do_action( 'bp_before_group_invites_content' ); ?>
 
 				<div class="action">
 
-					<?php
-
-					/**
-					 * Fires inside the member group item action markup.
-					 *
-					 * @since 1.1.0
-					 */
-					do_action( 'bp_group_invites_item_action' ); ?>
+					<?php bp_nouveau_groups_invite_buttons(); ?>
 
 				</div>
 			</li>

@@ -17,24 +17,41 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 
 	$data_attribute = $button->id;
 
-	if ( 'member_friendship' === $button->id ) {
-		$parse_class = explode( ' ', $button->link_class );
+	$reset_ids = array(
+		'member_friendship' => true,
+		'group_membership'  => true,
+	);
 
-		if ( false !== $parse_class ) {
-			$find_id = array_intersect( $parse_class, array(
-				'pending_friend',
-				'awaiting_response_friend',
-				'is_friend',
-				'not_friends',
-			) );
+	if ( ! empty( $reset_ids[ $button->id ] ) )  {
+		$parse_class = array_map( 'sanitize_html_class', explode( ' ', $button->link_class ) );
 
-			if ( 1 === count( $find_id ) ) {
-				$data_attribute = reset( $find_id );
+		if ( false === $parse_class ) {
+			return $output;
+		}
 
-				if ( in_array( $data_attribute, array( 'pending_friend', 'awaiting_response_friend' ) ) ) {
-					$data_attribute = str_replace( '_friend', '', $data_attribute );
-				}
-			}
+		$find_id = array_intersect( $parse_class, array(
+			'pending_friend',
+			'awaiting_response_friend',
+			'is_friend',
+			'not_friends',
+			'leave-group',
+			'join-group',
+			'accept-invite',
+			'membership-requested',
+			'request-membership',
+		) );
+
+		if ( 1 !== count( $find_id ) ) {
+			return $output;
+		}
+
+		$data_attribute = reset( $find_id );
+
+		if ( in_array( $data_attribute, array( 'pending_friend', 'awaiting_response_friend' ) ) ) {
+			$data_attribute = str_replace( '_friend', '', $data_attribute );
+
+		} elseif ( 'group_membership' === $button->id ) {
+			$data_attribute = str_replace( '-', '_', $data_attribute );
 		}
 	}
 
@@ -42,164 +59,75 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 	return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $data_attribute . '">' . $button->link_text . '</a>' . $after;
 }
 
-if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
 /**
- * BP Sidebar Item Nav_Widget
+ * Register the 2 sidebars for the Group & User default front page
  *
- * Adds a widget to move avatar/item nav into the sidebar
- *
- * @since  1.0
- *
- * @uses   WP_Widget
+ * @since  1.0.0
  */
-class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
+function bp_nouveau_register_sidebars() {
+	$default_fronts     = bp_nouveau_get_appearance_settings();
+	$default_user_front = 0;
+	$is_active_groups   = bp_is_active( 'groups' );
 
-	/**
-	 * Constructor
-	 *
-	 * @since  1.0
-	 *
-	 * @uses   WP_Widget::__construct() to init the widget
-	 */
-	public function __construct() {
+	if ( isset( $default_fronts['user_front_page'] ) ) {
+		$default_user_front = $default_fronts['user_front_page'];
+	}
 
-		$widget_ops = array(
-			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-nouveau' ),
-			'classname'   => 'widget_nav_menu buddypress_object_nav'
+	if ( $is_active_groups ) {
+		$default_group_front = 0;
+
+		if ( isset( $default_fronts['group_front_page'] ) ) {
+			$default_group_front = $default_fronts['group_front_page'];
+		}
+	}
+
+	// Setting the front template happens too early, so we need this!
+	if ( is_customize_preview() ) {
+		$default_user_front = bp_nouveau_get_temporary_setting( 'user_front_page', $default_user_front );
+
+		if ( $is_active_groups ) {
+			$default_group_front = bp_nouveau_get_temporary_setting( 'group_front_page', $default_group_front );
+		}
+	}
+
+	$sidebars = array();
+	if ( $default_user_front ) {
+		$sidebars[] = array(
+			'name'          => __( 'BuddyPress User\'s Home', 'bp-nouveau' ),
+			'id'            => 'sidebar-buddypress-members',
+			'description'   => __( 'Add widgets here to appear in the front page of each member of your community.', 'bp-nouveau' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
 		);
+	}
 
-		parent::__construct(
-			'bp_nouveau_sidebar_object_nav_widget',
-			__( '(BuddyPress) Primary nav', 'bp-nouveau' ),
-			$widget_ops
+	if ( $default_group_front ) {
+		$sidebars[] = array(
+			'name'          => __( 'BuddyPress Group\'s Home', 'bp-nouveau' ),
+			'id'            => 'sidebar-buddypress-groups',
+			'description'   => __( 'Add widgets here to appear in the front page of each group of your community.', 'bp-nouveau' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
 		);
 	}
 
-	/**
-	 * Register the widget
-	 *
-	 * @since  1.0
-	 *
-	 * @uses   register_widget() to register the widget
-	 */
-	public static function register_widget() {
-		register_widget( 'BP_Nouveau_Object_Nav_Widget' );
+	if ( empty( $sidebars ) ) {
+		return;
 	}
 
-	/**
-	 * Displays the output, the button to post new support topics
-	 *
-	 * @since  1.0
-	 *
-	 * @param  mixed $args Arguments
-	 * @return string html output
-	 */
-	public function widget( $args, $instance ) {
-		if ( ! is_buddypress() || bp_is_group_create() ) {
-			return;
-		}
-
-		$item_nav_args = wp_parse_args( $instance, apply_filters( 'bp_nouveau_object_nav_widget_args', array(
-			'bp_nouveau_widget_title' => true,
-		) ) );
-
-		$title = '';
-
-		if ( ! empty( $item_nav_args[ 'bp_nouveau_widget_title' ] ) ) {
-			$title = '';
-
-			if ( bp_is_group() ) {
-				$title = bp_get_current_group_name();
-			} elseif ( bp_is_user() ) {
-				$title = bp_get_displayed_user_fullname();
-			} elseif ( bp_get_directory_title( bp_current_component() ) ) {
-				$title = bp_get_directory_title( bp_current_component() );
-			}
-		}
-
-		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
-
-		echo $args['before_widget'];
-
-		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . $title . $args['after_title'];
-		}
-
-		if ( bp_is_user() ) {
-			bp_get_template_part( 'members/single/item-nav' );
-		} elseif ( bp_is_group() ) {
-			bp_get_template_part( 'groups/single/item-nav' );
-		} elseif ( bp_is_directory() ) {
-			bp_get_template_part( 'common/nav/directory-nav' );
-		}
-
-		echo $args['after_widget'];
-	}
-
-	/**
-	 * Update the new support topic widget options (title)
-	 *
-	 * @since  1.0
-	 *
-	 * @param  array $new_instance The new instance options
-	 * @param  array $old_instance The old instance options
-	 * @return array the instance
-	 */
-	public function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-
-		$instance['bp_nouveau_widget_title'] = (bool) $new_instance['bp_nouveau_widget_title'];
-
-		return $instance;
-	}
-
-	/**
-	 * Output the new support topic widget options form
-	 *
-	 * @since  1.0
-	 *
-	 * @param  $instance Instance
-	 * @return string HTML Output
-	 */
-	public function form( $instance ) {
-		$defaults = array(
-			'bp_nouveau_widget_title' => true,
-		);
-
-		$instance = wp_parse_args( (array) $instance, $defaults );
-
-		$bp_nouveau_widget_title = (bool) $instance['bp_nouveau_widget_title'];
-		?>
-
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $bp_nouveau_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_nouveau_widget_title' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-nouveau' ); ?></label>
-		</p>
-
-		<?php
+	// Register the sidebars if needed.
+	foreach ( $sidebars as $sidebar ) {
+		register_sidebar( $sidebar );
 	}
 }
-
-endif;
-
-add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
 
 function bp_nouveau_is_object_nav_in_sidebar() {
 	return is_active_widget( false, false, 'bp_nouveau_sidebar_object_nav_widget', true );
 }
-
-function bp_nouveau_get_component_search_query_arg( $query_arg, $component = '' ) {
-	if ( 'members' === $component ) {
-		$query_arg = str_replace( '_s', '_search', $query_arg );
-
-		if ( bp_is_group() ) {
-			$query_arg = 'group_' . $query_arg;
-		}
-	}
-
-	return $query_arg;
-}
-add_filter( 'bp_core_get_component_search_query_arg', 'bp_nouveau_get_component_search_query_arg', 10, 2 );
 
 function bp_nouveau_current_user_can( $capability = '' ) {
 	return apply_filters( 'bp_nouveau_current_user_can', is_user_logged_in(), $capability, bp_loggedin_user_id() );
@@ -216,120 +144,217 @@ function bp_nouveau_get_forsaken_hooks() {
 	return array(
 		'bp_members_directory_member_types' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_members_directory_member_types&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_members_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_members_directory_member_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_members_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_all' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_before_activity_type_tab_all&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_all\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_friends' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_before_activity_type_tab_friends&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_friends\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_groups' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_before_activity_type_tab_groups&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_groups\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_favorites' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_before_activity_type_tab_favorites&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_favorites\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_before_activity_type_tab_mentions' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_before_activity_type_tab_mentions&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_before_activity_type_tab_mentions\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_activity_type_tabs' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_activity_type_tabs&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_activity_type_tabs\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_groups_directory_group_filter' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_groups_directory_group_filter&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_groups_directory_group_filter\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_blogs_directory_blog_types' => array(
 			'hook_type'    => 'action',
-			'message_type' => 'error',
-			'message'      => __( 'the &#39;bp_blogs_directory_blog_types&#39; action is not available in the BP Nouveau template pack, use the &#39;bp_nouveau_get_activity_directory_nav_items&#39; filter instead', 'bp-nouveau' ),
+			'message_type' => 'warning',
+			'message'      => __( 'the \'bp_blogs_directory_blog_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_members_directory_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_members_directory_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_filters&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_members_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'Instead of using the &#39;bp_activity_filter_options&#39; action you should register your activity types using the function &#39;bp_activity_set_action&#39;', 'bp-nouveau' ),
+			'message'      => __( 'Instead of using the \'bp_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'bp-nouveau' ),
 		),
 		'bp_member_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'Instead of using the &#39;bp_member_activity_filter_options&#39; action you should register your activity types using the function &#39;bp_activity_set_action&#39;', 'bp-nouveau' ),
+			'message'      => __( 'Instead of using the \'bp_member_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'bp-nouveau' ),
 		),
 		'bp_group_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'Instead of using the &#39;bp_group_activity_filter_options&#39; action you should register your activity types using the function &#39;bp_activity_set_action&#39;', 'bp-nouveau' ),
+			'message'      => __( 'Instead of using the \'bp_group_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'bp-nouveau' ),
 		),
 		'bp_groups_directory_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_groups_directory_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_groups_filters&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_groups_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_filters\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_member_group_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_member_group_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_groups_filters&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_group_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_filters\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_member_blog_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_member_blog_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_blogs_filters&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_blog_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_filters\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_blogs_directory_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_blogs_directory_order_options&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_blogs_filters&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_blogs_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_filters\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_activity_entry_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_activity_entry_meta&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_activity_entry_buttons&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_activity_entry_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_entry_buttons\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_member_header_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_member_header_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_buttons&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_header_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_directory_members_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_directory_members_actions&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_members_buttons&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_directory_members_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_group_members_list_item_action' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_group_members_list_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_group_header_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_group_header_meta&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_group_meta&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_header_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_group_meta\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_directory_members_item' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_directory_members_item&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_member_meta&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_directory_members_item\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_member_meta\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_profile_header_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The &#39;bp_profile_header_meta&#39; action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the &#39;bp_nouveau_get_member_meta&#39; filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_profile_header_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_member_meta\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_group_header_actions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_group_header_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_directory_groups_actions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_directory_groups_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_group_invites_item_action' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_group_invites_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_directory_blogs_actions' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_directory_blogs_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_buttons\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_activity_comment_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_activity_comment_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_comment_buttons\' filter instead', 'bp-nouveau' ),
 		),
 	);
+}
+
+/**
+ * Parse an html output to a list of component's directory nav item.
+ *
+ * @since  1.0.0
+ *
+ * @param  string  $hook      The hook to fire.
+ * @param  string  $component The component nav belongs to.
+ * @param  int     $position  The position of the nav item.
+ * @return array              A list of component's dir nav items
+ */
+function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position = 99 ) {
+	$extra_nav_items = array();
+
+	if ( empty( $hook ) || empty( $component ) || ! has_action( $hook ) ) {
+		return $extra_nav_items;
+	}
+
+	// Get the hook output.
+	ob_start();
+	do_action( $hook );
+	$output = ob_get_clean();
+
+	if ( ! empty( $output ) ) {
+		preg_match_all( "/<li\sid=\"{$component}\-(.*)\"[^>]*>/siU", $output, $lis );
+
+		if ( ! empty( $lis[1] ) ) {
+			$extra_nav_items = array_fill_keys( $lis[1], array( 'component' => $component, 'position' => $position ) );
+
+			preg_match_all( '/<a\s[^>]*>(.*)<\/a>/siU', $output, $as );
+
+			if ( ! empty( $as[0] ) ) {
+				foreach( $as[0] as $ka => $a ) {
+					$extra_nav_items[ $lis[1][ $ka ] ]['slug'] = $lis[1][ $ka ];
+					$extra_nav_items[ $lis[1][ $ka ] ]['text'] = $as[1][ $ka ];
+					preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $a, $attrs );
+
+					if ( ! empty( $attrs[1] ) ) {
+						foreach ( $attrs[1] as $katt => $att ) {
+							if ( 'href' === $att ) {
+								$extra_nav_items[ $lis[1][ $ka ] ]['link'] = trim( $attrs[2][ $katt ], '"' );
+							} else {
+								$extra_nav_items[ $lis[1][ $ka ] ][ $att ] = trim( $attrs[2][ $katt ], '"' );
+							}
+						}
+					}
+				}
+			}
+
+			if ( ! empty( $as[1] ) ) {
+				foreach( $as[1] as $ks => $s ) {
+					preg_match_all( '/<span>(.*)<\/span>/siU', $s, $spans );
+
+					if ( empty( $spans[0] ) ) {
+						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = false;
+					} elseif ( ! empty( $spans[1][0] ) ) {
+						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = (int) $spans[1][0];
+					} else {
+						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = '';
+					}
+				}
+			}
+		}
+	}
+
+	return $extra_nav_items;
 }
 
 /**
@@ -450,11 +475,16 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
-		'user_front_page'   => 1,
+		'user_front_page' => 1,
+		'user_front_bio'  => 0,
 	);
 
 	if ( bp_is_active( 'groups' ) ) {
-		$default_args['group_front_page'] = 1;
+		$default_args = array_merge( $default_args, array(
+			'group_front_page'        => 1,
+			'group_front_boxes'       => 1,
+			'group_front_description' => 0,
+		) );
 	}
 
 	$settings = bp_parse_args(
@@ -499,7 +529,7 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'title'       => __( 'User\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 10,
-			'description' => __( 'Activate or deactivate the default front page for your users.', 'bp-nouveau' ),
+			'description' => __( 'Set your preferences about the Users default front page.', 'bp-nouveau' ),
 		),
 	) );
 
@@ -511,6 +541,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	$settings = apply_filters( 'bp_nouveau_customizer_settings', array(
 		'bp_nouveau_appearance[user_front_page]' => array(
 			'index'             => 'user_front_page',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[user_front_bio]' => array(
+			'index'             => 'user_front_bio',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -538,12 +575,32 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'settings'   => 'bp_nouveau_appearance[user_front_page]',
 			'type'       => 'checkbox',
 		),
+		'user_front_bio' => array(
+			'label'      => __( 'Display the WordPress Biographical Info of the user.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_user_front_page',
+			'settings'   => 'bp_nouveau_appearance[user_front_bio]',
+			'type'       => 'checkbox',
+		),
 	) );
 
 	// Add the controls to the customizer's section
 	foreach ( $controls as $id_control => $control_args ) {
 		$wp_customize->add_control( $id_control, $control_args );
 	}
+}
+
+function bp_nouveau_customizer_enqueue_scripts() {
+	$min = bp_core_get_minified_asset_suffix();
+
+	wp_enqueue_script(
+		'bp-nouveau-customizer',
+		trailingslashit( bp_get_theme_compat_url() ) . "js/customizer{$min}.js",
+		array( 'customize-controls', 'iris', 'underscore', 'wp-util' ),
+		bp_nouveau()->version,
+		true
+	);
+
+	do_action( 'bp_nouveau_customizer_enqueue_scripts' );
 }
 
 /**

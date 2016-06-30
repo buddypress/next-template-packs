@@ -113,6 +113,15 @@ function bp_nouveau_members_loop_buttons() {
 		return;
 	}
 
+	$type   = 'loop';
+	$action = 'bp_directory_members_actions';
+
+	// specific case for group members
+	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
+		$type   = 'group_member';
+		$action = 'bp_group_members_list_item_action';
+	}
+
 	echo join( ' ', bp_nouveau_get_members_buttons( 'loop' ) );
 
 	/**
@@ -120,7 +129,7 @@ function bp_nouveau_members_loop_buttons() {
 	 *
 	 * @since 1.1.0 (BuddyPress)
 	 */
-	do_action( 'bp_directory_members_actions' );
+	do_action( $action );
 }
 
 	/**
@@ -138,6 +147,8 @@ function bp_nouveau_members_loop_buttons() {
 
 		if ( 'loop' === $type ) {
 			$user_id = bp_get_member_user_id();
+		} elseif ( 'group_member' === $type ) {
+			$user_id = bp_get_group_member_id();
 		} else {
 			$user_id = bp_displayed_user_id();
 		}
@@ -170,7 +181,7 @@ function bp_nouveau_members_loop_buttons() {
 		}
 
 		// Only add The public and private messages when not in a loop
-		if ( 'loop' !== $type ) {
+		if ( 'profile' === $type ) {
 			if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) {
 				/**
 				 * This filter workaround is waiting for a core adaptation
@@ -415,3 +426,73 @@ function bp_nouveau_member_header_template_part() {
 	// Display template notices if any
 	bp_nouveau_template_notices();
 }
+
+/**
+ * Get a link to set the Member's default front page and directly
+ * reach the Customizer section where it's possible to do it.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_members_get_customizer_option_link() {
+	return bp_nouveau_get_customizer_link( array(
+		'object'    => 'user',
+		'autofocus' => 'bp_nouveau_user_front_page',
+		'text'      => esc_html__( 'Members default front page', 'bp-nouveau' ),
+	) );
+}
+
+/**
+ * Get a link to set the Member's front page widgets and directly
+ * reach the Customizer section where it's possible to do it.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_members_get_customizer_widgets_link() {
+	return bp_nouveau_get_customizer_link( array(
+		'object'    => 'user',
+		'autofocus' => 'sidebar-widgets-sidebar-buddypress-members',
+		'text'      => esc_html__( '(BuddyPress) Widgets', 'bp-nouveau' ),
+	) );
+}
+
+/**
+ * Display the Edit profile link (temporary)
+ * @todo  replace with Ajax featur
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_member_description_edit_link() {
+	echo bp_nouveau_member_get_description_edit_link();
+}
+
+	/**
+	 * Get the Edit profile link (temporary)
+	 * @todo  replace with Ajax featur
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string HTML Output
+	 */
+	function bp_nouveau_member_get_description_edit_link() {
+		// Disable the filter
+		remove_filter( 'edit_profile_url', 'bp_members_edit_profile_url', 10, 3 );
+
+		if ( is_multisite() && ! current_user_can( 'read' ) ) {
+			$link = get_dashboard_url( bp_displayed_user_id(), 'profile.php' );
+		} else {
+			$link = get_edit_profile_url( bp_displayed_user_id() );
+		}
+
+		// Restore the filter
+		add_filter( 'edit_profile_url', 'bp_members_edit_profile_url', 10, 3 );
+
+		$link .= '#description';
+
+		return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html__( 'Edit your bio', 'bp-nouveau' ) );
+	}

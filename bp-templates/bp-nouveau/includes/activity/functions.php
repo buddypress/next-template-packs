@@ -181,7 +181,21 @@ function bp_nouveau_get_activity_directory_nav_items() {
 		'position'  => 5,
 	);
 
+	// deprecated hooks
+	$deprecated_hooks = array(
+		array( 'bp_before_activity_type_tab_all', 'activity',  0 ),
+		array( 'bp_activity_type_tabs',           'activity', 46 ),
+	);
+
 	if ( is_user_logged_in() ) {
+		$deprecated_hooks = array_merge(
+			$deprecated_hooks,
+			array(
+				array( 'bp_before_activity_type_tab_friends',   'activity',  6 ),
+				array( 'bp_before_activity_type_tab_groups',    'activity', 16 ),
+				array( 'bp_before_activity_type_tab_favorites', 'activity', 26 ),
+		) );
+
 
 		// If the user has favorite create a nav item
 		if ( bp_get_total_favorite_count_for_user( bp_loggedin_user_id() ) ) {
@@ -193,7 +207,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'title'     => __( 'The activity I\'ve marked as a favorite.', 'bp-nouveau' ),
 				'text'      => __( 'My Favorites', 'bp-nouveau' ),
 				'count'     => false,
-				'position'  => 15,
+				'position'  => 35,
 			);
 		}
 
@@ -207,7 +221,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'title'     => __( 'The activity of my friends only.', 'bp-nouveau' ),
 				'text'      => __( 'My Friends', 'bp-nouveau' ),
 				'count'     => '',
-				'position'  => 25,
+				'position'  => 15,
 			);
 		}
 
@@ -221,12 +235,14 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'title'     => __( 'The activity of groups I am a member of.', 'bp-nouveau' ),
 				'text'      => __( 'My Groups', 'bp-nouveau' ),
 				'count'     => '',
-				'position'  => 35,
+				'position'  => 25,
 			);
 		}
 
 		// Mentions are allowed
 		if ( bp_activity_do_mentions() ) {
+			$deprecated_hooks[] = array( 'bp_before_activity_type_tab_mentions', 'activity', 36 );
+
 			$count = '';
 			if ( bp_get_total_mention_count_for_user( bp_loggedin_user_id() ) ) {
 				$count = bp_total_mention_count_for_user( bp_loggedin_user_id() );
@@ -242,6 +258,17 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'count'     => $count,
 				'position'  => 45,
 			);
+		}
+	}
+
+	// Check for deprecated hooks :
+	foreach ( $deprecated_hooks as $deprectated_hook ) {
+		list( $hook, $component, $position ) = $deprectated_hook;
+
+		$extra_nav_items = bp_nouveau_parse_hooked_dir_nav( $hook, $component, $position );
+
+		if ( ! empty( $extra_nav_items ) ) {
+			$nav_items = array_merge( $nav_items, $extra_nav_items );
 		}
 	}
 
@@ -299,31 +326,6 @@ function bp_nouveau_get_activity_filters() {
 
 	return $filters;
 }
-
-if ( ! function_exists( 'bp_directory_activity_search_form' ) ) :
-
-function bp_directory_activity_search_form() {
-
-	$query_arg = bp_core_get_component_search_query_arg( 'activity' );
-	$placeholder = bp_get_search_default_text( 'activity' );
-
-	$search_form_html = '<form action="" method="get" id="search-activity-form">
-		<label for="activity_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="activity_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="activity_search_submit" name="activity_search_submit" value="'. __( 'Search', 'bp-nouveau' ) .'" />
-	</form>';
-
-	/**
-	 * Filters the HTML markup for the groups search form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $search_form_html HTML markup for the search form.
-	 */
-	echo apply_filters( 'bp_directory_activity_search_form', $search_form_html );
-
-}
-
-endif;
 
 function bp_nouveau_activity_secondary_avatars( $action, $activity ) {
 	switch ( $activity->component ) {

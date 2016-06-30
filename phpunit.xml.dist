@@ -1,0 +1,23 @@
+<phpunit
+	bootstrap="tests/phpunit/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	>
+	<php>
+		<const name="BP_TEMPLATE_PACK" value="nouveau;BP Nouveau;1.0.0;bp-nouveau" />
+	</php>
+	<groups>
+		<exclude>
+			<group>ajax</group>
+			<group>multisite</group>
+		</exclude>
+	</groups>
+	<testsuites>
+		<testsuite>
+			<directory suffix=".php">bp-templates/bp-nouveau/testcases/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

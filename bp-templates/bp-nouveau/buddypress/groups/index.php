@@ -23,16 +23,9 @@
 	<div class="item-list-tabs" id="subnav" role="navigation">
 
 		<ul type="list" class="subnav clearfix">
-			<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
 
-			<?php
+			<?php bp_nouveau_search_form(); ?>
 
-			/**
-			 * Fires inside the groups directory group types.
-			 *
-			 * @since 1.2.0
-			 */
-			do_action( 'bp_groups_directory_group_types' ); ?>
 		</ul>
 
 		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>

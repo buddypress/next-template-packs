@@ -36,6 +36,16 @@ function bp_nouveau_groups_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_groups_enqueue_scripts() {
+	// Neutralize Ajax when using BuddyPress Groups & member widgets on default front page
+	if ( bp_is_group_home() && bp_nouveau_get_appearance_settings( 'group_front_page' ) ) {
+		wp_add_inline_style( 'bp-nouveau', '
+			#group-front-widgets #groups-list-options,
+			#group-front-widgets #members-list-options {
+				display: none;
+			}
+		' );
+	}
+
 	if ( ! bp_is_group_invites() && ! ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
 		return;
 	}
@@ -185,33 +195,6 @@ function bp_nouveau_get_group_potential_invites( $args = array() ) {
 	return $response;
 }
 
-/**
- * Groups search form
- *
- * @todo Remove as there's now the common/search/dir-search-form.php ?
- */
-function bp_nouveau_directory_groups_search_form( $search_form_html = '' ) {
-
-	$query_arg   = bp_core_get_component_search_query_arg( 'groups' );
-	$placeholder = bp_get_search_default_text( 'groups' );
-
-	$search_form_html = '<form action="" method="get" id="search-groups-form">
-		<label for="groups_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="groups_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="groups_search_submit" name="groups_search_submit" value="'. __( 'Search', 'bp-nouveau' ) .'" />
-	</form>';
-
-	/**
-	 * Filters the HTML markup for the groups search form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $search_form_html HTML markup for the search form.
-	 */
-	echo apply_filters( 'bp_nouveau_directory_groups_search_form', $search_form_html );
-
-}
-add_filter( 'bp_directory_groups_search_form', 'bp_nouveau_directory_groups_search_form', 10, 1 );
-
 // I don't see any reason why to restrict group invites to friends..
 function bp_nouveau_group_invites_create_steps( $steps = array() ) {
 	if ( bp_is_active( 'friends' ) && isset( $steps['group-invites'] ) ) {
@@ -275,98 +258,6 @@ function bp_nouveau_group_setup_nav() {
 		) );
 	}
 }
-
-if ( ! function_exists( 'bp_group_accept_invite_button' ) ) :
-
-function bp_group_accept_invite_button( $group = false ) {
-	echo bp_get_group_accept_invite_button( $group );
-}
-
-endif;
-
-if ( ! function_exists( 'bp_get_group_accept_invite_button' ) ) :
-
-function bp_get_group_accept_invite_button( $group = false ) {
-	global $groups_template;
-
-	// Set group to current loop group if none passed
-	if ( empty( $group ) ) {
-		$group =& $groups_template->group;
-	}
-
-	// Don't show button if not logged in or previously banned
-	if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) ) {
-		return false;
-	}
-
-	// Group creation was not completed or status is unknown
-	if ( empty( $group->status ) ) {
-		return false;
-	}
-
-	// Setup button attributes
-	$button = array(
-		'id'                => 'accept_invite',
-		'component'         => 'groups',
-		'must_be_logged_in' => true,
-		'block_self'        => false,
-		'wrapper'           => false,
-		'link_href'         => bp_get_group_accept_invite_link(),
-		'link_text'         => __( 'Accept', 'bp-nouveau' ),
-		'link_title'        => __( 'Accept', 'bp-nouveau' ),
-		'link_class'        => 'button accept group-button accept-invite',
-	);
-
-	return bp_get_button( apply_filters( 'bp_get_group_accept_invite_button', $button, $group ) );
-}
-
-endif;
-
-if ( ! function_exists( 'bp_group_reject_invite_button' ) ) :
-
-function bp_group_reject_invite_button( $group = false ) {
-	echo bp_get_group_reject_invite_button( $group );
-}
-
-endif;
-
-if ( ! function_exists( 'bp_get_group_reject_invite_button' ) ) :
-
-function bp_get_group_reject_invite_button( $group = false ) {
-	global $groups_template;
-
-	// Set group to current loop group if none passed
-	if ( empty( $group ) ) {
-		$group =& $groups_template->group;
-	}
-
-	// Don't show button if not logged in or previously banned
-	if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) ) {
-		return false;
-	}
-
-	// Group creation was not completed or status is unknown
-	if ( empty( $group->status ) ) {
-		return false;
-	}
-
-	// Setup button attributes
-	$button = array(
-		'id'                => 'reject_invite',
-		'component'         => 'groups',
-		'must_be_logged_in' => true,
-		'block_self'        => false,
-		'wrapper'           => false,
-		'link_href'         => bp_get_group_reject_invite_link(),
-		'link_text'         => __( 'Reject', 'bp-nouveau' ),
-		'link_title'        => __( 'Reject', 'bp-nouveau' ),
-		'link_class'        => 'button reject group-button reject-invite',
-	);
-
-	return bp_get_button( apply_filters( 'bp_get_group_reject_invite_button', $button, $group ) );
-}
-
-endif;
 
 function bp_nouveau_groups_invites_custom_message( $message = '' ) {
 	if ( empty( $message ) ) {
@@ -459,6 +350,13 @@ function bp_nouveau_get_groups_directory_nav_items() {
 		}
 	}
 
+	// Check for the deprecated hook :
+	$extra_nav_items = bp_nouveau_parse_hooked_dir_nav( 'bp_groups_directory_group_filter', 'groups', 20 );
+
+	if ( ! empty( $extra_nav_items ) ) {
+		$nav_items = array_merge( $nav_items, $extra_nav_items );
+	}
+
 	/**
 	 * Use this filter to introduce your custom nav items for the groups directory.
 	 *
@@ -513,6 +411,25 @@ function bp_nouveau_get_groups_filters( $context = '' ) {
 }
 
 /**
+ * Catch the arguments for buttons
+ *
+ * @since 1.0.0
+ *
+ * @param  array $buttons The arguments of the button that BuddyPress is about to create.
+ * @return array An empty array to stop the button creation process.
+ */
+function bp_nouveau_groups_catch_button_args( $button = array() ) {
+	/**
+	 * Globalize the arguments so that we can use it
+	 * in bp_nouveau_get_groups_buttons().
+	 */
+	bp_nouveau()->groups->button_args = $button;
+
+	// return an empty array to stop the button creation process
+	return array();
+}
+
+/**
  * Catch the content hooked to the 'bp_group_header_meta' action
  *
  * @since  1.0.0
@@ -539,6 +456,32 @@ function bp_nouveau_get_hooked_group_meta() {
 }
 
 /**
+ * Display the Widgets of Group extensions into the default front page?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True to display. False otherwise.
+ */
+function bp_nouveau_groups_do_group_boxes() {
+	$group_settings = bp_nouveau_get_appearance_settings();
+
+	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_boxes'] );
+}
+
+/**
+ * Display description of the Group into the default front page?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True to display. False otherwise.
+ */
+function bp_nouveau_groups_front_page_description() {
+	$group_settings = bp_nouveau_get_appearance_settings();
+
+	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] );
+}
+
+/**
  * Add sections to the customizer for the groups component.
  *
  * @since 1.0.0
@@ -552,7 +495,7 @@ function bp_nouveau_groups_customizer_sections( $sections = array() ) {
 			'title'       => __( 'Group\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 10,
-			'description' => __( 'Activate or deactivate the default front page for your groups.', 'bp-nouveau' ),
+			'description' => __( 'Set your preferences for the groups default front page.', 'bp-nouveau' ),
 		),
 	) );
 }
@@ -569,6 +512,20 @@ function bp_nouveau_groups_customizer_settings( $settings = array() ) {
 	return array_merge( $settings, array(
 		'bp_nouveau_appearance[group_front_page]' => array(
 			'index'             => 'group_front_page',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[group_front_boxes]' => array(
+			'index'             => 'group_front_boxes',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[group_front_description]' => array(
+			'index'             => 'group_front_description',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -591,6 +548,18 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'label'      => __( 'Enable default front page for groups.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_group_front_page',
 			'settings'   => 'bp_nouveau_appearance[group_front_page]',
+			'type'       => 'checkbox',
+		),
+		'group_front_boxes' => array(
+			'label'      => __( 'Enable Group extensions widgets.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_front_page',
+			'settings'   => 'bp_nouveau_appearance[group_front_boxes]',
+			'type'       => 'checkbox',
+		),
+		'group_front_description' => array(
+			'label'      => __( 'Display the Group\'s description in the front page body.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_front_page',
+			'settings'   => 'bp_nouveau_appearance[group_front_description]',
 			'type'       => 'checkbox',
 		),
 	) );
@@ -704,4 +673,119 @@ function bp_nouveau_group_get_template_part( $template = '' ) {
 	}
 
 	return $located;
+}
+
+/**
+ * Are we inside the Current group's default front page sidebar?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if in the group's home sidebar. False otherwise.
+ */
+function bp_nouveau_group_is_home_widgets() {
+	return true === bp_nouveau()->groups->is_group_home_sidebar;
+}
+
+/**
+ * Filter the Latest activities Widget to only keep the one of the group displayed
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Activities Template arguments.
+ * @return array        The Activities Template arguments.
+ */
+function bp_nouveau_group_activity_widget_overrides( $args = array() ) {
+	return array_merge( $args, array(
+		'object'     => 'groups',
+		'primary_id' => bp_get_current_group_id(),
+	) );
+}
+
+/**
+ * Filter the Groups widget to only keep the displayed group.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Groups Template arguments.
+ * @return array        The Groups Template arguments.
+ */
+function bp_nouveau_group_groups_widget_overrides( $args = array() ) {
+	return array_merge( $args, array(
+		'include' => bp_get_current_group_id(),
+	) );
+}
+
+/**
+ * Filter the Members widgets to only keep members of the displayed group.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args The Members Template arguments.
+ * @return array        The Members Template arguments.
+ */
+function bp_nouveau_group_members_widget_overrides( $args = array() ) {
+	$group_members = groups_get_group_members( array( 'exclude_admins_mods' => false ) );
+
+	if ( empty( $group_members['members'] ) ) {
+		return $args;
+	}
+
+	return array_merge( $args, array(
+		'include' => wp_list_pluck( $group_members['members'], 'ID' ),
+	) );
+}
+
+/**
+ * Init the Group's default front page filters as we're in the sidebar
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_groups_add_home_widget_filters() {
+	add_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_group_activity_widget_overrides', 10, 1 );
+	add_filter( 'bp_before_has_groups_parse_args',  'bp_nouveau_group_groups_widget_overrides',   10, 1 );
+	add_filter( 'bp_before_has_members_parse_args', 'bp_nouveau_group_members_widget_overrides',  10, 1 );
+
+	do_action( 'bp_nouveau_groups_add_home_widget_filters' );
+}
+
+/**
+ * Remove the Group's default front page filters as we're no more in the sidebar
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_groups_remove_home_widget_filters() {
+	remove_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_group_activity_widget_overrides', 10, 1 );
+	remove_filter( 'bp_before_has_groups_parse_args',  'bp_nouveau_group_groups_widget_overrides',   10, 1 );
+	remove_filter( 'bp_before_has_members_parse_args', 'bp_nouveau_group_members_widget_overrides',  10, 1 );
+
+	do_action( 'bp_nouveau_groups_remove_home_widget_filters' );
+}
+
+/**
+ * Get the hook and nonce for Core Group's manage screens.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $id  The screen id
+ * @return mixed       An array containing the hook dynamic part and the nonce. False if it's not a core manage screen.
+ */
+function bp_nouveau_group_get_core_manage_screens( $id = '' ) {
+	/**
+	 * screen id => dynamic part of the hooks & nonce.
+	 */
+	$screens = array(
+		'edit-details'        => array( 'hook' => 'group_details_admin',             'nonce' => 'groups_edit_group_details'  ),
+		'group-settings'      => array( 'hook' => 'group_settings_admin',            'nonce' => 'groups_edit_group_settings' ),
+		'group-avatar'        => array(                                                                                      ),
+		'group-cover-image'   => array( 'hook' => 'group_settings_cover_image',      'nonce' => ''                           ),
+		'manage-members'      => array( 'hook' => 'group_manage_members_admin',      'nonce' => ''                           ),
+		'membership-requests' => array( 'hook' => 'group_membership_requests_admin', 'nonce' => ''                           ),
+		'delete-group'        => array( 'hook' => 'group_delete_admin',              'nonce' => 'groups_delete_group'        ),
+	);
+
+	if ( isset( $screens[ $id ] ) ) {
+		return $screens[ $id ];
+	}
+
+	return false;
 }

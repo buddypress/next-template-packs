@@ -117,6 +117,60 @@ function bp_nouveau_activity_member_post_form() {
 }
 
 /**
+ * Fire specific hooks into the activity entry template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_activity_entry_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$sactivity_entry%2$s', $when, $suffix );
+
+	/**
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( $hook );
+}
+
+/**
+ * Checks if an activity of the loop has some content.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if the activity has some content. False Otherwise.
+ */
+function bp_nouveau_activity_has_content() {
+	return bp_activity_has_content() || (bool) has_action( 'bp_activity_entry_content' );
+}
+
+/**
+ * Output the Activity content into the loop.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_content() {
+	if ( bp_activity_has_content() ) {
+		bp_activity_content_body();
+	}
+
+	/**
+	 * Fires after the display of an activity entry content.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_activity_entry_content' );
+}
+
+/**
  * Output the action buttons inside an Activity Loop
  *
  * @since 1.0.0
@@ -318,6 +372,244 @@ function bp_nouveau_activity_entry_buttons() {
 		// Remove the Comment button if the user can't comment
 		if ( ! bp_activity_can_comment() && $activity_type !== 'activity_comment' ) {
 			unset( $return['activity_conversation'] );
+		}
+
+		return $return;
+	}
+
+/**
+ * Output Activity Comments if any
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_comments() {
+	global $activities_template;
+
+	if ( empty( $activities_template->activity->children ) ) {
+		return false;
+	}
+
+	bp_nouveau_activity_recurse_comments( $activities_template->activity );
+}
+
+/**
+ * Loops through a level of activity comments and loads the template for each.
+ *
+ * Note: This is an adaptation of the bp_activity_recurse_comments() BuddyPress core function
+ *
+ * @since 1.0.0
+ *
+ * @global object $activities_template {@link BP_Activity_Template}
+ *
+ * @param object $comment The activity object currently being recursed.
+ * @return bool|string
+ */
+function bp_nouveau_activity_recurse_comments( $comment ) {
+	global $activities_template;
+
+	if ( empty( $comment ) ) {
+		return false;
+	}
+
+	if ( empty( $comment->children ) ) {
+		return false;
+	}
+
+	/**
+	 * Filters the opening tag for the template that lists activity comments.
+	 *
+	 * @since 1.6.0 (BuddyPress)
+	 *
+	 * @param string $value Opening tag for the HTML markup to use.
+	 */
+	echo apply_filters( 'bp_activity_recurse_comments_start_ul', '<ul>' );
+	foreach ( (array) $comment->children as $comment_child ) {
+
+		// Put the comment into the global so it's available to filters.
+		$activities_template->activity->current_comment = $comment_child;
+
+		/**
+		 * Fires before the display of an activity comment.
+		 *
+		 * @since 1.5.0 (BuddyPress)
+		 */
+		do_action( 'bp_before_activity_comment' );
+
+		bp_get_template_part( 'activity/comment' );
+
+		/**
+		 * Fires after the display of an activity comment.
+		 *
+		 * @since 1.5.0 (BuddyPress)
+		 */
+		do_action( 'bp_after_activity_comment' );
+
+		unset( $activities_template->activity->current_comment );
+	}
+
+	/**
+	 * Filters the closing tag for the template that list activity comments.
+	 *
+	 * @since  1.6.0 (BuddyPress)
+	 *
+	 * @param string $value Closing tag for the HTML markup to use.
+	 */
+	echo apply_filters( 'bp_activity_recurse_comments_end_ul', '</ul>' );
+}
+
+/**
+ * Ouptut the Activity comment action string
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_comment_action() {
+	echo bp_nouveau_get_activity_comment_action();
+}
+
+	/**
+	 * Get the Activity comment action string
+	 *
+	 * @since 1.0.0
+	 */
+	function bp_nouveau_get_activity_comment_action() {
+		/**
+		 * Filter here to edit the activity comment action.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $value HTML Output
+		 */
+		return apply_filters( 'bp_nouveau_get_activity_comment_action',
+			/* translators: 1: user profile link, 2: user name, 3: activity permalink, 4: activity recorded date, 5: activity timestamp, 6: activity human time since */
+			sprintf( __( '<a href="%1$s">%2$s</a> replied <a href="%3$s" class="activity-time-since"><time class="time-since" datetime="%4$s" data-bp-timestamp="%5$d">%6$s</time></a>', 'bp-nouveau' ),
+				esc_url( bp_get_activity_comment_user_link() ),
+				esc_html( bp_get_activity_comment_name() ),
+				esc_url( bp_get_activity_comment_permalink() ),
+				esc_attr( bp_get_activity_comment_date_recorded_raw() ),
+				esc_attr( strtotime( bp_get_activity_comment_date_recorded_raw() ) ),
+				esc_attr( bp_get_activity_comment_date_recorded() )
+		) );
+	}
+
+/**
+ * Load the Activity comment form
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_comment_form() {
+	bp_get_template_part( 'activity/comment-form' );
+
+	/**
+	 * Fires after the activity entry comment form.
+	 *
+	 * @since 1.5.0 (BuddyPress)
+	 */
+	do_action( 'bp_activity_entry_comments' );
+}
+
+/**
+ * Output the action buttons for the activity comments
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_comment_buttons() {
+	echo join( ' ', bp_nouveau_get_activity_comment_buttons() );
+
+	/**
+	 * Fires after the defualt comment action options display.
+	 *
+	 * @since 1.6.0 (BuddyPress)
+	 */
+	do_action( 'bp_activity_comment_options' );
+}
+
+	/**
+	 * Get the action buttons for the activity comments
+	 *
+	 * @since 1.0.0
+	 */
+	function bp_nouveau_get_activity_comment_buttons() {
+		$buttons = array();
+
+		if ( ! isset( $GLOBALS['activities_template'] ) ) {
+			return $buttons;
+		}
+
+		$activity_comment_id = (int) bp_get_activity_comment_id();
+		$activity_id         = (int) bp_get_activity_id();
+
+		if ( empty( $activity_comment_id ) || empty( $activity_id ) ) {
+			return $buttons;
+		}
+
+		$buttons = array( 'activity_comment_reply' => array(
+				'id'                => 'activity_comment_reply',
+				'position'          => 5,
+				'component'         => 'activity',
+				'must_be_logged_in' => true,
+				'link_href'         => sprintf( '#acomment-%s', $activity_comment_id ),
+				'link_class'        => 'acomment-reply bp-primary-action',
+				'link_id'           => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
+				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
+			),
+			'activity_comment_delete' => array(
+				'id'                => 'activity_comment_delete',
+				'position'          => 15,
+				'component'         => 'activity',
+				'must_be_logged_in' => true,
+				'link_href'         => esc_url( bp_get_activity_comment_delete_link() ),
+				'link_class'        => 'delete acomment-delete confirm bp-secondary-action',
+				'link_rel'          => 'nofollow',
+				'link_text'         => esc_html__( 'Delete', 'bp-nouveau' ),
+			),
+		);
+
+		/**
+		 * Filter here to add your buttons, use the position argument to choose where to insert it.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $buttons             The list of buttons.
+		 * @param int   $activity_comment_id The current activity comment ID.
+		 * @param int   $activity_id         The current activity ID.
+		 */
+		$buttons_group = apply_filters( 'bp_nouveau_get_activity_comment_buttons', $buttons, $activity_comment_id, $activity_id );
+
+		if ( empty( $buttons_group ) ) {
+			return $buttons;
+		}
+
+		// It's the first comment of the loop, so build the Group and sort it
+		if ( ! isset( bp_nouveau()->activity->comment_buttons ) || false === is_a( bp_nouveau()->activity->comment_buttons, 'BP_Buttons_Group' ) ) {
+			$sort = true;
+			bp_nouveau()->activity->comment_buttons = new BP_Buttons_Group( $buttons_group );
+
+		// It's not the first comment, the order is set, we simply need to update the Buttons Group
+		} else {
+			$sort = false;
+			bp_nouveau()->activity->comment_buttons->update( $buttons_group );
+		}
+
+		$return = bp_nouveau()->activity->comment_buttons->get( $sort );
+
+		if ( ! $return ) {
+			return array();
+		}
+
+		/**
+		 * If post comment / Activity comment sync is on, it's safer
+		 * to unset the comment button just before returning it.
+		 */
+		if ( ! bp_activity_can_comment_reply( bp_activity_current_comment() ) ) {
+			unset( $return['activity_comment_reply'] );
+		}
+
+		/**
+		 * If there was an activity of the user before one af another
+		 * user as we're updating buttons, we need to unset the delete link
+		 */
+		if ( ! bp_activity_user_can_delete() ) {
+			unset( $return['activity_comment_delete'] );
 		}
 
 		return $return;

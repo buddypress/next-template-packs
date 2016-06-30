@@ -57,6 +57,13 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 		}
 	}
 
+	// Check for the deprecated hook :
+	$extra_nav_items = bp_nouveau_parse_hooked_dir_nav( 'bp_blogs_directory_blog_types', 'blogs', 20 );
+
+	if ( ! empty( $extra_nav_items ) ) {
+		$nav_items = array_merge( $nav_items, $extra_nav_items );
+	}
+
 	/**
 	 * Use this filter to introduce your custom nav items for the blogs directory.
 	 *
@@ -107,4 +114,23 @@ function bp_nouveau_get_blogs_filters( $context = '' ) {
 	}
 
 	return $filters;
+}
+
+/**
+ * Catch the arguments for buttons
+ *
+ * @since 1.0.0
+ *
+ * @param  array $buttons The arguments of the button that BuddyPress is about to create.
+ * @return array An empty array to stop the button creation process.
+ */
+function bp_nouveau_blogs_catch_button_args( $button = array() ) {
+	/**
+	 * Globalize the arguments so that we can use it
+	 * in bp_nouveau_get_blogs_buttons().
+	 */
+	bp_nouveau()->blogs->button_args = $button;
+
+	// return an empty array to stop the button creation process
+	return array();
 }

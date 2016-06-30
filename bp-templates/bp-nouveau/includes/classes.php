@@ -175,3 +175,143 @@ class BP_Buttons_Group {
 }
 
 endif;
+
+if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
+/**
+ * BP Sidebar Item Nav_Widget
+ *
+ * Adds a widget to move avatar/item nav into the sidebar
+ *
+ * @since  1.0
+ *
+ * @uses   WP_Widget
+ */
+class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
+
+	/**
+	 * Constructor
+	 *
+	 * @since  1.0
+	 *
+	 * @uses   WP_Widget::__construct() to init the widget
+	 */
+	public function __construct() {
+
+		$widget_ops = array(
+			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-nouveau' ),
+			'classname'   => 'widget_nav_menu buddypress_object_nav'
+		);
+
+		parent::__construct(
+			'bp_nouveau_sidebar_object_nav_widget',
+			__( '(BuddyPress) Primary nav', 'bp-nouveau' ),
+			$widget_ops
+		);
+	}
+
+	/**
+	 * Register the widget
+	 *
+	 * @since  1.0
+	 *
+	 * @uses   register_widget() to register the widget
+	 */
+	public static function register_widget() {
+		register_widget( 'BP_Nouveau_Object_Nav_Widget' );
+	}
+
+	/**
+	 * Displays the output, the button to post new support topics
+	 *
+	 * @since  1.0
+	 *
+	 * @param  mixed $args Arguments
+	 * @return string html output
+	 */
+	public function widget( $args, $instance ) {
+		if ( ! is_buddypress() || bp_is_group_create() ) {
+			return;
+		}
+
+		$item_nav_args = wp_parse_args( $instance, apply_filters( 'bp_nouveau_object_nav_widget_args', array(
+			'bp_nouveau_widget_title' => true,
+		) ) );
+
+		$title = '';
+
+		if ( ! empty( $item_nav_args[ 'bp_nouveau_widget_title' ] ) ) {
+			$title = '';
+
+			if ( bp_is_group() ) {
+				$title = bp_get_current_group_name();
+			} elseif ( bp_is_user() ) {
+				$title = bp_get_displayed_user_fullname();
+			} elseif ( bp_get_directory_title( bp_current_component() ) ) {
+				$title = bp_get_directory_title( bp_current_component() );
+			}
+		}
+
+		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
+
+		echo $args['before_widget'];
+
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
+
+		if ( bp_is_user() ) {
+			bp_get_template_part( 'members/single/item-nav' );
+		} elseif ( bp_is_group() ) {
+			bp_get_template_part( 'groups/single/item-nav' );
+		} elseif ( bp_is_directory() ) {
+			bp_get_template_part( 'common/nav/directory-nav' );
+		}
+
+		echo $args['after_widget'];
+	}
+
+	/**
+	 * Update the new support topic widget options (title)
+	 *
+	 * @since  1.0
+	 *
+	 * @param  array $new_instance The new instance options
+	 * @param  array $old_instance The old instance options
+	 * @return array the instance
+	 */
+	public function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+
+		$instance['bp_nouveau_widget_title'] = (bool) $new_instance['bp_nouveau_widget_title'];
+
+		return $instance;
+	}
+
+	/**
+	 * Output the new support topic widget options form
+	 *
+	 * @since  1.0
+	 *
+	 * @param  $instance Instance
+	 * @return string HTML Output
+	 */
+	public function form( $instance ) {
+		$defaults = array(
+			'bp_nouveau_widget_title' => true,
+		);
+
+		$instance = wp_parse_args( (array) $instance, $defaults );
+
+		$bp_nouveau_widget_title = (bool) $instance['bp_nouveau_widget_title'];
+		?>
+
+		<p>
+			<input class="checkbox" type="checkbox" <?php checked( $bp_nouveau_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_nouveau_widget_title' ); ?>" />
+			<label for="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-nouveau' ); ?></label>
+		</p>
+
+		<?php
+	}
+}
+
+endif;

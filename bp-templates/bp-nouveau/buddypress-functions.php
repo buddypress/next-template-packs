@@ -11,7 +11,7 @@
  * Template Pack Name:     BP Nouveau
  * Version:                1.0.0
  * WP required version:    4.5
- * BP required version:    2.6.0-rc1
+ * BP required version:    2.7-alpha
  * Description:            A new template pack for BuddyPress!
  * Text Domain:            bp-nouveau
  * Domain Path:            /languages/
@@ -129,6 +129,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Filter BuddyPress template hierarchy and look for page templates.
 		add_filter( 'bp_get_buddypress_template', array( $this, 'theme_compat_page_templates' ), 10, 1 );
 
+		// We'll handle the display of template notices in BP Nouveau
+		remove_action( 'template_notices', 'bp_core_render_message' );
+
 		/** Scripts ***********************************************************/
 
 		add_action( 'bp_enqueue_scripts', array( $this, 'register_scripts'  ), 2 ); // Register theme JS
@@ -141,42 +144,23 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		add_filter( 'body_class', array( $this, 'add_nojs_body_class' ), 20, 1 );
 
-		/** Ajax **************************************************************/
-
-		$actions = array(
-			/**
-			 * @todo check if we still use these 2 actions, else remove it
-			 * and the corresponding functions
-			 */
-			'invite_filter'   => 'bp_legacy_theme_invite_template_loader',
-			'requests_filter' => 'bp_legacy_theme_requests_template_loader',
-		);
-
-		/**
-		 * Register all of these AJAX handlers.
-		 *
-		 * The "wp_ajax_" action is used for logged in users, and "wp_ajax_nopriv_"
-		 * executes for users that aren't logged in. This is for backpat with BP <1.6.
-		 *
-		 * @todo not all actions should be nopriv!
-		 */
-		foreach( $actions as $name => $function ) {
-			add_action( 'wp_ajax_'        . $name, $function );
-			add_action( 'wp_ajax_nopriv_' . $name, $function );
-		}
-
+		// Ajax querystring
 		add_filter( 'bp_ajax_querystring', 'bp_nouveau_ajax_querystring', 10, 2 );
 
 		// Register directory nav items
 		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
 
-		// Feedbacks for developers
-		if ( true === apply_filters( 'bp_nouveau_show_developer_warnings', WP_DEBUG ) ) {
-			add_action( 'wp_footer', array( $this, 'developer_feedbacks' ), 0 );
-		}
-
 		// BP Nouveau Customizer panel.
 		add_action( 'bp_customize_register', 'bp_nouveau_customize_register' );
+
+		// Enqueue scripts for the BP Nouveau customizer panel.
+		add_action( 'customize_controls_enqueue_scripts', 'bp_nouveau_customizer_enqueue_scripts' );
+
+		// Register the Default front pages Dynamic Sidebars
+		add_action( 'widgets_init', 'bp_nouveau_register_sidebars', 11 );
+
+		// Register the Primary Object nav widget
+		add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
 
 		/** Override **********************************************************/
 
@@ -417,7 +401,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 			}
 
 			if ( 'groups' === $object ) {
-				$supported_objects[] = 'group_members';
+				$supported_objects = array_merge( $supported_objects, array( 'group_members', 'group_requests' ) );
 			}
 
 			$object_nonces[ $object ] = wp_create_nonce( 'bp_nouveau_' . $object );
@@ -426,6 +410,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Add components & nonces
 		$params['objects'] = $supported_objects;
 		$params['nonces']  = $object_nonces;
+
+		// Add Warnings if any
+		$params['warnings'] = $this->developer_feedbacks();
 
 		/**
 		 * Filters core JavaScript strings for internationalization before AJAX usage.
@@ -546,16 +533,26 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 	/**
 	 * Inform developers about the Legacy hooks
-	 * we are not using.
+	 * we are not using. This will be output as
+	 * warnings inside the Browser console to avoid
+	 * messing with the page display.
 	 *
 	 * @since  1.0.0
 	 *
 	 * @return string HTML Output
 	 */
 	public function developer_feedbacks() {
-		$forsaken_hooks = bp_nouveau_get_forsaken_hooks();
-		$notices        = array();
+		$notices = array();
 
+		// If debug is not on, stop!
+		if ( ! WP_DEBUG ) {
+			return;
+		}
+
+		// Get The forsaken hooks.
+		$forsaken_hooks = bp_nouveau_get_forsaken_hooks();
+
+		// Loop to check if deprecated hooks are used.
 		foreach ( $forsaken_hooks as $hook => $feedback ) {
 			if ( 'action' === $feedback['hook_type'] ) {
 				if ( ! has_action( $hook ) ) {
@@ -568,20 +565,10 @@ class BP_Nouveau extends BP_Theme_Compat {
 				}
 			}
 
-			$notices[] = sprintf( '<div class="bp-feedback %1$s"><p>%2$s</p></div>', $feedback['message_type'], esc_html( $feedback['message'] ) );
+			$notices[] = $feedback['message'];
 		}
 
-		if ( empty( $notices ) ) {
-			return;
-		}
-
-		?>
-		<div id="developer-feedbacks">
-			<?php foreach ( $notices as $notice ) {
-				echo $notice;
-			} ;?>
-		</div>
-		<?php
+		return $notices;
 	}
 }
 endif;

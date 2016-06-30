@@ -66,6 +66,13 @@ window.bp = window.bp || {};
 				$('body').removeClass( 'no-js' ).addClass( 'js' );
 			}
 
+			// Log Warnings into the console instead of the screen
+			if ( BP_Nouveau.warnings && 'undefined' !== typeof console && console.warn ) {
+				$.each( BP_Nouveau.warnings, function( w, warning ) {
+					console.warn( warning );
+				} );
+			}
+
 			// Remove the directory title if there's a widget containing it
 			if ( $( '.buddypress_object_nav .widget-title' ).length ) {
 				var text = $( '.buddypress_object_nav .widget-title' ).html();
@@ -75,26 +82,6 @@ window.bp = window.bp || {};
 						$( element ).remove();
 					}
 				} );
-			}
-
-			if ( $( '#buddypress li[role="search"] input[type=text]' ).length ) {
-				// Transform text field into search field
-				$( '#buddypress li[role="search"] input[type=text]' ).prop( 'type', 'search' );
-
-				// The group members search misses some attributes and we can't use Theme Compat here
-				if ( $( '#buddypress li[role="search"]' ).hasClass( 'groups-members-search' )  && $( '#members-group-list' ).length ) {
-					$( '#buddypress li[role="search"]' ).attr( 'data-bp-search', 'group_members' );
-					$( '#members-group-list' ).attr( 'data-bp-list', 'group_members' );
-					$( '#group_members-order-select label').html(
-						$( '<span></span>' ).html( $( '#group_members-order-select label').html() ).addClass( 'bp-screen-reader-text' )
-					);
-					$( 'select#group_members-order-by' ).attr( 'data-bp-filter', 'group_members' );
-				}
-
-				// Add a title attribute and use an icon for the search submit button
-				search_title = $( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value' );
-				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'title', search_title );
-				$( '#buddypress li[role="search"] input[type=submit]' ).prop( 'value', BP_Nouveau.search_icon );
 			}
 		},
 
@@ -332,6 +319,8 @@ window.bp = window.bp || {};
 
 			if ( 'friends' === data.object || 'group_members' === data.object ) {
 				data.object = 'members';
+			} else if ( 'group_requests' === data.object ) {
+				data.object = 'groups';
 			}
 
 			postdata = $.extend( {
@@ -424,7 +413,9 @@ window.bp = window.bp || {};
 					}
 
 					if ( 'group_members' === object ) {
-						$.extend( queryData, { template: 'groups/single/members' } )
+						$.extend( queryData, { template: 'groups/single/members-loop' } );
+					} else if ( 'group_requests' === object ) {
+						$.extend( queryData, { template: 'groups/single/requests-loop' } );
 					}
 
 					// Populate the object list
@@ -482,6 +473,12 @@ window.bp = window.bp || {};
 
 			// Buttons
 			$( '#buddypress [data-bp-list], #buddypress #item-header' ).on( 'click', '[data-bp-btn-action]', this, this.buttonAction );
+
+			// Close notice
+			$( '#buddypress [data-bp-close]' ).on( 'click', this, this.closeNotice );
+
+			// Pagination
+			$( '#buddypress [data-bp-list]' ).on( 'click', '[data-bp-pagination] a', this, this.paginateAction );
 		},
 
 		/** Event Callbacks ***********************************************************/
@@ -575,7 +572,7 @@ window.bp = window.bp || {};
 
 			// On the Groups Members page, we specify a template
 			if ( 'group_members' === object ) {
-				template = 'groups/single/members';
+				template = 'groups/single/members-loop';
 			}
 
 			if ( 'friends' === object ) {
@@ -616,7 +613,7 @@ window.bp = window.bp || {};
 			}
 
 			if ( 'group_members' === object ) {
-				template = 'groups/single/members';
+				template = 'groups/single/members-loop';
 			}
 
 			self.objectRequest( {
@@ -635,7 +632,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		showSearchSubmit: function( event ) {
-			$( event.delegateTarget ).find( 'input[type=submit]' ).show();
+			$( event.delegateTarget ).find( '[type=submit]' ).show();
 		},
 
 		/**
@@ -645,7 +642,7 @@ window.bp = window.bp || {};
 		 */
 		hideSearchSubmit: function( event ) {
 			if ( ! $( event.target ).val() ) {
-				$( event.delegateTarget ).find( 'input[type=submit]' ).hide();
+				$( event.delegateTarget ).find( '[type=submit]' ).hide();
 			}
 		},
 
@@ -658,7 +655,7 @@ window.bp = window.bp || {};
 			if ( ! $( event.target ).val() ) {
 				$( event.delegateTarget ).submit();
 			} else {
-				$( event.delegateTarget ).find( 'input[type=submit]' ).show();
+				$( event.delegateTarget ).find( '[type=submit]' ).show();
 			}
 		},
 
@@ -746,6 +743,83 @@ window.bp = window.bp || {};
 					target.parent().replaceWith( response.data.contents );
 				}
 			} );
+		},
+
+		/**
+		 * [closeNotice description]
+		 * @param  {[type]} event [description]
+		 * @return {[type]}       [description]
+		 */
+		closeNotice: function( event ) {
+			var closeBtn = $( event.currentTarget );
+
+			event.preventDefault();
+
+			// Make sure cookies are removed
+			if ( 'clear' === closeBtn.data( 'bp-close' ) ) {
+				if ( undefined !== $.cookie( 'bp-message' ) ) {
+					$.removeCookie( 'bp-message' );
+				}
+
+				if ( undefined !== $.cookie( 'bp-message-type' ) ) {
+					$.removeCookie( 'bp-message-type' );
+				}
+			}
+
+			// @todo other cases...
+
+			// Remove the notice
+			closeBtn.closest( '.bp-feedback' ).remove();
+		},
+
+		paginateAction: function( event ) {
+			var self  = event.data, navLink = $( event.currentTarget ), pagArg,
+			    scope = null, object, filter = null, search_terms = null;
+
+			pagArg = navLink.closest( '[data-bp-pagination]' ).data( 'bp-pagination' ) || null;
+
+			if ( null === pagArg ) {
+				return event;
+			}
+
+			event.preventDefault();
+
+			object = $( event.delegateTarget ).data( 'bp-list' ) || null;
+
+			// Set the scope & filter
+			if ( null !== object ) {
+				objectData = self.getStorage( 'bp-' + object );
+
+				if ( undefined !== objectData.scope ) {
+					scope = objectData.scope;
+				}
+
+				if ( undefined !== objectData.filter ) {
+					filter = objectData.filter;
+				}
+			}
+
+			// Set the search terms
+			if ( $( '#buddypress [data-bp-search="' + object + '"] input[type=search]' ).length ) {
+				search_terms = $( '#buddypress [data-bp-search="' + object + '"] input[type=search]' ).val();
+			}
+
+			var queryData = {
+				object       : object,
+				scope        : scope,
+				filter       : filter,
+				search_terms : search_terms,
+				page         : self.getLinkParams( navLink.prop( 'href' ), pagArg ) || 1
+			}
+
+			if ( 'group_members' === object ) {
+				$.extend( queryData, { template: 'groups/single/members-loop' } );
+			} else if ( 'group_requests' === object ) {
+				$.extend( queryData, { template: 'groups/single/requests-loop' } );
+			}
+
+			// Request the page
+			self.objectRequest( queryData );
 		}
 	}
 

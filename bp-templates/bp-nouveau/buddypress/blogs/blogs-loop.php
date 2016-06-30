@@ -4,8 +4,9 @@
  *
  * Querystring is set via AJAX in _inc/ajax.php - bp_legacy_theme_object_filter().
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
 bp_nouveau_before_loop(); ?>
@@ -19,6 +20,7 @@ bp_nouveau_before_loop(); ?>
 	<?php while ( bp_blogs() ) : bp_the_blog(); ?>
 
 		<li <?php bp_blog_class() ?>>
+
 			<div class="item-avatar">
 				<a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_avatar( 'type=thumb' ); ?></a>
 			</div>
@@ -27,32 +29,19 @@ bp_nouveau_before_loop(); ?>
 				<div class="item-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></div>
 				<div class="item-meta"><span class="activity"><?php bp_blog_last_active(); ?></span></div>
 
-				<?php
+				<?php bp_nouveau_blogs_loop_item(); ?>
 
-				/**
-				 * Fires after the listing of a blog item in the blogs loop.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_directory_blogs_item' ); ?>
 			</div>
 
 			<div class="action">
 
-				<?php
+				<?php bp_nouveau_blogs_loop_buttons(); ?>
 
-				/**
-				 * Fires inside the blogs action listing area.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_directory_blogs_actions' ); ?>
+			</div>
 
-				<div class="meta">
+			<div class="meta">
 
-					<?php bp_blog_latest_post(); ?>
-
-				</div>
+				<?php bp_blog_latest_post(); ?>
 
 			</div>
 
