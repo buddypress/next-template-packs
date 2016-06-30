@@ -318,8 +318,8 @@
 	border-top: 1px solid #eaeaea;
 	clear: both;
 	list-style: none;
-	overflow: hidden;
 	margin: 15px 0;
+	overflow: hidden;
 	padding: 0;
 	width: 100%;
 }
@@ -1140,27 +1140,38 @@ body.no-js .single-item-header .js-self-profile-button {
 	* @subsection 5.2.2.2 - Extended Profiles
 	*-------------------------------------------
 	*/
-#buddypress div.profile h4 {
+.buddypress div.profile h4,
+.buddypress #profile-edit-form .button-nav {
 	margin-bottom: auto;
 	margin-top: 15px;
 }
 
-#buddypress #profile-edit-form ul.button-nav {
-	margin-top: 15px;
+.buddypress div.profile h4 {
+	font-size: 18px;
+	font-size: 1.8rem;
 }
 
-body.no-js #buddypress .field-visibility-settings-toggle,
-body.no-js #buddypress .field-visibility-settings-close {
+.buddypress #profile-edit-form .button-nav {
+	list-style: none;
+}
+
+.buddypress #profile-edit-form .button-nav li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+body.no-js .buddypress .field-visibility-settings-toggle,
+body.no-js .buddypress .field-visibility-settings-close {
 	display: none;
+}
+
+body.no-js #buddypress .field-visibility-settings {
+	display: block;
 }
 
 #buddypress .field-visibility-settings {
 	display: none;
 	margin-top: 10px;
-}
-
-body.no-js #buddypress .field-visibility-settings {
-	display: block;
 }
 
 #buddypress .current-visibility-level {

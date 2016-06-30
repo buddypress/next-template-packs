@@ -19,7 +19,6 @@
 // @include medium-up {
 //  body {property: value;}
 // }
-//
 
 @mixin small-up {
 	@media screen and (min-width: 24em) {

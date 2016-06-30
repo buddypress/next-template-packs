@@ -1,26 +1,45 @@
 // BP User Profiles screen
 
-#buddypress div.profile h4 {
-	margin-bottom: auto;
-	margin-top: 15px;
-}
+.buddypress {
+	div.profile h4,
+	#profile-edit-form .button-nav {
+		margin-bottom: auto;
+		margin-top: 15px;
+	}
 
-#buddypress #profile-edit-form ul.button-nav {
-	margin-top: 15px;
-}
+	div.profile {
+		h4 {
+			@include font-size(18);
+		}
+	}
 
-body.no-js #buddypress .field-visibility-settings-toggle,
-body.no-js #buddypress .field-visibility-settings-close {
-	display: none;
+	#profile-edit-form {
+		.button-nav {
+			list-style: none;
+
+			li {
+				display: inline-block;
+				margin-right: $marg-sml;
+			}
+		}
+	}
+
+} // close .buddypress
+
+body.no-js {
+	.buddypress .field-visibility-settings-toggle,
+	.buddypress .field-visibility-settings-close {
+		display: none;
+	}
+
+	#buddypress .field-visibility-settings {
+		display: block;
+	}
 }
 
 #buddypress .field-visibility-settings {
 	display: none;
 	margin-top: 10px;
-}
-
-body.no-js #buddypress .field-visibility-settings {
-	display: block;
 }
 
 #buddypress .current-visibility-level {
