@@ -5,8 +5,9 @@
  * This template is used by activity-loop.php and AJAX functions to show
  * each activity.
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
 bp_nouveau_activity_entry_hook( 'before' ); ?>
