@@ -82,6 +82,46 @@ function bp_nouveau_after_blogs_directory_content() {
 	do_action( 'bp_after_directory_blogs_page' );
 }
 
+/**
+ * Fire specific hooks into the blogs create template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_blogs_create_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$screate_blog%2$s', $when, $suffix );
+
+	/**
+	 * @since 1.1.0 (BuddyPress) for the 'content' suffix
+	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
+	 */
+	do_action( $hook );
+}
+
+/**
+ * Fire an isolated hook inside the blogs loop
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_blogs_loop_item() {
+	/**
+	 * Fires after the listing of a blog item in the blogs loop.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_directory_blogs_item' );
+}
+
 function bp_nouveau_blogs_loop_buttons() {
 	if ( empty( $GLOBALS['blogs_template'] ) ) {
 		return;
