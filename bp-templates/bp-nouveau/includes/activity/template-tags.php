@@ -117,6 +117,60 @@ function bp_nouveau_activity_member_post_form() {
 }
 
 /**
+ * Fire specific hooks into the activity entry template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_activity_entry_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$sactivity_entry%2$s', $when, $suffix );
+
+	/**
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( $hook );
+}
+
+/**
+ * Checks if an activity of the loop has some content.
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if the activity has some content. False Otherwise.
+ */
+function bp_nouveau_activity_has_content() {
+	return bp_activity_has_content() || (bool) has_action( 'bp_activity_entry_content' );
+}
+
+/**
+ * Output the Activity content into the loop.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_content() {
+	if ( bp_activity_has_content() ) {
+		bp_activity_content_body();
+	}
+
+	/**
+	 * Fires after the display of an activity entry content.
+	 *
+	 * @since 1.2.0 (BuddyPress)
+	 */
+	do_action( 'bp_activity_entry_content' );
+}
+
+/**
  * Output the action buttons inside an Activity Loop
  *
  * @since 1.0.0

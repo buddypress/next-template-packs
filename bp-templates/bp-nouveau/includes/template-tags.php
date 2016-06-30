@@ -120,6 +120,10 @@ function bp_nouveau_template_notices() {
 function bp_nouveau_before_loop() {
 	$component = bp_current_component();
 
+	if ( bp_is_group() ) {
+		$component = bp_current_action();
+	}
+
 	/**
 	 * Fires before the start of the component loop.
 	 *
@@ -135,6 +139,10 @@ function bp_nouveau_before_loop() {
  */
 function bp_nouveau_after_loop() {
 	$component = bp_current_component();
+
+	if ( bp_is_group() ) {
+		$component = bp_current_action();
+	}
 
 	/**
 	 * Fires after the finish of the component loop.
