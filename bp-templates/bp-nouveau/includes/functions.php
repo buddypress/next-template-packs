@@ -282,6 +282,11 @@ function bp_nouveau_get_forsaken_hooks() {
 			'message_type' => 'warning',
 			'message'      => __( 'The \'bp_directory_blogs_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_buttons\' filter instead', 'bp-nouveau' ),
 		),
+		'bp_activity_comment_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_activity_comment_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_comment_buttons\' filter instead', 'bp-nouveau' ),
+		),
 	);
 }
 
