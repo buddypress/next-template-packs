@@ -125,6 +125,91 @@ function bp_nouveau_group_invites_interface() {
 	do_action( 'bp_after_group_send_invites_content' );
 }
 
+/**
+ * Load the requested Manage Screen for the current group.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_manage_screen() {
+	$screen_id = sanitize_file_name( bp_action_variable(0) );
+
+	if ( ! bp_is_group_admin_screen( $screen_id ) ) {
+		return;
+	}
+
+	/**
+	 * Fires inside the group admin form and before the content.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_before_group_admin_content' );
+
+	$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
+
+	if ( false === $core_screen ) {
+		/**
+		 * Fires inside the group admin template.
+		 *
+		 * Allows plugins to add custom group edit screens.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'groups_custom_edit_steps' );
+
+	// Else we load the core screen.
+	} else {
+		if ( ! empty( $core_screen['hook'] ) ) {
+			/**
+			 * Fires before the display of group delete admin.
+			 *
+			 * @since 1.1.0 For most hooks.
+			 * @since 2.4.0 For the cover image hook.
+			 */
+			do_action( 'bp_before_' . $core_screen['hook'] );
+		}
+
+		bp_get_template_part( 'groups/single/admin/' . $screen_id );
+
+		if ( ! empty( $core_screen['hook'] ) ) {
+			/**
+			 * Fires before the display of group delete admin.
+			 *
+			 * @since 1.1.0 For most hooks.
+			 * @since 2.4.0 For the cover image hook.
+			 */
+			do_action( 'bp_after_' . $core_screen['hook'] );
+		}
+
+		if ( ! empty( $core_screen['nonce'] ) ) {
+			$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
+
+			// Specific case for the delete group screen
+			if ( 'delete-group' === $screen_id ) {
+				$output = sprintf( '<div class="submit">
+						<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
+					</div>',
+					esc_attr__( 'Delete Group', 'bp-nouveau' )
+				);
+			}
+
+			echo $output;
+			wp_nonce_field( $core_screen['nonce'] );
+		}
+	}
+
+	// This way we are absolutely sure this hidden field won't be removed from the template :)
+	printf( '<input type="hidden" name="group-id" id="group-id" value="%s" />', bp_get_group_id() );
+
+	/**
+	 * Fires inside the group admin form and after the content.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_after_group_admin_content' );
+}
+
 function bp_nouveau_groups_loop_buttons() {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;

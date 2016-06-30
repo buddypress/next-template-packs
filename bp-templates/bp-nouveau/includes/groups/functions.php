@@ -760,3 +760,32 @@ function bp_nouveau_groups_remove_home_widget_filters() {
 
 	do_action( 'bp_nouveau_groups_remove_home_widget_filters' );
 }
+
+/**
+ * Get the hook and nonce for Core Group's manage screens.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $id  The screen id
+ * @return mixed       An array containing the hook dynamic part and the nonce. False if it's not a core manage screen.
+ */
+function bp_nouveau_group_get_core_manage_screens( $id = '' ) {
+	/**
+	 * screen id => dynamic part of the hooks & nonce.
+	 */
+	$screens = array(
+		'edit-details'        => array( 'hook' => 'group_details_admin',             'nonce' => 'groups_edit_group_details'  ),
+		'group-settings'      => array( 'hook' => 'group_settings_admin',            'nonce' => 'groups_edit_group_settings' ),
+		'group-avatar'        => array(                                                                                      ),
+		'group-cover-image'   => array( 'hook' => 'group_settings_cover_image',      'nonce' => ''                           ),
+		'manage-members'      => array( 'hook' => 'group_manage_members_admin',      'nonce' => ''                           ),
+		'membership-requests' => array( 'hook' => 'group_membership_requests_admin', 'nonce' => ''                           ),
+		'delete-group'        => array( 'hook' => 'group_delete_admin',              'nonce' => 'groups_delete_group'        ),
+	);
+
+	if ( isset( $screens[ $id ] ) ) {
+		return $screens[ $id ];
+	}
+
+	return false;
+}
