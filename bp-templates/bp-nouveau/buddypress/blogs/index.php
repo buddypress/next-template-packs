@@ -1,9 +1,10 @@
 <?php
 /**
- * BuddyPress - Blogs
+ * BuddyPress - Blogs Directory
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 ?>
 
