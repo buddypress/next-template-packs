@@ -100,6 +100,31 @@ function bp_nouveau_group_header_buttons() {
 	do_action( 'bp_group_header_actions' );
 }
 
+/**
+ * Load the Group Invites UI.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_invites_interface() {
+	/**
+	 * Fires before the send invites content.
+	 *
+	 * @since 1.1.0 (BuddyPress)
+	 */
+	do_action( 'bp_before_group_send_invites_content' );
+
+	bp_get_template_part( '_accessoires/invites/index' );
+
+	/**
+	 * Fires after the send invites content.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_after_group_send_invites_content' );
+}
+
 function bp_nouveau_groups_loop_buttons() {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;
