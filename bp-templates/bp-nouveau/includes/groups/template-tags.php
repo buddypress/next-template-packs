@@ -126,6 +126,17 @@ function bp_nouveau_group_invites_interface() {
 }
 
 /**
+ * Load the requested Create Screen for the new group.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_creation_screen() {
+	return bp_nouveau_group_manage_screen();
+}
+
+/**
  * Load the requested Manage Screen for the current group.
  *
  * @since  1.0.0
@@ -133,30 +144,56 @@ function bp_nouveau_group_invites_interface() {
  * @return string HTML Output.
  */
 function bp_nouveau_group_manage_screen() {
-	$screen_id = sanitize_file_name( bp_action_variable(0) );
+	$action          = bp_action_variable(0);
+	$is_group_create = bp_is_group_create();
 
-	if ( ! bp_is_group_admin_screen( $screen_id ) ) {
+	if ( $is_group_create ) {
+		$action = bp_action_variable(1);
+	}
+
+	$screen_id = sanitize_file_name( $action );
+
+	if ( ! bp_is_group_admin_screen( $screen_id ) && ! bp_is_group_creation_step( $screen_id ) ) {
 		return;
 	}
 
-	/**
-	 * Fires inside the group admin form and before the content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_group_admin_content' );
-
-	$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
-
-	if ( false === $core_screen ) {
+	if ( ! $is_group_create ) {
 		/**
-		 * Fires inside the group admin template.
-		 *
-		 * Allows plugins to add custom group edit screens.
+		 * Fires inside the group admin form and before the content.
 		 *
 		 * @since 1.1.0
 		 */
-		do_action( 'groups_custom_edit_steps' );
+		do_action( 'bp_before_group_admin_content' );
+
+		$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
+
+	// It's a group step, get the creation screens.
+	} else {
+		$core_screen = bp_nouveau_group_get_core_create_screens( $screen_id );
+	}
+
+	if ( false === $core_screen ) {
+		if ( ! $is_group_create ) {
+			/**
+			 * Fires inside the group admin template.
+			 *
+			 * Allows plugins to add custom group edit screens.
+			 *
+			 * @since 1.1.0
+			 */
+			do_action( 'groups_custom_edit_steps' );
+
+		// Else use the group create hook
+		} else {
+			/**
+			 * Fires inside the group admin template.
+			 *
+			 * Allows plugins to add custom group creation steps.
+			 *
+			 * @since 1.1.0
+			 */
+			do_action( 'groups_custom_create_steps' );
+		}
 
 	// Else we load the core screen.
 	} else {
@@ -170,7 +207,13 @@ function bp_nouveau_group_manage_screen() {
 			do_action( 'bp_before_' . $core_screen['hook'] );
 		}
 
-		bp_get_template_part( 'groups/single/admin/' . $screen_id );
+		$template = 'groups/single/admin/' . $screen_id;
+
+		if ( ! empty( $core_screen['template'] ) ) {
+			$template = $core_screen['template'];
+		}
+
+		bp_get_template_part( $template );
 
 		if ( ! empty( $core_screen['hook'] ) ) {
 			/**
@@ -183,31 +226,94 @@ function bp_nouveau_group_manage_screen() {
 		}
 
 		if ( ! empty( $core_screen['nonce'] ) ) {
-			$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
+			$output = '';
 
-			// Specific case for the delete group screen
-			if ( 'delete-group' === $screen_id ) {
-				$output = sprintf( '<div class="submit">
-						<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
-					</div>',
-					esc_attr__( 'Delete Group', 'bp-nouveau' )
-				);
+			if ( ! $is_group_create ) {
+				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
+
+				// Specific case for the delete group screen
+				if ( 'delete-group' === $screen_id ) {
+					$output = sprintf( '<div class="submit">
+							<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
+						</div>',
+						esc_attr__( 'Delete Group', 'bp-nouveau' )
+					);
+				}
+
+			// Else output the create buttons
+			} else {
+				/**
+				 * Fires before the display of the group creation step buttons.
+				 *
+				 * @since 1.1.0
+				 */
+				do_action( 'bp_before_group_creation_step_buttons' );
+
+				if ( 'crop-image' != bp_get_avatar_admin_step() ) {
+					$creation_step_buttons = '';
+
+					if ( ! bp_is_first_group_creation_step() ) {
+						$creation_step_buttons .= sprintf( '<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
+							esc_attr__( 'Back to Previous Step', 'bp-nouveau' ),
+							"location.href='" . esc_url( bp_get_group_creation_previous_link() ) . "'"
+						);
+					}
+
+					if ( ! bp_is_last_group_creation_step() && ! bp_is_first_group_creation_step() ) {
+						$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-next" name="save" />',
+							esc_attr__( 'Next Step', 'bp-nouveau' )
+						);
+					}
+
+					if ( bp_is_first_group_creation_step() ) {
+						$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-create" name="save" />',
+							esc_attr__( 'Create Group and Continue', 'bp-nouveau' )
+						);
+					}
+
+					if ( bp_is_last_group_creation_step() ) {
+						$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-finish" name="save" />',
+							esc_attr__( 'Finish', 'bp-nouveau' )
+						);
+					}
+
+					// Set the output for the buttons
+					$output = sprintf( '<div class="submit" id="previous-next">%s</div>', $creation_step_buttons );
+				}
+
+				/**
+				 * Fires after the display of the group creation step buttons.
+				 *
+				 * @since 1.1.0
+				 */
+				do_action( 'bp_after_group_creation_step_buttons' );
 			}
 
-			echo $output;
 			wp_nonce_field( $core_screen['nonce'] );
+			echo $output;
 		}
 	}
 
 	// This way we are absolutely sure this hidden field won't be removed from the template :)
-	printf( '<input type="hidden" name="group-id" id="group-id" value="%s" />', bp_get_group_id() );
+	printf( '<input type="hidden" name="group-id" id="group-id" value="%s" />', $is_group_create ? bp_get_new_group_id() : bp_get_group_id() );
 
-	/**
-	 * Fires inside the group admin form and after the content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_group_admin_content' );
+	if ( ! $is_group_create ) {
+		/**
+		 * Fires inside the group admin form and after the content.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_after_group_admin_content' );
+
+	// We use a strange hook for the create screens...??
+	} else {
+		/**
+		 * Fires and displays the groups directory content.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_directory_groups_content' );
+	}
 }
 
 function bp_nouveau_groups_loop_buttons() {

@@ -287,6 +287,11 @@ function bp_nouveau_get_forsaken_hooks() {
 			'message_type' => 'warning',
 			'message'      => __( 'The \'bp_activity_comment_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_comment_buttons\' filter instead', 'bp-nouveau' ),
 		),
+		'groups_custom_group_fields_editable' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'error',
+			'message'      => __( 'The \'groups_custom_group_fields_editable\' is deprecated in the BP Nouveau template pack, please use \'bp_after_group_details_creation_step\' or \'bp_after_group_details_admin\' instead', 'bp-nouveau' ),
+		),
 	);
 }
 

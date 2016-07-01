@@ -762,6 +762,34 @@ function bp_nouveau_groups_remove_home_widget_filters() {
 }
 
 /**
+ * Get the hook, nonce, and eventually a specific template for Core Group's create screens.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $id  The screen id
+ * @return mixed       An array containing the hook dynamic part, the nonce, and eventually a specific template.
+ *                     False if it's not a core create screen.
+ */
+function bp_nouveau_group_get_core_create_screens( $id = '' ) {
+	/**
+	 * screen id => dynamic part of the hooks, nonce & specific template to use.
+	 */
+	$screens = array(
+		'group-details'     => array( 'hook' => 'group_details_creation_step',     'nonce' => 'groups_create_save_group-details',     'template' => 'groups/single/admin/edit-details' ),
+		'group-settings'    => array( 'hook' => 'group_settings_creation_step',    'nonce' => 'groups_create_save_group-settings',                                                     ),
+		'group-avatar'      => array( 'hook' => 'group_avatar_creation_step',      'nonce' => 'groups_create_save_group-avatar',                                                       ),
+		'group-cover-image' => array( 'hook' => 'group_cover_image_creation_step', 'nonce' => 'groups_create_save_group-cover-image',                                                  ),
+		'group-invites'     => array( 'hook' => 'group_invites_creation_step',     'nonce' => 'groups_create_save_group-invites',     'template' => '_accessoires/invites/index'       ),
+	);
+
+	if ( isset( $screens[ $id ] ) ) {
+		return $screens[ $id ];
+	}
+
+	return false;
+}
+
+/**
  * Get the hook and nonce for Core Group's manage screens.
  *
  * @since  1.0.0
