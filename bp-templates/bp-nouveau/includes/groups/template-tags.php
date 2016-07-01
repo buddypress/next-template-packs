@@ -76,6 +76,33 @@ function bp_nouveau_after_groups_directory_content() {
 }
 
 /**
+ * Fire specific hooks into the groups create template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$screate_group%2$s', $when, $suffix );
+
+	/**
+	 * @since 1.2.0 (BuddyPress) for no suffix
+	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
+	 * @since 1.7.0 (BuddyPress) for the 'page' suffix
+	 */
+	do_action( $hook );
+}
+
+/**
  * Output the action buttons for the displayed group
  *
  * @since 1.0.0

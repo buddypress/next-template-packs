@@ -6,34 +6,15 @@
  * @subpackage bp-nouveau
  */
 
-/**
- * Fires at the top of the groups creation template file.
- *
- * @since 1.7.0
- */
-do_action( 'bp_before_create_group_page' ); ?>
+bp_nouveau_groups_create_hook( 'before', 'page' ); ?>
 
 <div id="buddypress">
 
-	<?php
-
-	/**
-	 * Fires before the display of group creation content.
-	 *
-	 * @since 1.6.0
-	 */
-	do_action( 'bp_before_create_group_content_template' ); ?>
+	<?php bp_nouveau_groups_create_hook( 'before', 'content_template' ); ?>
 
 	<form action="<?php bp_group_creation_form_action(); ?>" method="post" id="create-group-form" class="standard-form" enctype="multipart/form-data">
 
-		<?php
-
-		/**
-		 * Fires before the display of group creation.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_create_group' ); ?>
+		<?php bp_nouveau_groups_create_hook( 'before' ); ?>
 
 		<div class="item-list-tabs no-ajax" id="group-create-tabs" role="navigation">
 			<ul>
@@ -51,33 +32,12 @@ do_action( 'bp_before_create_group_page' ); ?>
 
 		</div><!-- .item-body -->
 
-		<?php
-
-		/**
-		 * Fires after the display of group creation.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_create_group' ); ?>
+		<?php bp_nouveau_groups_create_hook( 'after' ); ?>
 
 	</form>
 
-	<?php
-
-	/**
-	 * Fires after the display of group creation content.
-	 *
-	 * @since 1.6.0
-	 */
-	do_action( 'bp_after_create_group_content_template' ); ?>
+	<?php bp_nouveau_groups_create_hook( 'after', 'content_template' ); ?>
 
 </div>
 
-<?php
-
-/**
- * Fires at the bottom of the groups creation template file.
- *
- * @since 1.7.0
- */
-do_action( 'bp_after_create_group_page' ); ?>
+<?php bp_nouveau_groups_create_hook( 'after', 'page' );
