@@ -8,17 +8,30 @@
  */
 
 if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
+	<?php if ( bp_is_group_create() ) : ?>
+		<div class="left-menu">
 
-	<p><?php _e("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
+			<?php bp_new_group_avatar(); ?>
 
-	<p>
-		<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-nouveau' ); ?></label>
-		<input type="file" name="file" id="file" />
-		<input type="submit" name="upload" id="upload" value="<?php esc_attr_e( 'Upload Image', 'bp-nouveau' ); ?>" />
-		<input type="hidden" name="action" id="action" value="bp_avatar_upload" />
-	</p>
+		</div><!-- .left-menu -->
 
-	<?php if ( bp_get_group_has_avatar() ) : ?>
+		<div class="main-column">
+	<?php endif; ?>
+
+			<p><?php _e("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
+
+			<p>
+				<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-nouveau' ); ?></label>
+				<input type="file" name="file" id="file" />
+				<input type="submit" name="upload" id="upload" value="<?php esc_attr_e( 'Upload Image', 'bp-nouveau' ); ?>" />
+				<input type="hidden" name="action" id="action" value="bp_avatar_upload" />
+			</p>
+
+	<?php if ( bp_is_group_create() ) : ?>
+			<p><?php _e( 'To skip the group profile photo upload process, hit the "Next Step" button.', 'bp-nouveau' ); ?></p>
+		</div><!-- .main-column -->
+
+	<?php elseif ( bp_get_group_has_avatar() ) : ?>
 
 		<p><?php _e( "If you'd like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.", 'bp-nouveau' ); ?></p>
 
@@ -34,13 +47,13 @@ if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 	 */
 	bp_avatar_get_templates(); ?>
 
-	<?php wp_nonce_field( 'bp_avatar_upload' ); ?>
+	<?php if ( ! bp_is_group_create() ) wp_nonce_field( 'bp_avatar_upload' ); ?>
 
 <?php endif;
 
 if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 
-	<h4><?php _e( 'Crop Profile Photo', 'bp-nouveau' ); ?></h4>
+	<h4><?php _e( 'Crop Group Profile Photo', 'bp-nouveau' ); ?></h4>
 
 	<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php esc_attr_e( 'Profile photo to crop', 'bp-nouveau' ); ?>" />
 
@@ -56,6 +69,6 @@ if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 	<input type="hidden" id="w" name="w" />
 	<input type="hidden" id="h" name="h" />
 
-	<?php wp_nonce_field( 'bp_avatar_cropstore' ); ?>
+	<?php if ( ! bp_is_group_create() ) wp_nonce_field( 'bp_avatar_cropstore' ); ?>
 
 <?php endif;

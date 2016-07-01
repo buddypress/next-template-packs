@@ -94,32 +94,7 @@
 
 						<?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?>
 
-						<span class="small">
-
-						<?php if ( bp_get_group_member_is_banned() ) : ?>
-
-							<a href="<?php bp_group_member_unban_link(); ?>" class="button confirm member-unban" title="<?php esc_attr_e( 'Unban this member', 'bp-nouveau' ); ?>"><?php _e( 'Remove Ban', 'bp-nouveau' ); ?></a>
-
-						<?php else : ?>
-
-							<a href="<?php bp_group_member_ban_link(); ?>" class="button confirm member-ban" title="<?php esc_attr_e( 'Kick and ban this member', 'bp-nouveau' ); ?>"><?php _e( 'Kick &amp; Ban', 'bp-nouveau' ); ?></a>
-							<a href="<?php bp_group_member_promote_mod_link(); ?>" class="button confirm member-promote-to-mod" title="<?php esc_attr_e( 'Promote to Mod', 'bp-nouveau' ); ?>"><?php _e( 'Promote to Mod', 'bp-nouveau' ); ?></a>
-							<a href="<?php bp_group_member_promote_admin_link(); ?>" class="button confirm member-promote-to-admin" title="<?php esc_attr_e( 'Promote to Admin', 'bp-nouveau' ); ?>"><?php _e( 'Promote to Admin', 'bp-nouveau' ); ?></a>
-
-						<?php endif; ?>
-
-							<a href="<?php bp_group_member_remove_link(); ?>" class="button confirm" title="<?php esc_attr_e( 'Remove this member', 'bp-nouveau' ); ?>"><?php _e( 'Remove from group', 'bp-nouveau' ); ?></a>
-
-							<?php
-
-							/**
-							 * Fires inside the display of a member admin item in group management area.
-							 *
-							 * @since 1.1.0
-							 */
-							do_action( 'bp_group_manage_members_admin_item' ); ?>
-
-						</span>
+						<span class="small"><?php bp_nouveau_groups_manage_members_buttons() ; ?></span>
 					</h5>
 				</li>
 

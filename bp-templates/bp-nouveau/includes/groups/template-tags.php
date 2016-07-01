@@ -76,28 +76,57 @@ function bp_nouveau_after_groups_directory_content() {
 }
 
 /**
- * Output the action buttons for the displayed group
+ * Fire specific hooks into the groups create template
  *
  * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
  */
-function bp_nouveau_group_header_buttons() {
-	$bp_nouveau = bp_nouveau();
+function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
 
-	echo join( ' ', bp_nouveau_get_groups_buttons() );
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$screate_group%2$s', $when, $suffix );
 
 	/**
-	 * On the group's header we need to reset the group button's global
+	 * @since 1.2.0 (BuddyPress) for no suffix
+	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
+	 * @since 1.7.0 (BuddyPress) for the 'page' suffix
 	 */
-	if ( ! empty( $bp_nouveau->groups->group_buttons ) ) {
-		unset( $bp_nouveau->groups->group_buttons );
+	do_action( $hook );
+}
+
+/**
+ * Display the current group activity post form if needed
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Outpur
+ */
+function bp_nouveau_groups_activity_post_form() {
+	/**
+	 * Fires before the display of the group activity post form.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_before_group_activity_post_form' );
+
+	if ( is_user_logged_in() && bp_group_is_member() ) {
+		bp_get_template_part( 'activity/post-form' );
 	}
 
 	/**
-	 * Fires in the group header actions section.
+	 * Fires after the display of the group activity post form.
 	 *
-	 * @since 1.2.6
+	 * @since 1.2.0
 	 */
-	do_action( 'bp_group_header_actions' );
+	do_action( 'bp_after_group_activity_post_form' );
 }
 
 /**
@@ -126,6 +155,17 @@ function bp_nouveau_group_invites_interface() {
 }
 
 /**
+ * Load the requested Create Screen for the new group.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_creation_screen() {
+	return bp_nouveau_group_manage_screen();
+}
+
+/**
  * Load the requested Manage Screen for the current group.
  *
  * @since  1.0.0
@@ -133,30 +173,57 @@ function bp_nouveau_group_invites_interface() {
  * @return string HTML Output.
  */
 function bp_nouveau_group_manage_screen() {
-	$screen_id = sanitize_file_name( bp_action_variable(0) );
+	$action          = bp_action_variable(0);
+	$is_group_create = bp_is_group_create();
+	$output          = '';
 
-	if ( ! bp_is_group_admin_screen( $screen_id ) ) {
+	if ( $is_group_create ) {
+		$action = bp_action_variable(1);
+	}
+
+	$screen_id = sanitize_file_name( $action );
+
+	if ( ! bp_is_group_admin_screen( $screen_id ) && ! bp_is_group_creation_step( $screen_id ) ) {
 		return;
 	}
 
-	/**
-	 * Fires inside the group admin form and before the content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_group_admin_content' );
-
-	$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
-
-	if ( false === $core_screen ) {
+	if ( ! $is_group_create ) {
 		/**
-		 * Fires inside the group admin template.
-		 *
-		 * Allows plugins to add custom group edit screens.
+		 * Fires inside the group admin form and before the content.
 		 *
 		 * @since 1.1.0
 		 */
-		do_action( 'groups_custom_edit_steps' );
+		do_action( 'bp_before_group_admin_content' );
+
+		$core_screen = bp_nouveau_group_get_core_manage_screens( $screen_id );
+
+	// It's a group step, get the creation screens.
+	} else {
+		$core_screen = bp_nouveau_group_get_core_create_screens( $screen_id );
+	}
+
+	if ( false === $core_screen ) {
+		if ( ! $is_group_create ) {
+			/**
+			 * Fires inside the group admin template.
+			 *
+			 * Allows plugins to add custom group edit screens.
+			 *
+			 * @since 1.1.0
+			 */
+			do_action( 'groups_custom_edit_steps' );
+
+		// Else use the group create hook
+		} else {
+			/**
+			 * Fires inside the group admin template.
+			 *
+			 * Allows plugins to add custom group creation steps.
+			 *
+			 * @since 1.1.0
+			 */
+			do_action( 'groups_custom_create_steps' );
+		}
 
 	// Else we load the core screen.
 	} else {
@@ -170,7 +237,13 @@ function bp_nouveau_group_manage_screen() {
 			do_action( 'bp_before_' . $core_screen['hook'] );
 		}
 
-		bp_get_template_part( 'groups/single/admin/' . $screen_id );
+		$template = 'groups/single/admin/' . $screen_id;
+
+		if ( ! empty( $core_screen['template'] ) ) {
+			$template = $core_screen['template'];
+		}
+
+		bp_get_template_part( $template );
 
 		if ( ! empty( $core_screen['hook'] ) ) {
 			/**
@@ -183,33 +256,127 @@ function bp_nouveau_group_manage_screen() {
 		}
 
 		if ( ! empty( $core_screen['nonce'] ) ) {
-			$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
 
-			// Specific case for the delete group screen
-			if ( 'delete-group' === $screen_id ) {
-				$output = sprintf( '<div class="submit">
-						<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
-					</div>',
-					esc_attr__( 'Delete Group', 'bp-nouveau' )
-				);
+			if ( ! $is_group_create ) {
+				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
+
+				// Specific case for the delete group screen
+				if ( 'delete-group' === $screen_id ) {
+					$output = sprintf( '<div class="submit">
+							<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
+						</div>',
+						esc_attr__( 'Delete Group', 'bp-nouveau' )
+					);
+				}
 			}
 
-			echo $output;
 			wp_nonce_field( $core_screen['nonce'] );
 		}
 	}
 
-	// This way we are absolutely sure this hidden field won't be removed from the template :)
-	printf( '<input type="hidden" name="group-id" id="group-id" value="%s" />', bp_get_group_id() );
+	if ( $is_group_create ) {
+		/**
+		 * Fires before the display of the group creation step buttons.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_before_group_creation_step_buttons' );
 
-	/**
-	 * Fires inside the group admin form and after the content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_group_admin_content' );
+		if ( 'crop-image' != bp_get_avatar_admin_step() ) {
+			$creation_step_buttons = '';
+
+			if ( ! bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
+					esc_attr__( 'Back to Previous Step', 'bp-nouveau' ),
+					"location.href='" . esc_url( bp_get_group_creation_previous_link() ) . "'"
+				);
+			}
+
+			if ( ! bp_is_last_group_creation_step() && ! bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-next" name="save" />',
+					esc_attr__( 'Next Step', 'bp-nouveau' )
+				);
+			}
+
+			if ( bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-create" name="save" />',
+					esc_attr__( 'Create Group and Continue', 'bp-nouveau' )
+				);
+			}
+
+			if ( bp_is_last_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-finish" name="save" />',
+					esc_attr__( 'Finish', 'bp-nouveau' )
+				);
+			}
+
+			// Set the output for the buttons
+			$output = sprintf( '<div class="submit" id="previous-next">%s</div>', $creation_step_buttons );
+		}
+
+		/**
+		 * Fires after the display of the group creation step buttons.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_after_group_creation_step_buttons' );
+	}
+
+	// This way we are absolutely sure this hidden field won't be removed from the template :)
+	printf( '<input type="hidden" name="group-id" id="group-id" value="%s" />', $is_group_create ? bp_get_new_group_id() : bp_get_group_id() );
+
+	// The submit actions
+	echo $output;
+
+	if ( ! $is_group_create ) {
+		/**
+		 * Fires inside the group admin form and after the content.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_after_group_admin_content' );
+
+	// We use a strange hook for the create screens...??
+	} else {
+		/**
+		 * Fires and displays the groups directory content.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_directory_groups_content' );
+	}
 }
 
+/**
+ * Output the action buttons for the displayed group
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_group_header_buttons() {
+	$bp_nouveau = bp_nouveau();
+
+	echo join( ' ', bp_nouveau_get_groups_buttons() );
+
+	/**
+	 * On the group's header we need to reset the group button's global
+	 */
+	if ( ! empty( $bp_nouveau->groups->group_buttons ) ) {
+		unset( $bp_nouveau->groups->group_buttons );
+	}
+
+	/**
+	 * Fires in the group header actions section.
+	 *
+	 * @since 1.2.6
+	 */
+	do_action( 'bp_group_header_actions' );
+}
+
+/**
+ * Output the action buttons inside the groups loop.
+ *
+ * @since 1.0.0
+ */
 function bp_nouveau_groups_loop_buttons() {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;
@@ -225,6 +392,11 @@ function bp_nouveau_groups_loop_buttons() {
 	do_action( 'bp_directory_groups_actions' );
 }
 
+/**
+ * Output the action buttons inside the invites loop of the displayed user.
+ *
+ * @since 1.0.0
+ */
 function bp_nouveau_groups_invite_buttons() {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;
@@ -238,6 +410,46 @@ function bp_nouveau_groups_invite_buttons() {
 	 * @since 1.1.0
 	 */
 	do_action( 'bp_group_invites_item_action' );
+}
+
+/**
+ * Output the action buttons inside the requests loop of the group's manage screen.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_groups_request_buttons() {
+	if ( empty( $GLOBALS['requests_template'] ) ) {
+		return;
+	}
+
+	echo join( ' ', bp_nouveau_get_groups_buttons( 'request' ) );
+
+	/**
+	 * Fires inside the list of membership request actions.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_group_membership_requests_admin_item_action' );
+}
+
+/**
+ * Output the action buttons inside the manage members loop of the group's manage screen.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_groups_manage_members_buttons() {
+	if ( empty( $GLOBALS['members_template'] ) ) {
+		return;
+	}
+
+	echo join( ' ', bp_nouveau_get_groups_buttons( 'manage_members' ) );
+
+	/**
+	 * Fires inside the display of a member admin item in group management area.
+	 *
+	 * @since 1.1.0
+	 */
+	do_action( 'bp_group_manage_members_admin_item' );
 }
 
 	/**
@@ -295,6 +507,84 @@ function bp_nouveau_groups_invite_buttons() {
 				'link_class'        => 'button reject group-button reject-invite',
 			);
 
+		// Request button for the group's manage screen
+		} elseif ( 'request' === $type ) {
+			// Setup Accept button attributes
+			$buttons['group_membership_accept'] =  array(
+				'id'                => 'group_membership_accept',
+				'position'          => 5,
+				'component'         => 'groups',
+				'must_be_logged_in' => true,
+				'wrapper_class'     => 'accept',
+				'link_href'         => esc_url( bp_get_group_request_accept_link() ),
+				'link_title'        => esc_attr__( 'Accept', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
+			);
+
+			// Setup Reject button attributes
+			$buttons['group_membership_reject'] = array(
+				'id'                => 'group_membership_reject',
+				'position'          => 15,
+				'component'         => 'groups',
+				'must_be_logged_in' => true,
+				'wrapper_class'     => 'reject',
+				'link_href'         => esc_url( bp_get_group_request_reject_link() ),
+				'link_text'         => __( 'Reject', 'bp-nouveau' ),
+				'link_title'        => __( 'Reject', 'bp-nouveau' ),
+			);
+
+		// Manage group members for the group's manage screen
+		} elseif ( 'manage_members' === $type && isset( $GLOBALS['members_template']->member->user_id ) ) {
+			$user_id = $GLOBALS['members_template']->member->user_id;
+
+			$buttons = array( 'unban_member' => array(
+					'id'                => 'unban_member',
+					'position'          => 5,
+					'component'         => 'groups',
+					'must_be_logged_in' => true,
+					'link_href'         => esc_url( bp_get_group_member_unban_link( $user_id ) ),
+					'link_text'         => __( 'Remove Ban', 'bp-nouveau' ),
+					'link_title'        => __( 'Unban this member', 'bp-nouveau' ),
+					'link_class'        => 'button confirm member-unban',
+				), 'ban_member' => array(
+					'id'                => 'ban_member',
+					'position'          => 15,
+					'component'         => 'groups',
+					'must_be_logged_in' => true,
+					'link_href'         => esc_url( bp_get_group_member_ban_link( $user_id ) ),
+					'link_text'         => __( 'Kick &amp; Ban', 'bp-nouveau' ),
+					'link_title'        => __( 'Kick and ban this member', 'bp-nouveau' ),
+					'link_class'        => 'button confirm member-ban',
+				), 'promote_mod' => array(
+					'id'                => 'promote_mod',
+					'position'          => 25,
+					'component'         => 'groups',
+					'must_be_logged_in' => true,
+					'link_href'         => esc_url( bp_get_group_member_promote_mod_link() ),
+					'link_text'         => __( 'Promote to Mod', 'bp-nouveau' ),
+					'link_title'        => __( 'Promote to Mod', 'bp-nouveau' ),
+					'link_class'        => 'button confirm member-promote-to-mod',
+				), 'promote_admin' => array(
+					'id'                => 'promote_admin',
+					'position'          => 35,
+					'component'         => 'groups',
+					'must_be_logged_in' => true,
+					'link_href'         => esc_url( bp_get_group_member_promote_admin_link() ),
+					'link_text'         => __( 'Promote to Admin', 'bp-nouveau' ),
+					'link_title'        => __( 'Promote to Admin', 'bp-nouveau' ),
+					'link_class'        => 'button confirm member-promote-to-admin',
+				), 'remove_member' => array(
+					'id'                => 'remove_member',
+					'position'          => 45,
+					'component'         => 'groups',
+					'must_be_logged_in' => true,
+					'link_href'         => esc_url( bp_get_group_member_remove_link( $user_id ) ),
+					'link_text'         => __( 'Remove from group', 'bp-nouveau' ),
+					'link_title'        => __( 'Remove this member', 'bp-nouveau' ),
+					'link_class'        => 'button confirm',
+				),
+			);
+
 		// Membership button on groups loop or single group's header
 		} else {
 			/**
@@ -350,6 +640,26 @@ function bp_nouveau_groups_invite_buttons() {
 		if ( ! $return ) {
 			return array();
 		}
+
+		// Remove buttons according to the user's membership type.
+		if ( 'manage_members' === $type && isset( $GLOBALS['members_template'] ) ) {
+			if ( bp_get_group_member_is_banned() ) {
+				unset( $return['ban_member'], $return['promote_mod'], $return['promote_admin'] );
+			} else {
+				unset( $return['unban_member'] );
+			}
+		}
+
+		/**
+		 * Leave a chance to adjust the $return
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $return  The list of buttons.
+		 * @param int    $group   The current group object.
+		 * @parem string $type    Whether we're displaying a groups loop or a groups single item.
+		 */
+		do_action_ref_array( 'bp_nouveau_return_groups_buttons', array( &$return, $group, $type ) );
 
 		return $return;
 	}

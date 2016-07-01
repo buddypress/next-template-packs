@@ -235,7 +235,7 @@ function bp_nouveau_members_loop_buttons() {
 		 *
 		 * @param array  $buttons The list of buttons.
 		 * @param int    $user_id The displayed user ID.
-		 * @parem string $type    Whether we're displaying a members loop or a user's page
+		 * @param string $type    Whether we're displaying a members loop or a user's page
 		 */
 		$buttons_group = apply_filters( 'bp_nouveau_get_members_buttons', $buttons, $user_id, $type );
 
@@ -259,6 +259,17 @@ function bp_nouveau_members_loop_buttons() {
 		if ( ! $return ) {
 			return array();
 		}
+
+		/**
+		 * Leave a chance to adjust the $return
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $return  The list of buttons ordered.
+		 * @param int    $user_id The displayed user ID.
+		 * @param string $type    Whether we're displaying a members loop or a user's page
+		 */
+		do_action_ref_array( 'bp_nouveau_return_members_buttons', array( &$return, $user_id, $type ) );
 
 		return $return;
 	}

@@ -8,7 +8,15 @@
  */
 ?>
 
-<h4><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
+<?php if ( bp_is_group_create() ) : ?>
+
+	<div id="header-cover-image"></div>
+
+<?php else : ?>
+
+	<h4><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
+
+<?php endif ; ?>
 
 <p><?php _e( 'The Cover Image will be used to customize the header of your group.', 'bp-nouveau' ); ?></p>
 

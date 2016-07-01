@@ -8,29 +8,7 @@
 
 ?>
 
-<?php
-
-/**
- * Fires before the display of the group activity post form.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_group_activity_post_form' ); ?>
-
-<?php if ( is_user_logged_in() && bp_group_is_member() ) : ?>
-
-	<?php bp_get_template_part( 'activity/post-form' ); ?>
-
-<?php endif; ?>
-
-<?php
-
-/**
- * Fires after the display of the group activity post form.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_group_activity_post_form' ); ?>
+<?php bp_nouveau_groups_activity_post_form(); ?>
 
 <div class="item-list-tabs" id="subnav" role="navigation">
 	<ul>
@@ -62,7 +40,7 @@ do_action( 'bp_before_group_activity_content' ); ?>
 
 	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		<li id="bp-activity-ajax-loader">loading</li>
+		<li id="bp-activity-ajax-loader"><?php esc_html_e( 'Loading the group updates, please wait.', 'bp-nouveau' ) ;?></li>
 
 	</ul>
 
