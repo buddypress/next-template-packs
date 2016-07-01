@@ -1851,13 +1851,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: 65%;
 }
 
-.buddypress [data-bp-search] form input[type="submit"] {
+.buddypress [data-bp-search] form button[type="submit"] {
+	border-left: none;
 	display: none;
 	float: left;
-	font-size: 90%;
+	font-weight: normal;
 	line-height: inherit;
-	padding: 5px 10px;
+	padding: 0.5em 0.8em;
 	text-align: center;
+	text-transform: none;
 	width: auto;
 }
 
@@ -1870,8 +1872,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: none;
 }
 
-.buddypress [data-bp-search] form input[type="submit"] {
+.buddypress [data-bp-search] form button[type="submit"] span {
+	background: none;
+	border: none;
 	font-family: dashicons;
+	font-size: 18px;
+	font-size: 1.8rem;
 }
 
 .buddypress .current-member-type {

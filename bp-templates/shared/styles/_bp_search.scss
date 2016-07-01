@@ -14,16 +14,15 @@
 				width: 65%;
 			}
 
-			input[type="submit"] {
-//			border-left: none; why??
+			button[type="submit"] {
+				border-left: none;
 				display: none;
 				float: left;
-				font-size: 90%;
-//			font-weight: normal; why??
+				font-weight: normal;
 				line-height: inherit;
-				padding: 5px 10px;
+				padding: 0.5em 0.8em;
 				text-align: center;
-//			text-transform: none; why??
+				text-transform: none;
 				width: auto;
 			}
 
@@ -36,8 +35,12 @@
 				display: none;
 			}
 
-			input[type="submit"] { // why seperate add to above ruleset?
+			button[type="submit"] span { // why seperate add to above ruleset?
+				background: none;
+				border: none;
 				font-family: dashicons;
+				@include font-size(18);
+
 			}
 
 		} // close form
