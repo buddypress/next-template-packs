@@ -200,6 +200,7 @@ function bp_nouveau_group_creation_screen() {
 function bp_nouveau_group_manage_screen() {
 	$action          = bp_action_variable(0);
 	$is_group_create = bp_is_group_create();
+	$output          = '';
 
 	if ( $is_group_create ) {
 		$action = bp_action_variable(1);
@@ -280,7 +281,6 @@ function bp_nouveau_group_manage_screen() {
 		}
 
 		if ( ! empty( $core_screen['nonce'] ) ) {
-			$output = '';
 
 			if ( ! $is_group_create ) {
 				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
@@ -293,63 +293,65 @@ function bp_nouveau_group_manage_screen() {
 						esc_attr__( 'Delete Group', 'bp-nouveau' )
 					);
 				}
-
-			// Else output the create buttons
-			} else {
-				/**
-				 * Fires before the display of the group creation step buttons.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_before_group_creation_step_buttons' );
-
-				if ( 'crop-image' != bp_get_avatar_admin_step() ) {
-					$creation_step_buttons = '';
-
-					if ( ! bp_is_first_group_creation_step() ) {
-						$creation_step_buttons .= sprintf( '<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
-							esc_attr__( 'Back to Previous Step', 'bp-nouveau' ),
-							"location.href='" . esc_url( bp_get_group_creation_previous_link() ) . "'"
-						);
-					}
-
-					if ( ! bp_is_last_group_creation_step() && ! bp_is_first_group_creation_step() ) {
-						$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-next" name="save" />',
-							esc_attr__( 'Next Step', 'bp-nouveau' )
-						);
-					}
-
-					if ( bp_is_first_group_creation_step() ) {
-						$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-create" name="save" />',
-							esc_attr__( 'Create Group and Continue', 'bp-nouveau' )
-						);
-					}
-
-					if ( bp_is_last_group_creation_step() ) {
-						$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-finish" name="save" />',
-							esc_attr__( 'Finish', 'bp-nouveau' )
-						);
-					}
-
-					// Set the output for the buttons
-					$output = sprintf( '<div class="submit" id="previous-next">%s</div>', $creation_step_buttons );
-				}
-
-				/**
-				 * Fires after the display of the group creation step buttons.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_after_group_creation_step_buttons' );
 			}
 
 			wp_nonce_field( $core_screen['nonce'] );
-			echo $output;
 		}
+	}
+
+	if ( $is_group_create ) {
+		/**
+		 * Fires before the display of the group creation step buttons.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_before_group_creation_step_buttons' );
+
+		if ( 'crop-image' != bp_get_avatar_admin_step() ) {
+			$creation_step_buttons = '';
+
+			if ( ! bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
+					esc_attr__( 'Back to Previous Step', 'bp-nouveau' ),
+					"location.href='" . esc_url( bp_get_group_creation_previous_link() ) . "'"
+				);
+			}
+
+			if ( ! bp_is_last_group_creation_step() && ! bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-next" name="save" />',
+					esc_attr__( 'Next Step', 'bp-nouveau' )
+				);
+			}
+
+			if ( bp_is_first_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-create" name="save" />',
+					esc_attr__( 'Create Group and Continue', 'bp-nouveau' )
+				);
+			}
+
+			if ( bp_is_last_group_creation_step() ) {
+				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-finish" name="save" />',
+					esc_attr__( 'Finish', 'bp-nouveau' )
+				);
+			}
+
+			// Set the output for the buttons
+			$output = sprintf( '<div class="submit" id="previous-next">%s</div>', $creation_step_buttons );
+		}
+
+		/**
+		 * Fires after the display of the group creation step buttons.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_after_group_creation_step_buttons' );
 	}
 
 	// This way we are absolutely sure this hidden field won't be removed from the template :)
 	printf( '<input type="hidden" name="group-id" id="group-id" value="%s" />', $is_group_create ? bp_get_new_group_id() : bp_get_group_id() );
+
+	// The submit actions
+	echo $output;
 
 	if ( ! $is_group_create ) {
 		/**
