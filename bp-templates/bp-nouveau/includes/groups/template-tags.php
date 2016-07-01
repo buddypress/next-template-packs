@@ -103,6 +103,33 @@ function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
 }
 
 /**
+ * Display the current group activity post form if needed
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Outpur
+ */
+function bp_nouveau_groups_activity_post_form() {
+	/**
+	 * Fires before the display of the group activity post form.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_before_group_activity_post_form' );
+
+	if ( is_user_logged_in() && bp_group_is_member() ) {
+		bp_get_template_part( 'activity/post-form' );
+	}
+
+	/**
+	 * Fires after the display of the group activity post form.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'bp_after_group_activity_post_form' );
+}
+
+/**
  * Output the action buttons for the displayed group
  *
  * @since 1.0.0

@@ -84,7 +84,9 @@ function bp_nouveau_before_activity_post_form() {
  * @since 1.0.0
  */
 function bp_nouveau_after_activity_post_form() {
-	bp_get_template_part( '_accessoires/activity/form' );
+	if ( bp_nouveau_current_user_can( 'publish_activity' ) ) {
+		bp_get_template_part( '_accessoires/activity/form' );
+	}
 
 	do_action( 'bp_after_activity_post_form' );
 }
