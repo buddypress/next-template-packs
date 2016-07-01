@@ -275,78 +275,77 @@ function bp_nouveau_activity_entry_buttons() {
 			);
 		}
 
-		if ( bp_activity_user_can_delete() ) {
-			$delete_args = array();
+		// The delete button is always created, and removed later on if needed.
+		$delete_args = array();
 
-			/**
-			 * As the delete link is filterable we need this workaround
-			 * to try to intercept the edits the filter made and build
-			 * a button out of it.
-			 */
-			if ( has_filter( 'bp_get_activity_delete_link' ) ) {
-				preg_match( '/<a\s[^>]*>(.*)<\/a>/siU', bp_get_activity_delete_link(), $link );
+		/**
+		 * As the delete link is filterable we need this workaround
+		 * to try to intercept the edits the filter made and build
+		 * a button out of it.
+		 */
+		if ( has_filter( 'bp_get_activity_delete_link' ) ) {
+			preg_match( '/<a\s[^>]*>(.*)<\/a>/siU', bp_get_activity_delete_link(), $link );
 
-				if ( ! empty( $link[0] ) && ! empty( $link[1] ) ) {
-					$delete_args['link_text'] = $link[1];
-					$subject = str_replace( $delete_args['link_text'], '', $link[0] );
-				}
-
-				preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $subject, $attrs );
-
-				if ( ! empty( $attrs[1] ) && ! empty( $attrs[2] ) ) {
-					foreach ( $attrs[1] as $key_attr => $key_value ) {
-						$delete_args[ 'link_'. $key_value ] = trim( $attrs[2][$key_attr], '"' );
-					}
-				}
-
-				$delete_args = wp_parse_args( $delete_args, array(
-					'link_href'  => '',
-					'link_class' => '',
-					'link_rel'   => 'nofollow',
-					'link_text'  => '',
-					'link_title' => '',
-					'link_id'    => '',
-				) );
+			if ( ! empty( $link[0] ) && ! empty( $link[1] ) ) {
+				$delete_args['link_text'] = $link[1];
+				$subject = str_replace( $delete_args['link_text'], '', $link[0] );
 			}
 
-			if ( empty( $delete_args['link_href'] ) ) {
-				$delete_args[] = bp_get_activity_delete_url();
-				$class = 'delete-activity';
+			preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $subject, $attrs );
 
-				if ( bp_is_activity_component() && is_numeric( bp_current_action() ) ) {
-					$class = 'delete-activity-single';
+			if ( ! empty( $attrs[1] ) && ! empty( $attrs[2] ) ) {
+				foreach ( $attrs[1] as $key_attr => $key_value ) {
+					$delete_args[ 'link_'. $key_value ] = trim( $attrs[2][$key_attr], '"' );
 				}
-
-				$delete_args = array(
-					'link_href'  => bp_get_activity_delete_url(),
-					'link_class' => 'button item-button bp-secondary-action ' . $class . ' confirm',
-					'link_rel'   => 'nofollow',
-					'link_text'  => __( 'Delete', 'bp_nouveau' ),
-					'link_title' => __( 'Delete', 'bp_nouveau' ),
-					'link_id'    => '',
-				);
 			}
 
-			$buttons['activity_delete'] = array(
-				'id'                => 'activity_delete',
-				'position'          => 35,
-				'component'         => 'activity',
-				'must_be_logged_in' => true,
-				'link_id'           => esc_attr( $delete_args['link_id'] ),
-				'link_href'         => esc_url( $delete_args['link_href'] ),
-				'link_class'        => $delete_args['link_class'],
-				'link_title'        => esc_attr( $delete_args['link_title'] ),
-				'link_text'         => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
+			$delete_args = wp_parse_args( $delete_args, array(
+				'link_href'  => '',
+				'link_class' => '',
+				'link_rel'   => 'nofollow',
+				'link_text'  => '',
+				'link_title' => '',
+				'link_id'    => '',
+			) );
+		}
+
+		if ( empty( $delete_args['link_href'] ) ) {
+			$delete_args[] = bp_get_activity_delete_url();
+			$class = 'delete-activity';
+
+			if ( bp_is_activity_component() && is_numeric( bp_current_action() ) ) {
+				$class = 'delete-activity-single';
+			}
+
+			$delete_args = array(
+				'link_href'  => bp_get_activity_delete_url(),
+				'link_class' => 'button item-button bp-secondary-action ' . $class . ' confirm',
+				'link_rel'   => 'nofollow',
+				'link_text'  => __( 'Delete', 'bp_nouveau' ),
+				'link_title' => __( 'Delete', 'bp_nouveau' ),
+				'link_id'    => '',
 			);
 		}
+
+		$buttons['activity_delete'] = array(
+			'id'                => 'activity_delete',
+			'position'          => 35,
+			'component'         => 'activity',
+			'must_be_logged_in' => true,
+			'link_id'           => esc_attr( $delete_args['link_id'] ),
+			'link_href'         => esc_url( $delete_args['link_href'] ),
+			'link_class'        => $delete_args['link_class'],
+			'link_title'        => esc_attr( $delete_args['link_title'] ),
+			'link_text'         => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
+		);
 
 		/**
 		 * Filter here to add your buttons, use the position argument to choose where to insert it.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param array the list of buttons
-		 * @param int   the current activity ID.
+		 * @param array $buttons     The list of buttons.
+		 * @param int   $activity_id The current activity ID.
 		 */
 		$buttons_group = apply_filters( 'bp_nouveau_get_activity_entry_buttons', $buttons, $activity_id );
 
@@ -375,6 +374,21 @@ function bp_nouveau_activity_entry_buttons() {
 		if ( ! bp_activity_can_comment() && $activity_type !== 'activity_comment' ) {
 			unset( $return['activity_conversation'] );
 		}
+
+		// Remove the Delete button if the user can't delete
+		if ( ! bp_activity_user_can_delete() ) {
+			unset( $return['activity_delete'] );
+		}
+
+		/**
+		 * Leave a chance to adjust the $return
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $return      The list of buttons ordered.
+		 * @param int   $activity_id The current activity ID.
+		 */
+		do_action_ref_array( 'bp_nouveau_return_activity_entry_buttons', array( &$return, $activity_id ) );
 
 		return $return;
 	}
@@ -613,6 +627,17 @@ function bp_nouveau_activity_comment_buttons() {
 		if ( ! bp_activity_user_can_delete() ) {
 			unset( $return['activity_comment_delete'] );
 		}
+
+		/**
+		 * Leave a chance to adjust the $return
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $return              The list of buttons ordered.
+		 * @param int   $activity_comment_id The current activity comment ID.
+		 * @param int   $activity_id         The current activity ID.
+		 */
+		do_action_ref_array( 'bp_nouveau_return_activity_comment_buttons', array( &$return, $activity_comment_id, $activity_id ) );
 
 		return $return;
 	}

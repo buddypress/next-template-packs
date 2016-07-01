@@ -186,7 +186,7 @@ function bp_nouveau_blogs_loop_buttons() {
 		 *
 		 * @param array  $buttons The list of buttons.
 		 * @param object $blog    The current blog object.
-		 * @parem string $type    Whether we're displaying a blogs loop or a the blogs single item (in the future!).
+		 * @param string $type    Whether we're displaying a blogs loop or a the blogs single item (in the future!).
 		 */
 		$buttons_group = apply_filters( 'bp_nouveau_get_blogs_buttons', $buttons, $blog, $type );
 
@@ -210,6 +210,17 @@ function bp_nouveau_blogs_loop_buttons() {
 		if ( ! $return ) {
 			return array();
 		}
+
+		/**
+		 * Leave a chance to adjust the $return
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $return  The list of buttons ordered.
+		 * @param object $blog    The current blog object.
+		 * @param string $type    Whether we're displaying a blogs loop or a the blogs single item (in the future!).
+		 */
+		do_action_ref_array( 'bp_nouveau_return_blogs_buttons', array( &$return, $blog, $type ) );
 
 		return $return;
 	}

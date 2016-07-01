@@ -52,18 +52,7 @@
 
 				<div class="action">
 
-					<?php bp_button( array( 'id' => 'group_membership_accept', 'component' => 'groups', 'wrapper_class' => 'accept', 'link_href' => bp_get_group_request_accept_link(), 'link_title' => __( 'Accept', 'bp-nouveau' ), 'link_text' => __( 'Accept', 'bp-nouveau' ) ) ); ?>
-
-					<?php bp_button( array( 'id' => 'group_membership_reject', 'component' => 'groups', 'wrapper_class' => 'reject', 'link_href' => bp_get_group_request_reject_link(), 'link_title' => __( 'Reject', 'bp-nouveau' ), 'link_text' => __( 'Reject', 'bp-nouveau' ) ) ); ?>
-
-					<?php
-
-					/**
-					 * Fires inside the list of membership request actions.
-					 *
-					 * @since 1.1.0
-					 */
-					do_action( 'bp_group_membership_requests_admin_item_action' ); ?>
+					<?php bp_nouveau_groups_request_buttons(); ?>
 
 				</div>
 			</li>
