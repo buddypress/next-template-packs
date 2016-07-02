@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Users Groups
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -43,12 +44,7 @@ switch ( bp_current_action() ) :
 	// Home/My Groups
 	case 'my-groups' :
 
-		/**
-		 * Fires before the display of member groups content.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_member_groups_content' ); ?>
+		bp_nouveau_member_hook( 'before', 'groups_content' ); ?>
 
 		<div class="groups mygroups" data-bp-list="groups">
 
@@ -56,14 +52,7 @@ switch ( bp_current_action() ) :
 
 		</div>
 
-		<?php
-
-		/**
-		 * Fires after the display of member groups content.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_member_groups_content' );
+		<?php bp_nouveau_member_hook( 'after', 'groups_content' );
 		break;
 
 	// Group Invitations

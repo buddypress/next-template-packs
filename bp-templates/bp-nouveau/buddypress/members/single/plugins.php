@@ -9,12 +9,7 @@
  * @subpackage bp-nouveau
  */
 
-		/**
-		 * Fires at the start of the member plugin template.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_member_plugin_template' ); ?>
+		bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 
 		<?php if ( ! bp_is_current_component_core() ) : ?>
 
@@ -56,11 +51,4 @@
 		 */
 		do_action( 'bp_template_content' ); ?>
 
-		<?php
-
-		/**
-		 * Fires at the end of the member plugin template.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_member_plugin_template' ); ?>
+		<?php bp_nouveau_member_hook( 'after', 'plugin_template' );

@@ -2,16 +2,12 @@
 /**
  * BuddyPress - Members Single Profile
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
-/**
- * Fires before the display of member settings template.
- *
- * @since 1.5.0
- */
-do_action( 'bp_before_member_settings_template' ); ?>
+bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
 <form action="<?php echo trailingslashit( bp_displayed_user_domain() . bp_get_settings_slug() . '/profile' ); ?>" method="post" class="standard-form" id="settings-form">
 
@@ -77,11 +73,4 @@ do_action( 'bp_before_member_settings_template' ); ?>
 
 </form>
 
-<?php
-
-/**
- * Fires after the display of member settings template.
- *
- * @since 1.5.0
- */
-do_action( 'bp_after_member_settings_template' );
+<?php bp_nouveau_member_hook( 'after', 'settings_template' );

@@ -28,14 +28,7 @@
 
 			<div id="item-buttons"><?php bp_nouveau_member_header_buttons(); ?></div><!-- #item-buttons -->
 
-			<?php
-
-			/**
-			 * Fires before the display of the member's header meta.
-			 *
-			 * @since 1.2.0
-			 */
-			do_action( 'bp_before_member_header_meta' ); ?>
+			<?php bp_nouveau_member_hook( 'before', 'header_meta' ); ?>
 
 			<?php if ( bp_nouveau_member_has_meta() ) : ?>
 				<div class="item-meta">

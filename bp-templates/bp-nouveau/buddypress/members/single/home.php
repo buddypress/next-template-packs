@@ -3,7 +3,6 @@
  * BuddyPress - Members Home
  *
  * @since    1.0.0
- * @version  1.0.0
  *
  * @package BP Nouveau
  */
@@ -12,14 +11,7 @@
 
 <div id="buddypress">
 
-	<?php
-
-	/**
-	 * Fires before the display of member home content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_before_member_home_content' ); ?>
+	<?php bp_nouveau_member_hook( 'before', 'home_content' ); ?>
 
 	<div id="item-header" role="complementary" data-bp-item-id="<?php echo bp_displayed_user_id(); ?>" data-bp-item-component="members" class="users-header single-item-header">
 
@@ -39,13 +31,6 @@
 
 	</div><!-- #item-body -->
 
-	<?php
-
-	/**
-	 * Fires after the display of member home content.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_after_member_home_content' ); ?>
+	<?php bp_nouveau_member_hook( 'after', 'home_content' ); ?>
 
 </div><!-- #buddypress -->

@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Users Blogs
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -31,12 +32,7 @@ switch ( bp_current_action() ) :
 	// Home/My Blogs
 	case 'my-sites' :
 
-		/**
-		 * Fires before the display of member blogs content.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_member_blogs_content' ); ?>
+		bp_nouveau_member_hook( 'before', 'blogs_content' ); ?>
 
 		<div class="blogs myblogs" data-bp-list="blogs">
 
@@ -44,14 +40,7 @@ switch ( bp_current_action() ) :
 
 		</div><!-- .blogs.myblogs -->
 
-		<?php
-
-		/**
-		 * Fires after the display of member blogs content.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_member_blogs_content' );
+		<?php bp_nouveau_member_hook( 'after', 'blogs_content' );
 		break;
 
 	// Any other

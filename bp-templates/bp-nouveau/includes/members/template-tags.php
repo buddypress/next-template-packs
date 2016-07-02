@@ -83,6 +83,34 @@ function bp_nouveau_after_members_directory_content() {
 }
 
 /**
+ * Fire specific hooks into the single members templates
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$smember%2$s', $when, $suffix );
+
+	/**
+	 * @since 1.2.0 (BuddyPress) for the 'activity_content', 'blogs_content', 'header_meta',
+	 *                           'friends_content', 'groups_content', 'home_content', 'plugin_template'
+	 *                           'friend_requests_content' suffixes.
+	 * @since 1.5.0 (BuddyPress) for the 'settings_template' suffix.
+	 */
+	do_action( $hook );
+}
+
+/**
  * Output the action buttons for the displayed user profile
  *
  * @since 1.0.0

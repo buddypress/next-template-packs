@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Users Friends
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -45,12 +46,7 @@ switch ( bp_current_action() ) :
 	// Home/My Friends
 	case 'my-friends' :
 
-		/**
-		 * Fires before the display of member friends content.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_before_member_friends_content' ); ?>
+		bp_nouveau_member_hook( 'before', 'friends_content' ); ?>
 
 		<div class="members friends">
 
@@ -58,14 +54,7 @@ switch ( bp_current_action() ) :
 
 		</div><!-- .members.friends -->
 
-		<?php
-
-		/**
-		 * Fires after the display of member friends content.
-		 *
-		 * @since 1.2.0
-		 */
-		do_action( 'bp_after_member_friends_content' );
+		<?php bp_nouveau_member_hook( 'after', 'friends_content' );
 		break;
 
 	case 'requests' :

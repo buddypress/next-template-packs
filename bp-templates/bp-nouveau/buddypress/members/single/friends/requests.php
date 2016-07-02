@@ -2,16 +2,12 @@
 /**
  * BuddyPress - Members Friends Requests
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
-/**
- * Fires before the display of member friend requests content.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_member_friend_requests_content' ); ?>
+bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 
 <?php if ( bp_has_members( 'type=alphabetical&include=' . bp_get_friendship_requests() ) ) : ?>
 
@@ -104,11 +100,4 @@ do_action( 'bp_before_member_friend_requests_content' ); ?>
 
 <?php endif;?>
 
-<?php
-
-/**
- * Fires after the display of member friend requests content.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_member_friend_requests_content' ); ?>
+<?php bp_nouveau_member_hook( 'after', 'friend_requests_content' );

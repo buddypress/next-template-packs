@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Users Activity
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -33,13 +34,7 @@
 	</ul>
 </div><!-- .item-list-tabs#subsubnav -->
 
-<?php
-/**
- * Fires before the display of the member activities list.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_member_activity_content' ); ?>
+<?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 
 <div class="activity single-user">
 
@@ -51,11 +46,4 @@ do_action( 'bp_before_member_activity_content' ); ?>
 
 </div><!-- .activity -->
 
-<?php
-
-/**
- * Fires after the display of the member activities list.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_member_activity_content' ); ?>
+<?php bp_nouveau_member_hook( 'after', 'activity_content' );
