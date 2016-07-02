@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Next Template Packs 1.0.0-alpha\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/next-template-packs\n"
-"POT-Creation-Date: 2016-04-09 10:11:28+00:00\n"
+"POT-Creation-Date: 2016-07-02 18:01:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,11 +12,11 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: next-template-packs.php:121 next-template-packs.php:220
+#: next-template-packs.php:119 next-template-packs.php:220
 msgid "Template Packs"
 msgstr ""
 
-#: next-template-packs.php:122
+#: next-template-packs.php:120
 msgid "Templates Packs"
 msgstr ""
 
@@ -36,64 +36,72 @@ msgstr ""
 msgid "No informations about supports provided."
 msgstr ""
 
-#: next-template-packs.php:305
+#: next-template-packs.php:330
 msgid "BuddyPress Settings"
 msgstr ""
 
-#: next-template-packs.php:307
+#: next-template-packs.php:332
 msgid "Templates"
 msgstr ""
 
-#: next-template-packs.php:393
+#: next-template-packs.php:420
 msgctxt "plugins"
 msgid "All <span class=\"count\">(%s)</span>"
 msgid_plural "All <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: next-template-packs.php:401 next-template-packs.php:410
+#: next-template-packs.php:428 next-template-packs.php:437
 msgid "Name"
 msgstr ""
 
-#: next-template-packs.php:402 next-template-packs.php:411
+#: next-template-packs.php:429 next-template-packs.php:438
 msgid "Description"
 msgstr ""
 
-#: next-template-packs.php:403 next-template-packs.php:412
+#: next-template-packs.php:430 next-template-packs.php:439
 msgid "Supports"
 msgstr ""
 
-#: next-template-packs.php:462
+#: next-template-packs.php:487
+msgid "WordPress required version is %s."
+msgstr ""
+
+#: next-template-packs.php:491
+msgid "BuddyPress required version is %s."
+msgstr ""
+
+#: next-template-packs.php:512
 msgid "No template packs found ???"
 msgstr ""
 
-#: next-template-packs.php:471
+#: next-template-packs.php:521
 msgid "Save Settings"
 msgstr ""
 
-#: next-template-packs.php:505
+#: next-template-packs.php:549
 msgid "%s requires at least version %s of BuddyPress."
 msgstr ""
 
-#: next-template-packs.php:509
+#: next-template-packs.php:553
 msgid "%s and BuddyPress need to share the same network configuration."
 msgstr ""
-#. Plugin Name of the plugin/theme
+#. Plugin Name of the BuddyPress Template Pack
 msgid "Next Template Packs"
 msgstr ""
 
-#. Plugin URI of the plugin/theme
-msgid "https://github.com/imath/next-template-packs"
+#. Plugin URI of the BuddyPress Template Pack
+msgid "https://github.com/buddypress/next-template-packs"
 msgstr ""
 
-#. Description of the plugin/theme
+#. Description of the BuddyPress Template Pack
 msgid "Adds a BuddyPress Admin Tab to manage BuddyPress template pack"
 msgstr ""
 
-#. Author of the plugin/theme
-msgid "imath"
+#. Author of the BuddyPress Template Pack
+msgid "The BuddyPress Community"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://imathi.eu"
+#. Author URI of the BuddyPress Template Pack
+msgid "https://buddypress.org"
 msgstr ""

@@ -1,0 +1,1939 @@
+# Copyright (C) 2016 BP Nouveau
+# This file is distributed under the same license as the BP Nouveau package.
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Nouveau 1.0.0\n"
+"Report-Msgid-Bugs-To: https://make.wordpress.org/polyglots/\n"
+"POT-Creation-Date: 2016-07-02 18:14:37+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: buddypress/_accessoires/activity/form.php:41
+msgid "Remove item"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:36
+msgid "The invite has not been sent yet."
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:38
+msgid "The invite has been sent."
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:44
+msgid "Invited by:"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:56
+msgid "Invite / Uninvite"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:57
+msgid "Invite/Uninvite"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:62
+#: buddypress/_accessoires/invites/index.php:63
+msgid "Remove"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:77
+msgid "Optional: add a message to your invite."
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:80
+#: buddypress/activity/comment-form.php:20
+msgid "Cancel"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:81
+#: buddypress/_accessoires/messages/index.php:44
+msgid "Send"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:93
+#: buddypress/_accessoires/messages/index.php:94
+#: includes/messages/functions.php:126
+msgid "Search"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:101
+#: buddypress/_accessoires/invites/index.php:102
+#: buddypress/_accessoires/messages/index.php:73
+#: buddypress/_accessoires/messages/index.php:74
+msgid "Prev"
+msgstr ""
+
+#: buddypress/_accessoires/invites/index.php:107
+#: buddypress/_accessoires/invites/index.php:108
+#: buddypress/_accessoires/messages/index.php:79
+#: buddypress/_accessoires/messages/index.php:80
+msgid "Next"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:26
+msgid "Send @Username"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:29
+#: buddypress/members/single/messages/compose.php:28
+#: buddypress/members/single/messages/messages-loop.php:56
+#: includes/messages/classes.php:184
+msgid "Subject"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:43
+msgid "Reset"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:111
+msgid "Apply"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:121
+#: buddypress/members/single/messages/messages-loop.php:84
+msgid "Select this message"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:145
+msgid "Active conversation:"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:149
+#: buddypress/_accessoires/messages/index.php:193
+msgid "Participants:"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:158
+#: buddypress/_accessoires/messages/index.php:159
+#: buddypress/_accessoires/messages/index.php:202
+#: buddypress/_accessoires/messages/index.php:203
+msgid "Delete conversation."
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:165
+#: buddypress/_accessoires/messages/index.php:166
+msgid "Unstar Conversation"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:169
+#: buddypress/_accessoires/messages/index.php:170
+msgid "Star Conversation"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:176
+msgid "View Full Conversation."
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:177
+msgid "View Full conversation."
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:240
+#: buddypress/_accessoires/messages/index.php:241
+msgid "Unstar Message"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:244
+#: buddypress/_accessoires/messages/index.php:245
+msgid "Star Message"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:328
+#: buddypress/members/single/messages/single.php:92
+msgid "Send a Reply"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:345
+#: buddypress/members/single/messages/single.php:113
+msgid "Reply to Message"
+msgstr ""
+
+#: buddypress/_accessoires/messages/index.php:357
+#: buddypress/members/single/messages/single.php:126
+msgid "Send Reply"
+msgstr ""
+
+#: buddypress/activity/activity-loop.php:22
+msgid "Load More"
+msgstr ""
+
+#: buddypress/activity/activity-loop.php:30 includes/activity/ajax.php:79
+msgid "Sorry, there was no activity found. Please try a different filter."
+msgstr ""
+
+#: buddypress/activity/comment-form.php:17
+#: includes/activity/template-tags.php:244
+#: includes/activity/template-tags.php:245
+msgid "Comment"
+msgstr ""
+
+#: buddypress/activity/comment-form.php:20
+msgid "Post"
+msgstr ""
+
+#: buddypress/activity/index.php:33 buddypress/groups/single/activity.php:16
+msgid "RSS Feed"
+msgstr ""
+
+#: buddypress/activity/index.php:33 buddypress/groups/single/activity.php:16
+msgid "RSS"
+msgstr ""
+
+#: buddypress/activity/index.php:56
+msgid "Loading the community updates, please wait."
+msgstr ""
+
+#: buddypress/activity/widget.php:54
+msgid "Sorry, no updates are available at the moment."
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/camera.php:17
+msgid "Your browser does not support this feature."
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/camera.php:24
+msgid "Capture"
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/camera.php:25
+#: buddypress/members/single/settings/capabilities.php:29
+msgid "Save"
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/crop.php:23
+#: buddypress/groups/single/admin/group-avatar.php:64
+#: buddypress/members/single/profile/change-avatar.php:57
+msgid "Crop Image"
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/index.php:37
+#: buddypress/members/single/profile/change-avatar.php:41
+msgid "If you'd like to delete your current profile photo but not upload a new one, please use the delete profile photo button."
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/index.php:38
+#: buddypress/members/single/profile/change-avatar.php:42
+msgid "Delete Profile Photo"
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/index.php:38
+#: buddypress/members/single/profile/change-avatar.php:42
+msgid "Delete My Profile Photo"
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/index.php:40
+#: buddypress/groups/single/admin/group-avatar.php:36
+msgid "If you'd like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button."
+msgstr ""
+
+#: buddypress/assets/_attachments/avatars/index.php:41
+#: buddypress/groups/single/admin/group-avatar.php:38
+msgid "Delete Group Profile Photo"
+msgstr ""
+
+#: buddypress/assets/_attachments/cover-images/index.php:26
+msgid "If you'd like to delete your current cover image but not upload a new one, please use the delete Cover Image button."
+msgstr ""
+
+#: buddypress/assets/_attachments/cover-images/index.php:27
+#: buddypress/assets/_attachments/cover-images/index.php:30
+msgid "Delete Cover Image"
+msgstr ""
+
+#: buddypress/assets/_attachments/cover-images/index.php:27
+msgid "Delete My Cover Image"
+msgstr ""
+
+#: buddypress/assets/_attachments/cover-images/index.php:29
+msgid "If you'd like to remove the existing group cover image but not upload a new one, please use the delete group cover image button."
+msgstr ""
+
+#: buddypress/assets/_attachments/cover-images/index.php:30
+msgid "Delete Group Cover Image"
+msgstr ""
+
+#: buddypress/assets/_attachments/uploader.php:16
+msgid "The web browser on your device cannot be used to upload files."
+msgstr ""
+
+#: buddypress/assets/_attachments/uploader.php:18
+msgid "Upload Limit Exceeded"
+msgstr ""
+
+#: buddypress/assets/_attachments/uploader.php:23
+msgid "Drop your file here"
+msgstr ""
+
+#: buddypress/assets/_attachments/uploader.php:24
+msgctxt "Uploader: Drop your file here - or - Select your File"
+msgid "or"
+msgstr ""
+
+#: buddypress/assets/_attachments/uploader.php:25
+msgid "Select your File"
+msgstr ""
+
+#: buddypress/assets/emails/single-bp-email.php:202
+msgctxt "email"
+msgid "unsubscribe"
+msgstr ""
+
+#: buddypress/blogs/blogs-loop.php:59
+msgid "Sorry, there were no sites found."
+msgstr ""
+
+#: buddypress/blogs/create.php:23
+msgid "Site registration is currently disabled"
+msgstr ""
+
+#: buddypress/blogs/index.php:33
+msgid "Loading the sites of the network, please wait."
+msgstr ""
+
+#: buddypress/groups/groups-loop.php:30
+#: buddypress/groups/single/cover-image-header.php:30
+#: buddypress/groups/single/group-header.php:49
+msgid "active %s"
+msgstr ""
+
+#: buddypress/groups/groups-loop.php:72
+msgid "There were no groups found."
+msgstr ""
+
+#: buddypress/groups/single/activity.php:21
+#: buddypress/members/single/activity.php:27 includes/template-tags.php:663
+msgid "Show:"
+msgstr ""
+
+#: buddypress/groups/single/activity.php:37
+msgid "Loading the group updates, please wait."
+msgstr ""
+
+#: buddypress/groups/single/admin/delete-group.php:12
+msgid "WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option."
+msgstr ""
+
+#: buddypress/groups/single/admin/delete-group.php:15
+msgid "I understand the consequences of deleting this group."
+msgstr ""
+
+#: buddypress/groups/single/admin/edit-details.php:11
+msgid "Group Name (required)"
+msgstr ""
+
+#: buddypress/groups/single/admin/edit-details.php:14
+msgid "Group Description (required)"
+msgstr ""
+
+#: buddypress/groups/single/admin/edit-details.php:20
+msgid "Notify group members of these changes via email"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:21
+msgid "Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:24
+#: buddypress/members/single/profile/change-avatar.php:34
+msgid "Select an image"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:26
+#: buddypress/members/single/profile/change-avatar.php:36
+msgid "Upload Image"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:31
+msgid "To skip the group profile photo upload process, hit the \"Next Step\" button."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:56
+msgid "Crop Group Profile Photo"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:58
+#: buddypress/members/single/profile/change-avatar.php:51
+msgid "Profile photo to crop"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-avatar.php:61
+#: buddypress/members/single/profile/change-avatar.php:54
+msgid "Profile photo preview"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-cover-image.php:17
+#: buddypress/members/single/profile/change-cover-image.php:11
+msgid "Change Cover Image"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-cover-image.php:21
+msgid "The Cover Image will be used to customize the header of your group."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:11
+msgid "Privacy Options"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:15
+msgid "This is a public group"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:18
+msgid "Any site member can join this group."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:19
+#: buddypress/groups/single/admin/group-settings.php:27
+msgid "This group will be listed in the groups directory and in search results."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:20
+msgid "Group content and activity will be visible to any site member."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:23
+msgid "This is a private group"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:26
+msgid "Only users who request membership and are accepted can join the group."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:28
+#: buddypress/groups/single/admin/group-settings.php:36
+msgid "Group content and activity will only be visible to members of the group."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:31
+msgid "This is a hidden group"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:34
+msgid "Only users who are invited can join the group."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:35
+msgid "This group will not be listed in the groups directory or search results."
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:43
+msgid "Group Invitations"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:45
+msgid "Which members of this group are allowed to invite others?"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:49
+msgid "All group members"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:51
+msgid "Group admins and mods only"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:53
+msgid "Group admins only"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:12
+msgid "Administrators"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:20
+#: buddypress/groups/single/admin/manage-members.php:47
+msgid "Profile picture of %s"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:25
+#: buddypress/groups/single/admin/manage-members.php:52
+msgid "Demote to Member"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:40
+msgid "Moderators"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:51
+#: includes/groups/template-tags.php:602 includes/groups/template-tags.php:603
+msgid "Promote to Admin"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:66
+msgid "Members"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:95
+msgid "(banned)"
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:107
+msgid "This group has no members."
+msgstr ""
+
+#: buddypress/groups/single/admin/membership-requests.php:13
+msgid "Loading the members who requested to join the group, please wait."
+msgstr ""
+
+#: buddypress/groups/single/cover-image-header.php:48
+#: buddypress/groups/single/group-header.php:15
+msgid "Group Admins"
+msgstr ""
+
+#: buddypress/groups/single/cover-image-header.php:58
+#: buddypress/groups/single/group-header.php:25
+msgid "Group Mods"
+msgstr ""
+
+#: buddypress/groups/single/default-front.php:15
+msgid "Manage the Groups default front page"
+msgstr ""
+
+#: buddypress/groups/single/default-front.php:17
+msgid "You can set your preferences about the %s or add %s to it."
+msgstr ""
+
+#: buddypress/groups/single/invites-loop.php:73
+msgid "Remove Invite"
+msgstr ""
+
+#: buddypress/groups/single/invites-loop.php:109
+msgid "Select friends to invite."
+msgstr ""
+
+#: buddypress/groups/single/members-loop.php:83
+msgid "No members were found."
+msgstr ""
+
+#: buddypress/groups/single/members.php:23
+msgid "Requesting the group members, please wait."
+msgstr ""
+
+#: buddypress/groups/single/request-membership.php:13
+msgid "You are requesting to become a member of the group '%s'."
+msgstr ""
+
+#: buddypress/groups/single/request-membership.php:16
+msgid "Comments (optional)"
+msgstr ""
+
+#: buddypress/groups/single/request-membership.php:21
+msgid "Send Request"
+msgstr ""
+
+#: buddypress/groups/single/requests-loop.php:82
+msgid "There are no pending membership requests."
+msgstr ""
+
+#: buddypress/members/activate.php:38
+msgid "Your account was activated successfully! Your account details have been sent to you in a separate email."
+msgstr ""
+
+#: buddypress/members/activate.php:40
+msgid "Your account was activated successfully! You can now <a href=\"%s\">log in</a> with the username and password you provided when you signed up."
+msgstr ""
+
+#: buddypress/members/activate.php:45
+msgid "Please provide a valid activation key."
+msgstr ""
+
+#: buddypress/members/activate.php:49
+msgid "Activation Key:"
+msgstr ""
+
+#: buddypress/members/activate.php:53
+msgid "Activate"
+msgstr ""
+
+#: buddypress/members/index.php:35
+msgid "Loading the members of your community, please wait."
+msgstr ""
+
+#: buddypress/members/members-loop.php:70
+msgid "Sorry, no members were found."
+msgstr ""
+
+#: buddypress/members/register.php:39
+msgid "User registration is currently not allowed."
+msgstr ""
+
+#: buddypress/members/register.php:55
+msgid "Registering for this site is easy. Just fill in the fields below, and we'll get a new account set up for you in no time."
+msgstr ""
+
+#: buddypress/members/register.php:70
+msgid "Account Details"
+msgstr ""
+
+#: buddypress/members/register.php:72
+msgid "Username"
+msgstr ""
+
+#: buddypress/members/register.php:72 buddypress/members/register.php:83
+#: buddypress/members/register.php:94 buddypress/members/register.php:106
+#: buddypress/members/register.php:266 buddypress/members/register.php:282
+msgid "(required)"
+msgstr ""
+
+#: buddypress/members/register.php:83
+msgid "Email Address"
+msgstr ""
+
+#: buddypress/members/register.php:94
+msgid "Choose a Password"
+msgstr ""
+
+#: buddypress/members/register.php:106
+msgid "Confirm Password"
+msgstr ""
+
+#: buddypress/members/register.php:152
+msgid "Profile Details"
+msgstr ""
+
+#: buddypress/members/register.php:176 buddypress/members/register.php:197
+#: buddypress/members/single/profile/edit.php:56
+#: buddypress/members/single/profile/edit.php:76
+msgid "This field can be seen by: %s"
+msgstr ""
+
+#: buddypress/members/register.php:180
+msgctxt "Change profile field visibility level"
+msgid "Change"
+msgstr ""
+
+#: buddypress/members/register.php:185
+#: buddypress/members/single/profile/edit.php:65
+msgid "Who can see this field?"
+msgstr ""
+
+#: buddypress/members/register.php:190
+#: buddypress/members/single/profile/edit.php:70 buddypress-functions.php:378
+msgid "Close"
+msgstr ""
+
+#: buddypress/members/register.php:260
+msgid "Blog Details"
+msgstr ""
+
+#: buddypress/members/register.php:262
+msgid "Yes, I'd like to create a new site"
+msgstr ""
+
+#: buddypress/members/register.php:266
+msgid "Blog URL"
+msgstr ""
+
+#: buddypress/members/register.php:282
+msgid "Site Title"
+msgstr ""
+
+#: buddypress/members/register.php:293
+msgid "I would like my site to appear in search engines, and in public listings around this network."
+msgstr ""
+
+#: buddypress/members/register.php:303
+msgid "Yes"
+msgstr ""
+
+#: buddypress/members/register.php:304
+msgid "No"
+msgstr ""
+
+#: buddypress/members/register.php:340
+msgid "Complete Sign Up"
+msgstr ""
+
+#: buddypress/members/register.php:370
+msgid "You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address."
+msgstr ""
+
+#: buddypress/members/register.php:372
+msgid "You have successfully created your account! Please log in using the username and password you have just created."
+msgstr ""
+
+#: buddypress/members/single/activity.php:43
+msgid "Loading your updates, please wait."
+msgstr ""
+
+#: buddypress/members/single/blogs.php:19
+#: buddypress/members/single/friends.php:20
+#: buddypress/members/single/groups.php:28 includes/template-tags.php:660
+msgid "Order By:"
+msgstr ""
+
+#: buddypress/members/single/blogs.php:39
+msgid "Loading the blogs you are a contributor of, please wait."
+msgstr ""
+
+#: buddypress/members/single/default-front.php:16
+msgid "Manage the members default front page"
+msgstr ""
+
+#: buddypress/members/single/default-front.php:18
+msgid "You can set the preferences of the %s or add %s to it."
+msgstr ""
+
+#: buddypress/members/single/friends/requests.php:53
+#: includes/groups/template-tags.php:523 includes/groups/template-tags.php:524
+#: includes/groups/template-tags.php:549 includes/groups/template-tags.php:550
+msgid "Accept"
+msgstr ""
+
+#: buddypress/members/single/friends/requests.php:54
+#: includes/groups/template-tags.php:534 includes/groups/template-tags.php:535
+#: includes/groups/template-tags.php:561 includes/groups/template-tags.php:562
+msgid "Reject"
+msgstr ""
+
+#: buddypress/members/single/friends/requests.php:98
+msgid "You have no pending friendship requests."
+msgstr ""
+
+#: buddypress/members/single/friends.php:22 includes/blogs/functions.php:107
+#: includes/groups/functions.php:400 includes/members/functions.php:109
+msgid "Last Active"
+msgstr ""
+
+#: buddypress/members/single/friends.php:23 includes/members/functions.php:110
+msgid "Newest Registered"
+msgstr ""
+
+#: buddypress/members/single/friends.php:24 includes/blogs/functions.php:109
+#: includes/groups/functions.php:403 includes/members/functions.php:114
+msgid "Alphabetical"
+msgstr ""
+
+#: buddypress/members/single/groups/invites.php:25
+msgctxt "Group member count"
+msgid "%d member"
+msgid_plural "%d members"
+msgstr[0] ""
+msgstr[1] ""
+
+#: buddypress/members/single/groups/invites.php:46
+msgid "You have no outstanding group invites."
+msgstr ""
+
+#: buddypress/members/single/groups.php:51
+msgid "Loading the groups you are a member of, please wait."
+msgstr ""
+
+#: buddypress/members/single/messages/compose.php:21
+msgid "Send To (Username or Friend's Name)"
+msgstr ""
+
+#: buddypress/members/single/messages/compose.php:25
+msgid "This is a notice to all users."
+msgstr ""
+
+#: buddypress/members/single/messages/compose.php:31
+msgid "Message"
+msgstr ""
+
+#: buddypress/members/single/messages/compose.php:46
+msgid "Send Message"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:54
+#: buddypress/members/single/notifications/notifications-loop.php:15
+msgid "Select all"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:55
+msgid "From"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:71
+#: includes/messages/functions.php:103
+msgid "Star"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:74
+#: buddypress/members/single/notifications/notifications-loop.php:18
+msgid "Actions"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:90
+msgid "From:"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:97
+msgid "To:"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:104
+msgid "View Message"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:128
+msgid "Read"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:130
+msgid "Unread"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:133
+#: buddypress/members/single/messages/single.php:44
+#: includes/activity/template-tags.php:324
+#: includes/activity/template-tags.php:325
+#: includes/activity/template-tags.php:579
+msgid "Delete"
+msgstr ""
+
+#: buddypress/members/single/messages/messages-loop.php:171
+#: includes/messages/ajax.php:174 includes/messages/ajax.php:301
+msgid "Sorry, no messages were found."
+msgstr ""
+
+#: buddypress/members/single/messages/notices-loop.php:63
+msgid "Sent:"
+msgstr ""
+
+#: buddypress/members/single/messages/notices-loop.php:77
+msgid "Delete Message"
+msgstr ""
+
+#: buddypress/members/single/messages/notices-loop.php:95
+msgid "Sorry, no notices were found."
+msgstr ""
+
+#: buddypress/members/single/messages/single.php:30
+msgid "You are alone in this conversation."
+msgstr ""
+
+#: buddypress/members/single/messages/single.php:34
+msgid "Conversation between %s recipients."
+msgstr ""
+
+#: buddypress/members/single/messages/single.php:38
+msgid "Conversation between %s and you."
+msgstr ""
+
+#: buddypress/members/single/messages/single.php:44
+msgid "Delete Conversation"
+msgstr ""
+
+#: buddypress/members/single/notifications/feedback-no-notifications.php:16
+msgid "You have no unread notifications."
+msgstr ""
+
+#: buddypress/members/single/notifications/feedback-no-notifications.php:20
+msgid "This member has no unread notifications."
+msgstr ""
+
+#: buddypress/members/single/notifications/feedback-no-notifications.php:28
+msgid "You have no notifications."
+msgstr ""
+
+#: buddypress/members/single/notifications/feedback-no-notifications.php:32
+msgid "This member has no notifications."
+msgstr ""
+
+#: buddypress/members/single/notifications/notifications-loop.php:16
+msgid "Notification"
+msgstr ""
+
+#: buddypress/members/single/notifications/notifications-loop.php:17
+msgid "Date Received"
+msgstr ""
+
+#: buddypress/members/single/notifications/notifications-loop.php:28
+msgid "Select this notification"
+msgstr ""
+
+#: buddypress/members/single/profile/change-avatar.php:11
+msgid "Change Profile Photo"
+msgstr ""
+
+#: buddypress/members/single/profile/change-avatar.php:24
+msgid "Your profile photo will be used on your profile and throughout the site. If there is a <a href=\"http://gravatar.com\">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer."
+msgstr ""
+
+#: buddypress/members/single/profile/change-avatar.php:31
+msgid "Click below to select a JPG, GIF or PNG format photo from your computer and then click 'Upload Image' to proceed."
+msgstr ""
+
+#: buddypress/members/single/profile/change-avatar.php:49
+msgid "Crop Your New Profile Photo"
+msgstr ""
+
+#: buddypress/members/single/profile/change-avatar.php:81
+msgid "Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href=\"http://gravatar.com\">Gravatar</a> using the same email address as you used to register with this site."
+msgstr ""
+
+#: buddypress/members/single/profile/change-cover-image.php:22
+msgid "Your Cover Image will be used to customize the header of your profile."
+msgstr ""
+
+#: buddypress/members/single/profile/edit.php:26
+msgid "Editing '%s' Profile Group"
+msgstr ""
+
+#: buddypress/members/single/profile/edit.php:60
+msgid "Change"
+msgstr ""
+
+#: buddypress/members/single/profile/edit.php:103
+#: buddypress/members/single/settings/general.php:40
+#: buddypress/members/single/settings/notifications.php:34
+#: includes/groups/template-tags.php:290
+msgid "Save Changes"
+msgstr ""
+
+#: buddypress/members/single/profile/profile-wp.php:13
+msgid "My Profile"
+msgstr ""
+
+#: buddypress/members/single/profile/profile-wp.php:13
+msgid "%s's Profile"
+msgstr ""
+
+#: buddypress/members/single/profile/profile-wp.php:33
+msgid "%s did not save any profile informations yet."
+msgstr ""
+
+#: buddypress/members/single/settings/capabilities.php:25
+msgid "This user is a spammer."
+msgstr ""
+
+#: buddypress/members/single/settings/delete-account.php:16
+msgid "Deleting your account will delete all of the content you have created. It will be completely irrecoverable."
+msgstr ""
+
+#: buddypress/members/single/settings/delete-account.php:20
+msgid "Deleting this account will delete all of the content it has created. It will be completely irrecoverable."
+msgstr ""
+
+#: buddypress/members/single/settings/delete-account.php:39
+msgid "I understand the consequences."
+msgstr ""
+
+#: buddypress/members/single/settings/delete-account.php:43
+msgid "Delete Account"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:16
+msgid "Current Password <span>(required to update email or change current password)</span>"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:17
+msgid "Password Lost and Found"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:17
+msgid "Lost your password?"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:21
+msgid "Account Email"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:24
+msgid "Change Password <span>(leave blank for no change)</span>"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:25
+msgid "New Password"
+msgstr ""
+
+#: buddypress/members/single/settings/general.php:27
+#: buddypress/members/single/settings/general.php:28
+msgid "Repeat New Password"
+msgstr ""
+
+#: buddypress/members/single/settings/notifications.php:13
+msgid "Send an email notice when:"
+msgstr ""
+
+#: buddypress/members/single/settings/profile.php:24
+msgid "Visibility"
+msgstr ""
+
+#: buddypress/members/single/settings/profile.php:58
+msgid "Save Settings"
+msgstr ""
+
+#: buddypress-functions.php:87
+msgid "Something is going wrong, please deactivate any plugin having an impact on the BP Theme Compat API"
+msgstr ""
+
+#: buddypress-functions.php:377
+msgid "Accepted"
+msgstr ""
+
+#: buddypress-functions.php:379
+msgid "comments"
+msgstr ""
+
+#: buddypress-functions.php:380
+msgid "Are you sure you want to leave this group?"
+msgstr ""
+
+#: buddypress-functions.php:381 includes/activity/ajax.php:40
+#: includes/activity/functions.php:208
+msgid "My Favorites"
+msgstr ""
+
+#: buddypress-functions.php:382
+msgid "Rejected"
+msgstr ""
+
+#: buddypress-functions.php:383
+msgid "Show all"
+msgstr ""
+
+#: buddypress-functions.php:384
+msgid "Show all comments for this thread"
+msgstr ""
+
+#: buddypress-functions.php:385
+msgid "Show all %d comments"
+msgstr ""
+
+#: buddypress-functions.php:386
+msgid "Your profile has unsaved changes. If you leave the page, the changes will be lost."
+msgstr ""
+
+#: buddypress-functions.php:387
+msgid "View"
+msgstr ""
+
+#: buddypress-functions.php:390
+msgctxt "javascript time since"
+msgid "sometime"
+msgstr ""
+
+#: buddypress-functions.php:391
+msgctxt "javascript time since"
+msgid "right now"
+msgstr ""
+
+#: buddypress-functions.php:392
+msgctxt "javascript time since"
+msgid "% ago"
+msgstr ""
+
+#: buddypress-functions.php:393
+msgctxt "Separator in javascript time since"
+msgid ","
+msgstr ""
+
+#: buddypress-functions.php:394
+msgctxt "javascript time since singular"
+msgid "% year"
+msgstr ""
+
+#: buddypress-functions.php:395
+msgctxt "javascript time since plural"
+msgid "% years"
+msgstr ""
+
+#: buddypress-functions.php:396
+msgctxt "javascript time since singular"
+msgid "% month"
+msgstr ""
+
+#: buddypress-functions.php:397
+msgctxt "javascript time since plural"
+msgid "% months"
+msgstr ""
+
+#: buddypress-functions.php:398
+msgctxt "javascript time since singular"
+msgid "% week"
+msgstr ""
+
+#: buddypress-functions.php:399
+msgctxt "javascript time since plural"
+msgid "% weeks"
+msgstr ""
+
+#: buddypress-functions.php:400
+msgctxt "javascript time since singular"
+msgid "% day"
+msgstr ""
+
+#: buddypress-functions.php:401
+msgctxt "javascript time since plural"
+msgid "% days"
+msgstr ""
+
+#: buddypress-functions.php:402
+msgctxt "javascript time since singular"
+msgid "% hour"
+msgstr ""
+
+#: buddypress-functions.php:403
+msgctxt "javascript time since plural"
+msgid "% hours"
+msgstr ""
+
+#: buddypress-functions.php:404
+msgctxt "javascript time since singular"
+msgid "% minute"
+msgstr ""
+
+#: buddypress-functions.php:405
+msgctxt "javascript time since plural"
+msgid "% minutes"
+msgstr ""
+
+#: buddypress-functions.php:406
+msgctxt "javascript time since singular"
+msgid "% second"
+msgstr ""
+
+#: buddypress-functions.php:407
+msgctxt "javascript time since plural"
+msgid "% seconds"
+msgstr ""
+
+#: includes/activity/ajax.php:32 includes/activity/template-tags.php:261
+#: includes/activity/template-tags.php:262
+msgid "Remove Favorite"
+msgstr ""
+
+#: includes/activity/ajax.php:39 includes/activity/functions.php:207
+msgid "The activity I've marked as a favorite."
+msgstr ""
+
+#: includes/activity/ajax.php:73 includes/activity/template-tags.php:255
+msgid "Favorite"
+msgstr ""
+
+#: includes/activity/ajax.php:117 includes/activity/ajax.php:193
+msgid "There was a problem when deleting. Please try again."
+msgstr ""
+
+#: includes/activity/ajax.php:212
+msgid "There was a problem displaying the content. Please try again."
+msgstr ""
+
+#: includes/activity/ajax.php:271
+msgid "There was an error posting your reply. Please try again."
+msgstr ""
+
+#: includes/activity/ajax.php:292
+msgid "Please do not leave the comment area blank."
+msgstr ""
+
+#: includes/activity/ajax.php:384
+msgid "No items were found."
+msgstr ""
+
+#: includes/activity/ajax.php:406
+msgid "Please enter some content to post."
+msgstr ""
+
+#: includes/activity/ajax.php:460
+msgid "There was a problem posting your update. Please try again."
+msgstr ""
+
+#: includes/activity/ajax.php:476
+msgid "Update posted <a href=\"%s\" class=\"just-posted\">View activity</a>"
+msgstr ""
+
+#: includes/activity/functions.php:82
+msgid "Profile photo of %s"
+msgstr ""
+
+#: includes/activity/functions.php:132
+msgid "Post in: Profile"
+msgstr ""
+
+#: includes/activity/functions.php:141
+msgid "Post in: Group"
+msgstr ""
+
+#: includes/activity/functions.php:142
+msgid "Start typing the group name..."
+msgstr ""
+
+#: includes/activity/functions.php:151
+msgid "What's new, %s?"
+msgstr ""
+
+#: includes/activity/functions.php:152
+msgid "Post what's new"
+msgstr ""
+
+#: includes/activity/functions.php:153
+msgid "Post in"
+msgstr ""
+
+#: includes/activity/functions.php:178
+msgid "The public activity for everyone on this site."
+msgstr ""
+
+#: includes/activity/functions.php:179 includes/groups/functions.php:73
+#: includes/members/functions.php:49
+msgid "All Members"
+msgstr ""
+
+#: includes/activity/functions.php:221
+msgid "The activity of my friends only."
+msgstr ""
+
+#: includes/activity/functions.php:222 includes/members/functions.php:64
+msgid "My Friends"
+msgstr ""
+
+#: includes/activity/functions.php:235
+msgid "The activity of groups I am a member of."
+msgstr ""
+
+#: includes/activity/functions.php:236 includes/groups/functions.php:332
+msgid "My Groups"
+msgstr ""
+
+#: includes/activity/functions.php:256
+msgid "Activity that I have been mentioned in."
+msgstr ""
+
+#: includes/activity/functions.php:257
+msgid "Mentions"
+msgstr ""
+
+#: includes/activity/template-tags.php:226
+#: includes/activity/template-tags.php:227
+msgid "View Conversation"
+msgstr ""
+
+#: includes/activity/template-tags.php:254
+msgid "Mark as Favorite"
+msgstr ""
+
+#. translators: 1: user profile link, 2: user name, 3: activity permalink, 4:
+#. activity recorded date, 5: activity timestamp, 6: activity human time since
+
+#: includes/activity/template-tags.php:500
+msgid "<a href=\"%1$s\">%2$s</a> replied <a href=\"%3$s\" class=\"activity-time-since\"><time class=\"time-since\" datetime=\"%4$s\" data-bp-timestamp=\"%5$d\">%6$s</time></a>"
+msgstr ""
+
+#: includes/activity/template-tags.php:569
+msgid "Reply"
+msgstr ""
+
+#: includes/activity/widgets.php:28
+msgid "Display the latest updates of your community having the type(s) of your choice."
+msgstr ""
+
+#: includes/activity/widgets.php:32
+msgid "(BuddyPress) Latest Actities"
+msgstr ""
+
+#: includes/activity/widgets.php:55 includes/activity/widgets.php:153
+msgid "Latest updates"
+msgstr ""
+
+#: includes/activity/widgets.php:167
+msgid "Title:"
+msgstr ""
+
+#: includes/activity/widgets.php:172
+msgid "Max amount to display:"
+msgstr ""
+
+#: includes/activity/widgets.php:176
+msgid "Type:"
+msgstr ""
+
+#: includes/blogs/functions.php:21
+msgid "The public sites of this network."
+msgstr ""
+
+#: includes/blogs/functions.php:22
+msgid "All Sites"
+msgstr ""
+
+#: includes/blogs/functions.php:38
+msgid "The sites I'm a contributor of."
+msgstr ""
+
+#: includes/blogs/functions.php:39
+msgid "My Sites"
+msgstr ""
+
+#: includes/blogs/functions.php:52 includes/blogs/functions.php:53
+msgid "Create a Site"
+msgstr ""
+
+#: includes/blogs/functions.php:108
+msgid "Newest"
+msgstr ""
+
+#: includes/classes.php:50
+msgid "You need to use an array containing arrays of parameters."
+msgstr ""
+
+#: includes/classes.php:201
+msgid "Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once."
+msgstr ""
+
+#: includes/classes.php:207
+msgid "(BuddyPress) Primary nav"
+msgstr ""
+
+#: includes/classes.php:310
+msgid "Include navigation title"
+msgstr ""
+
+#: includes/friends/ajax.php:24 includes/groups/ajax.php:24
+#: includes/groups/ajax.php:229
+msgid "There was a problem performing this action. Please try again."
+msgstr ""
+
+#: includes/friends/ajax.php:60
+msgid "Friendship could not be canceled."
+msgstr ""
+
+#: includes/friends/ajax.php:73
+msgid "Friendship could not be requested."
+msgstr ""
+
+#: includes/friends/ajax.php:88
+msgid "Friendship request could not be cancelled."
+msgstr ""
+
+#: includes/friends/ajax.php:98
+msgid "Request Pending"
+msgstr ""
+
+#: includes/friends/ajax.php:120
+msgid "There was a problem accepting that request. Please try again."
+msgstr ""
+
+#: includes/friends/ajax.php:140
+msgid "There was a problem rejecting that request. Please try again."
+msgstr ""
+
+#: includes/functions.php:96
+msgid "BuddyPress User's Home"
+msgstr ""
+
+#: includes/functions.php:98
+msgid "Add widgets here to appear in the front page of each member of your community."
+msgstr ""
+
+#: includes/functions.php:108
+msgid "BuddyPress Group's Home"
+msgstr ""
+
+#: includes/functions.php:110
+msgid "Add widgets here to appear in the front page of each group of your community."
+msgstr ""
+
+#: includes/functions.php:148
+msgid "the 'bp_members_directory_member_types' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_members_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:153
+msgid "the 'bp_before_activity_type_tab_all' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:158
+msgid "the 'bp_before_activity_type_tab_friends' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:163
+msgid "the 'bp_before_activity_type_tab_groups' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:168
+msgid "the 'bp_before_activity_type_tab_favorites' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:173
+msgid "the 'bp_before_activity_type_tab_mentions' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:178
+msgid "the 'bp_activity_type_tabs' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:183
+msgid "the 'bp_groups_directory_group_filter' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:188
+msgid "the 'bp_blogs_directory_blog_types' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
+msgstr ""
+
+#: includes/functions.php:193
+msgid "The 'bp_members_directory_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:198
+msgid "Instead of using the 'bp_activity_filter_options' action you should register your activity types using the function 'bp_activity_set_action'"
+msgstr ""
+
+#: includes/functions.php:203
+msgid "Instead of using the 'bp_member_activity_filter_options' action you should register your activity types using the function 'bp_activity_set_action'"
+msgstr ""
+
+#: includes/functions.php:208
+msgid "Instead of using the 'bp_group_activity_filter_options' action you should register your activity types using the function 'bp_activity_set_action'"
+msgstr ""
+
+#: includes/functions.php:213
+msgid "The 'bp_groups_directory_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:218
+msgid "The 'bp_member_group_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:223
+msgid "The 'bp_member_blog_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_blogs_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:228
+msgid "The 'bp_blogs_directory_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_blogs_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:233
+msgid "The 'bp_activity_entry_meta' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_activity_entry_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:238
+msgid "The 'bp_member_header_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:243
+msgid "The 'bp_directory_members_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:248
+msgid "The 'bp_group_members_list_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:253
+msgid "The 'bp_group_header_meta' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_group_meta' filter instead"
+msgstr ""
+
+#: includes/functions.php:258
+msgid "The 'bp_directory_members_item' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_member_meta' filter instead"
+msgstr ""
+
+#: includes/functions.php:263
+msgid "The 'bp_profile_header_meta' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_member_meta' filter instead"
+msgstr ""
+
+#: includes/functions.php:268
+msgid "The 'bp_group_header_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:273
+msgid "The 'bp_directory_groups_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:278
+msgid "The 'bp_group_invites_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:283
+msgid "The 'bp_group_membership_requests_admin_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:288
+msgid "The 'bp_group_manage_members_admin_item' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:293
+msgid "The 'bp_directory_blogs_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_blogs_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:298
+msgid "The 'bp_activity_comment_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_activity_comment_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:303
+msgid "The 'groups_custom_group_fields_editable' is deprecated in the BP Nouveau template pack, please use 'bp_after_group_details_creation_step' or 'bp_after_group_details_admin' instead"
+msgstr ""
+
+#: includes/functions.php:449
+msgid "&mdash; Everything &mdash;"
+msgstr ""
+
+#: includes/functions.php:537
+msgid "Customize the appearance of your BuddyPress Template pack."
+msgstr ""
+
+#: includes/functions.php:538
+msgctxt "Customizer Panel"
+msgid "BuddyPress Template Pack"
+msgstr ""
+
+#: includes/functions.php:544
+msgid "User's front page"
+msgstr ""
+
+#: includes/functions.php:547
+msgid "Set your preferences about the Users default front page."
+msgstr ""
+
+#: includes/functions.php:588
+msgid "Enable default front page for user profiles."
+msgstr ""
+
+#: includes/functions.php:594
+msgid "Display the WordPress Biographical Info of the user."
+msgstr ""
+
+#: includes/groups/ajax.php:56
+msgid "You cannot join this group."
+msgstr ""
+
+#: includes/groups/ajax.php:57
+msgid "You are already a member of the group."
+msgstr ""
+
+#: includes/groups/ajax.php:81
+msgid "Group invite could not be accepted."
+msgstr ""
+
+#: includes/groups/ajax.php:98
+msgid "Group invite accepted."
+msgstr ""
+
+#: includes/groups/ajax.php:113
+msgid "Group invite could not be rejected"
+msgstr ""
+
+#: includes/groups/ajax.php:121
+msgid "Group invite rejected"
+msgstr ""
+
+#: includes/groups/ajax.php:144
+msgid "Error joining this group."
+msgstr ""
+
+#: includes/groups/ajax.php:165
+msgid "Error requesting membership."
+msgstr ""
+
+#: includes/groups/ajax.php:186
+msgid "Error leaving group."
+msgstr ""
+
+#: includes/groups/ajax.php:257
+msgid "You can invite members using the + button, a new nav will appear to let you send your invites"
+msgstr ""
+
+#: includes/groups/ajax.php:262
+msgid "You can invite friends using the + button, a new nav will appear to let you send your invites"
+msgstr ""
+
+#: includes/groups/ajax.php:269
+msgid "No pending invites found."
+msgstr ""
+
+#: includes/groups/ajax.php:276
+msgid "You can view all the group's pending invites from this screen."
+msgstr ""
+
+#: includes/groups/ajax.php:283
+msgid "No members were found, try another filter."
+msgstr ""
+
+#: includes/groups/ajax.php:289
+msgid "All your friends are already members of this group or already received an invite to join this group or requested to join it."
+msgstr ""
+
+#: includes/groups/ajax.php:295
+msgid "You have no friends!"
+msgstr ""
+
+#: includes/groups/ajax.php:322 includes/groups/ajax.php:328
+msgid "Invites could not be sent, please try again."
+msgstr ""
+
+#: includes/groups/ajax.php:341
+msgid "You are not allowed to send invites for this group."
+msgstr ""
+
+#: includes/groups/ajax.php:376
+msgid "Invites failed for %d user(s)."
+msgstr ""
+
+#: includes/groups/ajax.php:383
+msgid "Invites sent."
+msgstr ""
+
+#: includes/groups/ajax.php:394
+msgid "Invites could not be removed, please try again."
+msgstr ""
+
+#: includes/groups/ajax.php:400
+msgid "Too late, the user is now a member of the group."
+msgstr ""
+
+#: includes/groups/ajax.php:408
+msgid "Removing the invite for the user failed."
+msgstr ""
+
+#: includes/groups/ajax.php:414
+msgid "No more pending invites for the group."
+msgstr ""
+
+#: includes/groups/functions.php:74
+msgid "Pending Invites"
+msgstr ""
+
+#: includes/groups/functions.php:75
+msgid "Send invites"
+msgstr ""
+
+#: includes/groups/functions.php:79
+msgid "My friends"
+msgstr ""
+
+#: includes/groups/functions.php:84
+msgid "Loading members, please wait."
+msgstr ""
+
+#: includes/groups/functions.php:85
+msgid "Use the \"Send\" button to send your invite, or the \"Cancel\" button to abort."
+msgstr ""
+
+#: includes/groups/functions.php:86
+msgid "Invites cleared, please use one of the available tabs to select members to invite."
+msgstr ""
+
+#: includes/groups/functions.php:87
+msgid "Sending the invites, please wait."
+msgstr ""
+
+#: includes/groups/functions.php:202 includes/groups/functions.php:208
+msgctxt "Group screen nav"
+msgid "Invites"
+msgstr ""
+
+#: includes/groups/functions.php:231 includes/groups/functions.php:239
+#: includes/groups/functions.php:249
+msgctxt "My Group screen nav"
+msgid "Invites"
+msgstr ""
+
+#: includes/groups/functions.php:314
+msgid "The public and private groups of this site."
+msgstr ""
+
+#: includes/groups/functions.php:315
+msgid "All Groups"
+msgstr ""
+
+#: includes/groups/functions.php:331
+msgid "The groups I'm a member of."
+msgstr ""
+
+#: includes/groups/functions.php:345 includes/groups/functions.php:346
+msgid "Create a Group"
+msgstr ""
+
+#: includes/groups/functions.php:401
+msgid "Most Members"
+msgstr ""
+
+#: includes/groups/functions.php:402
+msgid "Newly Created"
+msgstr ""
+
+#: includes/groups/functions.php:495
+msgid "Group's front page"
+msgstr ""
+
+#: includes/groups/functions.php:498
+msgid "Set your preferences for the groups default front page."
+msgstr ""
+
+#: includes/groups/functions.php:548
+msgid "Enable default front page for groups."
+msgstr ""
+
+#: includes/groups/functions.php:554
+msgid "Enable Group extensions widgets."
+msgstr ""
+
+#: includes/groups/functions.php:560
+msgid "Display the Group's description in the front page body."
+msgstr ""
+
+#: includes/groups/template-tags.php:297
+msgid "Delete Group"
+msgstr ""
+
+#: includes/groups/template-tags.php:319
+msgid "Back to Previous Step"
+msgstr ""
+
+#: includes/groups/template-tags.php:326
+msgid "Next Step"
+msgstr ""
+
+#: includes/groups/template-tags.php:332
+msgid "Create Group and Continue"
+msgstr ""
+
+#: includes/groups/template-tags.php:338
+msgid "Finish"
+msgstr ""
+
+#: includes/groups/template-tags.php:575
+msgid "Remove Ban"
+msgstr ""
+
+#: includes/groups/template-tags.php:576
+msgid "Unban this member"
+msgstr ""
+
+#: includes/groups/template-tags.php:584
+msgid "Kick &amp; Ban"
+msgstr ""
+
+#: includes/groups/template-tags.php:585
+msgid "Kick and ban this member"
+msgstr ""
+
+#: includes/groups/template-tags.php:593 includes/groups/template-tags.php:594
+msgid "Promote to Mod"
+msgstr ""
+
+#: includes/groups/template-tags.php:611
+msgid "Remove from group"
+msgstr ""
+
+#: includes/groups/template-tags.php:612
+msgid "Remove this member"
+msgstr ""
+
+#: includes/groups/template-tags.php:910
+msgid "Groups default front page"
+msgstr ""
+
+#: includes/groups/template-tags.php:926 includes/members/template-tags.php:497
+msgid "(BuddyPress) Widgets"
+msgstr ""
+
+#: includes/members/functions.php:48
+msgid "The members of your community."
+msgstr ""
+
+#: includes/members/functions.php:63
+msgid "The members I'm friend with."
+msgstr ""
+
+#: includes/members/functions.php:405
+msgid "Name"
+msgstr ""
+
+#: includes/members/functions.php:406
+msgid "About Me"
+msgstr ""
+
+#: includes/members/functions.php:407
+msgid "Website"
+msgstr ""
+
+#: includes/members/template-tags.php:481
+msgid "Members default front page"
+msgstr ""
+
+#: includes/members/template-tags.php:536
+msgid "Edit your bio"
+msgstr ""
+
+#: includes/messages/ajax.php:15
+msgid "Your message could not be sent, please try again."
+msgstr ""
+
+#: includes/messages/ajax.php:27
+msgid "Your message was not sent. Please enter a subject line."
+msgstr ""
+
+#: includes/messages/ajax.php:29
+msgid "Your message was not sent. Please enter some content."
+msgstr ""
+
+#: includes/messages/ajax.php:37
+msgid "Your message was not sent. Please enter at least one @username."
+msgstr ""
+
+#: includes/messages/ajax.php:56
+msgid "Message successfully sent."
+msgstr ""
+
+#: includes/messages/ajax.php:70
+msgid "There was a problem sending your reply. Please try again."
+msgstr ""
+
+#: includes/messages/ajax.php:80
+msgid "Your reply was not sent. Please enter some content."
+msgstr ""
+
+#: includes/messages/ajax.php:149
+msgid "Your reply was sent successfully"
+msgstr ""
+
+#: includes/messages/ajax.php:159 includes/messages/ajax.php:295
+msgid "Unauthorized request."
+msgstr ""
+
+#: includes/messages/ajax.php:385
+msgid "There was a problem deleting your message(s). Please try again."
+msgstr ""
+
+#: includes/messages/ajax.php:408
+msgid "Message(s) deleted"
+msgstr ""
+
+#: includes/messages/ajax.php:421
+msgid "There was a problem marking your message(s) as %s. Please try again."
+msgstr ""
+
+#: includes/messages/ajax.php:491
+msgid "Message(s) mark as %s"
+msgstr ""
+
+#: includes/messages/ajax.php:505
+msgid "There was a problem marking your message(s) as read. Please try again."
+msgstr ""
+
+#: includes/messages/ajax.php:511
+msgid "There was a problem marking your message(s) as unread. Please try again."
+msgstr ""
+
+#: includes/messages/ajax.php:529
+msgid "Message(s) marked as unread."
+msgstr ""
+
+#: includes/messages/ajax.php:531
+msgid "Message(s) marked as read."
+msgstr ""
+
+#: includes/messages/classes.php:46
+msgctxt "Admin Notices column header"
+msgid "Subject"
+msgstr ""
+
+#: includes/messages/classes.php:47
+msgctxt "Admin Notices column header"
+msgid "Content"
+msgstr ""
+
+#: includes/messages/classes.php:48
+msgctxt "Admin Notices column header"
+msgid "Created"
+msgstr ""
+
+#: includes/messages/classes.php:69
+msgid "Activate Notice"
+msgstr ""
+
+#: includes/messages/classes.php:73
+msgid "Delete Notice"
+msgstr ""
+
+#: includes/messages/classes.php:80
+msgid "Deactivate Notice"
+msgstr ""
+
+#: includes/messages/classes.php:139 includes/messages/classes.php:177
+msgctxt "Notices admin page title"
+msgid "All Member Notices"
+msgstr ""
+
+#: includes/messages/classes.php:140
+msgctxt "Admin Users menu"
+msgid "All Member Notices"
+msgstr ""
+
+#: includes/messages/classes.php:178
+msgid "Add New Notice"
+msgstr ""
+
+#: includes/messages/classes.php:188
+msgid "Content"
+msgstr ""
+
+#: includes/messages/classes.php:194
+msgid "Cancel Notice"
+msgstr ""
+
+#: includes/messages/classes.php:195
+msgid "Save Notice"
+msgstr ""
+
+#: includes/messages/classes.php:207
+msgid "Notice was not created. Please try again."
+msgstr ""
+
+#: includes/messages/classes.php:209
+msgid "Notice successfully created."
+msgstr ""
+
+#: includes/messages/functions.php:87
+msgid "Please add at least a user to send the message to, using their @username."
+msgstr ""
+
+#: includes/messages/functions.php:88
+msgid "Please add a subject to your message."
+msgstr ""
+
+#: includes/messages/functions.php:89
+msgid "Please add some content to your message."
+msgstr ""
+
+#: includes/messages/functions.php:94
+msgid "Loading messages, please wait."
+msgstr ""
+
+#: includes/messages/functions.php:102
+msgid "Unstar"
+msgstr ""
+
+#: includes/messages/functions.php:104
+msgid "Starred"
+msgstr ""
+
+#: includes/messages/functions.php:105
+msgid "Not starred"
+msgstr ""
+
+#: includes/messages/functions.php:106
+msgid "Remove all starred messages in this thread"
+msgstr ""
+
+#: includes/messages/functions.php:107
+msgid "Star the first message in this thread"
+msgstr ""
+
+#: includes/messages/functions.php:246
+msgid "New site wide notice"
+msgstr ""
+#. Description of the BuddyPress Template Pack
+msgid "A new template pack for BuddyPress!"
+msgstr ""
+
+#. Author of the BuddyPress Template Pack
+msgid "The BuddyPress community"
+msgstr ""
+
+#. Template Pack Name of the BuddyPress Template Pack
+msgid "BP Nouveau"
+msgstr ""
+
+#. Template Pack Link of the BuddyPress Template Pack
+msgid "https://github.com/buddypress/next-template-packs/bp-templates/bp-nouveau"
+msgstr ""
+
+#. Template Pack Supports of the BuddyPress Template Pack
+msgid "activity, blogs, friends, groups, messages, notifications, settings, xprofile"
+msgstr ""

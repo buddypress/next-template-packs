@@ -321,8 +321,8 @@ function bp_nouveau_activity_entry_buttons() {
 				'link_href'  => bp_get_activity_delete_url(),
 				'link_class' => 'button item-button bp-secondary-action ' . $class . ' confirm',
 				'link_rel'   => 'nofollow',
-				'link_text'  => __( 'Delete', 'bp_nouveau' ),
-				'link_title' => __( 'Delete', 'bp_nouveau' ),
+				'link_text'  => __( 'Delete', 'bp-nouveau' ),
+				'link_title' => __( 'Delete', 'bp-nouveau' ),
 				'link_id'    => '',
 			);
 		}

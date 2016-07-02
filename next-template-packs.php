@@ -232,7 +232,7 @@ class Next_Template_Packs {
 		}
 
 		if ( ! empty( $tp->author ) ) {
-			$tp_meta[] = sprintf( __( 'By %s' ), esc_html( $tp->author ) );
+			$tp_meta[] = sprintf( __( 'By %s', 'next-template-packs' ), esc_html( $tp->author ) );
 		}
 
 		if ( ! empty( $tp->link ) ) {
@@ -417,7 +417,7 @@ class Next_Template_Packs {
 			?>
 				<ul class="subsubsub">
 					<li>
-						<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'template-packs' ), bp_get_admin_url( 'admin.php' ) ) ); ?>" class="current"><?php printf( _nx( 'All <span class="count">(%s)</span>',      'All <span class="count">(%s)</span>',      count( $template_packs ),         'plugins', 'buddypress' ), number_format_i18n( count( $template_packs ) ) ); ?></a> |
+						<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'template-packs' ), bp_get_admin_url( 'admin.php' ) ) ); ?>" class="current"><?php printf( _nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', count( $template_packs ), 'plugins', 'next-template-packs' ), number_format_i18n( count( $template_packs ) ) ); ?></a> |
 					</li>
 				</ul>
 
