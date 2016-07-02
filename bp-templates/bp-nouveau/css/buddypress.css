@@ -792,22 +792,22 @@ form.ac-form .ac-reply-content input {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
-.single-item-header span.activity {
+.single-headers span.activity {
 	display: inline-block;
 	font-size: small;
 	opacity: 0.8;
 	padding: 0;
 }
 
-.single-item-header span.user-nicename {
+.single-headers span.user-nicename {
 	color: #777;
 	display: inline-block;
 	font-size: 120%;
 	font-weight: bold;
 }
 
-.single-item-header div#message p,
-.single-item-header #sitewide-notice p {
+.single-headers div#message p,
+.single-headers #sitewide-notice p {
 	background-color: #ffd;
 	border: 1px solid #cb2;
 	color: #440;
@@ -816,22 +816,22 @@ form.ac-form .ac-reply-content input {
 	text-decoration: none;
 }
 
-.single-item-header div#item-header-content {
+.single-headers div#item-header-content {
 	float: left;
 	margin-left: 0;
 }
 
-.single-item-header h2 {
+.single-headers h2 {
 	line-height: 120%;
 	margin: 0 0 5px;
 }
 
-.single-item-header h2 a {
+.single-headers h2 a {
 	color: #777;
 	text-decoration: none;
 }
 
-.single-item-header h2 span.highlight {
+.single-headers h2 span.highlight {
 	display: inline-block;
 	font-size: 60%;
 	font-weight: normal;
@@ -839,7 +839,7 @@ form.ac-form .ac-reply-content input {
 	vertical-align: middle;
 }
 
-.single-item-header h2 span.highlight span {
+.single-headers h2 span.highlight span {
 	background: #a1dcfa;
 	color: #fff;
 	cursor: pointer;
@@ -853,12 +853,12 @@ form.ac-form .ac-reply-content input {
 	vertical-align: middle;
 }
 
-.single-item-header img.avatar {
+.single-headers img.avatar {
 	float: left;
 	margin: 0 15px 19px 0;
 }
 
-.single-item-header div#item-meta {
+.single-headers div#item-meta {
 	color: #aaa;
 	font-size: 80%;
 	margin: 15px 0 5px 0;
@@ -866,47 +866,46 @@ form.ac-form .ac-reply-content input {
 	padding-bottom: 10px;
 }
 
-.single-item-header div#item-actions {
+.single-headers div#item-actions {
 	float: right;
 	margin: 0 0 15px 15px;
 	text-align: right;
 	width: 20%;
 }
 
-.single-item-header div#item-actions h3 {
+.single-headers div#item-actions h3 {
 	margin: 0 0 5px 0;
 }
 
-.single-item-header ul {
+.single-headers ul {
 	margin-bottom: 15px;
 	overflow: hidden;
 }
 
-.single-item-header ul h5,
-.single-item-header ul span,
-.single-item-header ul hr {
+.single-headers ul h5,
+.single-headers ul span,
+.single-headers ul hr {
 	display: none;
 }
 
-.single-item-header ul li {
+.single-headers ul li {
 	float: right;
 	list-style: none;
 }
 
-.single-item-header img.avatar,
-.single-item-header ul.avatars img.avatar {
+.single-headers ul.avatars img.avatar {
 	height: 30px;
 	margin: 2px;
 	width: 30px;
 }
 
-.single-item-header div.generic-button,
-.single-item-header a.button {
+.single-headers div.generic-button,
+.single-headers a.button {
 	float: left;
 	margin: 10px 10px 0 0;
 }
 
-.single-item-header div#message.info {
+.single-headers div#message.info {
 	line-height: 80%;
 }
 
