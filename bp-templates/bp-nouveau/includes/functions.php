@@ -621,9 +621,7 @@ function bp_nouveau_customizer_enqueue_scripts() {
 /**
  * BP Nouveau's callback for the cover image feature.
  *
- * @todo implement the cover image for this template pack!
- *
- * @since  2.4.0
+ * @since  1.0.0
  *
  * @param  array $params the current component's feature parameters.
  * @return array          an array to inform about the css handle to attach the css rules to
@@ -669,6 +667,12 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
 
 	return '
 		/* Cover image */
+		#buddypress #item-header-cover-image {
+			overflow: hidden;
+			min-height: ' . $params["height"] . 'px;
+			margin-bottom: 1em;
+		}
+
 		#buddypress #header-cover-image {
 			height: ' . $params["height"] . 'px;
 			' . $cover_image . '

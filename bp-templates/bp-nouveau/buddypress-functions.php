@@ -70,6 +70,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		// Include needed files
 		$this->includes();
+
+		// Setup features support
+		$this->setup_support();
 	}
 
 	/**
@@ -118,6 +121,36 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		do_action_ref_array( 'bp_nouveau_includes', array( &$this ) );
+	}
+
+	/**
+	 * Setup the Template Pack features support.
+	 *
+	 * @since 1.0.0
+	 */
+	private function setup_support() {
+		$width         = 1300;
+		$top_offset    = 150;
+		$avatar_height = apply_filters( 'bp_core_avatar_full_height', $top_offset );
+
+		if ( ! empty( $GLOBALS['content_width'] ) ) {
+			$width = $GLOBALS['content_width'];
+		}
+
+		if ( $avatar_height > $top_offset ) {
+			$top_offset = $avatar_height;
+		}
+
+		bp_set_theme_compat_feature( $this->id, array(
+			'name'     => 'cover_image',
+			'settings' => array(
+				'components'   => array( 'xprofile', 'groups' ),
+				'width'        => $width,
+				'height'       => $top_offset + round( $avatar_height / 2 ),
+				'callback'     => 'bp_nouveau_theme_cover_image',
+				'theme_handle' => 'bp-nouveau',
+			),
+		) );
 	}
 
 	/**
