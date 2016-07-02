@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Groups Header
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 ?>
 
@@ -15,32 +16,17 @@
 
 		<?php bp_group_list_admins();
 
-		/**
-		 * Fires after the display of the group's administrators.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_after_group_menu_admins' );
+		bp_nouveau_group_hook( 'after', 'menu_admins' );
 
 		if ( bp_group_has_moderators() ) :
 
-			/**
-			 * Fires before the display of the group's moderators, if there are any.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_before_group_menu_mods' ); ?>
+			bp_nouveau_group_hook( 'before', 'menu_mods' ); ?>
 
 			<h3><?php _e( 'Group Mods' , 'bp-nouveau' ); ?></h3>
 
 			<?php bp_group_list_mods();
 
-			/**
-			 * Fires after the display of the group's moderators, if there are any.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_after_group_menu_mods' );
+			bp_nouveau_group_hook( 'after', 'menu_mods' );
 
 		endif;
 
@@ -62,14 +48,7 @@
 	<span class="highlight"><?php bp_group_type(); ?></span>
 	<span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span>
 
-	<?php
-
-	/**
-	 * Fires before the display of the group's header meta.
-	 *
-	 * @since 1.2.0
-	 */
-	do_action( 'bp_before_group_header_meta' ); ?>
+	<?php bp_nouveau_group_hook( 'before', 'header_meta' ); ?>
 
 	<?php if ( bp_nouveau_group_has_meta() ): ?>
 		<div id="item-meta">

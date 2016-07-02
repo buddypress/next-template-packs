@@ -10,14 +10,7 @@
 
 <?php if ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
 
-	<?php
-
-	/**
-	 * Fires before the display of the group members content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_group_members_content' ); ?>
+	<?php bp_nouveau_group_hook( 'before', 'members_content' ); ?>
 
 	<div id="pag-top" class="pagination">
 
@@ -35,14 +28,7 @@
 
 	</div>
 
-	<?php
-
-	/**
-	 * Fires before the display of the group members list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_group_members_list' ); ?>
+	<?php bp_nouveau_group_hook( 'before', 'members_list' ); ?>
 
 	<ul id="member-list" class="item-list">
 
@@ -58,14 +44,7 @@
 				<h5><?php bp_group_member_link(); ?></h5>
 				<span class="activity"><?php bp_group_member_joined_since(); ?></span>
 
-				<?php
-
-				/**
-				 * Fires inside the listing of an individual group member listing item.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_group_members_list_item' ); ?>
+				<?php bp_nouveau_group_hook( '', 'members_list_item' ); ?>
 
 				<div class="action">
 
@@ -78,14 +57,7 @@
 
 	</ul>
 
-	<?php
-
-	/**
-	 * Fires after the display of the group members list.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_group_members_list' ); ?>
+	<?php bp_nouveau_group_hook( 'after', 'members_list' ); ?>
 
 	<div id="pag-bottom" class="pagination">
 
@@ -103,14 +75,7 @@
 
 	</div>
 
-	<?php
-
-	/**
-	 * Fires after the display of the group members content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_group_members_content' ); ?>
+	<?php bp_nouveau_group_hook( 'after', 'members_content' ); ?>
 
 <?php else: ?>
 

@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Groups Activity
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -27,14 +28,7 @@
 	</ul>
 </div><!-- .item-list-tabs -->
 
-<?php
-
-/**
- * Fires before the display of the group activities list.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_group_activity_content' ); ?>
+<?php bp_nouveau_group_hook( 'before', 'activity_content' ); ?>
 
 <div class="activity single-group">
 
@@ -46,11 +40,4 @@ do_action( 'bp_before_group_activity_content' ); ?>
 
 </div><!-- .activity -->
 
-<?php
-
-/**
- * Fires after the display of the group activities list.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_group_activity_content' ); ?>
+<?php bp_nouveau_group_hook( 'after', 'activity_content' );

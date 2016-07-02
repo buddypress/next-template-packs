@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Groups Requests Loop
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -41,14 +42,7 @@
 				<h4><?php bp_group_request_user_link(); ?> <span class="comments"><?php bp_group_request_comment(); ?></span></h4>
 				<span class="activity"><?php bp_group_request_time_since_requested(); ?></span>
 
-				<?php
-
-				/**
-				 * Fires inside the groups membership request list loop.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_group_membership_requests_admin_item' ); ?>
+				<?php bp_nouveau_group_hook( '', 'membership_requests_admin_item' ); ?>
 
 				<div class="action">
 

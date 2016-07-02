@@ -2,16 +2,12 @@
 /**
  * BuddyPress - Groups plugins
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
-/**
- * Fires before the display of content for plugins using the BP_Group_Extension.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_group_plugin_template' ); ?>
+bp_nouveau_group_hook( 'before', 'plugin_template' ); ?>
 
 <?php
 
@@ -22,11 +18,4 @@ do_action( 'bp_before_group_plugin_template' ); ?>
  */
 do_action( 'bp_template_content' ); ?>
 
-<?php
-
-/**
- * Fires after the display of content for plugins using the BP_Group_Extension.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_group_plugin_template' );
+<?php bp_nouveau_group_hook( 'after', 'plugin_template' );

@@ -103,6 +103,35 @@ function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
 }
 
 /**
+ * Fire specific hooks into the single groups templates
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_group_hook( $when = '', $suffix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	if ( ! empty( $suffix ) ) {
+		$suffix = '_' . $suffix;
+	}
+
+	$hook = sprintf( 'bp_%1$sgroup%2$s', $when, $suffix );
+
+	/**
+	 * @since 1.1.0 (BuddyPress) for the 'menu_admins', 'menu_mods', 'members_content',
+	 *                           'members_list', 'members_list_item', 'request_membership_content'
+	 *                           'membership_requests_admin_item', 'invites_item', 'invites_content' suffixes
+	 * @since 1.2.0 (BuddyPress) for the 'activity_content', 'header_meta', 'home_content',
+	 *                           'plugin_template', 'friend_requests_content' suffixes.
+	 */
+	do_action( $hook );
+}
+
+/**
  * Display the current group activity post form if needed
  *
  * @since  1.0.0

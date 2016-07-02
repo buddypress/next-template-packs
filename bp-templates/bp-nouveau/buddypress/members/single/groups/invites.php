@@ -2,16 +2,12 @@
 /**
  * BuddyPress - Members Single Group Invites
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
-/**
- * Fires before the display of member group invites content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_before_group_invites_content' ); ?>
+bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 <?php if ( bp_has_groups( 'type=invites&user_id=' . bp_loggedin_user_id() ) ) : ?>
 
@@ -32,14 +28,7 @@ do_action( 'bp_before_group_invites_content' ); ?>
 					<?php bp_group_description_excerpt(); ?>
 				</p>
 
-				<?php
-
-				/**
-				 * Fires inside the display of a member group invite item.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_group_invites_item' ); ?>
+				<?php bp_nouveau_group_hook( '', 'invites_item' ); ?>
 
 				<div class="action">
 
@@ -59,11 +48,4 @@ do_action( 'bp_before_group_invites_content' ); ?>
 
 <?php endif;?>
 
-<?php
-
-/**
- * Fires after the display of member group invites content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_after_group_invites_content' ); ?>
+<?php bp_nouveau_group_hook( 'after', 'invites_content' );
