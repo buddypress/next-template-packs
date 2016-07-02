@@ -47,7 +47,7 @@ class BP_Buttons_Group {
 	 */
 	public function __construct( $args = array() ) {
 		if ( empty( $args ) || ! is_array( $args ) ) {
-			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'bp_nouveau' ) );
+			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'bp-nouveau' ) );
 			return false;
 		}
 

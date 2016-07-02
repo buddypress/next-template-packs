@@ -1,0 +1,39 @@
+{
+  "author": "The BuddyPress Contributors",
+  "bugs": {
+    "url": "https://github.com/buddypress/next-template-packs/issues"
+  },
+  "description": "The Next Template Packs plugin helps you build new template packs for BuddyPress.",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-checktextdomain": "~1.0.0",
+    "grunt-contrib-clean": "~1.0.0",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-contrib-cssmin": "~0.14.0",
+    "grunt-contrib-imagemin": "~1.0.0",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-uglify": "~0.10.1",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-exec": "~0.4.6",
+    "grunt-check-dependencies": "~0.12.0",
+    "grunt-jsvalidate": "~0.2.2",
+    "grunt-legacy-util": "^0.2.0",
+    "grunt-rtlcss": "~2.0.1",
+    "matchdep": "~1.0.0"
+  },
+  "engines": {
+    "node": ">=4.2.1"
+  },
+  "keywords": [
+    "buddypress",
+    "template pack"
+  ],
+  "homepage": "https://buddypress.org",
+  "license": "GPL-2.0+",
+  "name": "next-template-packs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buddypress/next-template-packs.git"
+  },
+  "version": "1.0.0-alpha"
+}

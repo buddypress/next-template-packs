@@ -22,7 +22,7 @@
 	<input type="text" name="send-to-input" class="bp-suggestions send-to-input" id="send-to-input" />
 
 	<?php if ( bp_current_user_can( 'bp_moderate' ) ) : ?>
-		<p><label for="send-notice"><input type="checkbox" id="send-notice" name="send-notice" value="1" /> <?php _e( "This is a notice to all users.", "buddypress" ); ?></label></p>
+		<p><label for="send-notice"><input type="checkbox" id="send-notice" name="send-notice" value="1" /> <?php esc_html_e( 'This is a notice to all users.', 'bp-nouveau' ); ?></label></p>
 	<?php endif; ?>
 
 	<label for="subject"><?php _e( 'Subject', 'bp-nouveau' ); ?></label>

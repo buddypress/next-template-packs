@@ -74,7 +74,7 @@ class BPMakePOT {
 		),
 		'bp-templatepack-manager' => array(
 			'description' => 'Translation of the WordPress plugin {name} {version} by {author}',
-			'msgid-bugs-address' => 'https://github.com/imath/{slug}',
+			'msgid-bugs-address' => 'https://github.com/buddypress/next-template-packs/issues',
 			'copyright-holder' => '{author}',
 			'package-name' => '{name}',
 			'package-version' => '{version}',
@@ -146,7 +146,7 @@ class BPMakePOT {
 		return $this->wp_plugin( $dir, $output, $slug, array(
 			'project' => 'bp-templatepack-manager', 'output' => $output,
 			'includes' => array(),
-			'excludes' => array( 'bp-templates/.*', 'tools/.*' )
+			'excludes' => array( 'bp-templates/.*', 'node_modules/.*', 'tools/.*', 'tests/.*' )
 		) );
 	}
 
@@ -340,10 +340,18 @@ class BPMakePOT {
 $included_files = get_included_files();
 if ($included_files[0] == __FILE__) {
 	$makepot = new BPMakePOT;
+
 	if ((3 == count($argv) || 4 == count($argv)) && in_array($method = str_replace('-', '_', $argv[1]), get_class_methods($makepot))) {
-		$res = call_user_func(array($makepot, $method), realpath($argv[2]), isset($argv[3])? $argv[3] : null);
+		if ( isset( $argv[3] ) ) {
+			$folder = realpath( str_replace( '/' . basename( $argv[3] ), '', $argv[3] ) );
+			$file   = $folder . '/' . basename( $argv[3] );
+		}
+
+		$res = call_user_func(array($makepot, $method), realpath($argv[2]), isset($file)? $file : null);
 		if (false === $res) {
 			fwrite(STDERR, "Couldn't generate POT file!\n");
+		} else {
+			fwrite(STDERR, "POT file successfuly generated!\n");
 		}
 	} else {
 		$usage  = "Usage: php makepot.php PROJECT DIRECTORY [OUTPUT]\n\n";
