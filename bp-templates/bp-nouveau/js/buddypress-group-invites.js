@@ -121,7 +121,6 @@ window.bp = window.bp || {};
 				'page'         : 1,
 				'total_page'   : 0,
 				'search_terms' : '',
-				'search_icon'  : BP_Nouveau.search_icon,
 				scope          : this.scope,
 			} );
 
@@ -534,7 +533,7 @@ window.bp = window.bp || {};
 		displaySrcBtn: function( event ) {
 			event.preventDefault();
 
-			$( event.target ).closest( 'form' ).find( 'input[type=submit]' ).show();
+			$( event.target ).closest( 'form' ).find( '[type=submit]' ).show();
 		},
 
 		hideSrcBtn: function( event ) {
@@ -544,7 +543,7 @@ window.bp = window.bp || {};
 				return;
 			}
 
-			$( event.target ).closest( 'form' ).find( 'input[type=submit]' ).hide();
+			$( event.target ).closest( 'form' ).find( '[type=submit]' ).hide();
 		},
 
 		resetSearchTerms: function( event ) {
@@ -553,7 +552,7 @@ window.bp = window.bp || {};
 			if ( ! $( event.target ).val() ) {
 				$( event.target ).closest( 'form' ).submit();
 			} else {
-				$( event.target ).closest( 'form' ).find( 'input[type=submit]' ).show();
+				$( event.target ).closest( 'form' ).find( '[type=submit]' ).show();
 			}
 		},
 

@@ -88,7 +88,10 @@
 			<label for="group_invites_search">
 				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
 			</label>
-			<input type="submit" id="group_invites_search_submit" title="<?php esc_attr_e( 'Search', 'bp-nouveau' ); ?>" value="{{data.search_icon}}" />
+			<button type="submit" id="group_invites_search_submit">
+				<span class="dashicons dashicons-search"></span>
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
+			</button>
 		</form>
 	</li>
 </script>

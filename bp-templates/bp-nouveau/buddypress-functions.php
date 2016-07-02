@@ -415,7 +415,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 					'g_second' => 1,
 				),
 			),
-			'search_icon' => '&#xf179;'
 		);
 
 		// If the Object/Item nav are in the sidebar
