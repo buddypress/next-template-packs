@@ -507,3 +507,192 @@ function bp_nouveau_member_description_edit_link() {
 
 		return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html__( 'Edit your bio', 'bp-nouveau' ) );
 	}
+
+/** WP Profile tags **********************************************************/
+
+/**
+ * Template tag to wrap all Legacy actions that was used
+ * before and after the WP User's Profile.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_wp_profile_hooks( $type = 'top' ) {
+	if ( 'top' === $type ) {
+		/**
+		 * Fires before the display of member profile loop content.
+		 *
+		 * @since 1.2.0
+		 */
+		do_action( 'bp_before_profile_loop_content' );
+
+		/**
+		 * Fires before the display of member profile field content.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_before_profile_field_content' );
+	} else {
+		/**
+		 * Fires after the display of member profile field content.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_after_profile_field_content' );
+
+		/**
+		 * Fires and displays the profile field buttons.
+		 *
+		 * @since 1.1.0
+		 */
+		do_action( 'bp_profile_field_buttons' );
+
+		/**
+		 * Fires after the display of member profile loop content.
+		 *
+		 * @since 1.2.0
+		 */
+		do_action( 'bp_after_profile_loop_content' );
+	}
+}
+
+/**
+ * Does the displayed user has WP profile fields?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if user has profile fields. False otherwise.
+ */
+function bp_nouveau_has_wp_profile_fields() {
+	$user_id = bp_displayed_user_id();
+
+	if ( empty( $user_id ) ) {
+		return false;
+	}
+
+	$user = get_userdata( $user_id );
+
+	if ( ! $user ) {
+		return false;
+	}
+
+	$fields              = bp_nouveau_get_wp_profile_fields( $user );
+	$user_profile_fields = array();
+
+	foreach ( $fields as $key => $field ) {
+		if ( empty( $user->{$key} ) ) {
+			continue;
+		}
+
+		$user_profile_fields[] = (object) array( 'id' => 'wp_' . $key, 'label' => $field, 'data' => $user->{$key} );
+	}
+
+	if ( empty( $user_profile_fields ) ) {
+		return false;
+	}
+
+	// Keep it for a later use.
+	$bp_nouveau = bp_nouveau();
+	$bp_nouveau->members->wp_profile       = $user_profile_fields;
+	$bp_nouveau->members->wp_profile_index = 0;
+
+	return true;
+}
+
+/**
+ * Check if there are still profile fields to output.
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if the profile field exists. False otherwise.
+ */
+function bp_nouveau_wp_profile_fields() {
+	$bp_nouveau = bp_nouveau();
+
+	if ( isset( $bp_nouveau->members->wp_profile[ $bp_nouveau->members->wp_profile_index ] ) ) {
+		return true;
+	}
+
+	$bp_nouveau->members->wp_profile_index = 0;
+	unset( $bp_nouveau->members->wp_profile_current );
+
+	return false;
+}
+
+/**
+ * Set the current profile field and iterate into the loop.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_wp_profile_field() {
+	$bp_nouveau = bp_nouveau();
+
+	$bp_nouveau->members->wp_profile_current = $bp_nouveau->members->wp_profile[ $bp_nouveau->members->wp_profile_index ];
+	$bp_nouveau->members->wp_profile_index += 1;
+}
+
+/**
+ * Output the WP profile field ID.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_wp_profile_field_id() {
+	echo bp_nouveau_get_wp_profile_field_id();
+}
+	/**
+	 * Get the WP profile field ID.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string the profile field ID.
+	 */
+	function bp_nouveau_get_wp_profile_field_id() {
+		$field = bp_nouveau()->members->wp_profile_current;
+
+		return esc_attr( apply_filters( 'bp_nouveau_get_wp_profile_field_id', $field->id ) );
+	}
+
+/**
+ * Output the WP profile field label.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_wp_profile_field_label() {
+	echo bp_nouveau_get_wp_profile_field_label();
+}
+
+	/**
+	 * Get the WP profile label.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string the profile field label.
+	 */
+	function bp_nouveau_get_wp_profile_field_label() {
+		$field = bp_nouveau()->members->wp_profile_current;
+
+		return esc_html( apply_filters( 'bp_nouveau_get_wp_profile_field_label', $field->label ) );
+	}
+
+/**
+ * Output the WP profile field data.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_wp_profile_field_data() {
+	echo bp_nouveau_get_wp_profile_field_data();
+}
+
+	/**
+	 * Get the WP profile field data.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string the profile field data.
+	 */
+	function bp_nouveau_get_wp_profile_field_data() {
+		$field = bp_nouveau()->members->wp_profile_current;
+
+		$data = make_clickable( $field->data );
+
+		return wp_kses( apply_filters( 'bp_nouveau_get_wp_profile_field_data', $data ), array( 'a' => array( 'href' => true, 'rel' => true ) ) );
+	}

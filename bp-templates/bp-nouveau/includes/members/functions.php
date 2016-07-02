@@ -388,3 +388,24 @@ function bp_nouveau_members_remove_home_widget_filters() {
 
 	do_action( 'bp_nouveau_members_remove_home_widget_filters' );
 }
+
+/**
+ * Get the WP Profile fields for all or a specific user
+ *
+ * @since  1.0.0
+ *
+ * @param  WP_User $user The user object. Optional.
+ * @return array         The list of WP Profile fields
+ */
+function bp_nouveau_get_wp_profile_fields( $user = null ) {
+	// Leave a chance to plugins to avoid showing the contact methods they're adding on front end.
+	$contact_methods = (array) apply_filters( 'bp_nouveau_get_wp_profile_field', wp_get_user_contact_methods( $user ), $user );
+
+	$wp_fields = array(
+		'display_name'     => __( 'Name', 'bp-nouveau' ),
+		'user_description' => __( 'About Me', 'bp-nouveau' ),
+		'user_url'         => __( 'Website', 'bp-nouveau' ),
+	);
+
+	return array_merge( $wp_fields, $contact_methods );
+}

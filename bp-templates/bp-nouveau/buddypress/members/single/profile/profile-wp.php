@@ -6,109 +6,35 @@
  * @subpackage bp-nouveau
  */
 
-/**
- * Fires before the display of member profile loop content.
- *
- * @since 1.2.0
- */
-do_action( 'bp_before_profile_loop_content' ); ?>
+bp_nouveau_wp_profile_hooks(); ?>
 
-<?php $ud = get_userdata( bp_displayed_user_id() ); ?>
+<div class="bp-widget wp-profile">
 
-<?php
+	<h4><?php bp_is_my_profile() ? _e( 'My Profile', 'bp-nouveau' ) : printf( __( "%s's Profile", 'bp-nouveau' ), bp_get_displayed_user_fullname() ); ?></h4>
 
-	/**
-	 * Fires before the display of member profile field content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_profile_field_content' ); ?>
-
-	<div class="bp-widget wp-profile">
-		<h4><?php bp_is_my_profile() ? _e( 'My Profile', 'bp-nouveau' ) : printf( __( "%s's Profile", 'bp-nouveau' ), bp_get_displayed_user_fullname() ); ?></h4>
+	<?php if ( bp_nouveau_has_wp_profile_fields() ) : ?>
 
 		<table class="wp-profile-fields">
 
-			<?php if ( $ud->display_name ) : ?>
+			<?php while ( bp_nouveau_wp_profile_fields() ) : bp_nouveau_wp_profile_field(); ?>
 
-				<tr id="wp_displayname">
-					<td class="label"><?php _e( 'Name', 'bp-nouveau' ); ?></td>
-					<td class="data"><?php echo $ud->display_name; ?></td>
+				<tr id="<?php bp_nouveau_wp_profile_field_id();?>">
+					<td class="label"><?php bp_nouveau_wp_profile_field_label();?></td>
+					<td class="data"><?php bp_nouveau_wp_profile_field_data();?></td>
 				</tr>
 
-			<?php endif; ?>
-
-			<?php if ( $ud->user_description ) : ?>
-
-				<tr id="wp_desc">
-					<td class="label"><?php _e( 'About Me', 'bp-nouveau' ); ?></td>
-					<td class="data"><?php echo $ud->user_description; ?></td>
-				</tr>
-
-			<?php endif; ?>
-
-			<?php if ( $ud->user_url ) : ?>
-
-				<tr id="wp_website">
-					<td class="label"><?php _e( 'Website', 'bp-nouveau' ); ?></td>
-					<td class="data"><?php echo make_clickable( $ud->user_url ); ?></td>
-				</tr>
-
-			<?php endif; ?>
-
-			<?php if ( $ud->jabber ) : ?>
-
-				<tr id="wp_jabber">
-					<td class="label"><?php _e( 'Jabber', 'bp-nouveau' ); ?></td>
-					<td class="data"><?php echo $ud->jabber; ?></td>
-				</tr>
-
-			<?php endif; ?>
-
-			<?php if ( $ud->aim ) : ?>
-
-				<tr id="wp_aim">
-					<td class="label"><?php _e( 'AOL Messenger', 'bp-nouveau' ); ?></td>
-					<td class="data"><?php echo $ud->aim; ?></td>
-				</tr>
-
-			<?php endif; ?>
-
-			<?php if ( $ud->yim ) : ?>
-
-				<tr id="wp_yim">
-					<td class="label"><?php _e( 'Yahoo Messenger', 'bp-nouveau' ); ?></td>
-					<td class="data"><?php echo $ud->yim; ?></td>
-				</tr>
-
-			<?php endif; ?>
+			<?php endwhile ;?>
 
 		</table>
-	</div>
 
-<?php
+	<?php else : ?>
 
-/**
- * Fires after the display of member profile field content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_after_profile_field_content' ); ?>
+		<div class="bp-feedback info">
+			<?php echo esc_html( sprintf( __( '%s did not save any profile informations yet.', 'bp-nouveau' ), bp_get_displayed_user_fullname() ) ); ?>
+		</div>
 
-<?php
+	<?php endif; ?>
 
-/**
- * Fires and displays the profile field buttons.
- *
- * @since 1.1.0
- */
-do_action( 'bp_profile_field_buttons' ); ?>
+</div>
 
-<?php
-
-/**
- * Fires after the display of member profile loop content.
- *
- * @since 1.2.0
- */
-do_action( 'bp_after_profile_loop_content' ); ?>
+<?php bp_nouveau_wp_profile_hooks( 'bottom' ); ?>
