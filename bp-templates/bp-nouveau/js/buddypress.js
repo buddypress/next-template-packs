@@ -684,9 +684,11 @@ window.bp = window.bp || {};
 			// Unforunately unlike groups
 			// Friends actions does not match the wpnonce
 			var friends_actions_map = {
-				'is_friend'   : 'remove_friend',
-				'not_friends' : 'add_friend',
-				'pending'     : 'withdraw_friendship'
+				'is_friend'         : 'remove_friend',
+				'not_friends'       : 'add_friend',
+				'pending'           : 'withdraw_friendship',
+				'accept_friendship' : 'accept_friendship',
+				'reject_friendship' : 'reject_friendship'
 			}
 
 			if ( 'members' === object && undefined !== friends_actions_map[ action ] ) {
@@ -705,7 +707,7 @@ window.bp = window.bp || {};
 				if ( false === response.success ) {
 					item.prepend( response.data.feedback );
 					target.removeClass( 'pending loading' );
-					item.find( '.bp-feedback' ).fadeOut( 1500 );
+					item.find( '.bp-feedback' ).fadeOut( 2500 );
 				} else {
 					// Specific cases for groups
 					if ( 'groups' === object ) {
@@ -714,13 +716,13 @@ window.bp = window.bp || {};
 						if ( undefined !== response.data.is_group && response.data.is_group ) {
 							return window.location.reload();
 						}
+					}
 
-						// User's groups invitations screen
-						if ( undefined !== response.data.is_user && response.data.is_user ) {
-							target.parent().html( response.data.feedback );
-							item.fadeOut( 1500 );
-							return;
-						}
+					// User's groups invitations screen & User's friend screens
+					if ( undefined !== response.data.is_user && response.data.is_user ) {
+						target.parent().html( response.data.feedback );
+						item.fadeOut( 1500 );
+						return;
 					}
 
 					// Update count

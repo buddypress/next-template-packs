@@ -64,13 +64,8 @@ class BP_Nouveau_Friends {
 			array( 'friends_remove_friend'       => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
 			array( 'friends_add_friend'          => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
 			array( 'friends_withdraw_friendship' => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
-
-			/**
-			 * @todo implement this action in buddypress-activity.js as it's missing
-			 * right now
-			 */
-			array( 'accept_friendship' => array( 'function' => 'bp_legacy_theme_ajax_accept_friendship', 'nopriv' => false ) ),
-			array( 'reject_friendship' => array( 'function' => 'bp_legacy_theme_ajax_reject_friendship', 'nopriv' => false ) ),
+			array( 'friends_accept_friendship'   => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
+			array( 'friends_reject_friendship'   => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
 		);
 
 		foreach ( $ajax_actions as $ajax_action ) {
@@ -92,10 +87,11 @@ class BP_Nouveau_Friends {
 	private function setup_filters() {
 		$buttons = array(
 			'friends_pending',
-			'friends_awaiting_response',
 			'friends_is_friend',
 			'friends_not_friends',
 			'friends_member_friendship',
+			'friends_accept_friendship',
+			'friends_reject_friendship',
 		);
 
 		foreach ( $buttons as $button ) {

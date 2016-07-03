@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 function bp_nouveau_ajax_joinleave_group() {
 	$response = array(
 		'feedback' => sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback error">%s</div>',
 			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-nouveau' )
 		)
 	);
@@ -53,8 +53,8 @@ function bp_nouveau_ajax_joinleave_group() {
 	$group_id = (int) $_POST['item_id'];
 
 	$errors = array(
-		'cannot' => sprintf( '<div class="bp-feedback error"><p>%s</p></div>', esc_html__( 'You cannot join this group.', 'bp-nouveau' ) ),
-		'member' => sprintf( '<div class="feedback error bp-ajax-message"><p>%s</p></div>', esc_html__( 'You are already a member of the group.', 'bp-nouveau' ) ),
+		'cannot' => sprintf( '<div class="bp-feedback error">%s</div>', esc_html__( 'You cannot join this group.', 'bp-nouveau' ) ),
+		'member' => sprintf( '<div class="bp-feedback error">%s</div>', esc_html__( 'You are already a member of the group.', 'bp-nouveau' ) ),
 	);
 
 	if ( groups_is_user_banned( bp_loggedin_user_id(), $group_id ) ) {
@@ -140,7 +140,7 @@ function bp_nouveau_ajax_joinleave_group() {
 			} elseif ( ! groups_join_group( $group->id ) ) {
 				$response = array(
 					'feedback' => sprintf(
-						'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+						'<div class="bp-feedback error">%s</div>',
 						esc_html__( 'Error joining this group.', 'bp-nouveau' )
 					),
 					'type'     => 'error',
@@ -161,7 +161,7 @@ function bp_nouveau_ajax_joinleave_group() {
 				if ( ! groups_send_membership_request( bp_loggedin_user_id(), $group->id ) ) {
 					$response = array(
 						'feedback' => sprintf(
-							'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+							'<div class="bp-feedback error">%s</div>',
 							esc_html__( 'Error requesting membership.', 'bp-nouveau' )
 						),
 						'type'     => 'error',
@@ -182,7 +182,7 @@ function bp_nouveau_ajax_joinleave_group() {
 				if ( ! groups_leave_group( $group->id ) ) {
 					$response = array(
 						'feedback' => sprintf(
-							'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+							'<div class="bp-feedback error">%s</div>',
 							esc_html__( 'Error leaving group.', 'bp-nouveau' )
 						),
 						'type'     => 'error',
@@ -193,10 +193,10 @@ function bp_nouveau_ajax_joinleave_group() {
 					$bp               = buddypress();
 
 					/**
-					 * When inside the group or in the user's group memberships screen
+					 * When inside the group or in the loggedin user's group memberships screen
 					 * we need to reload the page.
 					 */
-					$bp_is_group = bp_is_group() || bp_is_user_groups();
+					$bp_is_group = bp_is_group() || ( bp_is_user_groups() && bp_is_my_profile() );
 
 					$response = array(
 						'contents' => bp_get_group_join_button( $group ),
@@ -204,7 +204,7 @@ function bp_nouveau_ajax_joinleave_group() {
 						'type'     => 'success',
 					);
 
-					// Reset the message if not in a Group or in a user's group memberships one!
+					// Reset the message if not in a Group or in a loggedin user's group memberships one!
 					if ( ! $bp_is_group && isset( $bp->template_message ) && isset( $bp->template_message_type ) ) {
 						unset( $bp->template_message, $bp->template_message_type );
 

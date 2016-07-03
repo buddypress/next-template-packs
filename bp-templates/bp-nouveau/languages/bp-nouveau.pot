@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BP Nouveau 1.0.0\n"
 "Report-Msgid-Bugs-To: https://make.wordpress.org/polyglots/\n"
-"POT-Creation-Date: 2016-07-02 18:14:37+00:00\n"
+"POT-Creation-Date: 2016-07-03 10:17:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -297,12 +297,16 @@ msgstr ""
 
 #: buddypress/groups/groups-loop.php:30
 #: buddypress/groups/single/cover-image-header.php:30
-#: buddypress/groups/single/group-header.php:49
+#: buddypress/groups/single/group-header.php:25
 msgid "active %s"
 msgstr ""
 
 #: buddypress/groups/groups-loop.php:72
 msgid "There were no groups found."
+msgstr ""
+
+#: buddypress/groups/index.php:36
+msgid "Loading the groups of the community, please wait."
 msgstr ""
 
 #: buddypress/groups/single/activity.php:21
@@ -480,16 +484,6 @@ msgstr ""
 msgid "Loading the members who requested to join the group, please wait."
 msgstr ""
 
-#: buddypress/groups/single/cover-image-header.php:48
-#: buddypress/groups/single/group-header.php:15
-msgid "Group Admins"
-msgstr ""
-
-#: buddypress/groups/single/cover-image-header.php:58
-#: buddypress/groups/single/group-header.php:25
-msgid "Group Mods"
-msgstr ""
-
 #: buddypress/groups/single/default-front.php:15
 msgid "Manage the Groups default front page"
 msgstr ""
@@ -510,8 +504,23 @@ msgstr ""
 msgid "No members were found."
 msgstr ""
 
-#: buddypress/groups/single/members.php:23
+#: buddypress/groups/single/members.php:18
+#: buddypress/members/single/blogs.php:19
+#: buddypress/members/single/friends.php:21
+#: buddypress/members/single/groups.php:28 includes/template-tags.php:660
+msgid "Order By:"
+msgstr ""
+
+#: buddypress/groups/single/members.php:32
 msgid "Requesting the group members, please wait."
+msgstr ""
+
+#: buddypress/groups/single/parts/header-item-actions.php:15
+msgid "Group Admins"
+msgstr ""
+
+#: buddypress/groups/single/parts/header-item-actions.php:25
+msgid "Group Mods"
 msgstr ""
 
 #: buddypress/groups/single/request-membership.php:13
@@ -661,12 +670,6 @@ msgstr ""
 msgid "Loading your updates, please wait."
 msgstr ""
 
-#: buddypress/members/single/blogs.php:19
-#: buddypress/members/single/friends.php:20
-#: buddypress/members/single/groups.php:28 includes/template-tags.php:660
-msgid "Order By:"
-msgstr ""
-
 #: buddypress/members/single/blogs.php:39
 msgid "Loading the blogs you are a contributor of, please wait."
 msgstr ""
@@ -679,34 +682,12 @@ msgstr ""
 msgid "You can set the preferences of the %s or add %s to it."
 msgstr ""
 
-#: buddypress/members/single/friends/requests.php:53
-#: includes/groups/template-tags.php:523 includes/groups/template-tags.php:524
-#: includes/groups/template-tags.php:549 includes/groups/template-tags.php:550
-msgid "Accept"
-msgstr ""
-
-#: buddypress/members/single/friends/requests.php:54
-#: includes/groups/template-tags.php:534 includes/groups/template-tags.php:535
-#: includes/groups/template-tags.php:561 includes/groups/template-tags.php:562
-msgid "Reject"
-msgstr ""
-
-#: buddypress/members/single/friends/requests.php:98
+#: buddypress/members/single/friends/requests.php:90
 msgid "You have no pending friendship requests."
 msgstr ""
 
-#: buddypress/members/single/friends.php:22 includes/blogs/functions.php:107
-#: includes/groups/functions.php:400 includes/members/functions.php:109
-msgid "Last Active"
-msgstr ""
-
-#: buddypress/members/single/friends.php:23 includes/members/functions.php:110
-msgid "Newest Registered"
-msgstr ""
-
-#: buddypress/members/single/friends.php:24 includes/blogs/functions.php:109
-#: includes/groups/functions.php:403 includes/members/functions.php:114
-msgid "Alphabetical"
+#: buddypress/members/single/friends.php:45
+msgid "Loading your friends, please wait."
 msgstr ""
 
 #: buddypress/members/single/groups/invites.php:25
@@ -1265,8 +1246,18 @@ msgstr ""
 msgid "Create a Site"
 msgstr ""
 
-#: includes/blogs/functions.php:108
+#: includes/blogs/functions.php:107 includes/groups/functions.php:400
+#: includes/members/functions.php:99
+msgid "Last Active"
+msgstr ""
+
+#: includes/blogs/functions.php:108 includes/members/functions.php:115
 msgid "Newest"
+msgstr ""
+
+#: includes/blogs/functions.php:109 includes/groups/functions.php:403
+#: includes/members/functions.php:104 includes/members/functions.php:123
+msgid "Alphabetical"
 msgstr ""
 
 #: includes/classes.php:50
@@ -1291,199 +1282,223 @@ msgid "There was a problem performing this action. Please try again."
 msgstr ""
 
 #: includes/friends/ajax.php:60
-msgid "Friendship could not be canceled."
-msgstr ""
-
-#: includes/friends/ajax.php:73
-msgid "Friendship could not be requested."
-msgstr ""
-
-#: includes/friends/ajax.php:88
-msgid "Friendship request could not be cancelled."
-msgstr ""
-
-#: includes/friends/ajax.php:98
-msgid "Request Pending"
-msgstr ""
-
-#: includes/friends/ajax.php:120
 msgid "There was a problem accepting that request. Please try again."
 msgstr ""
 
-#: includes/friends/ajax.php:140
+#: includes/friends/ajax.php:66
+msgid "Friendship accepted."
+msgstr ""
+
+#: includes/friends/ajax.php:78
 msgid "There was a problem rejecting that request. Please try again."
 msgstr ""
 
-#: includes/functions.php:96
+#: includes/friends/ajax.php:84
+msgid "Friendship rejected."
+msgstr ""
+
+#: includes/friends/ajax.php:96
+msgid "Friendship could not be cancelled."
+msgstr ""
+
+#: includes/friends/ajax.php:109
+msgid "Friendship cancelled."
+msgstr ""
+
+#: includes/friends/ajax.php:124
+msgid "Friendship could not be requested."
+msgstr ""
+
+#: includes/friends/ajax.php:139
+msgid "Friendship request could not be cancelled."
+msgstr ""
+
+#: includes/friends/ajax.php:149
+msgid "Request Pending"
+msgstr ""
+
+#: includes/functions.php:95
 msgid "BuddyPress User's Home"
 msgstr ""
 
-#: includes/functions.php:98
+#: includes/functions.php:97
 msgid "Add widgets here to appear in the front page of each member of your community."
 msgstr ""
 
-#: includes/functions.php:108
+#: includes/functions.php:107
 msgid "BuddyPress Group's Home"
 msgstr ""
 
-#: includes/functions.php:110
+#: includes/functions.php:109
 msgid "Add widgets here to appear in the front page of each group of your community."
 msgstr ""
 
-#: includes/functions.php:148
+#: includes/functions.php:147
 msgid "the 'bp_members_directory_member_types' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_members_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:153
+#: includes/functions.php:152
 msgid "the 'bp_before_activity_type_tab_all' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:158
+#: includes/functions.php:157
 msgid "the 'bp_before_activity_type_tab_friends' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:163
+#: includes/functions.php:162
 msgid "the 'bp_before_activity_type_tab_groups' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:168
+#: includes/functions.php:167
 msgid "the 'bp_before_activity_type_tab_favorites' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:173
+#: includes/functions.php:172
 msgid "the 'bp_before_activity_type_tab_mentions' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:178
+#: includes/functions.php:177
 msgid "the 'bp_activity_type_tabs' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:183
+#: includes/functions.php:182
 msgid "the 'bp_groups_directory_group_filter' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:188
+#: includes/functions.php:187
 msgid "the 'bp_blogs_directory_blog_types' action will soon be deprecated in the BP Nouveau template pack, use the 'bp_nouveau_get_activity_directory_nav_items' filter instead"
 msgstr ""
 
-#: includes/functions.php:193
+#: includes/functions.php:192
 msgid "The 'bp_members_directory_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_filters' filter instead"
 msgstr ""
 
-#: includes/functions.php:198
+#: includes/functions.php:197
+msgid "The 'bp_groups_members_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:202
+msgid "The 'bp_member_friends_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_filters' filter instead"
+msgstr ""
+
+#: includes/functions.php:207
 msgid "Instead of using the 'bp_activity_filter_options' action you should register your activity types using the function 'bp_activity_set_action'"
 msgstr ""
 
-#: includes/functions.php:203
+#: includes/functions.php:212
 msgid "Instead of using the 'bp_member_activity_filter_options' action you should register your activity types using the function 'bp_activity_set_action'"
 msgstr ""
 
-#: includes/functions.php:208
+#: includes/functions.php:217
 msgid "Instead of using the 'bp_group_activity_filter_options' action you should register your activity types using the function 'bp_activity_set_action'"
 msgstr ""
 
-#: includes/functions.php:213
+#: includes/functions.php:222
 msgid "The 'bp_groups_directory_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_filters' filter instead"
 msgstr ""
 
-#: includes/functions.php:218
+#: includes/functions.php:227
 msgid "The 'bp_member_group_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_filters' filter instead"
 msgstr ""
 
-#: includes/functions.php:223
+#: includes/functions.php:232
 msgid "The 'bp_member_blog_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_blogs_filters' filter instead"
 msgstr ""
 
-#: includes/functions.php:228
+#: includes/functions.php:237
 msgid "The 'bp_blogs_directory_order_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_blogs_filters' filter instead"
 msgstr ""
 
-#: includes/functions.php:233
+#: includes/functions.php:242
 msgid "The 'bp_activity_entry_meta' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_activity_entry_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:238
+#: includes/functions.php:247
 msgid "The 'bp_member_header_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:243
+#: includes/functions.php:252
 msgid "The 'bp_directory_members_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:248
+#: includes/functions.php:257
 msgid "The 'bp_group_members_list_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:253
+#: includes/functions.php:262
+msgid "The 'bp_friend_requests_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_members_buttons' filter instead"
+msgstr ""
+
+#: includes/functions.php:267
 msgid "The 'bp_group_header_meta' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_group_meta' filter instead"
 msgstr ""
 
-#: includes/functions.php:258
+#: includes/functions.php:272
 msgid "The 'bp_directory_members_item' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_member_meta' filter instead"
 msgstr ""
 
-#: includes/functions.php:263
+#: includes/functions.php:277
 msgid "The 'bp_profile_header_meta' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_member_meta' filter instead"
 msgstr ""
 
-#: includes/functions.php:268
+#: includes/functions.php:282
 msgid "The 'bp_group_header_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:273
+#: includes/functions.php:287
 msgid "The 'bp_directory_groups_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:278
+#: includes/functions.php:292
 msgid "The 'bp_group_invites_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:283
+#: includes/functions.php:297
 msgid "The 'bp_group_membership_requests_admin_item_action' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:288
+#: includes/functions.php:302
 msgid "The 'bp_group_manage_members_admin_item' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_groups_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:293
+#: includes/functions.php:307
 msgid "The 'bp_directory_blogs_actions' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_blogs_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:298
+#: includes/functions.php:312
 msgid "The 'bp_activity_comment_options' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the 'bp_nouveau_get_activity_comment_buttons' filter instead"
 msgstr ""
 
-#: includes/functions.php:303
+#: includes/functions.php:317
 msgid "The 'groups_custom_group_fields_editable' is deprecated in the BP Nouveau template pack, please use 'bp_after_group_details_creation_step' or 'bp_after_group_details_admin' instead"
 msgstr ""
 
-#: includes/functions.php:449
+#: includes/functions.php:470
 msgid "&mdash; Everything &mdash;"
 msgstr ""
 
-#: includes/functions.php:537
+#: includes/functions.php:558
 msgid "Customize the appearance of your BuddyPress Template pack."
 msgstr ""
 
-#: includes/functions.php:538
+#: includes/functions.php:559
 msgctxt "Customizer Panel"
 msgid "BuddyPress Template Pack"
 msgstr ""
 
-#: includes/functions.php:544
+#: includes/functions.php:565
 msgid "User's front page"
 msgstr ""
 
-#: includes/functions.php:547
+#: includes/functions.php:568
 msgid "Set your preferences about the Users default front page."
 msgstr ""
 
-#: includes/functions.php:588
+#: includes/functions.php:609
 msgid "Enable default front page for user profiles."
 msgstr ""
 
-#: includes/functions.php:594
+#: includes/functions.php:615
 msgid "Display the WordPress Biographical Info of the user."
 msgstr ""
 
@@ -1686,6 +1701,20 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
+#: includes/groups/template-tags.php:523 includes/groups/template-tags.php:524
+#: includes/groups/template-tags.php:549 includes/groups/template-tags.php:550
+#: includes/members/template-tags.php:200
+#: includes/members/template-tags.php:201
+msgid "Accept"
+msgstr ""
+
+#: includes/groups/template-tags.php:534 includes/groups/template-tags.php:535
+#: includes/groups/template-tags.php:561 includes/groups/template-tags.php:562
+#: includes/members/template-tags.php:209
+#: includes/members/template-tags.php:210
+msgid "Reject"
+msgstr ""
+
 #: includes/groups/template-tags.php:575
 msgid "Remove Ban"
 msgstr ""
@@ -1718,7 +1747,7 @@ msgstr ""
 msgid "Groups default front page"
 msgstr ""
 
-#: includes/groups/template-tags.php:926 includes/members/template-tags.php:497
+#: includes/groups/template-tags.php:926 includes/members/template-tags.php:527
 msgid "(BuddyPress) Widgets"
 msgstr ""
 
@@ -1730,23 +1759,35 @@ msgstr ""
 msgid "The members I'm friend with."
 msgstr ""
 
-#: includes/members/functions.php:405
+#: includes/members/functions.php:100
+msgid "Newest Registered"
+msgstr ""
+
+#: includes/members/functions.php:116
+msgid "Oldest"
+msgstr ""
+
+#: includes/members/functions.php:120
+msgid "Group Activity"
+msgstr ""
+
+#: includes/members/functions.php:415
 msgid "Name"
 msgstr ""
 
-#: includes/members/functions.php:406
+#: includes/members/functions.php:416
 msgid "About Me"
 msgstr ""
 
-#: includes/members/functions.php:407
+#: includes/members/functions.php:417
 msgid "Website"
 msgstr ""
 
-#: includes/members/template-tags.php:481
+#: includes/members/template-tags.php:511
 msgid "Members default front page"
 msgstr ""
 
-#: includes/members/template-tags.php:536
+#: includes/members/template-tags.php:566
 msgid "Edit your bio"
 msgstr ""
 
