@@ -158,6 +158,11 @@ function bp_nouveau_ajax_object_template_loader() {
 		wp_send_json_error();
 	}
 
+	// Nonce check!
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_' . $object ) ) {
+		wp_send_json_error();
+	}
+
 	$result = array();
 
 	if ( 'activity' === $object ) {

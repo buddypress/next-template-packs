@@ -13,7 +13,16 @@
 
 		<?php bp_nouveau_search_form(); ?>
 
-		<?php bp_groups_members_filter(); ?>
+		<li id="group_members-order-select" class="last filter">
+			<label for="group_members-order-by">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Order By:', 'bp-nouveau' ); ?></span>
+			</label>
+			<select id="group_members-order-by" data-bp-filter="group_members">
+
+				<?php bp_nouveau_filter_options(); ?>
+
+			</select>
+		</li>
 
 	</ul>
 </div>

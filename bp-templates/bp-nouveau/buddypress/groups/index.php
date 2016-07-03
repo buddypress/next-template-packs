@@ -33,7 +33,7 @@
 	</div>
 
 	<div id="groups-dir-list" class="groups dir-list" data-bp-list="groups">
-		<div id="bp-ajax-loader">loading</div>
+		<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the groups of the community, please wait.', 'bp-nouveau' ) ;?></div>
 	</div><!-- #groups-dir-list -->
 
 	<?php bp_nouveau_after_groups_directory_content(); ?>

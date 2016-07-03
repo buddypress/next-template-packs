@@ -170,9 +170,9 @@ window.bp = window.bp || {};
 			}
 
 			// Extend posted data with stored data and object nonce
-			$.extend( post_data, bp.Nouveau.getStorage( 'bp-' + object ), { nonce: BP_Nouveau.nonces[object] } );
+			var postData = $.extend( {}, bp.Nouveau.getStorage( 'bp-' + object ), { nonce: BP_Nouveau.nonces[object] }, post_data );
 
-			this.ajax_request = $.post( BP_Nouveau.ajaxurl, post_data, 'json' );
+			this.ajax_request = $.post( BP_Nouveau.ajaxurl, postData, 'json' );
 
 			return this.ajax_request;
 		},

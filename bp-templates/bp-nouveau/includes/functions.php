@@ -192,6 +192,16 @@ function bp_nouveau_get_forsaken_hooks() {
 			'message_type' => 'warning',
 			'message'      => __( 'The \'bp_members_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
 		),
+		'bp_groups_members_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_groups_members_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_member_friends_order_options' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_member_friends_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
+		),
 		'bp_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
@@ -431,8 +441,15 @@ function bp_nouveau_get_component_filters( $context = '', $component = '' ) {
 	if ( empty( $component ) ) {
 		if ( 'directory' === $context || 'user' === $context ) {
 			$component = bp_current_component();
+
+			if ( 'friends' === $component ) {
+				$context   = 'friends';
+				$component = 'members';
+			}
 		} elseif ( 'group' === $context && bp_is_group_activity() ) {
 			$component = 'activity';
+		} elseif ( 'group' === $context && bp_is_group_members() ) {
+			$component = 'members';
 		}
 	}
 

@@ -17,20 +17,12 @@
 
 			<li id="members-order-select" class="last filter">
 
-				<label for="members-friends"><?php _e( 'Order By:', 'bp-nouveau' ); ?></label>
-				<select id="members-friends">
-					<option value="active"><?php _e( 'Last Active', 'bp-nouveau' ); ?></option>
-					<option value="newest"><?php _e( 'Newest Registered', 'bp-nouveau' ); ?></option>
-					<option value="alphabetical"><?php _e( 'Alphabetical', 'bp-nouveau' ); ?></option>
+				<label for="members-friends">
+					<span class="bp-screen-reader-text"><?php esc_html_e( 'Order By:', 'bp-nouveau' ); ?></span>
+				</label>
+				<select id="members-friends" data-bp-filter="members">
 
-					<?php
-
-					/**
-					 * Fires inside the members friends order options select input.
-					 *
-					 * @since 2.0.0
-					 */
-					do_action( 'bp_member_friends_order_options' ); ?>
+					<?php bp_nouveau_filter_options(); ?>
 
 				</select>
 			</li>
@@ -48,9 +40,9 @@ switch ( bp_current_action() ) :
 
 		bp_nouveau_member_hook( 'before', 'friends_content' ); ?>
 
-		<div class="members friends">
+		<div class="members friends" data-bp-list="members">
 
-			<?php bp_get_template_part( 'members/members-loop' ) ?>
+			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading your friends, please wait.', 'bp-nouveau' ) ;?></div>
 
 		</div><!-- .members.friends -->
 
