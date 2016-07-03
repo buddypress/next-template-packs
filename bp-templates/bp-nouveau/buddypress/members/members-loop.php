@@ -19,7 +19,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="members-list" class="item-list bp-list">
+	<ul id="members-list" class="item-list members-list bp-list">
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
 
@@ -29,16 +29,14 @@ bp_nouveau_before_loop(); ?>
 			</div>
 
 			<div class="item">
-				<div class="item-title">
-					<a href="<?php bp_member_permalink(); ?>"><?php bp_member_name(); ?></a>
 
-					<?php if ( bp_get_member_latest_update() ) : ?>
+				<h2 class="list-title member-name"><a href="<?php bp_member_permalink(); ?>"><?php bp_member_name(); ?></a></h2>
 
-						<span class="update"> <?php bp_member_latest_update(); ?></span>
-
-					<?php endif; ?>
-
-				</div>
+				<?php if ( bp_get_member_latest_update() ) : ?>
+					<div class="user-update">
+							<p class="update"> <?php bp_member_latest_update(); ?></p>
+					</div>
+				<?php endif; ?>
 
 				<?php if ( bp_nouveau_member_has_meta() ) : ?>
 					<div class="item-meta">
@@ -48,7 +46,7 @@ bp_nouveau_before_loop(); ?>
 					</div><!-- #item-meta -->
 				<?php endif ; ?>
 
-			</div>
+			</div><!-- // .item -->
 
 			<div class="action">
 

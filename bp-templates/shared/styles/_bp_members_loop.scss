@@ -1,0 +1,20 @@
+// BP Lists Global Styles.
+
+.buddypress {
+
+	.members-list { // ul
+
+		.member-name { // .list-title site wide
+			@include font-size(18);
+		}
+
+		.user-update {
+			color: $grey;
+			@include font-size(12);
+		}
+
+	} // close .members-list
+
+}
+
+

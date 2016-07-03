@@ -24,7 +24,7 @@
 				margin: 0 $marg-sml 0 0;
 			}
 
-			.item-title {
+			.list-title {
 				font-size: 90%;
 				font-weight: normal;
 				margin: 0;
@@ -50,7 +50,8 @@
 				top: 15px;
 			}
 
-			.meta {
+			.meta,
+			.item-meta {
 				color: #888;
 				font-size: 80%;
 				margin-top: $marg-sml;
