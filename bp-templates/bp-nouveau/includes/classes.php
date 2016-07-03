@@ -260,9 +260,9 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 		}
 
 		if ( bp_is_user() ) {
-			bp_get_template_part( 'members/single/item-nav' );
+			bp_get_template_part( 'members/single/parts/item-nav' );
 		} elseif ( bp_is_group() ) {
-			bp_get_template_part( 'groups/single/item-nav' );
+			bp_get_template_part( 'groups/single/parts/item-nav' );
 		} elseif ( bp_is_directory() ) {
 			bp_get_template_part( 'common/nav/directory-nav' );
 		}
