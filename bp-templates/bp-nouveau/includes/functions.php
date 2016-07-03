@@ -31,7 +31,6 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 
 		$find_id = array_intersect( $parse_class, array(
 			'pending_friend',
-			'awaiting_response_friend',
 			'is_friend',
 			'not_friends',
 			'leave-group',
@@ -47,7 +46,7 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 
 		$data_attribute = reset( $find_id );
 
-		if ( in_array( $data_attribute, array( 'pending_friend', 'awaiting_response_friend' ) ) ) {
+		if ( 'pending_friend' === $data_attribute ) {
 			$data_attribute = str_replace( '_friend', '', $data_attribute );
 
 		} elseif ( 'group_membership' === $button->id ) {
@@ -256,6 +255,11 @@ function bp_nouveau_get_forsaken_hooks() {
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
 			'message'      => __( 'The \'bp_group_members_list_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
+		),
+		'bp_friend_requests_item_action' => array(
+			'hook_type'    => 'action',
+			'message_type' => 'warning',
+			'message'      => __( 'The \'bp_friend_requests_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
 		),
 		'bp_group_header_meta' => array(
 			'hook_type'    => 'action',

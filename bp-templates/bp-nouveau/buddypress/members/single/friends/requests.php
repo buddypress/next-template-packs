@@ -27,10 +27,10 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 
 	</div>
 
-	<ul id="friend-list" class="item-list">
+	<ul id="friend-list" class="item-list" data-bp-list="friendship_requests">
 		<?php while ( bp_members() ) : bp_the_member(); ?>
 
-			<li id="friendship-<?php bp_friend_friendship_id(); ?>">
+			<li id="friendship-<?php bp_friend_friendship_id(); ?>" data-bp-item-id="<?php bp_friend_friendship_id(); ?>" data-bp-item-component="members">
 				<div class="item-avatar">
 					<a href="<?php bp_member_link(); ?>"><?php bp_member_avatar(); ?></a>
 				</div>
@@ -50,17 +50,9 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 				</div>
 
 				<div class="action">
-					<a class="button accept" href="<?php bp_friend_accept_request_link(); ?>"><?php _e( 'Accept', 'bp-nouveau' ); ?></a> &nbsp;
-					<a class="button reject" href="<?php bp_friend_reject_request_link(); ?>"><?php _e( 'Reject', 'bp-nouveau' ); ?></a>
 
-					<?php
+					<?php bp_nouveau_members_loop_buttons(); ?>
 
-					/**
-					 * Fires inside the member friend request actions markup.
-					 *
-					 * @since 1.1.0
-					 */
-					do_action( 'bp_friend_requests_item_action' ); ?>
 				</div>
 			</li>
 

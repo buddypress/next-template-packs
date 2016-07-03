@@ -148,9 +148,12 @@ function bp_nouveau_members_loop_buttons() {
 	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
 		$type   = 'group_member';
 		$action = 'bp_group_members_list_item_action';
+	} elseif ( bp_is_active( 'friends' ) && bp_is_user_friend_requests() ) {
+		$type   = 'friendship_request';
+		$action = 'bp_friend_requests_item_action';
 	}
 
-	echo join( ' ', bp_nouveau_get_members_buttons( 'loop' ) );
+	echo join( ' ', bp_nouveau_get_members_buttons( $type ) );
 
 	/**
 	 * Fires inside the members action HTML markup to display actions.
@@ -173,7 +176,7 @@ function bp_nouveau_members_loop_buttons() {
 
 		$buttons = array();
 
-		if ( 'loop' === $type ) {
+		if ( 'loop' === $type || 'friendship_request' === $type ) {
 			$user_id = bp_get_member_user_id();
 		} elseif ( 'group_member' === $type ) {
 			$user_id = bp_get_group_member_id();
@@ -186,26 +189,53 @@ function bp_nouveau_members_loop_buttons() {
 		}
 
 		if ( bp_is_active( 'friends' ) ) {
-			/**
-			 * This filter workaround is waiting for a core adaptation
-			 * so that we can directly get the friends button arguments
-			 * instead of the button.
-			 * @see https://buddypress.trac.wordpress.org/ticket/7126
-			 */
-			add_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
+			// It's the member's friendship requests screen
+			if (  'friendship_request' === $type ) {
+				$buttons = array( 'accept_friendship' => array(
+						'id'                => 'accept_friendship',
+						'position'          => 5,
+						'component'         => 'friends',
+						'must_be_logged_in' => true,
+						'link_href'         => esc_url( bp_get_friend_accept_request_link() ),
+						'link_text'         => __( 'Accept', 'bp-nouveau' ),
+						'link_title'        => __( 'Accept', 'bp-nouveau' ),
+						'link_class'        => 'button accept',
+					), 'reject_friendship' => array(
+						'id'                => 'reject_friendship',
+						'position'          => 15,
+						'component'         => 'friends',
+						'must_be_logged_in' => true,
+						'link_href'         => esc_url( bp_get_friend_reject_request_link() ),
+						'link_text'         => __( 'Reject', 'bp-nouveau' ),
+						'link_title'        => __( 'Reject', 'bp-nouveau' ),
+						'link_class'        => 'button reject',
+					),
+				);
 
-			bp_get_add_friend_button( $user_id );
+			// It's any other members screen
+			} else {
+				/**
+				 * This filter workaround is waiting for a core adaptation
+				 * so that we can directly get the friends button arguments
+				 * instead of the button.
+				 * @see https://buddypress.trac.wordpress.org/ticket/7126
+				 */
+				add_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-			remove_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
+				bp_get_add_friend_button( $user_id );
 
-			if ( ! empty( bp_nouveau()->members->button_args ) ) {
-				$buttons['member_friendship'] = wp_parse_args( array(
-					'id'       => 'member_friendship',
-					'position' => 5,
-				), bp_nouveau()->members->button_args );
+				remove_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
-				unset( bp_nouveau()->members->button_args );
+				if ( ! empty( bp_nouveau()->members->button_args ) ) {
+					$buttons['member_friendship'] = wp_parse_args( array(
+						'id'       => 'member_friendship',
+						'position' => 5,
+					), bp_nouveau()->members->button_args );
+
+					unset( bp_nouveau()->members->button_args );
+				}
 			}
+
 		}
 
 		// Only add The public and private messages when not in a loop
