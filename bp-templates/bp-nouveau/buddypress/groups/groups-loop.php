@@ -14,7 +14,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="groups-list" class="item-list bp-list">
+	<ul id="groups-list" class="item-list groups-list bp-list">
 
 	<?php while ( bp_groups() ) : bp_the_group(); ?>
 
@@ -26,7 +26,9 @@ bp_nouveau_before_loop(); ?>
 			<?php endif; ?>
 
 			<div class="item">
-				<div class="item-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></div>
+
+				<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
+
 				<div class="item-meta"><span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span></div>
 
 				<div class="item-desc"><?php bp_group_description_excerpt(); ?></div>

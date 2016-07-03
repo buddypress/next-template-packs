@@ -1,0 +1,36 @@
+// BP Lists Global Styles.
+
+.buddypress {
+
+
+	.groups-list { // ul
+		li {
+
+			.item-desc {
+				color: $meta-text;
+				font-style: italic;
+			}
+
+			@include medium-up() {
+
+				.item-meta,
+				.list-title {
+					text-align: center;
+					width: auto;
+				}
+
+
+				.item-desc {
+					margin: 0 auto;
+					width: 80%;
+				}
+
+			} // close @media
+
+		} // close li
+
+	} // close .groups-list
+
+}
+
+

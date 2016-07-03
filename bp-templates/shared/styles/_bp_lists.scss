@@ -16,7 +16,7 @@
 			border-bottom: 1px solid $light-grey;
 			list-style: none;
 			margin: $marg-sml 0;
-			padding: $marg-med 0;
+			padding: $pad-sml 0;
 			position: relative;
 
 			img.avatar {
@@ -24,30 +24,20 @@
 				margin: 0 $marg-sml 0 0;
 			}
 
-			.list-title {
-				font-size: 90%;
-				font-weight: normal;
-				margin: 0;
-				width: 75%;
+			.item {
 
-				span {
-					color: #999;
-					font-size: 80%;
+				.list-title {
+					font-size: 90%;
+					font-weight: normal;
+					margin: 0;
 				}
-			} // close item-title
+			}
 
 			.item-desc {
 				color: #888;
 				font-size: 80%;
 				margin: $marg-sml 0 0 60px;
 				width: 50%;
-			}
-
-			div.action {
-				position: absolute;
-				right: 0;
-				text-align: right;
-				top: 15px;
 			}
 
 			.meta,
@@ -57,6 +47,37 @@
 				margin-top: $marg-sml;
 			}
 
+			.generic-button {
+				display: inline-block;
+				margin: 0 $marg-sml 0 0;
+			}
+
+			@include medium-up() {
+
+				.item-avatar {
+					float: left;
+					width: 18%;
+				}
+
+				.item {
+					margin: 0 20%;
+					overflow: hidden;
+				}
+
+				.action {
+					position: absolute;
+					right: 0;
+					text-align: right;
+					top:0;
+				}
+
+				.generic-button {
+					display: block;
+					margin: 0  0 $marg-xsml 0;
+				}
+
+			} // close @media
+
 		} // close li
 
 		li.group-no-avatar div.item-desc {
@@ -65,7 +86,7 @@
 
 	} // close .bp-list
 
-}
+} // .buddypress
 
 // body class: single act items screens.
 .activity-permalink {

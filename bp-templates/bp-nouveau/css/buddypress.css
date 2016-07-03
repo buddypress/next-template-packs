@@ -328,7 +328,7 @@
 	border-bottom: 1px solid #eaeaea;
 	list-style: none;
 	margin: 10px 0;
-	padding: 15px 0;
+	padding: 0.5em 0;
 	position: relative;
 }
 
@@ -337,16 +337,10 @@
 	margin: 0 10px 0 0;
 }
 
-.buddypress .bp-list li .list-title {
+.buddypress .bp-list li .item .list-title {
 	font-size: 90%;
 	font-weight: normal;
 	margin: 0;
-	width: 75%;
-}
-
-.buddypress .bp-list li .list-title span {
-	color: #999;
-	font-size: 80%;
 }
 
 .buddypress .bp-list li .item-desc {
@@ -356,18 +350,37 @@
 	width: 50%;
 }
 
-.buddypress .bp-list li div.action {
-	position: absolute;
-	right: 0;
-	text-align: right;
-	top: 15px;
-}
-
 .buddypress .bp-list li .meta,
 .buddypress .bp-list li .item-meta {
 	color: #888;
 	font-size: 80%;
 	margin-top: 10px;
+}
+
+.buddypress .bp-list li .generic-button {
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .bp-list li .item-avatar {
+		float: left;
+		width: 18%;
+	}
+	.buddypress .bp-list li .item {
+		margin: 0 20%;
+		overflow: hidden;
+	}
+	.buddypress .bp-list li .action {
+		position: absolute;
+		right: 0;
+		text-align: right;
+		top: 0;
+	}
+	.buddypress .bp-list li .generic-button {
+		display: block;
+		margin: 0 0 5px 0;
+	}
 }
 
 .buddypress .bp-list li.group-no-avatar div.item-desc {
@@ -773,6 +786,23 @@ form.ac-form .ac-reply-content input {
 * @section 3.2 - Groups Loop
 *----------------------------------------------------------
 */
+.buddypress .groups-list li .item-desc {
+	color: #888;
+	font-style: italic;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .groups-list li .item-meta,
+	.buddypress .groups-list li .list-title {
+		text-align: center;
+		width: auto;
+	}
+	.buddypress .groups-list li .item-desc {
+		margin: 0 auto;
+		width: 80%;
+	}
+}
+
 /**
 *----------------------------------------------------------
 * @section 3.2 - Members Loop
