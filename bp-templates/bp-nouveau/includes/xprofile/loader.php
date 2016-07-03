@@ -85,6 +85,6 @@ function bp_nouveau_xprofile( $bp_nouveau = null ) {
 		return;
 	}
 
-	$bp_nouveau->friends = new BP_Nouveau_xProfile();
+	$bp_nouveau->xprofile = new BP_Nouveau_xProfile();
 }
 add_action( 'bp_nouveau_includes', 'bp_nouveau_xprofile', 10, 1 );
