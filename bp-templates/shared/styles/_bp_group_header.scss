@@ -1,9 +1,29 @@
 // BP Single Group Header Styles.
 
-.single-group-header {
+.groups-header {
 
+	// The admin & mod list display for a group.
+	// 'moderators-lists' is used to refer to generic members with elevated access
+	.moderators-lists {
+		.moderators-title {
+			@include font-size(14);
+		}
 
+		.user-list {
+			ul {
+				overflow: hidden;
+			}
 
+			li {
+				float: right;
+			}
+		}
 
-} // close .single-group-header
+		img.avatar {
+			height: 20px;
+			width: 20px;
+		}
+	} // close moderators-lists
+
+} // close groups-header
 

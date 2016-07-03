@@ -26,8 +26,12 @@
 }
 
 #item-header-cover-image {
-	padding: 0 1em;
+	//padding: 0 1em;
 	position: relative;
 	z-index: 999;
+
+	#item-header-avatar {
+		padding: 0 1em;
+	}
 }
 /* end cover image block */

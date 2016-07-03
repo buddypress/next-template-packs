@@ -30,7 +30,7 @@
 
 	<?php bp_nouveau_group_hook( 'before', 'members_list' ); ?>
 
-	<ul id="member-list" class="item-list">
+	<ul id="member-list" class="item-list bp-list">
 
 		<?php while ( bp_group_members() ) : bp_group_the_member(); ?>
 

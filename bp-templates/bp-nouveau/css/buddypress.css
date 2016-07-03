@@ -937,9 +937,12 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 #item-header-cover-image {
-	padding: 0 1em;
 	position: relative;
 	z-index: 999;
+}
+
+#item-header-cover-image #item-header-avatar {
+	padding: 0 1em;
 }
 
 /* end cover image block */
@@ -950,6 +953,24 @@ body.no-js .single-item-header .js-self-profile-button {
 * Group Specific Item Header
 *-----------------------------------------------------
 */
+.groups-header .moderators-lists .moderators-title {
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+
+.groups-header .moderators-lists .user-list ul {
+	overflow: hidden;
+}
+
+.groups-header .moderators-lists .user-list li {
+	float: right;
+}
+
+.groups-header .moderators-lists img.avatar {
+	height: 20px;
+	width: 20px;
+}
+
 /**
 *-----------------------------------------------------
 * @subsection 5.1.2 - Item Header User Accounts

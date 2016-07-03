@@ -1,6 +1,7 @@
 // BP Lists Global Styles.
 
 .buddypress {
+
 	.bp-list {
 		@include box-model();
 		border-top: 1px solid $light-grey;
