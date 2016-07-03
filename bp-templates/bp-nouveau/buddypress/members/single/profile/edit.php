@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Members Single Profile Edit
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 /**
@@ -41,53 +42,8 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 				$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 				$field_type->edit_field_html();
 
-				/**
-				 * Fires before the display of visibility options for the field.
-				 *
-				 * @since 1.7.0
-				 */
-				do_action( 'bp_custom_profile_edit_fields_pre_visibility' );
+				bp_nouveau_xprofile_edit_visibilty();
 				?>
-
-				<?php if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
-					<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-						<?php
-						printf(
-							__( 'This field can be seen by: %s', 'bp-nouveau' ),
-							'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-						);
-						?>
-						<a href="#" class="visibility-toggle-link"><?php _e( 'Change', 'bp-nouveau' ); ?></a>
-					</p>
-
-					<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>">
-						<fieldset>
-							<legend><?php _e( 'Who can see this field?', 'bp-nouveau' ) ?></legend>
-
-							<?php bp_profile_visibility_radio_buttons() ?>
-
-						</fieldset>
-						<a class="field-visibility-settings-close" href="#"><?php _e( 'Close', 'bp-nouveau' ) ?></a>
-					</div>
-				<?php else : ?>
-					<div class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-						<?php
-						printf(
-							__( 'This field can be seen by: %s', 'bp-nouveau' ),
-							'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
-						);
-						?>
-					</div>
-				<?php endif ?>
-
-				<?php
-
-				/**
-				 * Fires after the visibility options for a field.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_custom_profile_edit_fields' ); ?>
 
 				<p class="description"><?php bp_the_profile_field_description(); ?></p>
 			</div>
