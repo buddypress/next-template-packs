@@ -35,11 +35,7 @@ bp_nouveau_before_loop(); ?>
 
 			</div>
 
-			<div class="action">
-
-				<?php bp_nouveau_blogs_loop_buttons(); ?>
-
-			</div>
+			<?php bp_nouveau_blogs_loop_buttons(); ?>
 
 			<div class="meta">
 
