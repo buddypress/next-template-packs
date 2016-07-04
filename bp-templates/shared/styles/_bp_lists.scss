@@ -12,6 +12,17 @@
 		padding: 0;
 		width: 100%;
 
+		// these clearfix rules simply becauase the element can't be classed
+		li:before,
+		li:after {
+			content: " ";
+			display: table;
+		}
+
+		li:after {
+			clear: both;
+		}
+
 		li {
 			border-bottom: 1px solid $light-grey;
 			list-style: none;
@@ -19,14 +30,18 @@
 			padding: $pad-sml 0;
 			position: relative;
 
-			img.avatar {
-				float: left;
-				margin: 0 $marg-sml 0 0;
+			.item-avatar {
+				text-align: center;
+
+				img.avatar {
+					display: inline;
+				}
 			}
 
 			.item {
 
 				.list-title {
+					clear: none; // some WP theme state clear:both
 					font-size: 90%;
 					font-weight: normal;
 					margin: 0;
@@ -52,12 +67,30 @@
 				margin: 0 $marg-sml 0 0;
 			}
 
-			@include medium-up() {
-
+			@include small-up() {
 				.item-avatar {
 					float: left;
+					text-align: left;
 					width: 18%;
 				}
+
+				.list-title,
+				.item-meta {
+					float: left;
+				}
+
+				.item-meta,
+				.action {
+					clear: left;
+				}
+
+				.action {
+					padding: $pad-sml 0 0;
+				}
+
+			} // close @media
+
+			@include medium-up() {
 
 				.item {
 					margin: 0 20%;
@@ -65,6 +98,7 @@
 				}
 
 				.action {
+					padding: 0;
 					position: absolute;
 					right: 0;
 					text-align: right;

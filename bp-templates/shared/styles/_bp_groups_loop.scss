@@ -21,7 +21,11 @@
 
 
 				.item-desc {
-					margin: 0 auto;
+					border-left: 1px solid $light-grey;
+					border-right: 1px solid $light-grey;
+					clear: left;
+					margin: $marg-med auto;
+					padding: $pad-med $pad-sml;
 					width: 80%;
 				}
 

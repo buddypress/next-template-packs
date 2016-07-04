@@ -22,7 +22,7 @@
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
-1.0 - BP Typography & Imagery
+1.0 - BP Generic, Typography & Imagery
 
 2.0 - Navigation - General
 	2.1 - Navs - Object Nav / Sub Nav (item-list-tabs)
@@ -67,10 +67,12 @@
 
 /**
 *-------------------------------------------------------------------------------
-* @section 1.0 - BP Typography & Imagery
+* @section 1.0 - BP Generic, Typography & Imagery
 *-------------------------------------------------------------------------------
 */
 
+// Import our generic elements & typography styles
+@import "../../shared/styles/_bp_generic_&_typography";
 
 /**
 *-------------------------------------------------------------------------------
@@ -147,13 +149,16 @@
 *----------------------------------------------------------
 */
 
+// Blogs loop
+@import "../../shared/styles/_bp_blogs_loop";
+
 /**
 *----------------------------------------------------------
 * @section 3.2 - Groups Loop
 *----------------------------------------------------------
 */
 
-// Members loop
+// Groups loop
 @import "../../shared/styles/_bp_groups_loop";
 
 

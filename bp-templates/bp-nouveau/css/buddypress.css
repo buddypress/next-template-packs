@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
-1.0 - BP Typography & Imagery
+1.0 - BP Generic, Typography & Imagery
 
 2.0 - Navigation - General
 	2.1 - Navs - Object Nav / Sub Nav (item-list-tabs)
@@ -45,9 +45,13 @@
 --------------------------------------------------------------*/
 /**
 *-------------------------------------------------------------------------------
-* @section 1.0 - BP Typography & Imagery
+* @section 1.0 - BP Generic, Typography & Imagery
 *-------------------------------------------------------------------------------
 */
+body .buddypress a {
+	border-bottom: 0;
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 2.0 - Navigation - General
@@ -324,6 +328,16 @@
 	width: 100%;
 }
 
+.buddypress .bp-list li:before,
+.buddypress .bp-list li:after {
+	content: " ";
+	display: table;
+}
+
+.buddypress .bp-list li:after {
+	clear: both;
+}
+
 .buddypress .bp-list li {
 	border-bottom: 1px solid #eaeaea;
 	list-style: none;
@@ -332,12 +346,16 @@
 	position: relative;
 }
 
-.buddypress .bp-list li img.avatar {
-	float: left;
-	margin: 0 10px 0 0;
+.buddypress .bp-list li .item-avatar {
+	text-align: center;
+}
+
+.buddypress .bp-list li .item-avatar img.avatar {
+	display: inline;
 }
 
 .buddypress .bp-list li .item .list-title {
+	clear: none;
 	font-size: 90%;
 	font-weight: normal;
 	margin: 0;
@@ -362,16 +380,32 @@
 	margin: 0 10px 0 0;
 }
 
-@media screen and (min-width: 46.8em) {
+@media screen and (min-width: 24em) {
 	.buddypress .bp-list li .item-avatar {
 		float: left;
+		text-align: left;
 		width: 18%;
 	}
+	.buddypress .bp-list li .list-title,
+	.buddypress .bp-list li .item-meta {
+		float: left;
+	}
+	.buddypress .bp-list li .item-meta,
+	.buddypress .bp-list li .action {
+		clear: left;
+	}
+	.buddypress .bp-list li .action {
+		padding: 0.5em 0 0;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
 	.buddypress .bp-list li .item {
 		margin: 0 20%;
 		overflow: hidden;
 	}
 	.buddypress .bp-list li .action {
+		padding: 0;
 		position: absolute;
 		right: 0;
 		text-align: right;
@@ -798,7 +832,11 @@ form.ac-form .ac-reply-content input {
 		width: auto;
 	}
 	.buddypress .groups-list li .item-desc {
-		margin: 0 auto;
+		border-left: 1px solid #eaeaea;
+		border-right: 1px solid #eaeaea;
+		clear: left;
+		margin: 15px auto;
+		padding: 1em 0.5em;
 		width: 80%;
 	}
 }
