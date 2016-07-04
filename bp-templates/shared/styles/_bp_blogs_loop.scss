@@ -1,0 +1,16 @@
+// BP Blogs loop.
+
+.buddypress {
+
+	.blogs-list { // ul
+		li {
+
+			@include medium-up() {
+
+			} // close @media
+
+		} // close li
+
+	} // close .blogs-list
+
+}

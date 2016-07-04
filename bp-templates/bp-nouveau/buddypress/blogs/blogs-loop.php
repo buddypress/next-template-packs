@@ -15,7 +15,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="blogs-list" class="item-list">
+	<ul id="blogs-list" class="item-list blogs-list bp-list">
 
 	<?php while ( bp_blogs() ) : bp_the_blog(); ?>
 
@@ -26,7 +26,9 @@ bp_nouveau_before_loop(); ?>
 			</div>
 
 			<div class="item">
-				<div class="item-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></div>
+
+				<h2 class="list-title blogs-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></h2>
+
 				<div class="item-meta"><span class="activity"><?php bp_blog_last_active(); ?></span></div>
 
 				<?php bp_nouveau_blogs_loop_item(); ?>

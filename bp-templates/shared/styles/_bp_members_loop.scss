@@ -1,20 +1,21 @@
-// BP Lists Global Styles.
+// BP Members loop.
 
 .buddypress {
 
 	.members-list { // ul
+		li {
 
-		.member-name { // .list-title site wide
-			@include font-size(18);
-		}
+			.member-name { // .list-title _bp_lists.scss handles site wide
+				@include font-size(18);
+			}
 
-		.user-update {
-			color: $grey;
-			@include font-size(12);
-		}
+			.user-update {
+				color: $grey;
+				@include font-size(12);
+			}
+
+		} // close li
 
 	} // close .members-list
 
 }
-
-

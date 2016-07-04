@@ -808,12 +808,12 @@ form.ac-form .ac-reply-content input {
 * @section 3.2 - Members Loop
 *----------------------------------------------------------
 */
-.buddypress .members-list .member-name {
+.buddypress .members-list li .member-name {
 	font-size: 18px;
 	font-size: 1.8rem;
 }
 
-.buddypress .members-list .user-update {
+.buddypress .members-list li .user-update {
 	color: #eee;
 	font-size: 12px;
 	font-size: 1.2rem;
