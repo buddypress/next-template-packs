@@ -640,6 +640,33 @@ function bp_nouveau_customizer_enqueue_scripts() {
 }
 
 /**
+ * Inline script to toggle the signup blog form
+ *
+ * @since  1.0.0
+ *
+ * @return string Javascript output
+ */
+function bp_nouveau_get_blog_signup_inline_script() {
+	return '
+		( function( $ ) {
+			if ( $( \'body\' ).hasClass( \'register\' ) ) {
+				var blog_checked = $( \'#signup_with_blog\' );
+
+				// hide "Blog Details" block if not checked by default
+				if ( ! blog_checked.prop( \'checked\' ) ) {
+					$( \'#blog-details\' ).toggle();
+				}
+
+				// toggle "Blog Details" block whenever checkbox is checked
+				blog_checked.change(function() {
+					$( \'#blog-details\' ).toggle();
+				});
+			}
+		} )( jQuery );
+	';
+}
+
+/**
  * BP Nouveau's callback for the cover image feature.
  *
  * @since  1.0.0
