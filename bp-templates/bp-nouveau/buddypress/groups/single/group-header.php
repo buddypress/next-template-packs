@@ -34,9 +34,5 @@
 		</div><!-- #item-meta -->
 	<?php endif; ?>
 
-	<div id="item-buttons">
-
-		<?php bp_nouveau_group_header_buttons(); ?>
-
-	</div><!-- #item-buttons -->
+	<?php bp_nouveau_group_header_buttons(); ?>
 </div><!-- #item-header-content -->

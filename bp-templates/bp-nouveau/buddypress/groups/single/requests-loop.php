@@ -44,11 +44,7 @@
 
 				<?php bp_nouveau_group_hook( '', 'membership_requests_admin_item' ); ?>
 
-				<div class="action">
-
-					<?php bp_nouveau_groups_request_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_groups_request_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>

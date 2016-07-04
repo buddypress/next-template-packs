@@ -380,11 +380,14 @@ function bp_nouveau_group_manage_screen() {
  * Output the action buttons for the displayed group
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_group_header_buttons() {
+function bp_nouveau_group_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	echo join( ' ', bp_nouveau_get_groups_buttons() );
+	$output = join( ' ', bp_nouveau_get_groups_buttons() );
 
 	/**
 	 * On the group's header we need to reset the group button's global
@@ -393,92 +396,152 @@ function bp_nouveau_group_header_buttons() {
 		unset( $bp_nouveau->groups->group_buttons );
 	}
 
+	ob_start();
 	/**
 	 * Fires in the group header actions section.
 	 *
 	 * @since 1.2.6
 	 */
 	do_action( 'bp_group_header_actions' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	if ( empty( $args ) ) {
+		$args = array( 'classes' => array( 'item-buttons' ) );
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 /**
  * Output the action buttons inside the groups loop.
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_groups_loop_buttons() {
+function bp_nouveau_groups_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_groups_buttons( 'loop' ) );
+	$output = join( ' ', bp_nouveau_get_groups_buttons( 'loop' ) );
 
+	ob_start();
 	/**
 	 * Fires inside the action section of an individual group listing item.
 	 *
 	 * @since 1.1.0 (BuddyPress)
 	 */
 	do_action( 'bp_directory_groups_actions' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 /**
  * Output the action buttons inside the invites loop of the displayed user.
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_groups_invite_buttons() {
+function bp_nouveau_groups_invite_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_groups_buttons( 'invite' ) );
+	$output = join( ' ', bp_nouveau_get_groups_buttons( 'invite' ) );
 
+	ob_start();
 	/**
 	 * Fires inside the member group item action markup.
 	 *
 	 * @since 1.1.0
 	 */
 	do_action( 'bp_group_invites_item_action' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 /**
  * Output the action buttons inside the requests loop of the group's manage screen.
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_groups_request_buttons() {
+function bp_nouveau_groups_request_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['requests_template'] ) ) {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_groups_buttons( 'request' ) );
+	$output = join( ' ', bp_nouveau_get_groups_buttons( 'request' ) );
 
+	ob_start();
 	/**
 	 * Fires inside the list of membership request actions.
 	 *
 	 * @since 1.1.0
 	 */
 	do_action( 'bp_group_membership_requests_admin_item_action' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 /**
  * Output the action buttons inside the manage members loop of the group's manage screen.
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_groups_manage_members_buttons() {
+function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['members_template'] ) ) {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_groups_buttons( 'manage_members' ) );
+	$output = join( ' ', bp_nouveau_get_groups_buttons( 'manage_members' ) );
 
+	ob_start();
 	/**
 	 * Fires inside the display of a member admin item in group management area.
 	 *
 	 * @since 1.1.0
 	 */
 	do_action( 'bp_group_manage_members_admin_item' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	if ( empty( $args ) ) {
+		$args = array( 'wrapper' => 'span', 'classes' => array( 'small' ) );
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**

@@ -44,11 +44,7 @@ bp_nouveau_before_loop(); ?>
 
 			</div>
 
-			<div class="action">
-
-				<?php bp_nouveau_groups_loop_buttons(); ?>
-
-			</div>
+			<?php bp_nouveau_groups_loop_buttons(); ?>
 
 			<?php if ( bp_nouveau_group_has_meta() ) : ?>
 

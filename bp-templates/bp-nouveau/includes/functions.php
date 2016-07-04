@@ -59,6 +59,59 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 }
 
 /**
+ * Output HTML content into a wrapper.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args {
+ *     Array of arguments.
+ *
+ *     @type string      $container         String HTML element type that should wrap
+ *                                          the buttons: 'div', 'span', or 'p'. Required.
+ *     @type array       $classes           Optional. DOM classes of the button wrapper
+ *                                          Default: array ( 'action' ).
+ *     @type string      $id                Optional. DOM ID of the button wrapper element.
+ *                                          Default: ''.
+ *     @type string      $output            The HTML to output. Required.
+ * }
+ * @return string       HTML Output
+ */
+function bp_nouveau_wrapper( $args = array() ) {
+	$r = wp_parse_args( $args, array(
+		'wrapper' => 'div',
+		'classes' => array( 'action' ),
+		'id'      => '',
+		'output'  => '',
+	) );
+
+	$valid_wrappers = array(
+		'div'  => true,
+		'span' => true,
+		'p'    => true,
+	);
+
+	if ( empty( $r['wrapper'] ) || ! isset( $valid_wrappers[ $r['wrapper'] ] ) || empty( $r['output'] ) ) {
+		return;
+	}
+
+	$wrapper = $r['wrapper'];
+	$id        = '';
+	$class     = '';
+	$output    = $r['output'];
+
+	if ( ! empty( $r['id'] ) ) {
+		$id = ' id="' . esc_attr( $r['id'] ) . '"';
+	}
+
+	if ( ! empty( $r['classes'] ) && is_array( $r['classes'] ) ) {
+		$class = ' class="' . join( ' ', array_map( 'sanitize_html_class', $r['classes'] ) ) .'"';
+	}
+
+	// Print the wrapper and its content.
+	printf( '<%1$s%2$s%3$s>%4$s</%1$s>', $wrapper, $id, $class, $output );
+}
+
+/**
  * Register the 2 sidebars for the Group & User default front page
  *
  * @since  1.0.0

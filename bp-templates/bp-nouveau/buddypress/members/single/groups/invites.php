@@ -30,11 +30,7 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 				<?php bp_nouveau_group_hook( '', 'invites_item' ); ?>
 
-				<div class="action">
-
-					<?php bp_nouveau_groups_invite_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_groups_invite_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>
