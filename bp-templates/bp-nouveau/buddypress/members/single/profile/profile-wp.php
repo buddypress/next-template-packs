@@ -27,13 +27,11 @@ bp_nouveau_wp_profile_hooks(); ?>
 
 		</table>
 
-	<?php else : ?>
+	<?php else :
 
-		<div class="bp-feedback info">
-			<?php echo esc_html( sprintf( __( '%s did not save any profile informations yet.', 'bp-nouveau' ), bp_get_displayed_user_fullname() ) ); ?>
-		</div>
+		bp_nouveau_user_feedback( 'member-wp-profile-none' );
 
-	<?php endif; ?>
+	endif; ?>
 
 </div>
 

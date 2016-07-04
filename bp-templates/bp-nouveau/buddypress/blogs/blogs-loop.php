@@ -55,12 +55,10 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'bottom' ); ?>
 
-<?php else: ?>
+<?php else:
 
-	<div id="message" class="bp-messages info">
-		<p><?php _e( 'Sorry, there were no sites found.', 'bp-nouveau' ); ?></p>
-	</div>
+	bp_nouveau_user_feedback( 'blogs-loop-none' );
 
-<?php endif; ?>
+endif; ?>
 
 <?php bp_nouveau_after_loop(); ?>

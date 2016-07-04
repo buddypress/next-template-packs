@@ -29,6 +29,6 @@
 
 <div id="members-group-list" class="group_members dir-list" data-bp-list="group_members">
 
-	<div id="bp-ajax-loader"><?php esc_html_e( 'Requesting the group members, please wait.', 'bp-nouveau' ) ;?></div>
+	<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'group-members-loading' ) ;?></div>
 
 </div><!-- .group_members.dir-list -->

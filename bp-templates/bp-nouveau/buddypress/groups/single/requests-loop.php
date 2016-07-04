@@ -76,10 +76,8 @@
 
 	</div>
 
-	<?php else: ?>
+	<?php else:
 
-		<div id="message" class="info">
-			<p><?php _e( 'There are no pending membership requests.', 'bp-nouveau' ); ?></p>
-		</div>
+		bp_nouveau_user_feedback( 'group-requests-none' );
 
-	<?php endif; ?>
+	endif; ?>

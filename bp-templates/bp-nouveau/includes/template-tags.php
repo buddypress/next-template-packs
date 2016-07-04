@@ -11,45 +11,54 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Add a class to style the template notice
+ * Add classes to style the template notice/feedback message
  *
  * @since  1.0.0
  *
  * @return string Css class Output
  */
-function bp_nouveau_template_message_type() {
-	echo sanitize_html_class( bp_nouveau_get_template_message_type() );
+function bp_nouveau_template_message_classes() {
+	$classes = array( 'bp-feedback', 'bp-messages' );
+
+	if ( ! empty( bp_nouveau()->template_message['message'] ) ) {
+		$classes[] = 'bp-template-notice';
+	}
+
+	$classes[] = bp_nouveau_get_template_message_type();
+	echo join( ' ', array_map( 'sanitize_html_class', $classes ) );
 }
 
 	/**
-	 * Get the template notice type
+	 * Get the template notice/feedback message type
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string the type of the notice. Defaults to error
 	 */
 	function bp_nouveau_get_template_message_type() {
-		$bp   = buddypress();
-		$type = 'error';
+		$bp_nouveau = bp_nouveau();
+		$type       = 'error';
 
-		if ( ! empty( $bp->template_message_type ) ) {
-			$type = $bp->template_message_type;
+		if ( ! empty( $bp_nouveau->template_message['type'] ) ) {
+			$type = $bp_nouveau->template_message['type'];
+		} elseif ( ! empty( $bp_nouveau->user_feedback['type'] ) ) {
+			$type = $bp_nouveau->user_feedback['type'];
 		}
 
 		return $type;
 	}
 
 /**
- * Checks if a template notice is set
+ * Checks if a template notice/feedback message is set
  *
  * @since 1.0.0
  *
  * @return bool True if a template notice is set. False otherwise.
  */
 function bp_nouveau_has_template_message() {
-	$bp = buddypress();
+	$bp_nouveau = bp_nouveau();
 
-	if ( empty( $bp->template_message ) ) {
+	if ( empty( $bp_nouveau->template_message['message'] ) && empty( $bp_nouveau->user_feedback ) ) {
 		return false;
 	}
 
@@ -57,7 +66,42 @@ function bp_nouveau_has_template_message() {
 }
 
 /**
- * Displays a template notice.
+ * Checks if the template notice/feedback message needs a dismiss button
+ *
+ * @since 1.0.0
+ *
+ * @return bool True if a template notice needs a dismiss button. False otherwise.
+ */
+function bp_nouveau_has_dismiss_button() {
+	$bp_nouveau = bp_nouveau();
+
+	if ( ! empty( $bp_nouveau->template_message['message'] ) || ! empty( $bp_nouveau->user_feedback['dismiss'] ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Ouptut the dismiss type.
+ *
+ * @since 1.0.0
+ *
+ * @return string The dismiss type.
+ */
+function bp_nouveau_dismiss_button_type() {
+	$bp_nouveau = bp_nouveau();
+	$type = 'clear';
+
+	if ( ! empty( $bp_nouveau->user_feedback['dismiss'] ) ) {
+		$type = $bp_nouveau->user_feedback['dismiss'];
+	}
+
+	echo esc_attr( $type );
+}
+
+/**
+ * Displays a template notice/feedback message.
  *
  * @since  1.0.0
  *
@@ -68,33 +112,62 @@ function bp_nouveau_template_message() {
 }
 
 	/**
-	 * Get the template notice and make sure core filter is applyed.
+	 * Get the template notice/feedback message and make sure core filter is applied.
 	 *
 	 * @since  1.0.0
 	 *
 	 * @return string HTML Output.
 	 */
 	function bp_nouveau_get_template_message() {
-		/**
-		 * Filters the 'template_notices' feedback message content.
-		 *
-		 * @since 1.5.5 (BuddyPress)
-		 *
-		 * @param string $template_message Feedback message content.
-		 * @param string $type             The type of message being displayed.
-		 *                                 Either 'updated' or 'error'.
-		 */
-		return apply_filters( 'bp_core_render_message_content', buddypress()->template_message, bp_nouveau_get_template_message_type() );
+		$bp_nouveau = bp_nouveau();
+
+		if ( ! empty( $bp_nouveau->user_feedback['message'] ) ) {
+			$user_feedback = $bp_nouveau->user_feedback['message'];
+			foreach ( array( 'wp_kses_data', 'wp_unslash', 'wptexturize', 'convert_smilies', 'convert_chars' ) as $filter ) {
+				$user_feedback = call_user_func( $filter, $user_feedback );
+			}
+
+			return $user_feedback;
+		} elseif ( ! empty( $bp_nouveau->template_message['message'] ) ) {
+			/**
+			 * Filters the 'template_notices' feedback message content.
+			 *
+			 * @since 1.5.5 (BuddyPress)
+			 *
+			 * @param string $template_message Feedback message content.
+			 * @param string $type             The type of message being displayed.
+			 *                                 Either 'updated' or 'error'.
+			 */
+			return apply_filters( 'bp_core_render_message_content', $bp_nouveau->template_message['message'], bp_nouveau_get_template_message_type() );
+		}
 	}
 
 /**
  * Template tag to display feedback notices to users, if there are to display
  *
  * @since 1.0.0
+ *
+ * @return HTML Output.
  */
 function bp_nouveau_template_notices() {
-	if ( bp_nouveau_has_template_message() ) {
+	$bp         = buddypress();
+	$bp_nouveau = bp_nouveau();
+
+	if ( ! empty( $bp->template_message ) ) {
+		// Clone BuddyPress template message to avoid altering it.
+		$template_message = array( 'message' => $bp->template_message );
+
+		if ( ! empty( $bp->template_message_type ) ) {
+			$template_message['type'] = $bp->template_message_type;
+		}
+
+		$bp_nouveau->template_message = $template_message;
+
+
 		bp_get_template_part( 'common/notices/template-notices' );
+
+		// Reset just after rendering it.
+		$bp_nouveau->template_message = array();
 
 		/**
 		 * Fires after the display of any template_notices feedback messages.
@@ -110,6 +183,49 @@ function bp_nouveau_template_notices() {
 	 * @since 1.0.0 (BuddyPress)
 	 */
 	do_action( 'template_notices' );
+}
+
+/**
+ * Displays a feedback message to the user.
+ *
+ * @since 1.0.0
+ *
+ * @param  string  $feedback_id The ID of the message to display
+ * @return string  HTML Output.
+ */
+function bp_nouveau_user_feedback( $feedback_id = '' ) {
+	if ( ! isset( $feedback_id ) ) {
+		return '';
+	}
+
+	$bp_nouveau = bp_nouveau();
+	$feedback   = bp_nouveau_get_user_feedback( $feedback_id );
+
+	if ( ! $feedback ) {
+		return;
+	}
+
+	if ( ! empty( $feedback['before'] ) ) {
+		do_action( $feedback['before'] );
+	}
+
+	$bp_nouveau->user_feedback = $feedback;
+
+	/**
+	 * Filter here if you wish to use a different templates than the notice one.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string path to your template part.
+	 */
+	bp_get_template_part( apply_filters( 'bp_nouveau_user_feedback_template', 'common/notices/template-notices' ) );
+
+	if ( ! empty( $feedback['after'] ) ) {
+		do_action( $feedback['after'] );
+	}
+
+	// Reset the feedback message.
+	$bp_nouveau->user_feedback =array();
 }
 
 /**

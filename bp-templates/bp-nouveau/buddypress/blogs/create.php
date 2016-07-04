@@ -17,13 +17,11 @@ bp_nouveau_blogs_create_hook( 'before', 'content_template' ); ?>
 
 	<?php bp_show_blog_signup_form(); ?>
 
-<?php else: ?>
+<?php else:
 
-	<div id="message" class="bp-messages info">
-		<p><?php _e( 'Site registration is currently disabled', 'bp-nouveau' ); ?></p>
-	</div>
+	bp_nouveau_user_feedback( 'blogs-no-signup' );
 
-<?php endif; ?>
+endif; ?>
 
 <?php
 bp_nouveau_blogs_create_hook( 'after', 'content' );

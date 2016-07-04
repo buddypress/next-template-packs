@@ -7,21 +7,9 @@
  * @package BP Nouveau
  */
 
-bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
+bp_nouveau_member_hook( 'before', 'settings_template' );
 
-<div id="message" class="info">
-
-	<?php if ( bp_is_my_profile() ) : ?>
-
-		<p><?php _e( 'Deleting your account will delete all of the content you have created. It will be completely irrecoverable.', 'bp-nouveau' ); ?></p>
-
-	<?php else : ?>
-
-		<p><?php _e( 'Deleting this account will delete all of the content it has created. It will be completely irrecoverable.', 'bp-nouveau' ); ?></p>
-
-	<?php endif; ?>
-
-</div>
+bp_nouveau_user_feedback( 'member-delete-account' );?>
 
 <form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/delete-account'; ?>" name="account-delete-form" id="account-delete-form" class="standard-form" method="post">
 

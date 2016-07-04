@@ -32,8 +32,8 @@
 		</div>
 	</div>
 
-<?php else : ?>
+<?php else :
 
-	<?php bp_get_template_part( 'members/single/notifications/feedback-no-notifications' ); ?>
+	bp_nouveau_user_feedback( 'member-notifications-none' );
 
-<?php endif;
+endif;

@@ -48,7 +48,7 @@ switch ( bp_current_action() ) :
 
 		<div class="groups mygroups" data-bp-list="groups">
 
-			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the groups you are a member of, please wait.', 'bp-nouveau' ) ;?></div>
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-groups-loading' ) ;?></div>
 
 		</div>
 

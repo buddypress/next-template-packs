@@ -101,12 +101,10 @@
 			<?php endwhile; ?>
 		</ul>
 
-	<?php else: ?>
+	<?php else:
 
-		<div id="message" class="info">
-			<p><?php _e( 'This group has no members.', 'bp-nouveau' ); ?></p>
-		</div>
+		bp_nouveau_user_feedback( 'group-manage-members-none' );
 
-	<?php endif; ?>
+	endif; ?>
 
 </div>

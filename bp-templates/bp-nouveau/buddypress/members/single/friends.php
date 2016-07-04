@@ -42,7 +42,7 @@ switch ( bp_current_action() ) :
 
 		<div class="members friends" data-bp-list="members">
 
-			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading your friends, please wait.', 'bp-nouveau' ) ;?></div>
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-friends-loading' ) ;?></div>
 
 		</div><!-- .members.friends -->
 
