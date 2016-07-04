@@ -37,11 +37,13 @@ bp_nouveau_before_loop(); ?>
 
 			<?php bp_nouveau_blogs_loop_buttons(); ?>
 
-			<div class="meta">
+			<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
+				<div class="meta">
 
-				<?php bp_blog_latest_post(); ?>
+					<?php bp_blog_latest_post(); ?>
 
-			</div>
+				</div>
+			<?php endif; ?>
 
 		</li>
 

@@ -242,3 +242,14 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 
 		return $return;
 	}
+
+/**
+ * Check if the Sites has a latest post
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if the sites has a latest post. False otherwise.
+ */
+function bp_nouveau_blog_has_latest_post() {
+	return (bool) bp_get_blog_latest_post_title();
+}
