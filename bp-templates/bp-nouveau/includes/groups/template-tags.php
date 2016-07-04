@@ -401,17 +401,21 @@ function bp_nouveau_group_header_buttons() {
 	do_action( 'bp_group_header_actions' );
 }
 
+function bp_nouveau_groups_loop_buttons() {
+	echo bp_nouveau_get_groups_loop_buttons();
+}
+
 /**
  * Output the action buttons inside the groups loop.
  *
  * @since 1.0.0
  */
-function bp_nouveau_groups_loop_buttons() {
+function bp_nouveau_get_groups_loop_buttons() {
 	if ( empty( $GLOBALS['groups_template'] ) ) {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_groups_buttons( 'loop' ) );
+	return join( ' ', bp_nouveau_get_groups_buttons( 'loop' ) );
 
 	/**
 	 * Fires inside the action section of an individual group listing item.

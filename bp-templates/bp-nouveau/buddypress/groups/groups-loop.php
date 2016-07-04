@@ -44,11 +44,13 @@ bp_nouveau_before_loop(); ?>
 
 			</div>
 
-			<div class="action">
+			<?php if( bp_nouveau_get_groups_loop_buttons() ): ?>
+				<div class="action">
 
 				<?php bp_nouveau_groups_loop_buttons(); ?>
 
-			</div>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( bp_nouveau_group_has_meta() ) : ?>
 
