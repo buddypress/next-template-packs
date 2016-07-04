@@ -245,7 +245,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 
 			$count = '';
 			if ( bp_get_total_mention_count_for_user( bp_loggedin_user_id() ) ) {
-				$count = bp_total_mention_count_for_user( bp_loggedin_user_id() );
+				$count = bp_get_total_mention_count_for_user( bp_loggedin_user_id() );
 			}
 
 			$nav_items['mentions'] = array(
