@@ -46,11 +46,7 @@
 
 				<?php bp_nouveau_group_hook( '', 'members_list_item' ); ?>
 
-				<div class="action">
-
-					<?php bp_nouveau_members_loop_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_members_loop_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>

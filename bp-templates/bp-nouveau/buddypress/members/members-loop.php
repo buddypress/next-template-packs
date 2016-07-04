@@ -48,11 +48,7 @@ bp_nouveau_before_loop(); ?>
 
 			</div><!-- // .item -->
 
-			<div class="action">
-
-				<?php bp_nouveau_members_loop_buttons(); ?>
-
-			</div>
+			<?php bp_nouveau_members_loop_buttons(); ?>
 
 		</li>
 

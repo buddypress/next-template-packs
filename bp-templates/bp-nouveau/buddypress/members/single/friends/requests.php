@@ -49,11 +49,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 					?>
 				</div>
 
-				<div class="action">
-
-					<?php bp_nouveau_members_loop_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_members_loop_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>

@@ -114,11 +114,14 @@ function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
  * Output the action buttons for the displayed user profile
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_member_header_buttons() {
+function bp_nouveau_member_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	echo join( ' ', bp_nouveau_get_members_buttons() );
+	$output = join( ' ', bp_nouveau_get_members_buttons() );
 
 	/**
 	 * On the member's header we need to reset the group button's global
@@ -128,15 +131,35 @@ function bp_nouveau_member_header_buttons() {
 		unset( $bp_nouveau->members->member_buttons );
 	}
 
+	ob_start();
 	/**
 	 * Fires in the member header actions section.
 	 *
 	 * @since 1.2.6 (BuddyPress)
 	 */
 	do_action( 'bp_member_header_actions' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	if ( empty( $args ) ) {
+		$args = array( 'id' => 'item-buttons', 'classes' => false );
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
-function bp_nouveau_members_loop_buttons() {
+/**
+ * Output the action buttons in member loops
+ *
+ * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
+ */
+function bp_nouveau_members_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['members_template'] ) ) {
 		return;
 	}
@@ -153,14 +176,22 @@ function bp_nouveau_members_loop_buttons() {
 		$action = 'bp_friend_requests_item_action';
 	}
 
-	echo join( ' ', bp_nouveau_get_members_buttons( $type ) );
+	$output = join( ' ', bp_nouveau_get_members_buttons( $type ) );
 
+	ob_start();
 	/**
 	 * Fires inside the members action HTML markup to display actions.
 	 *
 	 * @since 1.1.0 (BuddyPress)
 	 */
 	do_action( $action );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**
