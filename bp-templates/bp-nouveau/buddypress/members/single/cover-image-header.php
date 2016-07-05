@@ -26,7 +26,7 @@
 				<h2 class="user-nicename">@<?php bp_displayed_user_mentionname(); ?></h2>
 			<?php endif; ?>
 
-			<div id="item-buttons"><?php bp_nouveau_member_header_buttons(); ?></div><!-- #item-buttons -->
+			<?php bp_nouveau_member_header_buttons(); ?>
 
 			<?php bp_nouveau_member_hook( 'before', 'header_meta' ); ?>
 

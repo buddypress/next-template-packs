@@ -30,22 +30,16 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 				<?php bp_nouveau_group_hook( '', 'invites_item' ); ?>
 
-				<div class="action">
-
-					<?php bp_nouveau_groups_invite_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_groups_invite_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>
 	</ul>
 
-<?php else: ?>
+<?php else:
 
-	<div id="message" class="info">
-		<p><?php _e( 'You have no outstanding group invites.', 'bp-nouveau' ); ?></p>
-	</div>
+	bp_nouveau_user_feedback( 'member-invites-none' );
 
-<?php endif;?>
+endif;?>
 
 <?php bp_nouveau_group_hook( 'after', 'invites_content' );

@@ -40,7 +40,7 @@
 
 	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		<li id="bp-ajax-loader"><?php esc_html_e( 'Loading your updates, please wait.', 'bp-nouveau' ) ;?></li>
+		<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-activity-loading' ) ;?></li>
 
 	</ul>
 

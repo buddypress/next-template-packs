@@ -59,6 +59,59 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 }
 
 /**
+ * Output HTML content into a wrapper.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args {
+ *     Array of arguments.
+ *
+ *     @type string      $container         String HTML element type that should wrap
+ *                                          the buttons: 'div', 'span', or 'p'. Required.
+ *     @type array       $classes           Optional. DOM classes of the button wrapper
+ *                                          Default: array ( 'action' ).
+ *     @type string      $id                Optional. DOM ID of the button wrapper element.
+ *                                          Default: ''.
+ *     @type string      $output            The HTML to output. Required.
+ * }
+ * @return string       HTML Output
+ */
+function bp_nouveau_wrapper( $args = array() ) {
+	$r = wp_parse_args( $args, array(
+		'wrapper' => 'div',
+		'classes' => array( 'action' ),
+		'id'      => '',
+		'output'  => '',
+	) );
+
+	$valid_wrappers = array(
+		'div'  => true,
+		'span' => true,
+		'p'    => true,
+	);
+
+	if ( empty( $r['wrapper'] ) || ! isset( $valid_wrappers[ $r['wrapper'] ] ) || empty( $r['output'] ) ) {
+		return;
+	}
+
+	$wrapper = $r['wrapper'];
+	$id        = '';
+	$class     = '';
+	$output    = $r['output'];
+
+	if ( ! empty( $r['id'] ) ) {
+		$id = ' id="' . esc_attr( $r['id'] ) . '"';
+	}
+
+	if ( ! empty( $r['classes'] ) && is_array( $r['classes'] ) ) {
+		$class = ' class="' . join( ' ', array_map( 'sanitize_html_class', $r['classes'] ) ) .'"';
+	}
+
+	// Print the wrapper and its content.
+	printf( '<%1$s%2$s%3$s>%4$s</%1$s>', $wrapper, $id, $class, $output );
+}
+
+/**
  * Register the 2 sidebars for the Group & User default front page
  *
  * @since  1.0.0
@@ -844,4 +897,184 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
 			}
 		}
 	';
+}
+
+/**
+ * All user feedback messages are available here
+ *
+ * @since 1.0.0
+ *
+ * @param  string $feedback_id The ID of the message.
+ * @return array  The list of parameters for the message
+ */
+function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
+	/**
+	 * Filter here to add your custom feedback messages
+	 *
+	 * @param array $value The list of feedback messages.
+	 */
+	$feedback_messages = apply_filters( 'bp_nouveau_feedback_messages', array(
+		'registration-disabled' => array(
+			'type'    => 'info',
+			'message' => __( 'User registration is currently not allowed.', 'bp-nouveau' ),
+			'before'  => 'bp_before_registration_disabled',
+			'after'   => 'bp_after_registration_disabled'
+		),
+		'request-details' => array(
+			'type'    => 'info',
+			'message' => __( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'bp-nouveau' ),
+			'before'  => false,
+			'after'   => false,
+		),
+		'completed-confirmation' => array(
+			'type'    => 'info',
+			'message' => __( 'You have successfully created your account! Please log in using the username and password you have just created.', 'bp-nouveau' ),
+			'before'  => 'bp_before_registration_confirmed',
+			'after'   => 'bp_after_registration_confirmed',
+		),
+		'directory-activity-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the community updates, please wait.', 'bp-nouveau' ),
+		),
+		'activity-loop-none' => array(
+			'type'    => 'info',
+			'message' => __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ),
+		),
+		'blogs-loop-none' => array(
+			'type'    => 'info',
+			'message' => __( 'Sorry, there were no sites found.', 'bp-nouveau' ),
+		),
+		'blogs-no-signup' => array(
+			'type'    => 'info',
+			'message' => __( 'Site registration is currently disabled.', 'bp-nouveau' ),
+		),
+		'directory-blogs-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the sites of the network, please wait.', 'bp-nouveau' ),
+		),
+		'directory-groups-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the groups of the community, please wait.', 'bp-nouveau' ),
+		),
+		'groups-loop-none' => array(
+			'type'    => 'info',
+			'message' => __( 'Sorry, there were no groups found.', 'bp-nouveau' ),
+		),
+		'group-activity-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the group updates, please wait.', 'bp-nouveau' ),
+		),
+		'group-members-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Requesting the group members, please wait.', 'bp-nouveau' ),
+		),
+		'group-members-none' => array(
+			'type'    => 'info',
+			'message' => __( 'Sorry, there were no group members found.', 'bp-nouveau' ),
+		),
+		'group-manage-members-none' => array(
+			'type'    => 'info',
+			'message' => __( 'This group has no members.', 'bp-nouveau' ),
+		),
+		'group-requests-none' => array(
+			'type'    => 'info',
+			'message' => __( 'There are no pending membership requests.', 'bp-nouveau' ),
+		),
+		'group-requests-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the members who requested to join the group, please wait.', 'bp-nouveau' ),
+		),
+		'group-delete-warning' => array(
+			'type'    => 'warning',
+			'message' => __( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'bp-nouveau' ),
+		),
+		'directory-members-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the members of your community, please wait.', 'bp-nouveau' ),
+		),
+		'members-loop-none' => array(
+			'type'    => 'info',
+			'message' => __( 'Sorry, no members were found.', 'bp-nouveau' ),
+		),
+		'member-requests-none' => array(
+			'type'    => 'info',
+			'message' => __( 'You have no pending friendship requests.', 'bp-nouveau' ),
+		),
+		'member-invites-none' => array(
+			'type'    => 'info',
+			'message' => __( 'You have no outstanding group invites.', 'bp-nouveau' ),
+		),
+		'member-notifications-none' => array(
+			'type'    => 'info',
+			'message' => __( 'This member has no notifications.', 'bp-nouveau' ),
+		),
+		'member-wp-profile-none' => array(
+			'type'    => 'info',
+			'message' => __( '%s did not save any profile informations yet.', 'bp-nouveau' ),
+		),
+		'member-delete-account' => array(
+			'type'    => 'info',
+			'message' => __( 'Deleting this account will delete all of the content it has created. It will be completely irrecoverable.', 'bp-nouveau' ),
+		),
+		'member-activity-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the user\'s updates, please wait.', 'bp-nouveau' ),
+		),
+		'member-blogs-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the blogs the user is a contributor of, please wait.', 'bp-nouveau' ),
+		),
+		'member-friends-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the members the user is friend with, please wait.', 'bp-nouveau' ),
+		),
+		'member-groups-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the groups the user is a member of, please wait.', 'bp-nouveau' ),
+		),
+	) );
+
+	if ( isset( $feedback_messages[ $feedback_id ] ) ) {
+		/**
+		 * Adjust some messages to the context.
+		 */
+		if ( 'completed-confirmation' === $feedback_id && bp_registration_needs_activation() ) {
+			$feedback_messages['completed-confirmation']['message'] = __( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'bp-nouveau' );
+		} elseif ( 'member-notifications-none' === $feedback_id ) {
+			$is_myprofile = bp_is_my_profile();
+
+			if ( bp_is_current_action( 'unread' ) ) {
+				$feedback_messages['member-notifications-none']['message'] = __( 'This member has no unread notifications.', 'bp-nouveau' );
+
+				if ( $is_myprofile ) {
+					$feedback_messages['member-notifications-none']['message'] = __( 'You have no unread notifications.', 'bp-nouveau' );
+				}
+			} elseif ( $is_myprofile ) {
+				$feedback_messages['member-notifications-none']['message'] = __( 'You have no notifications.', 'bp-nouveau' );
+			}
+		} elseif ( 'member-wp-profile-none' === $feedback_id && bp_is_user_profile() ) {
+			$feedback_messages['member-wp-profile-none']['message'] = sprintf( $feedback_messages['member-wp-profile-none']['message'], bp_get_displayed_user_fullname() );
+		} elseif ( 'member-delete-account' === $feedback_id && bp_is_my_profile() ) {
+			$feedback_messages['member-delete-account']['message'] = __( 'Deleting your account will delete all of the content you have created. It will be completely irrecoverable.', 'bp-nouveau' );
+		} elseif ( 'member-activity-loading' === $feedback_id && bp_is_my_profile() ) {
+			$feedback_messages['member-activity-loading']['message'] = __( 'Loading your updates, please wait.', 'bp-nouveau' );
+		} elseif ( 'member-blogs-loading' === $feedback_id && bp_is_my_profile() ) {
+			$feedback_messages['member-blogs-loading']['message'] = __( 'Loading the blogs you are a contributor of, please wait.', 'bp-nouveau' );
+		} elseif ( 'member-friends-loading' === $feedback_id && bp_is_my_profile() ) {
+			$feedback_messages['member-friends-loading']['message'] = __( 'Loading your friends, please wait.', 'bp-nouveau' );
+		}  elseif ( 'member-groups-loading' === $feedback_id && bp_is_my_profile() ) {
+			$feedback_messages['member-groups-loading']['message'] = __( 'Loading the groups you are a member of, please wait.', 'bp-nouveau' );
+		}
+
+		/**
+		 * Filter here if you wish to edit the message just before being displayed
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $feedback_messages
+		 */
+		return apply_filters( 'bp_nouveau_get_user_feedback', $feedback_messages[ $feedback_id ] );
+	}
+
+	return false;
 }

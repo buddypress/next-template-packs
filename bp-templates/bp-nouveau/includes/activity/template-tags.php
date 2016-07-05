@@ -176,16 +176,31 @@ function bp_nouveau_activity_content() {
  * Output the action buttons inside an Activity Loop
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_activity_entry_buttons() {
-	echo join( ' ', bp_nouveau_get_activity_entry_buttons() );
+function bp_nouveau_activity_entry_buttons( $args = array() ) {
+	$output = join( ' ', bp_nouveau_get_activity_entry_buttons() );
 
+	ob_start();
 	/**
 	 * Fires at the end of the activity entry meta data area.
 	 *
 	 * @since 1.2.0 (BuddyPress)
 	 */
 	do_action( 'bp_activity_entry_meta' );
+	$output .= ob_get_clean();
+
+	if ( empty( trim( $output, ' ' ) ) ) {
+		return;
+	}
+
+	if ( empty( $args ) ) {
+		$args = array( 'classes' => array( 'activity-meta' ) );
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**
@@ -527,16 +542,31 @@ function bp_nouveau_activity_comment_form() {
  * Output the action buttons for the activity comments
  *
  * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
  */
-function bp_nouveau_activity_comment_buttons() {
-	echo join( ' ', bp_nouveau_get_activity_comment_buttons() );
+function bp_nouveau_activity_comment_buttons( $args = array() ) {
+	$output = join( ' ', bp_nouveau_get_activity_comment_buttons() );
 
+	ob_start();
 	/**
 	 * Fires after the defualt comment action options display.
 	 *
 	 * @since 1.6.0 (BuddyPress)
 	 */
 	do_action( 'bp_activity_comment_options' );
+	$output .= ob_get_clean();
+
+	if ( empty( trim( $output, ' ' ) ) ) {
+		return;
+	}
+
+	if ( empty( $args ) ) {
+		$args = array( 'classes' => array( 'acomment-options' ) );
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**

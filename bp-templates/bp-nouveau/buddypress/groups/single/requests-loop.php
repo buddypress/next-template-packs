@@ -44,11 +44,7 @@
 
 				<?php bp_nouveau_group_hook( '', 'membership_requests_admin_item' ); ?>
 
-				<div class="action">
-
-					<?php bp_nouveau_groups_request_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_groups_request_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>
@@ -76,10 +72,8 @@
 
 	</div>
 
-	<?php else: ?>
+	<?php else:
 
-		<div id="message" class="info">
-			<p><?php _e( 'There are no pending membership requests.', 'bp-nouveau' ); ?></p>
-		</div>
+		bp_nouveau_user_feedback( 'group-requests-none' );
 
-	<?php endif; ?>
+	endif; ?>

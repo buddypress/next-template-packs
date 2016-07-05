@@ -24,7 +24,7 @@
 
 		<div id="item-header-content">
 
-			<div id="item-buttons"><?php bp_nouveau_group_header_buttons(); ?></div><!-- #item-buttons -->
+			<?php bp_nouveau_group_header_buttons(); ?>
 
 			<span class="highlight"><?php bp_group_type(); ?></span>
 			<span class="activity"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></span>

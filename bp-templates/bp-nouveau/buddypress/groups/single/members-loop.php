@@ -46,11 +46,7 @@
 
 				<?php bp_nouveau_group_hook( '', 'members_list_item' ); ?>
 
-				<div class="action">
-
-					<?php bp_nouveau_members_loop_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_members_loop_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>
@@ -77,10 +73,8 @@
 
 	<?php bp_nouveau_group_hook( 'after', 'members_content' ); ?>
 
-<?php else: ?>
+<?php else:
 
-	<div id="message" class="info">
-		<p><?php _e( 'No members were found.', 'bp-nouveau' ); ?></p>
-	</div>
+	bp_nouveau_user_feedback( 'group-members-none' );
 
-<?php endif; ?>
+endif; ?>

@@ -122,25 +122,43 @@ function bp_nouveau_blogs_loop_item() {
 	do_action( 'bp_directory_blogs_item' );
 }
 
-function bp_nouveau_blogs_loop_buttons() {
+/**
+ * Output the action buttons inside the blogs loop.
+ *
+ * @since 1.0.0
+ *
+ * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @return string HTML Output
+ */
+function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['blogs_template'] ) ) {
 		return;
 	}
 
-	echo join( ' ', bp_nouveau_get_blogs_buttons() );
+	$output = join( ' ', bp_nouveau_get_blogs_buttons() );
 
+	ob_start();
 	/**
 	 * Fires inside the blogs action listing area.
 	 *
 	 * @since 1.1.0
 	 */
 	do_action( 'bp_directory_blogs_actions' );
+	$output .= ob_get_clean();
+
+	if ( empty( $output ) ) {
+		return;
+	}
+
+	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**
 	 * Get the action buttons for the current blog in the loop.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param  string $type Type of Group of buttons to get.
 	 */
 	function bp_nouveau_get_blogs_buttons( $type = 'loop' ) {
 		// Not really sure why BP Legacy needed to do this...
@@ -224,3 +242,14 @@ function bp_nouveau_blogs_loop_buttons() {
 
 		return $return;
 	}
+
+/**
+ * Check if the Sites has a latest post
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if the sites has a latest post. False otherwise.
+ */
+function bp_nouveau_blog_has_latest_post() {
+	return (bool) bp_get_blog_latest_post_title();
+}

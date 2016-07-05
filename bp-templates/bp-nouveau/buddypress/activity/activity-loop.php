@@ -27,7 +27,7 @@ bp_nouveau_before_loop(); ?>
 <?php else : ?>
 
 	<li id="activity-stream-message" class="bp-messages info">
-		<p><?php _e( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ); ?></p>
+		<?php bp_nouveau_user_feedback( 'activity-loop-none' ) ;?>
 	</li>
 
 <?php endif; ?>

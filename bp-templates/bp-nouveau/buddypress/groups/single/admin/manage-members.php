@@ -94,19 +94,17 @@
 
 						<?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?>
 
-						<span class="small"><?php bp_nouveau_groups_manage_members_buttons() ; ?></span>
+						<?php bp_nouveau_groups_manage_members_buttons() ; ?>
 					</h5>
 				</li>
 
 			<?php endwhile; ?>
 		</ul>
 
-	<?php else: ?>
+	<?php else:
 
-		<div id="message" class="info">
-			<p><?php _e( 'This group has no members.', 'bp-nouveau' ); ?></p>
-		</div>
+		bp_nouveau_user_feedback( 'group-manage-members-none' );
 
-	<?php endif; ?>
+	endif; ?>
 
 </div>

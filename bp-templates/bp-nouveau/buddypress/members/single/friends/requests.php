@@ -49,11 +49,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 					?>
 				</div>
 
-				<div class="action">
-
-					<?php bp_nouveau_members_loop_buttons(); ?>
-
-				</div>
+				<?php bp_nouveau_members_loop_buttons(); ?>
 			</li>
 
 		<?php endwhile; ?>
@@ -84,12 +80,10 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 
 	</div>
 
-<?php else: ?>
+<?php else:
 
-	<div id="message" class="info">
-		<p><?php _e( 'You have no pending friendship requests.', 'bp-nouveau' ); ?></p>
-	</div>
+	bp_nouveau_user_feedback( 'member-requests-none' );
 
-<?php endif;?>
+endif;?>
 
 <?php bp_nouveau_member_hook( 'after', 'friend_requests_content' );

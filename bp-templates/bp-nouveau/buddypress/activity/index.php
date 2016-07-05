@@ -53,7 +53,7 @@
 
 		<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
-		 	<li id="bp-ajax-loader"><?php esc_html_e( 'Loading the community updates, please wait.', 'bp-nouveau' ) ;?></li>
+		 	<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-activity-loading' ) ;?></li>
 
 		</ul>
 

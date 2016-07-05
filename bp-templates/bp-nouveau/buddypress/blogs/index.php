@@ -30,7 +30,7 @@
 	</div>
 
 	<div id="blogs-dir-list" class="blogs dir-list" data-bp-list="blogs">
-		<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the sites of the network, please wait.', 'bp-nouveau' ) ;?></div>
+		<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-blogs-loading' ) ;?></div>
 	</div><!-- #blogs-dir-list -->
 
 	<?php bp_nouveau_after_blogs_directory_content() ;?>

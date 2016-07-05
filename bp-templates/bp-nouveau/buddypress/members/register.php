@@ -23,36 +23,11 @@
 
 		<form action="" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
 
-		<?php if ( 'registration-disabled' == bp_get_current_signup_step() ) : ?>
-
 			<?php bp_nouveau_template_notices(); ?>
 
-			<?php
-
-			/**
-			 * Fires before the display of the registration disabled message.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_before_registration_disabled' ); ?>
-
-				<p><?php _e( 'User registration is currently not allowed.', 'bp-nouveau' ); ?></p>
-
-			<?php
-
-			/**
-			 * Fires after the display of the registration disabled message.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_after_registration_disabled' ); ?>
-		<?php endif; // registration-disabled signup step ?>
+			<?php bp_nouveau_user_feedback( bp_get_current_signup_step() ) ; ?>
 
 		<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
-
-			<?php bp_nouveau_template_notices(); ?>
-
-			<p><?php _e( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'bp-nouveau' ); ?></p>
 
 			<?php
 
@@ -307,36 +282,6 @@
 			<?php wp_nonce_field( 'bp_new_signup' ); ?>
 
 		<?php endif; // request-details signup step ?>
-
-		<?php if ( 'completed-confirmation' == bp_get_current_signup_step() ) : ?>
-
-			<?php bp_nouveau_template_notices(); ?>
-
-			<?php
-
-			/**
-			 * Fires before the display of the registration confirmed messages.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_before_registration_confirmed' ); ?>
-
-			<?php if ( bp_registration_needs_activation() ) : ?>
-				<p><?php _e( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'bp-nouveau' ); ?></p>
-			<?php else : ?>
-				<p><?php _e( 'You have successfully created your account! Please log in using the username and password you have just created.', 'bp-nouveau' ); ?></p>
-			<?php endif; ?>
-
-			<?php
-
-			/**
-			 * Fires after the display of the registration confirmed messages.
-			 *
-			 * @since 1.5.0
-			 */
-			do_action( 'bp_after_registration_confirmed' ); ?>
-
-		<?php endif; // completed-confirmation signup step ?>
 
 		<?php
 

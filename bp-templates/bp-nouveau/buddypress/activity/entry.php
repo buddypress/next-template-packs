@@ -42,11 +42,7 @@ bp_nouveau_activity_entry_hook( 'before' ); ?>
 
 		<?php endif; ?>
 
-		<div class="activity-meta">
-
-			<?php bp_nouveau_activity_entry_buttons();  ?>
-
-		</div>
+		<?php bp_nouveau_activity_entry_buttons();  ?>
 
 	</div>
 

@@ -36,7 +36,7 @@ switch ( bp_current_action() ) :
 
 		<div class="blogs myblogs" data-bp-list="blogs">
 
-			<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the blogs you are a contributor of, please wait.', 'bp-nouveau' ) ;?></div>
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-blogs-loading' ) ;?></div>
 
 		</div><!-- .blogs.myblogs -->
 

@@ -7,7 +7,13 @@
  * @package BP Nouveau
  */
 ?>
-<div class="bp-feedback bp-template-notice <?php bp_nouveau_template_message_type(); ?>">
+<div class="<?php bp_nouveau_template_message_classes(); ?>">
+
 	<?php bp_nouveau_template_message(); ?>
-	<a href="#" title="close" data-bp-close="clear"><span class="dashicons dashicons-dismiss"></span></a>
+
+	<?php if ( bp_nouveau_has_dismiss_button() ) : ?>
+
+		<a href="#" title="close" data-bp-close="<?php bp_nouveau_dismiss_button_type(); ?>"><span class="dashicons dashicons-dismiss"></span></a>
+
+	<?php endif ; ?>
 </div>

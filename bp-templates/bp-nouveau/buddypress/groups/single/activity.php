@@ -34,7 +34,7 @@
 
 	<ul id="activity-stream" class="activity-list item-list" data-bp-list="activity">
 
-		<li id="bp-activity-ajax-loader"><?php esc_html_e( 'Loading the group updates, please wait.', 'bp-nouveau' ) ;?></li>
+		<li id="bp-activity-ajax-loader"><?php bp_nouveau_user_feedback( 'group-activity-loading' ) ;?></li>
 
 	</ul>
 

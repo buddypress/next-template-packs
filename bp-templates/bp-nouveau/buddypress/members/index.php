@@ -32,7 +32,7 @@
 	</div>
 
 	<div id="members-dir-list" class="members dir-list" data-bp-list="members">
-		<div id="bp-ajax-loader"><?php esc_html_e( 'Loading the members of your community, please wait.', 'bp-nouveau' ) ;?></div>
+		<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-members-loading' ) ;?></div>
 	</div><!-- #members-dir-list -->
 
 	<?php bp_nouveau_after_members_directory_content() ?>

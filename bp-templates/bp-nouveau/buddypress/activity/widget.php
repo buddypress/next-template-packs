@@ -51,7 +51,7 @@
 <?php else : ?>
 
 	<div class="widget-error">
-		<p><?php _e( 'Sorry, no updates are available at the moment.', 'bp-nouveau' ); ?></p>
+		<?php bp_nouveau_user_feedback( 'activity-loop-none' ) ;?>
 	</div>
 
 <?php endif; ?>
