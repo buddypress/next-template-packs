@@ -859,3 +859,192 @@ function bp_nouveau_get_customizer_link( $args = array() ) {
 
 	return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $customizer_link ), $r['text'] );
 }
+
+/** Template tags for signup forms *******************************************/
+
+/**
+ * Fire specific hooks into the register template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $prefix  Use it to add terms before the hook name
+ */
+function bp_nouveau_signup_hook( $when = '', $prefix = '' ) {
+	if ( ! empty( $when ) ) {
+		$when .= '_';
+	}
+
+	$h = 'bp_%1$s%2$sfields';
+
+	// Naming these register page hooks so differently doesn't help!
+	if ( ! empty( $prefix ) ) {
+		// Particular cases
+		if ( 'page' === $prefix || 'steps' === $prefix  ) {
+			// Suffix
+			$prefix = '_' . $prefix;
+
+			// Page suffix
+			$h = 'bp_%1$sregister%2$s';
+
+			// Signup specific case.
+			if ( 'custom_' === $when ) {
+				$h = 'bp_%1$ssignup%2$s';
+			}
+
+		// Regular cases.
+		} else {
+			$prefix .= '_';
+		}
+	}
+
+	$hook = sprintf( $h, $when, $prefix );
+
+	/**
+	 * @since 1.1.0 (BuddyPress)
+	 * @since 1.2.4 (BuddyPress) Adds the 'bp_before_signup_profile_fields' action hook
+	 * @since 1.9.0 (BuddyPress) Adds the 'bp_signup_profile_fields' action hook
+	 */
+	do_action( $hook );
+}
+
+/**
+ * Output the signup form for the requested section
+ *
+ * @since 1.0.0
+ *
+ * @param  string     $section The section of fields to get 'account_details' or 'blog_details'. Required.
+ *                             Default: 'account_details'.
+ * @return string              HTML Output.
+ */
+function bp_nouveau_signup_form( $section = 'account_details' ) {
+	$fields = bp_nouveau_get_signup_fields( $section );
+
+	if ( ! $fields ) {
+		return;
+	}
+
+	foreach( $fields as $name => $attributes ) {
+		list( $label, $required, $value, $attribute_type, $type, $class ) = array_values( $attributes );
+
+		if ( $required ) {
+			$required = ' ' . _x( '(required)', 'signup required field', 'bp-nouveau' );
+		}
+
+		// Text fields are using strings, radios are using their inputs
+		$label_output = '<label for="%1$s">%2$s</label>';
+		$id           = $name;
+
+		// Output the label for regular fields
+		if ( 'radio' !== $type ) {
+			printf( $label_output, esc_attr( $name ), esc_html( sprintf( $label, $required ) ) );
+
+			if ( ! empty( $value ) && is_callable( $value ) ) {
+				$value = call_user_func( $value );
+			}
+
+		// Handle the specific case of Site's privacy differently
+		} elseif ( 'signup_blog_privacy_private' !== $name ) {
+			?>
+				<span class="label">
+					<?php esc_html_e( 'I would like my site to appear in search engines, and in public listings around this network.', 'bp-nouveau' ); ?>
+				</span>
+			<?php
+		}
+
+		// Set the additional attributes
+		if ( $attribute_type ) {
+			$existing_attributes = array();
+
+			if ( ! empty( $required ) ) {
+				$existing_attributes = array( 'aria-required' => 'true' );
+
+				/**
+				 * The blog section is hidden, so let's avoid a browser warning
+				 * and deal with the Blog section in Javascript.
+				 */
+				if ( $section !== 'blog_details' ) {
+					$existing_attributes['required'] = 'required';
+				}
+			}
+
+			$attribute_type = ' ' . bp_get_form_field_attributes( $attribute_type, $existing_attributes );
+		}
+
+		// Specific case for Site's privacy
+		if ( 'signup_blog_privacy_public' === $name || 'signup_blog_privacy_private' === $name ) {
+			$name           = 'signup_blog_privacy';
+			$submitted      = bp_get_signup_blog_privacy_value();
+
+			if ( ! $submitted ) {
+				$submitted = 'public';
+			}
+
+			$attribute_type = ' ' . checked( $value, $submitted, false );
+		}
+
+		if ( ! empty( $class ) ) {
+			// In case people are adding classes..
+			$classes = explode( ' ', $class );
+			$class = ' class="' . join( ' ', array_map( 'sanitize_html_class', $classes ) ) . '"';
+		}
+
+		// Do not fire the do_action to display errors for the private radio.
+		if ( 'private' !== $value ) {
+			/**
+			 * Fires and displays any member registration field errors.
+			 *
+			 * @since 1.1.0 (BuddyPress)
+			 */
+			do_action( "bp_{$name}_errors" );
+		}
+
+		// Set the input.
+		$field_output = sprintf( '<input type="%1$s" name="%2$s" id="%3$s"%4$s value="%5$s"%6$s/>',
+			esc_attr( $type ),
+			esc_attr( $name ),
+			esc_attr( $id ),
+			$class,
+			esc_attr( $value ),
+			$attribute_type
+		);
+
+		// Not a radio, let's output the field
+		if ( 'radio' !== $type ) {
+			if ( 'signup_blog_url' !== $name ) {
+				print( $field_output );
+
+			// If it's the signup blog url, it's specific to Multisite config.
+			} elseif ( is_subdomain_install() ) {
+				printf( '%1$s %2$s . %3$s',
+					is_ssl() ? 'https://' : 'http://',
+					$field_output,
+					bp_signup_get_subdomain_base()
+				);
+
+			// Subfolders!
+			} else {
+				printf( '%1$s %2$s',
+					home_url( '/' ),
+					$field_output
+				);
+			}
+
+		// It's a radio, let's output the field inside the label
+		} else {
+			printf( $label_output, esc_attr( $name ), $field_output . ' ' . esc_html( $label ) );
+		}
+
+		// Password strength is restricted to the signup_password field
+		if ( 'signup_password' === $name ) : ?>
+			<div id="pass-strength-result"></div>
+		<?php endif ;
+	}
+
+	/**
+	 * Fires and displays any extra member registration details fields.
+	 *
+	 * @since 1.9.0 (BuddyPress)
+	 */
+	do_action( "bp_{$section}_fields" );
+}

@@ -711,9 +711,14 @@ function bp_nouveau_get_blog_signup_inline_script() {
 				}
 
 				// toggle "Blog Details" block whenever checkbox is checked
-				blog_checked.change(function() {
+				blog_checked.change( function( event ) {
+					// Toggle HTML5 required attribute.
+					$.each( $( \'#blog-details\' ).find( \'[aria-required]\' ), function( i, input ) {
+						$( input ).prop( \'required\',  $( event.target ).prop( \'checked\' ) );
+					} );
+
 					$( \'#blog-details\' ).toggle();
-				});
+				} );
 			}
 		} )( jQuery );
 	';
@@ -1074,6 +1079,112 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 		 * @param array $feedback_messages
 		 */
 		return apply_filters( 'bp_nouveau_get_user_feedback', $feedback_messages[ $feedback_id ] );
+	}
+
+	return false;
+}
+
+/**
+ * Get the signup fields for the requested section
+ *
+ * @since 1.0.0
+ *
+ * @param  string     $section The section of fields to get 'account_details' or 'blog_details'. Required.
+ * @return array|bool          The list of signup fields for the requested section. False if not found.
+ */
+function bp_nouveau_get_signup_fields( $section = '' ) {
+	if ( empty( $section ) ) {
+		return false;
+	}
+
+	/**
+	 * Filter here to add your specific 'text' or 'password' inputs
+	 *
+	 * If you need to use other types of field, please use the
+	 * do_action( 'bp_account_details_fields' ) or do_action( 'blog_details' )
+	 * hooks instead.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $value The list of fields organized into sections.
+	 */
+	$fields = apply_filters( 'bp_nouveau_get_signup_fields', array(
+		'account_details' => array(
+			'signup_username' => array(
+				'label'          => _x( 'Username%s', 'signup field label', 'bp-nouveau' ),
+				'required'       => true,
+				'value'          => 'bp_get_signup_username_value',
+				'attribute_type' => 'username',
+				'type'           => 'text',
+				'class'          => '',
+			),
+			'signup_email' => array(
+				'label'          => _x( 'Email Address%s', 'signup field label', 'bp-nouveau' ),
+				'required'       => true,
+				'value'          => 'bp_get_signup_email_value',
+				'attribute_type' => 'email',
+				'type'           => 'email',
+				'class'          => '',
+			),
+			'signup_password' => array(
+				'label'          => _x( 'Choose a Password%s', 'signup field label', 'bp-nouveau' ),
+				'required'       => true,
+				'value'          => '',
+				'attribute_type' => 'password',
+				'type'           => 'password',
+				'class'          => 'password-entry',
+			),
+			'signup_password_confirm' => array(
+				'label'          => _x( 'Confirm Password%s', 'signup field label', 'bp-nouveau' ),
+				'required'       => true,
+				'value'          => '',
+				'attribute_type' => 'password',
+				'type'           => 'password',
+				'class'          => 'password-entry-confirm',
+			),
+		),
+		'blog_details' => array(
+			'signup_blog_url' => array(
+				'label'          => _x( 'Site URL%s', 'signup field label', 'bp-nouveau' ),
+				'required'       => true,
+				'value'          => 'bp_get_signup_blog_url_value',
+				'attribute_type' => 'slug',
+				'type'           => 'text',
+				'class'          => '',
+			),
+			'signup_blog_title' => array(
+				'label'          => _x( 'Site Title%s', 'signup field label', 'bp-nouveau' ),
+				'required'       => true,
+				'value'          => 'bp_get_signup_blog_title_value',
+				'attribute_type' => 'title',
+				'type'           => 'text',
+				'class'          => '',
+			),
+			'signup_blog_privacy_public' => array(
+				'label'          => __( 'Yes', 'bp-nouveau' ),
+				'required'       => false,
+				'value'          => 'public',
+				'attribute_type' => '',
+				'type'           => 'radio',
+				'class'          => '',
+			),
+			'signup_blog_privacy_private' => array(
+				'label'          => __( 'No', 'bp-nouveau' ),
+				'required'       => false,
+				'value'          => 'private',
+				'attribute_type' => '',
+				'type'           => 'radio',
+				'class'          => '',
+			),
+		),
+	) );
+
+	if ( ! bp_get_blog_signup_allowed() ) {
+		unset( $fields['blog_details'] );
+	}
+
+	if ( isset( $fields[ $section ] ) ) {
+		return $fields[ $section ];
 	}
 
 	return false;

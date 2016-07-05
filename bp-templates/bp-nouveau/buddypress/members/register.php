@@ -10,14 +10,7 @@
 
 <div id="buddypress">
 
-	<?php
-
-	/**
-	 * Fires at the top of the BuddyPress member registration page template.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_register_page' ); ?>
+	<?php bp_nouveau_signup_hook( 'before', 'page' ); ?>
 
 	<div class="page" id="register-page">
 
@@ -25,18 +18,11 @@
 
 			<?php bp_nouveau_template_notices(); ?>
 
-			<?php bp_nouveau_user_feedback( bp_get_current_signup_step() ) ; ?>
+			<?php bp_nouveau_user_feedback( bp_get_current_signup_step() ); ?>
 
 		<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
 
-			<?php
-
-			/**
-			 * Fires before the display of member registration account details fields.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_before_account_details_fields' ); ?>
+			<?php bp_nouveau_signup_hook( 'before', 'account_details' ); ?>
 
 			<div class="register-section" id="basic-details-section">
 
@@ -44,83 +30,17 @@
 
 				<h4><?php _e( 'Account Details', 'bp-nouveau' ); ?></h4>
 
-				<label for="signup_username"><?php _e( 'Username', 'bp-nouveau' ); ?> <?php _e( '(required)', 'bp-nouveau' ); ?></label>
-				<?php
-
-				/**
-				 * Fires and displays any member registration username errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_username_errors' ); ?>
-				<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" <?php bp_form_field_attributes( 'username' ); ?>/>
-
-				<label for="signup_email"><?php _e( 'Email Address', 'bp-nouveau' ); ?> <?php _e( '(required)', 'bp-nouveau' ); ?></label>
-				<?php
-
-				/**
-				 * Fires and displays any member registration email errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_email_errors' ); ?>
-				<input type="email" name="signup_email" id="signup_email" value="<?php bp_signup_email_value(); ?>" <?php bp_form_field_attributes( 'email' ); ?>/>
-
-				<label for="signup_password"><?php _e( 'Choose a Password', 'bp-nouveau' ); ?> <?php _e( '(required)', 'bp-nouveau' ); ?></label>
-				<?php
-
-				/**
-				 * Fires and displays any member registration password errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_password_errors' ); ?>
-				<input type="password" name="signup_password" id="signup_password" value="" class="password-entry" <?php bp_form_field_attributes( 'password' ); ?>/>
-				<div id="pass-strength-result"></div>
-
-				<label for="signup_password_confirm"><?php _e( 'Confirm Password', 'bp-nouveau' ); ?> <?php _e( '(required)', 'bp-nouveau' ); ?></label>
-				<?php
-
-				/**
-				 * Fires and displays any member registration password confirmation errors.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_signup_password_confirm_errors' ); ?>
-				<input type="password" name="signup_password_confirm" id="signup_password_confirm" value="" class="password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/>
-
-				<?php
-
-				/**
-				 * Fires and displays any extra member registration details fields.
-				 *
-				 * @since 1.9.0
-				 */
-				do_action( 'bp_account_details_fields' ); ?>
+				<?php bp_nouveau_signup_form(); ?>
 
 			</div><!-- #basic-details-section -->
 
-			<?php
-
-			/**
-			 * Fires after the display of member registration account details fields.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_after_account_details_fields' ); ?>
+			<?php bp_nouveau_signup_hook( 'after', 'account_details' ); ?>
 
 			<?php /***** Extra Profile Details ******/ ?>
 
 			<?php if ( bp_is_active( 'xprofile' ) ) : ?>
 
-				<?php
-
-				/**
-				 * Fires before the display of member registration xprofile fields.
-				 *
-				 * @since 1.2.4
-				 */
-				do_action( 'bp_before_signup_profile_fields' ); ?>
+				<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
 
 				<div class="register-section" id="profile-details-section">
 
@@ -150,38 +70,17 @@
 
 					<?php endwhile; endif; endif; ?>
 
-					<?php
-
-					/**
-					 * Fires and displays any extra member registration xprofile fields.
-					 *
-					 * @since 1.9.0
-					 */
-					do_action( 'bp_signup_profile_fields' ); ?>
+					<?php bp_nouveau_signup_hook( '', 'signup_profile' ); ?>
 
 				</div><!-- #profile-details-section -->
 
-				<?php
-
-				/**
-				 * Fires after the display of member registration xprofile fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_after_signup_profile_fields' ); ?>
+				<?php bp_nouveau_signup_hook( 'after', 'signup_profile' ); ?>
 
 			<?php endif; ?>
 
 			<?php if ( bp_get_blog_signup_allowed() ) : ?>
 
-				<?php
-
-				/**
-				 * Fires before the display of member registration blog details fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_before_blog_details_fields' ); ?>
+				<?php bp_nouveau_signup_hook( 'before', 'blog_details' ); ?>
 
 				<?php /***** Blog Creation Details ******/ ?>
 
@@ -193,67 +92,13 @@
 
 					<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
 
-						<label for="signup_blog_url"><?php _e( 'Blog URL', 'bp-nouveau' ); ?> <?php _e( '(required)', 'bp-nouveau' ); ?></label>
-						<?php
-
-						/**
-						 * Fires and displays any member registration blog URL errors.
-						 *
-						 * @since 1.1.0
-						 */
-						do_action( 'bp_signup_blog_url_errors' ); ?>
-
-						<?php if ( is_subdomain_install() ) : ?>
-							http:// <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" /> .<?php bp_signup_subdomain_base(); ?>
-						<?php else : ?>
-							<?php echo home_url( '/' ); ?> <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" />
-						<?php endif; ?>
-
-						<label for="signup_blog_title"><?php _e( 'Site Title', 'bp-nouveau' ); ?> <?php _e( '(required)', 'bp-nouveau' ); ?></label>
-						<?php
-
-						/**
-						 * Fires and displays any member registration blog title errors.
-						 *
-						 * @since 1.1.0
-						 */
-						do_action( 'bp_signup_blog_title_errors' ); ?>
-						<input type="text" name="signup_blog_title" id="signup_blog_title" value="<?php bp_signup_blog_title_value(); ?>" />
-
-						<span class="label"><?php _e( 'I would like my site to appear in search engines, and in public listings around this network.', 'bp-nouveau' ); ?></span>
-						<?php
-
-						/**
-						 * Fires and displays any member registration blog privacy errors.
-						 *
-						 * @since 1.1.0
-						 */
-						do_action( 'bp_signup_blog_privacy_errors' ); ?>
-
-						<label for="signup_blog_privacy_public"><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_public" value="public"<?php if ( 'public' == bp_get_signup_blog_privacy_value() || !bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes', 'bp-nouveau' ); ?></label>
-						<label for="signup_blog_privacy_private"><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_private" value="private"<?php if ( 'private' == bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'No', 'bp-nouveau' ); ?></label>
-
-						<?php
-
-						/**
-						 * Fires and displays any extra member registration blog details fields.
-						 *
-						 * @since 1.9.0
-						 */
-						do_action( 'bp_blog_details_fields' ); ?>
+						<?php bp_nouveau_signup_form( 'blog_details' ); ?>
 
 					</div>
 
 				</div><!-- #blog-details-section -->
 
-				<?php
-
-				/**
-				 * Fires after the display of member registration blog details fields.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_after_blog_details_fields' ); ?>
+				<?php bp_nouveau_signup_hook( 'after', 'blog_details' ); ?>
 
 			<?php endif; ?>
 
@@ -283,26 +128,12 @@
 
 		<?php endif; // request-details signup step ?>
 
-		<?php
-
-		/**
-		 * Fires and displays any custom signup steps.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_custom_signup_steps' ); ?>
+		<?php bp_nouveau_signup_hook( 'custom', 'steps' ); ?>
 
 		</form>
 
 	</div>
 
-	<?php
-
-	/**
-	 * Fires at the bottom of the BuddyPress member registration page template.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_register_page' ); ?>
+	<?php bp_nouveau_signup_hook( 'after', 'page' ); ?>
 
 </div><!-- #buddypress -->
