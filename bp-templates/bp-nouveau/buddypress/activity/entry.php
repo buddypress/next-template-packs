@@ -48,7 +48,7 @@ bp_nouveau_activity_entry_hook( 'before' ); ?>
 
 	<?php bp_nouveau_activity_entry_hook( 'before', 'comments' ); ?>
 
-	<?php if ( ( bp_activity_get_comment_count() || bp_activity_can_comment() ) || bp_is_single_activity() ) : ?>
+	<?php if ( bp_activity_get_comment_count() || ( is_user_logged_in() && ( bp_activity_can_comment() || bp_is_single_activity() ) ) ) : ?>
 
 		<div class="activity-comments">
 
