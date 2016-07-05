@@ -162,8 +162,8 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Filter BuddyPress template hierarchy and look for page templates.
 		add_filter( 'bp_get_buddypress_template', array( $this, 'theme_compat_page_templates' ), 10, 1 );
 
-		// We'll handle the display of template notices in BP Nouveau
-		remove_action( 'template_notices', 'bp_core_render_message' );
+		// We need to neutralize the BuddyPress core "bp_core_render_message()" once it has been added.
+		add_action( 'bp_actions', array( $this, 'neutralize_core_template_notices' ), 6 );
 
 		/** Scripts ***********************************************************/
 
@@ -605,6 +605,15 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		return $notices;
+	}
+
+	/**
+	 * We'll handle template notices from BP Nouveau.
+	 *
+	 * @since 1.0.0
+	 */
+	public function neutralize_core_template_notices(){
+		remove_action( 'template_notices', 'bp_core_render_message' );
 	}
 }
 endif;
