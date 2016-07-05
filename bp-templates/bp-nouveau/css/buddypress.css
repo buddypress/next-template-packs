@@ -1952,7 +1952,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress [data-bp-search] form button[type="submit"] {
-	border-left: none;
+	border-left: 0;
 	display: none;
 	float: left;
 	font-weight: normal;
@@ -1974,7 +1974,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress [data-bp-search] form button[type="submit"] span {
 	background: none;
-	border: none;
+	border: 0;
 	font-family: dashicons;
 	font-size: 18px;
 	font-size: 1.8rem;

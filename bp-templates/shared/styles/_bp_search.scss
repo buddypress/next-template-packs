@@ -15,7 +15,7 @@
 			}
 
 			button[type="submit"] {
-				border-left: none;
+				border-left: 0;
 				display: none;
 				float: left;
 				font-weight: normal;
@@ -37,7 +37,7 @@
 
 			button[type="submit"] span { // why seperate add to above ruleset?
 				background: none;
-				border: none;
+				border: 0;
 				font-family: dashicons;
 				@include font-size(18);
 
