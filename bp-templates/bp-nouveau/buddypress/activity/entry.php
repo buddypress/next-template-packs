@@ -14,7 +14,7 @@ bp_nouveau_activity_entry_hook( 'before' ); ?>
 
 <li class="<?php bp_activity_css_class(); ?>" id="activity-<?php bp_activity_id(); ?>" data-bp-activity-id="<?php bp_activity_id(); ?>">
 
-	<div class="activity-avatar">
+	<div class="activity-avatar item-avatar">
 
 		<a href="<?php bp_activity_user_link(); ?>">
 

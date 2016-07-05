@@ -12,7 +12,7 @@
  ?>
 
 <li id="acomment-<?php bp_activity_comment_id(); ?>" data-bp-activity-comment-id="<?php bp_activity_comment_id(); ?>">
-	<div class="acomment-avatar">
+	<div class="acomment-avatar item-avatar">
 		<a href="<?php bp_activity_comment_user_link(); ?>">
 			<?php bp_activity_avatar( array( 'type' => 'thumb', 'user_id' => bp_get_activity_comment_user_id() ) ); ?>
 		</a>
