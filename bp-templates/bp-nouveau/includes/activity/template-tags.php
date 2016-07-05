@@ -192,7 +192,9 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 	do_action( 'bp_activity_entry_meta' );
 	$output .= ob_get_clean();
 
-	if ( empty( trim( $output, ' ' ) ) ) {
+	$has_content = trim( $output, ' ' );
+
+	if ( empty( $has_content ) ) {
 		return;
 	}
 
@@ -558,7 +560,9 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 	do_action( 'bp_activity_comment_options' );
 	$output .= ob_get_clean();
 
-	if ( empty( trim( $output, ' ' ) ) ) {
+	$has_content = trim( $output, ' ' );
+
+	if ( empty( $has_content ) ) {
 		return;
 	}
 
