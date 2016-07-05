@@ -42,7 +42,7 @@
 
 				.list-title {
 					clear: none; // some WP theme state clear:both
-					font-size: 90%;
+					@include font-size(22);
 					font-weight: normal;
 					margin: 0;
 				}
@@ -71,7 +71,7 @@
 				.item-avatar {
 					float: left;
 					text-align: left;
-					width: 18%;
+					width: 15%;
 				}
 
 				.list-title,
@@ -93,7 +93,7 @@
 			@include medium-up() {
 
 				.item {
-					margin: 0 20%;
+					margin: 0 15%;
 					overflow: hidden;
 				}
 

@@ -356,7 +356,8 @@ body .buddypress a {
 
 .buddypress .bp-list li .item .list-title {
 	clear: none;
-	font-size: 90%;
+	font-size: 22px;
+	font-size: 2.2rem;
 	font-weight: normal;
 	margin: 0;
 }
@@ -384,7 +385,7 @@ body .buddypress a {
 	.buddypress .bp-list li .item-avatar {
 		float: left;
 		text-align: left;
-		width: 18%;
+		width: 15%;
 	}
 	.buddypress .bp-list li .list-title,
 	.buddypress .bp-list li .item-meta {
@@ -401,7 +402,7 @@ body .buddypress a {
 
 @media screen and (min-width: 46.8em) {
 	.buddypress .bp-list li .item {
-		margin: 0 20%;
+		margin: 0 15%;
 		overflow: hidden;
 	}
 	.buddypress .bp-list li .action {
@@ -502,9 +503,9 @@ body .buddypress a {
 
 .activity-list .activity-item.mini .activity-avatar img.avatar,
 .activity-list .activity-item.mini .activity-avatar img.FB_profile_pic {
-	height: 20px;
+	height: 30px;
 	margin-left: 30px;
-	width: 20px;
+	width: 30px;
 }
 
 .activity-list .activity-item.new_forum_post .activity-inner, .activity-list .activity-item.new_forum_topic .activity-inner {
@@ -559,6 +560,16 @@ body .buddypress a {
 
 .activity-list .activity-item .activity-header {
 	margin-right: 15px;
+}
+
+.activity-list .activity-item .activity-header a,
+.activity-list .activity-item .activity-header img {
+	display: inline;
+}
+
+.activity-list .activity-item .activity-header .avatar {
+	display: inline-block;
+	margin: 0 5px;
 }
 
 .activity-list .activity-item .activity-header a.activity-time-since {
@@ -686,7 +697,7 @@ body.activity-permalink .activity-list .activity-meta {
 * @section 3.1.3 - Activity Comments
 *-----------------------------------------------------
 */
-.activity-comments {
+.buddypress .activity-comments {
 	clear: both;
 	margin: 0 0 0 20px;
 	overflow: hidden;
@@ -694,26 +705,23 @@ body.activity-permalink .activity-list .activity-meta {
 	width: auto;
 }
 
-.activity-comments ul {
+.buddypress .activity-comments ul {
 	clear: both;
 	margin: 0;
 	padding: 0 0 0 1em;
 }
 
-.activity-comments ul li {
+.buddypress .activity-comments ul li {
 	border-top: 1px solid #eee;
+	border-bottom: 0;
 	padding: 1em 0 0;
 }
 
-.activity-comments ul li:first-child {
-	border-top: 0;
-}
-
-.activity-comments ul li:last-child {
+.buddypress .activity-comments ul li:last-child {
 	margin-bottom: 0;
 }
 
-.activity-comments .acomment-avatar img {
+.buddypress .activity-comments .acomment-avatar img {
 	border-width: 1px;
 	float: left;
 	height: 25px;
@@ -721,20 +729,39 @@ body.activity-permalink .activity-list .activity-meta {
 	width: 25px;
 }
 
-.activity-comments .acomment-options {
+.buddypress .activity-comments .acomment-meta {
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+
+.buddypress .activity-comments .acomment-content {
+	border-left: 1px solid #ccc;
+	margin-top: 15px;
+	padding: 1em;
+}
+
+.buddypress .activity-comments .acomment-content p {
+	font-size: 14px;
+	font-size: 1.4rem;
+	margin-bottom: 0.5em;
+}
+
+.buddypress .activity-comments .acomment-options {
 	float: left;
 	margin: 10px 0 10px 20px;
 }
 
-.activity-comments .acomment-options a {
+.buddypress .activity-comments .acomment-options a {
 	color: #999;
+	font-size: 14px;
+	font-size: 1.4rem;
 }
 
-.activity-comments .acomment-options a:focus, .activity-comments .acomment-options a:hover {
+.buddypress .activity-comments .acomment-options a:focus, .buddypress .activity-comments .acomment-options a:hover {
 	color: inherit;
 }
 
-.mini .activity-comments {
+.buddypress .mini .activity-comments {
 	clear: both;
 	font-size: 120%;
 	margin-top: 0;
@@ -826,10 +853,13 @@ form.ac-form .ac-reply-content input {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress .groups-list li .item-meta,
-	.buddypress .groups-list li .list-title {
+	.buddypress .groups-list li .list-title,
+	.buddypress .groups-list li .item-meta {
 		text-align: center;
 		width: auto;
+	}
+	.buddypress .groups-list li .item-meta {
+		margin-bottom: 20px;
 	}
 	.buddypress .groups-list li .item-desc {
 		border-left: 1px solid #eaeaea;
@@ -837,7 +867,7 @@ form.ac-form .ac-reply-content input {
 		clear: left;
 		margin: 15px auto;
 		padding: 1em 0.5em;
-		width: 80%;
+		width: 90%;
 	}
 }
 

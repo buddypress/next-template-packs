@@ -18,9 +18,9 @@
 			.activity-avatar {
 				img.avatar,
 				img.FB_profile_pic {
-					height: 20px;
+					height: 30px;
 					margin-left: 30px;  // change to $marg-med or...
-					width: 20px;
+					width: 30px;
 				}
 			}
 
@@ -56,7 +56,7 @@
 			background: rgba(31, 179, 221, 0.1);
 		}
 
-// === review this block! ============================================
+// === review this inreplyto block feels wrong and badly nested ============================================
 		.activity-inreplyto {
 			color: #888;
 			font-size: 80%;
@@ -76,7 +76,7 @@
 				padding: 0;
 			}
 		}
-// ====== review this inreplyto block feels wrong and badly nested =====
+// ====== review this block! ===================================
 
 		.activity-avatar {
 			float: left;
@@ -89,6 +89,17 @@
 		// The header elements: date stamp, author etc;
 		.activity-header {
 			margin-right: $marg-med;
+
+			// ensure elements are display inline, some themes setting avatars as block
+			a,
+			img {
+				display: inline;
+			}
+
+			.avatar {
+				display: inline-block;
+				margin: 0 $marg-xsml;
+			}
 
 			a.activity-time-since {
 				color: #aaa;

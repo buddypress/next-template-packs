@@ -13,20 +13,22 @@
 
 			@include medium-up() {
 
-				.item-meta,
-				.list-title {
+				.list-title,
+				.item-meta {
 					text-align: center;
 					width: auto;
 				}
 
-
+				.item-meta {
+					margin-bottom: $marg-lrg;
+				}
 				.item-desc {
 					border-left: 1px solid $light-grey;
 					border-right: 1px solid $light-grey;
 					clear: left;
 					margin: $marg-med auto;
 					padding: $pad-med $pad-sml;
-					width: 80%;
+					width: 90%;
 				}
 
 			} // close @media
