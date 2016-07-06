@@ -18,7 +18,7 @@
 </script>
 
 <script type="text/html" id="tmpl-activity-post-form-options">
-	<?php do_action( 'bp_activity_post_form_options' ); ?>
+	<?php bp_nouveau_activity_hook( '', 'post_form_options' ); ?>
 </script>
 
 <script type="text/html" id="tmpl-activity-post-form-buttons">

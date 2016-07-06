@@ -15,13 +15,7 @@
 <div class="bp-messages-feedback"></div>
 
 <script type="text/html" id="tmpl-bp-messages-form">
-	<?php
-	/**
-	 * Fires before the display of message compose content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_messages_compose_content' ); ?>
+	<?php bp_nouveau_messages_hook( 'before', 'compose_content' ); ?>
 
 	<label for="send-to-input"><?php esc_html_e( 'Send @Username', 'bp-nouveau' ); ?></label>
 	<input type="text" name="send_to" class="send-to-input" id="send-to-input" />
@@ -31,13 +25,7 @@
 
 	<div id="bp-message-content"></div>
 
-	<?php
-	/**
-	 * Fires after the display of message compose content.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_after_messages_compose_content' ); ?>
+	<?php bp_nouveau_messages_hook( 'after', 'compose_content' ); ?>
 
 	<div class="submit">
 		<input type="button" id="bp-messages-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Reset', 'bp-nouveau' ); ?>"/>
@@ -203,26 +191,14 @@
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
 		</a>
 
-		<?php
-		/**
-		 * Fires after the display of thread default actions.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'bp_after_message_thread_header_actions' ); ?>
+		<?php bp_nouveau_messages_hook( 'after', 'thread_header_actions' ); ?>
 	</div>
 
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single-list">
 	<div class="message-metadata">
-		<?php
-		/**
-		 * Fires before the single message metadatas are displayed.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'bp_before_message_meta' ); ?>
+		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
 		<a href="{{data.sender_link}}" title="{{data.sender_name}}" class="user-link">
 			<img src="{{data.sender_avatar}}" width="32px" height="32px" class="avatar">
@@ -249,78 +225,36 @@
 			<# } #>
 		</div>
 
-		<?php
-		/**
-		 * Fires after the single message metadatas are displayed.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'bp_after_message_meta' ); ?>
+		<?php bp_nouveau_messages_hook( 'after', 'meta' ); ?>
 
 	</div>
 
-	<?php
-	/**
-	 * Fires before the message content for a private message.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_before_message_content' ); ?>
+	<?php bp_nouveau_messages_hook( 'before', 'content' ); ?>
 
 	<div class="message-content"><# print( data.content ) #></div>
 
-	<?php
-	/**
-	 * Fires after the message content for a private message.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_after_message_content' ); ?>
+	<?php bp_nouveau_messages_hook( 'after', 'content' ); ?>
 
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single">
-	<?php
-	/**
-	 * Fires before the display of a single member message thread content.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_before_message_thread_content' ); ?>
+	<?php bp_nouveau_messages_hook( 'before', 'thread_content' ); ?>
 
 	<div id="bp-message-thread-header"></div>
 
-	<?php
-	/**
-	 * Fires before the display of the message thread list.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_before_message_thread_list' ); ?>
+	<?php bp_nouveau_messages_hook( 'before', 'thread_list' ); ?>
 
 	<ul id="bp-message-thread-list"></ul>
 
-	<?php
-	/**
-	 * Fires after the display of the message thread list.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_after_message_thread_list' ); ?>
+	<?php bp_nouveau_messages_hook( 'after', 'thread_list' ); ?>
 
-	<?php
-	/**
-	 * Fires before the display of the message thread reply form.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_message_thread_reply' ); ?>
+	<?php bp_nouveau_messages_hook( 'before', 'thread_reply' ); ?>
 
 	<form id="send-reply" class="standard-form">
 		<div class="message-box">
 			<div class="message-metadata">
 
-				<?php do_action( 'bp_before_message_meta' ); ?>
+				<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
 				<div class="avatar-box">
 					<?php bp_loggedin_user_avatar( 'type=thumb&height=30&width=30' ); ?>
@@ -328,30 +262,18 @@
 					<strong><?php _e( 'Send a Reply', 'bp-nouveau' ); ?></strong>
 				</div>
 
-				<?php do_action( 'bp_after_message_meta' ); ?>
+				<?php bp_nouveau_messages_hook( 'after', 'meta' ); ?>
 
 			</div><!-- .message-metadata -->
 
 			<div class="message-content">
 
-				<?php
-				/**
-				 * Fires before the display of the message reply box.
-				 *
-				 * @since 1.0.0
-				 */
-				do_action( 'bp_before_message_reply_box' ); ?>
+				<?php bp_nouveau_messages_hook( 'before', 'reply_box' ); ?>
 
 				<label for="message_content" class="bp-screen-reader-text"><?php _e( 'Reply to Message', 'bp-nouveau' ); ?></label>
 				<div id="bp-message-content"></div>
 
-				<?php
-				/**
-				 * Fires after the display of the message reply box.
-				 *
-				 * @since 1.0.0
-				 */
-				do_action( 'bp_after_message_reply_box' ); ?>
+				<?php bp_nouveau_messages_hook( 'after', 'reply_box' ); ?>
 
 				<div class="submit">
 					<input type="submit" name="send" value="<?php esc_attr_e( 'Send Reply', 'bp-nouveau' ); ?>" id="send_reply_button"/>
@@ -362,19 +284,7 @@
 		</div><!-- .message-box -->
 	</form>
 
-	<?php
-	/**
-	 * Fires after the display of the message thread reply form.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_after_message_thread_reply' ); ?>
+	<?php bp_nouveau_messages_hook( 'after', 'thread_reply' ); ?>
 
-	<?php
-	/**
-	 * Fires after the display of a single member message thread content.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_after_message_thread_content' ); ?>
+	<?php bp_nouveau_messages_hook( 'after', 'thread_content' ); ?>
 </script>

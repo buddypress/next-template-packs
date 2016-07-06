@@ -1,9 +1,10 @@
 <?php
 /**
- * BuddyPress - Members Register
+ * BuddyPress - Members/Blogs Registration forms
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -102,29 +103,7 @@
 
 			<?php endif; ?>
 
-			<?php
-
-			/**
-			 * Fires before the display of the registration submit buttons.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_before_registration_submit_buttons' ); ?>
-
-			<div class="submit">
-				<input type="submit" name="signup_submit" id="signup_submit" value="<?php esc_attr_e( 'Complete Sign Up', 'bp-nouveau' ); ?>" />
-			</div>
-
-			<?php
-
-			/**
-			 * Fires after the display of the registration submit buttons.
-			 *
-			 * @since 1.1.0
-			 */
-			do_action( 'bp_after_registration_submit_buttons' ); ?>
-
-			<?php wp_nonce_field( 'bp_new_signup' ); ?>
+			<?php bp_nouveau_submit_button( 'register' ); ?>
 
 		<?php endif; // request-details signup step ?>
 

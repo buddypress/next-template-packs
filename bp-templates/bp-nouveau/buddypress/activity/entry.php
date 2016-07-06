@@ -10,7 +10,7 @@
  * @package BP Nouveau
  */
 
-bp_nouveau_activity_entry_hook( 'before' ); ?>
+bp_nouveau_activity_hook( 'before', 'entry' ); ?>
 
 <li class="<?php bp_activity_css_class(); ?>" id="activity-<?php bp_activity_id(); ?>" data-bp-activity-id="<?php bp_activity_id(); ?>">
 
@@ -46,7 +46,7 @@ bp_nouveau_activity_entry_hook( 'before' ); ?>
 
 	</div>
 
-	<?php bp_nouveau_activity_entry_hook( 'before', 'comments' ); ?>
+	<?php bp_nouveau_activity_hook( 'before', 'entry_comments' ); ?>
 
 	<?php if ( bp_activity_get_comment_count() || ( is_user_logged_in() && ( bp_activity_can_comment() || bp_is_single_activity() ) ) ) : ?>
 
@@ -60,8 +60,8 @@ bp_nouveau_activity_entry_hook( 'before' ); ?>
 
 	<?php endif; ?>
 
-	<?php bp_nouveau_activity_entry_hook( 'after', 'comments' ); ?>
+	<?php bp_nouveau_activity_hook( 'after', 'entry_comments' ); ?>
 
 </li>
 
-<?php bp_nouveau_activity_entry_hook( 'after' );
+<?php bp_nouveau_activity_hook( 'after', 'entry' );

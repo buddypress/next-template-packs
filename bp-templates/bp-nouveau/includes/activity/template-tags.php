@@ -126,21 +126,24 @@ function bp_nouveau_activity_member_post_form() {
  * @param string $when    'before' or 'after'
  * @param string $suffix  Use it to add terms at the end of the hook name
  */
-function bp_nouveau_activity_entry_hook( $when = '', $suffix = '' ) {
+function bp_nouveau_activity_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
 	if ( ! empty( $when ) ) {
-		$when .= '_';
+		$hook[] = $when;
 	}
+
+	// It's a activity entry hook
+	$hook[] = 'activity';
 
 	if ( ! empty( $suffix ) ) {
-		$suffix = '_' . $suffix;
+		$hook[] = $suffix;
 	}
-
-	$hook = sprintf( 'bp_%1$sactivity_entry%2$s', $when, $suffix );
 
 	/**
 	 * @since 1.2.0 (BuddyPress)
 	 */
-	do_action( $hook );
+	return bp_nouveau_hook( $hook );
 }
 
 /**

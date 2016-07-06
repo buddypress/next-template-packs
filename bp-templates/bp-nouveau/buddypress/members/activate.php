@@ -10,27 +10,13 @@
 
 <div id="buddypress">
 
-	<?php
-
-	/**
-	 * Fires before the display of the member activation page.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_before_activation_page' ); ?>
+	<?php bp_nouveau_activation_hook( 'before', 'page' ); ?>
 
 	<div class="page" id="activate-page">
 
 		<?php bp_nouveau_template_notices(); ?>
 
-		<?php
-
-		/**
-		 * Fires before the display of the member activation page content.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_before_activate_content' ); ?>
+		<?php bp_nouveau_activation_hook( 'before', 'content' ); ?>
 
 		<?php if ( bp_account_was_activated() ) : ?>
 
@@ -57,24 +43,10 @@
 
 		<?php endif; ?>
 
-		<?php
-
-		/**
-		 * Fires after the display of the member activation page content.
-		 *
-		 * @since 1.1.0
-		 */
-		do_action( 'bp_after_activate_content' ); ?>
+		<?php bp_nouveau_activation_hook( 'after', 'content' ); ?>
 
 	</div><!-- .page -->
 
-	<?php
-
-	/**
-	 * Fires after the display of the member activation page.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_after_activation_page' ); ?>
+	<?php bp_nouveau_activation_hook( 'after', 'page' ); ?>
 
 </div><!-- #buddypress -->

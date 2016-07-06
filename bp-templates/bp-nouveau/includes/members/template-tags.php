@@ -91,15 +91,18 @@ function bp_nouveau_after_members_directory_content() {
  * @param string $suffix  Use it to add terms at the end of the hook name
  */
 function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
 	if ( ! empty( $when ) ) {
-		$when .= '_';
+		$hook[] = $when;
 	}
+
+	// It's a member hook
+	$hook[] = 'member';
 
 	if ( ! empty( $suffix ) ) {
-		$suffix = '_' . $suffix;
+		$hook[] = $suffix;
 	}
-
-	$hook = sprintf( 'bp_%1$smember%2$s', $when, $suffix );
 
 	/**
 	 * @since 1.2.0 (BuddyPress) for the 'activity_content', 'blogs_content', 'header_meta',
@@ -107,7 +110,7 @@ function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
 	 *                           'friend_requests_content' suffixes.
 	 * @since 1.5.0 (BuddyPress) for the 'settings_template' suffix.
 	 */
-	do_action( $hook );
+	return bp_nouveau_hook( $hook );
 }
 
 /**
@@ -605,8 +608,8 @@ function bp_nouveau_member_description_edit_link() {
  *
  * @since 1.0.0
  */
-function bp_nouveau_wp_profile_hooks( $type = 'top' ) {
-	if ( 'top' === $type ) {
+function bp_nouveau_wp_profile_hooks( $type = 'before' ) {
+	if ( 'before' === $type ) {
 		/**
 		 * Fires before the display of member profile loop content.
 		 *

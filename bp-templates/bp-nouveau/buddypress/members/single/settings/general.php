@@ -27,29 +27,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	<label for="pass2" class="bp-screen-reader-text"><?php _e( 'Repeat New Password', 'bp-nouveau' ); ?></label>
 	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'Repeat New Password', 'bp-nouveau' ); ?>
 
-	<?php
-
-	/**
-	 * Fires before the display of the submit button for user general settings saving.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_core_general_settings_before_submit' ); ?>
-
-	<div class="submit">
-		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-nouveau' ); ?>" id="submit" class="auto" />
-	</div>
-
-	<?php
-
-	/**
-	 * Fires after the display of the submit button for user general settings saving.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_core_general_settings_after_submit' ); ?>
-
-	<?php wp_nonce_field( 'bp_settings_general' ); ?>
+	<?php bp_nouveau_submit_button( 'members-general-settings' ); ?>
 
 </form>
 

@@ -2,11 +2,12 @@
 /**
  * BuddyPress - Members Single Profile WP
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
-bp_nouveau_wp_profile_hooks(); ?>
+bp_nouveau_wp_profile_hooks( 'before' ); ?>
 
 <div class="bp-widget wp-profile">
 
@@ -35,4 +36,4 @@ bp_nouveau_wp_profile_hooks(); ?>
 
 </div>
 
-<?php bp_nouveau_wp_profile_hooks( 'bottom' ); ?>
+<?php bp_nouveau_wp_profile_hooks( 'after' ); ?>

@@ -40,14 +40,7 @@
 
 	</div><!-- .item-list-tabs -->
 
-	<?php
-
-	/**
-	 * Fires before the display of the activity list.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_before_directory_activity_list' ); ?>
+	<?php bp_nouveau_activity_hook( 'before_directory', 'list' ); ?>
 
 	<div class="activity">
 

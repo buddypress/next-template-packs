@@ -11,6 +11,28 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Fire specific hooks at various places of templates
+ *
+ * @since 1.0.0
+ *
+ * @param array $pieces The list of terms of the hook to join.
+ */
+function bp_nouveau_hook( $pieces = array() ) {
+	if ( empty( $pieces ) ) {
+		return;
+	}
+
+	$bp_prefix = reset( $pieces );
+	if ( 'bp' !== $bp_prefix ) {
+		array_unshift( $pieces, 'bp' );
+	}
+
+	$hook = join( '_', $pieces );
+
+	do_action( $hook );
+}
+
+/**
  * Add classes to style the template notice/feedback message
  *
  * @since  1.0.0
@@ -871,41 +893,63 @@ function bp_nouveau_get_customizer_link( $args = array() ) {
  * @param string $prefix  Use it to add terms before the hook name
  */
 function bp_nouveau_signup_hook( $when = '', $prefix = '' ) {
+	$hook = array( 'bp' );
+
 	if ( ! empty( $when ) ) {
-		$when .= '_';
+		$hook[] = $when;
 	}
 
-	$h = 'bp_%1$s%2$sfields';
-
-	// Naming these register page hooks so differently doesn't help!
 	if ( ! empty( $prefix ) ) {
-		// Particular cases
-		if ( 'page' === $prefix || 'steps' === $prefix  ) {
-			// Suffix
-			$prefix = '_' . $prefix;
-
-			// Page suffix
-			$h = 'bp_%1$sregister%2$s';
-
-			// Signup specific case.
-			if ( 'custom_' === $when ) {
-				$h = 'bp_%1$ssignup%2$s';
-			}
-
-		// Regular cases.
-		} else {
-			$prefix .= '_';
+		if ( 'page' === $prefix ) {
+			$hook[] = 'register';
+		} elseif ( 'steps' === $prefix  ) {
+			$hook[] = 'signup';
 		}
+
+		$hook[] = $prefix;
 	}
 
-	$hook = sprintf( $h, $when, $prefix );
+	if ( 'page' !== $prefix && 'steps' !== $prefix ) {
+		$hook[] = 'fields';
+	}
 
 	/**
 	 * @since 1.1.0 (BuddyPress)
 	 * @since 1.2.4 (BuddyPress) Adds the 'bp_before_signup_profile_fields' action hook
 	 * @since 1.9.0 (BuddyPress) Adds the 'bp_signup_profile_fields' action hook
 	 */
-	do_action( $hook );
+	return bp_nouveau_hook( $hook );
+}
+
+/**
+ * Fire specific hooks into the activate template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $prefix  Use it to add terms before the hook name
+ */
+function bp_nouveau_activation_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
+	if ( ! empty( $when ) ) {
+		$hook[] = $when;
+	}
+
+	$hook[] = 'activate';
+
+	if ( ! empty( $suffix ) ) {
+		$hook[] = $suffix;
+	}
+
+	if ( 'page' === $suffix ) {
+		$hook[2] = 'activation';
+	}
+
+	/**
+	 * @since 1.1.0 (BuddyPress)
+	 */
+	return bp_nouveau_hook( $hook );
 }
 
 /**
@@ -1047,4 +1091,39 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 	 * @since 1.9.0 (BuddyPress)
 	 */
 	do_action( "bp_{$section}_fields" );
+}
+
+/**
+ * Output a submit button and the nonce for the requested action.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $action The action to get the submit button for. Required.
+ * @return string         HTML Output.
+ */
+function bp_nouveau_submit_button( $action = '' ) {
+	$submit_data = bp_nouveau_get_submit_button( $action );
+
+	if ( empty( $submit_data['attributes'] ) || empty( $submit_data['nonce'] ) ) {
+		return;
+	}
+
+	if ( ! empty( $submit_data['before'] ) ) {
+		do_action( $submit_data['before'] );
+	}
+
+	// Output the submit button.
+	printf( '
+		<div class="submit">
+			<input type="submit"%s/>
+		</div>',
+		bp_get_form_field_attributes( 'submit', $submit_data['attributes'] )
+	);
+
+	// Output the nonce field
+	wp_nonce_field( $submit_data['nonce'] );
+
+	if ( ! empty( $submit_data['after'] ) ) {
+		do_action( $submit_data['after'] );
+	}
 }

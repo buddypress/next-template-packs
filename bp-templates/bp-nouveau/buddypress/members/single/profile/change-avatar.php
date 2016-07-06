@@ -2,22 +2,16 @@
 /**
  * BuddyPress - Members Profile Change Avatar
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
 
 <h2 class="screen-heading"><?php _e( 'Change Profile Photo', 'bp-nouveau' ); ?></h2>
 
-<?php
-
-/**
- * Fires before the display of profile avatar upload content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_before_profile_avatar_upload_content' ); ?>
+<?php bp_nouveau_xprofile_hook( 'before', 'avatar_upload_content' ); ?>
 
 <?php if ( !(int)bp_get_option( 'bp-disable-avatar-uploads' ) ) : ?>
 
@@ -82,11 +76,4 @@ do_action( 'bp_before_profile_avatar_upload_content' ); ?>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires after the display of profile avatar upload content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_after_profile_avatar_upload_content' ); ?>
+<?php bp_nouveau_xprofile_hook( 'after', 'avatar_upload_content' );

@@ -84,22 +84,25 @@ function bp_nouveau_after_groups_directory_content() {
  * @param string $suffix  Use it to add terms at the end of the hook name
  */
 function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
 	if ( ! empty( $when ) ) {
-		$when .= '_';
+		$hook[] = $when;
 	}
+
+	// It's a create group hook
+	$hook[] = 'create_group';
 
 	if ( ! empty( $suffix ) ) {
-		$suffix = '_' . $suffix;
+		$hook[] = $suffix;
 	}
-
-	$hook = sprintf( 'bp_%1$screate_group%2$s', $when, $suffix );
 
 	/**
 	 * @since 1.2.0 (BuddyPress) for no suffix
 	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
 	 * @since 1.7.0 (BuddyPress) for the 'page' suffix
 	 */
-	do_action( $hook );
+	return bp_nouveau_hook( $hook );
 }
 
 /**
@@ -111,15 +114,18 @@ function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
  * @param string $suffix  Use it to add terms at the end of the hook name
  */
 function bp_nouveau_group_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
 	if ( ! empty( $when ) ) {
-		$when .= '_';
+		$hook[] = $when;
 	}
+
+	// It's a group hook
+	$hook[] = 'group';
 
 	if ( ! empty( $suffix ) ) {
-		$suffix = '_' . $suffix;
+		$hook[] = $suffix;
 	}
-
-	$hook = sprintf( 'bp_%1$sgroup%2$s', $when, $suffix );
 
 	/**
 	 * @since 1.1.0 (BuddyPress) for the 'menu_admins', 'menu_mods', 'members_content',
@@ -128,7 +134,7 @@ function bp_nouveau_group_hook( $when = '', $suffix = '' ) {
 	 * @since 1.2.0 (BuddyPress) for the 'activity_content', 'header_meta', 'home_content',
 	 *                           'plugin_template', 'friend_requests_content' suffixes.
 	 */
-	do_action( $hook );
+	return bp_nouveau_hook( $hook );
 }
 
 /**
