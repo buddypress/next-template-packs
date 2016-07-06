@@ -25,7 +25,7 @@
 
 	<?php endif; ?>
 
-	<div id="item-body">
+	<div id="item-body" class="item-body">
 
 		<?php bp_nouveau_member_template_part();?>
 
