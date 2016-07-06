@@ -102,7 +102,7 @@
 }
 
 .buddypress .item-list-tabs#subnav,
-.buddyoress .item-list-tabs#subsubnav {
+.buddypress .item-list-tabs#subsubnav {
 	background: transparent;
 	margin: 10px 0 10px;
 	overflow: hidden;
@@ -263,42 +263,26 @@
 	}
 }
 
-// Button navigation as tabbed effect for medium screens medium-up
-
+// Profile group name links
+// Button navigation as tabbed effect for
+// medium screens medium-up
 .buddypress {
-	.button-tabs {
-		border-bottom: 1px solid $bp-border-dark;
-		margin-bottom: $marg-sml;
+	.profile {
+		@include medium-up {
 
-		&:before,
-		&:after {
-			content: " ";
-			display: block;
-		}
+		@include tabbed-links();
 
-		&:after {
-			clear: both;
-		}
-
-		li {
-			float: left;
-			list-style: none;
-			margin: 0 $marg-med 0 0;
-
-			a {
-				background: none;
-				border: none;
+		// At tabbed nav we remove the default button nav styles.
+			ul.button-tabs {
+			li.current {
+				a {
+					background: none;
+					border: 0;
+				}
 			}
 		}
 
-		li.current {
-			border-color: $bp-border-dark $bp-border-dark #fff;
-			border-style: solid;
-			border-top-left-radius: 4px;
-			border-top-right-radius: 4px;
-			border-width: 1px;
-			margin-bottom: -1px;
-			padding: 0 $pad-sml;
-		}
+		} // @media
+
 	}
 }
