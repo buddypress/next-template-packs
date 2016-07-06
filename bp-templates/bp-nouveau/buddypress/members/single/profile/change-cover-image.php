@@ -8,7 +8,7 @@
 
 ?>
 
-<h4><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
+<h4 class="screen-heading"><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
 
 <?php
 

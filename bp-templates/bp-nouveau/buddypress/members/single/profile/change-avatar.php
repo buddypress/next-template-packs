@@ -8,7 +8,7 @@
 
 ?>
 
-<h4><?php _e( 'Change Profile Photo', 'bp-nouveau' ); ?></h4>
+<h2 class="screen-heading"><?php _e( 'Change Profile Photo', 'bp-nouveau' ); ?></h2>
 
 <?php
 
@@ -21,14 +21,14 @@ do_action( 'bp_before_profile_avatar_upload_content' ); ?>
 
 <?php if ( !(int)bp_get_option( 'bp-disable-avatar-uploads' ) ) : ?>
 
-	<p><?php _e( 'Your profile photo will be used on your profile and throughout the site. If there is a <a href="http://gravatar.com">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer.', 'bp-nouveau' ); ?></p>
+	<p class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. If there is a <a href="http://gravatar.com">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer.', 'bp-nouveau' ); ?></p>
 
 	<form action="" method="post" id="avatar-upload-form" class="standard-form" enctype="multipart/form-data">
 
 		<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 
 			<?php wp_nonce_field( 'bp_avatar_upload' ); ?>
-			<p><?php _e( 'Click below to select a JPG, GIF or PNG format photo from your computer and then click \'Upload Image\' to proceed.', 'bp-nouveau' ); ?></p>
+			<p class="bp-help-text"><?php _e( 'Click below to select a JPG, GIF or PNG format photo from your computer and then click \'Upload Image\' to proceed.', 'bp-nouveau' ); ?></p>
 
 			<p id="avatar-upload">
 				<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-nouveau' ); ?></label>
@@ -38,7 +38,7 @@ do_action( 'bp_before_profile_avatar_upload_content' ); ?>
 			</p>
 
 			<?php if ( bp_get_user_has_avatar() ) : ?>
-				<p><?php _e( "If you'd like to delete your current profile photo but not upload a new one, please use the delete profile photo button.", 'bp-nouveau' ); ?></p>
+				<p class="bp-help-text"><?php _e( "If you'd like to delete your current profile photo but not upload a new one, please use the delete profile photo button.", 'bp-nouveau' ); ?></p>
 				<p><a class="button edit" href="<?php bp_avatar_delete_link(); ?>" title="<?php esc_attr_e( 'Delete Profile Photo', 'bp-nouveau' ); ?>"><?php _e( 'Delete My Profile Photo', 'bp-nouveau' ); ?></a></p>
 			<?php endif; ?>
 
@@ -46,7 +46,7 @@ do_action( 'bp_before_profile_avatar_upload_content' ); ?>
 
 		<?php if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 
-			<h5><?php _e( 'Crop Your New Profile Photo', 'bp-nouveau' ); ?></h5>
+			<p class="bp-help-text screen-header"><?php _e( 'Crop Your New Profile Photo', 'bp-nouveau' ); ?></p>
 
 			<img src="<?php bp_avatar_to_crop(); ?>" id="avatar-to-crop" class="avatar" alt="<?php esc_attr_e( 'Profile photo to crop', 'bp-nouveau' ); ?>" />
 
@@ -78,7 +78,7 @@ do_action( 'bp_before_profile_avatar_upload_content' ); ?>
 
 <?php else : ?>
 
-	<p><?php _e( 'Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href="http://gravatar.com">Gravatar</a> using the same email address as you used to register with this site.', 'bp-nouveau' ); ?></p>
+	<p class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href="http://gravatar.com">Gravatar</a> using the same email address as you used to register with this site.', 'bp-nouveau' ); ?></p>
 
 <?php endif; ?>
 

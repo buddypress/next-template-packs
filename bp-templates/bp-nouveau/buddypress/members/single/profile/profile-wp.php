@@ -10,7 +10,7 @@ bp_nouveau_wp_profile_hooks(); ?>
 
 <div class="bp-widget wp-profile">
 
-	<h4><?php bp_is_my_profile() ? _e( 'My Profile', 'bp-nouveau' ) : printf( __( "%s's Profile", 'bp-nouveau' ), bp_get_displayed_user_fullname() ); ?></h4>
+	<h2 class="screen-heading"><?php bp_is_my_profile() ? _e( 'My Profile', 'bp-nouveau' ) : printf( __( "%s's Profile", 'bp-nouveau' ), bp_get_displayed_user_fullname() ); ?></h2>
 
 	<?php if ( bp_nouveau_has_wp_profile_fields() ) : ?>
 
