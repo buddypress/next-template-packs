@@ -268,6 +268,12 @@ body .buddypress a {
 	.dir-component-filters {
 		float: right;
 	}
+	#subsubnav .activity-search {
+		float: left;
+	}
+	#subsubnav .filter {
+		float: right;
+	}
 }
 
 .buddypress_object_nav .item-list-tabs li a span {
@@ -493,9 +499,18 @@ body .buddypress a {
 * @section 3.1.2 - Activity Entries
 *-----------------------------------------------------
 */
+.activity-list .activity-item:before,
+.activity-list .activity-item:after {
+	content: " ";
+	display: table;
+}
+
+.activity-list .activity-item:after {
+	clear: both;
+}
+
 .activity-list .activity-item {
 	list-style: none;
-	overflow: hidden;
 	padding: 1em 0 0;
 }
 
@@ -651,6 +666,7 @@ body .buddypress a {
 
 .activity-list .activity-item .activity-meta .button {
 	border: 0;
+	box-shadow: none;
 }
 
 .activity-list .activity-item .activity-meta .button span {
@@ -718,6 +734,7 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-comments ul {
 	clear: both;
+	list-style: none;
 	margin: 0;
 	padding: 0 0 0 1em;
 }

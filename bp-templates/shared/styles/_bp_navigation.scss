@@ -227,6 +227,19 @@
 	.dir-component-filters {
 		float: right;
 	}
+
+	// user screen last filter
+	#subsubnav {
+
+		.activity-search {
+			float: left;
+		}
+
+		.filter {
+			float: right;
+		}
+	}
+
 }
 
 

@@ -2,9 +2,18 @@
 
 .activity-list {
 
+	.activity-item:before,
+	.activity-item:after {
+		content: " ";
+		display: table;
+	}
+
+	.activity-item:after {
+		clear: both;
+	}
+
 	.activity-item { // li element
 		list-style: none;
-		overflow: hidden;
 		padding: $pad-med 0 0;
 
 		&.has-comments {
@@ -181,7 +190,7 @@
 
 			.button {
 				border: 0;
-
+				box-shadow: none;
 				span {
 					background: none;
 					color: #555;
