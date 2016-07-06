@@ -1,7 +1,7 @@
 // BP pagination  - generic styling for all screens
 .buddypress {
 
-	.pagination {
+	.bp-pagination {
 
 		background: transparent;
 		border: 0;
@@ -15,12 +15,11 @@
 
 		.pag-count {
 			float: left;
-			margin-left: 10px;
 		}
 
-		.pagination-links {
+		.bp-pagination-links {
 			float: right;
-			margin-right: 10px;
+			margin-right: $marg-sml;
 
 			span,
 			a {
@@ -29,9 +28,9 @@
 				padding: 0 5px;
 			}
 
-		} // .pagination-links
+		}
 
-		.pagination-links {
+		.bp-pagination-links {
 			a:focus,
 			a:hover {
 				opacity: 1;
@@ -40,6 +39,6 @@
 
 		p {margin: 0;}
 
-	} // close .pagination
+	} // close .bp-pagination
 
 }

@@ -328,7 +328,7 @@ function bp_nouveau_pagination( $position = null ) {
 		do_action( $bottom_hook );
 	};?>
 
-	<div class="pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-pagination="<?php echo esc_attr( $page_arg ); ?>">
+	<div class="bp-pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-pagination="<?php echo esc_attr( $page_arg ); ?>">
 
 		<?php if ( $pag_count ) : ?>
 			<div class="pag-count <?php echo sanitize_html_class( $count_class ); ?>">
@@ -341,7 +341,7 @@ function bp_nouveau_pagination( $position = null ) {
 		<?php endif; ?>
 
 		<?php if ( $pag_links ) : ?>
-			<div class="pagination-links <?php echo sanitize_html_class( $links_class ); ?>">
+			<div class="bp-pagination-links <?php echo sanitize_html_class( $links_class ); ?>">
 
 				<p class="pag-data">
 					<?php echo $pag_links; ?>

@@ -272,7 +272,7 @@ body .buddypress a {
 * @section 2.2 - Pagination
 *----------------------------------------------------------
 */
-.buddypress .pagination {
+.buddypress .bp-pagination {
 	background: transparent;
 	border: 0;
 	color: #999;
@@ -284,29 +284,28 @@ body .buddypress a {
 	width: 100%;
 }
 
-.buddypress .pagination .pag-count {
+.buddypress .bp-pagination .pag-count {
 	float: left;
-	margin-left: 10px;
 }
 
-.buddypress .pagination .pagination-links {
+.buddypress .bp-pagination .bp-pagination-links {
 	float: right;
 	margin-right: 10px;
 }
 
-.buddypress .pagination .pagination-links span,
-.buddypress .pagination .pagination-links a {
+.buddypress .bp-pagination .bp-pagination-links span,
+.buddypress .bp-pagination .bp-pagination-links a {
 	font-size: small;
 	opacity: 0.9;
 	padding: 0 5px;
 }
 
-.buddypress .pagination .pagination-links a:focus,
-.buddypress .pagination .pagination-links a:hover {
+.buddypress .bp-pagination .bp-pagination-links a:focus,
+.buddypress .bp-pagination .bp-pagination-links a:hover {
 	opacity: 1;
 }
 
-.buddypress .pagination p {
+.buddypress .bp-pagination p {
 	margin: 0;
 }
 
