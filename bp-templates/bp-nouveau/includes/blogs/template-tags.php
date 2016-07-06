@@ -91,21 +91,24 @@ function bp_nouveau_after_blogs_directory_content() {
  * @param string $suffix  Use it to add terms at the end of the hook name
  */
 function bp_nouveau_blogs_create_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
 	if ( ! empty( $when ) ) {
-		$when .= '_';
+		$hook[] = $when;
 	}
+
+	// It's a create a blog hook
+	$hook[] = 'create_blog';
 
 	if ( ! empty( $suffix ) ) {
-		$suffix = '_' . $suffix;
+		$hook[] = $suffix;
 	}
-
-	$hook = sprintf( 'bp_%1$screate_blog%2$s', $when, $suffix );
 
 	/**
 	 * @since 1.1.0 (BuddyPress) for the 'content' suffix
 	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
 	 */
-	do_action( $hook );
+	return bp_nouveau_hook( $hook );
 }
 
 /**

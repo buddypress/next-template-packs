@@ -2,32 +2,21 @@
 /**
  * BuddyPress - Members Profile Change Cover Image
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
 
 <h4><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
 
-<?php
-
-/**
- * Fires before the display of profile cover image upload content.
- *
- * @since 2.4.0
- */
-do_action( 'bp_before_profile_edit_cover_image' ); ?>
+<?php bp_nouveau_xprofile_hook( 'before', 'edit_cover_image' ); ?>
 
 <p><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'bp-nouveau' ); ?></p>
 
-<?php bp_attachments_get_template_part( 'cover-images/index' ); ?>
-
 <?php
+// Load the cover image UI
+bp_attachments_get_template_part( 'cover-images/index' );
 
-/**
- * Fires after the display of profile cover image upload content.
- *
- * @since 2.4.0
- */
-do_action( 'bp_after_profile_edit_cover_image' ); ?>
+bp_nouveau_xprofile_hook( 'after', 'edit_cover_image' );

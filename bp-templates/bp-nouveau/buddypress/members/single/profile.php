@@ -2,8 +2,9 @@
 /**
  * BuddyPress - Users Profile
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since 1.0.0
+ *
+ * @package BP Nouveau
  */
 
 ?>
@@ -14,14 +15,7 @@
 	</ul>
 </div><!-- .item-list-tabs -->
 
-<?php
-
-/**
- * Fires before the display of member profile content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_before_profile_content' ); ?>
+<?php bp_nouveau_xprofile_hook( 'before', 'profile_content' ); ?>
 
 <div class="profile">
 
@@ -62,11 +56,4 @@ do_action( 'bp_before_profile_content' ); ?>
 endswitch; ?>
 </div><!-- .profile -->
 
-<?php
-
-/**
- * Fires after the display of member profile content.
- *
- * @since 1.1.0
- */
-do_action( 'bp_after_profile_content' ); ?>
+<?php bp_nouveau_xprofile_hook( 'after', 'profile_content' );

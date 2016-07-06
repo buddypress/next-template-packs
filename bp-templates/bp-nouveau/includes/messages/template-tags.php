@@ -11,6 +11,40 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Fire specific hooks into the private messages template
+ *
+ * @since 1.0.0
+ *
+ * @param string $when    'before' or 'after'
+ * @param string $suffix  Use it to add terms at the end of the hook name
+ */
+function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
+	$hook = array( 'bp' );
+
+	if ( ! empty( $when ) ) {
+		$hook[] = $when;
+	}
+
+	// It's a message hook
+	$hook[] = 'message';
+
+	if ( ! empty( $suffix ) ) {
+		if ( 'compose_content' === $suffix ) {
+			$hook[2] = 'messages';
+		}
+
+		$hook[] = $suffix;
+	}
+
+	/**
+	 * @since 1.0.0 (BuddyPress) for the 'composent_content' (after), 'thread_header_actions', 'meta',
+	 *                           'content', 'thread_content', 'thread_list', 'reply_box' suffixes
+	 * @since 1.1.0 (BuddyPress) for the 'compose_content' (before), 'thread_reply' suffixes
+	 */
+	return bp_nouveau_hook( $hook );
+}
+
+/**
  * Output the sitewide notices into the member's header
  *
  * @since  1.0.0
