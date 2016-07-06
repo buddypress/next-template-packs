@@ -1,6 +1,14 @@
 // BP Forms Elements Global Styles
 
 .buddypress {
+
+
+	.filter { // has no form element and can't hold rules below.
+			select {
+				border: 1px solid $form-border-color;
+			}
+		}
+
 	.standard-form {
 
 		textarea,

@@ -16,7 +16,6 @@
 		}
 
 		li.last {
-			float: right;
 			margin: 7px 0 0;
 
 			select {
@@ -46,6 +45,7 @@
 				vertical-align: middle;
 			}
 		}
+
 		// these selected/current should apply to all navs
 		// if not pull out & move to end.
 		li.selected,
@@ -218,6 +218,18 @@
 	color: #fff;
 }
 
+// position our nav elements at larger screen widths
+@include medium-up() {
+	.subnav {
+		float: left;
+	}
+
+	.dir-component-filters {
+		float: right;
+	}
+}
+
+
 // Just buddypress_object_nav rules
 
 .buddypress_object_nav {
@@ -237,3 +249,4 @@
 
 	}
 }
+

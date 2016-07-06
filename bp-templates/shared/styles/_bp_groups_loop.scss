@@ -6,7 +6,12 @@
 	.groups-list { // ul
 		li {
 
+				.list-title {
+					text-align: center;
+				}
+
 			.item-desc {
+				clear: left;
 				color: $meta-text;
 				font-style: italic;
 			}
@@ -15,13 +20,14 @@
 
 				.list-title,
 				.item-meta {
-					text-align: center;
+					text-align: left;
 					width: auto;
 				}
 
 				.item-meta {
 					margin-bottom: $marg-lrg;
 				}
+
 				.item-desc {
 					border-left: 1px solid $light-grey;
 					border-right: 1px solid $light-grey;

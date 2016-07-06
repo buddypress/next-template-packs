@@ -7,7 +7,7 @@
 	2.1 - Navs - Object Nav / Sub Nav (item-list-tabs)
 	2.2 - Pagination
 
-3.0 - BP Lists / Loops Generic
+3.0 - BP Lists / Loops Generic & filters
 	3.1 - Activity Loop
 		3.1.1 Whats New Activity
 		3.1.2 - Activity Entries
@@ -82,7 +82,6 @@ body .buddypress a {
 }
 
 .item-list-tabs ul li.last {
-	float: right;
 	margin: 7px 0 0;
 }
 
@@ -260,6 +259,15 @@ body .buddypress a {
 	background-color: #1fb3dd;
 	border: 0;
 	color: #fff;
+}
+
+@media screen and (min-width: 46.8em) {
+	.subnav {
+		float: left;
+	}
+	.dir-component-filters {
+		float: right;
+	}
 }
 
 .buddypress_object_nav .item-list-tabs li a span {
@@ -641,6 +649,10 @@ body .buddypress a {
 	color: #800;
 }
 
+.activity-list .activity-item .activity-meta .button {
+	border: 0;
+}
+
 .activity-list .activity-item .activity-meta .button span {
 	background: none;
 	color: #555;
@@ -846,7 +858,12 @@ form.ac-form .ac-reply-content input {
 * @section 3.2 - Groups Loop
 *----------------------------------------------------------
 */
+.buddypress .groups-list li .list-title {
+	text-align: center;
+}
+
 .buddypress .groups-list li .item-desc {
+	clear: left;
 	color: #888;
 	font-style: italic;
 }
@@ -854,7 +871,7 @@ form.ac-form .ac-reply-content input {
 @media screen and (min-width: 46.8em) {
 	.buddypress .groups-list li .list-title,
 	.buddypress .groups-list li .item-meta {
-		text-align: center;
+		text-align: left;
 		width: auto;
 	}
 	.buddypress .groups-list li .item-meta {
@@ -1764,6 +1781,10 @@ div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 * @section 6.0 - Forms  - General
 *-------------------------------------------------------------------------------
 */
+.buddypress .filter select {
+	border: 1px solid #ccc;
+}
+
 .buddypress .standard-form textarea,
 .buddypress .standard-form input[type=text],
 .buddypress .standard-form input[type=color],

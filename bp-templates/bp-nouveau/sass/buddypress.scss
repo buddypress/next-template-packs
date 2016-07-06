@@ -28,7 +28,7 @@
 	2.1 - Navs - Object Nav / Sub Nav (item-list-tabs)
 	2.2 - Pagination
 
-3.0 - BP Lists / Loops Generic
+3.0 - BP Lists / Loops Generic & filters
 	3.1 - Activity Loop
 		3.1.1 Whats New Activity
 		3.1.2 - Activity Entries
@@ -92,6 +92,9 @@
 
 // Import our generic navigation styles
 @import "../../shared/styles/_bp_navigation";
+
+// Import our Dir Filter styles
+@import "../../shared/styles/_bp_filters";
 
 /**
 *----------------------------------------------------------
