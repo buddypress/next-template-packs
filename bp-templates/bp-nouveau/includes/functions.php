@@ -1189,3 +1189,170 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 
 	return false;
 }
+
+/**
+ * Get Some submit buttons data.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $action The action requested.
+ * @return array|bool The list of the submit button parameters for the requested action
+ *                    False if no actions were found.
+ */
+function bp_nouveau_get_submit_button( $action = '' ) {
+	if ( empty( $action ) ) {
+		return false;
+	}
+
+	/**
+	 * Filter the Submit buttons to add your own.
+	 * We strongly advise to not edit the existing ones.
+	 * You can eventually add classes though.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $value The list of submit buttons.
+	 */
+	$actions = apply_filters( 'bp_nouveau_get_submit_button', array(
+		'register' => array(
+			/**
+			 * Fires after the display of the registration submit buttons.
+			 *
+			 * @since 1.1.0 (BuddyPress)
+			 */
+			'before'     => 'bp_before_registration_submit_buttons',
+			/**
+			 * Fires after the display of the registration submit buttons.
+			 *
+			 * @since 1.1.0 (BuddyPress)
+			 */
+			'after'      => 'bp_after_registration_submit_buttons',
+			'nonce'      => 'bp_new_signup',
+			'attributes' => array(
+				'name'  => 'signup_submit',
+				'id'    => 'signup_submit',
+				'value' => __( 'Complete Sign Up', 'bp-nouveau' ),
+			),
+		),
+		'member-profile-edit' => array(
+			'before' => '',
+			'after'  => '',
+			'nonce'  => 'bp_xprofile_edit',
+			'attributes' => array(
+				'name'  => 'profile-group-edit-submit',
+				'id'    => 'profile-group-edit-submit',
+				'value' => __( 'Save Changes', 'bp-nouveau' ),
+			),
+		),
+		'member-capabilities' => array(
+			/**
+			 * Fires before the display of the submit button for user capabilities saving.
+			 *
+			 * @since 1.6.0 (BuddyPress)
+			 */
+			'before' => 'bp_members_capabilities_account_before_submit',
+			/**
+			 * Fires after the display of the submit button for user capabilities saving.
+			 *
+			 * @since 1.6.0 (BuddyPress)
+			 */
+			'after'  => 'bp_members_capabilities_account_after_submit',
+			'nonce'  => 'capabilities',
+			'attributes' => array(
+				'name'  => 'capabilities-submit',
+				'id'    => 'capabilities-submit',
+				'value' => __( 'Save', 'bp-nouveau' ),
+			),
+		),
+		'member-delete-account' => array(
+			/**
+			 * Fires before the display of the submit button for user delete account submitting.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			'before' => 'bp_members_delete_account_before_submit',
+			/**
+			 * Fires after the display of the submit button for user delete account submitting.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			'after'  => 'bp_members_delete_account_after_submit',
+			'nonce'  => 'delete-account',
+			'attributes' => array(
+				'disabled' => 'disabled',
+				'name'     => 'delete-account-button',
+				'id'       => 'delete-account-button',
+				'value'    => __( 'Delete Account', 'bp-nouveau' ),
+			),
+		),
+		'members-general-settings' => array(
+			/**
+			 * Fires before the display of the submit button for user general settings saving.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			'before' => 'bp_core_general_settings_before_submit',
+			/**
+			 * Fires after the display of the submit button for user general settings saving.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			'after'  => 'bp_core_general_settings_after_submit',
+			'nonce'  => 'bp_settings_general',
+			'attributes' => array(
+				'name'  => 'submit',
+				'id'    => 'submit',
+				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'class' => 'auto',
+			),
+		),
+		'member-notifications-settings' => array(
+			/**
+			 * Fires before the display of the submit button for user notification saving.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			'before' => 'bp_members_notification_settings_before_submit',
+			/**
+			 * Fires after the display of the submit button for user notification saving.
+			 *
+			 * @since 1.5.0 (BuddyPress)
+			 */
+			'after'  => 'bp_members_notification_settings_after_submit',
+			'nonce'  => 'bp_settings_notifications',
+			'attributes' => array(
+				'name'  => 'submit',
+				'id'    => 'submit',
+				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'class' => 'auto',
+			),
+		),
+		'members-profile-settings' => array(
+			/**
+			 * Fires before the display of the submit button for user profile saving.
+			 *
+			 * @since 2.0.0 (BuddyPress)
+			 */
+			'before' => 'bp_core_xprofile_settings_before_submit',
+			/**
+			 * Fires after the display of the submit button for user profile saving.
+			 *
+			 * @since 2.0.0 (BuddyPress)
+			 */
+			'after'  => 'bp_core_xprofile_settings_after_submit',
+			'nonce'  => 'bp_xprofile_settings',
+			'attributes' => array(
+				'name'  => 'xprofile-settings-submit',
+				'id'    => 'submit',
+				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'class' => 'auto',
+			),
+		),
+	) );
+
+	if ( isset( $actions[ $action ] ) ) {
+		return $actions[ $action ];
+	}
+
+	return false;
+}

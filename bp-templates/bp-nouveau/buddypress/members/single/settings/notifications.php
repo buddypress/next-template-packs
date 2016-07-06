@@ -21,29 +21,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	 */
 	do_action( 'bp_notification_settings' ); ?>
 
-	<?php
-
-	/**
-	 * Fires before the display of the submit button for user notification saving.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_members_notification_settings_before_submit' ); ?>
-
-	<div class="submit">
-		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'bp-nouveau' ); ?>" id="submit" class="auto" />
-	</div>
-
-	<?php
-
-	/**
-	 * Fires after the display of the submit button for user notification saving.
-	 *
-	 * @since 1.5.0
-	 */
-	do_action( 'bp_members_notification_settings_after_submit' ); ?>
-
-	<?php wp_nonce_field('bp_settings_notifications' ); ?>
+	<?php bp_nouveau_submit_button( 'member-notifications-settings' ); ?>
 
 </form>
 

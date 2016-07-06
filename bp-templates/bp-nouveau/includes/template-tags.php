@@ -1048,3 +1048,38 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 	 */
 	do_action( "bp_{$section}_fields" );
 }
+
+/**
+ * Output a submit button and the nonce for the requested action.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $action The action to get the submit button for. Required.
+ * @return string         HTML Output.
+ */
+function bp_nouveau_submit_button( $action = '' ) {
+	$submit_data = bp_nouveau_get_submit_button( $action );
+
+	if ( empty( $submit_data['attributes'] ) || empty( $submit_data['nonce'] ) ) {
+		return;
+	}
+
+	if ( ! empty( $submit_data['before'] ) ) {
+		do_action( $submit_data['before'] );
+	}
+
+	// Output the submit button.
+	printf( '
+		<div class="submit">
+			<input type="submit"%s/>
+		</div>',
+		bp_get_form_field_attributes( 'submit', $submit_data['attributes'] )
+	);
+
+	// Output the nonce field
+	wp_nonce_field( $submit_data['nonce'] );
+
+	if ( ! empty( $submit_data['after'] ) ) {
+		do_action( $submit_data['after'] );
+	}
+}

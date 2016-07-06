@@ -45,31 +45,9 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
 	<?php endif; ?>
 
-	<?php
-
-	/**
-	 * Fires before the display of the submit button for user profile saving.
-	 *
-	 * @since 2.0.0
-	 */
-	do_action( 'bp_core_xprofile_settings_before_submit' ); ?>
-
-	<div class="submit">
-		<input id="submit" type="submit" name="xprofile-settings-submit" value="<?php esc_attr_e( 'Save Settings', 'bp-nouveau' ); ?>" class="auto" />
-	</div>
-
-	<?php
-
-	/**
-	 * Fires after the display of the submit button for user profile saving.
-	 *
-	 * @since 2.0.0
-	 */
-	do_action( 'bp_core_xprofile_settings_after_submit' ); ?>
-
-	<?php wp_nonce_field( 'bp_xprofile_settings' ); ?>
-
 	<input type="hidden" name="field_ids" id="field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+
+	<?php bp_nouveau_submit_button( 'members-profile-settings' ); ?>
 
 </form>
 
