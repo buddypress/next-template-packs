@@ -9,7 +9,7 @@
 
 ?>
 
-<div id="buddypress">
+<div id="buddypress" class="buddypress">
 
 	<?php bp_nouveau_member_hook( 'before', 'home_content' ); ?>
 
