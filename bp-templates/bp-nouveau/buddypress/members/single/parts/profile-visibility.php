@@ -12,7 +12,7 @@ if ( empty( $GLOBALS['profile_template'] ) ) return;
 
 <?php if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
 
-	<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
+	<p class="field-visibility-settings-toggle field-visibility-settings-header" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
 
 		<?php printf(
 			__( 'This field may be seen by: %s', 'bp-nouveau' ),
@@ -34,7 +34,7 @@ if ( empty( $GLOBALS['profile_template'] ) ) return;
 
 <?php else : ?>
 
-	<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
+	<p class="field-visibility-settings-notoggle field-visibility-settings-header" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
 		<?php printf(
 			__( 'This field may be seen by: %s', 'bp-nouveau' ),
 			'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'

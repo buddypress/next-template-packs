@@ -50,6 +50,7 @@
 */
 body .buddypress * a {
 	border-bottom: none;
+	text-decoration: none;
 }
 
 /**
@@ -1350,12 +1351,10 @@ body.no-js .buddypress .field-visibility-settings {
 }
 
 .buddypress .field-visibility-settings,
-.buddypress .field-visibility-settings-toggle,
-.buddypress .field-visibility-settings-notoggle {
+.buddypress .field-visibility-settings-header {
 	color: #888;
 }
 
-.buddypress .field-visibility-settings-toggle a,
 .buddypress .field-visibility-settings a {
 	font-size: 80%;
 }
@@ -1386,11 +1385,11 @@ body.no-js .buddypress .field-visibility-settings {
 }
 
 .buddypress .standard-form .field-visibility-settings legend,
-.buddypress .standard-form .field-visibility-settings-toggle {
+.buddypress .standard-form .field-visibility-settings-header {
 	font-style: italic;
 }
 
-.buddypress .standard-form .field-visibility-settings-toggle {
+.buddypress .standard-form .field-visibility-settings-header {
 	font-size: 16px;
 	font-size: 1.6rem;
 }
