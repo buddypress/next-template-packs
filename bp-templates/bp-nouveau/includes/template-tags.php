@@ -338,8 +338,8 @@ function bp_nouveau_pagination( $position = null ) {
 
 		case 'notifications' :
 
-			$pag_count   = bp_notifications_pagination_count();
-			$pag_links   = bp_notifications_pagination_links();
+			$pag_count   = bp_get_notifications_pagination_count();
+			$pag_links   = bp_get_notifications_pagination_links();
 			$top_hook    = '';
 			$bottom_hook = '';
 			$page_arg    = $GLOBALS['notifications_template']->pag_arg;
