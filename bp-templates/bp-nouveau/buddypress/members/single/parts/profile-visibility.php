@@ -13,12 +13,13 @@ if ( empty( $GLOBALS['profile_template'] ) ) return;
 <?php if ( bp_current_user_can( 'bp_xprofile_change_field_visibility' ) ) : ?>
 
 	<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-		<?php _e('This field may be seen by: ', 'bp-nouveau' ); ?>
-			<span class="current-visibility-level">
-				<?php printf(__('%s', 'bp-nouveau'), bp_get_the_profile_field_visibility_level_label() ); ?>
-			</span>
 
-		<a href="#" class="visibility-toggle-link button"><?php _e( 'Change', 'bp-nouveau' ); ?></a>
+		<?php printf(
+			__( 'This field may be seen by: %s', 'bp-nouveau' ),
+			'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
+		); ?>
+		<a href="#" class="visibility-toggle-link"><?php _e( 'Change', 'bp-nouveau' ); ?></a>
+
 	</p>
 
 	<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>">
@@ -34,10 +35,10 @@ if ( empty( $GLOBALS['profile_template'] ) ) return;
 <?php else : ?>
 
 	<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
-		<?php _e('This field may be seen by: ', 'bp-nouveau' ); ?>
-		<span class="current-visibility-level">
-			<?php printf(__('%s', 'bp-nouveau'), bp_get_the_profile_field_visibility_level_label() ); ?>
-		</span>
+		<?php printf(
+			__( 'This field may be seen by: %s', 'bp-nouveau' ),
+			'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
+		); ?>
 	</p>
 
 <?php endif ?>
