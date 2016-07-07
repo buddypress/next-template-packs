@@ -281,42 +281,6 @@ body .buddypress a {
 	float: right;
 }
 
-@media screen and (min-width: 46.8em) {
-	.buddypress .profile .button-tabs {
-		border-bottom: 1px solid #ccc;
-		margin-bottom: 10px;
-	}
-	.buddypress .profile .button-tabs:before, .buddypress .profile .button-tabs:after {
-		content: " ";
-		display: block;
-	}
-	.buddypress .profile .button-tabs:after {
-		clear: both;
-	}
-	.buddypress .profile .button-tabs li {
-		float: left;
-		list-style: none;
-		margin: 0 15px 0 0;
-	}
-	.buddypress .profile .button-tabs li a {
-		background: none;
-		border: none;
-	}
-	.buddypress .profile .button-tabs li.current {
-		border-color: #ccc #ccc #fff;
-		border-style: solid;
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
-		border-width: 1px;
-		margin-bottom: -1px;
-		padding: 0 0.5em;
-	}
-	.buddypress .profile ul.button-tabs li.current a {
-		background: none;
-		border: 0;
-	}
-}
-
 /**
 *----------------------------------------------------------
 * @section 2.2 - Pagination
@@ -1175,11 +1139,6 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin: 30px 0 15px;
 }
 
-.buddypress .item-body .button-tabs li a {
-	font-size: 22px;
-	font-size: 2.2rem;
-}
-
 /**
 *----------------------------------------------------
 * @subsection 5.2.1 - Item Body Groups
@@ -1353,24 +1312,24 @@ body.no-js .single-item-header .js-self-profile-button {
 	* @subsection 5.2.2.2 - Extended Profiles
 	*-------------------------------------------
 	*/
-.buddypress div.profile h4,
-.buddypress #profile-edit-form .button-nav {
+.buddypress .profile .profile-group-title,
+.buddypress .profile .button-nav {
 	margin-bottom: auto;
 	margin-top: 15px;
 }
 
-.buddypress div.profile h4 {
-	font-size: 18px;
-	font-size: 1.8rem;
-}
-
-.buddypress #profile-edit-form .button-nav {
+.buddypress .profile .button-nav {
 	list-style: none;
 }
 
-.buddypress #profile-edit-form .button-nav li {
+.buddypress .profile .button-nav li {
 	display: inline-block;
 	margin-right: 10px;
+}
+
+.buddypress .profile .button-nav li a {
+	font-size: 18px;
+	font-size: 1.8rem;
 }
 
 .buddypress .field-visibility-settings {
@@ -1448,6 +1407,42 @@ body.no-js .buddypress .field-visibility-settings {
 
 body.register .buddypress .page ul {
 	list-style: none;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .profile .button-tabs {
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 10px;
+	}
+	.buddypress .profile .button-tabs:before, .buddypress .profile .button-tabs:after {
+		content: " ";
+		display: block;
+	}
+	.buddypress .profile .button-tabs:after {
+		clear: both;
+	}
+	.buddypress .profile .button-tabs li {
+		float: left;
+		list-style: none;
+		margin: 0 15px 0 0;
+	}
+	.buddypress .profile .button-tabs li a {
+		background: none;
+		border: none;
+	}
+	.buddypress .profile .button-tabs li.current {
+		border-color: #ccc #ccc #fff;
+		border-style: solid;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		border-width: 1px;
+		margin-bottom: -1px;
+		padding: 0 0.5em;
+	}
+	.buddypress .profile ul.button-tabs li.current a {
+		background: none;
+		border: 0;
+	}
 }
 
 /**

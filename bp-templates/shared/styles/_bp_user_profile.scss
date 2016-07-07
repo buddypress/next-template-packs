@@ -1,30 +1,30 @@
 // BP User Profiles screen
-
+// Profile Display
+// Profile Edit
 .buddypress {
-	div.profile h4,
-	#profile-edit-form .button-nav {
-		margin-bottom: auto;
-		margin-top: $marg-med;
-	}
 
-	div.profile {
-		h4 {
-			@include font-size(18);
+	.profile {
+		.profile-group-title,
+		.button-nav {
+			margin-bottom: auto;
+			margin-top: $marg-med;
 		}
-	}
 
-	#profile-edit-form {
 		.button-nav {
 			list-style: none;
 
 			li {
 				display: inline-block;
 				margin-right: $marg-sml;
+
+				a {
+					@include font-size(18);
+				}
 			}
 		}
 	}
-
 } // close .buddypress
+
 
 .buddypress .field-visibility-settings {
 	display: none;
@@ -112,4 +112,28 @@ body.no-js {
 
 body.register .buddypress .page ul {
 	list-style: none;
+}
+
+// medium screens up
+.buddypress {
+	.profile {
+		@include medium-up {
+
+		// Profile group name links
+		// Button navigation as tabbed effect for wide screen
+		@include tabbed-links();
+
+		// For tabbed nav we remove the default button nav styles.
+			ul.button-tabs {
+			li.current {
+				a {
+					background: none;
+					border: 0;
+				}
+			}
+		}
+
+		} // @media
+
+	}
 }
