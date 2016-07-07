@@ -39,7 +39,7 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 
 				<p class="description"><?php bp_the_profile_field_description(); ?></p>
 
-				<?php		bp_nouveau_xprofile_edit_visibilty(); ?>
+				<?php bp_nouveau_xprofile_edit_visibilty(); ?>
 
 			</div>
 
