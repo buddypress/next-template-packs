@@ -35,11 +35,12 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 				<?php
 				$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 				$field_type->edit_field_html();
-
-				bp_nouveau_xprofile_edit_visibilty();
 				?>
 
 				<p class="description"><?php bp_the_profile_field_description(); ?></p>
+
+				<?php		bp_nouveau_xprofile_edit_visibilty(); ?>
+
 			</div>
 
 		<?php endwhile; ?>
