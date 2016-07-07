@@ -335,6 +335,16 @@ function bp_nouveau_pagination( $position = null ) {
 			$page_arg    = $GLOBALS['groups_template']->pag_arg;
 
 		break;
+
+		case 'notifications' :
+
+			$pag_count   = bp_notifications_pagination_count();
+			$pag_links   = bp_notifications_pagination_links();
+			$top_hook    = '';
+			$bottom_hook = '';
+			$page_arg    = $GLOBALS['notifications_template']->pag_arg;
+
+		break;
 	}
 
 	$count_class = sprintf( '%1$s-%2$s-count-%3$s', $component, $screen, $position );
