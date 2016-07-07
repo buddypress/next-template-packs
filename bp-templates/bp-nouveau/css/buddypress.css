@@ -49,7 +49,7 @@
 *-------------------------------------------------------------------------------
 */
 body .buddypress * a {
-	border-bottom: none !important;
+	border-bottom: none;
 }
 
 /**
@@ -272,6 +272,9 @@ body .buddypress * a {
 		float: left;
 	}
 	#subsubnav .filter {
+		float: right;
+	}
+	#subnav .last {
 		float: right;
 	}
 }
