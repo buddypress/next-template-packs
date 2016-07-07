@@ -143,10 +143,15 @@ body.register .buddypress .page ul {
 
 		// For tabbed nav we remove the default button nav styles.
 			ul.button-tabs {
+
+			li,
 			li.current {
-				a {
+				a,
+				a:focus,
+				a:hover {
 					background: none;
 					border: 0;
+
 				}
 			}
 		}
@@ -158,3 +163,6 @@ body.register .buddypress .page ul {
 
 // Profile Public Display
 
+.buddypress {
+
+}

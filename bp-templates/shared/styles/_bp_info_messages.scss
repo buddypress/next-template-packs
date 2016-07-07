@@ -1,5 +1,11 @@
 // Sitewide template error & info messages constructs.
 .buddypress {
+
+	.bp-help-text {
+		background: $off-white;
+		padding: $pad-sml;
+	}
+
 	.bp-messages {
 		margin: 0 0 $marg-med;
 

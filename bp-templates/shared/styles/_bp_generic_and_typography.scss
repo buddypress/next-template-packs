@@ -1,12 +1,12 @@
-// BPGeneric elements, Typograpgy and Images.
+// BP Generic elements, Typography and Images.
 
 body {
 	.buddypress {
-
-		// some WP themes add anchor border bottom :(
-		a {
-			border-bottom: 0;
+		* {
+			// some WP themes add anchor border bottom :(
+			a {
+				border-bottom: none !important;
+			}
 		}
-
 	}
 }

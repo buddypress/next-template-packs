@@ -48,8 +48,8 @@
 * @section 1.0 - BP Generic, Typography & Imagery
 *-------------------------------------------------------------------------------
 */
-body .buddypress a {
-	border-bottom: 0;
+body .buddypress * a {
+	border-bottom: none !important;
 }
 
 /**
@@ -1450,7 +1450,12 @@ body.register .buddypress .page ul {
 		margin-bottom: -1px;
 		padding: 0 0.5em;
 	}
-	.buddypress .profile ul.button-tabs li.current a {
+	.buddypress .profile ul.button-tabs li a,
+	.buddypress .profile ul.button-tabs li a:focus,
+	.buddypress .profile ul.button-tabs li a:hover,
+	.buddypress .profile ul.button-tabs li.current a,
+	.buddypress .profile ul.button-tabs li.current a:focus,
+	.buddypress .profile ul.button-tabs li.current a:hover {
 		background: none;
 		border: 0;
 	}
@@ -2341,6 +2346,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress #item-buttons:empty {
 	display: none;
+}
+
+.buddypress .bp-help-text {
+	background: #fafafa;
+	padding: 0.5em;
 }
 
 .buddypress .bp-messages {

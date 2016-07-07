@@ -9,11 +9,11 @@
 
 ?>
 
-<h4 class="screen-heading"><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
+<h2 class="screen-heading"><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h2>
 
 <?php bp_nouveau_xprofile_hook( 'before', 'edit_cover_image' ); ?>
 
-<p><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'bp-nouveau' ); ?></p>
+<p class="bp-help-text"><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'bp-nouveau' ); ?></p>
 
 <?php
 // Load the cover image UI
