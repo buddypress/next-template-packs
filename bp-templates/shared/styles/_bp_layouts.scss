@@ -1,0 +1,244 @@
+// BP Layouts
+// Layouts provides classes to handle specific module layouts on a user selectable basis
+
+// BP Lists (loops) may be suited to a grid layout e.g members loops
+// These classes added to the elements will provide these styles.
+
+.grid {
+	// the parent element (usually the ul)
+
+	>li,
+	>li .generic-button a {
+		@include box-model( border-box );
+	}
+
+	>li {
+		border-bottom: 0;
+		padding-bottom: 0;
+		padding-top: 0;
+
+		.wrap {
+			background: $light-grey;
+			padding-bottom: 15px;
+			min-height: 400px;
+			overflow: hidden;
+			padding-top: 14px;
+
+			.update {
+				color: $meta-text;
+				padding: $pad-sml $pad-lrg;
+			}
+		}
+
+		.item-avatar {
+			text-align: center;
+
+			.avatar {
+				border-radius: 50%;
+				display: inline-block;
+				width: 50%;
+			}
+		}
+
+	}
+
+}
+
+@include small-up() {
+	// Set the column  or item numbers to span horizontally
+	.grid {
+
+		>li.item-entry {
+			float: left;
+			margin: 0;
+		}
+
+		&.two {
+			>li {
+				padding-bottom: 10px;
+				padding-top: 0;
+				width: 50%;
+
+				&:nth-child(odd) {
+					padding-right: 10px;
+				}
+
+				&:nth-child(even) {
+					padding-left: 10px;
+				}
+
+				.item {
+					margin: 1rem auto 0;
+					width: 80%;
+
+					.item-title {
+						width: auto;
+					}
+				}
+			} // close >li
+		}
+	}
+}
+
+@include medium-up() {
+	// Set three to a row
+	.grid {
+		&.three {
+
+			>li {
+				padding-bottom: 15px;
+				padding-top: 0;
+				width: 33.3%;
+
+				&:nth-child(1n+1) {
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+
+				&:nth-child(3n+3) {
+					padding-left: 10px;
+					padding-right: 0;
+				}
+
+				&:nth-child(3n+1) {
+					padding-left: 0;
+					padding-right: 10px;
+				}
+
+			} // close >li
+		}
+	} // .grid
+} // close @media
+
+
+// This block styles the loop items for a grid layout
+// The block might be better located in the generic bp-lists section
+
+@include small-up() {
+	// if grid is set & this is a member, group or blog loop
+	// we want to re-style some of the elements in the item
+	// we'll exclude activity from this though
+	.grid.bp-list {
+
+		>li {
+			border-bottom: none;
+
+			.item-avatar {
+				text-align: center;
+				width: auto;
+
+				img.avatar {
+					display: inline-block;
+					height: auto;
+					width: 50%;
+				}
+			}
+
+			.item-meta,
+			.list-title {
+				float: none;
+				text-align: center;
+			}
+
+			.item {
+				font-size: 1.6rem;
+				left: 0;
+				margin: 0 auto;
+				text-align: center;
+				width: 96%;
+
+				.user-update {
+					clear: both;
+					text-align: left;
+				}
+
+				.activity-read-more a {
+					display: inline;
+				}
+			}
+
+			div.action {
+				float: none;
+				margin: 0 5px;
+				position: relative;
+				text-align: center;
+
+				.generic-button {
+					display: block;
+					float: none;
+					margin: 0.2em 0;
+				}
+			}
+
+			.item-avatar,
+			.avatar,
+			.item {
+				float: none;
+			}
+
+		}
+	}
+}
+
+
+
+/*
+
+			.item-avatar {
+				text-align: center;
+
+				.avatar {
+					display: inline-block;
+					width: 50%;
+				}
+			}
+
+			.item {
+				font-size: 1.6rem;
+				left: 0;
+				margin: 0 auto;
+				text-align: center;
+				width: 96%;
+
+				.item-title {
+					display: inline-block;
+
+					a {
+						display: block;
+						text-align: center;
+					}
+
+					.update {
+						font-size: 12px;
+						text-align: left;
+					}
+				}
+
+				.activity-read-more a {
+					display: inline;
+				}
+			}
+
+			div.action {
+				float: none;
+				margin: 0 5px;
+				position: relative;
+				text-align: center;
+
+				.generic-button {
+					display: block;
+					float: none;
+					margin: 0.2em 0;
+				}
+			}
+
+			.item-avatar,
+			.avatar,
+			.item {
+				float: none;
+			}
+
+		} // close li generic
+
+*/
+
