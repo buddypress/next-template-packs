@@ -29,14 +29,7 @@
 
 				<?php endwhile; ?>
 
-				<?php
-
-				/**
-				 * Fires after the display of member options navigation.
-				 *
-				 * @since 1.0.0
-				 */
-				do_action( 'bp_member_options_nav' ); ?>
+				<?php bp_nouveau_member_hook( '', 'options_nav' ) ;?>
 
 			</ul>
 

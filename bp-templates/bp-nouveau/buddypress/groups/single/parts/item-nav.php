@@ -29,14 +29,7 @@
 
 				<?php endwhile; ?>
 
-				<?php
-
-				/**
-				 * Fires after the display of group options navigation.
-				 *
-				 * @since 1.2.0
-				 */
-				do_action( 'bp_group_options_nav' ); ?>
+				<?php bp_nouveau_group_hook( '', 'options_nav' ) ;?>
 
 			</ul>
 
