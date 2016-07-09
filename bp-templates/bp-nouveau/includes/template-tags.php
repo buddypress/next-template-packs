@@ -303,6 +303,10 @@ function bp_nouveau_pagination( $position = null ) {
 		$screen = 'user';
 	}
 
+	if ( ! bp_is_active( $component ) ) {
+		return;
+	}
+
 	switch( $component ) {
 
 		case 'blogs' :
@@ -342,7 +346,7 @@ function bp_nouveau_pagination( $position = null ) {
 			$pag_links   = bp_get_notifications_pagination_links();
 			$top_hook    = '';
 			$bottom_hook = '';
-			$page_arg    = $GLOBALS['notifications_template']->pag_arg;
+			$page_arg    = buddypress()->notifications->query_loop->pag_arg;
 
 		break;
 	}
