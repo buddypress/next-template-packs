@@ -10,11 +10,13 @@
 
 <div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 	<ul>
-		<?php bp_get_options_nav(); ?>
+
+		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 		<li id="members-order-select" class="last filter">
 			<?php bp_notifications_sort_order_form(); ?>
 		</li>
+
 	</ul>
 </div>
 

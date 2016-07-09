@@ -9,46 +9,48 @@
  * @subpackage bp-nouveau
  */
 
-		bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
+bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 
-		<?php if ( ! bp_is_current_component_core() ) : ?>
+<?php if ( ! bp_is_current_component_core() ) : ?>
 
-		<div class="item-list-tabs no-ajax" id="subnav">
-			<ul>
-				<?php bp_get_options_nav(); ?>
+	<div class="item-list-tabs no-ajax" id="subnav">
+		<ul>
 
-				<?php
+			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
-				/**
-				 * Fires inside the member plugin template nav <ul> tag.
-				 *
-				 * @since 1.2.2
-				 */
-				do_action( 'bp_member_plugin_options_nav' ); ?>
-			</ul>
-		</div><!-- .item-list-tabs -->
-
-		<?php endif; ?>
-
-		<?php if ( has_action( 'bp_template_title' ) ) : ?>
-			<h3><?php
+			<?php
 
 			/**
-			 * Fires inside the member plugin template <h3> tag.
+			 * Fires inside the member plugin template nav <ul> tag.
 			 *
-			 * @since 1.0.0
+			 * @since 1.2.2
 			 */
-			do_action( 'bp_template_title' ); ?></h3>
+			do_action( 'bp_member_plugin_options_nav' ); ?>
 
-		<?php endif; ?>
+		</ul>
+	</div><!-- .item-list-tabs -->
 
-		<?php
+<?php endif; ?>
 
-		/**
-		 * Fires and displays the member plugin template content.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'bp_template_content' ); ?>
+<?php if ( has_action( 'bp_template_title' ) ) : ?>
+	<h3><?php
 
-		<?php bp_nouveau_member_hook( 'after', 'plugin_template' );
+	/**
+	 * Fires inside the member plugin template <h3> tag.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'bp_template_title' ); ?></h3>
+
+<?php endif; ?>
+
+<?php
+
+/**
+ * Fires and displays the member plugin template content.
+ *
+ * @since 1.0.0
+ */
+do_action( 'bp_template_content' );
+
+bp_nouveau_member_hook( 'after', 'plugin_template' );

@@ -401,154 +401,593 @@ function bp_nouveau_pagination( $position = null ) {
 	return;
 }
 
-/** Template tags for the Directory navs **************************************/
+/** Template Tags for BuddyPress navigations **********************************/
 
+/**
+ * This is the BP Nouveau Navigation Loop.
+ *
+ * It can be used by any object using the
+ * BP_Core_Nav API introduced in BuddyPress 2.6.0.
+ */
+
+/**
+ * Init the Navigation Loop and checks it has items.
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $args {
+ *     Array of arguments.
+ *
+ *     @type string $type                    The type of Nav to get (primary or secondary)
+ *                                           Default 'primary'. Required.
+ *     @type string $object                  The object to get the nav for (eg: 'directory', 'group_manage',
+ *                                           or any custom object). Default ''. Optional
+ *     @type bool   $user_has_access         Used by the secondary member's & group's nav. Default true. Optional.
+ *     @type bool   $show_for_displayed_user Used by the primary member's nav. Default true. Optional.
+ * }
+ * @return bool         True if the Nav contains items. False otherwise.
+ */
+function bp_nouveau_has_nav( $args = array() ) {
+	$bp_nouveau = bp_nouveau();
+
+	$n = wp_parse_args( $args, array(
+		'type'                    => 'primary',
+		'object'                  => '',
+		'user_has_access'         => true,
+		'show_for_displayed_user' => true,
+	) );
+
+	if ( empty( $n['type'] ) ) {
+		return false;
+	}
+
+	$nav                       = array();
+	$bp_nouveau->displayed_nav = '';
+	$bp_nouveau->object_nav    = $n['object'];
+
+	if ( bp_is_directory() || 'directory' === $bp_nouveau->object_nav ) {
+		$bp_nouveau->displayed_nav = 'directory';
+		$nav                       = $bp_nouveau->directory_nav->get_primary();
+
+	// So far it's only possible to build a Group nav when displaying it.
+	} elseif ( bp_is_group() ) {
+		$bp_nouveau->displayed_nav = 'groups';
+		$parent_slug               = bp_get_current_group_slug();
+
+		if ( 'group_manage' === $bp_nouveau->object_nav && bp_is_group_admin_page() ) {
+			$parent_slug .= '_manage';
+		}
+
+		$nav = buddypress()->groups->nav->get_secondary( array(
+			'parent_slug'     => $parent_slug,
+			'user_has_access' => (bool) $n['user_has_access'],
+		) );
+
+	// Build the nav for the displayed user
+	} elseif ( bp_is_user() ) {
+		$bp_nouveau->displayed_nav = 'personal';
+
+		if ( 'secondary' === $n['type'] ) {
+			$nav = buddypress()->members->nav->get_secondary( array(
+				'parent_slug'     => bp_current_component(),
+				'user_has_access' => (bool) $n['user_has_access'],
+			) );
+		} else {
+			$args = array();
+
+			if ( true === (bool) $n['show_for_displayed_user'] && ! bp_is_my_profile() ) {
+				$args = array( 'show_for_displayed_user' => true );
+			}
+
+			$nav = buddypress()->members->nav->get_primary( $args );
+		}
+
+	} elseif ( ! empty( $bp_nouveau->object_nav ) ) {
+		$bp_nouveau->displayed_nav = $bp_nouveau->object_nav;
+
+		/**
+		 * Use the filter to use your specific Navigation.
+		 * Use the $n param to check for your custom object
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param  array $nav The list of item navigations generated
+		 *                    by the BP_Core_Nav API.
+		 * @param  array $n   The arguments of the Navigation loop.
+		 */
+		$nav = apply_filters( 'bp_nouveau_get_nav', $nav, $n );
+	}
+
+	$bp_nouveau->sorted_nav = array_values( $nav );
+
+	if ( 0 === count( $bp_nouveau->sorted_nav ) || ! $bp_nouveau->displayed_nav ) {
+		unset( $bp_nouveau->sorted_nav, $bp_nouveau->displayed_nav, $bp_nouveau->object_nav );
+
+		return false;
+	}
+
+	$bp_nouveau->current_nav_index = 0;
+	return true;
+}
+
+/**
+ * Checks there are still nav items to display.
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if there are still items to display.
+ *              False otherwise.
+ */
+function bp_nouveau_nav_items() {
+	$bp_nouveau = bp_nouveau();
+
+	if ( isset( $bp_nouveau->sorted_nav[ $bp_nouveau->current_nav_index ] ) ) {
+		return true;
+	}
+
+	$bp_nouveau->current_nav_index = 0;
+	unset( $bp_nouveau->current_nav_item );
+
+	return false;
+}
+
+/**
+ * Sets the current nav item and prepare the navigation loop
+ * to iterate to next one.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_nav_item() {
+	$bp_nouveau = bp_nouveau();
+
+	$bp_nouveau->current_nav_item   = $bp_nouveau->sorted_nav[ $bp_nouveau->current_nav_index ];
+	$bp_nouveau->current_nav_index += 1;
+}
+
+/**
+ * Displays the nav item ID.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_id() {
+	echo bp_nouveau_get_nav_id();
+}
+
+	/**
+	 * Retrieve the ID attribute of the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string the ID attribute.
+	 */
+	function bp_nouveau_get_nav_id() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		if ( 'directory' === $bp_nouveau->displayed_nav ) {
+			$id = sprintf( '%1$s-%2$s', $nav_item->component, $nav_item->slug );
+		} elseif ( 'groups' === $bp_nouveau->displayed_nav || 'personal' ===  $bp_nouveau->displayed_nav ) {
+			$id = sprintf( '%1$s-%2$s-li', $nav_item->css_id, $bp_nouveau->displayed_nav );
+		} else {
+			$id = $nav_item->slug;
+		}
+
+		/**
+		 * Filter here to edit the ID attribute of the nav.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $id       The ID attribute of the nav.
+		 * @param object $nav_item The current nav item object.
+		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		return esc_attr( apply_filters( 'bp_nouveau_get_nav_id', $id, $nav_item, $bp_nouveau->displayed_nav ) );
+	}
+
+/**
+ * Displays the nav item classes.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_classes() {
+	echo bp_nouveau_get_nav_classes();
+}
+
+	/**
+	 * Retrieve a space separated list of classes for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string the list of classes.
+	 */
+	function bp_nouveau_get_nav_classes() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$classes = array();
+		if ( 'directory' === $bp_nouveau->displayed_nav && ! empty( $nav_item->li_class ) ) {
+			$classes = (array) $nav_item->li_class;
+		} elseif ( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav ) {
+			$classes  = array( 'bp-' . $bp_nouveau->displayed_nav . '-tab' );
+			$selected = bp_current_action();
+
+			// User's primary nav
+			if ( ! empty( $nav_item->primary ) ) {
+				$selected = bp_current_component();
+
+			// Group Admin Tabs.
+			} elseif ( 'group_manage' === $bp_nouveau->object_nav ) {
+				$selected = bp_action_variable( 0 );
+				$classes  = array( 'bp-' . $bp_nouveau->displayed_nav . '-admin-tab' );
+
+			// If we are here, it's the member's subnav
+			} elseif ( 'personal' === $bp_nouveau->displayed_nav ) {
+				$classes  = array( 'bp-' . $bp_nouveau->displayed_nav . '-sub-tab' );
+			}
+
+			if ( $nav_item->slug === $selected ) {
+				$classes = array_merge( $classes, array( 'current', 'selected' ) );
+			}
+		}
+
+		if ( ! empty( $classes ) ) {
+			$classes = array_map( 'sanitize_html_class', $classes );
+		}
+
+		/**
+		 * Filter here to edit/add classes.
+		 *
+		 * NB: you can also directly add classes into the template parts.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $value    A space separated list of classes.
+		 * @param array  $classes  The list of classes.
+		 * @param object $nav_item The current nav item object.
+		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		$classes_list = apply_filters( 'bp_nouveau_get_classes', join( ' ', $classes ), $classes, $nav_item, $bp_nouveau->displayed_nav );
+
+		if ( empty( $classes_list ) ) {
+			return;
+		}
+
+		return esc_attr( $classes_list );
+	}
+
+/**
+ * Displays the nav item link.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_link() {
+	echo bp_nouveau_get_nav_link();
+}
+
+	/**
+	 * Retrieve the link for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string The link for the nav item.
+	 */
+	function bp_nouveau_get_nav_link() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$link = '#';
+		if ( ! empty( $nav_item->link ) ) {
+			$link = $nav_item->link;
+		}
+
+		if ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->primary ) ) {
+			if ( bp_loggedin_user_domain() ) {
+				$link = str_replace( bp_loggedin_user_domain(), bp_displayed_user_domain(), $link );
+			} else {
+				$link = trailingslashit( bp_displayed_user_domain() . $link );
+			}
+		}
+
+		/**
+		 * Filter here to edit the link of the nav.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $link     The link for the nav item.
+		 * @param object $nav_item The current nav item object.
+		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		return esc_url( apply_filters( 'bp_nouveau_get_nav_link', $link, $nav_item, $bp_nouveau->displayed_nav ) );
+	}
+
+/**
+ * Displays the nav item link ID.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_link_id() {
+	echo bp_nouveau_get_nav_link_id();
+}
+
+	/**
+	 * Retrieve the id attribute of the link for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string The link id for the nav item.
+	 */
+	function bp_nouveau_get_nav_link_id() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$link_id = '';
+		if ( ( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav ) && ! empty( $nav_item->css_id ) ) {
+			$link_id = $nav_item->css_id;
+
+			if ( ! empty( $nav_item->primary ) && 'personal' === $bp_nouveau->displayed_nav ) {
+				$link_id = 'user-' . $link_id;
+			}
+		} else {
+			$link_id = $nav_item->slug;
+		}
+
+		/**
+		 * Filter here to edit the link id attribute of the nav.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $link_id  The link id attribute for the nav item.
+		 * @param object $nav_item The current nav item object.
+		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		return esc_attr( apply_filters( 'bp_nouveau_get_nav_link_id', $link_id, $nav_item, $bp_nouveau->displayed_nav ) );
+	}
+
+/**
+ * Displays the nav item link title.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_link_title() {
+	echo bp_nouveau_get_nav_link_title();
+}
+
+	/**
+	 * Retrieve the title attribute of the link for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string The link title for the nav item.
+	 */
+	function bp_nouveau_get_nav_link_title() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$title = '';
+		if ( 'directory' === $bp_nouveau->displayed_nav && ! empty( $nav_item->title ) ) {
+			$title = $nav_item->title;
+		} elseif ( ( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav ) && ! empty( $nav_item->name ) ) {
+			$title = $nav_item->name;
+		}
+
+		/**
+		 * Filter here to edit the link title attribute of the nav.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title    The link title attribute for the nav item.
+		 * @param object $nav_item The current nav item object.
+		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		return esc_attr( apply_filters( 'bp_nouveau_get_nav_link_title', $title, $nav_item, $bp_nouveau->displayed_nav ) );
+	}
+
+/**
+ * Displays the nav item link html text.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_link_text() {
+	echo bp_nouveau_get_nav_link_text();
+}
+
+	/**
+	 * Retrieve the html text of the link for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string The html text for the nav item.
+	 */
+	function bp_nouveau_get_nav_link_text() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$link_text = '';
+		if ( 'directory' === $bp_nouveau->displayed_nav && ! empty( $nav_item->text ) ) {
+			$link_text = $nav_item->text;
+		} elseif ( ( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav ) && ! empty( $nav_item->name ) ) {
+			$link_text = _bp_strip_spans_from_title( $nav_item->name );
+		}
+
+		/**
+		 * Filter here to edit the html text of the nav.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $link_text The html text of the nav item.
+		 * @param object $nav_item  The current nav item object.
+		 * @param string $value     The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		return esc_html( apply_filters( 'bp_nouveau_get_nav_link_text', $link_text, $nav_item, $bp_nouveau->displayed_nav ) );
+	}
+
+/**
+ * Checks if the nav item has a count attribute.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_has_count() {
+	$bp_nouveau = bp_nouveau();
+	$nav_item   = $bp_nouveau->current_nav_item;
+
+	$count = false;
+	if ( 'directory' === $bp_nouveau->displayed_nav ) {
+		$count = $nav_item->count;
+	} elseif ( 'groups' === $bp_nouveau->displayed_nav && 'members' === $nav_item->slug ) {
+		$count = 0 !== (int) groups_get_current_group()->total_member_count;
+	} elseif ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->primary ) ) {
+		$count = (bool) strpos( $nav_item->name, '="count"' );
+	}
+
+	/**
+	 * Filter here to edit whether the nav has a count attribute.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool   $value     True if the nav has a count attribute. False otherwise
+	 * @param object $nav_item  The current nav item object.
+	 * @param string $value     The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+	 */
+	return apply_filters( 'bp_nouveau_nav_has_count', false !== $count, $nav_item, $bp_nouveau->displayed_nav );
+}
+
+/**
+ * Displays the nav item count attribute.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_count() {
+	echo bp_nouveau_get_nav_count();
+}
+
+	/**
+	 * Retrieve the count attribute for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string The count attribute for the nav item.
+	 */
+	function bp_nouveau_get_nav_count() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$count = 0;
+		if ( 'directory' === $bp_nouveau->displayed_nav ) {
+			$count = $nav_item->count;
+		} elseif ( 'groups' === $bp_nouveau->displayed_nav && 'members' === $nav_item->slug ) {
+			$count = number_format( groups_get_current_group()->total_member_count );
+
+		/**
+		 * imho BuddyPress shouldn't add html tags inside Nav attributes...
+		 */
+		} elseif ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->primary ) ) {
+			preg_match( '/\<span.*\>(.?)\<\/span\>/', $nav_item->name, $match );
+
+			if ( ! empty( $match[1] ) ) {
+				$count = number_format( $match[1] );
+			}
+		}
+
+		/**
+		 * Filter here to edit the count attribute for the nav item.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $count    The count attribute for the nav item.
+		 * @param object $nav_item The current nav item object.
+		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+		 */
+		return esc_attr( apply_filters( 'bp_nouveau_get_nav_count', $count, $nav_item, $bp_nouveau->displayed_nav ) );
+	}
+
+/** Template tags specific to the Directory navs ******************************/
+
+/**
+ * Displays the directory nav class.
+ *
+ * @since 1.0.0
+ */
 function bp_nouveau_directory_type_tabs_class() {
 	echo bp_nouveau_get_directory_type_tabs_class();
 }
 
+	/**
+	 * Gets the directory nav class.
+	 *
+	 * @since 1.0.0
+	 */
 	function bp_nouveau_get_directory_type_tabs_class() {
 		$class = sprintf( '%s-type-tabs', bp_current_component() );
 
 		return sanitize_html_class( $class );
 	}
 
+/**
+ * Displays the directory nav item list class.
+ *
+ * @since 1.0.0
+ */
 function bp_nouveau_directory_list_class() {
 	echo bp_nouveau_get_directory_list_class();
 }
 
+	/**
+	 * Gets the directory nav item list class.
+	 *
+	 * @since 1.0.0
+	 */
 	function bp_nouveau_get_directory_list_class() {
 		$class = sprintf( '%s-nav', bp_current_component() );
 
 		return sanitize_html_class( $class );
 	}
 
-function bp_nouveau_directory_has_nav() {
-	$bp_nouveau = bp_nouveau();
-
-	$bp_nouveau->sorted_dir_nav = array_values( $bp_nouveau->directory_nav->get_primary() );
-
-	if ( 0 === count( $bp_nouveau->sorted_dir_nav ) ) {
-		unset( $bp_nouveau->sorted_dir_nav );
-
-		return false;
-	}
-
-	$bp_nouveau->current_dir_nav_index = 0;
-	return true;
-}
-
-function bp_nouveau_directory_nav_items() {
-	$bp_nouveau = bp_nouveau();
-
-	if ( isset( $bp_nouveau->sorted_dir_nav[ $bp_nouveau->current_dir_nav_index ] ) ) {
-		return true;
-	}
-
-	$bp_nouveau->current_dir_nav_index = 0;
-	unset( $bp_nouveau->current_dir_nav_item );
-
-	return false;
-}
-
-function bp_nouveau_directory_nav_item() {
-	$bp_nouveau = bp_nouveau();
-
-	$bp_nouveau->current_dir_nav_item   = $bp_nouveau->sorted_dir_nav[ $bp_nouveau->current_dir_nav_index ];
-	$bp_nouveau->current_dir_nav_index += 1;
-}
-
-function bp_nouveau_directory_nav_id() {
-	echo bp_nouveau_get_directory_nav_id();
-}
-
-	function bp_nouveau_get_directory_nav_id() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
-		$id = sprintf( '%1$s-%2$s', $nav_item->component, $nav_item->slug );
-
-		return esc_attr( $id );
-	}
-
-function bp_nouveau_directory_nav_classes() {
-	echo bp_nouveau_get_directory_nav_classes();
-}
-
-	function bp_nouveau_get_directory_nav_classes() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
-
-		if ( empty( $nav_item->li_class ) ) {
-			return;
-		}
-
-		$classes = array_map( 'sanitize_html_class', (array) $nav_item->li_class );
-
-		return join( ' ', $classes );
-	}
-
+/**
+ * Displays the directory nav item scope (data-bp attribute).
+ *
+ * @since 1.0.0
+ */
 function bp_nouveau_directory_nav_scope() {
 	echo bp_nouveau_get_directory_nav_scope();
 }
 
+	/**
+	 * Gets the directory nav item scope.
+	 *
+	 * @since 1.0.0
+	 */
 	function bp_nouveau_get_directory_nav_scope() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_nav_item;
+
+		if ( ! $nav_item->slug ) {
+			return;
+		}
 
 		return esc_attr( $nav_item->slug );
 	}
 
+/**
+ * Displays the directory nav item object (data-bp attribute).
+ *
+ * @since 1.0.0
+ */
 function bp_nouveau_directory_nav_object() {
 	echo bp_nouveau_get_directory_nav_object();
 }
 
+	/**
+	 * Gets the directory nav item object.
+	 *
+	 * @since 1.0.0
+	 */
 	function bp_nouveau_get_directory_nav_object() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
+		$nav_item = bp_nouveau()->current_nav_item;
+
+		if ( ! $nav_item->component ) {
+			return;
+		}
 
 		return esc_attr( $nav_item->component );
-	}
-
-function bp_nouveau_directory_nav_link() {
-	echo bp_nouveau_get_directory_nav_link();
-}
-
-	function bp_nouveau_get_directory_nav_link() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
-
-		return esc_url( $nav_item->link );
-	}
-
-function bp_nouveau_directory_nav_title() {
-	echo bp_nouveau_get_directory_nav_title();
-}
-
-	function bp_nouveau_get_directory_nav_title() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
-
-		return esc_attr( $nav_item->title );
-	}
-
-function bp_nouveau_directory_nav_text() {
-	echo bp_nouveau_get_directory_nav_text();
-}
-
-	function bp_nouveau_get_directory_nav_text() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
-
-		return esc_html( $nav_item->text );
-	}
-
-function bp_nouveau_directory_nav_has_count() {
-	$nav_item = bp_nouveau()->current_dir_nav_item;
-
-	return false !== $nav_item->count;
-}
-
-function bp_nouveau_directory_nav_count() {
-	echo bp_nouveau_get_directory_nav_count();
-}
-
-	function bp_nouveau_get_directory_nav_count() {
-		$nav_item = bp_nouveau()->current_dir_nav_item;
-
-		return esc_attr( $nav_item->count );
 	}
 
 /** Template tags for the object search **************************************/

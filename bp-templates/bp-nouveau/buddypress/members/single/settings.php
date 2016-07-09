@@ -8,17 +8,17 @@
 
 ?>
 
-<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-	<ul>
-		<?php if ( bp_core_can_edit_settings() ) : ?>
+<?php if ( bp_core_can_edit_settings() ) : ?>
 
-			<?php bp_get_options_nav(); ?>
+	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
+		<ul>
 
-		<?php endif; ?>
-	</ul>
-</div>
+			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
-<?php
+		</ul>
+	</div>
+
+<?php endif;
 
 switch ( bp_current_action() ) :
 	case 'notifications'  :

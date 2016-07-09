@@ -140,43 +140,28 @@ add_filter( 'bp_message_search_form', 'bp_nouveau_message_search_form', 10, 1 );
 function bp_nouveau_messages_adjust_nav() {
 	$bp = buddypress();
 
-	/**
-	 * Since BuddyPress 2.6.0
-	 *
-	 * Direct access to bp_nav or bp_options_nav is deprecated.
-	 */
-	if ( class_exists( 'BP_Core_Nav' ) ) {
-		$secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => bp_get_messages_slug() ), false );
+	$secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => bp_get_messages_slug() ), false );
 
-		if ( ! $secondary_nav_items ) {
-			return;
+	if ( ! $secondary_nav_items ) {
+		return;
+	}
+
+	foreach ( $secondary_nav_items as $secondary_nav_item ) {
+		if ( empty( $secondary_nav_item->slug ) ) {
+			continue;
 		}
 
-		foreach ( $secondary_nav_items as $secondary_nav_item ) {
-			if ( empty( $secondary_nav_item->slug ) ) {
-				continue;
+		if ( 'notices' === $secondary_nav_item->slug ) {
+			bp_core_remove_subnav_item( bp_get_messages_slug(), $secondary_nav_item->slug, 'members' );
+		} else {
+			$params = array( 'link' => '#' . $secondary_nav_item->slug );
+
+			// Make sure Admins won't write a messages from the user's account.
+			if ( 'compose' === $secondary_nav_item->slug ) {
+				$params['user_has_access'] = bp_is_my_profile();
 			}
 
-			if ( 'notices' === $secondary_nav_item->slug ) {
-				bp_core_remove_subnav_item( bp_get_messages_slug(), $secondary_nav_item->slug, 'members' );
-			} else {
-				$bp->members->nav->edit_nav( array( 'link' => '#' . $secondary_nav_item->slug ), $secondary_nav_item->slug, bp_get_messages_slug() );
-			}
-		}
-
-	// We shouldn't do backcompat and bump BuddyPress required version to 2.6
-	} else {
-		if ( ! isset( $bp->bp_options_nav[ bp_get_messages_slug() ] ) ) {
-			return;
-		}
-
-		foreach ( $bp->bp_options_nav[ bp_get_messages_slug() ] as $nav_id => $nav_item ) {
-			if ( $nav_id === 'notices' ) {
-				bp_core_remove_subnav_item( bp_get_messages_slug(), $nav_id );
-			} else {
-				$bp->bp_options_nav[ bp_get_messages_slug() ][ $nav_id ]['link'] = '#' . $nav_id;
-			}
-
+			$bp->members->nav->edit_nav( $params, $secondary_nav_item->slug, bp_get_messages_slug() );
 		}
 	}
 }

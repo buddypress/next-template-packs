@@ -193,7 +193,7 @@ function bp_nouveau_current_user_can( $capability = '' ) {
  * @return array the list of disused legacy hooks
  */
 function bp_nouveau_get_forsaken_hooks() {
-	return array(
+	$forsaken_hooks = array(
 		'bp_members_directory_member_types' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
@@ -367,9 +367,54 @@ function bp_nouveau_get_forsaken_hooks() {
 		'groups_custom_group_fields_editable' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'error',
-			'message'      => __( 'The \'groups_custom_group_fields_editable\' is deprecated in the BP Nouveau template pack, please use \'bp_after_group_details_creation_step\' or \'bp_after_group_details_admin\' instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'groups_custom_group_fields_editable\' action is deprecated in the BP Nouveau template pack, please use \'bp_after_group_details_creation_step\' or \'bp_after_group_details_admin\' instead', 'bp-nouveau' ),
 		),
 	);
+
+	/**
+	 * Add warning messages for people using dynamic filters the BP Nouveau Nav Loop
+	 * won't take in account unlike bp_get_displayed_user_nav() & bp_get_options_nav().
+	 */
+	$nav_items = array();
+	if ( bp_is_user() ) {
+		$nav_items = buddypress()->members->nav->get_item_nav();
+	} elseif( bp_is_group() ) {
+		$nav_items = buddypress()->groups->nav->get_secondary( array( 'parent_slug' => bp_get_current_group_slug() ), false );
+	}
+
+	if ( $nav_items ) {
+		// Set the common parts
+		$common = array(
+			'hook_type'    => 'filter',
+			'message_type' => 'error',
+		);
+
+		// And the warning message
+		$message = __( 'The \'%s\' filter is not used in the BP Nouveau template pack, please use one of the filters of the BP Nouveau Navigation Loop instead', 'bp-nouveau' );
+
+		foreach ( $nav_items as $nav_item ) {
+			if ( ! isset( $nav_item->children ) ) {
+				$filter = 'bp_get_options_nav_' . $nav_item->css_id;
+				$forsaken_hooks[ $filter ] = array_merge( $common, array(
+					'message' => sprintf( $message, $filter ),
+				) );
+			} else {
+				$filter = 'bp_get_displayed_user_nav_' . $nav_item->css_id;
+				$forsaken_hooks[ $filter ] = array_merge( $common, array(
+					'message' => sprintf( $message, $filter ),
+				) );
+
+				foreach( $nav_item->children as $child ) {
+					$filter = 'bp_get_options_nav_' . $child->css_id;
+					$forsaken_hooks[ $filter ] = array_merge( $common, array(
+						'message' => sprintf( $message, $filter ),
+					) );
+				}
+			}
+		}
+	}
+
+	return $forsaken_hooks;
 }
 
 /**

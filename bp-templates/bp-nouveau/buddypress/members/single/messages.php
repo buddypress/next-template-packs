@@ -11,7 +11,7 @@
 <div class="item-list-tabs" id="subnav" role="navigation">
 	<ul>
 
-		<?php bp_get_options_nav(); ?>
+		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 	</ul>
 </div><!-- .item-list-tabs -->

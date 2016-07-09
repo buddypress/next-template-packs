@@ -12,7 +12,11 @@
 <div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 	<ul>
 
-		<?php if ( bp_is_my_profile() ) bp_get_options_nav(); ?>
+		<?php if ( bp_is_my_profile() ) : ?>
+
+			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
+
+		<?php endif ; ?>
 
 	</ul>
 </div><!-- .item-list-tabs -->
