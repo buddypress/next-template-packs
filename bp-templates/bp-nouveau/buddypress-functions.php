@@ -94,6 +94,10 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Includes dir
 		$this->includes_dir = trailingslashit( $this->dir ) . 'includes';
 
+		// i18n
+		$this->lang_dir = trailingslashit( $this->dir ) . 'languages';
+		$this->domain   = 'bp-nouveau';
+
 		// Set the Directory Nav
 		$this->directory_nav = new BP_Core_Nav();
 	}
@@ -194,6 +198,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		// Register the Primary Object nav widget
 		add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
+
+		// loads the languages..
+		add_action( 'bp_init', array( $this, 'load_textdomain' ), 5 );
 
 		/** Override **********************************************************/
 
@@ -614,6 +621,29 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 */
 	public function neutralize_core_template_notices(){
 		remove_action( 'template_notices', 'bp_core_render_message' );
+	}
+
+	/**
+	 * Loads the translation files
+	 *
+	 * @since  1.0.0
+	 */
+	public function load_textdomain() {
+		// Traditional WordPress plugin locale filter
+		$locale        = apply_filters( 'plugin_locale', get_locale(), $this->domain );
+		$mofile        = sprintf( '%1$s-%2$s.mo', $this->domain, $locale );
+
+		//var_dump( $mofile );
+
+		// Setup paths to current locale file
+		$mofile_local  = trailingslashit( $this->lang_dir ) . $mofile;
+		$mofile_global = WP_LANG_DIR . '/buddypress/' . $mofile;
+
+		// Look in global /wp-content/languages/buddypress folder
+		if ( ! load_textdomain( $this->domain, $mofile_global ) ) {
+			// Look in local /wp-content/plugins/next-template-packs/bp-nouveau/languages/ folder
+			load_textdomain( $this->domain, $mofile_local );
+		}
 	}
 }
 endif;

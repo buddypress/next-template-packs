@@ -257,7 +257,7 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 		} else {
 			if ( bp_is_active( 'activity' ) ) {
 				$nav_items['activity'] = array(
-					'name'            => _x( 'Activity', 'My Group screen nav', 'buddypress' ),
+					'name'            => _x( 'Activity', 'My Group screen nav', 'bp-nouveau' ),
 					'slug'            => 'activity',
 					'parent_slug'     => $this->group->slug,
 					'position'        => 11,
