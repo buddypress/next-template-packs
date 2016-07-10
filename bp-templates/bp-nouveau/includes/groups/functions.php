@@ -199,13 +199,13 @@ function bp_nouveau_get_group_potential_invites( $args = array() ) {
 function bp_nouveau_group_invites_create_steps( $steps = array() ) {
 	if ( bp_is_active( 'friends' ) && isset( $steps['group-invites'] ) ) {
 		// Simply change the name
-		$steps['group-invites']['name'] = _x( 'Invites',  'Group screen nav', 'bp-nouveau' );
+		$steps['group-invites']['name'] = _x( 'Invite',  'Group screen nav', 'bp-nouveau' );
 		return $steps;
 	}
 
 	// Add the create step if friends component is not active
 	$steps['group-invites'] = array(
-		'name'     => _x( 'Invites',  'Group screen nav', 'bp-nouveau' ),
+		'name'     => _x( 'Invite',  'Group screen nav', 'bp-nouveau' ),
 		'position' => 30
 	);
 
@@ -221,24 +221,11 @@ function bp_nouveau_group_setup_nav() {
 	if ( bp_is_active( 'friends' ) ) {
 		$bp = buddypress();
 
-		/**
-		 * Since BuddyPress 2.6.0
-		 *
-		 * Direct access to bp_nav or bp_options_nav is deprecated.
-		 */
-		if ( class_exists( 'BP_Core_Nav' ) ) {
-			$bp->groups->nav->edit_nav(
-				array( 'name' => _x( 'Invites', 'My Group screen nav', 'bp-nouveau' ) ),
-				'send-invites',
-				bp_get_current_group_slug()
-			);
-
-		// We shouldn't do backcompat and bump BuddyPress required version to 2.6
-		} else {
-			if ( isset( $bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites'] ) ) {
-				$bp->bp_options_nav[ bp_get_current_group_slug() ]['send-invites']['name'] = _x( 'Invites', 'My Group screen nav', 'bp-nouveau' );
-			}
-		}
+		$bp->groups->nav->edit_nav(
+			array( 'name' => _x( 'Invite', 'My Group screen nav', 'bp-nouveau' ) ),
+			'send-invites',
+			bp_get_current_group_slug()
+		);
 
 	// Create the Subnav item for the group
 	} else {
@@ -246,7 +233,7 @@ function bp_nouveau_group_setup_nav() {
 		$group_link    = bp_get_group_permalink( $current_group );
 
 		bp_core_new_subnav_item( array(
-			'name'            => _x( 'Invites', 'My Group screen nav', 'bp-nouveau' ),
+			'name'            => _x( 'Invite', 'My Group screen nav', 'bp-nouveau' ),
 			'slug'            => 'send-invites',
 			'parent_url'      => $group_link,
 			'parent_slug'     => $current_group->slug,
@@ -494,8 +481,14 @@ function bp_nouveau_groups_customizer_sections( $sections = array() ) {
 		'bp_nouveau_group_front_page' => array(
 			'title'       => __( 'Group\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
-			'priority'    => 10,
+			'priority'    => 20,
 			'description' => __( 'Set your preferences for the groups default front page.', 'bp-nouveau' ),
+		),
+		'bp_nouveau_group_nav_order' => array(
+			'title'       => __( 'Group\'s navigation', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 40,
+			'description' => __( 'Set the order for the groups navigation items.', 'bp-nouveau' ),
 		),
 	) );
 }
@@ -531,6 +524,13 @@ function bp_nouveau_groups_customizer_settings( $settings = array() ) {
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
+		'bp_nouveau_appearance[group_nav_order]' => array(
+			'index'             => 'group_nav_order',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'bp_nouveau_sanitize_nav_order',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
 	) );
 }
 
@@ -562,6 +562,13 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'settings'   => 'bp_nouveau_appearance[group_front_description]',
 			'type'       => 'checkbox',
 		),
+		'group_nav_order' => array(
+			'class'       => 'BP_Nouveau_Nav_Customize_Control',
+			'label'      => __( 'Reorder the Groups single items primary navigation.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_nav_order',
+			'settings'   => 'bp_nouveau_appearance[group_nav_order]',
+			'type'       => 'group',
+		),
 	) );
 }
 
@@ -570,12 +577,11 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
  *
  * @since  1.0.0
  *
- * @param  array  $templates The list of templates for the front.php template part.
- * @return array  The same list with the default front template if needed.
+ * @param  array           $templates The list of templates for the front.php template part.
+ * @param  BP_Groups_Group The group object.
+ * @return array           The same list with the default front template if needed.
  */
-function bp_nouveau_group_reset_front_template( $templates = array() ) {
-	$group = groups_get_current_group();
-
+function bp_nouveau_group_reset_front_template( $templates = array(), $group = null ) {
 	if ( empty( $group->id ) ) {
 		return $templates;
 	}
@@ -591,7 +597,7 @@ function bp_nouveau_group_reset_front_template( $templates = array() ) {
 		array_push( $templates, 'groups/single/default-front.php' );
 	}
 
-	return $templates;
+	return apply_filters( '_bp_nouveau_group_reset_front_template', $templates );
 }
 
 /**

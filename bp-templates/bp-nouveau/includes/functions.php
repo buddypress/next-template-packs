@@ -378,7 +378,7 @@ function bp_nouveau_get_forsaken_hooks() {
 	$nav_items = array();
 	if ( bp_is_user() ) {
 		$nav_items = buddypress()->members->nav->get_item_nav();
-	} elseif( bp_is_group() ) {
+	} elseif( bp_is_group() && ! bp_is_group_create() ) {
 		$nav_items = buddypress()->groups->nav->get_secondary( array( 'parent_slug' => bp_get_current_group_slug() ), false );
 	}
 
@@ -611,6 +611,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
 		'user_front_page' => 1,
 		'user_front_bio'  => 0,
+		'user_nav_order'  => array(),
 	);
 
 	if ( bp_is_active( 'groups' ) ) {
@@ -618,6 +619,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_front_page'        => 1,
 			'group_front_boxes'       => 1,
 			'group_front_description' => 0,
+			'group_nav_order'         => array(),
 		) );
 	}
 
@@ -650,6 +652,12 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		return;
 	}
 
+	// include the Customizer control.
+	require_once( trailingslashit( bp_nouveau()->includes_dir ) . 'customizer-controls.php' );
+
+	// Add it to control types
+	$wp_customize->register_control_type( 'BP_Nouveau_Nav_Customize_Control' );
+
 	$bp_nouveau_options = bp_nouveau_get_appearance_settings();
 
 	$wp_customize->add_panel( 'bp_nouveau_panel', array(
@@ -663,7 +671,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'title'       => __( 'User\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 10,
-			'description' => __( 'Set your preferences about the Users default front page.', 'bp-nouveau' ),
+			'description' => __( 'Set your preferences about the members default front page.', 'bp-nouveau' ),
+		),
+		'bp_nouveau_user_nav_order' => array(
+			'title'       => __( 'User\'s navigation', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 30,
+			'description' => __( 'Set the order for the members navigation items.', 'bp-nouveau' ),
 		),
 	) );
 
@@ -684,6 +698,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'index'             => 'user_front_bio',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[user_nav_order]' => array(
+			'index'             => 'user_nav_order',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'bp_nouveau_sanitize_nav_order',
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
@@ -715,21 +736,50 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'settings'   => 'bp_nouveau_appearance[user_front_bio]',
 			'type'       => 'checkbox',
 		),
+		'user_nav_order' => array(
+			'class'       => 'BP_Nouveau_Nav_Customize_Control',
+			'label'      => __( 'Reorder the Members single items primary navigation.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_user_nav_order',
+			'settings'   => 'bp_nouveau_appearance[user_nav_order]',
+			'type'       => 'user',
+		),
 	) );
 
 	// Add the controls to the customizer's section
 	foreach ( $controls as $id_control => $control_args ) {
-		$wp_customize->add_control( $id_control, $control_args );
+		if ( empty( $control_args['class'] ) )  {
+			$wp_customize->add_control( $id_control, $control_args );
+		} else {
+			$wp_customize->add_control( new $control_args['class']( $wp_customize, $id_control, $control_args ) );
+		}
 	}
 }
 
+/**
+ * Sanitize a list of slugs to save it as an array
+ *
+ * @since  1.0.0
+ *
+ * @param  string $option A comma separated list of nav items slugs.
+ * @return array          An array of nav items slugs.
+ */
+function bp_nouveau_sanitize_nav_order( $option = '' ) {
+	$option = explode( ',', $option );
+	return array_map( 'sanitize_key', $option );
+}
+
+/**
+ * Enqueue needed JS for our customizer Settings & Controls
+ *
+ * @since  1.0.0
+ */
 function bp_nouveau_customizer_enqueue_scripts() {
 	$min = bp_core_get_minified_asset_suffix();
 
 	wp_enqueue_script(
 		'bp-nouveau-customizer',
 		trailingslashit( bp_get_theme_compat_url() ) . "js/customizer{$min}.js",
-		array( 'customize-controls', 'iris', 'underscore', 'wp-util' ),
+		array( 'jquery', 'jquery-ui-sortable', 'customize-controls', 'iris', 'underscore', 'wp-util' ),
 		bp_nouveau()->version,
 		true
 	);
@@ -1400,4 +1450,43 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 	}
 
 	return false;
+}
+
+/**
+ * Reorder a BuddyPress item nav according to a given list of nav item slugs
+ *
+ * @since  1.0.0
+ *
+ * @param  object $nav         The BuddyPress Item Nav object to reorder
+ * @param  array  $order       A list of slugs ordered (eg: array( 'profile', 'activity', etc..) )
+ * @param  string $parent_slug A parent slug if it's a secondary nav we are reordering (case of the Groups single item)
+ * @return bool                True on success. False otherwise.
+ */
+function bp_nouveau_set_nav_item_order( $nav = null, $order = array(), $parent_slug = '' ) {
+	if ( ! is_object( $nav ) || empty( $order ) || ! is_array( $order ) ) {
+		return false;
+	}
+
+	$position = 0;
+
+	foreach ( $order as $slug ) {
+		$position += 10;
+
+		$key = $slug;
+		if ( ! empty( $parent_slug ) ) {
+			$key = $parent_slug . '/' . $key;
+		}
+
+		$item_nav = $nav->get( $key );
+
+		if ( ! $item_nav ) {
+			continue;
+		}
+
+		if ( (int) $item_nav->position !== (int) $position ) {
+			$nav->edit_nav( array( 'position' => $position ), $slug, $parent_slug );
+		}
+	}
+
+	return true;
 }

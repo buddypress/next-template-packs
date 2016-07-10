@@ -217,7 +217,22 @@ function bp_nouveau_member_reset_front_template( $templates = array() ) {
 		array_push( $templates, 'members/single/default-front.php' );
 	}
 
-	return $templates;
+	return apply_filters( '_bp_nouveau_member_reset_front_template', $templates );
+}
+
+/**
+ * Only locate global user's front templates
+ *
+ * @since  1.0.0
+ *
+ * @param  array  $templates The User's front template hierarchy.
+ * @return array             Only the global front templates.
+ */
+function bp_nouveau_member_restrict_user_front_templates( $templates = array() ) {
+	return array_intersect( array(
+		'members/single/front.php',
+		'members/single/default-front.php',
+	), $templates );
 }
 
 /**
@@ -418,4 +433,32 @@ function bp_nouveau_get_wp_profile_fields( $user = null ) {
 	);
 
 	return array_merge( $wp_fields, $contact_methods );
+}
+
+/**
+ * Build the Member's nav for the our customizer control.
+ *
+ * @since  1.0.0
+ *
+ * @return array The Members single item primary nav ordered.
+ */
+function bp_nouveau_member_customizer_nav() {
+	add_filter( '_bp_nouveau_member_reset_front_template', 'bp_nouveau_member_restrict_user_front_templates', 10, 1 );
+
+	if ( bp_displayed_user_get_front_template( buddypress()->loggedin_user ) ) {
+		buddypress()->members->nav->add_nav( array(
+			'name'                => _x( 'Home', 'Member Home page', 'bp-nouveau' ),
+			'slug'                => 'front',
+			'position'            => 5,
+		) );
+	}
+
+	remove_filter( '_bp_nouveau_member_reset_front_template', 'bp_nouveau_member_restrict_user_front_templates', 10, 1 );
+
+	$nav = buddypress()->members->nav;
+
+	// Eventually reset the order.
+	bp_nouveau_set_nav_item_order( $nav, bp_nouveau_get_appearance_settings( 'user_nav_order' ) );
+
+	return $nav->get_primary();
 }

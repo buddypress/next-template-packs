@@ -39,6 +39,26 @@ window.wp = window.wp || {};
 			} );
 		} );
 
+		$( 'ul#customize-control-group_nav_order, ul#customize-control-user_nav_order' ).sortable( {
+			cursor    : 'move',
+			axis      : 'y',
+			opacity   : 1,
+			items     : 'li:not(.ui-sortable-disabled)',
+			tolerance : 'intersect',
+
+			update: function() {
+				var order = [];
+
+				$( this ).find( '[data-bp-nav]' ).each( function( s, slug ) {
+					order.push( $( slug ).data( 'bp-nav' ) );
+				} );
+
+				if ( order.length ) {
+					$( '#bp_item_' + $( this ).data( 'bp-type' ) ).val( order.join() ).trigger( 'change' );
+				}
+			}
+		} ).disableSelection();
+
 	} );
 
 } )( window.wp, jQuery );

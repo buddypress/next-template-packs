@@ -184,7 +184,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
 
 		// BP Nouveau Customizer panel.
-		add_action( 'bp_customize_register', 'bp_nouveau_customize_register' );
+		add_action( 'bp_customize_register', 'bp_nouveau_customize_register', 10, 1 );
 
 		// Enqueue scripts for the BP Nouveau customizer panel.
 		add_action( 'customize_controls_enqueue_scripts', 'bp_nouveau_customizer_enqueue_scripts' );

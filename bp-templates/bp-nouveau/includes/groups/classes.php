@@ -125,3 +125,217 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 }
 
 endif;
+
+/**
+ * A specific Group Nav class to make it possible to
+ * set new positions for the buddypress()->groups->nav.
+ *
+ * @since  1.0.0
+ */
+class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
+
+	/**
+	 * Constructor
+	 *
+	 * @param int $object_id The random group ID used to generate the nav.
+	 */
+	public function __construct( $object_id = 0 ) {
+		$error = new WP_Error( 'missing_parameter' );
+
+		if ( empty( $object_id ) || ! bp_current_user_can( 'bp_moderate' ) || ! did_action( 'admin_init' ) ) {
+			return $error;
+		}
+
+		$group = groups_get_group( array( 'group_id' => $object_id ) );
+
+		if ( empty( $group->id ) ) {
+			return $error;
+		}
+
+		$this->group = $group;
+
+		parent::__construct( $group->id );
+
+		$this->setup_nav();
+	}
+
+	/**
+	 * Checks whether a property is set.
+	 *
+	 * Overrides BP_Core_Nav::__isset() to avoid
+	 * looking into its nav property.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The property.
+	 * @return bool True if the property is set, false otherwise.
+	 */
+	public function __isset( $key ) {
+		return isset( $this->{$key} );
+	}
+
+	/**
+	 * Gets a property.
+	 *
+	 * Overrides BP_Core_Nav::__isset() to avoid
+	 * looking into its nav property.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The property.
+	 * @return mixed The value corresponding to the property.
+	 */
+	public function __get( $key ) {
+		if ( ! isset( $this->{$key} ) ) {
+			$this->{$key} = null;
+		}
+
+		return $this->{$key};
+	}
+
+	/**
+	 * Sets a property.
+	 *
+	 * Overrides BP_Core_Nav::__isset() to avoid
+	 * adding a value to its nav property.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key   The property.
+	 * @param mixed  $value The value of the property.
+	 */
+	public function __set( $key, $value ) {
+		$this->{$key} = $value;
+	}
+
+	/**
+	 * Setup a temporary nav with only the needed parameters.
+	 *
+	 * @since  1.0.0
+	 */
+	private function setup_nav() {
+		$nav_items = array(
+			'root' => array(
+				'name'                => __( 'Memberships', 'bp-nouveau' ),
+				'slug'                => $this->group->slug,
+				'position'            => -1,
+				'default_subnav_slug' => apply_filters( 'bp_groups_default_extension', defined( 'BP_GROUPS_DEFAULT_EXTENSION' ) ? BP_GROUPS_DEFAULT_EXTENSION : 'home' ),
+			),
+			'home' => array(
+				'name'            =>  _x( 'Home', 'Group screen navigation title', 'bp-nouveau' ),
+				'slug'            => 'home',
+				'parent_slug'     => $this->group->slug,
+				'position'        => 10,
+			),
+			'invites' => array(
+				'name'            => _x( 'Invite', 'My Group screen nav', 'bp-nouveau' ),
+				'slug'            => 'send-invites',
+				'parent_slug'     => $this->group->slug,
+				'position'        => 70,
+			),
+			'manage' => array(
+				'name'            => _x( 'Manage', 'My Group screen nav', 'bp-nouveau' ),
+				'slug'            => 'admin',
+				'parent_slug'     => $this->group->slug,
+				'position'        => 1000,
+			),
+		);
+
+		// Make sure only global front.php will be checked.
+		add_filter( '_bp_nouveau_group_reset_front_template', array( $this, 'all_groups_fronts' ), 10, 1 );
+
+		$front_template = bp_groups_get_front_template( $this->group );
+
+		remove_filter( '_bp_nouveau_group_reset_front_template', array( $this, 'all_groups_fronts' ), 10, 1 );
+
+		if ( ! $front_template ) {
+			if ( bp_is_active( 'activity' ) ) {
+				$nav_items['home']['name'] = _x( 'Home (Activity)', 'Group screen navigation title', 'bp-nouveau' );
+			} else {
+				$nav_items['home']['name'] = _x( 'Home (Members)', 'Group screen navigation title', 'bp-nouveau' );
+			}
+		} else {
+			if ( bp_is_active( 'activity' ) ) {
+				$nav_items['activity'] = array(
+					'name'            => _x( 'Activity', 'My Group screen nav', 'buddypress' ),
+					'slug'            => 'activity',
+					'parent_slug'     => $this->group->slug,
+					'position'        => 11,
+				);
+			}
+
+			// Add the members one
+			$nav_items['members'] = array(
+				'name'            => _x( 'Members', 'My Group screen nav', 'bp-nouveau' ),
+				'slug'            => 'members',
+				'parent_slug'     => $this->group->slug,
+				'position'        => 60,
+			);
+		}
+
+		// Required params
+		$required_params = array( 'slug' => true, 'name' => true, 'nav_item_position' => true );
+
+		// Now find nav items plugins are creating within their Group extensions!
+		foreach ( get_declared_classes() as $class ) {
+			if ( is_subclass_of( $class, 'BP_Group_Extension' ) ) {
+				$extension = new $class;
+
+				if ( ! empty( $extension->params ) && ! array_diff_key( $required_params, $extension->params ) ) {
+					$nav_items[ $extension->params['slug'] ] = array(
+						'name'            => $extension->params['name'],
+						'slug'            => $extension->params['slug'],
+						'parent_slug'     => $this->group->slug,
+						'position'        => $extension->params['nav_item_position'],
+					);
+				}
+			}
+		}
+
+		// Now we got all, create the temporary nav.
+		foreach ( $nav_items as $nav_item ) {
+			$this->add_nav( $nav_item );
+		}
+	}
+
+	/**
+	 * Front template: do not look into group's template hierarchy.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  array  $templates The list of possible group front templates.
+	 * @return array             The list of "global" group front templates.
+	 */
+	public function all_groups_fronts( $templates = array() ) {
+		return array_intersect( array(
+			'groups/single/front.php',
+			'groups/single/default-front.php',
+		), $templates );
+	}
+
+	/**
+	 * Get the original order for the group navigation.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return array a list of nav items slugs ordered.
+	 */
+	public function get_default_value() {
+		$default_nav = $this->get_secondary( array( 'parent_slug' => $this->group->slug ) );
+		return wp_list_pluck( $default_nav, 'slug' );
+	}
+
+	/**
+	 * Get the list of nav items ordered according to the Site owner preferences.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return array the nav items ordered.
+	 */
+	public function get_group_nav() {
+		// Eventually reset the order
+		bp_nouveau_set_nav_item_order( $this, bp_nouveau_get_appearance_settings( 'group_nav_order' ), $this->group->slug );
+
+		return $this->get_secondary( array( 'parent_slug' => $this->group->slug ) );
+	}
+}

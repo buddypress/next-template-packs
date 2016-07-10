@@ -72,7 +72,7 @@ class BP_Nouveau_Groups {
 		remove_action( 'bp_groups_directory_group_filter', 'bp_group_backcompat_create_nav_item', 1000 );
 
 		$ajax_actions = array(
-			array( 'groups_filter'                      => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true ) ),
+			array( 'groups_filter'                      => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true  ) ),
 			array( 'groups_join_group'                  => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_leave_group'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
 			array( 'groups_accept_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
@@ -136,7 +136,7 @@ class BP_Nouveau_Groups {
 		add_filter( 'bp_nouveau_customizer_controls', 'bp_nouveau_groups_customizer_controls', 10, 1 );
 
 		// Add the group's default front template to hieararchy if user enabled it (Enabled by default).
-		add_filter( 'bp_groups_get_front_template', 'bp_nouveau_group_reset_front_template', 10, 1 );
+		add_filter( 'bp_groups_get_front_template', 'bp_nouveau_group_reset_front_template', 10, 2 );
 	}
 
 	/**

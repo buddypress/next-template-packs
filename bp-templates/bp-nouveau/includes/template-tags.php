@@ -453,12 +453,20 @@ function bp_nouveau_has_nav( $args = array() ) {
 	} elseif ( bp_is_group() ) {
 		$bp_nouveau->displayed_nav = 'groups';
 		$parent_slug               = bp_get_current_group_slug();
+		$group_nav                 = buddypress()->groups->nav;
 
 		if ( 'group_manage' === $bp_nouveau->object_nav && bp_is_group_admin_page() ) {
 			$parent_slug .= '_manage';
+
+		/**
+		 * If it's not the Admin tabs, reorder the Group's nav according to the
+		 * customizer setting.
+		 */
+		} else {
+			bp_nouveau_set_nav_item_order( $group_nav, bp_nouveau_get_appearance_settings( 'group_nav_order' ), $parent_slug );
 		}
 
-		$nav = buddypress()->groups->nav->get_secondary( array(
+		$nav = $group_nav->get_secondary( array(
 			'parent_slug'     => $parent_slug,
 			'user_has_access' => (bool) $n['user_has_access'],
 		) );
@@ -466,9 +474,10 @@ function bp_nouveau_has_nav( $args = array() ) {
 	// Build the nav for the displayed user
 	} elseif ( bp_is_user() ) {
 		$bp_nouveau->displayed_nav = 'personal';
+		$user_nav                  = buddypress()->members->nav;
 
 		if ( 'secondary' === $n['type'] ) {
-			$nav = buddypress()->members->nav->get_secondary( array(
+			$nav = $user_nav->get_secondary( array(
 				'parent_slug'     => bp_current_component(),
 				'user_has_access' => (bool) $n['user_has_access'],
 			) );
@@ -479,7 +488,10 @@ function bp_nouveau_has_nav( $args = array() ) {
 				$args = array( 'show_for_displayed_user' => true );
 			}
 
-			$nav = buddypress()->members->nav->get_primary( $args );
+			// Reorder the user's primary nav according to the customizer setting.
+			bp_nouveau_set_nav_item_order( $user_nav, bp_nouveau_get_appearance_settings( 'user_nav_order' ) );
+
+			$nav = $user_nav->get_primary( $args );
 		}
 
 	} elseif ( ! empty( $bp_nouveau->object_nav ) ) {
