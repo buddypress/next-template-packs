@@ -33,14 +33,7 @@ bp_nouveau_before_loop(); ?>
 
 				<div class="item-desc"><?php bp_group_description_excerpt(); ?></div>
 
-				<?php
-
-				/**
-				 * Fires inside the listing of an individual group listing item.
-				 *
-				 * @since 1.1.0
-				 */
-				do_action( 'bp_directory_groups_item' ); ?>
+				<?php bp_nouveau_groups_loop_item(); ?>
 
 			</div>
 

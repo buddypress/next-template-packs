@@ -138,6 +138,20 @@ function bp_nouveau_group_hook( $when = '', $suffix = '' ) {
 }
 
 /**
+ * Fire an isolated hook inside the groups loop
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_groups_loop_item() {
+	/**
+	 * Fires inside the listing of an individual group listing item.
+	 *
+	 * @since 1.1.0 (BuddyPress)
+	 */
+	do_action( 'bp_directory_groups_item' );
+}
+
+/**
  * Display the current group activity post form if needed
  *
  * @since  1.0.0

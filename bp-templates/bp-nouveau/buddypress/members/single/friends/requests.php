@@ -39,14 +39,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 					<div class="item-title"><a href="<?php bp_member_link(); ?>"><?php bp_member_name(); ?></a></div>
 					<div class="item-meta"><span class="activity"><?php bp_member_last_active(); ?></span></div>
 
-					<?php
-					/**
-					 * Fires inside the display of a member friend request item.
-					 *
-					 * @since 1.1.0
-					 */
-					do_action( 'bp_friend_requests_item' );
-					?>
+					<?php bp_nouveau_friend_hook( 'requests_item' ); ?>
 				</div>
 
 				<?php bp_nouveau_members_loop_buttons(); ?>
@@ -55,14 +48,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 		<?php endwhile; ?>
 	</ul>
 
-	<?php
-
-	/**
-	 * Fires and displays the member friend requests content.
-	 *
-	 * @since 1.1.0
-	 */
-	do_action( 'bp_friend_requests_content' ); ?>
+	<?php bp_nouveau_friend_hook( 'requests_content' ); ?>
 
 	<div id="pag-bottom" class="pagination no-ajax">
 

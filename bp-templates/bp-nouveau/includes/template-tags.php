@@ -33,6 +33,55 @@ function bp_nouveau_hook( $pieces = array() ) {
 }
 
 /**
+ * Fire plugin hooks in the plugins.php template (Groups and Members single items)
+ *
+ * @since 1.0.0
+ *
+ * @param string The suffix of the hook.
+ */
+function bp_nouveau_plugin_hook( $suffix = '' ) {
+	if ( empty( $suffix ) ) {
+		return;
+	}
+
+	/**
+	 * Fires and displays content/title for plugins using the BP_Group_Extension.
+	 *
+	 * @since 1.0.0 (BuddyPress)
+	 */
+	return bp_nouveau_hook( array(
+		'bp',
+		'template',
+		$suffix,
+	) );
+}
+
+/**
+ * Fire friend hooks
+ *
+ * @todo Move this into bp-nouveau/includes/friends/template-tags.php
+ *       once we'll need other friends template tags.
+ *
+ * @since 1.0.0
+ *
+ * @param string The suffix of the hook.
+ */
+function bp_nouveau_friend_hook( $suffix = '' ) {
+	if ( empty( $suffix ) ) {
+		return;
+	}
+
+	/**
+	 * @since 1.1.0 (BuddyPress)
+	 */
+	return bp_nouveau_hook( array(
+		'bp',
+		'friend',
+		$suffix,
+	) );
+}
+
+/**
  * Add classes to style the template notice/feedback message
  *
  * @since  1.0.0

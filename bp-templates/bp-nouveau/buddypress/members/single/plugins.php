@@ -5,8 +5,9 @@
  * 3rd-party plugins should use this template to easily add template
  * support to their plugins for the members component.
  *
- * @package BuddyPress
- * @subpackage bp-nouveau
+ * @since  1.0.0
+ *
+ * @package BP Nouveau
  */
 
 bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
@@ -18,14 +19,7 @@ bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 
 			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
-			<?php
-
-			/**
-			 * Fires inside the member plugin template nav <ul> tag.
-			 *
-			 * @since 1.2.2
-			 */
-			do_action( 'bp_member_plugin_options_nav' ); ?>
+			<?php bp_nouveau_member_hook( '', 'plugin_options_nav' ); ?>
 
 		</ul>
 	</div><!-- .item-list-tabs -->
@@ -33,24 +27,11 @@ bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 <?php endif; ?>
 
 <?php if ( has_action( 'bp_template_title' ) ) : ?>
-	<h3><?php
 
-	/**
-	 * Fires inside the member plugin template <h3> tag.
-	 *
-	 * @since 1.0.0
-	 */
-	do_action( 'bp_template_title' ); ?></h3>
+	<h3><?php bp_nouveau_plugin_hook( 'title' ); ?></h3>
 
 <?php endif; ?>
 
-<?php
-
-/**
- * Fires and displays the member plugin template content.
- *
- * @since 1.0.0
- */
-do_action( 'bp_template_content' );
+<?php bp_nouveau_plugin_hook( 'content' );
 
 bp_nouveau_member_hook( 'after', 'plugin_template' );

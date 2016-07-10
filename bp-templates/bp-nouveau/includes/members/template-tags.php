@@ -114,6 +114,20 @@ function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
 }
 
 /**
+ * Template tag to wrap the notification settings hook
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_member_email_notice_settings() {
+	/**
+	 * Fires at the top of the member template notification settings form.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'bp_notification_settings' );
+}
+
+/**
  * Output the action buttons for the displayed user profile
  *
  * @since 1.0.0
