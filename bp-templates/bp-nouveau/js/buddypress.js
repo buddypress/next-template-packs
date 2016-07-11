@@ -410,7 +410,7 @@ window.bp = window.bp || {};
 						scope        : scope,
 						filter       : objectData.filter,
 						search_terms : search_terms
-					}
+					};
 
 					if ( 'group_members' === object ) {
 						$.extend( queryData, { template: 'groups/single/members-loop' } );
