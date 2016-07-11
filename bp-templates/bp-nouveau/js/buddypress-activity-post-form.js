@@ -692,7 +692,8 @@ window.bp = window.bp || {};
 			};
 
 			bp.ajax.post( 'post_update', _.extend( data, this.model.attributes ) ).done( function( response ) {
-				var scope = bp.Nouveau.getStorage( 'bp-activity', 'scope' ), prepended = false;
+				var scope     = bp.Nouveau.getStorage( 'bp-activity', 'scope' ),
+					prepended = false;
 
 				if ( ! response.is_directory ||
 				     ( 'all' === scope && ( 'user' === self.model.get( 'object' ) || false === response.is_private ) ) ||

@@ -19,13 +19,16 @@ defined( 'ABSPATH' ) || exit;
  * @return array  The same array with the specific groups scripts.
  */
 function bp_nouveau_groups_register_scripts( $scripts = array() ) {
+
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
 
 	return array_merge( $scripts, array(
 		'bp-nouveau-group-invites' => array(
-			'file' => 'js/buddypress-group-invites%s.js', 'dependencies' => array( 'bp-nouveau', 'json2', 'wp-backbone' ), 'footer' => true,
+			'file'         => 'js/buddypress-group-invites%s.js',
+			'dependencies' => array( 'bp-nouveau', 'json2', 'wp-backbone' ),
+			'footer'       => true,
 		),
 	) );
 }
@@ -402,7 +405,8 @@ function bp_nouveau_get_groups_filters( $context = '' ) {
  *
  * @since 1.0.0
  *
- * @param  array $buttons The arguments of the button that BuddyPress is about to create.
+ * @param  array $button The arguments of the button that BuddyPress is about to create.
+ *
  * @return array An empty array to stop the button creation process.
  */
 function bp_nouveau_groups_catch_button_args( $button = array() ) {

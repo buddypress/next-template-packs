@@ -19,6 +19,7 @@ window.bp = window.bp || {};
 		 * @return {[type]} [description]
 		 */
 		start: function() {
+
 			// Setup globals
 			this.setupGlobals();
 

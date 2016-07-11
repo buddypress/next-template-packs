@@ -15,6 +15,7 @@ window.bp = window.bp || {};
 	 * @type {Object}
 	 */
 	bp.Nouveau.Activity = {
+
 		/**
 		 * [start description]
 		 * @return {[type]} [description]

@@ -19,16 +19,21 @@ defined( 'ABSPATH' ) || exit;
  * @return array  The same array with the specific activity scripts.
  */
 function bp_nouveau_activity_register_scripts( $scripts = array() ) {
+
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
 
 	return array_merge( $scripts, array(
 		'bp-nouveau-activity' => array(
-			'file' => 'js/buddypress-activity%s.js', 'dependencies' => array( 'bp-nouveau' ), 'footer' => true,
+			'file'         => 'js/buddypress-activity%s.js',
+			'dependencies' => array( 'bp-nouveau' ),
+			'footer'       => true,
 		),
 		'bp-nouveau-activity-post-form' => array(
-			'file' => 'js/buddypress-activity-post-form%s.js', 'dependencies' => array( 'bp-nouveau-activity', 'json2', 'wp-backbone' ), 'footer' => true,
+			'file'         => 'js/buddypress-activity-post-form%s.js',
+			'dependencies' => array( 'bp-nouveau', 'bp-nouveau-activity', 'json2', 'wp-backbone' ),
+			'footer'       => true,
 		),
 	) );
 }
@@ -39,6 +44,7 @@ function bp_nouveau_activity_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_activity_enqueue_scripts() {
+
 	if ( ! bp_is_activity_component() && ! bp_is_group_activity() ) {
 		return;
 	}
@@ -55,6 +61,7 @@ function bp_nouveau_activity_enqueue_scripts() {
  * @return array          The same array with specific strings for the Activity Post form UI if needed.
  */
 function bp_nouveau_activity_localize_scripts( $params = array() ) {
+
 	if ( ! bp_is_activity_component() && ! bp_is_group_activity() ) {
 		return $params;
 	}
@@ -101,6 +108,7 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	$activity_buttons = apply_filters( 'bp_nouveau_activity_buttons', array() );
 
 	if ( ! empty( $activity_buttons ) ) {
+
 		// Sort buttons
 		$activity_params['buttons'] = bp_sort_by_key( $activity_buttons, 'order', 'num' );
 
@@ -344,6 +352,7 @@ function bp_nouveau_activity_secondary_avatars( $action, $activity ) {
 }
 
 function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
+
 	if ( ! is_user_logged_in() ) {
 		return $classes;
 	}
@@ -422,6 +431,7 @@ function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 }
 
 function bp_nouveau_activity_time_since( $time_since, $activity = null ) {
+
 	if ( ! isset ( $activity->date_recorded ) ) {
 		return $time_since;
 	}

@@ -280,54 +280,62 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	public function register_scripts() {
-		$min = bp_core_get_minified_asset_suffix();
-
+		$min          = bp_core_get_minified_asset_suffix();
 		$dependencies = bp_core_get_js_dependencies();
 		$bp_confirm   = array_search( 'bp-confirm', $dependencies );
+
 		unset( $dependencies[ $bp_confirm ] );
 
 		$scripts = apply_filters( 'bp_nouveau_register_scripts', array(
 			'bp-nouveau' => array(
-				'file' => 'js/buddypress%s.js', 'dependencies' => $dependencies, 'version' => $this->version, 'footer' => true,
+				'file'         => 'js/buddypress-nouveau%s.js',
+				'dependencies' => $dependencies,
+				'version'      => $this->version,
+				'footer'       => true,
 			),
 		) );
 
-		if ( $scripts ) {
+		// Bail if no scripts
+		if ( empty( $scripts ) ) {
+			return;
+		}
 
-			// Add The password verify if needed.
-			if ( bp_is_active( 'settings' ) || bp_get_signup_allowed() ) {
-				$scripts['bp-nouveau-password-verify'] = array(
-					'file' => 'js/password-verify%s.js', 'dependencies' => array( 'bp-nouveau', 'password-strength-meter' ), 'footer' => true,
-				);
+		// Add The password verify if needed.
+		if ( bp_is_active( 'settings' ) || bp_get_signup_allowed() ) {
+			$scripts['bp-nouveau-password-verify'] = array(
+				'file'         => 'js/password-verify%s.js',
+				'dependencies' => array( 'bp-nouveau', 'password-strength-meter' ),
+				'footer'       => true,
+			);
+		}
+
+		foreach ( $scripts as $handle => $script ) {
+
+			if ( ! isset( $script['file'] ) ) {
+				continue;
 			}
 
-			foreach ( $scripts as $handle => $script ) {
-				if ( ! isset( $script['file'] ) ) {
+			// Eventually use the minified version.
+			$file = sprintf( $script['file'], $min );
+
+			// Locate the asset if needed.
+			if ( false === strpos( $script['file'], '://' ) ) {
+				$asset = bp_locate_template_asset( $file );
+
+				if ( empty( $asset['uri'] ) || false === strpos( $asset['uri'], '://' ) ) {
 					continue;
 				}
 
-				// Eventually use the minified version.
-				$file = sprintf( $script['file'], $min );
-
-				// Locate the asset if needed.
-				if ( false === strpos( $script['file'], '://' ) ) {
-					$asset = bp_locate_template_asset( $file );
-
-					if ( empty( $asset['uri'] ) || false === strpos( $asset['uri'], '://' ) ) {
-						continue;
-					}
-
-					$file = $asset['uri'];
-				}
-
-				$data = wp_parse_args( $script, array(
-					'dependencies' => array(),
-					'version'      => $this->version,
-					'footer'       => false,
-				) );
-
-				wp_register_script( $handle, $file, $data['dependencies'], $data['version'], $data['footer'] );
+				$file = $asset['uri'];
 			}
+
+			$data = wp_parse_args( $script, array(
+				'dependencies' => array(),
+				'version'      => $this->version,
+				'footer'       => false,
+			) );
+
+			wp_register_script( $handle, $file, $data['dependencies'], $data['version'], $data['footer'] );
 		}
 	}
 
@@ -337,6 +345,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
+
 		// Always enqueue the common javascript file
 		wp_enqueue_script( 'bp-nouveau' );
 

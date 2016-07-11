@@ -19,13 +19,16 @@ defined( 'ABSPATH' ) || exit;
  * @return array  The same array with the specific groups scripts.
  */
 function bp_nouveau_xprofile_register_scripts( $scripts = array() ) {
+
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
 
 	return array_merge( $scripts, array(
 		'bp-nouveau-xprofile' => array(
-			'file' => 'js/buddypress-xprofile%s.js', 'dependencies' => array( 'bp-nouveau' ), 'footer' => true,
+			'file'         => 'js/buddypress-xprofile%s.js',
+			'dependencies' => array( 'bp-nouveau' ),
+			'footer'       => true,
 		),
 	) );
 }
@@ -36,6 +39,7 @@ function bp_nouveau_xprofile_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_xprofile_enqueue_scripts() {
+
 	if ( ! bp_is_user_profile_edit() && ! bp_is_register_page() ) {
 		return;
 	}
