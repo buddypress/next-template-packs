@@ -497,10 +497,10 @@ window.bp = window.bp || {};
 				target.addClass( 'loading' );
 
 				parent.ajax( {
-					action      : 'delete_activity',
-					'id'        : activity_id,
-					'_wpnonce'  : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' ),
-					'is_single' : target.closest( '[data-bp-single]' ).length
+					action    : 'delete_activity',
+					id        : activity_id,
+					_wpnonce  : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' ),
+					is_single : target.closest( '[data-bp-single]' ).length
 				}, 'activity' ).done( function( response ) {
 					target.removeClass( 'loading' );
 
@@ -636,11 +636,11 @@ window.bp = window.bp || {};
 				comment_content.addClass( 'loading' ).prop( 'disabled', true );
 
 				comment_data = {
-					action:                          'new_activity_comment',
-					'_wpnonce_new_activity_comment': $( '#_wpnonce_new_activity_comment' ).val(),
-					'comment_id':                    item_id,
-					'form_id':                       activity_id,
-					'content':                       comment_content.val()
+					action                        : 'new_activity_comment',
+					_wpnonce_new_activity_comment : $( '#_wpnonce_new_activity_comment' ).val(),
+					comment_id                    : item_id,
+					form_id                       : activity_id,
+					content                       : comment_content.val()
 				};
 
 				// Akismet

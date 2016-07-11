@@ -153,8 +153,8 @@ window.bp = window.bp || {};
 			}
 
 			feedback = new bp.Views.Feedback( {
-				value: message,
-				type:  type || 'info'
+				value : message,
+				type  : type || 'info'
 			} );
 
 			this.views.add( { id: 'feedback', view: feedback } );
@@ -266,8 +266,8 @@ window.bp = window.bp || {};
 
 			if ( 'create' === method ) {
 				options.data = _.extend( options.data, {
-					action     : 'groups_send_group_invites',
-					'_wpnonce' : BP_Nouveau.group_invites.nonces.send_invites
+					action   : 'groups_send_group_invites',
+					_wpnonce : BP_Nouveau.group_invites.nonces.send_invites
 				} );
 
 				if ( model ) {
@@ -279,8 +279,8 @@ window.bp = window.bp || {};
 
 			if ( 'delete' === method ) {
 				options.data = _.extend( options.data, {
-					action     : 'groups_delete_group_invite',
-					'_wpnonce' : BP_Nouveau.group_invites.nonces.uninvite
+					action   : 'groups_delete_group_invite',
+					_wpnonce : BP_Nouveau.group_invites.nonces.uninvite
 				} );
 
 				if ( model ) {
@@ -336,8 +336,8 @@ window.bp = window.bp || {};
 
 	// Feedback view
 	bp.Views.Feedback = bp.Nouveau.GroupInvites.View.extend( {
-		tagName: 'div',
-		className: 'bp-feedback',
+		tagName   : 'div',
+		className : 'bp-feedback',
 
 		initialize: function() {
 			this.value = this.options.value;
@@ -432,8 +432,8 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.invitesNavItem = bp.Nouveau.GroupInvites.View.extend( {
-		tagName:   'li',
-		template:  bp.template( 'bp-invites-nav' ),
+		tagName  : 'li',
+		template : bp.template( 'bp-invites-nav' ),
 
 		initialize: function() {
 			if ( 1 === this.model.get( 'active' ) ) {
@@ -560,8 +560,8 @@ window.bp = window.bp || {};
 			event.preventDefault();
 
 			this.model.set( {
-				'search_terms': $( event.target ).find( 'input[type=search]' ).val() || '',
-				page: 1
+				search_terms : $( event.target ).find( 'input[type=search]' ).val() || '',
+				page         : 1
 			} );
 		},
 
@@ -579,9 +579,9 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.inviteUsers = bp.Nouveau.GroupInvites.View.extend( {
-		tagName: 'ul',
-		className: 'item-list bp-list',
-		id: 'members-list',
+		tagName   : 'ul',
+		className : 'item-list bp-list',
+		id        : 'members-list',
 
 		initialize: function() {
 			// Load users for the active view
@@ -623,8 +623,8 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.inviteUser = bp.Nouveau.GroupInvites.View.extend( {
-		tagName:   'li',
-		template:  bp.template( 'bp-invites-users' ),
+		tagName  : 'li',
+		template : bp.template( 'bp-invites-users' ),
 
 		events: {
 			'click .group-add-remove-invite-button'    : 'toggleUser',
@@ -703,8 +703,8 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.invitesEditor = bp.Nouveau.GroupInvites.View.extend( {
-		tagName: 'div',
-		id:      'send-invites-editor',
+		tagName : 'div',
+		id      : 'send-invites-editor',
 
 		events: {
 			'click #bp-invites-send'  : 'sendInvites',
@@ -781,13 +781,13 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.invitesForm = bp.Nouveau.GroupInvites.View.extend( {
-		tagName : 'div',
-		id      : 'bp-send-invites-form',
-		template:  bp.template( 'bp-invites-form' )
+		tagName  : 'div',
+		id       : 'bp-send-invites-form',
+		template :  bp.template( 'bp-invites-form' )
 	} );
 
 	bp.Views.selectedUsers = bp.Nouveau.GroupInvites.View.extend( {
-		tagName: 'ul',
+		tagName : 'ul',
 
 		initialize: function() {
 			this.cleanContent();
@@ -805,11 +805,11 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.selectedUser = bp.Nouveau.GroupInvites.View.extend( {
-		tagName:   'li',
-		template:  bp.template( 'bp-invites-selection' ),
+		tagName  : 'li',
+		template : bp.template( 'bp-invites-selection' ),
 
 		events: {
-			'click' : 'removeSelection'
+			click : 'removeSelection'
 		},
 
 		initialize: function() {

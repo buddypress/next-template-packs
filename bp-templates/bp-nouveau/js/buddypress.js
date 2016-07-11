@@ -683,11 +683,11 @@ window.bp = window.bp || {};
 			// Unforunately unlike groups
 			// Friends actions does not match the wpnonce
 			var friends_actions_map = {
-				'is_friend'         : 'remove_friend',
-				'not_friends'       : 'add_friend',
-				'pending'           : 'withdraw_friendship',
-				'accept_friendship' : 'accept_friendship',
-				'reject_friendship' : 'reject_friendship'
+				is_friend         : 'remove_friend',
+				not_friends       : 'add_friend',
+				pending           : 'withdraw_friendship',
+				accept_friendship : 'accept_friendship',
+				reject_friendship : 'reject_friendship'
 			};
 
 			if ( 'members' === object && undefined !== friends_actions_map[ action ] ) {
@@ -699,9 +699,9 @@ window.bp = window.bp || {};
 			target.addClass( 'pending loading' );
 
 			self.ajax( {
-				action     : object + '_' + action,
-				'item_id'  : item_id,
-				'_wpnonce' : self.getLinkParams( target.prop( 'href' ), '_wpnonce' )
+				action   : object + '_' + action,
+				item_id  : item_id,
+				_wpnonce : self.getLinkParams( target.prop( 'href' ), '_wpnonce' )
 			}, object ).done( function( response ) {
 				if ( false === response.success ) {
 					item.prepend( response.data.feedback );

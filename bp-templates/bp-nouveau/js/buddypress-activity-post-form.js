@@ -76,10 +76,10 @@ window.bp = window.bp || {};
 	// Object, the activity is attached to (group or blog or any other)
 	bp.Models.ActivityObject = Backbone.Model.extend( {
 		defaults: {
-			id           : 0,
-			name         : '',
-			'avatar_url' : '',
-			'object_type': 'group'
+			id          : 0,
+			name        : '',
+			avatar_url  : '',
+			object_type : 'group'
 		}
 	} );
 
@@ -95,7 +95,7 @@ window.bp = window.bp || {};
 				options = options || {};
 				options.context = this;
 				options.data = _.extend( options.data || {}, {
-					action: 'bp_nouveau_get_activity_objects',
+					action: 'bp_nouveau_get_activity_objects'
 				} );
 
 				return bp.ajax.send( options );
@@ -116,9 +116,9 @@ window.bp = window.bp || {};
 
 	// Feedback messages
 	bp.Views.activityFeedback = bp.View.extend( {
-		tagName: 'div',
-		id: 'message',
-		template: bp.template( 'activity-post-form-feedback' ),
+		tagName  : 'div',
+		id       : 'message',
+		template : bp.template( 'activity-post-form-feedback' ),
 
 		initialize: function() {
 			this.model = new Backbone.Model();
@@ -158,9 +158,9 @@ window.bp = window.bp || {};
 
 	// The content of the activity
 	bp.Views.WhatsNew = bp.View.extend( {
-		tagName:   'textarea',
-		className: 'bp-suggestions',
-		id       : 'whats-new',
+		tagName   : 'textarea',
+		className : 'bp-suggestions',
+		id        : 'whats-new',
 
 		attributes: {
 			role         : 'textbox',
@@ -178,10 +178,11 @@ window.bp = window.bp || {};
 		},
 
 		adjustContent: function() {
+
 			// First adjust layout
 			this.$el.css( {
 				resize: 'none',
-				height: '50px',
+				height: '50px'
 			} );
 
 			// Check for mention
@@ -255,7 +256,7 @@ window.bp = window.bp || {};
 		},
 
 		events: {
-			'click': 'setObject'
+			click : 'setObject'
 		},
 
 		setObject:function( event ) {
@@ -270,18 +271,18 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.AutoComplete = bp.View.extend( {
-		tagName  : 'ul',
-		id       : 'whats-new-post-in-box-items',
+		tagName : 'ul',
+		id      : 'whats-new-post-in-box-items',
 
 		events: {
-			'keyup':  'autoComplete'
+			keyup :  'autoComplete'
 		},
 
 		initialize: function() {
 			var autocomplete = new bp.Views.ActivityInput( {
-				type: 'text',
-				id: 'activity-autocomplete',
-				placeholder: this.options.placeholder || ''
+				type        : 'text',
+				id          : 'activity-autocomplete',
+				placeholder : this.options.placeholder || ''
 			} ).render();
 
 			this.$el.prepend( $( '<li></li>' ).html( autocomplete.$el ) );
@@ -311,9 +312,9 @@ window.bp = window.bp || {};
 
 			this.collection.fetch( {
 				data: {
-					type  : this.options.type,
-					search: search,
-					nonce : BP_Nouveau.nonces['activity']
+					type   : this.options.type,
+					search : search,
+					nonce  : BP_Nouveau.nonces['activity']
 				},
 				success : _.bind( this.itemFetched, this ),
 				error   : _.bind( this.itemFetched, this )
@@ -345,7 +346,7 @@ window.bp = window.bp || {};
 				'avatar_width',
 				'avatar_height',
 				'avatar_alt',
-				'user_domain',
+				'user_domain'
 			] ) );
 
 			if ( this.model.has( 'avatar_url' ) ) {
@@ -367,7 +368,7 @@ window.bp = window.bp || {};
 	bp.Views.FormOptions = bp.View.extend( {
 		tagName  : 'div',
 		id       : 'whats-new-options',
-		template : bp.template( 'activity-post-form-options' ),
+		template : bp.template( 'activity-post-form-options' )
 	} );
 
 	bp.Views.FormTarget = bp.View.extend( {
@@ -443,11 +444,11 @@ window.bp = window.bp || {};
 	 * @type {[type]}
 	 */
 	bp.Views.FormButtons = bp.View.extend( {
-		tagName  : 'div',
-		id       : 'whats-new-actions',
+		tagName : 'div',
+		id      : 'whats-new-actions',
 
 		initialize: function() {
-			this.views.add( new bp.View( { tagName: 'ul', id: 'whats-new-buttons' } ) )
+			this.views.add( new bp.View( { tagName: 'ul', id: 'whats-new-buttons' } ) );
 
 			_.each( this.collection.models, function( button ) {
 				this.addItemView( button );
@@ -498,10 +499,10 @@ window.bp = window.bp || {};
 	bp.Views.FormButton = bp.View.extend( {
 		tagName   : 'li',
 		className : 'whats-new-button',
-		template : bp.template( 'activity-post-form-buttons' ),
+		template  : bp.template( 'activity-post-form-buttons' ),
 
 		events: {
-			'click': 'setActive'
+			click : 'setActive'
 		},
 
 		setActive: function( event ) {
@@ -527,16 +528,16 @@ window.bp = window.bp || {};
 
 		initialize: function() {
 			var reset = new bp.Views.ActivityInput( {
-				type:  'reset',
-				id:    'aw-whats-new-reset',
-				value: 'Cancel'
+				type  : 'reset',
+				id    : 'aw-whats-new-reset',
+				value : 'Cancel'
 			} );
 
 			var submit = new bp.Views.ActivityInput( {
-				type:  'submit',
-				id:    'aw-whats-new-submit',
-				name:  'aw-whats-new-submit',
-				value: 'Post Update'
+				type  : 'submit',
+				id    : 'aw-whats-new-submit',
+				name  : 'aw-whats-new-submit',
+				value : 'Post Update'
 			} );
 
 			this.views.set( [ submit, reset ] );
@@ -558,13 +559,13 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.PostForm = bp.View.extend( {
-		tagName  : 'form',
-		className: 'activity-form',
-		id       : 'whats-new-form',
+		tagName   : 'form',
+		className : 'activity-form',
+		id        : 'whats-new-form',
 
 		attributes: {
-			name  : 'whats-new-form',
-			method: 'post'
+			name   : 'whats-new-form',
+			method : 'post'
 		},
 
 		events: {
@@ -591,6 +592,7 @@ window.bp = window.bp || {};
 		},
 
 		displayFull: function( event ) {
+
 			// Remove feedback.
 			this.cleanFeedback();
 
@@ -599,8 +601,8 @@ window.bp = window.bp || {};
 			}
 
 			$( event.target ).css( {
-				resize: 'vertical',
-				height: 'auto',
+				resize : 'vertical',
+				height : 'auto'
 			} );
 
 			// Backcompat custom fields
@@ -631,8 +633,8 @@ window.bp = window.bp || {};
 			} );
 
 			$( '#whats-new' ).css( {
-				resize: 'none',
-				height: '50px',
+				resize : 'none',
+				height : '50px'
 			} );
 
 			// Reset the model
@@ -686,7 +688,7 @@ window.bp = window.bp || {};
 			this.model.set( meta, { silent: true } );
 
 			var data = {
-				'_wpnonce_post_update': BP_Nouveau.activity.params.post_nonce,
+				'_wpnonce_post_update': BP_Nouveau.activity.params.post_nonce
 			};
 
 			bp.ajax.post( 'post_update', _.extend( data, this.model.attributes ) ).done( function( response ) {
