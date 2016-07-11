@@ -117,17 +117,16 @@ function bp_nouveau_wrapper( $args = array() ) {
  * @since  1.0.0
  */
 function bp_nouveau_register_sidebars() {
-	$default_fronts     = bp_nouveau_get_appearance_settings();
-	$default_user_front = 0;
-	$is_active_groups   = bp_is_active( 'groups' );
+	$default_fronts      = bp_nouveau_get_appearance_settings();
+	$default_user_front  = 0;
+	$default_group_front = 0;
+	$is_active_groups    = bp_is_active( 'groups' );
 
 	if ( isset( $default_fronts['user_front_page'] ) ) {
 		$default_user_front = $default_fronts['user_front_page'];
 	}
 
 	if ( $is_active_groups ) {
-		$default_group_front = 0;
-
 		if ( isset( $default_fronts['group_front_page'] ) ) {
 			$default_group_front = $default_fronts['group_front_page'];
 		}
