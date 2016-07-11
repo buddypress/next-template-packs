@@ -16,6 +16,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 function bp_nouveau_before_activity_directory_content() {
+
 	/**
 	 * Fires at the begining of the templates BP injected content.
 	 *
@@ -37,6 +38,7 @@ function bp_nouveau_before_activity_directory_content() {
  * @since 1.0.0
  */
 function bp_nouveau_after_activity_directory_content() {
+
 	/**
 	 * Fires after the display of the activity list.
 	 *
@@ -70,7 +72,6 @@ function bp_nouveau_after_activity_directory_content() {
  * @since 1.0.0
  */
 function bp_nouveau_before_activity_post_form() {
-	// Enqueue needed script.
 	if ( bp_nouveau_current_user_can( 'publish_activity' ) ) {
 		wp_enqueue_script( 'bp-nouveau-activity-post-form' );
 	}
@@ -99,6 +100,7 @@ function bp_nouveau_after_activity_post_form() {
  * @return string HTML Outpur
  */
 function bp_nouveau_activity_member_post_form() {
+
 	/**
 	 * Fires before the display of the member activity post form.
 	 *
@@ -187,12 +189,14 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 	$output = join( ' ', bp_nouveau_get_activity_entry_buttons() );
 
 	ob_start();
+
 	/**
 	 * Fires at the end of the activity entry meta data area.
 	 *
 	 * @since 1.2.0 (BuddyPress)
 	 */
 	do_action( 'bp_activity_entry_meta' );
+
 	$output .= ob_get_clean();
 
 	$has_content = trim( $output, ' ' );
@@ -455,6 +459,7 @@ function bp_nouveau_activity_recurse_comments( $comment ) {
 	 * @param string $value Opening tag for the HTML markup to use.
 	 */
 	echo apply_filters( 'bp_activity_recurse_comments_start_ul', '<ul>' );
+
 	foreach ( (array) $comment->children as $comment_child ) {
 
 		// Put the comment into the global so it's available to filters.
@@ -504,6 +509,7 @@ function bp_nouveau_activity_comment_action() {
 	 * @since 1.0.0
 	 */
 	function bp_nouveau_get_activity_comment_action() {
+
 		/**
 		 * Filter here to edit the activity comment action.
 		 *
