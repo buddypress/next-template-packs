@@ -148,7 +148,7 @@ window.bp = window.bp || {};
 			}
 
 			var params = qs.replace( /(^\?)/, '' ).split( '&' ).map( function( n ) {
-				return n = n.split( '=' ),this[n[0]] = n[1],this
+				return n = n.split( '=' ), this[n[0]] = n[1], this;
 			}.bind( {} ) )[0];
 
 			if ( param ) {
@@ -288,7 +288,7 @@ window.bp = window.bp || {};
 				extras       : null,
 				caller       : null,
 				template     : null,
-				method       : 'reset',
+				method       : 'reset'
 			}, data );
 
 			// Do not request if we don't have the object or the target to inject results into
@@ -324,7 +324,7 @@ window.bp = window.bp || {};
 			}
 
 			postdata = $.extend( {
-				action: data.object + '_filter',
+				action: data.object + '_filter'
 			}, data );
 
 			return this.ajax( postdata, data.object ).done( function( response ) {
@@ -409,7 +409,7 @@ window.bp = window.bp || {};
 						object       : object,
 						scope        : scope,
 						filter       : objectData.filter,
-						search_terms : search_terms,
+						search_terms : search_terms
 					}
 
 					if ( 'group_members' === object ) {
@@ -689,7 +689,7 @@ window.bp = window.bp || {};
 				'pending'           : 'withdraw_friendship',
 				'accept_friendship' : 'accept_friendship',
 				'reject_friendship' : 'reject_friendship'
-			}
+			};
 
 			if ( 'members' === object && undefined !== friends_actions_map[ action ] ) {
 				action = friends_actions_map[ action ];
@@ -812,7 +812,7 @@ window.bp = window.bp || {};
 				filter       : filter,
 				search_terms : search_terms,
 				page         : self.getLinkParams( navLink.prop( 'href' ), pagArg ) || 1
-			}
+			};
 
 			if ( 'group_members' === object ) {
 				$.extend( queryData, { template: 'groups/single/members-loop' } );
@@ -823,7 +823,7 @@ window.bp = window.bp || {};
 			// Request the page
 			self.objectRequest( queryData );
 		}
-	}
+	};
 
 	// Launch BP Nouveau
 	bp.Nouveau.start();
