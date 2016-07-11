@@ -19,13 +19,15 @@ defined( 'ABSPATH' ) || exit;
  * @return array  The same array with the specific messages styles.
  */
 function bp_nouveau_messages_enqueue_styles( $styles = array() ) {
+
 	if ( ! bp_is_user_messages() ) {
 		return $styles;
 	}
 
 	return array_merge( $styles, array(
 		'bp-nouveau-messages-at' => array(
-			'file' => buddypress()->plugin_url . 'bp-activity/css/mentions%1$s%2$s.css', 'version' => bp_get_version(),
+			'file'    => buddypress()->plugin_url . 'bp-activity/css/mentions%1$s%2$s.css',
+			'version' => bp_get_version(),
 		),
 	) );
 }
@@ -39,6 +41,7 @@ function bp_nouveau_messages_enqueue_styles( $styles = array() ) {
  * @return array  The same array with the specific messages scripts.
  */
 function bp_nouveau_messages_register_scripts( $scripts = array() ) {
+
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
@@ -59,6 +62,7 @@ function bp_nouveau_messages_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_messages_enqueue_scripts() {
+
 	if ( ! bp_is_user_messages() ) {
 		return;
 	}
@@ -78,6 +82,7 @@ function bp_nouveau_messages_enqueue_scripts() {
  * @return array          The same array with specific strings for the messages UI if needed.
  */
 function bp_nouveau_messages_localize_scripts( $params = array() ) {
+
 	if ( ! bp_is_user_messages() ) {
 		return $params;
 	}
@@ -142,11 +147,12 @@ function bp_nouveau_messages_adjust_nav() {
 
 	$secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => bp_get_messages_slug() ), false );
 
-	if ( ! $secondary_nav_items ) {
+	if ( empty( $secondary_nav_items ) ) {
 		return;
 	}
 
 	foreach ( $secondary_nav_items as $secondary_nav_item ) {
+
 		if ( empty( $secondary_nav_item->slug ) ) {
 			continue;
 		}
@@ -167,6 +173,7 @@ function bp_nouveau_messages_adjust_nav() {
 }
 
 function bp_nouveau_messages_adjust_admin_nav( $admin_nav ) {
+
 	if ( empty( $admin_nav ) ) {
 		return $admin_nav;
 	}
@@ -189,6 +196,7 @@ function bp_nouveau_messages_adjust_admin_nav( $admin_nav ) {
 }
 
 function bp_nouveau_add_notice_notification_for_user( $notifications, $user_id ) {
+
 	if ( ! bp_is_active( 'messages' ) || ! doing_action( 'admin_bar_menu' ) ) {
 		return $notifications;
 	}
@@ -199,7 +207,7 @@ function bp_nouveau_add_notice_notification_for_user( $notifications, $user_id )
 		return $notifications;
 	}
 
-	$closed_notices = bp_get_user_meta( bp_loggedin_user_id(), 'closed_notices', true );
+	$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
 
 	if ( empty( $closed_notices ) ) {
 		$closed_notices = array();
@@ -211,7 +219,7 @@ function bp_nouveau_add_notice_notification_for_user( $notifications, $user_id )
 
 	$notice_notification = new stdClass;
 	$notice_notification->id                = 0;
-	$notice_notification->user_id           = bp_loggedin_user_id();
+	$notice_notification->user_id           = $user_id;
 	$notice_notification->item_id           = $notice->id;
 	$notice_notification->secondary_item_id = '';
 	$notice_notification->component_name    = 'messages';
@@ -302,7 +310,6 @@ function bp_nouveau_messages_get_bulk_actions() {
 	bp_messages_bulk_management_dropdown();
 
 	$bulk_actions = array();
-
 	$bulk_options = ob_get_clean();
 
 	$matched = preg_match_all( '/<option value="(.*?)"\s*>(.*?)<\/option>/', $bulk_options, $matches, PREG_SET_ORDER );
