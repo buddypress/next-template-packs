@@ -411,7 +411,7 @@ function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 		/**
 		 * Leave other components do their specific stuff if needed.
 		 */
-		$myclasses = (array) apply_filters( 'bp_nouveau_activity_scope_newest_class', $my_classes, $scope );
+		$my_classes = (array) apply_filters( 'bp_nouveau_activity_scope_newest_class', $my_classes, $scope );
 
 		if ( ! empty( $my_classes ) ) {
 			$classes .= ' ' . join( ' ', $my_classes );
