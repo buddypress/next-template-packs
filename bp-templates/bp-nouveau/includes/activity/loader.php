@@ -48,10 +48,12 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require( trailingslashit( $this->dir ) . 'functions.php'     );
-		require( trailingslashit( $this->dir ) . 'template-tags.php' );
-		require( trailingslashit( $this->dir ) . 'ajax.php'          );
-		require( trailingslashit( $this->dir ) . 'widgets.php'       );
+		$dir = trailingslashit( $this->dir );
+
+		require "{$dir}functions.php";
+		require "{$dir}template-tags.php";
+		require "{$dir}ajax.php";
+		require "{$dir}widgets.php";
 	}
 
 	/**
@@ -60,6 +62,7 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function setup_actions() {
+
 		// Enqueue the scripts
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_activity_enqueue_scripts' );
 
@@ -103,6 +106,7 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
+
 		// Register activity scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_activity_register_scripts', 10, 1 );
 
@@ -124,6 +128,7 @@ endif;
  * @since 1.0.0
  */
 function bp_nouveau_activity( $bp_nouveau = null ) {
+
 	if ( is_null( $bp_nouveau ) ) {
 		return;
 	}
