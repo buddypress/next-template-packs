@@ -1,5 +1,6 @@
 /* jshint undef: false */
 /* Password Verify */
+/* global pwsL10n */
 ( function( $ ){
 	function check_pass_strength() {
 		var pass1 = $( '.password-entry' ).val(),
@@ -38,6 +39,6 @@
 	$( document ).ready( function() {
 		$( '.password-entry' ).val( '' ).keyup( check_pass_strength );
 		$( '.password-entry-confirm' ).val( '' ).keyup( check_pass_strength );
-	});
+	} );
 
 } )( jQuery );

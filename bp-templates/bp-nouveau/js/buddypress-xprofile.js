@@ -15,6 +15,7 @@ window.bp = window.bp || {};
 	 */
 
 	/** Profile Visibility Settings *********************************/
+
 	$( '.visibility-toggle-link' ).on( 'click', function( event ) {
 		event.preventDefault();
 
@@ -64,6 +65,5 @@ window.bp = window.bp || {};
 				$( checkbox ).prop( 'checked', false );
 			} );
 		}
-	}
-
+	};
 } )( bp, jQuery );

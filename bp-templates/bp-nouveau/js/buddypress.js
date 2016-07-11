@@ -59,7 +59,6 @@ window.bp = window.bp || {};
 		 * @return {[type]} [description]
 		 */
 		prepareDocument: function() {
-			var search_title;
 
 			// Remove the no-js class and add the js one
 			if ( $( 'body' ).hasClass( 'no-js' ) ) {

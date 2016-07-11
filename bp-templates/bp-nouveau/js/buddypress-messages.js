@@ -1,4 +1,4 @@
-/* global wp, bp, BP_Nouveau */
+/* global wp, bp, BP_Nouveau, _, Backbone, tinymce, tinyMCE */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
@@ -194,7 +194,7 @@ window.bp = window.bp || {};
 				'page'         : 1,
 				'total_page'   : 0,
 				'search_terms' : '',
-				'box'          : this.box,
+				'box'          : this.box
 			} );
 
 			// Use it in the filters viex
@@ -218,14 +218,14 @@ window.bp = window.bp || {};
 
 			single_thread.inject( '.bp-messages-content' );
 		}
-	}
+	};
 
 	bp.Models.Message = Backbone.Model.extend( {
 		defaults: {
 			send_to         : [],
 			subject         : '',
 			message_content : '',
-			meta            : {},
+			meta            : {}
 		},
 
 		sendMessage: function() {
@@ -288,7 +288,7 @@ window.bp = window.bp || {};
 			sender_link   : '',
 			sender_avatar : '',
 			date          : 0,
-			display_date  : '',
+			display_date  : ''
 		}
 	} );
 
@@ -309,7 +309,7 @@ window.bp = window.bp || {};
 
 			if ( 'read' === method ) {
 				options.data = _.extend( options.data, {
-					action: 'messages_get_user_message_threads',
+					action: 'messages_get_user_message_threads'
 				} );
 
 				return bp.ajax.send( options );
@@ -350,7 +350,7 @@ window.bp = window.bp || {};
 			}
 
 			if ( bp.Nouveau.Messages.box ) {
-				this.options.box = bp.Nouveau.Messages.box
+				this.options.box = bp.Nouveau.Messages.box;
 			}
 
 			return resp.threads;
@@ -385,7 +385,7 @@ window.bp = window.bp || {};
 
 			if ( 'read' === method ) {
 				options.data = _.extend( options.data, {
-					action: 'messages_get_thread_messages',
+					action: 'messages_get_thread_messages'
 				} );
 
 				return bp.ajax.send( options );
@@ -1206,7 +1206,7 @@ window.bp = window.bp || {};
 
 			} else {
 				data.id        = this.options.thread.get( 'id' );
-				data.js_thread = ! _.isEmpty( this.options.thread.get( 'subject' ) )
+				data.js_thread = ! _.isEmpty( this.options.thread.get( 'subject' ) );
 			}
 
 			this.collection.fetch( {
@@ -1254,7 +1254,7 @@ window.bp = window.bp || {};
 
 			this.collection.sync( 'create', _.pick( this.reply.attributes, ['thread_id', 'content' ] ), {
 				success : _.bind( this.replySent, this ),
-				error   : _.bind( this.replyError, this ),
+				error   : _.bind( this.replyError, this )
 			} );
 		},
 

@@ -1,4 +1,4 @@
-/* global wp, bp, BP_Nouveau */
+/* global wp, bp, BP_Nouveau, _, Backbone */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
@@ -118,10 +118,10 @@ window.bp = window.bp || {};
 
 			// Create the model
 			this.filters = new Backbone.Model( {
-				'page'         : 1,
-				'total_page'   : 0,
-				'search_terms' : '',
-				scope          : this.scope,
+				page         : 1,
+				total_page   : 0,
+				search_terms : '',
+				scope        : this.scope
 			} );
 
 			// Use it in the filters viex
@@ -222,7 +222,7 @@ window.bp = window.bp || {};
 
 			invites.inject( '.bp-invites-content' );
 		}
-	}
+	};
 
 	// Item (group or blog or any other)
 	bp.Models.User = Backbone.Model.extend( {
@@ -231,7 +231,7 @@ window.bp = window.bp || {};
 			avatar   : '',
 			name     : '',
 			selected : false
-        },
+        }
 	} );
 
 	/** Collections ***********************************************************/
@@ -258,7 +258,7 @@ window.bp = window.bp || {};
 
 			if ( 'read' === method ) {
 				options.data = _.extend( options.data, {
-					action: 'groups_get_group_potential_invites',
+					action: 'groups_get_group_potential_invites'
 				} );
 
 				return bp.ajax.send( options );

@@ -316,7 +316,6 @@ window.bp = window.bp || {};
 		/**
 		 * [truncateComments description]
 		 * @param  {[type]} event [description]
-		 * @param  {[type]} data  [description]
 		 * @return {[type]}       [description]
 		 */
 		hideComments: function( event ) {
@@ -545,8 +544,8 @@ window.bp = window.bp || {};
 				$( readMore ).addClass( 'loading' );
 
 				parent.ajax( {
-					action     : 'get_single_activity_content',
-					'id'       : item_id,
+					action : 'get_single_activity_content',
+					id     : item_id
 				}, 'activity' ).done( function( response ) {
 					$( readMore ).removeClass( 'loading' );
 
@@ -728,7 +727,7 @@ window.bp = window.bp || {};
 				}
 			}
 		}
-	}
+	};
 
 	// Launch BP Nouveau Activity
 	bp.Nouveau.Activity.start();

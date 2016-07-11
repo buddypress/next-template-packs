@@ -1,4 +1,4 @@
-/* globals bp, BP_Nouveau, _, Backbone */
+/* global bp, BP_Nouveau, _, Backbone */
 
 window.wp = window.wp || {};
 window.bp = window.bp || {};
