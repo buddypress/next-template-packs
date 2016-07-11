@@ -592,8 +592,25 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
 
 	$temporary_setting = json_decode( wp_unslash( $_POST['customized'] ), true );
 
-	if ( isset( $temporary_setting['bp_nouveau_appearance[' . $option . ']'] ) ) {
+	// This is used to transport the customizer settings into Ajax requests.
+	if ( 'any' === $option ) {
+		$retval = array();
+
+		foreach ( $temporary_setting as $key => $setting ) {
+			if ( 0 !== strpos( $key, 'bp_nouveau_appearance' ) ) {
+				continue;
+			}
+			$k = str_replace( array( '[', ']'), array( '_', '' ), $key );
+			$retval[ $k ] = $setting;
+		}
+
+	// Used when it's an early regular request
+	} elseif ( isset( $temporary_setting['bp_nouveau_appearance[' . $option . ']'] ) ) {
 		$retval = $temporary_setting['bp_nouveau_appearance[' . $option . ']'];
+
+	// Used when it's an ajax request
+	} elseif ( isset( $_POST['customized'][ 'bp_nouveau_appearance_' . $option ] ) ) {
+		$retval = $_POST['customized'][ 'bp_nouveau_appearance_' . $option ];
 	}
 
 	return $retval;
@@ -612,6 +629,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 		'user_front_page' => 1,
 		'user_front_bio'  => 0,
 		'user_nav_order'  => array(),
+		'members_layout'  => 1,
 	);
 
 	if ( bp_is_active( 'groups' ) ) {
@@ -620,6 +638,13 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_front_boxes'       => 1,
 			'group_front_description' => 0,
 			'group_nav_order'         => array(),
+			'groups_layout'           => 1,
+		) );
+	}
+
+	if ( is_multisite() && bp_is_active( 'blogs' ) ) {
+		$default_args = array_merge( $default_args, array(
+			'blogs_layout' => 1,
 		) );
 	}
 
@@ -679,6 +704,12 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'priority'    => 30,
 			'description' => __( 'Set the order for the members navigation items.', 'bp-nouveau' ),
 		),
+		'bp_nouveau_loops_layout' => array(
+			'title'       => __( 'Directories layout', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 50,
+			'description' => __( 'Set the number of columns to use for the BuddyPress Directories.', 'bp-nouveau' ),
+		),
 	) );
 
 	// Add the sections to the customizer
@@ -705,6 +736,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'index'             => 'user_nav_order',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'bp_nouveau_sanitize_nav_order',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[members_layout]' => array(
+			'index'             => 'members_layout',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
@@ -742,6 +780,17 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'section'    => 'bp_nouveau_user_nav_order',
 			'settings'   => 'bp_nouveau_appearance[user_nav_order]',
 			'type'       => 'user',
+		),
+		'members_layout' => array(
+			'label'      => __( 'Members loop:', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_loops_layout',
+			'settings'   => 'bp_nouveau_appearance[members_layout]',
+			'type'       => 'select',
+			'choices'    => array(
+				'1' => __( 'One column', 'bp-nouveau' ),
+				'2' => __( 'Two columns', 'bp-nouveau' ),
+				'3' => __( 'Three columns', 'bp-nouveau' ),
+			),
 		),
 	) );
 

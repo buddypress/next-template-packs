@@ -134,3 +134,47 @@ function bp_nouveau_blogs_catch_button_args( $button = array() ) {
 	// return an empty array to stop the button creation process
 	return array();
 }
+
+/**
+ * Add settings to the customizer for the blogs component.
+ *
+ * @since 1.0.0
+ *
+ * @param  array $settings the settings to add.
+ * @return array           the settings to add.
+ */
+function bp_nouveau_blogs_customizer_settings( $settings = array() ) {
+	return array_merge( $settings, array(
+		'bp_nouveau_appearance[blogs_layout]' => array(
+			'index'             => 'blogs_layout',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+	) );
+}
+
+/**
+ * Add controls for the settings of the customizer for the blogs component.
+ *
+ * @since 1.0.0
+ *
+ * @param  array $controls the controls to add.
+ * @return array           the controls to add.
+ */
+function bp_nouveau_blogs_customizer_controls( $controls = array() ) {
+	return array_merge( $controls, array(
+		'blogs_layout' => array(
+			'label'      => __( 'Blogs loop:', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_loops_layout',
+			'settings'   => 'bp_nouveau_appearance[blogs_layout]',
+			'type'       => 'select',
+			'choices'    => array(
+				'1' => __( 'One column', 'bp-nouveau' ),
+				'2' => __( 'Two columns', 'bp-nouveau' ),
+				'3' => __( 'Three columns', 'bp-nouveau' ),
+			),
+		),
+	) );
+}

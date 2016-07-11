@@ -172,6 +172,10 @@ window.bp = window.bp || {};
 			// Extend posted data with stored data and object nonce
 			var postData = $.extend( {}, bp.Nouveau.getStorage( 'bp-' + object ), { nonce: BP_Nouveau.nonces[object] }, post_data );
 
+			if ( undefined !== BP_Nouveau.customizer_settings ) {
+				postData.customized = BP_Nouveau.customizer_settings;
+			}
+
 			this.ajax_request = $.post( BP_Nouveau.ajaxurl, postData, 'json' );
 
 			return this.ajax_request;

@@ -28,6 +28,9 @@ class BP_Nouveau_Blogs {
 
 		// Setup list of add_action() hooks
 		$this->setup_actions();
+
+		// Setup list of add_filter() hooks
+		$this->setup_filters();
 	}
 
 	/**
@@ -72,6 +75,21 @@ class BP_Nouveau_Blogs {
 			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
 				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
 			}
+		}
+	}
+
+	/**
+	 * Register add_filter() hooks
+	 *
+	 * @since 1.0.0
+	 */
+	private function setup_filters() {
+		if ( is_multisite() ) {
+			// Add settings into the Blogs sections of the customizer.
+			add_filter( 'bp_nouveau_customizer_settings', 'bp_nouveau_blogs_customizer_settings', 11, 1 );
+
+			// Add controls into the Blogs sections of the customizer.
+			add_filter( 'bp_nouveau_customizer_controls', 'bp_nouveau_blogs_customizer_controls', 11, 1 );
 		}
 	}
 }

@@ -450,6 +450,102 @@ function bp_nouveau_pagination( $position = null ) {
 	return;
 }
 
+/**
+ * Display the component's loop classes
+ *
+ * @since  1.0.0
+ *
+ * @return string CSS classes
+ */
+function bp_nouveau_loop_classes() {
+	echo bp_nouveau_get_loop_classes();
+}
+
+	/**
+	 * Get the component's loop classes
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string space separated value of classes.
+	 */
+	function bp_nouveau_get_loop_classes() {
+		$bp_nouveau = bp_nouveau();
+		$component  = sanitize_key( bp_current_component() );
+
+		$classes = array(
+			'item-list',
+			sprintf( '%s-list', $component ),
+			'bp-list',
+		);
+
+		$available_components = array(
+			'members' => true,
+			'groups'  => true,
+			'blogs'   => true,
+		);
+
+		// Only the available components supports custom layouts.
+		if ( ! empty( $available_components[ $component ] ) && bp_is_directory() ) {
+			$customizer_option = sprintf( '%s_layout', $component );
+			$layout_prefs      = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+
+			if ( ! empty( $layout_prefs ) && (int) $layout_prefs > 1 ) {
+				$classes[] = 'grid';
+
+				if ( 2 === (int) $layout_prefs ) {
+					$classes[] = 'two';
+				} else {
+					$classes[] = 'three';
+				}
+
+				// Set the global for a later use.
+				$bp_nouveau->{$component}->loop_layout = $layout_prefs;
+			}
+		}
+
+		/**
+		 * Filter here to edit/add classes.
+		 *
+		 * NB: you can also directly add classes into the template parts.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $classes   The list of classes.
+		 * @param string $component The current component's loop.
+		 */
+		$class_list = (array) apply_filters( 'bp_nouveau_get_loop_classes', $classes, $component );
+
+		return join( ' ', array_map( 'sanitize_html_class', $class_list ) );
+	}
+
+/**
+ * Checks the layout preferences to display thumb or full avatars.
+ *
+ * @since  1.0.0
+ *
+ * @return array The avatar arguments.
+ */
+function bp_nouveau_avatar_args() {
+	$bp_nouveau = bp_nouveau();
+	$component  = sanitize_key( bp_current_component() );
+
+	$args = array(
+		'type'   => 'thumb',
+		'width'  => bp_core_avatar_thumb_width(),
+		'height' => bp_core_avatar_thumb_height(),
+	);
+
+	if ( ! empty( $bp_nouveau->{$component}->loop_layout ) && $bp_nouveau->{$component}->loop_layout > 1 ) {
+		$args = array(
+			'type'   => 'full',
+			'width'  => bp_core_avatar_full_width(),
+			'height' => bp_core_avatar_full_height(),
+		);
+	}
+
+	return $args;
+}
+
 /** Template Tags for BuddyPress navigations **********************************/
 
 /**

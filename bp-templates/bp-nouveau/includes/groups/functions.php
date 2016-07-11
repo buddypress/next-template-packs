@@ -535,6 +535,13 @@ function bp_nouveau_groups_customizer_settings( $settings = array() ) {
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
+		'bp_nouveau_appearance[groups_layout]' => array(
+			'index'             => 'groups_layout',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
 	) );
 }
 
@@ -572,6 +579,17 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'section'    => 'bp_nouveau_group_nav_order',
 			'settings'   => 'bp_nouveau_appearance[group_nav_order]',
 			'type'       => 'group',
+		),
+		'groups_layout' => array(
+			'label'      => __( 'Groups loop:', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_loops_layout',
+			'settings'   => 'bp_nouveau_appearance[groups_layout]',
+			'type'       => 'select',
+			'choices'    => array(
+				'1' => __( 'One column', 'bp-nouveau' ),
+				'2' => __( 'Two columns', 'bp-nouveau' ),
+				'3' => __( 'Three columns', 'bp-nouveau' ),
+			),
 		),
 	) );
 }
