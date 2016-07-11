@@ -326,9 +326,15 @@ class Next_Template_Packs {
 	public function admin_display() {
 		$current_theme_package_id = bp_get_theme_package_id();
 		?>
+
+		<style type="text/css">
+			.plugins tbody th.check-column input[type="radio"] {
+				margin-top: 4px;
+			}
+		</style>
+
 		<div class="wrap">
 			<h1><?php esc_html_e( 'BuddyPress Settings', 'next-template-packs' ); ?></h1>
-
 			<h2 class="nav-tab-wrapper"><?php bp_core_admin_tabs( __( 'Templates', 'next-template-packs' ) ); ?></h2>
 
 			<form action="" method="post" id="bp-admin-template-pack-form">
@@ -424,7 +430,7 @@ class Next_Template_Packs {
 				<table class="widefat fixed plugins" cellspacing="0">
 					<thead>
 						<tr>
-							<th scope="col" id="cb" class="manage-column column-cb check-column">&nbsp;</th>
+							<td scope="col" id="cb" class="manage-column column-cb check-column">&nbsp;</td>
 							<th scope="col" id="name" class="manage-column column-name" style="width: 190px;"><?php _e( 'Name', 'next-template-packs' ); ?></th>
 							<th scope="col" id="description" class="manage-column column-description"><?php _e( 'Description', 'next-template-packs' ); ?></th>
 							<th scope="col" id="supports" class="manage-column column-supports" style="width: 190px;"><?php _e( 'Supports', 'next-template-packs' ); ?></th>
@@ -433,7 +439,7 @@ class Next_Template_Packs {
 
 					<tfoot>
 						<tr>
-							<th scope="col" class="manage-column column-cb check-column">&nbsp;</th>
+							<td scope="col" class="manage-column column-cb check-column">&nbsp;</td>
 							<th scope="col" class="manage-column column-name" style="width: 190px;"><?php _e( 'Name', 'next-template-packs' ); ?></th>
 							<th scope="col" class="manage-column column-description"><?php _e( 'Description', 'next-template-packs' ); ?></th>
 							<th scope="col" class="manage-column column-supports" style="width: 190px;"><?php _e( 'Supports', 'next-template-packs' ); ?></th>
@@ -454,7 +460,7 @@ class Next_Template_Packs {
 								?>
 
 								<tr id="<?php echo esc_attr( $tp_pack->id ); ?>" class="<?php echo esc_attr( $tp_pack->id ) . ' ' . esc_attr( $class ); ?>">
-									<th scope="row">
+									<th scope="row" class="check-column">
 
 										<?php if ( $config_is_supported ) : ?>
 											<input type="radio" id="bp_tpl_pack-<?php echo esc_attr( $tp_pack->id ); ?>" name="bp_tpl_pack[dir]" value="<?php echo esc_attr( $tp_pack->dir );?>"<?php checked( ( $tp_pack->id === $current_theme_package_id ) ); ?> />
