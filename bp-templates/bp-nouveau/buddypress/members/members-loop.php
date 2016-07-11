@@ -19,7 +19,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="members-list" class="item-list members-list bp-list grid three">
+	<ul id="members-list" class="<?php bp_nouveau_loop_classes(); ?>">
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
 
@@ -27,7 +27,7 @@ bp_nouveau_before_loop(); ?>
 			<div class="wrap">
 
 			<div class="item-avatar">
-				<a href="<?php bp_member_permalink(); ?>"><?php bp_member_avatar(); ?></a>
+				<a href="<?php bp_member_permalink(); ?>"><?php bp_member_avatar( bp_nouveau_avatar_args() ); ?></a>
 			</div>
 
 			<div class="item">

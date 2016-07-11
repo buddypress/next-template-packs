@@ -205,6 +205,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// loads the languages..
 		add_action( 'bp_init', array( $this, 'load_textdomain' ), 5 );
 
+		// Set the BP Uri for the Ajax customizer preview
+		add_filter( 'bp_uri', array( $this, 'customizer_set_uri' ), 10, 1 );
+
 		/** Override **********************************************************/
 
 		/**
@@ -465,6 +468,11 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Add Warnings if any
 		$params['warnings'] = $this->developer_feedbacks();
 
+		// Used to transport the settings inside the Ajax requests
+		if ( is_customize_preview() ) {
+			$params['customizer_settings'] = bp_nouveau_get_temporary_setting( 'any' );
+		}
+
 		/**
 		 * Filters core JavaScript strings for internationalization before AJAX usage.
 		 *
@@ -629,6 +637,34 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 */
 	public function neutralize_core_template_notices(){
 		remove_action( 'template_notices', 'bp_core_render_message' );
+	}
+
+	/**
+	 * Set the BP Uri for the customizer in case of Ajax requests.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $path the BP Uri.
+	 * @return string       the BP Uri.
+	 */
+	public function customizer_set_uri( $path ) {
+		if ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) {
+			return $path;
+		}
+
+		$uri = parse_url( $path );
+
+		if ( false === strpos( $uri['path'], 'customize.php' ) ) {
+			return $path;
+		} else {
+			$vars = wp_parse_args( $uri['query'], array() );
+
+			if ( ! empty( $vars['url'] ) ) {
+				$path = str_replace( get_site_url(), '', urldecode( $vars['url'] ) );
+			}
+		}
+
+		return $path;
 	}
 
 	/**

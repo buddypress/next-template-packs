@@ -15,14 +15,14 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="blogs-list" class="item-list blogs-list bp-list">
+	<ul id="blogs-list" class="<?php bp_nouveau_loop_classes(); ?>">
 
 	<?php while ( bp_blogs() ) : bp_the_blog(); ?>
 
 		<li <?php bp_blog_class() ?>>
 
 			<div class="item-avatar">
-				<a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_avatar( 'type=thumb' ); ?></a>
+				<a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_avatar( bp_nouveau_avatar_args() ); ?></a>
 			</div>
 
 			<div class="item">

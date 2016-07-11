@@ -14,14 +14,14 @@ bp_nouveau_before_loop(); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="groups-list" class="item-list groups-list bp-list">
+	<ul id="groups-list" class="<?php bp_nouveau_loop_classes(); ?>">
 
 	<?php while ( bp_groups() ) : bp_the_group(); ?>
 
 		<li <?php bp_group_class(); ?> data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
 			<?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 				<div class="item-avatar">
-					<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ); ?></a>
+					<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( bp_nouveau_avatar_args() ); ?></a>
 				</div>
 			<?php endif; ?>
 
