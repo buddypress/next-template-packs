@@ -462,8 +462,10 @@ window.bp = window.bp || {};
 						target.addClass( 'unfav' );
 
 					} else if ( 'unfav' === type ) {
+						var favoriteScope = $( '[data-bp-user-scope="favorites"]' ).hasClass( 'selected' ) || $( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).hasClass( 'selected' );
+
 						// If on user's profile or on the favorites directory tab, remove the entry
-						if ( ! $( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).length || $( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).hasClass( 'selected' )  ) {
+						if ( favoriteScope ) {
 							activity_item.remove();
 						}
 
@@ -473,7 +475,7 @@ window.bp = window.bp || {};
 								$( parent.objectNavParent + ' [data-bp-scope="favorites"]' ).remove();
 
 							// In all the other cases, append a message to the empty stream
-							} else {
+							} else if ( favoriteScope ) {
 								stream.append( response.data.no_favorite );
 							}
 						}
@@ -489,12 +491,17 @@ window.bp = window.bp || {};
 				// Stop event propagation
 				event.preventDefault();
 
+				if ( undefined !== BP_Nouveau.confirm && false === confirm( BP_Nouveau.confirm ) ) {
+					return false;
+				}
+
 				target.addClass( 'loading' );
 
 				parent.ajax( {
-					action     : 'delete_activity',
-					'id'       : activity_id,
-					'_wpnonce' : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' )
+					action      : 'delete_activity',
+					'id'        : activity_id,
+					'_wpnonce'  : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' ),
+					'is_single' : target.closest( '[data-bp-single]' ).length
 				}, 'activity' ).done( function( response ) {
 					target.removeClass( 'loading' );
 
@@ -502,6 +509,11 @@ window.bp = window.bp || {};
 						activity_item.prepend( response.data.feedback );
 						activity_item.find( '.feedback' ).hide().fadeIn( 300 );
 					} else {
+						// Specific case of the single activity screen.
+						if ( response.data.redirect ) {
+							return window.location.href = response.data.redirect;
+						}
+
 						activity_item.slideUp( 300 );
 
 						// reset vars to get newest activities

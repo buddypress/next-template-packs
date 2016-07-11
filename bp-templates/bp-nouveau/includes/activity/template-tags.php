@@ -333,10 +333,6 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			$delete_args[] = bp_get_activity_delete_url();
 			$class = 'delete-activity';
 
-			if ( bp_is_activity_component() && is_numeric( bp_current_action() ) ) {
-				$class = 'delete-activity-single';
-			}
-
 			$delete_args = array(
 				'link_href'  => bp_get_activity_delete_url(),
 				'link_class' => 'button item-button bp-secondary-action ' . $class . ' confirm',

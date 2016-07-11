@@ -1036,6 +1036,10 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'type'    => 'loading',
 			'message' => __( 'Loading the community updates, please wait.', 'bp-nouveau' ),
 		),
+		'single-activity-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading the update, please wait.', 'bp-nouveau' ),
+		),
 		'activity-loop-none' => array(
 			'type'    => 'info',
 			'message' => __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ),

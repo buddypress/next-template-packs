@@ -173,6 +173,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		add_action( 'bp_enqueue_scripts', array( $this, 'register_scripts'  ), 2 ); // Register theme JS
 
+		// We won't use this.
+		remove_action( 'bp_enqueue_scripts', 'bp_core_confirmation_js' );
+
 		add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_styles'   ) ); // Enqueue theme CSS
 		add_action( 'bp_enqueue_scripts', array( $this, 'enqueue_scripts'  ) ); // Enqueue theme JS
 		add_filter( 'bp_enqueue_scripts', array( $this, 'localize_scripts' ) ); // Enqueue theme script localization
@@ -279,9 +282,13 @@ class BP_Nouveau extends BP_Theme_Compat {
 	public function register_scripts() {
 		$min = bp_core_get_minified_asset_suffix();
 
+		$dependencies = bp_core_get_js_dependencies();
+		$bp_confirm   = array_search( 'bp-confirm', $dependencies );
+		unset( $dependencies[ $bp_confirm ] );
+
 		$scripts = apply_filters( 'bp_nouveau_register_scripts', array(
 			'bp-nouveau' => array(
-				'file' => 'js/buddypress%s.js', 'dependencies' => bp_core_get_js_dependencies(), 'version' => $this->version, 'footer' => true,
+				'file' => 'js/buddypress%s.js', 'dependencies' => $dependencies, 'version' => $this->version, 'footer' => true,
 			),
 		) );
 
@@ -389,6 +396,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 			'close'               => __( 'Close', 'bp-nouveau' ),
 			'comments'            => __( 'comments', 'bp-nouveau' ),
 			'leave_group_confirm' => __( 'Are you sure you want to leave this group?', 'bp-nouveau' ),
+			'confirm'             => __( 'Are you sure?', 'bp-nouveau' ),
 			'my_favs'             => __( 'My Favorites', 'bp-nouveau' ),
 			'rejected'            => __( 'Rejected', 'bp-nouveau' ),
 			'show_all'            => __( 'Show all', 'bp-nouveau' ),

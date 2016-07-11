@@ -74,10 +74,10 @@ function bp_nouveau_ajax_unmark_activity_favorite() {
 
 		$fav_count = (int) bp_get_total_favorite_count_for_user( bp_loggedin_user_id() );
 
-		if ( 0 === $fav_count ) {
-			$response['no_favorite'] = '<li id="activity-stream-message" class="info">
-				<p>' . __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ) . '</p>
-			</li>';
+		if ( 0 === $fav_count && ! bp_is_single_activity() ) {
+			$response['no_favorite'] = '<li><div class="bp-feedback bp-messages info">
+				' . __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ) . '
+			</div></li>';
 		} else {
 			$response['fav_count'] = $fav_count;
 		}
@@ -113,7 +113,7 @@ function bp_nouveau_ajax_clear_new_mentions() {
 function bp_nouveau_ajax_delete_activity() {
 	$response = array(
 		'feedback' => sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback bp-messages error">%s</div>',
 			esc_html__( 'There was a problem when deleting. Please try again.', 'bp-nouveau' )
 		)
 	);
@@ -153,7 +153,16 @@ function bp_nouveau_ajax_delete_activity() {
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_action_delete_activity', $activity->id, $activity->user_id );
 
-	wp_send_json_success( array( 'deleted' => $activity->id ) );
+	// The activity has been deleted successfully
+	$response = array( 'deleted' => $activity->id );
+
+	// If on a single activity redirect to user's home.
+	if ( ! empty( $_POST['is_single'] ) ) {
+		$response['redirect'] = bp_core_get_user_domain( $activity->user_id );
+		bp_core_add_message( __( 'Activity deleted successfully', 'bp-nouveau' ) );
+	}
+
+	wp_send_json_success( $response );
 }
 
 /**

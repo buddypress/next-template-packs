@@ -717,6 +717,51 @@ function bp_nouveau_nav_classes() {
 	}
 
 /**
+ * Displays the nav item scope.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_nav_scope() {
+	echo bp_nouveau_get_nav_scope();
+}
+
+	/**
+	 * Retrieve the specific scope for the current nav item.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string the specific scope of the nav.
+	 */
+	function bp_nouveau_get_nav_scope() {
+		$bp_nouveau = bp_nouveau();
+		$nav_item   = $bp_nouveau->current_nav_item;
+
+		$scope = array();
+		if ( 'directory' === $bp_nouveau->displayed_nav ) {
+			$scope = array( 'data-bp-scope' => $nav_item->slug );
+		} elseif ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->secondary ) ) {
+			$scope = array( 'data-bp-user-scope' => $nav_item->slug );
+		} else {
+			/**
+			 * Filter here to add your own scope.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $scope    An array containing the key and the value for your scope.
+			 * @param object $nav_item The current nav item object.
+			 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
+			 */
+			$scope = apply_filters( 'bp_nouveau_set_nav_scope', $scope, $nav_item, $bp_nouveau->displayed_nav );
+		}
+
+		if ( empty( $scope ) ) {
+			return;
+		}
+
+		return bp_get_form_field_attributes( 'scope', $scope );
+	}
+
+/**
  * Displays the nav item link.
  *
  * @since 1.0.0
@@ -1001,30 +1046,6 @@ function bp_nouveau_directory_list_class() {
 		$class = sprintf( '%s-nav', bp_current_component() );
 
 		return sanitize_html_class( $class );
-	}
-
-/**
- * Displays the directory nav item scope (data-bp attribute).
- *
- * @since 1.0.0
- */
-function bp_nouveau_directory_nav_scope() {
-	echo bp_nouveau_get_directory_nav_scope();
-}
-
-	/**
-	 * Gets the directory nav item scope.
-	 *
-	 * @since 1.0.0
-	 */
-	function bp_nouveau_get_directory_nav_scope() {
-		$nav_item = bp_nouveau()->current_nav_item;
-
-		if ( ! $nav_item->slug ) {
-			return;
-		}
-
-		return esc_attr( $nav_item->slug );
 	}
 
 /**

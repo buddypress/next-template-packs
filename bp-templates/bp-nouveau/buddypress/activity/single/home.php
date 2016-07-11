@@ -11,17 +11,13 @@
 
 	<?php bp_nouveau_template_notices(); ?>
 
-	<div class="activity no-ajax">
-		<?php if ( bp_has_activities( 'display_comments=threaded&show_hidden=true&include=' . bp_current_action() ) ) : ?>
+	<div class="activity" data-bp-single="<?php echo esc_attr( bp_current_action() ); ?>">
 
-			<ul id="activity-stream" class="activity-list item-list">
-				<?php while ( bp_activities() ) : bp_the_activity(); ?>
+		<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
-					<?php bp_get_template_part( 'activity/entry' ); ?>
+			<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'single-activity-loading' ) ;?></li>
 
-				<?php endwhile; ?>
-			</ul>
+		</ul>
 
-		<?php endif; ?>
 	</div>
 </div>

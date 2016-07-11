@@ -111,6 +111,15 @@ function bp_nouveau_ajax_querystring( $query_string, $object ) {
 		}
 	}
 
+	// Single activity.
+	if ( bp_is_single_activity() ) {
+		$qs = array(
+			'display_comments=threaded',
+			'show_hidden=true',
+			'include=' . bp_current_action(),
+		);
+	}
+
 	// Now pass the querystring to override default values.
 	$query_string = empty( $qs ) ? '' : join( '&', (array) $qs );
 
