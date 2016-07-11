@@ -1117,7 +1117,7 @@ function bp_nouveau_get_search_objects( $objects = array() ) {
 
 	if ( 'member' === $primary || 'dir' === $primary ) {
 		$objects['secondary'] = bp_current_component();
-	} elseif( 'group' === $primary ) {
+	} elseif ( 'group' === $primary ) {
 		$objects['secondary'] = bp_current_action();
 	} else {
 		$objects = apply_filters( 'bp_nouveau_get_search_objects', $objects );
@@ -1503,7 +1503,7 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 		return;
 	}
 
-	foreach( $fields as $name => $attributes ) {
+	foreach ( $fields as $name => $attributes ) {
 		list( $label, $required, $value, $attribute_type, $type, $class ) = array_values( $attributes );
 
 		if ( $required ) {

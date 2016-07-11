@@ -39,7 +39,7 @@ class PotExtMeta {
 		$source = $makepot->get_first_lines($ext_filename);
 		$pot = '';
 		$po = new PO;
-		foreach($this->headers as $header) {
+		foreach ($this->headers as $header) {
 			$string = $makepot->get_addon_header($header, $source);
 			if (!$string) continue;
 			$args = array(

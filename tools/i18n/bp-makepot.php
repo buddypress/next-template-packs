@@ -120,7 +120,7 @@ class BPMakePOT {
 		$placeholders['year'] = date( 'Y' );
 		$placeholder_keys = array_map( create_function( '$x', 'return "{".$x."}";' ), array_keys( $placeholders ) );
 		$placeholder_values = array_values( $placeholders );
-		foreach($meta as $key => $value) {
+		foreach ($meta as $key => $value) {
 			$meta[$key] = str_replace($placeholder_keys, $placeholder_values, $value);
 		}
 
@@ -216,7 +216,7 @@ class BPMakePOT {
 		$extf = fopen($filename, 'r');
 		if (!$extf) return false;
 		$first_lines = '';
-		foreach(range(1, $lines) as $x) {
+		foreach (range(1, $lines) as $x) {
 			$line = fgets($extf);
 			if (feof($extf)) break;
 			if (false === $line) {

@@ -377,11 +377,12 @@ function bp_nouveau_get_forsaken_hooks() {
 	$nav_items = array();
 	if ( bp_is_user() ) {
 		$nav_items = buddypress()->members->nav->get_item_nav();
-	} elseif( bp_is_group() && ! bp_is_group_create() ) {
+	} elseif ( bp_is_group() && ! bp_is_group_create() ) {
 		$nav_items = buddypress()->groups->nav->get_secondary( array( 'parent_slug' => bp_get_current_group_slug() ), false );
 	}
 
 	if ( $nav_items ) {
+
 		// Set the common parts
 		$common = array(
 			'hook_type'    => 'filter',
@@ -403,7 +404,7 @@ function bp_nouveau_get_forsaken_hooks() {
 					'message' => sprintf( $message, $filter ),
 				) );
 
-				foreach( $nav_item->children as $child ) {
+				foreach ( $nav_item->children as $child ) {
 					$filter = 'bp_get_options_nav_' . $child->css_id;
 					$forsaken_hooks[ $filter ] = array_merge( $common, array(
 						'message' => sprintf( $message, $filter ),
@@ -447,7 +448,7 @@ function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position
 			preg_match_all( '/<a\s[^>]*>(.*)<\/a>/siU', $output, $as );
 
 			if ( ! empty( $as[0] ) ) {
-				foreach( $as[0] as $ka => $a ) {
+				foreach ( $as[0] as $ka => $a ) {
 					$extra_nav_items[ $lis[1][ $ka ] ]['slug'] = $lis[1][ $ka ];
 					$extra_nav_items[ $lis[1][ $ka ] ]['text'] = $as[1][ $ka ];
 					preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $a, $attrs );
@@ -465,7 +466,7 @@ function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position
 			}
 
 			if ( ! empty( $as[1] ) ) {
-				foreach( $as[1] as $ks => $s ) {
+				foreach ( $as[1] as $ks => $s ) {
 					preg_match_all( '/<span>(.*)<\/span>/siU', $s, $spans );
 
 					if ( empty( $spans[0] ) ) {

@@ -175,7 +175,7 @@ class BP_Latest_Activities extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'type' ); ?>"><?php esc_html_e( 'Type:', 'bp-nouveau' ); ?></label>
 			<select class="widefat" multiple="multiple" id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>[]">
-				<?php foreach( bp_nouveau_get_activity_filters() as $key => $name ) : ?>
+				<?php foreach ( bp_nouveau_get_activity_filters() as $key => $name ) : ?>
 					<option value="<?php echo esc_attr( $key ); ?>" <?php selected( in_array( $key, $type ) ); ?>><?php echo esc_html( $name ); ?></option>
 				<?php endforeach ; ?>
 			</select>
