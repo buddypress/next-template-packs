@@ -84,7 +84,6 @@ class BP_Nouveau_Activity {
 			 * @todo implement this action in buddypress-activity.js as it's missing
 			 * right now
 			 */
-			array( 'delete_activity_comment'         => array( 'function' => 'bp_nouveau_ajax_delete_activity_comment',     'nopriv' => false ) ),
 			array( 'bp_spam_activity'                => array( 'function' => 'bp_nouveau_ajax_spam_activity',               'nopriv' => false ) ),
 			array( 'bp_spam_activity_comment'        => array( 'function' => 'bp_nouveau_ajax_spam_activity',               'nopriv' => false ) ),
 		);

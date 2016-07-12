@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  *
- * @return string HTML
+ * @return string JSON reply
  */
 function bp_nouveau_ajax_mark_activity_favorite() {
 	// Bail if not a POST action.
@@ -56,7 +56,7 @@ function bp_nouveau_ajax_mark_activity_favorite() {
  *
  * @since 1.0.0
  *
- * @return string HTML
+ * @return string JSON reply
  */
 function bp_nouveau_ajax_unmark_activity_favorite() {
 	// Bail if not a POST action.
@@ -88,6 +88,13 @@ function bp_nouveau_ajax_unmark_activity_favorite() {
 	}
 }
 
+/**
+ * Clear mentions if the directory tab is clicked
+ *
+ * @since  1.0.0
+ *
+ * @return string JSON reply
+ */
 function bp_nouveau_ajax_clear_new_mentions() {
 	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
@@ -104,11 +111,11 @@ function bp_nouveau_ajax_clear_new_mentions() {
 }
 
 /**
- * Deletes an Activity item received via a POST request.
+ * Deletes an Activity item/Activity comment item received via a POST request.
  *
  * @since 1.0.0
  *
- * @return mixed String on error, void on success.
+ * @return string JSON reply.
  */
 function bp_nouveau_ajax_delete_activity() {
 	$response = array(
@@ -146,8 +153,17 @@ function bp_nouveau_ajax_delete_activity() {
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_before_action_delete_activity', $activity->id, $activity->user_id );
 
-	if ( ! bp_activity_delete( array( 'id' => $activity->id, 'user_id' => $activity->user_id ) ) ) {
-		wp_send_json_error( $response );
+	// Deleting an activity comment.
+	if ( ! empty( $_POST['is_comment'] ) ) {
+		if ( ! bp_activity_delete_comment( $activity->item_id, $activity->id ) ) {
+			wp_send_json_error( $response );
+		}
+
+	// Deleting an activity.
+	} else {
+		if ( ! bp_activity_delete( array( 'id' => $activity->id, 'user_id' => $activity->user_id ) ) ) {
+			wp_send_json_error( $response );
+		}
 	}
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
@@ -166,58 +182,17 @@ function bp_nouveau_ajax_delete_activity() {
 }
 
 /**
- * Deletes an Activity comment received via a POST request.
- *
- * @todo implement the delete_activity_comment ajax action
- * in buddypress-activity.js
- *
- * @since 1.0.0
- *
- * @return mixed String on error, void on success.
- */
-function bp_nouveau_ajax_delete_activity_comment() {
-	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
-
-	// Check the nonce.
-	check_admin_referer( 'bp_activity_delete_link' );
-
-	if ( ! is_user_logged_in() )
-		exit( '-1' );
-
-	$comment = new BP_Activity_Activity( $_POST['id'] );
-
-	// Check access.
-	if ( ! bp_current_user_can( 'bp_moderate' ) && $comment->user_id != bp_loggedin_user_id() )
-		exit( '-1' );
-
-	if ( empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) )
-		exit( '-1' );
-
-	/** This action is documented in bp-activity/bp-activity-actions.php */
-	do_action( 'bp_activity_before_action_delete_activity', $_POST['id'], $comment->user_id );
-
-	if ( ! bp_activity_delete_comment( $comment->item_id, $comment->id ) )
-		exit( '-1<div id="message" class="error bp-ajax-message"><p>' . __( 'There was a problem when deleting. Please try again.', 'bp-nouveau' ) . '</p></div>' );
-
-	/** This action is documented in bp-activity/bp-activity-actions.php */
-	do_action( 'bp_activity_action_delete_activity', $_POST['id'], $comment->user_id );
-	exit;
-}
-
-/**
  * Fetches an activity's full, non-excerpted content via a POST request.
  * Used for the 'Read More' link on long activity items.
  *
  * @since 1.0.0
  *
- * @return string HTML
+ * @return string JSON reply
  */
 function bp_nouveau_ajax_get_single_activity_content() {
 	$response = array(
 		'feedback' => sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback bp-messages error">%s</div>',
 			esc_html__( 'There was a problem displaying the content. Please try again.', 'bp-nouveau' )
 		)
 	);
@@ -268,7 +243,7 @@ function bp_nouveau_ajax_get_single_activity_content() {
  *
  * @global BP_Activity_Template $activities_template
  *
- * @return string HTML
+ * @return string JSON reply
  */
 function bp_nouveau_ajax_new_activity_comment() {
 	global $activities_template;
@@ -276,7 +251,7 @@ function bp_nouveau_ajax_new_activity_comment() {
 
 	$response = array(
 		'feedback' => sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback bp-messages error">%s</div>',
 			esc_html__( 'There was an error posting your reply. Please try again.', 'bp-nouveau' )
 		)
 	);
@@ -297,7 +272,7 @@ function bp_nouveau_ajax_new_activity_comment() {
 
 	if ( empty( $_POST['content'] ) ) {
 		wp_send_json_error( array( 'feedback' => sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback bp-messages error">%s</div>',
 			esc_html__( 'Please do not leave the comment area blank.', 'bp-nouveau' )
 		) ) );
 	}
@@ -315,7 +290,7 @@ function bp_nouveau_ajax_new_activity_comment() {
 	if ( ! $comment_id ) {
 		if ( ! empty( $bp->activity->errors['new_comment'] ) && is_wp_error( $bp->activity->errors['new_comment'] ) ) {
 			$response = array( 'feedback' => sprintf(
-				'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+				'<div class="bp-feedback bp-messages error">%s</div>',
 				esc_html( $bp->activity->errors['new_comment']->get_error_message() )
 			) );
 			unset( $bp->activity->errors['new_comment'] );

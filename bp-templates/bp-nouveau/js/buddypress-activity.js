@@ -487,7 +487,11 @@ window.bp = window.bp || {};
 			}
 
 			// Deleting
-			if ( target.hasClass( 'delete-activity' ) ) {
+			if ( target.hasClass( 'delete-activity' ) || target.hasClass( 'acomment-delete' ) ) {
+				var activity_comment_li = target.closest( '[data-bp-activity-comment-id]' ),
+				    activity_comment_id = activity_comment_li.data( 'bp-activity-comment-id' ),
+				    li_parent, comment_count_span, comment_count, show_all_a, deleted_comments_count = 0;
+
 				// Stop event propagation
 				event.preventDefault();
 
@@ -497,27 +501,75 @@ window.bp = window.bp || {};
 
 				target.addClass( 'loading' );
 
-				parent.ajax( {
-					action    : 'delete_activity',
-					id        : activity_id,
-					_wpnonce  : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' ),
-					is_single : target.closest( '[data-bp-single]' ).length
-				}, 'activity' ).done( function( response ) {
+				var ajaxData = {
+					action      : 'delete_activity',
+					'id'        : activity_id,
+					'_wpnonce'  : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' ),
+					'is_single' : target.closest( '[data-bp-single]' ).length
+				};
+
+				// Set defaults parent li to activity container
+				li_parent = activity_item;
+
+				// If it's a comment edit ajaxData.
+				if ( activity_comment_id ) {
+					delete ajaxData.is_single;
+
+					// Set comment data.
+					ajaxData.id         = activity_comment_id;
+					ajaxData.is_comment = true;
+
+					// Set parent li to activity comment container
+					li_parent = activity_comment_li;
+				}
+
+				parent.ajax( ajaxData, 'activity' ).done( function( response ) {
 					target.removeClass( 'loading' );
 
 					if ( false === response.success ) {
-						activity_item.prepend( response.data.feedback );
-						activity_item.find( '.feedback' ).hide().fadeIn( 300 );
+						li_parent.prepend( response.data.feedback );
+						li_parent.find( '.bp-feedback' ).hide().fadeIn( 300 );
 					} else {
 						// Specific case of the single activity screen.
 						if ( response.data.redirect ) {
 							return window.location.href = response.data.redirect;
 						}
 
-						activity_item.slideUp( 300 );
+						if ( activity_comment_id ) {
+							deleted_comments_count = 1;
 
-						// reset vars to get newest activities
-						if ( activity_item.find( 'time' ).first().data( 'bp-timestamp' ) === parent.Activity.heartbeat_data.last_recorded ) {
+							// Move the form if needed
+							activity_item.append( activity_comment_li.find( 'form' ) );
+
+							// Count child comments if there are some
+							$.each( activity_comment_li.find( 'li' ), function( i ) {
+								deleted_comments_count += 1;
+							} );
+
+							// Update the button count
+							comment_count_span = activity_item.find( '.acomment-reply span.comment-count' );
+							comment_count      = Number( comment_count_span.html() - deleted_comments_count );
+							comment_count_span.html( comment_count );
+
+							// Update the show all count
+							show_all_a = activity_item.find( 'li.show-all a' );
+							if ( show_all_a.length ) {
+								show_all_a.html( BP_Nouveau.show_x_comments.replace( '%d', comment_count ) );
+							}
+
+							// Clean up the parent activity classes.
+							if ( 0 === comment_count ) {
+								activity_item.removeClass( 'has-comments' );
+							}
+						}
+
+						// Remove the entry
+						li_parent.slideUp( 300, function() {
+							li_parent.remove();
+						} );
+
+						// reset vars to get newest activities when an activity is deleted
+						if ( ! activity_comment_id && activity_item.find( 'time' ).first().data( 'bp-timestamp' ) === parent.Activity.heartbeat_data.last_recorded ) {
 							parent.Activity.heartbeat_data.newest        = '';
 							parent.Activity.heartbeat_data.last_recorded  = 0;
 						}
@@ -550,13 +602,13 @@ window.bp = window.bp || {};
 				}, 'activity' ).done( function( response ) {
 					$( readMore ).removeClass( 'loading' );
 
-					if ( content.parent().find( '.feedback' ).length ) {
-						content.parent().find( '.feedback' ).remove();
+					if ( content.parent().find( '.bp-feedback' ).length ) {
+						content.parent().find( '.bp-feedback' ).remove();
 					}
 
 					if ( false === response.success ) {
 						content.after( response.data.feedback );
-						content.parent().find( '.feedback' ).hide().fadeIn( 300 );
+						content.parent().find( '.bp-feedback' ).hide().fadeIn( 300 );
 					} else {
 						$( content ).slideUp( 300 ).html( response.data.contents ).slideDown( 300 );
 					}
