@@ -12,21 +12,7 @@
 
 	<?php bp_nouveau_group_hook( 'before', 'members_content' ); ?>
 
-	<div id="pag-top" class="pagination">
-
-		<div class="pag-count" id="member-count-top">
-
-			<?php bp_members_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="member-pag-top">
-
-			<?php bp_members_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php bp_nouveau_pagination( 'top' ) ; ?>
 
 	<?php bp_nouveau_group_hook( 'before', 'members_list' ); ?>
 
@@ -55,21 +41,7 @@
 
 	<?php bp_nouveau_group_hook( 'after', 'members_list' ); ?>
 
-	<div id="pag-bottom" class="pagination">
-
-		<div class="pag-count" id="member-count-bottom">
-
-			<?php bp_members_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="member-pag-bottom">
-
-			<?php bp_members_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php bp_nouveau_pagination( 'bottom' ) ; ?>
 
 	<?php bp_nouveau_group_hook( 'after', 'members_content' ); ?>
 

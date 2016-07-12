@@ -347,16 +347,25 @@ function bp_nouveau_after_loop() {
 function bp_nouveau_pagination( $position = null ) {
 	$component = bp_current_component();
 
-	$screen = 'dir';
-	if ( bp_is_user() ) {
-		$screen = 'user';
-	}
-
 	if ( ! bp_is_active( $component ) ) {
 		return;
 	}
 
-	switch( $component ) {
+	$screen          = 'dir';
+	$pagination_type = $component;
+
+	if ( bp_is_user() ) {
+		$screen = 'user';
+	} elseif ( bp_is_group() ) {
+		$screen          = 'group';
+		$pagination_type = bp_current_action();
+
+		if ( bp_is_group_admin_page() ) {
+			$pagination_type = bp_action_variable( 0 );
+		}
+	}
+
+	switch( $pagination_type ) {
 
 		case 'blogs' :
 
@@ -368,13 +377,19 @@ function bp_nouveau_pagination( $position = null ) {
 
 		break;
 
-		case 'members' :
-		case 'friends' :
+		case 'members'        :
+		case 'friends'        :
+		case 'manage-members' :
 
 			$pag_count   = bp_get_members_pagination_count();
 			$pag_links   = bp_get_members_pagination_links();
-			$top_hook    = 'bp_before_directory_members_list';
-			$bottom_hook = 'bp_after_directory_members_list';
+
+			// Groups single items are not using these hooks
+			if ( ! bp_is_group() ) {
+				$top_hook    = 'bp_before_directory_members_list';
+				$bottom_hook = 'bp_after_directory_members_list';
+			}
+
 			$page_arg    = $GLOBALS['members_template']->pag_arg;
 
 		break;
@@ -398,10 +413,20 @@ function bp_nouveau_pagination( $position = null ) {
 			$page_arg    = buddypress()->notifications->query_loop->pag_arg;
 
 		break;
+
+		case 'membership-requests' :
+
+			$pag_count   = bp_get_group_requests_pagination_count();
+			$pag_links   = bp_get_group_requests_pagination_links();
+			$top_hook    = '';
+			$bottom_hook = '';
+			$page_arg    = $GLOBALS['requests_template']->pag_arg;
+
+		break;
 	}
 
-	$count_class = sprintf( '%1$s-%2$s-count-%3$s', $component, $screen, $position );
-	$links_class = sprintf( '%1$s-%2$s-links-%3$s', $component, $screen, $position );
+	$count_class = sprintf( '%1$s-%2$s-count-%3$s', $pagination_type, $screen, $position );
+	$links_class = sprintf( '%1$s-%2$s-links-%3$s', $pagination_type, $screen, $position );
 	?>
 
 	<?php if ( 'bottom' === $position && isset( $bottom_hook ) ) {

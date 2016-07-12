@@ -11,21 +11,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 
 <?php if ( bp_has_members( 'type=alphabetical&include=' . bp_get_friendship_requests() ) ) : ?>
 
-	<div id="pag-top" class="pagination no-ajax">
-
-		<div class="pag-count" id="member-dir-count-top">
-
-			<?php bp_members_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="member-dir-pag-top">
-
-			<?php bp_members_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php bp_nouveau_pagination( 'top' ); ?>
 
 	<ul id="friend-list" class="item-list" data-bp-list="friendship_requests">
 		<?php while ( bp_members() ) : bp_the_member(); ?>
@@ -50,21 +36,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 
 	<?php bp_nouveau_friend_hook( 'requests_content' ); ?>
 
-	<div id="pag-bottom" class="pagination no-ajax">
-
-		<div class="pag-count" id="member-dir-count-bottom">
-
-			<?php bp_members_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="member-dir-pag-bottom">
-
-			<?php bp_members_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php bp_nouveau_pagination( 'bottom' ); ?>
 
 <?php else:
 

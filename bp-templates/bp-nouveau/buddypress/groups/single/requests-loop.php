@@ -11,28 +11,7 @@
 
 <?php if ( bp_group_has_membership_requests( bp_ajax_querystring( 'membership_requests' ) ) ) : ?>
 
-	<?php
-	/**
-	 *
-	 * @todo  create a template tag for $GLOBALS['requests_template']->pag_arg
-	 *
-	 */
-	?>
-	<div id="pag-top" class="pagination" data-bp-pagination="<?php echo esc_attr( $GLOBALS['requests_template']->pag_arg );?>">
-
-		<div class="pag-count" id="group-mem-requests-count-top">
-
-			<?php bp_group_requests_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="group-mem-requests-pag-top">
-
-			<?php bp_group_requests_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php bp_nouveau_pagination( 'top' ) ; ?>
 
 	<ul id="request-list" class="item-list">
 		<?php while ( bp_group_membership_requests() ) : bp_group_the_membership_request(); ?>
@@ -49,28 +28,8 @@
 
 		<?php endwhile; ?>
 	</ul>
-	<?php
-	/**
-	 *
-	 * @todo  create a template tag for $GLOBALS['requests_template']->pag_arg
-	 *
-	 */
-	?>
-	<div id="pag-bottom" class="pagination" data-bp-pagination="<?php echo esc_attr( $GLOBALS['requests_template']->pag_arg );?>">
 
-		<div class="pag-count" id="group-mem-requests-count-bottom">
-
-			<?php bp_group_requests_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="group-mem-requests-pag-bottom">
-
-			<?php bp_group_requests_pagination_links(); ?>
-
-		</div>
-
-	</div>
+	<?php bp_nouveau_pagination( 'bottom' ) ; ?>
 
 	<?php else:
 
