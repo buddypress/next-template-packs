@@ -69,8 +69,17 @@ function bp_nouveau_ajax_querystring( $query_string, $object ) {
 
 	// Activity stream filtering on action.
 	if ( ! empty( $post_query['filter'] ) && '-1' !== $post_query['filter'] ) {
-		$qs[] = 'type='   . $post_query['filter'];
-		$qs[] = 'action=' . $post_query['filter'];
+		if ( 'notifications' === $object ) {
+			$qs[] = 'component_action=' . $post_query['filter'];
+		} else {
+			$qs[] = 'type='   . $post_query['filter'];
+			$qs[] = 'action=' . $post_query['filter'];
+		}
+	}
+
+	// Sort the notifications if needed
+	if ( ! empty( $post_query['extras'] ) && 'notifications' === $object ) {
+		$qs[] = 'sort_order=' . $post_query['extras'];
 	}
 
 	if ( 'personal' === $post_query['scope'] ) {

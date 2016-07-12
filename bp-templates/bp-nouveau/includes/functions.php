@@ -1185,6 +1185,10 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'type'    => 'loading',
 			'message' => __( 'Loading the groups the user is a member of, please wait.', 'bp-nouveau' ),
 		),
+		'member-notifications-loading' => array(
+			'type'    => 'loading',
+			'message' => __( 'Loading notifications, please wait.', 'bp-nouveau' ),
+		),
 	) );
 
 	if ( isset( $feedback_messages[ $feedback_id ] ) ) {

@@ -477,3 +477,32 @@ function bp_nouveau_activity_widget_query() {
 	 */
 	return apply_filters( 'bp_nouveau_activity_widget_query', $args );
 }
+
+/**
+ * Register notifications filters for the activity component.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_activity_notification_filters() {
+	$notifications = array(
+		array(
+			'id'       => 'new_at_mention',
+			'label'    => __( 'New mentions', 'bp-nouveau' ),
+			'position' => 5,
+		),
+		array(
+			'id'       => 'update_reply',
+			'label'    => __( 'New update replies', 'bp-nouveau' ),
+			'position' => 15,
+		),
+		array(
+			'id'       => 'comment_reply',
+			'label'    => __( 'New update comment replies', 'bp-nouveau' ),
+			'position' => 25,
+		),
+	);
+
+	foreach ( $notifications as $notification ) {
+		bp_nouveau_notifications_register_filter( $notification );
+	}
+}

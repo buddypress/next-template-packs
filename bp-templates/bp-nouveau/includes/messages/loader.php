@@ -73,6 +73,9 @@ class BP_Nouveau_Messages {
 		// Enqueue the scripts for the new UI
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_messages_enqueue_scripts' );
 
+		// Register the Messages Notifications filters
+		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_messages_notification_filters' );
+
 		$ajax_actions = array(
 			array( 'messages_send_message'             => array( 'function' => 'bp_nouveau_ajax_messages_send_message',      'nopriv' => false ) ),
 			array( 'messages_send_reply'               => array( 'function' => 'bp_nouveau_ajax_messages_send_reply',        'nopriv' => false ) ),

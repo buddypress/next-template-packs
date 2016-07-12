@@ -60,6 +60,9 @@ class BP_Nouveau_Friends {
 		// Remove BuddyPress action for the members loop
 		remove_action( 'bp_directory_members_actions', 'bp_member_add_friend_button' );
 
+		// Register the friends Notifications filters
+		add_action( 'bp_nouveau_notifications_init_filters', array( $this, 'notification_filters' ) );
+
 		$ajax_actions = array(
 			array( 'friends_remove_friend'       => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
 			array( 'friends_add_friend'          => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
@@ -96,6 +99,30 @@ class BP_Nouveau_Friends {
 
 		foreach ( $buttons as $button ) {
 			add_filter( 'bp_button_' . $button, 'bp_nouveau_ajax_button', 10, 4 );
+		}
+	}
+
+	/**
+	 * Register notifications filters for the friends component.
+	 *
+	 * @since 1.0.0
+	 */
+	public function notification_filters() {
+		$notifications = array(
+			array(
+				'id'       => 'friendship_accepted',
+				'label'    => __( 'Accepted friendship requests', 'bp-nouveau' ),
+				'position' => 35,
+			),
+			array(
+				'id'       => 'friendship_request',
+				'label'    => __( 'Pending friendship requests', 'bp-nouveau' ),
+				'position' => 45,
+			),
+		);
+
+		foreach ( $notifications as $notification ) {
+			bp_nouveau_notifications_register_filter( $notification );
 		}
 	}
 }

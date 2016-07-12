@@ -845,3 +845,47 @@ function bp_nouveau_group_get_core_manage_screens( $id = '' ) {
 
 	return false;
 }
+
+/**
+ * Register notifications filters for the groups component.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_groups_notification_filters() {
+	$notifications = array(
+		array(
+			'id'       => 'new_membership_request',
+			'label'    => __( 'Pending Group membership requests', 'bp-nouveau' ),
+			'position' => 55,
+		),
+		array(
+			'id'       => 'membership_request_accepted',
+			'label'    => __( 'Accepted Group membership requests', 'bp-nouveau' ),
+			'position' => 65,
+		),
+		array(
+			'id'       => 'membership_request_rejected',
+			'label'    => __( 'Rejected Group membership requests', 'bp-nouveau' ),
+			'position' => 75,
+		),
+		array(
+			'id'       => 'member_promoted_to_admin',
+			'label'    => __( 'Group Admin promotions', 'bp-nouveau' ),
+			'position' => 85,
+		),
+		array(
+			'id'       => 'member_promoted_to_mod',
+			'label'    => __( 'Group Mod promotions', 'bp-nouveau' ),
+			'position' => 95,
+		),
+		array(
+			'id'       => 'group_invite',
+			'label'    => __( 'Group invites', 'bp-nouveau' ),
+			'position' => 105,
+		),
+	);
+
+	foreach ( $notifications as $notification ) {
+		bp_nouveau_notifications_register_filter( $notification );
+	}
+}

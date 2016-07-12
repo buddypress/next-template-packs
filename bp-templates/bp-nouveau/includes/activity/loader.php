@@ -69,6 +69,9 @@ class BP_Nouveau_Activity {
 		// Register the Activity Widget.
 		add_action( 'bp_widgets_init', array( 'BP_Latest_Activities', 'register_widget' ) );
 
+		// Register the Activity Notifications filters
+		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_activity_notification_filters' );
+
 		$ajax_actions = array(
 			array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
 			array( 'get_single_activity_content'     => array( 'function' => 'bp_nouveau_ajax_get_single_activity_content', 'nopriv' => true ) ),

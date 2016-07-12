@@ -71,6 +71,9 @@ class BP_Nouveau_Groups {
 		// Avoid Notices for BuddyPress Legacy Backcompat
 		remove_action( 'bp_groups_directory_group_filter', 'bp_group_backcompat_create_nav_item', 1000 );
 
+		// Register the Groups Notifications filters
+		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_groups_notification_filters' );
+
 		$ajax_actions = array(
 			array( 'groups_filter'                      => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true  ) ),
 			array( 'groups_join_group'                  => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),

@@ -334,3 +334,16 @@ function bp_nouveau_messages_get_bulk_actions() {
 
 	return $bulk_actions;
 }
+
+/**
+ * Register notifications filters for the messages component.
+ *
+ * @since 1.0.0
+ */
+function bp_nouveau_messages_notification_filters() {
+	bp_nouveau_notifications_register_filter( array(
+		'id'       => 'new_message',
+		'label'    => __( 'New private messages', 'bp-nouveau' ),
+		'position' => 115,
+	) );
+}

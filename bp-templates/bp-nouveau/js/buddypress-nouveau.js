@@ -374,7 +374,7 @@ window.bp = window.bp || {};
 		 * @return {[type]} [description]
 		 */
 		initObjects: function() {
-			var self = this, objectData = {}, queryData = {}, scope = 'all', search_terms = '';
+			var self = this, objectData = {}, queryData = {}, scope = 'all', search_terms = '', extras = null, filter = null;
 
 			$.each( this.objects, function( o, object ) {
 				objectData = self.getStorage( 'bp-' + object );
@@ -383,8 +383,18 @@ window.bp = window.bp || {};
 					scope = objectData.scope;
 				}
 
-				if ( undefined !== objectData.filter && $( '#buddypress [data-bp-filter="' + object + '"]' ).length ) {
-					$( '#buddypress [data-bp-filter="' + object + '"] option[value="' + objectData.filter + '"]' ).prop( 'selected', true );
+				// Notifications always need to start with Newest ones
+				if ( undefined !== objectData.extras && 'notifications' !== object ) {
+					extras = objectData.extras;
+				}
+
+				if (  $( '#buddypress [data-bp-filter="' + object + '"]' ).length ) {
+					if ( '-1' !== $( '#buddypress [data-bp-filter="' + object + '"]' ).val() && '0' !== $( '#buddypress [data-bp-filter="' + object + '"]' ).val() ) {
+						filter = $( '#buddypress [data-bp-filter="' + object + '"]' ).val();
+					} else if ( undefined !== objectData.filter ) {
+						filter = objectData.filter,
+						$( '#buddypress [data-bp-filter="' + object + '"] option[value="' + filter + '"]' ).prop( 'selected', true );
+					}
 				}
 
 				if ( $( this.objectNavParent + ' [data-bp-object="' + object + '"]' ).length ) {
@@ -412,14 +422,17 @@ window.bp = window.bp || {};
 					queryData =  {
 						object       : object,
 						scope        : scope,
-						filter       : objectData.filter,
-						search_terms : search_terms
+						filter       : filter,
+						search_terms : search_terms,
+						extras       : extras
 					};
 
 					if ( 'group_members' === object ) {
 						$.extend( queryData, { template: 'groups/single/members-loop' } );
 					} else if ( 'group_requests' === object ) {
 						$.extend( queryData, { template: 'groups/single/requests-loop' } );
+					} else if ( 'notifications' === object ) {
+						$.extend( queryData, { template: 'members/single/notifications/notifications-loop' } );
 					}
 
 					// Populate the object list
@@ -579,6 +592,11 @@ window.bp = window.bp || {};
 				template = 'groups/single/members-loop';
 			}
 
+			// On the Members notifications page, we specify a template
+			if ( 'notifications' === object ) {
+				template = 'members/single/notifications/notifications-loop';
+			}
+
 			if ( 'friends' === object ) {
 				object = 'members';
 			}
@@ -618,6 +636,10 @@ window.bp = window.bp || {};
 
 			if ( 'group_members' === object ) {
 				template = 'groups/single/members-loop';
+			}
+
+			if ( 'notifications' === object ) {
+				template = 'members/single/notifications/notifications-loop';
 			}
 
 			self.objectRequest( {
@@ -780,7 +802,7 @@ window.bp = window.bp || {};
 
 		paginateAction: function( event ) {
 			var self  = event.data, navLink = $( event.currentTarget ), pagArg,
-			    scope = null, object, filter = null, search_terms = null;
+			    scope = null, object, filter = null, search_terms = null, extras = null;
 
 			pagArg = navLink.closest( '[data-bp-pagination]' ).data( 'bp-pagination' ) || null;
 
@@ -803,6 +825,10 @@ window.bp = window.bp || {};
 				if ( undefined !== objectData.filter ) {
 					filter = objectData.filter;
 				}
+
+				if ( undefined !== objectData.extras ) {
+					extras = objectData.extras;
+				}
 			}
 
 			// Set the search terms
@@ -815,6 +841,7 @@ window.bp = window.bp || {};
 				scope        : scope,
 				filter       : filter,
 				search_terms : search_terms,
+				extras       : extras,
 				page         : self.getLinkParams( navLink.prop( 'href' ), pagArg ) || 1
 			};
 
@@ -822,6 +849,8 @@ window.bp = window.bp || {};
 				$.extend( queryData, { template: 'groups/single/members-loop' } );
 			} else if ( 'group_requests' === object ) {
 				$.extend( queryData, { template: 'groups/single/requests-loop' } );
+			} else if ( 'notifications' === object ) {
+				$.extend( queryData, { template: 'members/single/notifications/notifications-loop' } );
 			}
 
 			// Request the page
