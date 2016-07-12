@@ -81,13 +81,13 @@ class BP_Nouveau_Blogs_Functions extends Next_Template_Packs_TestCase {
 		$expected = array( 'all', 'foo', 'bar', 'create' );
 
 		// Init and sort the directory nav
-		bp_nouveau_directory_has_nav();
+		bp_nouveau_has_nav( array( 'object' => 'directory' ) );
 
 		remove_filter( 'wpmu_active_signup', array( $this, '__return_all' ) );
 		remove_action( 'bp_blogs_directory_blog_types', array( $this, 'do_dir_nav' ), 9 );
 		remove_action( 'bp_blogs_directory_blog_types', array( $this, 'do_dir_nav' ), 10 );
 
-		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_dir_nav, 'slug' ) );
+		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_nav, 'slug' ) );
 	}
 
 	/**
@@ -107,10 +107,10 @@ class BP_Nouveau_Blogs_Functions extends Next_Template_Packs_TestCase {
 		$expected = array( 'taz', 'all' );
 
 		// Init and sort the directory nav
-		bp_nouveau_directory_has_nav();
+		bp_nouveau_has_nav( array( 'object' => 'directory' ) );
 
 		remove_filter( 'bp_nouveau_get_blogs_directory_nav_items', array( $this, 'filter_dir_nav' ), 10, 1 );
 
-		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_dir_nav, 'slug' ) );
+		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_nav, 'slug' ) );
 	}
 }

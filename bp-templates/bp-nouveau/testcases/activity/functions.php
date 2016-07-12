@@ -63,12 +63,12 @@ class BP_Nouveau_Activity_Functions extends Next_Template_Packs_TestCase {
 		$expected = array( 'foo', 'bar', 'all', 'mentions' );
 
 		// Init and sort the directory nav
-		bp_nouveau_directory_has_nav();
+		bp_nouveau_has_nav( array( 'object' => 'directory' ) );
 
 		remove_action( 'bp_before_activity_type_tab_all', array( $this, 'do_dir_nav' ), 9 );
 		remove_action( 'bp_before_activity_type_tab_all', array( $this, 'do_dir_nav' ), 10 );
 
-		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_dir_nav, 'slug' ) );
+		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_nav, 'slug' ) );
 	}
 
 	/**
@@ -86,10 +86,10 @@ class BP_Nouveau_Activity_Functions extends Next_Template_Packs_TestCase {
 		$expected = array( 'all', 'taz', 'mentions' );
 
 		// Init and sort the directory nav
-		bp_nouveau_directory_has_nav();
+		bp_nouveau_has_nav( array( 'object' => 'directory' ) );
 
 		remove_filter( 'bp_nouveau_get_activity_directory_nav_items', array( $this, 'filter_dir_nav' ), 10, 1 );
 
-		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_dir_nav, 'slug' ) );
+		$this->assertSame( $expected, wp_list_pluck( bp_nouveau()->sorted_nav, 'slug' ) );
 	}
 }
