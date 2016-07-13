@@ -371,7 +371,7 @@ function bp_nouveau_groups_invites_restriction_admin_nav( $wp_admin_nav ) {
 	$wp_admin_nav[] = array(
 		'parent' => 'my-account-' . buddypress()->settings->id,
 		'id'     => 'my-account-' . buddypress()->settings->id . '-invites',
-		'title'  => _x( 'Group Invites', 'My Account Settings sub nav', 'buddypress' ),
+		'title'  => _x( 'Group Invites', 'My Account Settings sub nav', 'bp-nouveau' ),
 		'href'   => trailingslashit( $settings_link . 'invites/' ),
 	);
 
