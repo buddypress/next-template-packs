@@ -44,6 +44,7 @@
 
 }
 
+/* Build the two column class small up */
 @include small-up() {
 	// Set the column  or item numbers to span horizontally
 	.grid {
@@ -80,6 +81,7 @@
 	}
 }
 
+/* Build the three column class medium up */
 @include medium-up() {
 	// Set three to a row
 	.grid {
@@ -110,15 +112,47 @@
 	} // .grid
 } // close @media
 
+/* Build the four column class medium up */
+@include medium-up() {
+	// Set four to a row
+	.grid {
+		&.four {
+
+			>li {
+				padding-bottom: 15px;
+				padding-top: 0;
+				width: 25%;
+
+				&:nth-child(1n+1) {
+					padding-left: 5px;
+					padding-right: 5px;
+				}
+
+				&:nth-child(4n+4) {
+					padding-left: 10px;
+					padding-right: 0;
+				}
+
+				&:nth-child(4n+1) {
+					padding-left: 0;
+					padding-right: 10px;
+				}
+
+			} // close >li
+		}
+	} // .grid
+} // close @media
 
 // This block styles the loop items for a grid layout
 // The block might be better located in the generic bp-lists section
 
+/* Style the .bp-list occurences if a 'grid' class added to the ul*/
 @include small-up() {
 	// if grid is set & this is a member, group or blog loop
 	// we want to re-style some of the elements in the item
 	// we'll exclude activity from this though
 	.grid.bp-list {
+		padding-top: $pad-med;
 
 		>li {
 			border-bottom: none;
@@ -179,66 +213,3 @@
 		}
 	}
 }
-
-
-
-/*
-
-			.item-avatar {
-				text-align: center;
-
-				.avatar {
-					display: inline-block;
-					width: 50%;
-				}
-			}
-
-			.item {
-				font-size: 1.6rem;
-				left: 0;
-				margin: 0 auto;
-				text-align: center;
-				width: 96%;
-
-				.item-title {
-					display: inline-block;
-
-					a {
-						display: block;
-						text-align: center;
-					}
-
-					.update {
-						font-size: 12px;
-						text-align: left;
-					}
-				}
-
-				.activity-read-more a {
-					display: inline;
-				}
-			}
-
-			div.action {
-				float: none;
-				margin: 0 5px;
-				position: relative;
-				text-align: center;
-
-				.generic-button {
-					display: block;
-					float: none;
-					margin: 0.2em 0;
-				}
-			}
-
-			.item-avatar,
-			.avatar,
-			.item {
-				float: none;
-			}
-
-		} // close li generic
-
-*/
-
