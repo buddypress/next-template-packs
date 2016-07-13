@@ -20,7 +20,7 @@
 		.wrap {
 			background: $light-grey;
 			padding-bottom: 15px;
-			min-height: 400px;
+			position: relative;
 			overflow: hidden;
 			padding-top: 14px;
 
@@ -40,7 +40,7 @@
 			}
 		}
 
-	}
+	} // close >li
 
 }
 
@@ -157,6 +157,11 @@
 		>li {
 			border-bottom: none;
 
+			.wrap {
+				// make room for the action buttons to sit.
+				padding-bottom: 3rem;
+			}
+
 			.item-avatar {
 				text-align: center;
 				width: auto;
@@ -192,15 +197,28 @@
 			}
 
 			div.action {
+				bottom: 5px;
 				float: none;
-				margin: 0 5px;
-				position: relative;
+				height: auto;
+				left: 0;
+				margin: 0;
+				padding: 0 5px;
+				position: absolute;
 				text-align: center;
+				top: auto;
+				width: 100%;
 
 				.generic-button {
 					display: block;
 					float: none;
-					margin: 0.2em 0;
+					margin: 0;
+					text-align: center;
+					width: 100%;
+
+					a {
+						display: inline-block;
+						width: 100%;
+					}
 				}
 			}
 
@@ -210,6 +228,31 @@
 				float: none;
 			}
 
+		} // close >li
+	} // close .grid.bp-list
+
+	// .wrap min-heights & other adjustments per component type loop
+	.grid {
+		&.members-list {
+			.wrap {
+				min-height: 350px;
+			}
+		}
+
+		&.groups-list {
+			.wrap {
+				min-height: 350px;
+
+				.item-desc {
+					margin-top: 0;
+					min-height: 155px;
+
+					p {
+						margin-bottom: 0;
+					}
+				}
+			}
 		}
 	}
-}
+
+} // close @media
