@@ -686,8 +686,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		$locale        = apply_filters( 'plugin_locale', get_locale(), $this->domain );
 		$mofile        = sprintf( '%1$s-%2$s.mo', $this->domain, $locale );
 
-		//var_dump( $mofile );
-
 		// Setup paths to current locale file
 		$mofile_local  = trailingslashit( $this->lang_dir ) . $mofile;
 		$mofile_global = WP_LANG_DIR . '/buddypress/' . $mofile;
