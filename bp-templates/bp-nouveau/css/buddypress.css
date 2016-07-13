@@ -374,7 +374,6 @@ body .buddypress * a {
 .buddypress .bp-list li .item .list-title {
 	clear: none;
 	font-size: 22px;
-	font-size: 2.2rem;
 	font-weight: normal;
 	margin: 0;
 }
@@ -389,7 +388,7 @@ body .buddypress * a {
 .buddypress .bp-list li .meta,
 .buddypress .bp-list li .item-meta {
 	color: #888;
-	font-size: 80%;
+	font-size: 12px;
 	margin-top: 10px;
 }
 
@@ -402,7 +401,6 @@ body .buddypress * a {
 	.buddypress .bp-list li .item-avatar {
 		float: left;
 		text-align: left;
-		width: 15%;
 	}
 	.buddypress .bp-list li .list-title,
 	.buddypress .bp-list li .item-meta {
@@ -523,7 +521,7 @@ body .buddypress * a {
 }
 
 .activity-list .activity-item.mini {
-	font-size: 80%;
+	font-size: 13px;
 	position: relative;
 }
 
@@ -558,7 +556,7 @@ body .buddypress * a {
 
 .activity-list .activity-item .activity-inreplyto {
 	color: #888;
-	font-size: 80%;
+	font-size: 13px;
 }
 
 .activity-list .activity-item .activity-inreplyto > p {
@@ -578,10 +576,6 @@ body .buddypress * a {
 
 .activity-list .activity-item .activity-avatar {
 	float: left;
-}
-
-.activity-list .activity-item img.avatar {
-	margin: 0 -5px 0;
 }
 
 .activity-list .activity-item .activity-header {
@@ -763,7 +757,6 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-comments .acomment-meta {
 	font-size: 14px;
-	font-size: 1.4rem;
 }
 
 .buddypress .activity-comments .acomment-content {
@@ -774,7 +767,6 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-comments .acomment-content p {
 	font-size: 14px;
-	font-size: 1.4rem;
 	margin-bottom: 0.5em;
 }
 
@@ -786,7 +778,6 @@ body.activity-permalink .activity-list .activity-meta {
 .buddypress .activity-comments .acomment-options a {
 	color: #999;
 	font-size: 14px;
-	font-size: 1.4rem;
 }
 
 .buddypress .activity-comments .acomment-options a:focus, .buddypress .activity-comments .acomment-options a:hover {
@@ -915,13 +906,11 @@ form.ac-form .ac-reply-content input {
 */
 .buddypress .members-list li .member-name {
 	font-size: 18px;
-	font-size: 1.8rem;
 }
 
 .buddypress .members-list li .user-update {
 	color: #eee;
 	font-size: 12px;
-	font-size: 1.2rem;
 }
 
 /**
@@ -1102,7 +1091,6 @@ body.no-js .single-item-header .js-self-profile-button {
 */
 .groups-header .moderators-lists .moderators-title {
 	font-size: 14px;
-	font-size: 1.4rem;
 }
 
 .groups-header .moderators-lists .user-list ul {
@@ -1136,7 +1124,6 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .buddypress .item-body .screen-heading {
 	font-size: 22px;
-	font-size: 2.2rem;
 }
 
 .buddypress .item-body .button-tabs {
@@ -1328,7 +1315,6 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .buddypress .profile .button-nav li a {
 	font-size: 18px;
-	font-size: 1.8rem;
 }
 
 body.no-js .buddypress .field-visibility-settings-toggle,
@@ -1391,13 +1377,11 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress .standard-form .field-visibility-settings-header {
 	font-size: 16px;
-	font-size: 1.6rem;
 }
 
 .buddypress .standard-form .field-visibility-settings legend,
 .buddypress .standard-form .field-visibility-settings label {
 	font-size: 14px;
-	font-size: 1.4rem;
 }
 
 .buddypress .standard-form .field-visibility select {
@@ -2107,7 +2091,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border: 0;
 	font-family: dashicons;
 	font-size: 18px;
-	font-size: 1.8rem;
 }
 
 .buddypress .current-member-type {
@@ -2551,6 +2534,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: 50%;
 }
 
+/* Build the two column class small up */
 @media screen and (min-width: 24em) {
 	.grid > li.item-entry {
 		float: left;
@@ -2576,6 +2560,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
+/* Build the three column class medium up */
 @media screen and (min-width: 46.8em) {
 	.grid.three > li {
 		padding-bottom: 15px;
@@ -2596,7 +2581,32 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
+/* Build the four column class medium up */
+@media screen and (min-width: 46.8em) {
+	.grid.four > li {
+		padding-bottom: 15px;
+		padding-top: 0;
+		width: 25%;
+	}
+	.grid.four > li:nth-child(1n+1) {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.grid.four > li:nth-child(4n+4) {
+		padding-left: 10px;
+		padding-right: 0;
+	}
+	.grid.four > li:nth-child(4n+1) {
+		padding-left: 0;
+		padding-right: 10px;
+	}
+}
+
+/* Style the .bp-list occurences if a 'grid' class added to the ul*/
 @media screen and (min-width: 24em) {
+	.grid.bp-list {
+		padding-top: 1em;
+	}
 	.grid.bp-list > li {
 		border-bottom: none;
 	}
@@ -2645,63 +2655,3 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		float: none;
 	}
 }
-
-/*
-
-			.item-avatar {
-				text-align: center;
-
-				.avatar {
-					display: inline-block;
-					width: 50%;
-				}
-			}
-
-			.item {
-				font-size: 1.6rem;
-				left: 0;
-				margin: 0 auto;
-				text-align: center;
-				width: 96%;
-
-				.item-title {
-					display: inline-block;
-
-					a {
-						display: block;
-						text-align: center;
-					}
-
-					.update {
-						font-size: 12px;
-						text-align: left;
-					}
-				}
-
-				.activity-read-more a {
-					display: inline;
-				}
-			}
-
-			div.action {
-				float: none;
-				margin: 0 5px;
-				position: relative;
-				text-align: center;
-
-				.generic-button {
-					display: block;
-					float: none;
-					margin: 0.2em 0;
-				}
-			}
-
-			.item-avatar,
-			.avatar,
-			.item {
-				float: none;
-			}
-
-		} // close li generic
-
-*/

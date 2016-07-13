@@ -10,7 +10,7 @@
 @mixin font-size($font-size: 16) {
 	$rem-font-value: ($font-size / 10);
 	font-size: ($font-size * 1px);
-	font-size: $rem-font-value + rem;
+	//font-size: $rem-font-value + rem;
 }
 
 // Essential em based breakpoints

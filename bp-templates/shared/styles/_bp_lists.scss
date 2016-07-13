@@ -41,7 +41,7 @@
 			.item {
 
 				.list-title {
-					clear: none; // some WP theme state clear:both
+					clear: none; // some WP themes state clear:both
 					@include font-size(22);
 					font-weight: normal;
 					margin: 0;
@@ -58,7 +58,7 @@
 			.meta,
 			.item-meta {
 				color: #888;
-				font-size: 80%;
+				@include font-size(12);
 				margin-top: $marg-sml;
 			}
 
@@ -71,7 +71,7 @@
 				.item-avatar {
 					float: left;
 					text-align: left;
-					width: 15%;
+					//width: 15%; // review whether we really need this width
 				}
 
 				.list-title,

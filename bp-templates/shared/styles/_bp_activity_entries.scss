@@ -21,7 +21,7 @@
 		}
 
 		&.mini {
-			font-size: 80%;
+			@include font-size(13);
 			position: relative;
 
 			.activity-avatar {
@@ -68,7 +68,7 @@
 // === review this inreplyto block feels wrong and badly nested ============================================
 		.activity-inreplyto {
 			color: #888;
-			font-size: 80%;
+			@include font-size(13);
 
 			> p {
 				display: inline;
@@ -89,10 +89,6 @@
 
 		.activity-avatar {
 			float: left;
-		}
-
-		img.avatar {
-			margin: 0 $marg-sml - $marg-med 0;
 		}
 
 		// The header elements: date stamp, author etc;
