@@ -57,6 +57,25 @@ function bp_nouveau_groups_enqueue_scripts() {
 }
 
 /**
+ * Can all members be invited to join any group?
+ *
+ * @since  1.0.0
+ *
+ * @param  bool $default False to allow. True to disallow.
+ * @return bool
+ */
+function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
+	/**
+	 * Filter here to remove the All members nav, returning true
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  bool $default True to disable the nav. False otherwise.
+	 */
+	return apply_filters( 'bp_nouveau_groups_disallow_all_members_invites', $default );
+}
+
+/**
  * Localize the strings needed for the Group's Invite UI
  *
  * @since  1.0.0
@@ -73,13 +92,17 @@ function bp_nouveau_groups_localize_scripts( $params = array() ) {
 
 	// Init the Group invites nav
 	$invites_nav = array(
-		'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-nouveau' ), 'order' => 0 ),
+		'members' => array( 'id' => 'members', 'caption' => __( 'All Members', 'bp-nouveau' ), 'order' => 5 ),
 		'invited' => array( 'id' => 'invited', 'caption' => __( 'Pending Invites', 'bp-nouveau' ), 'order' => 90, 'hide' => (int) ! $show_pending ),
 		'invites' => array( 'id' => 'invites', 'caption' => __( 'Send invites', 'bp-nouveau' ), 'order' => 100, 'hide' => 1 ),
 	);
 
 	if ( bp_is_active( 'friends' ) ) {
-		$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-nouveau' ), 'order' => 5 );
+		$invites_nav['friends'] = array( 'id' => 'friends', 'caption' => __( 'My friends', 'bp-nouveau' ), 'order' => 0 );
+
+		if ( true === bp_nouveau_groups_disallow_all_members_invites() ) {
+			unset( $invites_nav['members'] );
+		}
 	}
 
 	$params['group_invites'] = array(
@@ -175,6 +198,19 @@ function bp_nouveau_get_group_potential_invites( $args = array() ) {
 
 	if ( empty( $r['group_id'] ) ) {
 		return false;
+	}
+
+	/**
+	 * If it's not a friend request and users can restrict invites to friends,
+	 * make sure they are not displayed in results.
+	 */
+	if ( ! $r['user_id'] && bp_is_active( 'friends' ) && bp_is_active( 'settings' ) && ! bp_nouveau_groups_disallow_all_members_invites() ) {
+		$r['meta_query'] = array(
+			array(
+				'key'     => '_bp_nouveau_restrict_invites_to_friends',
+				'compare' => 'NOT EXISTS',
+			),
+		);
 	}
 
 	$query = new BP_Nouveau_Group_Invite_Query( $r );
@@ -291,6 +327,100 @@ function bp_nouveau_prepare_group_for_js( $item ) {
 		'object_type' => 'group',
 		'is_public'   => 'public' === $item->status,
 	);
+}
+
+/**
+ * Group invites restriction settings navigation.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_groups_invites_restriction_nav() {
+	$slug        = bp_get_settings_slug();
+	$user_domain = bp_loggedin_user_domain();
+
+	if ( bp_displayed_user_domain() ) {
+		$user_domain = bp_displayed_user_domain();
+	}
+
+	bp_core_new_subnav_item( array(
+		'name'            => _x( 'Group invites settings', 'My Group Invites settings screen nav', 'bp-nouveau' ),
+		'slug'            => 'invites',
+		'parent_url'      => trailingslashit( $user_domain . $slug ),
+		'parent_slug'     => $slug,
+		'screen_function' => 'bp_nouveau_groups_screen_invites_restriction',
+		'item_css_id'     => 'invites',
+		'position'        => 70,
+		'user_has_access' => bp_core_can_edit_settings(),
+	), 'members' );
+}
+
+/**
+ * Group invites restriction settings Admin Bar navigation.
+ *
+ * @since  1.0.0
+ *
+ * @param   array $wp_admin_nav The list of settings admin subnav items.
+ * @return  array The list of settings admin subnav items.
+ */
+function bp_nouveau_groups_invites_restriction_admin_nav( $wp_admin_nav ) {
+
+	// Setup the logged in user variables.
+	$settings_link = trailingslashit( bp_loggedin_user_domain() . bp_get_settings_slug() );
+
+	// Add the "Group Invites" subnav item.
+	$wp_admin_nav[] = array(
+		'parent' => 'my-account-' . buddypress()->settings->id,
+		'id'     => 'my-account-' . buddypress()->settings->id . '-invites',
+		'title'  => _x( 'Group Invites', 'My Account Settings sub nav', 'bp-nouveau' ),
+		'href'   => trailingslashit( $settings_link . 'invites/' ),
+	);
+
+	return $wp_admin_nav;
+}
+
+/**
+ * Group invites restriction screen.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_groups_screen_invites_restriction() {
+
+	// Redirect if no invites restriction settings page is accessible.
+	if ( 'invites' !== bp_current_action() || ! bp_is_active( 'friends' ) ) {
+		bp_do_404();
+		return;
+	}
+
+	if ( isset( $_POST['member-group-invites-submit'] ) ) {
+
+		// Nonce check.
+		check_admin_referer( 'bp_nouveau_group_invites_settings' );
+
+		if ( bp_is_my_profile() || bp_current_user_can( 'bp_moderate' ) ) {
+			if ( empty( $_POST['account-group-invites-preferences'] ) ) {
+				bp_delete_user_meta( bp_displayed_user_id(), '_bp_nouveau_restrict_invites_to_friends' );
+			} else {
+				bp_update_user_meta( bp_displayed_user_id(), '_bp_nouveau_restrict_invites_to_friends', (int) $_POST['account-group-invites-preferences'] );
+			}
+
+			bp_core_add_message( __( 'Group invites preferences saved.', 'bp-nouveau' ) );
+
+		// OOps!
+		} else {
+			bp_core_add_message( __( 'You are not allowed to perform this action.', 'bp-nouveau' ), 'error' );
+		}
+
+		bp_core_redirect( trailingslashit( bp_displayed_user_domain() . bp_get_settings_slug() ) . 'invites/' );
+	}
+
+	/**
+	 * Filters the template to load for the Group Invites settings screen.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $template Path to the Group Invites settings screen template to load.
+	 */
+	bp_core_load_template( apply_filters( 'bp_nouveau_groups_screen_invites_restriction', 'members/single/settings/group-invites' ) );
 }
 
 function bp_nouveau_get_groups_directory_nav_items() {

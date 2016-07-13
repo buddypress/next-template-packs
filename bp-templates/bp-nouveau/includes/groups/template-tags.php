@@ -204,6 +204,17 @@ function bp_nouveau_group_invites_interface() {
 }
 
 /**
+ * Gets the displayed user group invites preferences
+ *
+ * @since  1.0.0
+ *
+ * @return int 1 if user chose to restrict to friends. O otherwise.
+ */
+function bp_nouveau_groups_get_group_invites_setting() {
+	return (int) bp_get_user_meta( bp_displayed_user_id(), '_bp_nouveau_restrict_invites_to_friends' );
+}
+
+/**
  * Load the requested Create Screen for the new group.
  *
  * @since  1.0.0

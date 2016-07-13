@@ -34,6 +34,7 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	 */
 	public function setup_hooks() {
 		add_action( 'bp_pre_user_query_construct', array( $this, 'build_exclude_args' ) );
+		add_action( 'bp_pre_user_query',           array( $this, 'build_meta_query'   ) );
 	}
 
 	/**
@@ -109,6 +110,21 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 		$this->group_member_ids = $wpdb->get_col( "{$sql['select']} {$sql['where']} {$sql['orderby']} {$sql['order']} {$sql['limit']}" );
 
 		return $this->group_member_ids;
+	}
+
+	public function build_meta_query( BP_User_Query $bp_user_query ) {
+		if ( isset( $this->query_vars['scope'] ) && 'members' === $this->query_vars['scope'] && isset( $this->query_vars['meta_query'] ) ) {
+
+			$invites_meta_query = new WP_Meta_Query( $this->query_vars['meta_query'] );
+			$meta_sql = $invites_meta_query->get_sql( 'user', 'u', 'ID' );
+
+			if ( empty( $meta_sql['join'] ) || empty( $meta_sql['where'] ) ) {
+				return;
+			}
+
+			$bp_user_query->uid_clauses['select'] .= ' ' . $meta_sql['join'];
+			$bp_user_query->uid_clauses['where']  .= ' ' . $meta_sql['where'];
+		}
 	}
 
 	public static function get_inviter_ids( $user_id = 0, $group_id = 0 ) {

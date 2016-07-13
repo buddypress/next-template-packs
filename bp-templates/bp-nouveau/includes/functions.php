@@ -1189,6 +1189,10 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'type'    => 'loading',
 			'message' => __( 'Loading notifications, please wait.', 'bp-nouveau' ),
 		),
+		'member-group-invites' => array(
+			'type'    => 'info',
+			'message' => __( 'Currently every member of the community can invite you to join their groups. If you are not comfortable with it, you can always restrict group invites to your friends only.', 'bp-nouveau' ),
+		),
 	) );
 
 	if ( isset( $feedback_messages[ $feedback_id ] ) ) {
@@ -1497,6 +1501,15 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 				'name'  => 'xprofile-settings-submit',
 				'id'    => 'submit',
 				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'class' => 'auto',
+			),
+		),
+		'member-group-invites' => array(
+			'nonce'  => 'bp_nouveau_group_invites_settings',
+			'attributes' => array(
+				'name'  => 'member-group-invites-submit',
+				'id'    => 'submit',
+				'value' => __( 'Save', 'bp-nouveau' ),
 				'class' => 'auto',
 			),
 		),
