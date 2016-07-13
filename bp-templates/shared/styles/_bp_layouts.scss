@@ -243,9 +243,14 @@
 			.wrap {
 				min-height: 350px;
 
+				.list-title {
+					min-height: 3.5em;
+					padding: $pad-sml;
+				}
+
 				.item-desc {
 					margin-top: 0;
-					min-height: 155px;
+					min-height: 10em;
 
 					p {
 						margin-bottom: 0;
