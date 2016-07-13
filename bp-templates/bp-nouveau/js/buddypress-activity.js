@@ -425,6 +425,11 @@ window.bp = window.bp || {};
 			var parent = event.data, target = $( event.target ), activity_item = $( event.currentTarget ),
 				activity_id = activity_item.data( 'bp-activity-id' ), stream = $( event.delegateTarget );
 
+			// In case the target is set to a span inside the link.
+			if ( $( target ).is( 'span' ) ) {
+				target = $( target ).closest( 'a' );
+			}
+
 			// Favoriting
 			if ( target.hasClass( 'fav') || target.hasClass('unfav') ) {
 				var type = target.hasClass( 'fav' ) ? 'fav' : 'unfav';
@@ -486,8 +491,10 @@ window.bp = window.bp || {};
 				} );
 			}
 
-			// Deleting
-			if ( target.hasClass( 'delete-activity' ) || target.hasClass( 'acomment-delete' ) ) {
+			// Deleting or spamming
+			if ( target.hasClass( 'delete-activity' ) || target.hasClass( 'acomment-delete' )
+				|| target.hasClass( 'spam-activity' ) || target.hasClass( 'spam-activity-comment' )
+			) {
 				var activity_comment_li = target.closest( '[data-bp-activity-comment-id]' ),
 				    activity_comment_id = activity_comment_li.data( 'bp-activity-comment-id' ),
 				    li_parent, comment_count_span, comment_count, show_all_a, deleted_comments_count = 0;
@@ -507,6 +514,11 @@ window.bp = window.bp || {};
 					'_wpnonce'  : parent.getLinkParams( target.prop( 'href' ), '_wpnonce' ),
 					'is_single' : target.closest( '[data-bp-single]' ).length
 				};
+
+				// Only the action changes when spamming an activity or a comment.
+				if ( target.hasClass( 'spam-activity' ) || target.hasClass( 'spam-activity-comment' ) ) {
+					ajaxData.action = 'bp_spam_activity';
+				}
 
 				// Set defaults parent li to activity container
 				li_parent = activity_item;
@@ -696,9 +708,9 @@ window.bp = window.bp || {};
 					content                       : comment_content.val()
 				};
 
-				// Akismet
-				if ( $( '#_bp_as_nonce_' + item_id ).val() ) {
-					comment_data['_bp_as_nonce_' + item_id] = $( '#_bp_as_nonce_' + item_id ).val();
+				// Add the Akismet nonce if it exists
+				if ( $( '#_bp_as_nonce_' + activity_id ).val() ) {
+					comment_data['_bp_as_nonce_' + activity_id] = $( '#_bp_as_nonce_' + activity_id ).val();
 				}
 
 				parent.ajax( comment_data, 'activity' ).done( function( response ) {
