@@ -359,6 +359,25 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			'link_text'         => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
 		);
 
+		// Add the Spam Button if supported
+		if ( bp_is_akismet_active() && isset( buddypress()->activity->akismet ) && bp_activity_user_can_mark_spam() ) {
+			$buttons['activity_spam'] = array(
+				'id'                => 'activity_spam',
+				'position'          => 45,
+				'component'         => 'activity',
+				'must_be_logged_in' => true,
+				'link_id'           => 'activity_make_spam_' . $activity_id,
+				'link_href'         => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id ),
+				'link_class'        => 'bp-secondary-action spam-activity confirm button item-button',
+				'link_title'        => esc_attr__( 'Spam', 'bp-nouveau' ),
+				'link_text'         => sprintf(
+					/** @todo: use a specific css rule for this *************************************************************/
+					'<span class="dashicons dashicons-flag" style="color:#a00;vertical-align:baseline;width:18px;height:18px"></span><span class="bp-screen-reader-text">%s</span>',
+					esc_html__( 'Spam', 'bp-nouveau' )
+				),
+			);
+		}
+
 		/**
 		 * Filter here to add your buttons, use the position argument to choose where to insert it.
 		 *
@@ -398,6 +417,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		// Remove the Delete button if the user can't delete
 		if ( ! bp_activity_user_can_delete() ) {
 			unset( $return['activity_delete'] );
+		}
+
+		if ( isset( $return['activity_spam'] ) && ! in_array( $activity_type, BP_Akismet::get_activity_types() ) ) {
+			unset( $return['activity_spam'] );
 		}
 
 		/**
@@ -619,6 +642,21 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 			),
 		);
 
+		// Add the Spam Button if supported
+		if ( bp_is_akismet_active() && isset( buddypress()->activity->akismet ) && bp_activity_user_can_mark_spam() ) {
+			$buttons['activity_comment_spam'] = array(
+				'id'                => 'activity_comment_spam',
+				'position'          => 25,
+				'component'         => 'activity',
+				'must_be_logged_in' => true,
+				'link_id'           => 'activity_make_spam_' . $activity_comment_id,
+				'link_href'         => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id ),
+				'link_class'        => 'bp-secondary-action spam-activity-comment confirm',
+				'link_rel'          => 'nofollow',
+				'link_text'         => esc_html__( 'Spam', 'bp-nouveau' ),
+			);
+		}
+
 		/**
 		 * Filter here to add your buttons, use the position argument to choose where to insert it.
 		 *
@@ -665,6 +703,10 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		 */
 		if ( ! bp_activity_user_can_delete() ) {
 			unset( $return['activity_comment_delete'] );
+		}
+
+		if ( isset( $return['activity_comment_spam'] ) && ( ! bp_activity_current_comment() || ! in_array( bp_activity_current_comment()->type, BP_Akismet::get_activity_types() ) ) ) {
+			unset( $return['activity_comment_spam'] );
 		}
 
 		/**

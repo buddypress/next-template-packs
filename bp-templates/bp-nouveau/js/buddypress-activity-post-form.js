@@ -691,6 +691,11 @@ window.bp = window.bp || {};
 				'_wpnonce_post_update': BP_Nouveau.activity.params.post_nonce
 			};
 
+			// Add the Akismet nonce if it exists.
+			if ( $('#_bp_as_nonce').val() ) {
+				data['_bp_as_nonce'] = $('#_bp_as_nonce').val();
+			}
+
 			bp.ajax.post( 'post_update', _.extend( data, this.model.attributes ) ).done( function( response ) {
 				var scope     = bp.Nouveau.getStorage( 'bp-activity', 'scope' ),
 					prepended = false;

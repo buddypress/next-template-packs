@@ -82,13 +82,7 @@ class BP_Nouveau_Activity {
 			array( 'new_activity_comment'            => array( 'function' => 'bp_nouveau_ajax_new_activity_comment',        'nopriv' => false ) ),
 			array( 'bp_nouveau_get_activity_objects' => array( 'function' => 'bp_nouveau_ajax_get_activity_objects',        'nopriv' => false ) ),
 			array( 'post_update'                     => array( 'function' => 'bp_nouveau_ajax_post_update',                 'nopriv' => false ) ),
-
-			/**
-			 * @todo implement this action in buddypress-activity.js as it's missing
-			 * right now
-			 */
 			array( 'bp_spam_activity'                => array( 'function' => 'bp_nouveau_ajax_spam_activity',               'nopriv' => false ) ),
-			array( 'bp_spam_activity_comment'        => array( 'function' => 'bp_nouveau_ajax_spam_activity',               'nopriv' => false ) ),
 		);
 
 		foreach ( $ajax_actions as $ajax_action ) {
@@ -99,6 +93,18 @@ class BP_Nouveau_Activity {
 			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
 				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
 			}
+		}
+
+		/**
+		 * Avoid BuddyPress to trigger a forsaken action notice.
+		 * We'll generate the button inside our bp_nouveau_get_activity_entry_buttons()
+		 * function.
+		 */
+		$bp = buddypress();
+
+		if ( bp_is_akismet_active() && isset( $bp->activity->akismet ) ) {
+			remove_action( 'bp_activity_entry_meta',      array( $bp->activity->akismet, 'add_activity_spam_button'         ) );
+			remove_action( 'bp_activity_comment_options', array( $bp->activity->akismet, 'add_activity_comment_spam_button' ) );
 		}
 	}
 

@@ -467,39 +467,48 @@ function bp_nouveau_ajax_post_update() {
 /**
  * AJAX spam an activity item or comment.
  *
- * @todo implement the delete_activity_comment ajax action
- * in buddypress-activity.js
- *
  * @since 1.0.0
  *
- * @return mixed String on error, void on success.
+ * @return string JSON reply.
  */
 function bp_nouveau_ajax_spam_activity() {
 	$bp = buddypress();
 
+	$response = array(
+		'feedback' => sprintf(
+			'<div class="bp-feedback bp-messages error">%s</div>',
+			esc_html__( 'There was a problem spamming this item. Please try again.', 'bp-nouveau' )
+		)
+	);
+
 	// Bail if not a POST action.
-	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) )
-		return;
+	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		wp_send_json_error( $response );
+	}
 
-	// Check that user is logged in, Activity Streams are enabled, and Akismet is present.
-	if ( ! is_user_logged_in() || ! bp_is_active( 'activity' ) || empty( $bp->activity->akismet ) )
-		exit( '-1' );
+	if ( ! is_user_logged_in() || ! bp_is_active( 'activity' ) || empty( $bp->activity->akismet ) ) {
+		wp_send_json_error( $response );
+	}
 
-	// Check an item ID was passed.
-	if ( empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) )
-		exit( '-1' );
+	if ( empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) ) {
+		wp_send_json_error( $response );
+	}
 
 	// Is the current user allowed to spam items?
-	if ( ! bp_activity_user_can_mark_spam() )
-		exit( '-1' );
+	if ( ! bp_activity_user_can_mark_spam() ) {
+		wp_send_json_error( $response );
+	}
 
-	// Load up the activity item.
 	$activity = new BP_Activity_Activity( (int) $_POST['id'] );
-	if ( empty( $activity->component ) )
-		exit( '-1' );
 
-	// Check nonce.
-	check_admin_referer( 'bp_activity_akismet_spam_' . $activity->id );
+	if ( empty( $activity->component ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// Nonce check!
+	if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'bp_activity_akismet_spam_' . $activity->id ) ) {
+		wp_send_json_error( $response );
+	}
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_before_action_spam_activity', $activity->id, $activity );
@@ -510,5 +519,16 @@ function bp_nouveau_ajax_spam_activity() {
 
 	/** This action is documented in bp-activity/bp-activity-actions.php */
 	do_action( 'bp_activity_action_spam_activity', $activity->id, $activity->user_id );
-	exit;
+
+	// Prepare the successfull reply
+	$response = array( 'spammed' => $activity->id );
+
+	// If on a single activity redirect to user's home.
+	if ( ! empty( $_POST['is_single'] ) ) {
+		$response['redirect'] = bp_core_get_user_domain( $activity->user_id );
+		bp_core_add_message( __( 'The activity item has been marked as spam and is no longer visible.', 'bp-nouveau' ) );
+	}
+
+	// Send the json reply
+	wp_send_json_success( $response );
 }
