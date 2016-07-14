@@ -666,6 +666,30 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 }
 
 /**
+ * Returns the choices for the Layout option of the customizer
+ * or the list of corresponding css classes.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $type 'option' to get the labels, 'classes' to get the classes
+ * @return array  the list of labels or classes preserving keys.
+ */
+function bp_nouveau_customizer_grid_choices( $type = 'option' ) {
+	$columns = array(
+		array( 'key' => '1', 'label' => __( 'One column', 'bp-nouveau'    ), 'class' => ''      ),
+		array( 'key' => '2', 'label' => __( 'Two columns', 'bp-nouveau'   ), 'class' => 'two'   ),
+		array( 'key' => '3', 'label' => __( 'Three columns', 'bp-nouveau' ), 'class' => 'three' ),
+		array( 'key' => '4', 'label' => __( 'Four columns', 'bp-nouveau'  ), 'class' => 'four'  ),
+	);
+
+	if ( 'option' === $type ) {
+		return wp_list_pluck( $columns, 'label', 'key' );
+	}
+
+	return wp_list_pluck( $columns, 'class', 'key' );
+}
+
+/**
  * Add a specific panel for the BP Nouveau Template Pack.
  *
  * @since 1.0.0
@@ -786,11 +810,7 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[members_layout]',
 			'type'       => 'select',
-			'choices'    => array(
-				'1' => __( 'One column', 'bp-nouveau' ),
-				'2' => __( 'Two columns', 'bp-nouveau' ),
-				'3' => __( 'Three columns', 'bp-nouveau' ),
-			),
+			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),
 	) );
 

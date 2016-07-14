@@ -515,12 +515,13 @@ function bp_nouveau_loop_classes() {
 			$layout_prefs      = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 
 			if ( ! empty( $layout_prefs ) && (int) $layout_prefs > 1 ) {
-				$classes[] = 'grid';
+				$grid_classes = bp_nouveau_customizer_grid_choices( 'classes' );
 
-				if ( 2 === (int) $layout_prefs ) {
-					$classes[] = 'two';
-				} else {
-					$classes[] = 'three';
+				if ( isset( $grid_classes[ $layout_prefs ] ) ) {
+					$classes = array_merge( $classes, array(
+						'grid',
+						$grid_classes[ $layout_prefs ],
+					) );
 				}
 
 				// Set the global for a later use.

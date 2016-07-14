@@ -715,11 +715,7 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[groups_layout]',
 			'type'       => 'select',
-			'choices'    => array(
-				'1' => __( 'One column', 'bp-nouveau' ),
-				'2' => __( 'Two columns', 'bp-nouveau' ),
-				'3' => __( 'Three columns', 'bp-nouveau' ),
-			),
+			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),
 	) );
 }
