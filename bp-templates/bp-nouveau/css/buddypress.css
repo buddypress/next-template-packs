@@ -2603,87 +2603,110 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 /* Style the .bp-list occurences if a 'grid' class added to the ul*/
-@media screen and (min-width: 24em) {
-	.grid.bp-list {
-		padding-top: 1em;
-	}
-	.grid.bp-list > li {
-		border-bottom: none;
-	}
-	.grid.bp-list > li .wrap {
-		padding-bottom: 3rem;
-	}
-	.grid.bp-list > li .item-avatar {
-		text-align: center;
-		width: auto;
-	}
-	.grid.bp-list > li .item-avatar img.avatar {
-		display: inline-block;
-		height: auto;
-		width: 50%;
-	}
-	.grid.bp-list > li .item-meta,
-	.grid.bp-list > li .list-title {
-		float: none;
-		text-align: center;
-	}
-	.grid.bp-list > li .item {
-		font-size: 1.6rem;
-		left: 0;
-		margin: 0 auto;
-		text-align: center;
-		width: 96%;
-	}
-	.grid.bp-list > li .item .user-update {
-		clear: both;
-		text-align: left;
-	}
-	.grid.bp-list > li .item .activity-read-more a {
-		display: inline;
-	}
-	.grid.bp-list > li div.action {
-		bottom: 5px;
-		float: none;
-		height: auto;
-		left: 0;
-		margin: 0;
-		padding: 0 5px;
-		position: absolute;
-		text-align: center;
-		top: auto;
-		width: 100%;
-	}
-	.grid.bp-list > li div.action .generic-button {
-		display: block;
-		float: none;
-		margin: 0;
-		text-align: center;
-		width: 100%;
-	}
-	.grid.bp-list > li div.action .generic-button a {
-		display: inline-block;
-		width: 100%;
-	}
-	.grid.bp-list > li .item-avatar,
-	.grid.bp-list > li .avatar,
-	.grid.bp-list > li .item {
-		float: none;
-	}
-	.grid.members-list .wrap {
-		min-height: 350px;
-	}
-	.grid.groups-list .wrap {
-		min-height: 350px;
-	}
-	.grid.groups-list .wrap .list-title {
-		min-height: 3.5em;
-		padding: 0.5em;
-	}
-	.grid.groups-list .wrap .item-desc {
-		margin-top: 0;
-		min-height: 13em;
-	}
-	.grid.groups-list .wrap .item-desc p {
-		margin-bottom: 0;
-	}
+.grid.bp-list {
+	padding-top: 1em;
+}
+
+.grid.bp-list > li {
+	border-bottom: none;
+}
+
+.grid.bp-list > li .wrap {
+	padding-bottom: 3rem;
+}
+
+.grid.bp-list > li .item-avatar {
+	text-align: center;
+	width: auto;
+}
+
+.grid.bp-list > li .item-avatar img.avatar {
+	display: inline-block;
+	height: auto;
+	width: 50%;
+}
+
+.grid.bp-list > li .item-meta,
+.grid.bp-list > li .list-title {
+	float: none;
+	text-align: center;
+}
+
+.grid.bp-list > li .item {
+	font-size: 1.6rem;
+	left: 0;
+	margin: 0 auto;
+	text-align: center;
+	width: 96%;
+}
+
+.grid.bp-list > li .item .user-update {
+	clear: both;
+	text-align: left;
+}
+
+.grid.bp-list > li .item .activity-read-more a {
+	display: inline;
+}
+
+.grid.bp-list > li div.action {
+	bottom: 5px;
+	float: none;
+	height: auto;
+	left: 0;
+	margin: 0;
+	padding: 0 5px;
+	position: absolute;
+	text-align: center;
+	top: auto;
+	width: 100%;
+}
+
+.grid.bp-list > li div.action .generic-button {
+	display: block;
+	float: none;
+	margin: 0;
+	text-align: center;
+	width: 100%;
+}
+
+.grid.bp-list > li div.action .generic-button a {
+	display: inline-block;
+	width: 100%;
+}
+
+.grid.bp-list > li div.action .generic-button a:focus, .grid.bp-list > li div.action .generic-button a:hover {
+	background: #e0e0e0;
+}
+
+.grid.bp-list > li .item-avatar,
+.grid.bp-list > li .avatar,
+.grid.bp-list > li .item {
+	float: none;
+}
+
+.grid.members-list .wrap {
+	min-height: 350px;
+}
+
+.grid.groups-list .wrap {
+	min-height: 350px;
+}
+
+.grid.groups-list .wrap .list-title {
+	min-height: 3.5em;
+	padding: 0.5em;
+}
+
+.grid.groups-list .wrap .item-desc {
+	margin-top: 0;
+	min-height: 13em;
+}
+
+.grid.groups-list .wrap .item-desc p {
+	margin-bottom: 0;
+}
+
+.grid.blogs-list .wrap {
+	min-height: 350px;
 }

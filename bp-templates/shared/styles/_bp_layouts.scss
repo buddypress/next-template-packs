@@ -147,7 +147,7 @@
 // The block might be better located in the generic bp-lists section
 
 /* Style the .bp-list occurences if a 'grid' class added to the ul*/
-@include small-up() {
+//@include small-up() {
 	// if grid is set & this is a member, group or blog loop
 	// we want to re-style some of the elements in the item
 	// we'll exclude activity from this though
@@ -218,6 +218,11 @@
 					a {
 						display: inline-block;
 						width: 100%;
+
+						&:focus,
+						&:hover {
+							background: $med-light-grey;
+						}
 					}
 				}
 			}
@@ -258,6 +263,13 @@
 				}
 			}
 		}
-	}
 
-} // close @media
+		&.blogs-list {
+			.wrap {
+				min-height: 350px;
+			}
+		}
+
+	} // close .grid
+
+//} // close @media
