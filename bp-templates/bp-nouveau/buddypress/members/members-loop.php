@@ -9,13 +9,6 @@
  * @package BP Nouveau
  */
 
-/**
-* @todo this needs removing and replacing with real function in template tag file
-*/
-function bp_nouveau_loop_is_grid() {
-	return true;
-}
-
 bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_get_current_member_type() ) : ?>
@@ -43,7 +36,7 @@ bp_nouveau_before_loop(); ?>
 
 				<?php if ( bp_get_member_latest_update() && ! bp_nouveau_loop_is_grid() ) : ?>
 					<div class="user-update">
-							<p class="update"> <?php bp_member_latest_update(); ?></p>
+						<p class="update"> <?php bp_member_latest_update(); ?></p>
 					</div>
 				<?php endif; ?>
 

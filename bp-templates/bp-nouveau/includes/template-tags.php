@@ -544,6 +544,20 @@ function bp_nouveau_loop_classes() {
 	}
 
 /**
+ * Checks if the layout preferences is set to grid (2 or more columns).
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if loop is displayed in grid mod. False otherwise.
+ */
+function bp_nouveau_loop_is_grid() {
+	$bp_nouveau = bp_nouveau();
+	$component  = sanitize_key( bp_current_component() );
+
+	return ! empty( $bp_nouveau->{$component}->loop_layout ) && $bp_nouveau->{$component}->loop_layout > 1;
+}
+
+/**
  * Checks the layout preferences to display thumb or full avatars.
  *
  * @since  1.0.0
@@ -551,16 +565,16 @@ function bp_nouveau_loop_classes() {
  * @return array The avatar arguments.
  */
 function bp_nouveau_avatar_args() {
-	$bp_nouveau = bp_nouveau();
-	$component  = sanitize_key( bp_current_component() );
 
+	// Default args.
 	$args = array(
 		'type'   => 'thumb',
 		'width'  => bp_core_avatar_thumb_width(),
 		'height' => bp_core_avatar_thumb_height(),
 	);
 
-	if ( ! empty( $bp_nouveau->{$component}->loop_layout ) && $bp_nouveau->{$component}->loop_layout > 1 ) {
+	if ( bp_nouveau_loop_is_grid() ) {
+		// Grid Args
 		$args = array(
 			'type'   => 'full',
 			'width'  => bp_core_avatar_full_width(),
