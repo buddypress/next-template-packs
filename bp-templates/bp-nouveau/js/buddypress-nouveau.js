@@ -78,7 +78,7 @@ window.bp = window.bp || {};
 				var text = $( '.buddypress_object_nav .widget-title' ).html();
 
 				$( 'body' ).find( '*:contains("' + text + '")' ).each( function( e, element ) {
-					if ( ! $( element ).hasClass( 'widget-title' ) && text === $( element ).html() ) {
+					if ( ! $( element ).hasClass( 'widget-title' ) && text === $( element ).html() && ! $( element ).is( 'a' ) ) {
 						$( element ).remove();
 					}
 				} );

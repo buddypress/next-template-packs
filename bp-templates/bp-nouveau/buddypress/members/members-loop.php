@@ -9,13 +9,6 @@
  * @package BP Nouveau
  */
 
-/**
-* @todo this needs removing and replacing with real function in template tag file
-*/
-function bp_nouveau_loop_is_grid() {
-	return true;
-}
-
 bp_nouveau_before_loop(); ?>
 
 <?php if ( bp_get_current_member_type() ) : ?>
@@ -33,31 +26,31 @@ bp_nouveau_before_loop(); ?>
 		<li <?php bp_member_class( array('item-entry') ); ?>  data-bp-item-id="<?php bp_member_user_id(); ?>" data-bp-item-component="members">
 			<div class="wrap">
 
-			<div class="item-avatar">
-				<a href="<?php bp_member_permalink(); ?>"><?php bp_member_avatar( bp_nouveau_avatar_args() ); ?></a>
-			</div>
+				<div class="item-avatar">
+					<a href="<?php bp_member_permalink(); ?>"><?php bp_member_avatar( bp_nouveau_avatar_args() ); ?></a>
+				</div>
 
-			<div class="item">
+				<div class="item">
 
-				<h2 class="list-title member-name"><a href="<?php bp_member_permalink(); ?>"><?php bp_member_name(); ?></a></h2>
+					<h2 class="list-title member-name"><a href="<?php bp_member_permalink(); ?>"><?php bp_member_name(); ?></a></h2>
 
-				<?php if ( bp_get_member_latest_update() && ! bp_nouveau_loop_is_grid() ) : ?>
-					<div class="user-update">
+					<?php if ( bp_get_member_latest_update() && ! bp_nouveau_loop_is_grid() ) : ?>
+						<div class="user-update">
 							<p class="update"> <?php bp_member_latest_update(); ?></p>
-					</div>
-				<?php endif; ?>
+						</div>
+					<?php endif; ?>
 
-				<?php if ( bp_nouveau_member_has_meta() ) : ?>
-					<div class="item-meta">
+					<?php if ( bp_nouveau_member_has_meta() ) : ?>
+						<div class="item-meta">
 
-						<?php bp_nouveau_member_meta(); ?>
+							<?php bp_nouveau_member_meta(); ?>
 
-					</div><!-- #item-meta -->
-				<?php endif ; ?>
+						</div><!-- #item-meta -->
+					<?php endif ; ?>
 
-			</div><!-- // .item -->
+				</div><!-- // .item -->
 
-			<?php bp_nouveau_members_loop_buttons(); ?>
+				<?php bp_nouveau_members_loop_buttons(); ?>
 
 			</div>
 		</li>
