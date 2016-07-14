@@ -19,32 +19,34 @@ bp_nouveau_before_loop(); ?>
 
 	<?php while ( bp_blogs() ) : bp_the_blog(); ?>
 
-		<li <?php bp_blog_class() ?>>
+		<li <?php bp_blog_class( array( 'item-entry' ) ) ?>>
+			<div class="wrap">
 
-			<div class="item-avatar">
-				<a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_avatar( bp_nouveau_avatar_args() ); ?></a>
-			</div>
+				<div class="item-avatar">
+					<a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_avatar( bp_nouveau_avatar_args() ); ?></a>
+				</div>
 
-			<div class="item">
+				<div class="item">
 
-				<h2 class="list-title blogs-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></h2>
+					<h2 class="list-title blogs-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></h2>
 
-				<div class="item-meta"><span class="activity"><?php bp_blog_last_active(); ?></span></div>
+					<div class="item-meta"><span class="activity"><?php bp_blog_last_active(); ?></span></div>
 
-				<?php bp_nouveau_blogs_loop_item(); ?>
-
-			</div>
-
-			<?php bp_nouveau_blogs_loop_buttons(); ?>
-
-			<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
-				<div class="meta">
-
-					<?php bp_blog_latest_post(); ?>
+					<?php bp_nouveau_blogs_loop_item(); ?>
 
 				</div>
-			<?php endif; ?>
 
+				<?php bp_nouveau_blogs_loop_buttons(); ?>
+
+				<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
+					<div class="meta">
+
+						<?php bp_blog_latest_post(); ?>
+
+					</div>
+				<?php endif; ?>
+
+			</div>
 		</li>
 
 	<?php endwhile; ?>
