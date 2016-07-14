@@ -29,7 +29,7 @@
 
 			<?php if ( get_the_author_meta( 'description', bp_displayed_user_id() ) ) : ?>
 				<blockquote class="member-bio">
-					<?php the_author_meta( 'description', bp_displayed_user_id() ); ?>
+					<?php bp_nouveau_member_description( bp_displayed_user_id() ); ?>
 				</blockquote><!-- .member-bio -->
 			<?php endif ; ?>
 
