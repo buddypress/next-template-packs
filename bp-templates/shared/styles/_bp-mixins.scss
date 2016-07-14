@@ -1,16 +1,56 @@
 //
-// BuddyPress scss Mixins
+// BuddyPress Sass Mixins
 //
 
 // This file provides some basic mixins for BP elements such as box sizing
 // radius, calc etc
 
-// font size decs are used with caution BP doesn't manage
-// layout sizes & must take care to work with layout sizes
+
+// ======= Typography ======
+
+// BP provides two mixins for font size one basic  that states a value and can
+// produce rem & px versions the other that calculates  a reduced size at smaller screen sizes
+// Worked on the medium em breakpoints, and therefore is responsive in nature.
+
+
+// Font size decs are used with caution BP doesn't manage
+// layout sizes & must take care to work with existing layout sizes.
 @mixin font-size($font-size: 16) {
 	$rem-font-value: ($font-size / 10);
 	font-size: ($font-size * 1px);
 	//font-size: $rem-font-value + rem;
+}
+
+
+
+// The following Sass map handles some basic re-sizing of BP font
+// sizes at below & above medium breakpoints.
+// It is hard for BP to know what the theme is doing so we are limited in what we can do here.
+// The dev can feed a value to the mixin which will then be calculated below to find a reduced size
+
+@mixin responsive-font($res-size: 16) {
+
+	$the-sizes: $res-size;
+
+	$small: round( ($the-sizes / 1.2) );
+	$larger: $the-sizes;
+
+	$the-sizes: (
+  null  : $small,
+  46.8em : $larger
+	);
+
+  @each $font-breakpoint, $resonsive-font-size in $the-sizes {
+    @if $font-breakpoint == null {
+      font-size: $resonsive-font-size + px;
+    }
+    @else {
+      @media screen and (min-width: $font-breakpoint) {
+        font-size: $resonsive-font-size + px;
+      }
+    }
+  }
+
 }
 
 // Essential em based breakpoints

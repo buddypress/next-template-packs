@@ -42,7 +42,7 @@
 
 				.list-title {
 					clear: none; // some WP themes state clear:both
-					@include font-size(22);
+					@include responsive-font(22);
 					font-weight: normal;
 					margin: 0;
 				}
@@ -50,7 +50,7 @@
 
 			.item-desc {
 				color: #888;
-				font-size: 80%;
+				@include responsive-font(18);
 				margin: $marg-sml 0 0 60px;
 				width: 50%;
 			}

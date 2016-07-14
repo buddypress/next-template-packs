@@ -146,8 +146,8 @@
 // This block styles the loop items for a grid layout
 // The block might be better located in the generic bp-lists section
 
-/* Style the .bp-list occurences if a 'grid' class added to the ul*/
-//@include small-up() {
+/* Style the .bp-list li elements if a 'grid' class added to the ul*/
+
 	// if grid is set & this is a member, group or blog loop
 	// we want to re-style some of the elements in the item
 	// we'll exclude activity from this though
@@ -180,7 +180,7 @@
 			}
 
 			.item {
-				font-size: 1.6rem;
+				@include responsive-font( 22 );
 				left: 0;
 				margin: 0 auto;
 				text-align: center;
@@ -237,6 +237,8 @@
 	} // close .grid.bp-list
 
 	// .wrap min-heights & other adjustments per component type loop
+	// this section needs review as tricky in trying to get equal height
+	// on elements and some rules here are repeated to allow for variable values.
 	.grid {
 		&.members-list {
 			.wrap {
@@ -271,5 +273,3 @@
 		}
 
 	} // close .grid
-
-//} // close @media

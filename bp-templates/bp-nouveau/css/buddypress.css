@@ -373,16 +373,28 @@ body .buddypress * a {
 
 .buddypress .bp-list li .item .list-title {
 	clear: none;
-	font-size: 22px;
+	font-size: 18px;
 	font-weight: normal;
 	margin: 0;
 }
 
+@media screen and (min-width: 46.8em) {
+	.buddypress .bp-list li .item .list-title {
+		font-size: 22px;
+	}
+}
+
 .buddypress .bp-list li .item-desc {
 	color: #888;
-	font-size: 80%;
+	font-size: 15px;
 	margin: 10px 0 0 60px;
 	width: 50%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .bp-list li .item-desc {
+		font-size: 18px;
+	}
 }
 
 .buddypress .bp-list li .meta,
@@ -2602,7 +2614,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
-/* Style the .bp-list occurences if a 'grid' class added to the ul*/
+/* Style the .bp-list li elements if a 'grid' class added to the ul*/
 .grid.bp-list {
 	padding-top: 1em;
 }
@@ -2633,11 +2645,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid.bp-list > li .item {
-	font-size: 1.6rem;
+	font-size: 18px;
 	left: 0;
 	margin: 0 auto;
 	text-align: center;
 	width: 96%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.grid.bp-list > li .item {
+		font-size: 22px;
+	}
 }
 
 .grid.bp-list > li .item .user-update {
