@@ -156,10 +156,12 @@ class Next_Template_Packs {
 			return;
 		}
 
-		$tpl_dir = wp_unslash( $_POST['bp_tpl_pack']['dir'] );
+		$tpl_dir  = wp_unslash( $_POST['bp_tpl_pack']['dir'] );
+		$redirect = add_query_arg( array( 'page' => 'template-packs' ), bp_get_admin_url( 'admin.php' ) );
 
 		if ( ! is_dir( $tpl_dir ) || ! file_exists( $tpl_dir . '/buddypress-functions.php' ) ) {
-			return false;
+			wp_safe_redirect( add_query_arg( 'status', 'error', $redirect ) );
+			exit();
 		}
 
 		if ( 'bp-legacy' === wp_basename( $tpl_dir ) ) {
@@ -205,6 +207,9 @@ class Next_Template_Packs {
 		}
 
 		bp_update_option( '_bp_theme_package_id', $tp_data['id'] );
+
+		wp_safe_redirect( add_query_arg( 'status', 'updated', $redirect ) );
+		exit();
 	}
 
 	/**
@@ -223,6 +228,25 @@ class Next_Template_Packs {
 	 * Add Admin tab
 	 */
 	public function admin_tab() {
+
+		if ( isset( $_GET['status'] ) ) {
+			// Defaults to an error.
+			$message = __( 'Error: something went wrong. Please try again later.', 'next-template-packs' );
+			$type    = 'error';
+
+			// Success!
+			if ( 'updated' === $_GET['status'] ) {
+				$message = __( 'Template pack successfully activated.', 'next-template-packs' );
+				$type    = 'updated';
+			}
+
+			// Display the feedback message.
+			printf(
+				'<div id="message" class="%1$s notice is-dismissible"><p>%2$s</p></div>',
+				$type,
+				esc_html( $message )
+			);
+		}
 
 		$class = ( strpos( get_current_screen()->id, 'template-packs' ) !== false )
 			? "nav-tab-active"
@@ -364,7 +388,7 @@ class Next_Template_Packs {
 			<h1><?php esc_html_e( 'BuddyPress Settings', 'next-template-packs' ); ?></h1>
 			<h2 class="nav-tab-wrapper"><?php bp_core_admin_tabs( __( 'Templates', 'next-template-packs' ) ); ?></h2>
 
-			<form action="" method="post" id="bp-admin-template-pack-form">
+			<form action="<?php echo esc_url( add_query_arg( array( 'page' => 'template-packs' ), bp_get_admin_url( 'admin.php' ) ) ); ?>" method="post" id="bp-admin-template-pack-form">
 
 				<ul class="subsubsub">
 					<li>
