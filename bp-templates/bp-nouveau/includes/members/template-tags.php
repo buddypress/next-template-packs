@@ -434,7 +434,7 @@ function bp_nouveau_member_meta() {
 			// We're in the members loop
 			} else {
 				$meta = array(
-					'last_activity' => sprintf( '<span class="activity">%s</span>', bp_get_member_last_active() ),
+					'last_activity' => sprintf( '%s', bp_get_member_last_active() ),
 				);
 			}
 

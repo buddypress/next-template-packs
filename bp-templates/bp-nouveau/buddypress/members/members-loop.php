@@ -32,7 +32,9 @@ bp_nouveau_before_loop(); ?>
 
 				<div class="item">
 
-					<h2 class="list-title member-name"><a href="<?php bp_member_permalink(); ?>"><?php bp_member_name(); ?></a></h2>
+					<h2 class="list-title member-name">
+						<a href="<?php bp_member_permalink(); ?>"><?php bp_member_name(); ?></a>
+					</h2>
 
 					<?php if ( bp_get_member_latest_update() && ! bp_nouveau_loop_is_grid() ) : ?>
 						<div class="user-update">
@@ -41,11 +43,11 @@ bp_nouveau_before_loop(); ?>
 					<?php endif; ?>
 
 					<?php if ( bp_nouveau_member_has_meta() ) : ?>
-						<div class="item-meta">
+						<p class="item-meta last-activity">
 
 							<?php bp_nouveau_member_meta(); ?>
 
-						</div><!-- #item-meta -->
+						</p><!-- #item-meta -->
 					<?php endif ; ?>
 
 				</div><!-- // .item -->
