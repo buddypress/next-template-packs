@@ -2716,13 +2716,21 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 0.5em;
 }
 
+.grid.groups-list .wrap .last-activity,
+.grid.groups-list .wrap .group-details,
+.grid.groups-list .wrap .item-desc {
+	margin-bottom: 0;
+}
+
+.grid.groups-list .wrap .last-activity p,
+.grid.groups-list .wrap .group-details p,
+.grid.groups-list .wrap .item-desc p {
+	margin-bottom: 0;
+}
+
 .grid.groups-list .wrap .item-desc {
 	margin-top: 0;
 	min-height: 13em;
-}
-
-.grid.groups-list .wrap .item-desc p {
-	margin-bottom: 0;
 }
 
 .grid.blogs-list .wrap {

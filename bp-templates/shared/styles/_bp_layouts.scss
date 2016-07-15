@@ -255,13 +255,19 @@
 					padding: $pad-sml;
 				}
 
+				.last-activity,
+				.group-details,
 				.item-desc {
-					margin-top: 0;
-					min-height: 13em;
+					margin-bottom: 0;
 
 					p {
 						margin-bottom: 0;
 					}
+				}
+
+				.item-desc {
+					margin-top: 0;
+					min-height: 13em;
 				}
 			}
 		}
