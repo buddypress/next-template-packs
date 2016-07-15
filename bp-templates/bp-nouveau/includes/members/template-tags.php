@@ -592,11 +592,21 @@ function bp_nouveau_member_description( $user_id = 0 ) {
 		}
 	}
 
-	add_filter( 'the_author_description', 'nl2br' );
+	add_filter( 'the_author_description', 'make_clickable', 9 );
+	add_filter( 'the_author_description', 'wpautop'           );
+	add_filter( 'the_author_description', 'wptexturize'       );
+	add_filter( 'the_author_description', 'convert_smilies'   );
+	add_filter( 'the_author_description', 'convert_chars'     );
+	add_filter( 'the_author_description', 'stripslashes'      );
 
 	the_author_meta( 'description', $user_id );
 
-	remove_filter( 'the_author_description', 'nl2br' );
+	remove_filter( 'the_author_description', 'make_clickable', 9 );
+	remove_filter( 'the_author_description', 'wpautop'           );
+	remove_filter( 'the_author_description', 'wptexturize'       );
+	remove_filter( 'the_author_description', 'convert_smilies'   );
+	remove_filter( 'the_author_description', 'convert_chars'     );
+	remove_filter( 'the_author_description', 'stripslashes'      );
 }
 
 /**
