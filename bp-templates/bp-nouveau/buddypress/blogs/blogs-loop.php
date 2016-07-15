@@ -39,11 +39,11 @@ bp_nouveau_before_loop(); ?>
 				<?php bp_nouveau_blogs_loop_buttons(); ?>
 
 				<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
-				<p class="meta last-post">
+					<p class="meta last-post">
 
 						<?php bp_blog_latest_post(); ?>
 
-				</p>
+					</p>
 				<?php endif; ?>
 
 			</div>
