@@ -30,7 +30,7 @@ bp_nouveau_before_loop(); ?>
 
 					<h2 class="list-title blogs-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></h2>
 
-					<div class="item-meta"><span class="activity"><?php bp_blog_last_active(); ?></span></div>
+					<p class="last-activity item-meta"><?php bp_blog_last_active(); ?></p>
 
 					<?php bp_nouveau_blogs_loop_item(); ?>
 
@@ -39,11 +39,11 @@ bp_nouveau_before_loop(); ?>
 				<?php bp_nouveau_blogs_loop_buttons(); ?>
 
 				<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
-					<div class="meta">
+				<p class="meta last-post">
 
 						<?php bp_blog_latest_post(); ?>
 
-					</div>
+				</p>
 				<?php endif; ?>
 
 			</div>
