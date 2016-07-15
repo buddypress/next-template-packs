@@ -2729,8 +2729,16 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid.groups-list .wrap .item-desc {
-	margin-top: 0;
-	min-height: 13em;
+	height: 4.5em;
+	margin: 0 auto 2.5em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.grid.groups-list .wrap .item-desc:focus, .grid.groups-list .wrap .item-desc:hover {
+	left: 0;
+	height: auto;
+	overflow: visible;
 }
 
 .grid.blogs-list .wrap {

@@ -266,8 +266,17 @@
 				}
 
 				.item-desc {
-					margin-top: 0;
-					min-height: 13em;
+					height: 4.5em;
+					margin: 0 auto 2.5em;
+					overflow: hidden;
+					text-overflow: ellipsis;
+
+					&:focus,
+					&:hover {
+						left: 0;
+						height: auto;
+						overflow: visible;
+					}
 				}
 			}
 		}
