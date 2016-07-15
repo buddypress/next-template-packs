@@ -8,9 +8,10 @@
 
 // ======= Typography ======
 
-// BP provides two mixins for font size one basic  that states a value and can
-// produce rem & px versions the other that calculates  a reduced size at smaller screen sizes
-// Worked on the medium em breakpoints, and therefore is responsive in nature.
+// BP provides two mixins for font size, one basic  that states a value and can
+// produce rem & px versions the other that calculates  a reduced size for small
+// screen sizes or series of screens described as breakpoints & can be termed responsive font sizing.
+
 
 
 // Font size decs are used with caution BP doesn't manage
@@ -22,9 +23,8 @@
 }
 
 
-
-// The following Sass map handles some basic re-sizing of BP font
-// sizes at below & above medium breakpoints.
+// The following Sass map handles some basic re-sizing of BP fonts.
+// sizes are set to change on the medium breakpoint.
 // It is hard for BP to know what the theme is doing so we are limited in what we can do here.
 // The dev can feed a value to the mixin which will then be calculated below to find a reduced size
 
@@ -36,8 +36,8 @@
 	$larger: $the-sizes;
 
 	$the-sizes: (
-  null  : $small,
-  46.8em : $larger
+  null:   $small,
+  46.8em: $larger
 	);
 
   @each $font-breakpoint, $resonsive-font-size in $the-sizes {
