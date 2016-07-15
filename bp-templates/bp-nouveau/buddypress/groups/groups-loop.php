@@ -38,7 +38,7 @@ bp_nouveau_before_loop(); ?>
 
 					<?php endif; ?>
 
-						<p class="last-activity item-meta"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></p>
+					<p class="last-activity item-meta"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></p>
 
 					<div class="item-desc"><?php bp_group_description_excerpt(); ?></div>
 
