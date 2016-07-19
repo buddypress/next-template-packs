@@ -8,8 +8,7 @@
  */
 ?>
 
-<div id="item-nav">
-	<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
+	<div class="item-list-tabs no-ajax single-screen-navs" id="object-nav" role="navigation">
 
 		<?php if ( bp_nouveau_has_nav( array( 'object' => 'groups' ) ) ) : ?>
 
@@ -36,4 +35,3 @@
 		<?php endif ; ?>
 
 	</div>
-</div><!-- #item-nav -->
