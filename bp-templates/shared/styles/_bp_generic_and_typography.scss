@@ -10,5 +10,14 @@ body {
 				text-decoration: none;
 			}
 		}
+
+		// Some themes have a negative left margin on the blockquote element??
+		#item-body,
+		.bp-lists {
+			blockquote {
+				margin-left: $marg-sml;
+			}
+		}
+
 	}
 }
