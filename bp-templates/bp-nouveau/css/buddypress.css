@@ -53,6 +53,11 @@ body .buddypress * a {
 	text-decoration: none;
 }
 
+body .buddypress #item-body blockquote,
+body .buddypress .bp-lists blockquote {
+	margin-left: 10px;
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 2.0 - Navigation - General
@@ -2743,4 +2748,51 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .grid.blogs-list .wrap {
 	min-height: 350px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .vertical {
+		overflow: visible;
+	}
+	.buddypress .vertical ul {
+		border-right: 1px solid #e0e0e0;
+		float: left;
+		margin-right: -1px;
+		width: 30%;
+	}
+	.buddypress .vertical li {
+		float: none;
+	}
+	.buddypress .vertical li span {
+		background: #eee;
+		border-radius: 10%;
+		float: right;
+		margin-right: 2px;
+	}
+	.bp-vertical-nav #item-body {
+		border-left: 1px solid #e0e0e0;
+		overflow: hidden;
+		padding: 0 0 0 1em;
+		width: 70%;
+	}
+	.bp-vertical-nav #item-body #subnav {
+		background: #eee;
+		margin: 0 0 0 -15px;
+		width: auto;
+	}
+	.bp-vertical-nav #item-body #subnav li {
+		font-size: 14px;
+		margin: 10px 0;
+	}
+	.bp-vertical-nav #item-body #subnav li a {
+		border-right: 1px solid #ccc;
+		padding: 0 0.5em;
+	}
+	.bp-vertical-nav #item-body #subnav li.selected a {
+		color: #333;
+		text-decoration: underline;
+	}
+	.bp-vertical-nav #item-body #subnav li:last-child a {
+		border: none;
+	}
 }

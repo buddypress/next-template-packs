@@ -1,6 +1,8 @@
 // BP Layouts
 // Layouts provides classes to handle specific module layouts on a user selectable basis
 
+// ==== The Grid Layout Classes ====
+
 // BP Lists (loops) may be suited to a grid layout e.g members loops
 // These classes added to the elements will provide these styles.
 
@@ -150,7 +152,7 @@
 
 	// if grid is set & this is a member, group or blog loop
 	// we want to re-style some of the elements in the item
-	// we'll exclude activity from this though
+
 	.grid.bp-list {
 		padding-top: $pad-med;
 
@@ -288,3 +290,79 @@
 		}
 
 	} // close .grid
+
+	// ==== Vertical Navigation Classes ====
+
+// These classes added to the BP user navigation elements
+// will provide rules to modify the layout to present the
+// parent object navigation in a vertical column & sub navs
+// horizontally across the item-body
+
+@include medium-up() {
+	.buddypress {
+		.vertical {
+			overflow: visible;
+
+			ul {
+				border-right: 1px solid $med-light-grey;
+				float: left;
+				margin-right: -1px;
+				width: 30%;
+			}
+
+			li {
+				float: none;
+
+					span {
+						background: $grey;
+						border-radius: 10%;
+						float: right;
+						margin-right: 2px;
+					}
+			}
+
+		}
+	} // close .buddypress
+
+	// re-factor the related elements like the #item-body so it sits alongside(floated)
+
+	.bp-vertical-nav { // the body class
+		#item-body {
+			border-left: 1px solid $med-light-grey;
+			overflow: hidden;
+			padding: 0 0 0 $pad-med;
+			width: 70%;
+
+			#subnav {
+				background: $grey;
+				margin: 0 0 0 (-$marg-med);
+				width: auto;
+
+				li {
+					@include font-size(14);
+					margin: $marg-sml 0;
+
+					a {
+						border-right: 1px solid $bp-border-dark;
+						padding: 0 $pad-sml;
+					}
+				}
+
+				li.selected {
+					a {
+						color: $black;
+						text-decoration: underline;
+					}
+				}
+
+				li:last-child {
+					a {
+						border: none;
+					}
+				}
+
+			} // close #subnav
+		}
+	}
+
+} // close @media
