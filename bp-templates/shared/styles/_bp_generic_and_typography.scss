@@ -6,7 +6,8 @@ body {
 		* {
 			// some WP themes add anchor border bottom :(
 			a {
-				border-bottom: none;
+				border-bottom: 0;
+				box-shadow: none;
 				text-decoration: none;
 			}
 		}

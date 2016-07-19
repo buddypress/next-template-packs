@@ -49,7 +49,8 @@
 *-------------------------------------------------------------------------------
 */
 body .buddypress * a {
-	border-bottom: none;
+	border-bottom: 0;
+	box-shadow: none;
 	text-decoration: none;
 }
 
