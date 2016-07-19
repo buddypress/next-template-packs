@@ -22,3 +22,10 @@ body {
 
 	}
 }
+// Some themes have very restricted content widths for pages or entry-content (2013, 2014)
+// Lets remove this
+body.buddypress {
+	.entry-content {
+		max-width: none;
+	}
+}

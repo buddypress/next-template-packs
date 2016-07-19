@@ -1,5 +1,13 @@
 // BP Layouts
 // Layouts provides classes to handle specific module layouts on a user selectable basis
+// The sheet also adds layout properties such border-box
+
+#item-body,
+.single-screen-navs {
+	@include box-model();
+}
+
+
 
 // ==== The Grid Layout Classes ====
 
@@ -331,7 +339,6 @@
 			border-left: 1px solid $med-light-grey;
 			overflow: hidden;
 			padding: 0 0 0 $pad-med;
-			width: 70%;
 
 			#subnav {
 				background: $grey;

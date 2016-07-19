@@ -42,6 +42,7 @@
 
 8.0 - Classes - Messages, Ajax, Widgets, Buttons
 
+9.0 - Layout Classes.
 --------------------------------------------------------------*/
 /**
 *-------------------------------------------------------------------------------
@@ -57,6 +58,10 @@ body .buddypress * a {
 body .buddypress #item-body blockquote,
 body .buddypress .bp-lists blockquote {
 	margin-left: 10px;
+}
+
+body.buddypress .entry-content {
+	max-width: none;
 }
 
 /**
@@ -2516,6 +2521,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * @section 9.0 - Layout classes
 *-------------------------------------------------------------------------------
 */
+#item-body,
+.single-screen-navs {
+	-webkit-box-sizing: "border-box";
+	-moz-box-sizing: "border-box";
+	box-sizing: "border-box";
+}
+
 .grid > li,
 .grid > li .generic-button a {
 	-webkit-box-sizing: border-box;
@@ -2774,7 +2786,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		border-left: 1px solid #e0e0e0;
 		overflow: hidden;
 		padding: 0 0 0 1em;
-		width: 70%;
 	}
 	.bp-vertical-nav #item-body #subnav {
 		background: #eee;
