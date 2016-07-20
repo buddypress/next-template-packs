@@ -84,6 +84,22 @@
 	}
 }
 
+// 'clearfix' allows us to pass a element, class or id through of an element
+// we need to have float containment on and where getting to the physical element
+// to add a class of 'clearfix' is problematic.
+@mixin clearfix-element($item) {
+
+	#{$item}:before,
+	#{$item}:after {
+		content: " ";
+		display: table;
+	}
+	#{$item}:after {
+		clear:both;
+	}
+
+}
+
 
 // To allow mixins to pass VendorPrefix scss-lint tests we disable lint-test
 // for specific blocks / rulesets
