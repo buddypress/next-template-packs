@@ -23,9 +23,26 @@ body {
 	}
 }
 // Some themes have very restricted content widths for pages or entry-content (2013, 2014)
-// Lets remove this
+// Lets adjust these restrictions
 body.buddypress {
 	.entry-content {
 		max-width: none;
+		padding: 0 $pad-sml;
+	}
+}
+
+// BP Theme Compatibility isn't technically a theme and has to
+// inherit and move over for a themes styles so with generic styling of
+// elements we have limited scope
+
+// Ensure themes can't cause issues with headings.
+.buddypress {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		clear: none;
 	}
 }
