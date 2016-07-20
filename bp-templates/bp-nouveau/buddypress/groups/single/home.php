@@ -8,7 +8,7 @@
  */
 
 ?>
-<div id="buddypress">
+<div id="buddypress" class="buddypress bp-vertical-nav">
 
 	<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
@@ -20,19 +20,23 @@
 
 	</div><!-- #item-header -->
 
-	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
+	<div class="bp-wrap">
 
-		<?php bp_get_template_part( 'groups/single/parts/item-nav' ); ?>
+		<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
-	<?php endif; ?>
+			<?php bp_get_template_part( 'groups/single/parts/item-nav' ); ?>
 
-	<div id="item-body">
+		<?php endif; ?>
 
-		<?php bp_nouveau_group_template_part(); ?>
+		<div id="item-body">
 
-	</div><!-- #item-body -->
+			<?php bp_nouveau_group_template_part(); ?>
 
-	<?php bp_nouveau_group_hook( 'after', 'home_content' ); ?>
+		</div><!-- #item-body -->
+
+	</div><!-- // .bp-wrap -->
+
+		<?php bp_nouveau_group_hook( 'after', 'home_content' ); ?>
 
 	<?php endwhile; endif; ?>
 

@@ -46,3 +46,7 @@ body.buddypress {
 		clear: none;
 	}
 }
+
+// Ensure the .bp-wrap element always contains it's children - this may cause issues
+// but gropus single requires it.
+@include clearfix-element('.bp-wrap');

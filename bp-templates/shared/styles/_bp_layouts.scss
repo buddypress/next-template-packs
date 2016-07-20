@@ -351,11 +351,14 @@
 
 		.bp-wrap {
 			background: $light-grey;
+			margin-bottom: $marg-med;
 		}
 
 		#item-body {
 			background: #fff;
 			border-left: 1px solid $med-light-grey;
+			margin: 0;
+			min-height: 400px;
 			overflow: hidden;
 			padding: 0 0 0 $pad-med;
 
@@ -374,7 +377,7 @@
 					}
 				}
 
-				li.selected {
+				li.current {
 					a {
 						color: $black;
 						text-decoration: underline;
