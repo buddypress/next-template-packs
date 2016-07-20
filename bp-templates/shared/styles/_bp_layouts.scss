@@ -321,12 +321,25 @@
 			li {
 				float: none;
 
-					span {
-						background: $grey;
-						border-radius: 10%;
-						float: right;
-						margin-right: 2px;
-					}
+				&.selected a {
+					background: $grey;
+				}
+
+				&:focus,
+				&:hover  {
+					background: $grey;
+				}
+
+				span {
+					background: $med-light-grey;
+					border-radius: 10%;
+					float: right;
+					margin-right: 2px;
+				}
+
+				&:hover span {
+					border-color: $light-grey;
+				}
 			}
 
 		}
@@ -334,14 +347,20 @@
 
 	// re-factor the related elements like the #item-body so it sits alongside(floated)
 
-	.bp-vertical-nav { // the body class
+	.bp-vertical-nav { // the body or additional #buddypress element class
+
+		.bp-wrap {
+			background: $light-grey;
+		}
+
 		#item-body {
+			background: #fff;
 			border-left: 1px solid $med-light-grey;
 			overflow: hidden;
 			padding: 0 0 0 $pad-med;
 
 			#subnav {
-				background: $grey;
+				background: $light-grey;
 				margin: 0 0 0 (-$marg-med);
 				width: auto;
 

@@ -62,6 +62,16 @@ body .buddypress .bp-lists blockquote {
 
 body.buddypress .entry-content {
 	max-width: none;
+	padding: 0 0.5em;
+}
+
+.buddypress h1,
+.buddypress h2,
+.buddypress h3,
+.buddypress h4,
+.buddypress h5,
+.buddypress h6 {
+	clear: none;
 }
 
 /**
@@ -170,7 +180,7 @@ body.buddypress .entry-content {
 .buddypress .item-list-tabs li.selected a span,
 .buddypress .item-list-tabs li.current a span,
 .buddypress .item-list-tabs li a:hover span {
-	background-color: #eee;
+	background-color: #ccc;
 }
 
 .buddypress_object_nav .item-list-tabs li.selected a span,
@@ -932,7 +942,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .buddypress .members-list li .user-update {
-	color: #eee;
+	color: #ccc;
 	font-size: 12px;
 }
 
@@ -2776,19 +2786,32 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress .vertical li {
 		float: none;
 	}
+	.buddypress .vertical li.selected a {
+		background: #ccc;
+	}
+	.buddypress .vertical li:focus, .buddypress .vertical li:hover {
+		background: #ccc;
+	}
 	.buddypress .vertical li span {
-		background: #eee;
+		background: #e0e0e0;
 		border-radius: 10%;
 		float: right;
 		margin-right: 2px;
 	}
+	.buddypress .vertical li:hover span {
+		border-color: #eaeaea;
+	}
+	.bp-vertical-nav .bp-wrap {
+		background: #eaeaea;
+	}
 	.bp-vertical-nav #item-body {
+		background: #fff;
 		border-left: 1px solid #e0e0e0;
 		overflow: hidden;
 		padding: 0 0 0 1em;
 	}
 	.bp-vertical-nav #item-body #subnav {
-		background: #eee;
+		background: #eaeaea;
 		margin: 0 0 0 -15px;
 		width: auto;
 	}
