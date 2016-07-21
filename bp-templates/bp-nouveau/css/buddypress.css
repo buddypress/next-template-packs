@@ -84,6 +84,16 @@ body.buddypress .entry-content {
 	clear: both;
 }
 
+.bp-label-text {
+	font-size: 13px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.bp-label-text {
+		font-size: 16px;
+	}
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 2.0 - Navigation - General
@@ -1892,6 +1902,10 @@ div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	border: 1px solid #ccc;
 }
 
+.buddypress .standard-form .bp-controls-wrap {
+	margin: 1em 0;
+}
+
 .buddypress .standard-form textarea,
 .buddypress .standard-form input[type=text],
 .buddypress .standard-form input[type=color],
@@ -1933,7 +1947,6 @@ div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 
 .buddypress .standard-form textarea {
 	height: 120px;
-	width: 75%;
 }
 
 .buddypress .standard-form textarea#message_content {
@@ -2821,11 +2834,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		margin: 0;
 		min-height: 400px;
 		overflow: hidden;
-		padding: 0 0 0 1em;
+		padding: 0 0 0 0.5em;
 	}
 	.bp-vertical-nav #item-body #subnav {
 		background: #eaeaea;
-		margin: 0 0 0 -15px;
+		margin: 0 0 0 -5px;
 		width: auto;
 	}
 	.bp-vertical-nav #item-body #subnav li {

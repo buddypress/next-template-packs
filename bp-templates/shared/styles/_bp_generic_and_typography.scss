@@ -50,3 +50,11 @@ body.buddypress {
 // Ensure the .bp-wrap element always contains it's children - this may cause issues
 // but gropus single requires it.
 @include clearfix-element('.bp-wrap');
+
+// ====== BP Typograph Elements ======
+
+// General labels text for controls
+
+.bp-label-text {
+	@include responsive-font(16);
+}

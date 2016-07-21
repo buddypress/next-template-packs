@@ -1,5 +1,12 @@
 // BP Forms Elements Global Styles
 
+// Some essential classes used for forms elements:
+// labels - sizing especially for standalone control
+// 'bp-label-text'
+//
+// Where a 'p' element is used to wrap form controls that element should be classed with
+// 'bp-controls-wrap'
+
 .buddypress {
 
 
@@ -10,6 +17,10 @@
 		}
 
 	.standard-form {
+
+		.bp-controls-wrap {
+			margin: 1em 0;
+		}
 
 		textarea,
 		input[type=text],
@@ -52,7 +63,7 @@
 
 		textarea {
 			height: 120px; // bad rule! ?
-			width: 75%;
+		//	width: 75%;
 		}
 
 		textarea#message_content {
