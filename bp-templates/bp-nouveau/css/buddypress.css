@@ -65,13 +65,14 @@ body.buddypress .entry-content {
 	padding: 0 0.5em;
 }
 
-.buddypress h1,
-.buddypress h2,
-.buddypress h3,
-.buddypress h4,
-.buddypress h5,
-.buddypress h6 {
+body .buddypress h1,
+body .buddypress h2,
+body .buddypress h3,
+body .buddypress h4,
+body .buddypress h5,
+body .buddypress h6 {
 	clear: none;
+	margin: 1em 0;
 }
 
 .bp-wrap:before,
@@ -1199,6 +1200,22 @@ body.no-js .single-item-header .js-self-profile-button {
 * @subsection 5.2.1.1 - Management Settings Screens
 *-----------------------------------------
 */
+.radio .group-conditions {
+	font-size: 13px;
+	margin-left: 20px;
+	width: 80%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.radio .group-conditions {
+		font-size: 16px;
+	}
+}
+
+.radio .group-conditions dd ul {
+	margin: 0 0 20px 20px;
+}
+
 /**
 *-----------------------------------------
 * @subsection 5.2.1.2 - Group Members List
@@ -1906,6 +1923,16 @@ div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	border: 1px solid #ccc;
 }
 
+.buddypress *[disabled="disabled"] {
+	cursor: default;
+	opacity: 0.4;
+}
+
+.buddypress fieldset legend {
+	font-size: inherit;
+	font-weight: bold;
+}
+
 .buddypress .standard-form .bp-controls-wrap {
 	margin: 1em 0;
 }
@@ -1940,11 +1967,6 @@ div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	padding: 0.5em;
 }
 
-.buddypress .standard-form *[disabled="disabled"] {
-	cursor: default;
-	opacity: 0.4;
-}
-
 .buddypress .standard-form select {
 	padding: 3px;
 }
@@ -1974,15 +1996,6 @@ div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	font-weight: bold;
 	margin: 15px 0 5px;
 	width: auto;
-}
-
-.buddypress .standard-form .radio ul {
-	list-style: disc;
-	margin: 10px 0 15px 30px;
-}
-
-.buddypress .standard-form .radio ul li {
-	margin: 5px;
 }
 
 .buddypress .standard-form a.clear-value {

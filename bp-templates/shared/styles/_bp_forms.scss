@@ -16,6 +16,18 @@
 			}
 		}
 
+	*[disabled="disabled"] {
+		cursor: default;
+		opacity: 0.4;
+	}
+
+	fieldset {
+		legend {
+			font-size: inherit;
+			font-weight: bold;
+		}
+	}
+
 	.standard-form {
 
 		.bp-controls-wrap {
@@ -52,11 +64,6 @@
 			padding: $pad-sml;
 		}
 
-		*[disabled="disabled"] {
-			cursor: default;
-			opacity: 0.4;
-		}
-
 		select {
 			padding: 3px;
 		}
@@ -87,15 +94,6 @@
 			font-weight: bold;
 			margin: $marg-med 0 $marg-xsml;
 			width: auto;
-		}
-
-		.radio ul {
-			list-style: disc;
-			margin: $marg-sml 0 $marg-med $marg-xlrg;
-
-			li {
-				margin: $marg-xsml;
-			}
 		}
 
 		a.clear-value {
