@@ -360,11 +360,11 @@
 			margin: 0;
 			min-height: 400px;
 			overflow: hidden;
-			padding: 0 0 0 $pad-med;
+			padding: 0 0 0 $pad-sml;
 
 			#subnav {
 				background: $light-grey;
-				margin: 0 0 0 (-$marg-med);
+				margin: 0 0 0 -5px;
 				width: auto;
 
 				li {
