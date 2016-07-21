@@ -12,29 +12,29 @@
 
 	<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
-	<?php bp_nouveau_group_hook( 'before', 'home_content' ); ?>
+		<?php bp_nouveau_group_hook( 'before', 'home_content' ); ?>
 
-	<div id="item-header" role="complementary" data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups" class="groups-header single-headers">
+		<div id="item-header" role="complementary" data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups" class="groups-header single-headers">
 
-		<?php bp_nouveau_group_header_template_part(); ?>
+			<?php bp_nouveau_group_header_template_part(); ?>
 
-	</div><!-- #item-header -->
+		</div><!-- #item-header -->
 
-	<div class="bp-wrap">
+		<div class="bp-wrap">
 
-		<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
+			<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
 
-			<?php bp_get_template_part( 'groups/single/parts/item-nav' ); ?>
+				<?php bp_get_template_part( 'groups/single/parts/item-nav' ); ?>
 
-		<?php endif; ?>
+			<?php endif; ?>
 
-		<div id="item-body">
+			<div id="item-body">
 
-			<?php bp_nouveau_group_template_part(); ?>
+				<?php bp_nouveau_group_template_part(); ?>
 
-		</div><!-- #item-body -->
+			</div><!-- #item-body -->
 
-	</div><!-- // .bp-wrap -->
+		</div><!-- // .bp-wrap -->
 
 		<?php bp_nouveau_group_hook( 'after', 'home_content' ); ?>
 
