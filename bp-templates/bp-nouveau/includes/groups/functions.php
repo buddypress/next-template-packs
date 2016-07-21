@@ -618,11 +618,11 @@ function bp_nouveau_groups_customizer_sections( $sections = array() ) {
 			'priority'    => 20,
 			'description' => __( 'Set your preferences for the groups default front page.', 'bp-nouveau' ),
 		),
-		'bp_nouveau_group_nav_order' => array(
+		'bp_nouveau_group_primary_nav' => array(
 			'title'       => __( 'Group\'s navigation', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 40,
-			'description' => __( 'Set the order for the groups navigation items.', 'bp-nouveau' ),
+			'description' => __( 'Customize the groups primary navigations. Navigate to any random group to live preview your changes.', 'bp-nouveau' ),
 		),
 	) );
 }
@@ -653,6 +653,13 @@ function bp_nouveau_groups_customizer_settings( $settings = array() ) {
 		),
 		'bp_nouveau_appearance[group_front_description]' => array(
 			'index'             => 'group_front_description',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[group_nav_display]' => array(
+			'index'             => 'group_nav_display',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -703,10 +710,16 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'settings'   => 'bp_nouveau_appearance[group_front_description]',
 			'type'       => 'checkbox',
 		),
+		'group_nav_display' => array(
+			'label'      => __( 'Display the Group\'s primary nav vertically.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_group_primary_nav',
+			'settings'   => 'bp_nouveau_appearance[group_nav_display]',
+			'type'       => 'checkbox',
+		),
 		'group_nav_order' => array(
 			'class'       => 'BP_Nouveau_Nav_Customize_Control',
 			'label'      => __( 'Reorder the Groups single items primary navigation.', 'bp-nouveau' ),
-			'section'    => 'bp_nouveau_group_nav_order',
+			'section'    => 'bp_nouveau_group_primary_nav',
 			'settings'   => 'bp_nouveau_appearance[group_nav_order]',
 			'type'       => 'group',
 		),

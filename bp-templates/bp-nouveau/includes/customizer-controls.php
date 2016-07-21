@@ -49,23 +49,19 @@ class BP_Nouveau_Nav_Customize_Control extends WP_Customize_Control {
 
 			if ( $item_nav ) {
 				$guide = __( 'All the possible group nav items are listed below, in some groups some of these nav items might not be active.', 'bp-nouveau' );
-				$guide = ' ' . __( 'Navigate to any random group to live preview your order changes.', 'bp-nouveau' );
 			}
 
 		// It's a user!
 		} else {
-
 			$item_nav = bp_nouveau_member_customizer_nav();
-
-			if ( $item_nav ) {
-				$guide = __( 'Navigate to any random member\'s profile to live preview your order changes.', 'bp-nouveau' );
-			}
 		}
 		?>
 
-		<p class="description">
-			<?php echo esc_html( $guide ); ?>
-		</p>
+		<?php if ( isset( $guide ) ) : ?>
+			<p class="description">
+				<?php echo esc_html( $guide ); ?>
+			</p>
+		<?php endif ; ?>
 
 		<?php if ( ! empty( $item_nav ) ) : ?>
 

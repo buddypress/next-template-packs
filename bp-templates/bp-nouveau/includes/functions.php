@@ -626,10 +626,11 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
-		'user_front_page' => 1,
-		'user_front_bio'  => 0,
-		'user_nav_order'  => array(),
-		'members_layout'  => 1,
+		'user_front_page'  => 1,
+		'user_front_bio'   => 0,
+		'user_nav_display' => 0,       // O is default (horizontally). 1 is vertically.
+		'user_nav_order'   => array(),
+		'members_layout'   => 1,
 	);
 
 	if ( bp_is_active( 'groups' ) ) {
@@ -637,6 +638,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_front_page'        => 1,
 			'group_front_boxes'       => 1,
 			'group_front_description' => 0,
+			'group_nav_display'       => 0,       // O is default (horizontally). 1 is vertically.
 			'group_nav_order'         => array(),
 			'groups_layout'           => 1,
 		) );
@@ -722,11 +724,11 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'priority'    => 10,
 			'description' => __( 'Set your preferences about the members default front page.', 'bp-nouveau' ),
 		),
-		'bp_nouveau_user_nav_order' => array(
+		'bp_nouveau_user_primary_nav' => array(
 			'title'       => __( 'User\'s navigation', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 30,
-			'description' => __( 'Set the order for the members navigation items.', 'bp-nouveau' ),
+			'description' => __( 'Customize the members primary navigations. Navigate to any random member\'s profile to live preview your changes.', 'bp-nouveau' ),
 		),
 		'bp_nouveau_loops_layout' => array(
 			'title'       => __( 'Directories layout', 'bp-nouveau' ),
@@ -751,6 +753,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		),
 		'bp_nouveau_appearance[user_front_bio]' => array(
 			'index'             => 'user_front_bio',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[user_nav_display]' => array(
+			'index'             => 'user_nav_display',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -798,10 +807,16 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'settings'   => 'bp_nouveau_appearance[user_front_bio]',
 			'type'       => 'checkbox',
 		),
+		'user_nav_display' => array(
+			'label'      => __( 'Display the User\'s primary nav vertically.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_user_primary_nav',
+			'settings'   => 'bp_nouveau_appearance[user_nav_display]',
+			'type'       => 'checkbox',
+		),
 		'user_nav_order' => array(
 			'class'       => 'BP_Nouveau_Nav_Customize_Control',
 			'label'      => __( 'Reorder the Members single items primary navigation.', 'bp-nouveau' ),
-			'section'    => 'bp_nouveau_user_nav_order',
+			'section'    => 'bp_nouveau_user_primary_nav',
 			'settings'   => 'bp_nouveau_appearance[user_nav_order]',
 			'type'       => 'user',
 		),

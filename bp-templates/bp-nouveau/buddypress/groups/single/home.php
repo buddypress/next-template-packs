@@ -8,7 +8,7 @@
  */
 
 ?>
-<div id="buddypress" class="buddypress bp-vertical-nav">
+<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
 	<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 

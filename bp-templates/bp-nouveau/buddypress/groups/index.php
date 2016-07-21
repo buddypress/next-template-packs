@@ -8,7 +8,7 @@
  */
 ?>
 
-<div id="buddypress" class="buddypress">
+<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
     <?php bp_nouveau_before_groups_directory_content(); ?>
 

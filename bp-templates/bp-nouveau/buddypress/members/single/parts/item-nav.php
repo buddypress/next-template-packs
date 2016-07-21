@@ -8,7 +8,7 @@
  */
 ?>
 
-	<div class="item-list-tabs no-ajax single-screen-navs vertical" id="object-nav" role="navigation">
+	<div class="<?php bp_nouveau_single_item_nav_classes(); ?>" id="object-nav" role="navigation">
 
 		<?php if ( bp_nouveau_has_nav( array( 'type' => 'primary' ) ) ) : ?>
 

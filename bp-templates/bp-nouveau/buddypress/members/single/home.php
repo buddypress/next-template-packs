@@ -9,7 +9,7 @@
 
 ?>
 
-<div id="buddypress" class="buddypress bp-vertical-nav">
+<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
 	<?php bp_nouveau_member_hook( 'before', 'home_content' ); ?>
 

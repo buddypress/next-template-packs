@@ -1208,6 +1208,94 @@ function bp_nouveau_directory_nav_object() {
 		return esc_attr( $nav_item->component );
 	}
 
+/** Template tags for the single item navs ***********************************/
+
+/**
+ * Output main BuddyPress container classes
+ *
+ * @since  1.0.0
+ *
+ * @return string CSS classes
+ */
+function bp_nouveau_buddypress_classes() {
+	echo bp_nouveau_get_buddypress_classes();
+}
+
+	/**
+	 * Returns the main BuddyPress container classes
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string CSS classes
+	 */
+	function bp_nouveau_get_buddypress_classes() {
+		$classes    = array( 'buddypress' );
+		$component  = bp_current_component();
+		$bp_nouveau = bp_nouveau();
+
+		if ( bp_is_user() ) {
+			$customizer_option = 'user_nav_display';
+			$component         = 'members';
+		} elseif ( bp_is_group() ) {
+			$customizer_option = 'group_nav_display';
+		} else {
+			$customizer_option = apply_filters( 'bp_nouveau_single_item_display_settings_id', '' );
+		}
+
+		// Add classes according to site owners preferences.
+		if ( ! empty( $customizer_option ) ) {
+			$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+
+			if ( ! empty( $layout_prefs ) && (int) $layout_prefs === 1 ) {
+				$classes[] = 'bp-vertical-nav';
+
+				// Set the global for a later use.
+				$bp_nouveau->{$component}->single_primary_nav_layout = $layout_prefs;
+			}
+		}
+
+		$class = array_map( 'sanitize_html_class', $classes );
+
+		return apply_filters( 'bp_nouveau_get_buddypress_classes', join( ' ', $class ), $classes );
+	}
+
+/**
+ * Output single item nav container classes
+ *
+ * @since  1.0.0
+ *
+ * @return string CSS classes
+ */
+function bp_nouveau_single_item_nav_classes() {
+	echo bp_nouveau_get_single_item_nav_classes();
+}
+
+	/**
+	 * Returns the single item nav container classes
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string CSS classes
+	 */
+	function bp_nouveau_get_single_item_nav_classes() {
+		$classes    = array( 'item-list-tabs', 'no-ajax', 'single-screen-navs' );
+		$component  = bp_current_component();
+		$bp_nouveau = bp_nouveau();
+
+		if ( bp_is_user() ) {
+			$component = 'members';
+		}
+
+		if ( ! empty( $bp_nouveau->{$component}->single_primary_nav_layout ) && (int) $bp_nouveau->{$component}->single_primary_nav_layout === 1 ) {
+			$classes[] = 'vertical';
+		}
+
+		$class = array_map( 'sanitize_html_class', $classes );
+
+		return apply_filters( 'bp_nouveau_get_single_item_nav_classes', join( ' ', $class ), $classes );
+	}
+
+
 /** Template tags for the object search **************************************/
 
 /**
