@@ -36,14 +36,18 @@ body.buddypress {
 // elements we have limited scope
 
 // Ensure themes can't cause issues with headings.
-.buddypress {
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		clear: none;
+body { // add weight
+	.buddypress {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			clear: none;
+			// some themes set massive margins ensure we avoid thse in bp elements
+			margin: 1em 0;
+		}
 	}
 }
 
