@@ -1,6 +1,10 @@
 // Sitewide template error & info messages constructs.
 .buddypress {
 
+	.warn {
+		color: $warn;
+	}
+
 	.bp-help-text {
 		background: $off-white;
 		padding: $pad-sml;

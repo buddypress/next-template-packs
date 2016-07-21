@@ -68,6 +68,11 @@
 		}
 	}
 
+	// this is the groups members.php inline sub-nav elements
+	.sub-nav { // ul
+		padding: 0 $marg-xsml;
+	}
+
 } // close item-list-tabs
 
 #buddypress div#item-nav ul li.loading a {
@@ -239,11 +244,13 @@
 			float: right;
 		}
 	}
+
 	#subnav {
 		.last {
 			float: right;
 		}
 	}
+
 }
 
 
