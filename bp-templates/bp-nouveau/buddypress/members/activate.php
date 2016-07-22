@@ -8,7 +8,7 @@
 
 ?>
 
-<div id="buddypress">
+<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
 	<?php bp_nouveau_activation_hook( 'before', 'page' ); ?>
 
