@@ -130,35 +130,6 @@ body.register .buddypress .page ul {
 	list-style: none;
 }
 
-// medium screens up
-.buddypress {
-	.profile {
-		@include medium-up {
-
-		// Profile group name links
-		// Button navigation as tabbed effect for wide screen
-		@include tabbed-links();
-
-		// For tabbed nav we remove the default button nav styles.
-			ul.button-tabs {
-
-			li,
-			li.current {
-				a,
-				a:focus,
-				a:hover {
-					background: none;
-					border: 0;
-
-				}
-			}
-		}
-
-		} // @media
-
-	}
-}
-
 // Profile Change Avatar
 
 .buddypress {

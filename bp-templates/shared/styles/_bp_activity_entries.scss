@@ -38,7 +38,7 @@
 		&.new_forum_post,
 		&.new_forum_topic {
 			.activity-inner {
-				border-left: 2px solid #eaeaea;
+				border-left: 2px solid $light-grey;
 				margin-left: $marg-sml;
 				padding-left: $pad-med;
 			}
@@ -46,7 +46,7 @@
 
 		&.load-more,
 		&.load-newest {
-			background: #f0f0f0;
+			background: $off-white;
 			font-size: 110%;
 			margin: 15px 0;
 			padding: 10px 15px;

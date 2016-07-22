@@ -597,7 +597,7 @@ body .buddypress h6 {
 }
 
 .activity-list .activity-item.load-more, .activity-list .activity-item.load-newest {
-	background: #f0f0f0;
+	background: #fafafa;
 	font-size: 110%;
 	margin: 15px 0;
 	padding: 10px 15px;
@@ -1478,47 +1478,6 @@ body.no-js .buddypress .field-visibility-settings {
 
 body.register .buddypress .page ul {
 	list-style: none;
-}
-
-@media screen and (min-width: 46.8em) {
-	.buddypress .profile .button-tabs {
-		border-bottom: 1px solid #ccc;
-		margin-bottom: 10px;
-	}
-	.buddypress .profile .button-tabs:before, .buddypress .profile .button-tabs:after {
-		content: " ";
-		display: block;
-	}
-	.buddypress .profile .button-tabs:after {
-		clear: both;
-	}
-	.buddypress .profile .button-tabs li {
-		float: left;
-		list-style: none;
-		margin: 0 15px 0 0;
-	}
-	.buddypress .profile .button-tabs li a {
-		background: none;
-		border: none;
-	}
-	.buddypress .profile .button-tabs li.current {
-		border-color: #ccc #ccc #fff;
-		border-style: solid;
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
-		border-width: 1px;
-		margin-bottom: -1px;
-		padding: 0 0.5em;
-	}
-	.buddypress .profile ul.button-tabs li a,
-	.buddypress .profile ul.button-tabs li a:focus,
-	.buddypress .profile ul.button-tabs li a:hover,
-	.buddypress .profile ul.button-tabs li.current a,
-	.buddypress .profile ul.button-tabs li.current a:focus,
-	.buddypress .profile ul.button-tabs li.current a:hover {
-		background: none;
-		border: 0;
-	}
 }
 
 /**
@@ -2876,5 +2835,46 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.bp-vertical-nav #item-body #subnav li:last-child a {
 		border: none;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .button-tabs {
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 10px;
+	}
+	.buddypress .button-tabs:before, .buddypress .button-tabs:after {
+		content: " ";
+		display: block;
+	}
+	.buddypress .button-tabs:after {
+		clear: both;
+	}
+	.buddypress .button-tabs li {
+		float: left;
+		list-style: none;
+		margin: 0 15px 0 0;
+	}
+	.buddypress .button-tabs li a {
+		background: none;
+		border: none;
+	}
+	.buddypress .button-tabs li.current {
+		border-color: #ccc #ccc #fff;
+		border-style: solid;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		border-width: 1px;
+		margin-bottom: -1px;
+		padding: 0 0.5em;
+	}
+	.buddypress ul.button-tabs li a,
+	.buddypress ul.button-tabs li a:focus,
+	.buddypress ul.button-tabs li a:hover,
+	.buddypress ul.button-tabs li.current a,
+	.buddypress ul.button-tabs li.current a:focus,
+	.buddypress ul.button-tabs li.current a:hover {
+		background: none;
+		border: 0;
 	}
 }

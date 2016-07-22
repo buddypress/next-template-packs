@@ -395,3 +395,35 @@
 	}
 
 } // close @media
+
+// Tabbed links
+
+// Our tabbed links are pulled in via a mixin, our margin
+// BP element must have 'tabbed-links' added and the ul 'button-tabs'
+// medium screens up
+.buddypress {
+
+		@include medium-up {
+
+		// Profile group name links
+		// Button navigation as tabbed effect for wide screen
+		@include tabbed-links();
+
+		// For tabbed nav we remove the default button nav styles.
+			ul.button-tabs {
+
+			li,
+			li.current {
+				a,
+				a:focus,
+				a:hover {
+					background: none;
+					border: 0;
+
+				}
+			}
+		}
+
+		} // @media
+
+}
