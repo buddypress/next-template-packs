@@ -932,10 +932,18 @@ form.ac-form .ac-reply-content input {
 	text-align: center;
 }
 
+.buddypress .groups-list li .group-details {
+	clear: left;
+}
+
 .buddypress .groups-list li .item-desc {
 	clear: left;
 	color: #888;
 	font-style: italic;
+}
+
+.buddypress .groups-list li p {
+	margin: 0 0 .5em;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -1200,6 +1208,22 @@ body.no-js .single-item-header .js-self-profile-button {
 * @subsection 5.2.1.1 - Management Settings Screens
 *-----------------------------------------
 */
+.radio .group-conditions {
+	font-size: 13px;
+	margin-left: 20px;
+	width: 80%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.radio .group-conditions {
+		font-size: 16px;
+	}
+}
+
+.radio .group-conditions dd ul {
+	margin: 0 0 20px 20px;
+}
+
 .radio .group-conditions {
 	font-size: 13px;
 	margin-left: 20px;
@@ -2808,7 +2832,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		background: #eaeaea;
 		margin-bottom: 15px;
 	}
-	.bp-vertical-nav #item-body {
+	.bp-vertical-nav .item-body {
 		background: #fff;
 		border-left: 1px solid #e0e0e0;
 		margin: 0;
@@ -2816,50 +2840,50 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		overflow: hidden;
 		padding: 0 0 0 0.5em;
 	}
-	.bp-vertical-nav #item-body #subnav {
+	.bp-vertical-nav .item-body #subnav {
 		background: #eaeaea;
 		margin: 0 0 0 -5px;
 		width: auto;
 	}
-	.bp-vertical-nav #item-body #subnav li {
+	.bp-vertical-nav .item-body #subnav li {
 		font-size: 14px;
 		margin: 10px 0;
 	}
-	.bp-vertical-nav #item-body #subnav li a {
+	.bp-vertical-nav .item-body #subnav li a {
 		border-right: 1px solid #ccc;
 		padding: 0 0.5em;
 	}
-	.bp-vertical-nav #item-body #subnav li.current a {
+	.bp-vertical-nav .item-body #subnav li.current a {
 		color: #333;
 		text-decoration: underline;
 	}
-	.bp-vertical-nav #item-body #subnav li:last-child a {
+	.bp-vertical-nav .item-body #subnav li:last-child a {
 		border: none;
 	}
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress .button-tabs {
+	.buddypress #item-body .button-tabs {
 		border-bottom: 1px solid #ccc;
 		margin-bottom: 10px;
 	}
-	.buddypress .button-tabs:before, .buddypress .button-tabs:after {
+	.buddypress #item-body .button-tabs:before, .buddypress #item-body .button-tabs:after {
 		content: " ";
 		display: block;
 	}
-	.buddypress .button-tabs:after {
+	.buddypress #item-body .button-tabs:after {
 		clear: both;
 	}
-	.buddypress .button-tabs li {
+	.buddypress #item-body .button-tabs li {
 		float: left;
 		list-style: none;
 		margin: 0 15px 0 0;
 	}
-	.buddypress .button-tabs li a {
+	.buddypress #item-body .button-tabs li a {
 		background: none;
 		border: none;
 	}
-	.buddypress .button-tabs li.current {
+	.buddypress #item-body .button-tabs li.current {
 		border-color: #ccc #ccc #fff;
 		border-style: solid;
 		border-top-left-radius: 4px;
@@ -2868,12 +2892,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		margin-bottom: -1px;
 		padding: 0 0.5em;
 	}
-	.buddypress ul.button-tabs li a,
-	.buddypress ul.button-tabs li a:focus,
-	.buddypress ul.button-tabs li a:hover,
-	.buddypress ul.button-tabs li.current a,
-	.buddypress ul.button-tabs li.current a:focus,
-	.buddypress ul.button-tabs li.current a:hover {
+	.buddypress #item-body ul.button-tabs li a {
+		border-right: 0;
+	}
+	.buddypress #item-body ul.button-tabs li a,
+	.buddypress #item-body ul.button-tabs li a:focus,
+	.buddypress #item-body ul.button-tabs li a:hover,
+	.buddypress #item-body ul.button-tabs li.current a,
+	.buddypress #item-body ul.button-tabs li.current a:focus,
+	.buddypress #item-body ul.button-tabs li.current a:hover {
 		background: none;
 		border: 0;
 	}

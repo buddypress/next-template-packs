@@ -354,7 +354,7 @@
 			margin-bottom: $marg-med;
 		}
 
-		#item-body {
+		.item-body {
 			background: #fff;
 			border-left: 1px solid $med-light-grey;
 			margin: 0;
@@ -398,11 +398,11 @@
 
 // Tabbed links
 
-// Our tabbed links are pulled in via a mixin, our margin
+// Our tabbed links are pulled in via a mixin
 // BP element must have 'tabbed-links' added and the ul 'button-tabs'
 // medium screens up
 .buddypress {
-
+	#item-body {
 		@include medium-up {
 
 		// Profile group name links
@@ -412,18 +412,24 @@
 		// For tabbed nav we remove the default button nav styles.
 			ul.button-tabs {
 
-			li,
-			li.current {
-				a,
-				a:focus,
-				a:hover {
-					background: none;
-					border: 0;
+				li {
+					a {
+						border-right: 0;
+					}
+				}
 
+				li,
+				li.current {
+					a,
+					a:focus,
+					a:hover {
+						background: none;
+						border: 0;
+					}
 				}
 			}
-		}
 
 		} // @media
 
+	}
 }

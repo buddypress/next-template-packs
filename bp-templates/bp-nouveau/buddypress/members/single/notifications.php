@@ -10,7 +10,7 @@
 ?>
 
 <div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-	<ul>
+	<ul class="button-tabs">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
@@ -23,7 +23,7 @@ switch ( bp_current_action() ) :
 	case 'unread' :
 	case 'read'   : ?>
 
-		<div class="item-list-tabs no-ajax" id="subsubnav">
+		<div class="item-list-tabs  no-ajax" id="subsubnav">
 			<ul>
 				<?php bp_nouveau_search_form(); ?>
 
