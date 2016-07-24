@@ -9,7 +9,7 @@
 ?>
 
 <div class="item-list-tabs" id="subnav" role="navigation">
-	<ul>
+	<ul class="button-tabs">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 

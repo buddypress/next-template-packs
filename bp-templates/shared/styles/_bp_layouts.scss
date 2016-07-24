@@ -418,6 +418,15 @@
 					}
 				}
 
+				li.last {
+					float: right;
+					margin: 0;
+
+					a {
+						margin-top: -1em;
+					}
+				}
+
 				li,
 				li.current {
 					a,

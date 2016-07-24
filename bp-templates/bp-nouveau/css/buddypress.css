@@ -2895,6 +2895,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress #item-body ul.button-tabs li a {
 		border-right: 0;
 	}
+	.buddypress #item-body ul.button-tabs li.last {
+		float: right;
+		margin: 0;
+	}
+	.buddypress #item-body ul.button-tabs li.last a {
+		margin-top: -1em;
+	}
 	.buddypress #item-body ul.button-tabs li a,
 	.buddypress #item-body ul.button-tabs li a:focus,
 	.buddypress #item-body ul.button-tabs li a:hover,
