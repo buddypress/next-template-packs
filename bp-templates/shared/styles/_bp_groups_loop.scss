@@ -10,10 +10,18 @@
 					text-align: center;
 				}
 
+			.group-details {
+				clear: left;
+			}
+
 			.item-desc {
 				clear: left;
 				color: $meta-text;
 				font-style: italic;
+			}
+
+			p {
+				margin: 0 0 .5em;
 			}
 
 			@include medium-up() {
