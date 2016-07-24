@@ -2892,6 +2892,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		margin-bottom: -1px;
 		padding: 0 0.5em;
 	}
+	.buddypress #item-body #subnav.tabbed-links {
+		margin-top: -20px;
+	}
 	.buddypress #item-body ul.button-tabs li a {
 		border-right: 0;
 	}

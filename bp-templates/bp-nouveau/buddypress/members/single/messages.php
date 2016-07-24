@@ -8,7 +8,7 @@
 
 ?>
 
-<div class="item-list-tabs" id="subnav" role="navigation">
+<div class="item-list-tabs tabbed-links" id="subnav" role="navigation">
 	<ul class="button-tabs">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
@@ -25,3 +25,4 @@ else :
 	bp_nouveau_messages_member_interface();
 
 endif ;?>
+

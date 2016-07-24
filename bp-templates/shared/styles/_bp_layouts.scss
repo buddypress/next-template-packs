@@ -409,6 +409,10 @@
 		// Button navigation as tabbed effect for wide screen
 		@include tabbed-links();
 
+		#subnav.tabbed-links {
+			margin-top: -($marg-lrg);
+		}
+
 		// For tabbed nav we remove the default button nav styles.
 			ul.button-tabs {
 
