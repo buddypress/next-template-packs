@@ -1,0 +1,18 @@
+// Single Groups Management screens // Groups settings screen
+.radio {
+	.group-conditions {
+		@include responsive-font(16);
+		margin-left: $marg-lrg;
+		width: 80%;
+
+	//dt {
+
+	//	}
+
+		dd {
+			ul {
+				margin: 0 0 $marg-lrg $marg-lrg;
+			}
+		}
+	}
+}

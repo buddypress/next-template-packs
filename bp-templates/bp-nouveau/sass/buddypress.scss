@@ -241,6 +241,9 @@
 *-----------------------------------------
 */
 
+// Import general global styles for single screen item-body
+@import "../../shared/styles/_bp_groups_management";
+
 // Groups settings screen
 .radio {
 	.group-conditions {
@@ -248,9 +251,9 @@
 		margin-left: $marg-lrg;
 		width: 80%;
 
-		dt {
+	//dt {
 
-		}
+	//	}
 
 		dd {
 			ul {
