@@ -10,7 +10,7 @@
 ?>
 
 <div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-	<ul>
+	<ul class="subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
@@ -19,7 +19,7 @@
 
 <?php bp_nouveau_activity_member_post_form() ;?>
 
-<div class="item-list-tabs no-ajax" id="subsubnav">
+<div class="item-list-tabs bp-navs user-subnav no-ajax" id="subsubnav">
 	<ul>
 		<?php bp_nouveau_search_form(); ?>
 

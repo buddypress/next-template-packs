@@ -14,8 +14,8 @@ bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 
 <?php if ( ! bp_is_current_component_core() ) : ?>
 
-	<div class="item-list-tabs no-ajax" id="subnav">
-		<ul>
+	<div class="item-list-tabs bp-navs user-subnav no-ajax" id="subnav">
+		<ul class="subnav">
 
 			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 

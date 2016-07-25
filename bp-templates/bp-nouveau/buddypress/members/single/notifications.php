@@ -9,8 +9,8 @@
 
 ?>
 
-<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-	<ul class="button-tabs">
+<div class="item-list-tabs bp-navs user-subnav no-ajax" id="subnav" role="navigation">
+	<ul class="button-tabs subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 

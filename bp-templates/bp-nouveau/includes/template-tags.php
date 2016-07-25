@@ -1149,8 +1149,8 @@ function bp_nouveau_nav_count() {
  *
  * @since 1.0.0
  */
-function bp_nouveau_directory_type_tabs_class() {
-	echo bp_nouveau_get_directory_type_tabs_class();
+function bp_nouveau_directory_type_navs_class() {
+	echo bp_nouveau_get_directory_type_navs_class();
 }
 
 	/**
@@ -1158,8 +1158,8 @@ function bp_nouveau_directory_type_tabs_class() {
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_directory_type_tabs_class() {
-		$class = sprintf( '%s-type-tabs', bp_current_component() );
+	function bp_nouveau_get_directory_type_navs_class() {
+		$class = sprintf( '%s-type-navs', bp_current_component() );
 
 		return sanitize_html_class( $class );
 	}
@@ -1278,17 +1278,22 @@ function bp_nouveau_single_item_nav_classes() {
 	 * @return string CSS classes
 	 */
 	function bp_nouveau_get_single_item_nav_classes() {
-		$classes    = array( 'item-list-tabs', 'no-ajax', 'single-screen-navs' );
+		$classes    = array( 'item-list-tabs', 'no-ajax', 'bp-navs', 'single-screen-navs' );
 		$component  = bp_current_component();
 		$bp_nouveau = bp_nouveau();
 
 		if ( bp_is_user() ) {
 			$component = 'members';
+			$menu_type = 'users-nav';
+		} else {
+			$menu_type = 'groups-nav';
 		}
 
 		if ( ! empty( $bp_nouveau->{$component}->single_primary_nav_layout ) && (int) $bp_nouveau->{$component}->single_primary_nav_layout === 1 ) {
 			$classes[] = 'vertical';
 		}
+
+		$classes[] = $menu_type;
 
 		$class = array_map( 'sanitize_html_class', $classes );
 

@@ -19,7 +19,7 @@
 
 	<?php endif; ?>
 
-	<div class="item-list-tabs" id="subnav" role="navigation">
+	<div class="item-list-tabs bp-navs dir-navs" id="subnav" role="navigation">
 
 		<ul type="list" class="subnav clearfix">
 
