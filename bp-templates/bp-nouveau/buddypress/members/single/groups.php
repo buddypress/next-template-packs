@@ -10,7 +10,7 @@
 ?>
 
 <div class="item-list-tabs bp-navs user-subnav no-ajax" id="subnav" role="navigation">
-	<ul>
+	<ul class="subnav">
 
 		<?php if ( bp_is_my_profile() ) : ?>
 

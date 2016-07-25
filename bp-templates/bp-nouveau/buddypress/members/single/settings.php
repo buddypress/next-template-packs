@@ -10,8 +10,8 @@
 
 <?php if ( bp_core_can_edit_settings() ) : ?>
 
-	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
-		<ul>
+	<div class="item-list-tabs bp-navs user-subnav no-ajax" id="subnav" role="navigation">
+		<ul class="subnav">
 
 			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 

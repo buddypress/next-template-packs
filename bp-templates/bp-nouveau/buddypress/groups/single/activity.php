@@ -11,8 +11,8 @@
 
 <?php bp_nouveau_groups_activity_post_form(); ?>
 
-<div class="item-list-tabs" id="subnav" role="navigation">
-	<ul>
+<div class="item-list-tabs bp-navs" id="subnav" role="navigation">
+	<ul class="subnav">
 		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
 		<?php bp_nouveau_search_form(); ?>
