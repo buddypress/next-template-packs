@@ -477,7 +477,7 @@ window.bp = window.bp || {};
 			$( document ).on( 'heartbeat-tick.buddypress', this.heartbeatTick );
 
 			// Refreshing
-			$( this.objectNavParent + ' .item-list-tabs' ).on( 'click', 'a', this, this.scopeQuery );
+			$( this.objectNavParent + ' .bp-navs' ).on( 'click', 'a', this, this.scopeQuery );
 
 			// Filtering
 			$( '#buddypress [data-bp-filter]' ).on( 'change', this, this.filterQuery );
