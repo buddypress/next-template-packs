@@ -23,7 +23,7 @@ switch ( bp_current_action() ) :
 	case 'unread' :
 	case 'read'   : ?>
 
-		<div class="item-list-tabs  no-ajax" id="subsubnav">
+		<div class="item-list-tabs no-ajax" id="subsubnav">
 			<ul>
 				<?php bp_nouveau_search_form(); ?>
 

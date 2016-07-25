@@ -22,7 +22,7 @@ if ( bp_has_notifications( bp_ajax_querystring( 'notifications' ) ) ) :
 						<?php _e( 'Date Received', 'bp-nouveau' ); ?>
 						<?php bp_nouveau_notifications_sort_order_links() ;?>
 					</th>
-					<th class="actions"><?php _e( 'Actions',    'bp-nouveau' ); ?></th>
+					<th class="actions"><?php _e( 'Actions', 'bp-nouveau' ); ?></th>
 				</tr>
 			</thead>
 
