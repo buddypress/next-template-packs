@@ -1,6 +1,6 @@
-// BP Primary & secondary directory and single screen navigation
+// BP primary & secondary directory and single screen navigation
 
-.item-list-tabs {
+.bp-navs {
 	background: transparent;
 	clear: both;
 	overflow: hidden;
@@ -73,18 +73,17 @@
 		padding: 0 $marg-xsml;
 	}
 
-} // close item-list-tabs
+} // close .bp-navs
 
-#buddypress div#item-nav ul li.loading a {
-	background-position: 88% 50%;
-}
 
-#subnav {
+// do we need to seperately specify subnav? - an inherited rule
+.bp-subnav {
 	width: 100%;
 }
 
-.item-list-tabs#subnav,
-.item-list-tabs#subsubnav {
+
+.bp-subnavs,
+.bp-navs#subsubnav {
 	ul {
 		li {
 			margin-top: 0;
@@ -93,6 +92,15 @@
 				margin-top: 4px;
 			}
 		}
+	}
+}
+
+.buddypress {
+	.bp-subnavs,
+	.bp-subnavs#subsubnav {
+		background: transparent;
+		margin: 10px 0 10px;
+		overflow: hidden;
 	}
 }
 
@@ -106,20 +114,26 @@
 	}
 }
 
-.buddypress .item-list-tabs#subnav,
-.buddypress .item-list-tabs#subsubnav {
-	background: transparent;
-	margin: 10px 0 10px;
-	overflow: hidden;
-}
 
 // The selected, current, hover states, psuedo elements etc - stuff!
-.buddypress_object_nav .item-list-tabs  li a:hover span,
-.buddypress  .item-list-tabs  li.selected a span,
-.buddypress  .item-list-tabs  li.current a span,
-.buddypress  .item-list-tabs  li a:hover span {
-	background-color: $grey;
+
+// whats this????
+// .buddypress_object_nav .item-list-tabs  li a:hover span,
+
+.buddypress {
+	.item-list-tabs {
+		li.selected,
+		li.current,
+		li a:hover {
+			a {
+				span {
+					background-color: $grey;
+				}
+			}
+		}
+	}
 }
+
 
 .buddypress_object_nav .item-list-tabs  li.selected a span,
 .buddypress_object_nav .item-list-tabs  li.current a span,
@@ -163,99 +177,112 @@
 }
 
 // Icons
-.buddypress div.item-list-tabs ul li.filter label:before {
-	content: "\f536";
-}
 
-.buddypress div.item-list-tabs ul li.feed a:before {
-	content: "\f303";
-}
+.buddypress {
 
-.buddypress .bp-invites-content ul.item-list li a.invite-button:not(.group-remove-invite-button):before {
-	content: "\f502";
-}
+	.item-list-tabs {
+		ul {
 
-.buddypress .bp-invites-content ul.item-list li.selected a.invite-button:before,
-.buddypress .bp-invites-content ul.item-list li a.group-remove-invite-button:before {
-	content: "\f153";
-}
+			li.filter label:before {
+				content: "\f536";
+			}
 
-.buddypress .bp-invites-filters ul li a#bp-invites-next-page:before,
-.buddypress .bp-messages-filters ul li a#bp-messages-next-page:before {
-	content: "\f345";
-}
+			li.feed a:before {
+				content: "\f303";
+			}
+		} // close ul
 
-.buddypress .bp-invites-filters ul li a#bp-invites-prev-page:before,
-.buddypress .bp-messages-filters ul li a#bp-messages-prev-page:before {
-	content: "\f341";
-}
+		ul.item-list {
 
-.buddypress .bp-messages-filters ul li a.messages-button.bulk-apply:before {
-	content: "\f147";
-	font-size: 18px;
-}
+			li a.invite-button:not(.group-remove-invite-button):before {
+				content: "\f502";
+			}
 
-.item-list-tabs.bp-messages-filters ul li a.bulk-apply {
-	border-left: 0;
-	border-radius: none;
-	font-weight: normal;
-	line-height: inherit;
-	margin: 0;
-	padding: 2.5px 10px;
-	text-align: center;
-	text-transform: none;
-	vertical-align: baseline;
-	width: auto;
-}
+			li.selected a.invite-button:before,
+			li a.group-remove-invite-button:before {
+				content: "\f153";
+			}
+		} // close ul.item-list
 
-.buddypress_object_nav .item-list-tabs  li.dynamic a span,
-.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
-.buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
-.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-.buddypress .item-list-tabs  li.dynamic a span,
-.buddypress .item-list-tabs  li.dynamic a:hover span,
-.buddypress .item-list-tabs  li.dynamic.selected a span,
-.buddypress .item-list-tabs  li.dynamic.current a span,
-.buddypress .item-list-tabs  li.dynamic a:hover span {
-	background-color: #1fb3dd;
-	border: 0;
-	color: #fff;
-}
+		.bp-invites-filters ul li a#bp-invites-next-page:before,
+		.bp-messages-filters ul li a#bp-messages-next-page:before {
+			content: "\f345";
+		}
 
-// position our nav elements at larger screen widths
-@include medium-up() {
-	.subnav {
-		float: left;
+		.bp-invites-filters ul li a#bp-invites-prev-page:before,
+		.bp-messages-filters ul li a#bp-messages-prev-page:before {
+			content: "\f341";
+		}
+
+		.bp-messages-filters ul li a.messages-button.bulk-apply:before {
+			content: "\f147";
+			font-size: 18px;
+		}
+	} // .item-list-tabs
+
+
+	.bp-user-nav.bp-messages-filters ul li a.bulk-apply {
+		border-left: 0;
+		border-radius: none;
+		font-weight: normal;
+		line-height: inherit;
+		margin: 0;
+		padding: 2.5px 10px;
+		text-align: center;
+		text-transform: none;
+		vertical-align: baseline;
+		width: auto;
 	}
 
-	.dir-component-filters {
-		float: right;
+	.buddypress_object_nav .item-list-tabs  li.dynamic a span,
+	.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
+	.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
+	.buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
+	.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
+	.buddypress .item-list-tabs  li.dynamic a span,
+	.buddypress .item-list-tabs  li.dynamic a:hover span,
+	.buddypress .item-list-tabs  li.dynamic.selected a span,
+	.buddypress .item-list-tabs  li.dynamic.current a span,
+	.buddypress .item-list-tabs  li.dynamic a:hover span {
+		background-color: #1fb3dd;
+		border: 0;
+		color: #fff;
 	}
 
-	// user screen last filter
-	#subsubnav {
-
-		.activity-search {
+	// position our nav elements at larger screen widths
+	@include medium-up() {
+		.subnav {
 			float: left;
 		}
 
-		.filter {
+		.dir-component-filters {
 			float: right;
 		}
-	}
 
-	#subnav {
-		.last {
-			float: right;
+		// user screen last filter
+		#subsubnav {
+
+			.activity-search {
+				float: left;
+			}
+
+			.filter {
+				float: right;
+			}
 		}
-	}
 
-}
+		#subnav {
+			.last {
+				float: right;
+			}
+		}
+
+	} // close @media
+
+} // close .buddypress
 
 
 // Just buddypress_object_nav rules
-
 .buddypress_object_nav {
 	.item-list-tabs {
 		ul {

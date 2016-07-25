@@ -244,25 +244,6 @@
 // Import general global styles for single screen item-body
 @import "../../shared/styles/_bp_groups_management";
 
-// Groups settings screen
-.radio {
-	.group-conditions {
-		@include responsive-font(16);
-		margin-left: $marg-lrg;
-		width: 80%;
-
-	//dt {
-
-	//	}
-
-		dd {
-			ul {
-				margin: 0 0 $marg-lrg $marg-lrg;
-			}
-		}
-	}
-}
-
 /**
 *-----------------------------------------
 * @subsection 5.2.1.2 - Group Members List
