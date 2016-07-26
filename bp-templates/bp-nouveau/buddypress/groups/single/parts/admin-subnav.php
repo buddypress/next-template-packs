@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
+<div class="item-list-tabs bp-navs bp-subnavs no-ajax" id="subnav" role="navigation">
 
 	<?php if ( bp_nouveau_has_nav( array( 'object' => 'group_manage' ) ) ) : ?>
 

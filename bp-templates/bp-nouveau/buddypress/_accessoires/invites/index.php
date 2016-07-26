@@ -10,8 +10,8 @@
  * @package BP Nouveau
  */
 ?>
-<div class="item-list-tabs bp-invites-nav" id="subnav"></div>
-<div class="item-list-tabs bp-invites-filters" id="subsubnav"></div>
+<div class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav"></div>
+<div class="bp-navs bp-subnavs group-subnav bp-invites-filters" id="subsubnav"></div>
 <div class="members bp-invites-content"></div>
 <div class="bp-invites-feedback"></div>
 

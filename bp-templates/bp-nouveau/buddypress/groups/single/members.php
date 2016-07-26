@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="item-list-tabs" id="subnav" role="navigation">
+<div class="item-list-tabs bp-navs bp-subnavs group-subnav" id="subnav" role="navigation">
 	<ul class="sub-nav filters clearfix">
 
 		<?php bp_nouveau_search_form(); ?>
