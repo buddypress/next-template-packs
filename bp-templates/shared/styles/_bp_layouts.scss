@@ -8,7 +8,6 @@
 }
 
 
-
 // ==== The Grid Layout Classes ====
 
 // BP Lists (loops) may be suited to a grid layout e.g members loops
@@ -362,7 +361,7 @@
 			overflow: hidden;
 			padding: 0 0 0 $pad-sml;
 
-			#subnav {
+			#subnav:not(.tabbed-links) {
 				background: $light-grey;
 				margin: 0 0 0 -5px;
 				width: auto;
@@ -401,6 +400,7 @@
 // Our tabbed links are pulled in via a mixin
 // BP element must have 'tabbed-links' added and the ul 'button-tabs'
 // medium screens up
+
 .buddypress {
 	#item-body {
 		@include medium-up {
@@ -410,12 +410,16 @@
 		@include tabbed-links();
 
 		#subnav.tabbed-links {
-			margin-top: -($marg-lrg);
+			margin-top: 2px;
+
+			li#compose-personal-li {
+				margin-top: 6px;
+			}
 		}
 
 		// For tabbed nav we remove the default button nav styles.
 			ul.button-tabs {
-
+				margin-top: 0;
 				li {
 					a {
 						border-right: 0;

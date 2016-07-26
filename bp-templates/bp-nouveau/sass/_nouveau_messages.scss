@@ -5,7 +5,7 @@
 
 .message-action-star:before,
 .message-action-unstar:before,
-.item-list-tabs ul li#compose-personal-li a#compose:before,
+.bp-navs ul li#compose-personal-li a#compose:before,
 .message-action-view:before,
 .message-action-delete:before {
 	font-family: dashicons;
@@ -250,7 +250,7 @@ li#compose-personal-li {
 
 // Bulk Message styles
 
-div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
+div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	margin-right: 15px;
 	max-width: 42.5%;
 }

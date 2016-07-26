@@ -72,7 +72,8 @@
 
 
 // do we need to seperately specify subnav? - an inherited rule
-.bp-subnavs {
+.bp-subnavs,
+ul.subnav {
 	width: 100%;
 }
 

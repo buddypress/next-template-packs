@@ -166,7 +166,8 @@ body .buddypress h6 {
 	display: inline-block;
 }
 
-.bp-subnavs {
+.bp-subnavs,
+ul.subnav {
 	width: 100%;
 }
 
@@ -1514,7 +1515,7 @@ tr.unread span.unread-count {
 	padding: 2px 8px;
 }
 
-div.item-list-tabs ul li a span.unread-count {
+.bp-navs ul li a span.unread-count {
 	color: #fff;
 	padding: 1px 6px;
 }
@@ -1617,7 +1618,7 @@ a.message-action-star:hover {
 
 .message-action-star:before,
 .message-action-unstar:before,
-.item-list-tabs ul li#compose-personal-li a#compose:before,
+.bp-navs ul li#compose-personal-li a#compose:before,
 .message-action-view:before,
 .message-action-delete:before {
 	font-family: dashicons;
@@ -1839,7 +1840,7 @@ li#compose-personal-li a#compose:before {
 	font-size: 80%;
 }
 
-div.item-list-tabs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
+div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	margin-right: 15px;
 	max-width: 42.5%;
 }
@@ -2819,24 +2820,24 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		overflow: hidden;
 		padding: 0 0 0 0.5em;
 	}
-	.bp-vertical-nav .item-body #subnav {
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) {
 		background: #eaeaea;
 		margin: 0 0 0 -5px;
 		width: auto;
 	}
-	.bp-vertical-nav .item-body #subnav li {
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li {
 		font-size: 14px;
 		margin: 10px 0;
 	}
-	.bp-vertical-nav .item-body #subnav li a {
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a {
 		border-right: 1px solid #ccc;
 		padding: 0 0.5em;
 	}
-	.bp-vertical-nav .item-body #subnav li.current a {
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li.current a {
 		color: #333;
 		text-decoration: underline;
 	}
-	.bp-vertical-nav .item-body #subnav li:last-child a {
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li:last-child a {
 		border: none;
 	}
 }
@@ -2872,7 +2873,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		padding: 0 0.5em;
 	}
 	.buddypress #item-body #subnav.tabbed-links {
-		margin-top: -20px;
+		margin-top: 2px;
+	}
+	.buddypress #item-body #subnav.tabbed-links li#compose-personal-li {
+		margin-top: 6px;
+	}
+	.buddypress #item-body ul.button-tabs {
+		margin-top: 0;
 	}
 	.buddypress #item-body ul.button-tabs li a {
 		border-right: 0;
