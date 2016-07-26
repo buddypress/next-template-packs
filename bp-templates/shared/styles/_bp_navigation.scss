@@ -68,60 +68,53 @@
 		}
 	}
 
-	// this is the groups members.php inline sub-nav elements
-	.sub-nav { // ul
-		padding: 0 $marg-xsml;
-	}
-
 } // close .bp-navs
 
 
 // do we need to seperately specify subnav? - an inherited rule
-.bp-subnav {
+.bp-subnavs {
 	width: 100%;
 }
 
-
-.bp-subnavs,
-.bp-navs#subsubnav {
-	ul {
-		li {
-			margin-top: 0;
-
-			&.last {
-				margin-top: 4px;
-			}
-		}
-	}
-}
-
 .buddypress {
+
 	.bp-subnavs,
 	.bp-subnavs#subsubnav {
 		background: transparent;
 		margin: 10px 0 10px;
 		overflow: hidden;
-	}
-}
 
-.item-list-tabs.bp-invites-nav#subnav,
-.item-list-tabs.bp-invites-filters#subsubnav,
-.item-list-tabs.bp-messages-filters#subsubnav {
-	ul {
-		li.last {
-			margin-top: 0;
+		ul {
+			li {
+				margin-top: 0;
+
+				&.last {
+					margin-top: 4px;
+				}
+			}
 		}
 	}
-}
 
+	.bp-navs.bp-invites-nav#subnav,
+	.bp-navs.bp-invites-filters#subsubnav,
+	.bp-navs.bp-messages-filters#subsubnav {
+		ul {
+			li.last {
+				margin-top: 0;
+			}
+		}
+	}
 
-// The selected, current, hover states, psuedo elements etc - stuff!
+	// this is the groups members.php inline sub-nav elements
+	.sub-nav { // ul
+		padding: 0 $marg-xsml;
+	}
 
-// whats this????
-// .buddypress_object_nav .item-list-tabs  li a:hover span,
+	// The selected, current, hover states, psuedo elements etc - stuff!
 
-.buddypress {
-	.item-list-tabs {
+	// whats this????
+	// .buddypress_object_nav .item-list-tabs  li a:hover span,
+	.bp-navs {
 		li.selected,
 		li.current,
 		li a:hover {
@@ -132,39 +125,39 @@
 			}
 		}
 	}
-}
 
+} // close .buddypress
 
-.buddypress_object_nav .item-list-tabs  li.selected a span,
-.buddypress_object_nav .item-list-tabs  li.current a span,
-.buddypress .item-list-tabs  li.selected a span,
-.buddypress .item-list-tabs  li.current a span {
+.buddypress_object_nav .bp-navs  li.selected a span,
+.buddypress_object_nav .bp-navs  li.current a span,
+.buddypress .bp-navs  li.selected a span,
+.buddypress .bp-navs  li.current a span {
 	background-color: $white;
 }
 
-.buddypress_object_nav .item-list-tabs  li.dynamic a span,
-.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
-.buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
-.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-.buddypress .item-list-tabs  li.dynamic a span,
-.buddypress .item-list-tabs  li.dynamic a:hover span,
-.buddypress .item-list-tabs  li.dynamic.selected a span,
-.buddypress .item-list-tabs  li.dynamic.current a span,
-.buddypress .item-list-tabs  li.dynamic a:hover span {
+.buddypress_object_nav .bp-navs  li.dynamic a span,
+.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
+.buddypress_object_nav .bp-navs  li.dynamic.selected a span,
+.buddypress_object_nav .bp-navs  li.dynamic.current a span,
+.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
+.buddypress .bp-navs  li.dynamic a span,
+.buddypress .bp-navs  li.dynamic a:hover span,
+.buddypress .bp-navs  li.dynamic.selected a span,
+.buddypress .bp-navs  li.dynamic.current a span,
+.buddypress .bp-navs  li.dynamic a:hover span {
 	background-color: #1fb3dd;
 	border: 0;
 	color: #fff;
 }
 
 
-.buddypress_object_nav .item-list-tabs  li a span:empty,
-.buddypress .item-list-tabs  li a span:empty {
+.buddypress_object_nav .bp-navs  li a span:empty,
+.buddypress .bp-navs  li a span:empty {
 	display: none;
 }
 
-.buddypress .item-list-tabs  li.filter label:before,
-.buddypress .item-list-tabs  li.feed a:before,
+.buddypress .bp-navs  li.filter label:before,
+.buddypress .bp-navs  li.feed a:before,
 .buddypress .bp-invites-content .item-list li a.invite-button:before,
 .buddypress .bp-invites-filters  li a.invite-button:before,
 .buddypress .bp-messages-filters li a.messages-button:before {
@@ -180,7 +173,7 @@
 
 .buddypress {
 
-	.item-list-tabs {
+	.bp-navs {
 		ul {
 
 			li.filter label:before {
@@ -218,10 +211,9 @@
 			content: "\f147";
 			font-size: 18px;
 		}
-	} // .item-list-tabs
+	} // close .bp-navs
 
-
-	.bp-user-nav.bp-messages-filters ul li a.bulk-apply {
+	.bp-subnavs.bp-messages-filters ul li a.bulk-apply {
 		border-left: 0;
 		border-radius: none;
 		font-weight: normal;
@@ -234,16 +226,16 @@
 		width: auto;
 	}
 
-	.buddypress_object_nav .item-list-tabs  li.dynamic a span,
-	.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-	.buddypress_object_nav .item-list-tabs  li.dynamic.selected a span,
-	.buddypress_object_nav .item-list-tabs  li.dynamic.current a span,
-	.buddypress_object_nav .item-list-tabs  li.dynamic a:hover span,
-	.buddypress .item-list-tabs  li.dynamic a span,
-	.buddypress .item-list-tabs  li.dynamic a:hover span,
-	.buddypress .item-list-tabs  li.dynamic.selected a span,
-	.buddypress .item-list-tabs  li.dynamic.current a span,
-	.buddypress .item-list-tabs  li.dynamic a:hover span {
+	.buddypress_object_nav .bp-navs  li.dynamic a span,
+	.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
+	.buddypress_object_nav .bp-navs  li.dynamic.selected a span,
+	.buddypress_object_nav .bp-navs  li.dynamic.current a span,
+	.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
+	.buddypress .bp-navs  li.dynamic a span,
+	.buddypress .bp-navs  li.dynamic a:hover span,
+	.buddypress .bp-navs  li.dynamic.selected a span,
+	.buddypress .bp-navs  li.dynamic.current a span,
+	.buddypress .bp-navs  li.dynamic a:hover span {
 		background-color: #1fb3dd;
 		border: 0;
 		color: #fff;
@@ -284,7 +276,7 @@
 
 // Just buddypress_object_nav rules
 .buddypress_object_nav {
-	.item-list-tabs {
+	.bp-navs {
 		ul {
 			// yes it's empty, I know that!
 		}

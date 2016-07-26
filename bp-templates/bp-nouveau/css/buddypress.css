@@ -166,22 +166,8 @@ body .buddypress h6 {
 	display: inline-block;
 }
 
-.bp-navs .sub-nav {
-	padding: 0 5px;
-}
-
-.bp-subnav {
+.bp-subnavs {
 	width: 100%;
-}
-
-.bp-subnavs ul li,
-.bp-navs#subsubnav ul li {
-	margin-top: 0;
-}
-
-.bp-subnavs ul li.last,
-.bp-navs#subsubnav ul li.last {
-	margin-top: 4px;
 }
 
 .buddypress .bp-subnavs,
@@ -191,47 +177,61 @@ body .buddypress h6 {
 	overflow: hidden;
 }
 
-.item-list-tabs.bp-invites-nav#subnav ul li.last,
-.item-list-tabs.bp-invites-filters#subsubnav ul li.last,
-.item-list-tabs.bp-messages-filters#subsubnav ul li.last {
+.buddypress .bp-subnavs ul li,
+.buddypress .bp-subnavs#subsubnav ul li {
 	margin-top: 0;
 }
 
-.buddypress .item-list-tabs li.selected a span,
-.buddypress .item-list-tabs li.current a span,
-.buddypress .item-list-tabs li a:hover a span {
+.buddypress .bp-subnavs ul li.last,
+.buddypress .bp-subnavs#subsubnav ul li.last {
+	margin-top: 4px;
+}
+
+.buddypress .bp-navs.bp-invites-nav#subnav ul li.last,
+.buddypress .bp-navs.bp-invites-filters#subsubnav ul li.last,
+.buddypress .bp-navs.bp-messages-filters#subsubnav ul li.last {
+	margin-top: 0;
+}
+
+.buddypress .sub-nav {
+	padding: 0 5px;
+}
+
+.buddypress .bp-navs li.selected a span,
+.buddypress .bp-navs li.current a span,
+.buddypress .bp-navs li a:hover a span {
 	background-color: #ccc;
 }
 
-.buddypress_object_nav .item-list-tabs li.selected a span,
-.buddypress_object_nav .item-list-tabs li.current a span,
-.buddypress .item-list-tabs li.selected a span,
-.buddypress .item-list-tabs li.current a span {
+.buddypress_object_nav .bp-navs li.selected a span,
+.buddypress_object_nav .bp-navs li.current a span,
+.buddypress .bp-navs li.selected a span,
+.buddypress .bp-navs li.current a span {
 	background-color: #fff;
 }
 
-.buddypress_object_nav .item-list-tabs li.dynamic a span,
-.buddypress_object_nav .item-list-tabs li.dynamic a:hover span,
-.buddypress_object_nav .item-list-tabs li.dynamic.selected a span,
-.buddypress_object_nav .item-list-tabs li.dynamic.current a span,
-.buddypress_object_nav .item-list-tabs li.dynamic a:hover span,
-.buddypress .item-list-tabs li.dynamic a span,
-.buddypress .item-list-tabs li.dynamic a:hover span,
-.buddypress .item-list-tabs li.dynamic.selected a span,
-.buddypress .item-list-tabs li.dynamic.current a span,
-.buddypress .item-list-tabs li.dynamic a:hover span {
+.buddypress_object_nav .bp-navs li.dynamic a span,
+.buddypress_object_nav .bp-navs li.dynamic a:hover span,
+.buddypress_object_nav .bp-navs li.dynamic.selected a span,
+.buddypress_object_nav .bp-navs li.dynamic.current a span,
+.buddypress_object_nav .bp-navs li.dynamic a:hover span,
+.buddypress .bp-navs li.dynamic a span,
+.buddypress .bp-navs li.dynamic a:hover span,
+.buddypress .bp-navs li.dynamic.selected a span,
+.buddypress .bp-navs li.dynamic.current a span,
+.buddypress .bp-navs li.dynamic a:hover span {
 	background-color: #1fb3dd;
 	border: 0;
 	color: #fff;
 }
 
-.buddypress_object_nav .item-list-tabs li a span:empty,
-.buddypress .item-list-tabs li a span:empty {
+.buddypress_object_nav .bp-navs li a span:empty,
+.buddypress .bp-navs li a span:empty {
 	display: none;
 }
 
-.buddypress .item-list-tabs li.filter label:before,
-.buddypress .item-list-tabs li.feed a:before,
+.buddypress .bp-navs li.filter label:before,
+.buddypress .bp-navs li.feed a:before,
 .buddypress .bp-invites-content .item-list li a.invite-button:before,
 .buddypress .bp-invites-filters li a.invite-button:before,
 .buddypress .bp-messages-filters li a.messages-button:before {
@@ -243,39 +243,39 @@ body .buddypress h6 {
 	font-size: 32px;
 }
 
-.buddypress .item-list-tabs ul li.filter label:before {
+.buddypress .bp-navs ul li.filter label:before {
 	content: "\f536";
 }
 
-.buddypress .item-list-tabs ul li.feed a:before {
+.buddypress .bp-navs ul li.feed a:before {
 	content: "\f303";
 }
 
-.buddypress .item-list-tabs ul.item-list li a.invite-button:not(.group-remove-invite-button):before {
+.buddypress .bp-navs ul.item-list li a.invite-button:not(.group-remove-invite-button):before {
 	content: "\f502";
 }
 
-.buddypress .item-list-tabs ul.item-list li.selected a.invite-button:before,
-.buddypress .item-list-tabs ul.item-list li a.group-remove-invite-button:before {
+.buddypress .bp-navs ul.item-list li.selected a.invite-button:before,
+.buddypress .bp-navs ul.item-list li a.group-remove-invite-button:before {
 	content: "\f153";
 }
 
-.buddypress .item-list-tabs .bp-invites-filters ul li a#bp-invites-next-page:before,
-.buddypress .item-list-tabs .bp-messages-filters ul li a#bp-messages-next-page:before {
+.buddypress .bp-navs .bp-invites-filters ul li a#bp-invites-next-page:before,
+.buddypress .bp-navs .bp-messages-filters ul li a#bp-messages-next-page:before {
 	content: "\f345";
 }
 
-.buddypress .item-list-tabs .bp-invites-filters ul li a#bp-invites-prev-page:before,
-.buddypress .item-list-tabs .bp-messages-filters ul li a#bp-messages-prev-page:before {
+.buddypress .bp-navs .bp-invites-filters ul li a#bp-invites-prev-page:before,
+.buddypress .bp-navs .bp-messages-filters ul li a#bp-messages-prev-page:before {
 	content: "\f341";
 }
 
-.buddypress .item-list-tabs .bp-messages-filters ul li a.messages-button.bulk-apply:before {
+.buddypress .bp-navs .bp-messages-filters ul li a.messages-button.bulk-apply:before {
 	content: "\f147";
 	font-size: 18px;
 }
 
-.buddypress .bp-user-nav.bp-messages-filters ul li a.bulk-apply {
+.buddypress .bp-subnavs.bp-messages-filters ul li a.bulk-apply {
 	border-left: 0;
 	border-radius: none;
 	font-weight: normal;
@@ -288,16 +288,16 @@ body .buddypress h6 {
 	width: auto;
 }
 
-.buddypress .buddypress_object_nav .item-list-tabs li.dynamic a span,
-.buddypress .buddypress_object_nav .item-list-tabs li.dynamic a:hover span,
-.buddypress .buddypress_object_nav .item-list-tabs li.dynamic.selected a span,
-.buddypress .buddypress_object_nav .item-list-tabs li.dynamic.current a span,
-.buddypress .buddypress_object_nav .item-list-tabs li.dynamic a:hover span,
-.buddypress .buddypress .item-list-tabs li.dynamic a span,
-.buddypress .buddypress .item-list-tabs li.dynamic a:hover span,
-.buddypress .buddypress .item-list-tabs li.dynamic.selected a span,
-.buddypress .buddypress .item-list-tabs li.dynamic.current a span,
-.buddypress .buddypress .item-list-tabs li.dynamic a:hover span {
+.buddypress .buddypress_object_nav .bp-navs li.dynamic a span,
+.buddypress .buddypress_object_nav .bp-navs li.dynamic a:hover span,
+.buddypress .buddypress_object_nav .bp-navs li.dynamic.selected a span,
+.buddypress .buddypress_object_nav .bp-navs li.dynamic.current a span,
+.buddypress .buddypress_object_nav .bp-navs li.dynamic a:hover span,
+.buddypress .buddypress .bp-navs li.dynamic a span,
+.buddypress .buddypress .bp-navs li.dynamic a:hover span,
+.buddypress .buddypress .bp-navs li.dynamic.selected a span,
+.buddypress .buddypress .bp-navs li.dynamic.current a span,
+.buddypress .buddypress .bp-navs li.dynamic a:hover span {
 	background-color: #1fb3dd;
 	border: 0;
 	color: #fff;
@@ -321,7 +321,7 @@ body .buddypress h6 {
 	}
 }
 
-.buddypress_object_nav .item-list-tabs li a span {
+.buddypress_object_nav .bp-navs li a span {
 	display: inline-block;
 	float: right;
 }
