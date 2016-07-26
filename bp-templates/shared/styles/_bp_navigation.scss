@@ -62,16 +62,18 @@
 
 	&.bp-invites-filters,
 	&.bp-messages-filters {
-		ul li a {
-			border: 1px solid #ccc;
-			display: inline-block;
+		ul {
+			li {
+				a {
+					border: 1px solid #ccc;
+					display: inline-block;
+				}
+			}
 		}
 	}
 
 } // close .bp-navs
 
-
-// do we need to seperately specify subnav? - an inherited rule
 .bp-subnavs,
 ul.subnav {
 	width: 100%;
@@ -129,32 +131,48 @@ ul.subnav {
 
 } // close .buddypress
 
-.buddypress_object_nav .bp-navs  li.selected a span,
-.buddypress_object_nav .bp-navs  li.current a span,
-.buddypress .bp-navs  li.selected a span,
-.buddypress .bp-navs  li.current a span {
-	background-color: $white;
-}
+.buddypress_object_nav,
+.buddypress {
+	.bp-navs {
+		li.selected,
+		li.current {
+			a {
+				span {
+					background-color: $white;
+				}
+			}
+		} // close li
 
-.buddypress_object_nav .bp-navs  li.dynamic a span,
-.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
-.buddypress_object_nav .bp-navs  li.dynamic.selected a span,
-.buddypress_object_nav .bp-navs  li.dynamic.current a span,
-.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
-.buddypress .bp-navs  li.dynamic a span,
-.buddypress .bp-navs  li.dynamic a:hover span,
-.buddypress .bp-navs  li.dynamic.selected a span,
-.buddypress .bp-navs  li.dynamic.current a span,
-.buddypress .bp-navs  li.dynamic a:hover span {
-	background-color: #1fb3dd;
-	border: 0;
-	color: #fff;
-}
+		li.dynamic,
+		li.dynamic.selected,
+		li.dynamic.current {
+			a {
+				span {
+					background-color: #1fb3dd;
+					border: 0;
+					color: #fff;
+				}
+			}
+		}
 
+		li.dynamic {
+			a:hover {
+				span {
+					background-color: #1fb3dd;
+					border: 0;
+					color: #fff;
+				}
+			}
+		} // li
 
-.buddypress_object_nav .bp-navs  li a span:empty,
-.buddypress .bp-navs  li a span:empty {
-	display: none;
+		li {
+			a {
+				span:empty {
+					display: none;
+				}
+			}
+		}
+	} // bp-navs
 }
 
 .buddypress .bp-navs  li.filter label:before,
@@ -225,21 +243,6 @@ ul.subnav {
 		text-transform: none;
 		vertical-align: baseline;
 		width: auto;
-	}
-
-	.buddypress_object_nav .bp-navs  li.dynamic a span,
-	.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
-	.buddypress_object_nav .bp-navs  li.dynamic.selected a span,
-	.buddypress_object_nav .bp-navs  li.dynamic.current a span,
-	.buddypress_object_nav .bp-navs  li.dynamic a:hover span,
-	.buddypress .bp-navs  li.dynamic a span,
-	.buddypress .bp-navs  li.dynamic a:hover span,
-	.buddypress .bp-navs  li.dynamic.selected a span,
-	.buddypress .bp-navs  li.dynamic.current a span,
-	.buddypress .bp-navs  li.dynamic a:hover span {
-		background-color: #1fb3dd;
-		border: 0;
-		color: #fff;
 	}
 
 	// position our nav elements at larger screen widths

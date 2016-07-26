@@ -212,14 +212,17 @@ ul.subnav {
 }
 
 .buddypress_object_nav .bp-navs li.dynamic a span,
-.buddypress_object_nav .bp-navs li.dynamic a:hover span,
 .buddypress_object_nav .bp-navs li.dynamic.selected a span,
 .buddypress_object_nav .bp-navs li.dynamic.current a span,
-.buddypress_object_nav .bp-navs li.dynamic a:hover span,
 .buddypress .bp-navs li.dynamic a span,
-.buddypress .bp-navs li.dynamic a:hover span,
 .buddypress .bp-navs li.dynamic.selected a span,
-.buddypress .bp-navs li.dynamic.current a span,
+.buddypress .bp-navs li.dynamic.current a span {
+	background-color: #1fb3dd;
+	border: 0;
+	color: #fff;
+}
+
+.buddypress_object_nav .bp-navs li.dynamic a:hover span,
 .buddypress .bp-navs li.dynamic a:hover span {
 	background-color: #1fb3dd;
 	border: 0;
@@ -287,21 +290,6 @@ ul.subnav {
 	text-transform: none;
 	vertical-align: baseline;
 	width: auto;
-}
-
-.buddypress .buddypress_object_nav .bp-navs li.dynamic a span,
-.buddypress .buddypress_object_nav .bp-navs li.dynamic a:hover span,
-.buddypress .buddypress_object_nav .bp-navs li.dynamic.selected a span,
-.buddypress .buddypress_object_nav .bp-navs li.dynamic.current a span,
-.buddypress .buddypress_object_nav .bp-navs li.dynamic a:hover span,
-.buddypress .buddypress .bp-navs li.dynamic a span,
-.buddypress .buddypress .bp-navs li.dynamic a:hover span,
-.buddypress .buddypress .bp-navs li.dynamic.selected a span,
-.buddypress .buddypress .bp-navs li.dynamic.current a span,
-.buddypress .buddypress .bp-navs li.dynamic a:hover span {
-	background-color: #1fb3dd;
-	border: 0;
-	color: #fff;
 }
 
 @media screen and (min-width: 46.8em) {
