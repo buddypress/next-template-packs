@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="item-list-tabs bp-navs user-subnav no-ajax" id="subnav" role="navigation">
+<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation">
 	<ul class="subnav">
 		<?php if ( bp_is_my_profile() ) : ?>
 

@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="item-list-tabs bp-navs user-subnav no-ajax" id="subnav" role="navigation">
+<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation">
 	<ul class="button-tabs subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
@@ -23,8 +23,8 @@ switch ( bp_current_action() ) :
 	case 'unread' :
 	case 'read'   : ?>
 
-		<div class="item-list-tabs no-ajax" id="subsubnav">
-			<ul>
+		<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subsubnav">
+			<ul class="filters">
 				<?php bp_nouveau_search_form(); ?>
 
 				<li id="notifications-filter-select" class="last filter">

@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="item-list-tabs bp-navs user-subnavs no-ajax" id="subnav" role="navigation">
+<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation">
 	<ul class="subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>

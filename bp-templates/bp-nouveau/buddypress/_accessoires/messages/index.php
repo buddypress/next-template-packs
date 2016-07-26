@@ -10,7 +10,7 @@
  * @package BP Nouveau
  */
 ?>
-<div class="item-list-tabs bp-messages-filters" id="subsubnav"></div>
+<div class="bp-navs bp-subnavs user-subnav bp-messages-filters" id="subsubnav"></div>
 <div class="bp-messages-content"></div>
 <div class="bp-messages-feedback"></div>
 
