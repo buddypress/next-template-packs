@@ -1201,8 +1201,8 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'message' => __( '%s did not save any profile informations yet.', 'bp-nouveau' ),
 		),
 		'member-delete-account' => array(
-			'type'    => 'info',
-			'message' => __( 'Deleting this account will delete all of the content it has created. It will be completely irrecoverable.', 'bp-nouveau' ),
+			'type'    => 'warning',
+			'message' => __( 'Deleting this account will delete all of the content it has created. It will be completely unrecoverable.', 'bp-nouveau' ),
 		),
 		'member-activity-loading' => array(
 			'type'    => 'loading',
