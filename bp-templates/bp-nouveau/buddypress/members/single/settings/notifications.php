@@ -9,8 +9,11 @@
 
 bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
+<h2 class="screen-heading email-settings-screen"><?php _e('Email Notifications', 'bp-nouveau'); ?></h2>
+
+<p class="bp-help-text email-notifications-info"><?php _e( 'Set your email notification preferences.', 'bp-nouveau' ); ?></p>
+
 <form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/notifications'; ?>" method="post" class="standard-form" id="settings-form">
-	<p><?php _e( 'Send an email notice when:', 'bp-nouveau' ); ?></p>
 
 	<?php bp_nouveau_member_email_notice_settings() ; ?>
 

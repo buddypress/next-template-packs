@@ -2363,6 +2363,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .bp-help-text {
 	background: #fafafa;
+	font-style: italic;
+	margin: 10px;
 	padding: 0.5em;
 }
 
