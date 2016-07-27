@@ -2374,7 +2374,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .bp-messages .sitewide-notices {
 	display: block;
 	font-size: 90%;
-	padding: 1em;
+	margin: 5px;
+	padding: 0.5em;
 }
 
 .buddypress .bp-messages.info {
@@ -2387,12 +2388,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress .bp-feedback {
-	background-color: #fff;
+	background: #fff;
+	color: gray;
 	-webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	margin: 10px 0;
-	padding: 10px 0 10px 30px;
+	padding: 0.5em 0 0.5em 30px;
 	position: relative;
 }
 

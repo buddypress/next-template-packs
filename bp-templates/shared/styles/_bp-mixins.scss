@@ -248,3 +248,25 @@
 		margin-top: 0;
 	}
 }
+
+// BP message boxes
+@mixin message-box($background: #fff, $text-color: null, $border: null) {
+
+	@if $text-color {
+		// if a param was passed through
+		$text-color: $text-color;
+	} @else {
+		$text-color: darken($background, 50%);
+	}
+
+	background: $background;
+
+	@if $border != none {
+		@if $border {
+			border: $border;
+		} @else {
+			border: 1px solid darken($background, 10%);
+		}
+	}
+	color: $text-color;
+}

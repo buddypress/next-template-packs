@@ -17,7 +17,8 @@
 		.sitewide-notices {
 			display: block;
 			font-size: 90%;
-			padding: $pad-med;
+			margin: $marg-xsml;
+			padding: $pad-sml;
 		}
 
 		// General info boxes
@@ -52,11 +53,10 @@
 	} // close .bp-messages
 
 	.bp-feedback {
-		background-color: #fff;
-	//	padding: 1px $pad-med; // ?????
-		@include box-shadow(0 1px 1px 1px rgba(0, 0, 0, 0.1));
+		@include message-box( $border: none);
+		@include box-shadow( 0 1px 1px 1px rgba(0, 0, 0, 0.1) );
 		margin: 10px 0;
-		padding: 10px 0 10px 30px;
+		padding: $pad-sml 0 $pad-sml 30px;
 		position: relative;
 	}
 
