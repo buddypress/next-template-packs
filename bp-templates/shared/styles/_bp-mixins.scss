@@ -270,3 +270,61 @@
 	}
 	color: $text-color;
 }
+
+// Password warn colors
+@mixin pwd-bad-colors($background: null, $border: null) {
+
+	@if $background {
+		$background: $background;
+	} @else {
+		$background: $background-bad;
+	}
+
+	background-color: $background;
+
+	@if $border {
+		$border: $border;
+	} @else {
+		$border: $border-bad;
+	}
+
+	border-color: $border;
+}
+
+@mixin pwd-short-colors($background: null, $border: null) {
+
+	@if $background {
+		$background: $background;
+	} @else {
+		$background: $background-short ;
+	}
+
+	background-color: $background;
+
+	@if $border {
+		$border: $border;
+	} @else {
+		$border: $border-short;
+	}
+
+	border-color: $border;
+}
+
+@mixin pwd-good-colors($background: null, $border: null) {
+
+	@if $background {
+		$background: $background;
+	} @else {
+		$background: $background-good;
+	}
+
+	background-color: $background;
+
+	@if $border {
+		$border: $border;
+	} @else {
+		$border: $border-good;
+	}
+
+	border-color: $border;
+}

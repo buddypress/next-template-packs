@@ -32,5 +32,23 @@ $med-light-grey:     #e0e0e0;
 $grey:               #ccc;
 $white:              #fff;
 $black:              #333;
+
 // Message colors
-$warn:               #b71717;
+
+// used on text == red
+$warn:           #b71717;
+
+//the colors for boxes
+$warnings:       #d33;
+$informational:  #38a;
+$loading:        #ffd087;
+$update-success: #8a2;
+
+// password warn colors
+$pwd-background:    #eee;
+$background-short:  #ffa0a0;
+$border-short:      #f04040;
+$background-good:   #66d66e;
+$border-good:       #438c48;
+$background-bad:    #ffb78c;
+$border-bad:        #ff853c;

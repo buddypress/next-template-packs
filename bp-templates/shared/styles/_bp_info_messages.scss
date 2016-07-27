@@ -75,27 +75,23 @@
 
 	.bp-feedback.info:before,
 	.bp-feedback.help:before {
-		background-color: #38a;
+		background-color: $informational;
 		content: "\f348";
 	}
 
 	.bp-feedback.error:before,
 	.bp-feedback.warning:before {
-		background-color: #d33;
+		background-color: $warnings;
 		content: "\f534";
 	}
 
-	.bp-feedback.warning:before,
 	.bp-feedback.loading:before {
-		background-color: #ffd087;
-	}
-
-	.bp-feedback.loading:before {
+		background-color: $loading;
 		content: "\f469";
 	}
 
 	.bp-feedback.success:before {
-		background-color: #8a2;
+		background-color: $update-success;
 		content: "\f147";
 	}
 
@@ -104,7 +100,7 @@
 	}
 
 	#pass-strength-result {
-		background-color: #eee;
+		background-color: $pwd-background;
 		border-color: #ddd;
 		border-style: solid;
 		border-width: 1px;
@@ -116,20 +112,17 @@
 
 		&.error,
 		&.bad {
-			background-color: #ffb78c;
-			border-color: #ff853c;
+		@include pwd-bad-colors();
 			display: block;
 		}
 
 		&.short {
-			background-color: #ffa0a0;
-			border-color: #f04040;
+			@include pwd-short-colors();
 			display: block;
 		}
 
 		&.strong {
-			background-color: #c3ff88;
-			border-color: #8dff1c;
+			@include pwd-good-colors();
 			display: block;
 		}
 

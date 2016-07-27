@@ -2423,12 +2423,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	content: "\f534";
 }
 
-.buddypress .bp-feedback.warning:before,
 .buddypress .bp-feedback.loading:before {
 	background-color: #ffd087;
-}
-
-.buddypress .bp-feedback.loading:before {
 	content: "\f469";
 }
 
@@ -2466,8 +2462,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress #pass-strength-result.strong {
-	background-color: #c3ff88;
-	border-color: #8dff1c;
+	background-color: #66d66e;
+	border-color: #438c48;
 	display: block;
 }
 
