@@ -21,12 +21,17 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	<label for="email"><?php _e( 'Account Email', 'bp-nouveau' ); ?></label>
 	<input type="email" name="email" id="email" value="<?php echo bp_get_displayed_user_email(); ?>" class="settings-input" <?php bp_form_field_attributes( 'email' ); ?>/>
 
-	<label for="pass1"><?php _e( 'Change Password <span>(leave blank for no change)</span>', 'bp-nouveau' ); ?></label>
-	<input type="password" name="pass1" id="pass1" size="16" value="" class="settings-input small password-entry" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'New Password', 'bp-nouveau' ); ?><br />
-	<div id="pass-strength-result"></div>
-	<label for="pass2" class="bp-screen-reader-text"><?php _e( 'Repeat New Password', 'bp-nouveau' ); ?></label>
-	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<?php _e( 'Repeat New Password', 'bp-nouveau' ); ?>
+	<p class="bp-help-text">
+		<?php _e( 'Change Password <span>(leave blank for no change)</span>', 'bp-nouveau' ); ?>
+	</p>
 
+	<label for="pass1"><?php _e('Add Your New Password', 'bp-nouveau'); ?></label>
+	<input type="password" name="pass1" id="pass1" size="16" value="" class="settings-input small password-entry" <?php bp_form_field_attributes( 'password' ); ?>/>
+
+
+	<label for="pass2" class="repeated-pwd"><?php _e( 'Repeat Your New Password', 'bp-nouveau' ); ?></label>
+	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/>
+<div id="pass-strength-result"></div>
 	<?php bp_nouveau_submit_button( 'members-general-settings' ); ?>
 
 </form>
