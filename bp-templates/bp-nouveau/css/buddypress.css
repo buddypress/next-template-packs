@@ -2201,10 +2201,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress table.notifications th.icon,
 .buddypress table.notifications td:first-child,
-.buddypress table.notifications th.icon,
-.buddypress table.notifications td:first-child,
-.buddypress table.notification-settings th.icon,
-.buddypress table.notification-settings td:first-child,
 .buddypress table.notification-settings th.icon,
 .buddypress table.notification-settings td:first-child {
 	display: none;
@@ -2215,8 +2211,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: 80%;
 }
 
-.buddypress table.notification-settings .no,
-.buddypress table.notification-settings .yes,
 .buddypress table.notification-settings .no,
 .buddypress table.notification-settings .yes {
 	text-align: center;
