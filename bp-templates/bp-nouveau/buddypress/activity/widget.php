@@ -25,7 +25,7 @@
 							<cite>
 								<a href="<?php bp_activity_user_link(); ?>">
 									<?php bp_activity_avatar( array(
-										'type'  => 'thumb',
+										'type'   => 'thumb',
 										'width'  => '40px',
 										'height' => '40px',
 									) ); ?>

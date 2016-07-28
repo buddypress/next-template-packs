@@ -38,7 +38,7 @@
 		</div><!-- .bp-plugin-widgets -->
 	<?php endif ;?>
 
-	<?php if ( is_active_sidebar( 'sidebar-buddypress-groups' )  ) : ?>
+	<?php if ( is_active_sidebar( 'sidebar-buddypress-groups' ) ) : ?>
 		<div id="group-front-widgets" class="bp-sidebar bp-widget-area" role="complementary">
 
 			<?php dynamic_sidebar( 'sidebar-buddypress-groups' ); ?>

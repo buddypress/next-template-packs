@@ -23,7 +23,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
 
-		<li <?php bp_member_class( array('item-entry') ); ?>  data-bp-item-id="<?php bp_member_user_id(); ?>" data-bp-item-component="members">
+		<li <?php bp_member_class( array('item-entry') ); ?> data-bp-item-id="<?php bp_member_user_id(); ?>" data-bp-item-component="members">
 			<div class="wrap">
 
 				<div class="item-avatar">

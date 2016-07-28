@@ -18,7 +18,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 <form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/delete-account'; ?>" name="account-delete-form" id="account-delete-form" class="standard-form" method="post">
 
 	<label class="warn" for="delete-account-understand">
-		<input  type="checkbox" name="delete-account-understand" id="delete-account-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-account-button').disabled = ''; } else { document.getElementById('delete-account-button').disabled = 'disabled'; }" />
+		<input type="checkbox" name="delete-account-understand" id="delete-account-understand" value="1" onclick="if(this.checked) { document.getElementById('delete-account-button').disabled = ''; } else { document.getElementById('delete-account-button').disabled = 'disabled'; }" />
 		 <?php _e( 'I understand the consequences.', 'bp-nouveau' ); ?>
 	</label>
 
