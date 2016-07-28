@@ -2117,6 +2117,31 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	font-size: 18px;
 }
 
+.buddypress ul.filters form {
+	font-size: 15px;
+}
+
+.buddypress ul.filters li form button[type="submit"] {
+	font-size: inherit;
+	padding: .1em .7em;
+	line-height: 1.4;
+}
+
+.buddypress ul.filters li form button[type="submit"] span.dashicons {
+	font-size: 20px;
+	line-height: inherit;
+}
+
+.buddypress ul.filters li form label {
+	font-size: inherit !important;
+}
+
+.buddypress ul.filters li form label input {
+	font-size: inherit !important;
+	line-height: 1.4;
+	padding: .1em .7em;
+}
+
 .buddypress .current-member-type {
 	font-style: italic;
 }
@@ -2130,64 +2155,43 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * @section 7.0 - Tables - General
 *-------------------------------------------------------------------------------
 */
-.buddypress table.notifications,
-.buddypress table.notifications-settings,
-.buddypress table.profile-settings,
-.buddypress table.profile-fields,
+.buddypress .bp-table-user,
 .buddypress table.wp-profile-fields,
-.buddypress table.messages-notices,
 .buddypress table.forum {
 	width: 100%;
 }
 
-.buddypress table.notifications thead tr,
-.buddypress table.notifications-settings thead tr,
-.buddypress table.profile-settings thead tr,
-.buddypress table.profile-fields thead tr,
+.buddypress .bp-tables-user thead tr,
 .buddypress table.wp-profile-fields thead tr,
-.buddypress table.messages-notices thead tr,
 .buddypress table.forum thead tr {
 	background: #eaeaea;
 }
 
-.buddypress table.notifications tr td,
-.buddypress table.notifications-settings tr td,
-.buddypress table.profile-settings tr td,
-.buddypress table.profile-fields tr td,
-.buddypress table.wp-profile-fields tr td,
-.buddypress table.messages-notices tr td,
-.buddypress table.forum tr td,
-.buddypress table.notifications tr th,
-.buddypress table.notifications-settings tr th,
-.buddypress table.profile-fields tr th,
+.buddypress .bp-tables-user tr th,
+.buddypress .bp-tables-user tr td,
 .buddypress table.wp-profile-fields tr th,
-.buddypress table.messages-notices tr th,
-.buddypress table.forum tr th {
+.buddypress table.wp-profile-fields tr td,
+.buddypress table.forum tr th,
+.buddypress table.forum tr td {
 	padding: 0.5em;
 	vertical-align: middle;
 }
 
-.buddypress table.notifications tr td.label,
-.buddypress table.notifications-settings tr td.label,
-.buddypress table.profile-fields tr td.label,
+.buddypress .bp-tables-user tr td.label,
 .buddypress table.wp-profile-fields tr td.label,
-.buddypress table.messages-notices tr td.label,
 .buddypress table.forum tr td.label {
 	border-right: 1px solid #eaeaea;
 	font-weight: bold;
 	width: 25%;
 }
 
-.buddypress table.notifications-settings tr.alt td,
-.buddypress table.profile-settings tr.alt td,
-.buddypress table.profile-fields tr.alt td,
-.buddypress table.wp-profile-fields tr.alt td,
-.buddypress table.messages-notices tr.alt td {
+.buddypress .bp-tables-user tr.alt td,
+.buddypress table.wp-profile-fields tr.alt td {
 	background: #fafafa;
 }
 
 .buddypress table.notification-settings {
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	text-align: left;
 }
 
@@ -2197,6 +2201,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress table.notifications th.icon,
 .buddypress table.notifications td:first-child,
+.buddypress table.notifications th.icon,
+.buddypress table.notifications td:first-child,
+.buddypress table.notification-settings th.icon,
+.buddypress table.notification-settings td:first-child,
 .buddypress table.notification-settings th.icon,
 .buddypress table.notification-settings td:first-child {
 	display: none;
@@ -2408,6 +2416,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	left: 0;
 	line-height: 200%;
 	margin-right: 10px;
+	padding: 0 3px;
 	position: absolute;
 	top: 0;
 	vertical-align: bottom;

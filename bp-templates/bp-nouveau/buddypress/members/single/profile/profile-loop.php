@@ -21,7 +21,7 @@ bp_nouveau_xprofile_hook( 'before', 'loop_content' ); ?>
 
 				<h2 class="screen-heading profile-group-title"><?php bp_the_profile_group_name(); ?></h2>
 
-				<table class="profile-fields">
+				<table class="profile-fields bp-tables-user">
 
 					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 

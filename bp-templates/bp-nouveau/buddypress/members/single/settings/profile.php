@@ -25,7 +25,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
 			<?php if ( bp_profile_fields() ) : ?>
 
-				<table class="profile-settings" id="xprofile-settings-<?php bp_the_profile_group_slug(); ?>">
+				<table class="profile-settings bp-tables-user" id="xprofile-settings-<?php bp_the_profile_group_slug(); ?>">
 					<thead>
 						<tr>
 							<th class="title field-group-name"><?php bp_the_profile_group_name(); ?></th>
