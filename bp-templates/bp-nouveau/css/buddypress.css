@@ -2155,7 +2155,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * @section 7.0 - Tables - General
 *-------------------------------------------------------------------------------
 */
-.buddypress .bp-table-user,
+.buddypress .bp-tables-user,
 .buddypress table.wp-profile-fields,
 .buddypress table.forum {
 	width: 100%;
