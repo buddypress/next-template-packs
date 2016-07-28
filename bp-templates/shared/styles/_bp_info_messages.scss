@@ -54,6 +54,11 @@
 
 	} // close .bp-messages
 
+	// message-box() may be have params passed through:
+	// ($background: #fff, $text-color: #000, $border: #eee)
+	// '$border: none' ensures border turned off in favour off
+	// box shadow.
+
 	.bp-feedback {
 		@include message-box( $border: none);
 		@include box-shadow( 0 1px 1px 1px rgba(0, 0, 0, 0.1) );
@@ -70,6 +75,7 @@
 		left: 0;
 		line-height: 200%;
 		margin-right: 10px;
+		padding: 0 3px;
 		position: absolute;
 		top: 0;
 		vertical-align: bottom;

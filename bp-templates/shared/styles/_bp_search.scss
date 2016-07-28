@@ -43,9 +43,25 @@
 
 			}
 
+			// Rough re-working to allo search to be re-sized
+
+
 		} // close form
 
 	} // close [data-bp-search]
+
+	ul.filters form {font-size: $search-element-size + px; }
+	ul.filters  li  form button[type="submit"] {
+		font-size: inherit;
+		padding: .1em .7em; line-height: 1.4;
+		span.dashicons {
+			font-size:  $search-element-button-size + px;
+			line-height: inherit;
+		}
+	}
+	ul.filters  li  form label {font-size: inherit !important;}
+	ul.filters  li  form label input {font-size: inherit !important; line-height: 1.4;padding: .1em .7em;}
+
 
 	.current-member-type {
 		font-style: italic;
