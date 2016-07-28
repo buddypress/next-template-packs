@@ -1,6 +1,6 @@
 <?php
 /**
- * BuddyPress - Members Single Profile
+ * BuddyPress - Members Settings ( Profile )
  *
  * @since  1.0.0
  *
@@ -9,9 +9,14 @@
 
 bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
-<h2 class="screen-heading profile-settings-screen"><?php _e('Profile Visibility Settings', 'bp-nouveau'); ?></h2>
+<h2 class="screen-heading profile-settings-screen">
+	<?php _e('Profile Visibility Settings', 'bp-nouveau'); ?>
+</h2>
 
-<p class="bp-help-text profile-visibility-info"><?php _e( 'Select which profile fields are private or public.', 'bp-nouveau' ); ?></p>
+<p class="bp-help-text profile-visibility-info">
+	<?php _e( 'Select who may see your profile details.', 'bp-nouveau' ); ?>
+</p>
+
 <form action="<?php echo trailingslashit( bp_displayed_user_domain() . bp_get_settings_slug() . '/profile' ); ?>" method="post" class="standard-form" id="settings-form">
 
 	<?php if ( bp_xprofile_get_settings_fields() ) : ?>

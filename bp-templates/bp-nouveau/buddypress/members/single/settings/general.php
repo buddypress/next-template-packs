@@ -1,6 +1,6 @@
 <?php
 /**
- * BuddyPress - Members Single Profile
+ * BuddyPress - Members Settings ( General )
  *
  * @since  1.0.0
  *
@@ -8,6 +8,14 @@
  */
 
 bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
+
+<h2 class="screen-heading genaral-settings-screen">
+	<?php _e('Email & Password', 'bp-nouveau'); ?>
+</h2>
+
+<p class="bp-help-text email-pwd-info">
+	<?php _e( 'Change your email or password.', 'bp-nouveau' ); ?>
+</p>
 
 <form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/general'; ?>" method="post" class="standard-form" id="settings-form">
 
@@ -22,7 +30,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	<input type="email" name="email" id="email" value="<?php echo bp_get_displayed_user_email(); ?>" class="settings-input" <?php bp_form_field_attributes( 'email' ); ?>/>
 
 	<p class="bp-help-text">
-		<?php _e( 'Change Password <span>(leave blank for no change)</span>', 'bp-nouveau' ); ?>
+		<?php _e( 'Leave password fields blank for no change', 'bp-nouveau' ); ?>
 	</p>
 
 	<label for="pass1"><?php _e('Add Your New Password', 'bp-nouveau'); ?></label>

@@ -1,6 +1,6 @@
 <?php
 /**
- * BuddyPress - Group Invites Settings
+ * BuddyPress - Members Settings ( Group Invites )
  *
  * @since  1.0.0
  *
@@ -8,11 +8,15 @@
  */
 ?>
 
-<h2 class="screen-heading group-invites-screen"><?php _e('Group Invites', 'bp-nouveau'); ?></h2>
+<h2 class="screen-heading group-invites-screen">
+	<?php _e('Group Invites', 'bp-nouveau'); ?>
+</h2>
 
 <?php bp_nouveau_user_feedback( 'member-group-invites' ); ?>
 
-<p class="bp-help-text group-invites-info"><?php _e( 'Set your email notification preferences.', 'bp-nouveau' ); ?></p>
+<p class="bp-help-text group-invites-info">
+	<?php _e( 'Set your email notification preferences.', 'bp-nouveau' ); ?>
+</p>
 
 <form action="<?php echo bp_displayed_user_domain() . bp_get_settings_slug() . '/invites/'; ?>" name="account-group-invites-form" id="account-group-invites-form" class="standard-form" method="post">
 

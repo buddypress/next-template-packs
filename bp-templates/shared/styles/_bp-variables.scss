@@ -20,16 +20,20 @@ $marg-lrg:  20px;
 $marg-xlrg: 30px;
 
 // Colours
+
+$light-text:         #888;
+$primary-grey:       #ccc;
+
 $bp-border-color:    #eee;
-$bp-border-dark:     #ccc;
-$form-border-color:  #ccc;
+$bp-border-dark:     $primary-grey;
+$form-border-color:  $primary-grey;
 $bp-text:            #555;
-$form-text:          #888;
-$meta-text:          #888;
+$form-text:          $light-text;
+$meta-text:          $light-text;
 $off-white:          #fafafa;
 $light-grey:         #eaeaea;
 $med-light-grey:     #e0e0e0;
-$grey:               #ccc;
+$grey:               $primary-grey;
 $white:              #fff;
 $black:              #333;
 
@@ -44,7 +48,8 @@ $informational:  #38a;
 $loading:        #ffd087;
 $update-success: #8a2;
 
-// password warn colors
+// password warn colors & border-short
+// These may be overidden on the @include mixin call
 $pwd-background:    #eee;
 $background-short:  #ffa0a0;
 $border-short:      #f04040;

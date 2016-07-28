@@ -1,6 +1,6 @@
 <?php
 /**
- * BuddyPress - Members Settings Delete Account
+ * BuddyPress - Members Settings ( Delete Account )
  *
  * @since  1.0.0
  *
@@ -9,7 +9,9 @@
 
 bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
-<h2 class="screen-heading delete-account-screen warn"><?php _e('Delete Account', 'bp-nouveau'); ?></h2>
+<h2 class="screen-heading delete-account-screen warn">
+	<?php _e('Delete Account', 'bp-nouveau'); ?>
+</h2>
 
 <?php bp_nouveau_user_feedback( 'member-delete-account' ); ?>
 
