@@ -43,7 +43,7 @@
 
 	<?php endif ; ?>
 
-	<?php if ( is_active_sidebar( 'sidebar-buddypress-members' )  ) : ?>
+	<?php if ( is_active_sidebar( 'sidebar-buddypress-members' ) ) : ?>
 
 		<div id="member-front-widgets" class="bp-sidebar bp-widget-area" role="complementary">
 			<?php dynamic_sidebar( 'sidebar-buddypress-members' ); ?>

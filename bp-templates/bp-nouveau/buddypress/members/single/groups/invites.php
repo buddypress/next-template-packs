@@ -22,7 +22,7 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 					</div>
 				<?php endif; ?>
 
-				<h4><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false )  ); ?></span></h4>
+				<h4><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span></h4>
 
 				<p class="desc">
 					<?php bp_group_description_excerpt(); ?>
