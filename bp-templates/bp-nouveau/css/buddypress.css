@@ -174,7 +174,7 @@ ul.subnav {
 .buddypress .bp-subnavs,
 .buddypress .bp-subnavs#subsubnav {
 	background: transparent;
-	margin: 10px 0 10px;
+	margin: 10px 0;
 	overflow: hidden;
 }
 
@@ -186,6 +186,12 @@ ul.subnav {
 .buddypress .bp-subnavs ul li.last,
 .buddypress .bp-subnavs#subsubnav ul li.last {
 	margin-top: 4px;
+}
+
+.buddypress .bp-subnavs ul .last.filter select,
+.buddypress .bp-subnavs#subsubnav ul .last.filter select {
+	font-size: 16px;
+	margin-right: 5px;
 }
 
 .buddypress .bp-navs.bp-invites-nav#subnav ul li.last,
@@ -313,6 +319,70 @@ ul.subnav {
 .buddypress_object_nav .bp-navs li a span {
 	display: inline-block;
 	float: right;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress #item-body .button-tabs {
+		border-bottom: 1px solid #ccc;
+		margin: 20px 0 10px;
+	}
+	.buddypress #item-body .button-tabs:before, .buddypress #item-body .button-tabs:after {
+		content: " ";
+		display: block;
+	}
+	.buddypress #item-body .button-tabs:after {
+		clear: both;
+	}
+	.buddypress #item-body .button-tabs li {
+		float: left;
+		list-style: none;
+		margin: 0 15px 0 0;
+	}
+	.buddypress #item-body .button-tabs li a {
+		background: none;
+		border: none;
+	}
+	.buddypress #item-body .button-tabs li.current {
+		border-color: #ccc #ccc #fff;
+		border-style: solid;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		border-width: 1px;
+		margin-bottom: -1px;
+		padding: 0 0.5em;
+	}
+	.buddypress #item-body .tabbed-links > .button-tabs {
+		margin-top: 0;
+	}
+	.buddypress #item-body #subnav.tabbed-links {
+		margin-top: 2px;
+	}
+	.buddypress #item-body #subnav.tabbed-links li#compose-personal-li {
+		margin-top: 6px;
+	}
+	.buddypress #item-body ul.button-tabs li a {
+		border-right: 0;
+	}
+	.buddypress #item-body ul.button-tabs li.last {
+		float: right;
+		margin: 0;
+	}
+	.buddypress #item-body ul.button-tabs li.last a {
+		margin-top: -1em;
+	}
+	.buddypress #item-body ul.button-tabs li a,
+	.buddypress #item-body ul.button-tabs li a:focus,
+	.buddypress #item-body ul.button-tabs li a:hover,
+	.buddypress #item-body ul.button-tabs li.current a,
+	.buddypress #item-body ul.button-tabs li.current a:focus,
+	.buddypress #item-body ul.button-tabs li.current a:hover {
+		background: none;
+		border: 0;
+	}
+	.buddypress #item-body ul.button-tabs li a:active,
+	.buddypress #item-body ul.button-tabs li.current a:active {
+		outline: none;
+	}
 }
 
 /**
@@ -2832,65 +2902,5 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li:last-child a {
 		border: none;
-	}
-}
-
-@media screen and (min-width: 46.8em) {
-	.buddypress #item-body .button-tabs {
-		border-bottom: 1px solid #ccc;
-		margin: 20px 0 10px;
-	}
-	.buddypress #item-body .button-tabs:before, .buddypress #item-body .button-tabs:after {
-		content: " ";
-		display: block;
-	}
-	.buddypress #item-body .button-tabs:after {
-		clear: both;
-	}
-	.buddypress #item-body .button-tabs li {
-		float: left;
-		list-style: none;
-		margin: 0 15px 0 0;
-	}
-	.buddypress #item-body .button-tabs li a {
-		background: none;
-		border: none;
-	}
-	.buddypress #item-body .button-tabs li.current {
-		border-color: #ccc #ccc #fff;
-		border-style: solid;
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
-		border-width: 1px;
-		margin-bottom: -1px;
-		padding: 0 0.5em;
-	}
-	.buddypress #item-body .tabbed-links > .button-tabs {
-		margin-top: 0;
-	}
-	.buddypress #item-body #subnav.tabbed-links {
-		margin-top: 2px;
-	}
-	.buddypress #item-body #subnav.tabbed-links li#compose-personal-li {
-		margin-top: 6px;
-	}
-	.buddypress #item-body ul.button-tabs li a {
-		border-right: 0;
-	}
-	.buddypress #item-body ul.button-tabs li.last {
-		float: right;
-		margin: 0;
-	}
-	.buddypress #item-body ul.button-tabs li.last a {
-		margin-top: -1em;
-	}
-	.buddypress #item-body ul.button-tabs li a,
-	.buddypress #item-body ul.button-tabs li a:focus,
-	.buddypress #item-body ul.button-tabs li a:hover,
-	.buddypress #item-body ul.button-tabs li.current a,
-	.buddypress #item-body ul.button-tabs li.current a:focus,
-	.buddypress #item-body ul.button-tabs li.current a:hover {
-		background: none;
-		border: 0;
 	}
 }
