@@ -72,6 +72,12 @@
 	}
 }
 
+@mixin medium-max {
+	@media screen and (max-width: 46.8em) {
+		@content;
+	}
+}
+
 @mixin medium-up {
 	@media screen and (min-width: 46.8em) {
 		@content;
