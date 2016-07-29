@@ -63,7 +63,7 @@
 		@include message-box( $border: none);
 		@include box-shadow( 0 1px 1px 1px rgba(0, 0, 0, 0.1) );
 		margin: 10px 0;
-		padding: $pad-sml 0 $pad-sml 30px;
+		padding: $pad-sml 0 $pad-sml 50px;
 		position: relative;
 	}
 
@@ -74,11 +74,9 @@
 		height: 100%;
 		left: 0;
 		line-height: 200%;
-		margin-right: 10px;
 		padding: 0 3px;
 		position: absolute;
 		top: 0;
-		vertical-align: bottom;
 	}
 
 	.bp-feedback.info:before,
