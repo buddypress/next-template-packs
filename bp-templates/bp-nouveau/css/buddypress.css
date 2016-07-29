@@ -194,7 +194,7 @@ ul.subnav {
 	margin-top: 0;
 }
 
-.buddypress .sub-nav {
+.buddypress .subnav-filters {
 	padding: 0 5px;
 }
 
@@ -1865,6 +1865,10 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	* @subsection 5.2.2.6 - Settings
 	*------------------------------------------
 	*/
+.buddypress .profile-settings.bp-tables-user select {
+	width: 100%;
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 6.0 - Forms  - General
@@ -2231,7 +2235,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress table#message-threads .thread-info p.thread-excerpt {
 	color: #888;
-	font-size: 80%;
+	font-size: 12px;
 	margin-top: 3px;
 }
 
@@ -2398,7 +2402,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-moz-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	margin: 10px 0;
-	padding: 0.5em 0 0.5em 30px;
+	padding: 0.5em 0 0.5em 50px;
 	position: relative;
 }
 
@@ -2409,11 +2413,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	height: 100%;
 	left: 0;
 	line-height: 200%;
-	margin-right: 10px;
 	padding: 0 3px;
 	position: absolute;
 	top: 0;
-	vertical-align: bottom;
 }
 
 .buddypress .bp-feedback.info:before,

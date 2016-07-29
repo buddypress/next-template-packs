@@ -12,7 +12,7 @@
 <?php bp_nouveau_groups_activity_post_form(); ?>
 
 <div class="bp-navs bp-subnavs group-subnav" id="subnav" role="navigation">
-	<ul class="subnav">
+	<ul class="subnav-filters filters clearfix">
 		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
 		<?php bp_nouveau_search_form(); ?>
@@ -26,7 +26,7 @@
 			</select>
 		</li>
 	</ul>
-</div><!-- .item-list-tabs -->
+</div><!-- .bp-navs -->
 
 <?php bp_nouveau_group_hook( 'before', 'activity_content' ); ?>
 

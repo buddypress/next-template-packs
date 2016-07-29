@@ -108,8 +108,8 @@ ul.subnav {
 		}
 	}
 
-	// this is the groups members.php inline sub-nav elements
-	.sub-nav { // ul
+	// ul generally holding filters & search elements only
+	.subnav-filters {
 		padding: 0 $marg-xsml;
 	}
 
