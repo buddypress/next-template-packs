@@ -24,7 +24,7 @@
 <?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 
 	<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subsubnav">
-		<ul>
+		<ul class="subnav-filters filters">
 			<?php bp_nouveau_search_form(); ?>
 
 			<li id="groups-order-select" class="last filter">

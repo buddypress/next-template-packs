@@ -10,7 +10,7 @@
 ?>
 
 <div class="bp-navs bp-subnavs user-subnav" id="subnav" role="navigation">
-	<ul class="subnav">
+	<ul class="subnav subnav-filters filters">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 

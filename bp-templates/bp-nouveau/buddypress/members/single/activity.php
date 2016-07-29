@@ -20,7 +20,7 @@
 <?php bp_nouveau_activity_member_post_form() ;?>
 
 <div class="bp-navs user-subnav no-ajax" id="subsubnav">
-	<ul>
+	<ul class="subnav-filters filters">
 		<?php bp_nouveau_search_form(); ?>
 
 		<li id="activity-filter-select" class="last filter">
@@ -32,7 +32,7 @@
 			</select>
 		</li>
 	</ul>
-</div><!-- .item-list-tabs#subsubnav -->
+</div><!-- // #subsubnav -->
 
 <?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 

@@ -14,7 +14,7 @@
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 	</ul>
-</div><!-- .item-list-tabs -->
+</div><!-- .bp-navs -->
 
 <?php if ( ! in_array( bp_current_action(), array( 'inbox', 'sentbox', 'starred', 'view', 'compose', 'notices' ) ) ) :
 
