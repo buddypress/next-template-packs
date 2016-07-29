@@ -1233,6 +1233,10 @@ body.no-js .single-item-header .js-self-profile-button {
 * User Accounts Specific Item Header
 *-----------------------------------------------------
 */
+.bp-user .users-header .user-nicename {
+	margin-bottom: 5px;
+}
+
 /**
 *-----------------------------------------------------------
 * @subsection 5.2 - Item Body: Global
