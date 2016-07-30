@@ -50,6 +50,43 @@
 		}
 	}
 
+	// Set various tables th/td cell sizes
+	table.notifications {
+		.bulk-select-all,
+		.bulk-select-check {
+			width: 7%;
+		}
+
+		.title,
+		.notification-description,
+		.date,
+		.notification-since {
+			width: 35%;
+		}
+
+		.actions,
+		.notification-actions {
+			width: 23%;
+		}
+	}
+
+	table.notification-settings,
+	table.profile-settings {
+		th.title {
+			width: 80%;
+		}
+	}
+	// end cell sizings
+
+	table.notifications {
+		.notification-actions {
+			a.delete,
+			a.mark-read {
+				display: inline-block;
+			}
+		}
+	}
+
 	table.notification-settings {
 		margin-bottom: $marg-med;
 		text-align: left;
@@ -67,18 +104,12 @@
 		}
 	}
 
-	table.notification-settings,
-	table.profile-settings {
-		th.title {
-			width: 80%;
-		}
-	}
-
 	table.notification-settings {
 		.no,
 		.yes {
 			text-align: center;
 			width: 40px;
+			vertical-align: middle;
 		}
 	}
 

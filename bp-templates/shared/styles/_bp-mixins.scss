@@ -216,6 +216,7 @@
 
 	.button-tabs {
 		border-bottom: 1px solid $bp-border-dark;
+		float: none;
 		margin: $marg-lrg 0 $marg-sml;
 
 		&:before,

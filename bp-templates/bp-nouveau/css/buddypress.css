@@ -95,6 +95,36 @@ body .buddypress h6 {
 	}
 }
 
+.bp-tables-user th {
+	font-size: 13px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.bp-tables-user th {
+		font-size: 16px;
+	}
+}
+
+.bp-tables-user td {
+	font-size: 12px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.bp-tables-user td {
+		font-size: 14px;
+	}
+}
+
+#notification-select {
+	font-size: 12px;
+}
+
+@media screen and (min-width: 46.8em) {
+	#notification-select {
+		font-size: 14px;
+	}
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 2.0 - Navigation - General
@@ -340,6 +370,7 @@ body .buddypress h6 {
 @media screen and (min-width: 46.8em) {
 	.buddypress #item-body .button-tabs {
 		border-bottom: 1px solid #ccc;
+		float: none;
 		margin: 20px 0 10px;
 	}
 	.buddypress #item-body .button-tabs:before, .buddypress #item-body .button-tabs:after {
@@ -2287,6 +2318,33 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: #fafafa;
 }
 
+.buddypress table.notifications .bulk-select-all,
+.buddypress table.notifications .bulk-select-check {
+	width: 7%;
+}
+
+.buddypress table.notifications .title,
+.buddypress table.notifications .notification-description,
+.buddypress table.notifications .date,
+.buddypress table.notifications .notification-since {
+	width: 35%;
+}
+
+.buddypress table.notifications .actions,
+.buddypress table.notifications .notification-actions {
+	width: 23%;
+}
+
+.buddypress table.notification-settings th.title,
+.buddypress table.profile-settings th.title {
+	width: 80%;
+}
+
+.buddypress table.notifications .notification-actions a.delete,
+.buddypress table.notifications .notification-actions a.mark-read {
+	display: inline-block;
+}
+
 .buddypress table.notification-settings {
 	margin-bottom: 15px;
 	text-align: left;
@@ -2303,15 +2361,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: none;
 }
 
-.buddypress table.notification-settings th.title,
-.buddypress table.profile-settings th.title {
-	width: 80%;
-}
-
 .buddypress table.notification-settings .no,
 .buddypress table.notification-settings .yes {
 	text-align: center;
 	width: 40px;
+	vertical-align: middle;
 }
 
 .buddypress table#message-threads {

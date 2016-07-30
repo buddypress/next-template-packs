@@ -73,3 +73,15 @@ ul.filters {
 }
 $search-element-size: 15;
 $search-element-button-size: $search-element-size + 5;
+
+	.bp-tables-user {
+		th {
+			@include responsive-font(16);
+		}
+
+		td {
+			@include responsive-font(14);
+		}
+	}
+
+#notification-select { @include responsive-font(14) }
