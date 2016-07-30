@@ -16,7 +16,7 @@
 		}
 
 		li.last {
-			margin: 7px 0 0;
+			//margin: 7px 0 0;
 
 			select {
 				max-width: 185px;
@@ -92,14 +92,25 @@
 				margin-top: 0;
 
 				&.last {
-					margin-top: 4px;
+			//margin-top: 4px;
 				}
 			}
+
 			.last.filter {
 				select {
 					@include font-size(16)
-					margin-right: $marg-xsml;
+	//				margin-right: $marg-xsml;
+					padding: $marg-xsml $marg-sml;
 				}
+			}
+		}
+	}
+
+	.user-subnav {
+		.last.filter {
+			select {
+				@include font-size(16);
+				padding: 3px $marg-sml;
 			}
 		}
 	}

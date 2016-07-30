@@ -153,10 +153,6 @@ body .buddypress h6 {
 	margin: 0;
 }
 
-.bp-navs ul li.last {
-	margin: 7px 0 0;
-}
-
 .bp-navs ul li.last select {
 	max-width: 185px;
 }
@@ -211,15 +207,15 @@ body .buddypress h6 {
 	margin-top: 0;
 }
 
-.buddypress .bp-subnavs ul li.last,
-.buddypress .bp-subnavs#subsubnav ul li.last {
-	margin-top: 4px;
-}
-
 .buddypress .bp-subnavs ul .last.filter select,
 .buddypress .bp-subnavs#subsubnav ul .last.filter select {
 	font-size: 16px;
-	margin-right: 5px;
+	padding: 5px 10px;
+}
+
+.buddypress .user-subnav .last.filter select {
+	font-size: 16px;
+	padding: 3px 10px;
 }
 
 .buddypress .bp-navs.bp-invites-nav#subnav ul li.last,
