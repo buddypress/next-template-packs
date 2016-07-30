@@ -247,6 +247,10 @@
 			border-width: 1px;
 			margin-bottom: -1px;
 			padding: 0 $pad-sml;
+
+			a {
+				color: $black;
+			}
 		}
 	}
 	// we don't want top margin if tabs are on the top subnav position
