@@ -119,7 +119,6 @@ body .buddypress h6 {
 }
 
 .bp-navs ul li {
-	float: left;
 	list-style: none;
 	margin: 0;
 }
@@ -155,8 +154,8 @@ body .buddypress h6 {
 
 .bp-navs ul li.selected a,
 .bp-navs ul li.current a {
-	background-color: #eee;
-	color: #555;
+	background-color: #555;
+	color: #fafafa;
 	font-weight: bold;
 	opacity: 0.8;
 }
@@ -166,14 +165,13 @@ body .buddypress h6 {
 	display: inline-block;
 }
 
-.bp-subnavs,
-ul.subnav {
+.buddypress .bp-subnavs,
+.buddypress ul.subnav {
 	width: 100%;
 }
 
 .buddypress .bp-subnavs,
 .buddypress .bp-subnavs#subsubnav {
-	background: transparent;
 	margin: 10px 0;
 	overflow: hidden;
 }
@@ -208,6 +206,11 @@ ul.subnav {
 .buddypress .bp-navs li.current a span,
 .buddypress .bp-navs li a:hover a span {
 	background-color: #ccc;
+}
+
+.buddypress .bp-navs li:not(.current) a:focus,
+.buddypress .bp-navs li:not(.current) a:hover {
+	background: #ccc;
 }
 
 .buddypress_object_nav .bp-navs li.selected a span,
@@ -298,12 +301,25 @@ ul.subnav {
 	width: auto;
 }
 
+@media screen and (max-width: 46.8em) {
+	.buddypress .bp-navs {
+		background: #eaeaea;
+	}
+}
+
 @media screen and (min-width: 46.8em) {
+	.buddypress .bp-navs li {
+		float: left;
+	}
 	.buddypress .subnav {
 		float: left;
 	}
 	.buddypress .dir-component-filters {
 		float: right;
+	}
+	.buddypress ul.subnav,
+	.buddypress .dir-component-filters {
+		width: auto;
 	}
 	.buddypress #subsubnav .activity-search {
 		float: left;
@@ -2798,6 +2814,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.buddypress .vertical li.selected a {
 		background: #ccc;
+		color: #333;
 	}
 	.buddypress .vertical li:focus, .buddypress .vertical li:hover {
 		background: #ccc;
@@ -2836,7 +2853,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		border-right: 1px solid #ccc;
 		padding: 0 0.5em;
 	}
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a:focus,
+	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a:hover {
+		background: none;
+	}
 	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li.current a {
+		background: none;
 		color: #333;
 		text-decoration: underline;
 	}

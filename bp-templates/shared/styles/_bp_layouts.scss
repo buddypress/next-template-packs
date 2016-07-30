@@ -322,6 +322,7 @@
 
 				&.selected a {
 					background: $grey;
+					color: $black;
 				}
 
 				&:focus,
@@ -339,7 +340,7 @@
 				&:hover span {
 					border-color: $light-grey;
 				}
-			}
+			} // li
 
 		}
 	} // close .buddypress
@@ -374,10 +375,16 @@
 						border-right: 1px solid $bp-border-dark;
 						padding: 0 $pad-sml;
 					}
+
+					a:focus,
+					a:hover {
+						background: none;
+					}
 				}
 
 				li.current {
 					a {
+						background: none;
 						color: $black;
 						text-decoration: underline;
 					}
