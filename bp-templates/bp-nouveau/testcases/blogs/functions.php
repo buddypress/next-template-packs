@@ -16,17 +16,6 @@ class BP_Nouveau_Blogs_Functions extends Next_Template_Packs_TestCase {
 			'all_one' => sprintf( '<li id="blogs-%1$s"><a href="%2$s" title="%3$s">%4$s</a></li>', 'foo', 'http://example.org/blogs/foo', 'Foo', 'Foo' ),
 			'all_two' => sprintf( '<li id="blogs-%1$s"><a href="%2$s" title="%3$s">%4$s <span>%5$s</span></a></li>', 'bar', 'http://example.org/blogs/bar', 'Bar', 'Bar', 5 ),
 		);
-
-		/**
-		 * Workaround till #7150 is fixed
-		 *
-		 * @see https://buddypress.trac.wordpress.org/ticket/7150
-		 */
-		$bp_pages = array_keys( bp_get_option( 'bp-pages' ) );
-		if ( ! isset( $bp_pages['blogs'] ) && bp_is_active( 'blogs' ) ) {
-			bp_core_add_root_component( 'blogs' );
-			bp_core_create_root_component_page();
-		}
 	}
 
 	public function tearDown() {
