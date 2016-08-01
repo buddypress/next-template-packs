@@ -51,8 +51,6 @@
 		li.selected,
 		li.current {
 			a {
-				background-color: $dark-grey;
-				color: $off-white;
 				font-weight: bold;
 				opacity: 0.8;
 			}
@@ -74,7 +72,66 @@
 
 } // close .bp-navs
 
+// Primary, default current/selected states
+.buddypress {
 
+	.bp-navs {
+		li.selected,
+		li.current {
+			a {
+				background-color: $dark-grey;
+				color: $off-white;
+			}
+		}
+	}
+
+	@include medium-up() {
+		.main-navs:not(.dir-navs) {
+			li.selected,
+			li.current {
+				a {
+					background: none;
+					color: $black;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		.main-navs.vertical {
+			li.selected,
+			li.current {
+				a {text-decoration: none;}
+			}
+		}
+	}
+
+	.bp-subnavs {
+		li.selected,
+		li.current {
+			a {
+				background-color: $dark-grey;
+				color: $off-white;
+			}
+		}
+
+	}
+}
+
+// visual styling of default single navs - adds background to
+// the parent elements if vertical nav not selected
+.buddypress:not(.bp-vertical-nav) {
+		.bp-navs:not(.dir-navs) {
+				background: $light-grey;
+		}
+
+	.user-subnav#subsubnav,
+	.group-subnav#subsubnav {
+		background: none;
+	}
+}
+
+
+// Specifically default subnav elements
 .buddypress {
 
 	.bp-subnavs,
@@ -99,7 +156,7 @@
 			.last.filter {
 				select {
 					@include font-size(16)
-	//				margin-right: $marg-xsml;
+	//		margin-right: $marg-xsml;
 					padding: $marg-xsml $marg-sml;
 				}
 			}
@@ -199,6 +256,7 @@
 	} // bp-navs
 }
 
+// Icons
 .buddypress .bp-navs  li.filter label:before,
 .buddypress .bp-navs  li.feed a:before,
 .buddypress .bp-invites-content .item-list li a.invite-button:before,
@@ -211,8 +269,6 @@
 .buddypress .bp-invites-content .item-list li a.invite-button:before {
 	font-size: 32px;
 }
-
-// Icons
 
 .buddypress {
 
@@ -268,16 +324,6 @@
 		vertical-align: baseline;
 		width: auto;
 	}
-
-	// max width handles some visual styling
-	@include medium-max() {
-
-		.bp-navs {
-			background: $light-grey;
-		}
-
-	}
-
 
 	// position our nav elements at larger screen widths
 	@include medium-up() {

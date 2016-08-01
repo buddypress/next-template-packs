@@ -180,8 +180,6 @@ body .buddypress h6 {
 
 .bp-navs ul li.selected a,
 .bp-navs ul li.current a {
-	background-color: #555;
-	color: #fafafa;
 	font-weight: bold;
 	opacity: 0.8;
 }
@@ -189,6 +187,40 @@ body .buddypress h6 {
 .bp-navs.bp-invites-filters ul li a, .bp-navs.bp-messages-filters ul li a {
 	border: 1px solid #ccc;
 	display: inline-block;
+}
+
+.buddypress .bp-navs li.selected a,
+.buddypress .bp-navs li.current a {
+	background-color: #555;
+	color: #fafafa;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .main-navs:not(.dir-navs) li.selected a,
+	.buddypress .main-navs:not(.dir-navs) li.current a {
+		background: none;
+		color: #333;
+		text-decoration: underline;
+	}
+	.buddypress .main-navs.vertical li.selected a,
+	.buddypress .main-navs.vertical li.current a {
+		text-decoration: none;
+	}
+}
+
+.buddypress .bp-subnavs li.selected a,
+.buddypress .bp-subnavs li.current a {
+	background-color: #555;
+	color: #fafafa;
+}
+
+.buddypress:not(.bp-vertical-nav) .bp-navs:not(.dir-navs) {
+	background: #eaeaea;
+}
+
+.buddypress:not(.bp-vertical-nav) .user-subnav#subsubnav,
+.buddypress:not(.bp-vertical-nav) .group-subnav#subsubnav {
+	background: none;
 }
 
 .buddypress .bp-subnavs,
@@ -325,12 +357,6 @@ body .buddypress h6 {
 	text-transform: none;
 	vertical-align: baseline;
 	width: auto;
-}
-
-@media screen and (max-width: 46.8em) {
-	.buddypress .bp-navs {
-		background: #eaeaea;
-	}
 }
 
 @media screen and (min-width: 46.8em) {

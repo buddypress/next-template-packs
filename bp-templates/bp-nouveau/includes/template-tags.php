@@ -1278,7 +1278,7 @@ function bp_nouveau_single_item_nav_classes() {
 	 * @return string CSS classes
 	 */
 	function bp_nouveau_get_single_item_nav_classes() {
-		$classes    = array( 'item-list-tabs', 'no-ajax', 'bp-navs', 'single-screen-navs' );
+		$classes    = array( 'main-navs', 'no-ajax', 'bp-navs', 'single-screen-navs' );
 		$component  = bp_current_component();
 		$bp_nouveau = bp_nouveau();
 
