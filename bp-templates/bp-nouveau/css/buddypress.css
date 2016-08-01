@@ -196,6 +196,10 @@ body .buddypress h6 {
 	display: inline-block;
 }
 
+.main-navs.dir-navs {
+	margin-bottom: 20px;
+}
+
 .buddypress .bp-navs li.selected a,
 .buddypress .bp-navs li.current a {
 	background-color: #555;
@@ -659,6 +663,10 @@ body .buddypress h6 {
 	margin: 15px 0;
 }
 
+.activity-update-form .activity-form {
+	margin-bottom: 30px;
+}
+
 .activity-update-form .activity-form p.activity-greeting {
 	line-height: 0.5em;
 	margin-bottom: 15px;
@@ -671,8 +679,13 @@ body .buddypress h6 {
 }
 
 .activity-update-form #whats-new-content {
-	margin-left: 55px;
-	padding: 0 0 20px 20px;
+	padding: 0 0 20px 0;
+}
+
+.activity-update-form #whats-new-content,
+.activity-update-form #whats-new-post-in-box,
+.activity-update-form #whats-new-submit {
+	margin-left: 10%;
 }
 
 .activity-update-form #whats-new-textarea textarea {
@@ -2042,7 +2055,8 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 * @section 6.0 - Forms  - General
 *-------------------------------------------------------------------------------
 */
-.buddypress .filter select {
+.buddypress .filter select,
+.buddypress #whats-new-post-in-box select {
 	border: 1px solid #ccc;
 }
 

@@ -13,6 +13,7 @@
 	margin: $marg-med 0;
 
 	.activity-form { // #whats-new-form
+		margin-bottom: $marg-xlrg;
 
 		// This ruleset may be redundent!
 		p.activity-greeting {
@@ -32,9 +33,15 @@
 	//.content-wrap { // #whats-new-content
 
 	#whats-new-content {
-		margin-left: 55px;
-		padding: 0 0 $marg-lrg $marg-lrg;
+		padding: 0 0 $marg-lrg 0;
 	}
+
+	#whats-new-content,
+	#whats-new-post-in-box,
+	#whats-new-submit {
+		margin-left: 10%;
+	}
+
 
 	// these ID's need replacing with this!
 	//.textarea-wrap { // #whats-new-textarea
@@ -59,9 +66,7 @@
 		}
 	}
 
-	.post-to { //#whats-new-post-in-box
 
-	}
 
 	.submit-update { // #whats-new-submit
 
