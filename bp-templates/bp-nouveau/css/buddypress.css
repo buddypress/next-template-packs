@@ -85,14 +85,21 @@ body .buddypress h6 {
 	clear: both;
 }
 
-.bp-label-text {
+.bp-label-text,
+.activity-header {
 	font-size: 13px;
 }
 
 @media screen and (min-width: 46.8em) {
-	.bp-label-text {
+	.bp-label-text,
+	.activity-header {
 		font-size: 16px;
 	}
+}
+
+.mini .activity-header,
+.acomment-meta {
+	font-size: 14px;
 }
 
 .bp-tables-user th {
@@ -584,7 +591,11 @@ body .buddypress h6 {
 @media screen and (min-width: 24em) {
 	.buddypress .bp-list li .item-avatar {
 		float: left;
-		text-align: left;
+		text-align: center;
+		width: 15%;
+	}
+	.buddypress .bp-list li .item-avatar img {
+		width: 86%;
 	}
 	.buddypress .bp-list li .list-title,
 	.buddypress .bp-list li .item-meta {
@@ -600,8 +611,11 @@ body .buddypress h6 {
 }
 
 @media screen and (min-width: 46.8em) {
+	.buddypress .bp-list li .item-avatar {
+		margin-right: 5%;
+	}
 	.buddypress .bp-list li .item {
-		margin: 0 15%;
+		margin: 0 10% 0 0;
 		overflow: hidden;
 	}
 	.buddypress .bp-list li .action {
@@ -704,9 +718,22 @@ body .buddypress h6 {
 	padding-bottom: 1em;
 }
 
+.activity-list .activity-item div.item-avatar {
+	margin-right: 5%;
+	width: auto;
+}
+
+.activity-list .activity-item div.item-avatar img {
+	width: auto;
+}
+
 .activity-list .activity-item.mini {
 	font-size: 13px;
 	position: relative;
+}
+
+.activity-list .activity-item.mini .activity-avatar {
+	width: auto;
 }
 
 .activity-list .activity-item.mini .activity-avatar img.avatar,
@@ -758,10 +785,6 @@ body .buddypress h6 {
 	padding: 0;
 }
 
-.activity-list .activity-item .activity-avatar {
-	float: left;
-}
-
 .activity-list .activity-item .activity-header {
 	margin-right: 15px;
 }
@@ -787,7 +810,8 @@ body .buddypress h6 {
 }
 
 .activity-list .activity-item .activity-content {
-	margin: 0 0 0 70px;
+	margin: 0 5% 0 0;
+	overflow: hidden;
 	position: relative;
 }
 
@@ -799,8 +823,10 @@ body .buddypress h6 {
 
 .activity-list .activity-item .activity-content .activity-inner,
 .activity-list .activity-item .activity-content blockquote {
+	background: #fafafa;
 	margin: 15px 15px 10px 0;
 	overflow: hidden;
+	padding: 1em;
 }
 
 .activity-list .activity-item .activity-content p {
@@ -935,17 +961,12 @@ body.activity-permalink .activity-list .activity-meta {
 	border-width: 1px;
 	float: left;
 	height: 25px;
-	margin-right: 10px;
 	width: 25px;
-}
-
-.buddypress .activity-comments .acomment-meta {
-	font-size: 14px;
 }
 
 .buddypress .activity-comments .acomment-content {
 	border-left: 1px solid #ccc;
-	margin-top: 15px;
+	margin: 15px 0 0 10%;
 	padding: 1em;
 }
 
@@ -1101,7 +1122,8 @@ form.ac-form .ac-reply-content input {
 }
 
 .buddypress .members-list li .user-update {
-	color: #ccc;
+	clear: both;
+	color: #888;
 	font-size: 12px;
 }
 

@@ -29,18 +29,18 @@
 				border-width: 1px;
 				float: left;
 				height: 25px;
-				margin-right: 10px;
+	//			margin-right: 10px;
 				width: 25px;
 			}
 		}
 
-		.acomment-meta {
-			@include font-size(14);
-		}
+//		.acomment-meta {
+
+//		}
 
 		.acomment-content {
 			border-left: 1px solid $bp-border-dark;
-			margin-top: $marg-med;
+			margin: $marg-med 0 0 10%;
 			padding: $pad-med;
 
 			p {

@@ -59,8 +59,14 @@ body { // add weight
 
 // General labels text for controls
 
-.bp-label-text {
+.bp-label-text,
+.activity-header {
 	@include responsive-font(16);
+}
+
+.mini .activity-header,
+.acomment-meta {
+	@include font-size(14);
 }
 
 ul.filters {

@@ -12,7 +12,7 @@
 		padding: 0;
 		width: 100%;
 
-		// these clearfix rules simply becauase the element can't be classed
+		// these clearfix rules simply because the element can't be classed
 		li:before,
 		li:after {
 			content: " ";
@@ -70,8 +70,12 @@
 			@include small-up() {
 				.item-avatar {
 					float: left;
-					text-align: left;
-					//width: 15%; // review whether we really need this width
+					text-align: center;
+					width: 15%; // review whether we really need this width
+
+					img {
+						width: 86%;
+					}
 				}
 
 				.list-title,
@@ -92,8 +96,12 @@
 
 			@include medium-up() {
 
+				.item-avatar {
+					margin-right: 5%;
+				}
+
 				.item {
-					margin: 0 15%;
+					margin: 0 10% 0 0;
 					overflow: hidden;
 				}
 

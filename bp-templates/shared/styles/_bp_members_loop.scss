@@ -10,7 +10,8 @@
 			}
 
 			.user-update {
-				color: $grey;
+				clear: both;
+				color: $meta-text;
 				@include font-size(12);
 			}
 

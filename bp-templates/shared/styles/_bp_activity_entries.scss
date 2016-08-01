@@ -20,11 +20,27 @@
 			padding-bottom: $pad-med;
 		}
 
+
+		div.item-avatar { // 'div' for weight
+			margin-right: 5%;
+			width: auto;
+
+			img {
+				width: auto;
+			}
+		}
+
+		.activity-header {
+
+		}
+
 		&.mini {
 			@include font-size(13);
 			position: relative;
 
 			.activity-avatar {
+				width: auto;
+
 				img.avatar,
 				img.FB_profile_pic {
 					height: 30px;
@@ -87,9 +103,6 @@
 		}
 // ====== review this block! ===================================
 
-		.activity-avatar {
-			float: left;
-		}
 
 		// The header elements: date stamp, author etc;
 		.activity-header {
@@ -119,7 +132,8 @@
 		} // close .activity-header
 
 		.activity-content {
-			margin: 0 0 0 70px;
+			margin: 0 5% 0 0;
+			overflow: hidden;
 			position: relative;
 
 			.activity-header,
@@ -130,8 +144,10 @@
 
 			.activity-inner,
 			blockquote {
+				background: $off-white;
 				margin: $marg-med $marg-med $marg-sml 0;
 				overflow: hidden;
+				padding: $pad-med;
 			}
 
 			p {
