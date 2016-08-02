@@ -2588,7 +2588,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 #buddypress div.pending a,
 #buddypress a.disabled {
 	border-color: #eee;
-	color: #bbb;
+	color: #888;
 	cursor: default;
 }
 
@@ -2603,7 +2603,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 #buddypress div.pending a:hover,
 #buddypress a.disabled:hover {
 	border-color: #eee;
-	color: #bbb;
+	color: #888;
 }
 
 #buddypress .bp-invites-content ul.item-list li a.invite-button:hover {
