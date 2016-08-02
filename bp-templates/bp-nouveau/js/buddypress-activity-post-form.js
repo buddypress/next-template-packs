@@ -571,7 +571,8 @@ window.bp = window.bp || {};
 		events: {
 			'focus #whats-new' : 'displayFull',
 			'reset'            : 'resetForm',
-			'submit'           : 'postUpdate'
+			'submit'           : 'postUpdate',
+			'keydown'          : 'postUpdate'
 		},
 
 		initialize: function() {
@@ -663,6 +664,10 @@ window.bp = window.bp || {};
 			    meta = {};
 
 			if ( event ) {
+				if ( 'keydown' === event.type && ( 13 !== event.keyCode || ! event.ctrlKey ) ) {
+					return event;
+				}
+
 				event.preventDefault();
 			}
 

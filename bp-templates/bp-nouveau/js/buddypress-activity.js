@@ -71,7 +71,7 @@ window.bp = window.bp || {};
 
 			// Activity actions
 			$( '#buddypress [data-bp-list="activity"]' ).on( 'click', '.activity-item', bp.Nouveau, this.activityActions );
-			$( document ).keydown( this.closeCommentForm );
+			$( document ).keydown( this.commentFormAction );
 		},
 
 		/**
@@ -765,7 +765,7 @@ window.bp = window.bp || {};
 		 * @param  {[type]} event [description]
 		 * @return {[type]}       [description]
 		 */
-		closeCommentForm: function( event ) {
+		commentFormAction: function( event ) {
 			var event = event || window.event, element, keyCode;
 
 			if ( event.target ) {
@@ -778,18 +778,23 @@ window.bp = window.bp || {};
 				element = element.parentNode;
 			}
 
-			if ( event.ctrlKey === true || event.altKey === true || event.metaKey === true ) {
+			if ( event.altKey === true || event.metaKey === true ) {
+				return event;
+			}
+
+			// Not in a comment textarea, return
+			if ( element.tagName !== 'TEXTAREA' || ! $( element ).hasClass( 'ac-input' ) ) {
 				return event;
 			}
 
 			keyCode = ( event.keyCode) ? event.keyCode : event.which;
 
-			if ( 27 === keyCode ) {
+			if ( 27 === keyCode && false === event.ctrlKey  ) {
 				if ( element.tagName === 'TEXTAREA' ) {
-					if ( $( element ).hasClass( 'ac-input' ) ) {
-						$( element ).closest( 'form' ).slideUp( 200 );
-					}
+					$( element ).closest( 'form' ).slideUp( 200 );
 				}
+			} else if ( event.ctrlKey && 13 === keyCode && $( element ).val() ) {
+				$( element ).closest( 'form' ).find( '[type=submit]' ).first().trigger( 'click' );
 			}
 		}
 	};
