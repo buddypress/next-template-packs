@@ -11,9 +11,11 @@
 	.generic-button a,
 	.comment-reply-link,
 	a.bp-title-button {
-		background: #fff; /* Old browsers */
-		border: 1px solid #ccc;
-		color: #777;
+		background: $white; /* Old browsers */
+		border-color: $bp-border-dark;
+		border-style: solid;
+		border-width: 1px;
+		color: $dark-grey;
 		cursor: pointer;
 		font-size: small;
 		outline: none;
@@ -23,7 +25,6 @@
 	}
 
 	button:hover,
-	button:hover,
 	button:focus,
 	input[type=submit]:hover,
 	input[type=button]:hover,
@@ -32,11 +33,17 @@
 	.button-nav li.current a,
 	div.generic-button a:hover,
 	.comment-reply-link:hover {
-		background: #ededed;
-		border: 1px solid #bbb;
-		color: $bp-text;
+		background: $buttons-background;
+		border-color: darken($bp-border-dark, 20%);
+		color: $black;
 		outline: none;
 		text-decoration: none;
+	}
+
+	.activity-list {
+		a.button {
+			border: none;
+		}
 	}
 
 	input[type="submit"].pending,
@@ -49,8 +56,8 @@
 	button.disabled,
 	div.pending a,
 	a.disabled {
-		border-color: #eee;
-		color: #bbb;
+		border-color: $bp-border-color;
+		color: $light-text;
 		cursor: default;
 	}
 
@@ -64,8 +71,8 @@
 	button.disabled:hover,
 	div.pending a:hover,
 	a.disabled:hover {
-		border-color: #eee;
-		color: #bbb;
+		border-color: $bp-border-color;
+		color: $light-text;
 	}
 
 	.bp-invites-content {
