@@ -73,14 +73,12 @@ body { // add weight
 	@include font-size(14);
 }
 
-ul.filters {
-	li.member-search {
-		label,
-		button {
-		//	@include responsive-font(16);
-		}
+.dir-component-filters {
+	#activity-filter-by {
+		@include responsive-font(16);
 	}
 }
+
 $search-element-size: 15;
 $search-element-button-size: $search-element-size + 5;
 

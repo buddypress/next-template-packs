@@ -160,7 +160,6 @@
 			.last.filter {
 				select {
 					@include font-size(16)
-	//		margin-right: $marg-xsml;
 					padding: $marg-xsml $marg-sml;
 				}
 			}
@@ -173,6 +172,23 @@
 				@include font-size(16);
 				padding: 3px $marg-sml;
 			}
+		}
+	}
+
+	.dir-navs {
+
+		ul.subnav,
+		.feed,
+		.dir-search {
+			float: left;
+		}
+
+		ul.subnav {
+			width: auto;
+		}
+
+		.dir-component-filters {
+			float: right;
 		}
 	}
 
@@ -342,12 +358,7 @@
 			float: left;
 		}
 
-		.dir-component-filters {
-			float: right;
-		}
-
-		ul.subnav,
-		.dir-component-filters {
+		ul.subnav {
 			width: auto;
 		}
 
@@ -359,12 +370,6 @@
 			}
 
 			.filter {
-				float: right;
-			}
-		}
-
-		#subnav {
-			.last {
 				float: right;
 			}
 		}

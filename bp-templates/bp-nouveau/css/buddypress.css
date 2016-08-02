@@ -106,6 +106,16 @@ body .buddypress h6 {
 	font-size: 14px;
 }
 
+.dir-component-filters #activity-filter-by {
+	font-size: 13px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.dir-component-filters #activity-filter-by {
+		font-size: 16px;
+	}
+}
+
 .bp-tables-user th {
 	font-size: 13px;
 }
@@ -265,6 +275,20 @@ body .buddypress h6 {
 	padding: 3px 10px;
 }
 
+.buddypress .dir-navs ul.subnav,
+.buddypress .dir-navs .feed,
+.buddypress .dir-navs .dir-search {
+	float: left;
+}
+
+.buddypress .dir-navs ul.subnav {
+	width: auto;
+}
+
+.buddypress .dir-navs .dir-component-filters {
+	float: right;
+}
+
 .buddypress .bp-navs.bp-invites-nav#subnav ul li.last,
 .buddypress .bp-navs.bp-invites-filters#subsubnav ul li.last,
 .buddypress .bp-navs.bp-messages-filters#subsubnav ul li.last {
@@ -381,20 +405,13 @@ body .buddypress h6 {
 	.buddypress .subnav {
 		float: left;
 	}
-	.buddypress .dir-component-filters {
-		float: right;
-	}
-	.buddypress ul.subnav,
-	.buddypress .dir-component-filters {
+	.buddypress ul.subnav {
 		width: auto;
 	}
 	.buddypress #subsubnav .activity-search {
 		float: left;
 	}
 	.buddypress #subsubnav .filter {
-		float: right;
-	}
-	.buddypress #subnav .last {
 		float: right;
 	}
 }
