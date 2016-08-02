@@ -559,31 +559,38 @@ function bp_nouveau_loop_is_grid() {
 }
 
 /**
- * Checks the layout preferences to display thumb or full avatars.
+ * Returns the number of columns of the layout preferences.
+ *
+ * @since 1.0.0
+ *
+ * @return int The number of columns.
+ */
+function bp_nouveau_loop_get_grid_columns() {
+	$bp_nouveau = bp_nouveau();
+	$component  = sanitize_key( bp_current_component() );
+
+	$columns = 1;
+
+	if ( ! empty( $bp_nouveau->{$component}->loop_layout ) ) {
+		$columns = (int) $bp_nouveau->{$component}->loop_layout;
+	}
+
+	return apply_filters( 'bp_nouveau_loop_get_grid_columns', $columns );
+}
+
+/**
+ * Get the full size avatar args.
  *
  * @since  1.0.0
  *
  * @return array The avatar arguments.
  */
 function bp_nouveau_avatar_args() {
-
-	// Default args.
-	$args = array(
-		'type'   => 'thumb',
-		'width'  => bp_core_avatar_thumb_width(),
-		'height' => bp_core_avatar_thumb_height(),
-	);
-
-	if ( bp_nouveau_loop_is_grid() ) {
-		// Grid Args
-		$args = array(
-			'type'   => 'full',
-			'width'  => bp_core_avatar_full_width(),
-			'height' => bp_core_avatar_full_height(),
-		);
-	}
-
-	return $args;
+	return apply_filters( 'bp_nouveau_avatar_args',  array(
+		'type'   => 'full',
+		'width'  => bp_core_avatar_full_width(),
+		'height' => bp_core_avatar_full_height(),
+	) );
 }
 
 /** Template Tags for BuddyPress navigations **********************************/
