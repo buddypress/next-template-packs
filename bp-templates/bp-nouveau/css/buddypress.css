@@ -2892,6 +2892,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid.bp-list > li .item-avatar {
+	margin: 0;
 	text-align: center;
 	width: auto;
 }
