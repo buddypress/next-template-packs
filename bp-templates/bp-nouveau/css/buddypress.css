@@ -2545,8 +2545,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 #buddypress a.bp-title-button {
 	background: #fff;
 	/* Old browsers */
-	border: 1px solid #ccc;
-	color: #777;
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px;
+	color: #555;
 	cursor: pointer;
 	font-size: small;
 	outline: none;
@@ -2555,7 +2557,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	text-decoration: none;
 }
 
-#buddypress button:hover,
 #buddypress button:hover,
 #buddypress button:focus,
 #buddypress input[type=submit]:hover,
@@ -2566,10 +2567,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 #buddypress div.generic-button a:hover,
 #buddypress .comment-reply-link:hover {
 	background: #ededed;
-	border: 1px solid #bbb;
-	color: #555;
+	border-color: #999999;
+	color: #333;
 	outline: none;
 	text-decoration: none;
+}
+
+#buddypress .activity-list a.button {
+	border: none;
 }
 
 #buddypress input[type="submit"].pending,
@@ -2739,6 +2744,18 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .reject {
 	float: left;
 	margin-left: 10px;
+}
+
+#buddypress * {
+	transition: opacity .1s ease-in-out .1s;
+}
+
+#buddypress button,
+#buddypress .bp-navs a,
+#buddypress a.generic-button,
+#buddypress input[type=submit],
+#buddypress input[type=reset] {
+	transition: background .1s ease-in-out .1s, color .1s ease-in-out .1s, border-color .1s ease-in-out .1s;
 }
 
 .buddypress a.loading,

@@ -361,53 +361,8 @@
 // Import BP Widget styles
 @import "../../shared/styles/_bp_widgets";
 
-// Ajax Animations and styles
-// scss-lint:disable VendorPrefix
-.buddypress {
-	a.loading,
-	input.loading {
-		-moz-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
-		-webkit-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
-		border-color: #aaa;
-	}
-
-	@-webkit-keyframes loader-pulsate {
-
-		from {
-			border-color: #aaa;
-			-webkit-box-shadow: 0 0 6px #ccc;
-			box-shadow: 0 0 6px #ccc;
-		}
-
-		to {
-			border-color: #ccc;
-
-			-webkit-box-shadow: 0 0 6px #f8f8f8;
-			box-shadow: 0 0 6px #f8f8f8;
-		}
-	}
-	@-moz-keyframes loader-pulsate {
-
-		from {
-			border-color: #aaa;
-			-moz-box-shadow: 0 0 6px #ccc;
-			box-shadow: 0 0 6px #ccc;
-		}
-
-		to {
-			border-color: #ccc;
-			-moz-box-shadow: 0 0 6px #f8f8f8;
-			box-shadow: 0 0 6px #f8f8f8;
-		}
-	}
-
-	a.loading:hover,
-	input.loading:hover {
-		color: #777;
-	}
-
-}
-// scss-lint:enable VendorPrefix
+// Import BP Animations & Transitions - fluffy effects :)
+@import "../../shared/styles/_bp_animations";
 
 /**
 *-------------------------------------------------------------------------------
