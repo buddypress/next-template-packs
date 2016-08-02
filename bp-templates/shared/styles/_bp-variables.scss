@@ -21,22 +21,24 @@ $marg-xlrg: 30px;
 
 // Colours
 
-$light-text:         #888;
-$primary-grey:       #ccc;
-$dark-grey:          #555;
+$light-text:           #888;
+$primary-grey:         #ccc;
+$dark-grey:            #555;
 
-$bp-border-color:    #eee;
-$bp-border-dark:     $primary-grey;
-$form-border-color:  $primary-grey;
-$bp-text:            $dark-grey;
-$form-text:          $light-text;
-$meta-text:          $light-text;
-$off-white:          #fafafa;
-$light-grey:         #eaeaea;
-$med-light-grey:     #e0e0e0;
-$grey:               $primary-grey;
-$white:              #fff;
-$black:              #333;
+$bp-border-color:      #eee;
+$off-white:            #fafafa;
+$light-grey:           #eaeaea;
+$med-light-grey:       #e0e0e0;
+$white:                #fff;
+$black:                #333;
+$grey:                 $primary-grey;
+$bp-border-dark:       $primary-grey;
+$form-border-color:    $primary-grey;
+$bp-text:              $dark-grey;
+$form-text:            $light-text;
+$textarea-bck:         $white;
+$meta-text:            $light-text;
+$focussed-border-clr:  rgba(31, 179, 221, 0.9);
 
 // Message colors
 

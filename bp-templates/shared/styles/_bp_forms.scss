@@ -1,7 +1,7 @@
 // BP Forms Elements Global Styles
 
 // Some essential classes used for forms elements:
-// labels - sizing especially for standalone control
+// labels - sizing especially for standalone controls
 // 'bp-label-text'
 //
 // Where a 'p' element is used to wrap form controls that element should be classed with
@@ -28,6 +28,18 @@
 			font-weight: bold;
 		}
 	}
+
+textarea,
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=tel],
+input[type=password] {
+
+	&:focus {
+			@include box-shadow(0 0 8px #eee);
+	}
+}
 
 	.standard-form {
 

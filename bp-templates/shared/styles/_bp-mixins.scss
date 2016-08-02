@@ -175,7 +175,7 @@
 
 // very basic box-shadow mixin  - this needs to be
 // updated & improved
-@mixin box-shadow($values) {
+@mixin box-shadow($values...) {
 	-webkit-box-shadow: $values;
 	-moz-box-shadow: $values;
 	box-shadow: $values;

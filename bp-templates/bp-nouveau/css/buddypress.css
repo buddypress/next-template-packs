@@ -97,6 +97,10 @@ body .buddypress h6 {
 	}
 }
 
+#whats-new-post-in {
+	font-size: 16px;
+}
+
 .mini .activity-header,
 .acomment-meta {
 	font-size: 14px;
@@ -667,25 +671,27 @@ body .buddypress h6 {
 	margin-bottom: 30px;
 }
 
-.activity-update-form .activity-form p.activity-greeting {
-	line-height: 0.5em;
-	margin-bottom: 15px;
-	margin-left: 75px;
+.activity-update-form #whats-new-avatar {
+	margin-right: 10px;
+	text-align: center;
 }
 
-.activity-update-form #whats-new-avatar {
-	float: left;
-	margin-right: 10px;
+.activity-update-form #whats-new-avatar img {
+	display: inline-block;
 }
 
 .activity-update-form #whats-new-content {
 	padding: 0 0 20px 0;
 }
 
-.activity-update-form #whats-new-content,
-.activity-update-form #whats-new-post-in-box,
 .activity-update-form #whats-new-submit {
-	margin-left: 10%;
+	margin: 20px 0 15px 0;
+}
+
+.activity-update-form #whats-new-submit input {
+	margin-right: 2px;
+	width: 10em;
+	text-align: center;
 }
 
 .activity-update-form #whats-new-textarea textarea {
@@ -702,9 +708,23 @@ body .buddypress h6 {
 	width: 100%;
 }
 
-.activity-update-form #whats-new-textarea:focus {
+.activity-update-form #whats-new-textarea textarea:focus {
+	background: #fafafa;
 	border-color: rgba(31, 179, 221, 0.9);
 	outline-color: rgba(31, 179, 221, 0.9);
+}
+
+@media screen and (min-width: 46.8em) {
+	.activity-update-form #whats-new-avatar {
+		display: block;
+		float: left;
+		margin-right: 10px;
+	}
+	.activity-update-form #whats-new-content,
+	.activity-update-form #whats-new-post-in-box,
+	.activity-update-form #whats-new-submit {
+		margin-left: 10%;
+	}
 }
 
 /**
@@ -2068,6 +2088,17 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress fieldset legend {
 	font-size: inherit;
 	font-weight: bold;
+}
+
+.buddypress textarea:focus,
+.buddypress input[type=text]:focus,
+.buddypress input[type=email]:focus,
+.buddypress input[type=url]:focus,
+.buddypress input[type=tel]:focus,
+.buddypress input[type=password]:focus {
+	-webkit-box-shadow: 0 0 8px #eee;
+	-moz-box-shadow: 0 0 8px #eee;
+	box-shadow: 0 0 8px #eee;
 }
 
 .buddypress .standard-form .bp-controls-wrap {

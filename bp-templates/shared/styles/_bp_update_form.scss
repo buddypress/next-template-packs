@@ -14,19 +14,16 @@
 
 	.activity-form { // #whats-new-form
 		margin-bottom: $marg-xlrg;
-
-		// This ruleset may be redundent!
-		p.activity-greeting {
-			line-height: 0.5em;
-			margin-bottom: $marg-med;
-			margin-left: 75px;
-		}
-
 	}
 
 	#whats-new-avatar {
-		float: left;
+		//float: left;
 		margin-right: $marg-sml;
+		text-align: center;
+
+		img {
+			display: inline-block;
+		}
 	}
 
 	// these ID's need replacing with this!
@@ -39,16 +36,25 @@
 	#whats-new-content,
 	#whats-new-post-in-box,
 	#whats-new-submit {
-		margin-left: 10%;
+	//	margin-left: 10%;
 	}
 
+	#whats-new-submit {
+		margin: $marg-lrg 0 $marg-med 0;
+
+		input {
+			margin-right: 2px;
+			width: 10em;
+			text-align: center;
+		}
+	}
 
 	// these ID's need replacing with this!
 	//.textarea-wrap { // #whats-new-textarea
 
 	#whats-new-textarea {
 		textarea {
-			background: #fff;
+			background: $textarea-bck;
 			@include box-model();
 			color: #333;
 			font-family: inherit;
@@ -57,18 +63,29 @@
 			line-height: 1.4;
 			padding: 6px;
 			width: 100%;
-		}
 
-		// Do we want this?
-		&:focus {
-			border-color: rgba(31, 179, 221, 0.9);
-			outline-color: rgba(31, 179, 221, 0.9);
+			&:focus {
+				background: $off-white;
+				border-color: 	$focussed-border-clr;
+				outline-color: $focussed-border-clr;
+			}
 		}
 	}
 
+	@include medium-up() {
 
+		#whats-new-avatar {
+			display: block;
+			float: left;
+			margin-right: $marg-sml;
+		}
 
-	.submit-update { // #whats-new-submit
+		#whats-new-content,
+		#whats-new-post-in-box,
+		#whats-new-submit {
+			margin-left: 10%;
+		}
 
-	}
+	} // close @media
+
 }

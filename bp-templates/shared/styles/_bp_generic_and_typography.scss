@@ -64,6 +64,10 @@ body { // add weight
 	@include responsive-font(16);
 }
 
+#whats-new-post-in {
+	@include font-size(16);
+}
+
 .mini .activity-header,
 .acomment-meta {
 	@include font-size(14);
