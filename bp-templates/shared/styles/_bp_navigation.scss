@@ -80,13 +80,35 @@
 .buddypress {
 
 	.bp-navs {
+
+		li.selected,
+		li.current,
+		li a:hover {
+			a {
+				span {
+					background-color: $grey;
+				}
+			}
+		}
+
+		li:not(.current),
+		li:not(.selected), {
+			a:focus,
+			a:hover {
+				background: $grey;
+			}
+		}
+
 		li.selected,
 		li.current {
-			a {
-				background-color: $dark-grey;
+			a,
+			a:focus,
+			a:hover {
+				background: $dark-grey;
 				color: $off-white;
 			}
 		}
+
 	}
 
 	@include medium-up() {
@@ -205,29 +227,6 @@
 	// ul generally holding filters & search elements only
 	.subnav-filters {
 		padding: 0 $marg-xsml;
-	}
-
-	// The selected, current, hover states, psuedo elements etc - stuff!
-
-	// whats this????
-	// .buddypress_object_nav .item-list-tabs  li a:hover span,
-	.bp-navs {
-		li.selected,
-		li.current,
-		li a:hover {
-			a {
-				span {
-					background-color: $grey;
-				}
-			}
-		}
-
-		li:not(.current) {
-			a:focus,
-			a:hover {
-				background: $grey;
-			}
-		}
 	}
 
 } // close .buddypress

@@ -214,9 +214,26 @@ body .buddypress h6 {
 	margin-bottom: 20px;
 }
 
+.buddypress .bp-navs li.selected a span,
+.buddypress .bp-navs li.current a span,
+.buddypress .bp-navs li a:hover a span {
+	background-color: #ccc;
+}
+
+.buddypress .bp-navs li:not(.current) a:focus,
+.buddypress .bp-navs li:not(.current) a:hover,
+.buddypress .bp-navs li:not(.selected) a:focus,
+.buddypress .bp-navs li:not(.selected) a:hover {
+	background: #ccc;
+}
+
 .buddypress .bp-navs li.selected a,
-.buddypress .bp-navs li.current a {
-	background-color: #555;
+.buddypress .bp-navs li.selected a:focus,
+.buddypress .bp-navs li.selected a:hover,
+.buddypress .bp-navs li.current a,
+.buddypress .bp-navs li.current a:focus,
+.buddypress .bp-navs li.current a:hover {
+	background: #555;
 	color: #fafafa;
 }
 
@@ -297,17 +314,6 @@ body .buddypress h6 {
 
 .buddypress .subnav-filters {
 	padding: 0 5px;
-}
-
-.buddypress .bp-navs li.selected a span,
-.buddypress .bp-navs li.current a span,
-.buddypress .bp-navs li a:hover a span {
-	background-color: #ccc;
-}
-
-.buddypress .bp-navs li:not(.current) a:focus,
-.buddypress .bp-navs li:not(.current) a:hover {
-	background: #ccc;
 }
 
 .buddypress_object_nav .bp-navs li.selected a span,
