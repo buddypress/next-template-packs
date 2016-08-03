@@ -413,6 +413,7 @@
 		@include tabbed-links();
 
 		#subnav.tabbed-links {
+			background: none;
 			margin-top: 2px;
 
 			li#compose-personal-li {

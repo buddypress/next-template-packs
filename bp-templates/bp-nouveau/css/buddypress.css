@@ -459,6 +459,7 @@ body .buddypress h6 {
 		margin-top: 0;
 	}
 	.buddypress #item-body #subnav.tabbed-links {
+		background: none;
 		margin-top: 2px;
 	}
 	.buddypress #item-body #subnav.tabbed-links li#compose-personal-li {
