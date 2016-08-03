@@ -183,6 +183,7 @@ li#compose-personal-li {
 		}
 	}
 
+	// preview pane on main inbox view all message entries
 	#thread-preview {
 		border: 1px solid $light-grey;
 		margin-top: 0.5em;
@@ -212,6 +213,8 @@ li#compose-personal-li {
 
 	} // close .thread-preview
 
+	// Grouped rules for both inbox all messages lists &
+	// for single view conversation thread
 	#thread-preview .preview-message,
 	#bp-message-thread-list li .message-content {
 		ul,
@@ -220,10 +223,6 @@ li#compose-personal-li {
 			list-style-position: inside;
 			margin-left: 0;
 		}
-	}
-
-	#bp-message-thread-list {
-		clear: both;
 	}
 
 	#thread-preview .preview-message,
@@ -253,9 +252,30 @@ li#compose-personal-li {
 		text-decoration: none;
 	}
 
+	// The single view of messages in a conversation thread
 	#bp-message-thread-list  {
-		message-content {
-			margin-top: 1em;
+		clear: both;
+
+		li {
+			padding: $pad-sml;
+		}
+		li:nth-child(2n) {
+			background: $off-white;
+		}
+
+		.message-metadata {
+			border-bottom: 1px solid $bp-border-dark;
+			@include box-shadow(-2px 1px 9px 0 #eee);
+			padding: .2em 0;
+
+			.user-link {
+				@include responsive-font(16);
+			}
+		}
+
+		.message-content {
+			margin: 1em auto 0;
+			width: 80%;
 		}
 
 		img.avatar {
@@ -271,8 +291,8 @@ li#compose-personal-li {
 		}
 
 		time {
-			color: #888;
-			font-size: 80%;
+			color: $meta-text;
+			@include font-size(12)
 		}
 
 	} // close #bp-message-thread-list
