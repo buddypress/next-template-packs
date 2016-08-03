@@ -661,7 +661,7 @@ window.bp = window.bp || {};
 
 		initialize: function() {
 			// Add the threads parent view
-			this.views.add( new bp.Nouveau.Messages.View( { tagName: 'ul', id: 'message-threads' } ) );
+			this.views.add( new bp.Nouveau.Messages.View( { tagName: 'ul', id: 'message-threads', className: 'message-lists' } ) );
 
 			// Add the preview Active Thread view
 			this.views.add( new bp.Views.previewThread( { collection: this.collection } ) );
