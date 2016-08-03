@@ -65,8 +65,12 @@ li#compose-personal-li {
 .bp-messages-content {
 	margin: $marg-med 0;
 
+	.thread-participants {
+		list-style: none;
+	}
+
 	#message-threads {
-		border-top: 1px solid #eaeaea;
+		border-top: 1px solid $light-grey;
 		clear: both;
 		list-style: none;
 		margin: 0;
@@ -77,13 +81,20 @@ li#compose-personal-li {
 		width: 100%;
 
 		li {
-			border-bottom: 1px solid #eaeaea;
+			border-bottom: 1px solid $light-grey;
 			margin: 0;
 			overflow: hidden;
 			padding: 5px 0;
 
+			// the selected parent li elements & message details
 			&.selected {
-				background-color: #eaeaea;
+				background-color: $light-grey;
+
+				.thread-subject {
+					.subject {
+						color: #7099e5;
+					}
+				}
 			}
 
 			.thread-content {
@@ -98,9 +109,15 @@ li#compose-personal-li {
 					overflow: hidden;
 				}
 
-				.thread-subject,
-				.thread-date {
-					font-weight: bold;
+				span.excerpt,
+				.thread-date time {
+						color: $meta-text;
+						@include font-size(12);
+				}
+
+				.thread-from,
+				.thread-subject {
+						@include responsive-font(16);
 				}
 
 				.thread-from {
@@ -114,19 +131,28 @@ li#compose-personal-li {
 
 				.thread-subject {
 					width: 48%;
+
+				//	.thread-count {
+
+				//	}
+
+				//	.subject {
+
+				//	}
+
+					.excerpt {
+						font-weight: normal;
+					}
+
 				}
 
+				.thread-selected
 				.thread-date {
 					padding-right: 5px;
 					text-align: right;
 					width: 17%;
 				}
 
-				.thread-subject span.excerpt,
-				.thread-date time {
-					color: #888;
-					font-size: 80%;
-				}
 			} // close thread-content
 
 			&:not(.selected) .thread-content {
@@ -158,7 +184,7 @@ li#compose-personal-li {
 	}
 
 	#thread-preview {
-		border: 1px solid #eaeaea;
+		border: 1px solid $light-grey;
 		margin-top: 0.5em;
 		overflow: hidden;
 
@@ -196,9 +222,13 @@ li#compose-personal-li {
 		}
 	}
 
+	#bp-message-thread-list {
+		clear: both;
+	}
+
 	#thread-preview .preview-message,
 	ul#bp-message-thread-list {
-		border-top: 1px solid #eaeaea;
+		border-top: 1px solid $light-grey;
 		overflow: hidden;
 		padding: 5px;
 		padding-top: 1em;
@@ -211,7 +241,7 @@ li#compose-personal-li {
 
 	#thread-preview h4:first-child,
 	#bp-message-thread-header h4:first-child {
-		background-color: #eaeaea;
+		background-color: $light-grey;
 		color: #555;
 		margin: 0;
 		padding: 0.5em;
@@ -234,6 +264,7 @@ li#compose-personal-li {
 		}
 
 		.actions {
+
 			a:before {
 				font-size: 18px;
 			}

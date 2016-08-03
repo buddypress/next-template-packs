@@ -1881,6 +1881,10 @@ li#compose-personal-li a#compose:before {
 	margin: 15px 0;
 }
 
+.bp-messages-content .thread-participants {
+	list-style: none;
+}
+
 .bp-messages-content #message-threads {
 	border-top: 1px solid #eaeaea;
 	clear: both;
@@ -1904,6 +1908,10 @@ li#compose-personal-li a#compose:before {
 	background-color: #eaeaea;
 }
 
+.bp-messages-content #message-threads li.selected .thread-subject .subject {
+	color: #7099e5;
+}
+
 .bp-messages-content #message-threads li .thread-content {
 	float: left;
 	width: 95%;
@@ -1917,9 +1925,22 @@ li#compose-personal-li a#compose:before {
 	overflow: hidden;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-subject,
-.bp-messages-content #message-threads li .thread-content .thread-date {
-	font-weight: bold;
+.bp-messages-content #message-threads li .thread-content span.excerpt,
+.bp-messages-content #message-threads li .thread-content .thread-date time {
+	color: #888;
+	font-size: 12px;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-from,
+.bp-messages-content #message-threads li .thread-content .thread-subject {
+	font-size: 13px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.bp-messages-content #message-threads li .thread-content .thread-from,
+	.bp-messages-content #message-threads li .thread-content .thread-subject {
+		font-size: 16px;
+	}
 }
 
 .bp-messages-content #message-threads li .thread-content .thread-from {
@@ -1935,16 +1956,15 @@ li#compose-personal-li a#compose:before {
 	width: 48%;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-date {
+.bp-messages-content #message-threads li .thread-content .thread-subject .excerpt {
+	font-weight: normal;
+}
+
+.bp-messages-content #message-threads li .thread-content .thread-selected
+.thread-date {
 	padding-right: 5px;
 	text-align: right;
 	width: 17%;
-}
-
-.bp-messages-content #message-threads li .thread-content .thread-subject span.excerpt,
-.bp-messages-content #message-threads li .thread-content .thread-date time {
-	color: #888;
-	font-size: 80%;
 }
 
 .bp-messages-content #message-threads li:not(.selected) .thread-content {
@@ -2006,6 +2026,10 @@ li#compose-personal-li a#compose:before {
 .bp-messages-content #bp-message-thread-list li .message-content blockquote {
 	list-style-position: inside;
 	margin-left: 0;
+}
+
+.bp-messages-content #bp-message-thread-list {
+	clear: both;
 }
 
 .bp-messages-content #thread-preview .preview-message,
