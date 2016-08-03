@@ -1,105 +1,109 @@
 // BP Buttons, Submits, and general clicky things styling.
 
-#buddypress {
+.buddypress {
 
-	button,
-	a.button,
-	input[type=submit],
-	input[type=button],
-	input[type=reset],
-	ul.button-nav li a,
-	.generic-button a,
-	.comment-reply-link,
-	a.bp-title-button {
-		background: $white; /* Old browsers */
-		border-color: $bp-border-dark;
-		border-style: solid;
-		border-width: 1px;
-		color: $dark-grey;
-		cursor: pointer;
-		font-size: small;
-		outline: none;
-		padding: 4px 10px;
-		text-align: center;
-		text-decoration: none;
-	}
+	// this doubling avoids issues applying styles from body class
+	// to general theme elements - changing body class would be better though.
+	.buddypress {
 
-	button:hover,
-	button:focus,
-	input[type=submit]:hover,
-	input[type=button]:hover,
-	input[type=reset]:hover,
-	.button-nav li a:hover,
-	.button-nav li.current a,
-	div.generic-button a:hover,
-	.comment-reply-link:hover {
-		background: $buttons-background;
-		border-color: darken($bp-border-dark, 20%);
-		color: $black;
-		outline: none;
-		text-decoration: none;
-	}
-
-	.activity-list {
-		a.button {
-			border: none;
+		button,
+		a.button,
+		input[type=submit],
+		input[type=button],
+		input[type=reset],
+		ul.button-nav li a,
+		.generic-button a,
+		.comment-reply-link,
+		a.bp-title-button {
+			background: $white; /* Old browsers */
+			border-color: $bp-border-dark;
+			border-style: solid;
+			border-width: 1px;
+			color: $dark-grey;
+			cursor: pointer;
+			font-size: small;
+			outline: none;
+			padding: 4px 10px;
+			text-align: center;
+			text-decoration: none;
 		}
-	}
 
-	input[type="submit"].pending,
-	input[type="button"].pending,
-	input[type="reset"].pending,
-	input[type="button"].disabled,
-	input[type="reset"].disabled,
-	input[type="submit"][disabled=disabled],
-	button.pending,
-	button.disabled,
-	div.pending a,
-	a.disabled {
-		border-color: $bp-border-color;
-		color: $light-text;
-		cursor: default;
-	}
-
-	input[type="submit"]:hover.pending,
-	input[type="button"]:hover.pending,
-	input[type="reset"]:hover.pending,
-	input[type="submit"]:hover.disabled,
-	input[type="button"]:hover.disabled,
-	input[type="reset"]:hover.disabled,
-	button.pending:hover,
-	button.disabled:hover,
-	div.pending a:hover,
-	a.disabled:hover {
-		border-color: $bp-border-color;
-		color: $light-text;
-	}
-
-	.bp-invites-content {
-		ul.item-list {
-
-			li {
-				a.invite-button:hover {
-					color: #1fb3dd;
-				}
-			}
-
-			li.selected,
-			li {
-				a.invite-button:hover,
-				a.group-remove-invite-button:hover {
-					color: #a00;
-				}
-			}
-
+		button:hover,
+		button:focus,
+		input[type=submit]:hover,
+		input[type=button]:hover,
+		input[type=reset]:hover,
+		.button-nav li a:hover,
+		.button-nav li.current a,
+		div.generic-button a:hover,
+		.comment-reply-link:hover {
+			background: $buttons-background;
+			border-color: darken($bp-border-dark, 20%);
+			color: $black;
+			outline: none;
+			text-decoration: none;
 		}
-	}
 
-	#item-buttons:empty {
-		display: none;
-	}
+		.activity-list {
+			a.button {
+				border: none;
+			}
+		}
 
-} // close .buddypress
+		input[type="submit"].pending,
+		input[type="button"].pending,
+		input[type="reset"].pending,
+		input[type="button"].disabled,
+		input[type="reset"].disabled,
+		input[type="submit"][disabled=disabled],
+		button.pending,
+		button.disabled,
+		div.pending a,
+		a.disabled {
+			border-color: $bp-border-color;
+			color: $light-text;
+			cursor: default;
+		}
+
+		input[type="submit"]:hover.pending,
+		input[type="button"]:hover.pending,
+		input[type="reset"]:hover.pending,
+		input[type="submit"]:hover.disabled,
+		input[type="button"]:hover.disabled,
+		input[type="reset"]:hover.disabled,
+		button.pending:hover,
+		button.disabled:hover,
+		div.pending a:hover,
+		a.disabled:hover {
+			border-color: $bp-border-color;
+			color: $light-text;
+		}
+
+		.bp-invites-content {
+			ul.item-list {
+
+				li {
+					a.invite-button:hover {
+						color: #1fb3dd;
+					}
+				}
+
+				li.selected,
+				li {
+					a.invite-button:hover,
+					a.group-remove-invite-button:hover {
+						color: #a00;
+					}
+				}
+
+			}
+		}
+
+		#item-buttons:empty {
+			display: none;
+		}
+
+	} // close .buddypress
 
 
-
+} // close body class .buddypress @todo this should be removed in time

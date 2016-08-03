@@ -2535,15 +2535,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	clear: both;
 }
 
-#buddypress button,
-#buddypress a.button,
-#buddypress input[type=submit],
-#buddypress input[type=button],
-#buddypress input[type=reset],
-#buddypress ul.button-nav li a,
-#buddypress .generic-button a,
-#buddypress .comment-reply-link,
-#buddypress a.bp-title-button {
+.buddypress .buddypress button,
+.buddypress .buddypress a.button,
+.buddypress .buddypress input[type=submit],
+.buddypress .buddypress input[type=button],
+.buddypress .buddypress input[type=reset],
+.buddypress .buddypress ul.button-nav li a,
+.buddypress .buddypress .generic-button a,
+.buddypress .buddypress .comment-reply-link,
+.buddypress .buddypress a.bp-title-button {
 	background: #fff;
 	/* Old browsers */
 	border-color: #ccc;
@@ -2558,15 +2558,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	text-decoration: none;
 }
 
-#buddypress button:hover,
-#buddypress button:focus,
-#buddypress input[type=submit]:hover,
-#buddypress input[type=button]:hover,
-#buddypress input[type=reset]:hover,
-#buddypress .button-nav li a:hover,
-#buddypress .button-nav li.current a,
-#buddypress div.generic-button a:hover,
-#buddypress .comment-reply-link:hover {
+.buddypress .buddypress button:hover,
+.buddypress .buddypress button:focus,
+.buddypress .buddypress input[type=submit]:hover,
+.buddypress .buddypress input[type=button]:hover,
+.buddypress .buddypress input[type=reset]:hover,
+.buddypress .buddypress .button-nav li a:hover,
+.buddypress .buddypress .button-nav li.current a,
+.buddypress .buddypress div.generic-button a:hover,
+.buddypress .buddypress .comment-reply-link:hover {
 	background: #ededed;
 	border-color: #999999;
 	color: #333;
@@ -2574,51 +2574,51 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	text-decoration: none;
 }
 
-#buddypress .activity-list a.button {
+.buddypress .buddypress .activity-list a.button {
 	border: none;
 }
 
-#buddypress input[type="submit"].pending,
-#buddypress input[type="button"].pending,
-#buddypress input[type="reset"].pending,
-#buddypress input[type="button"].disabled,
-#buddypress input[type="reset"].disabled,
-#buddypress input[type="submit"][disabled=disabled],
-#buddypress button.pending,
-#buddypress button.disabled,
-#buddypress div.pending a,
-#buddypress a.disabled {
+.buddypress .buddypress input[type="submit"].pending,
+.buddypress .buddypress input[type="button"].pending,
+.buddypress .buddypress input[type="reset"].pending,
+.buddypress .buddypress input[type="button"].disabled,
+.buddypress .buddypress input[type="reset"].disabled,
+.buddypress .buddypress input[type="submit"][disabled=disabled],
+.buddypress .buddypress button.pending,
+.buddypress .buddypress button.disabled,
+.buddypress .buddypress div.pending a,
+.buddypress .buddypress a.disabled {
 	border-color: #eee;
 	color: #888;
 	cursor: default;
 }
 
-#buddypress input[type="submit"]:hover.pending,
-#buddypress input[type="button"]:hover.pending,
-#buddypress input[type="reset"]:hover.pending,
-#buddypress input[type="submit"]:hover.disabled,
-#buddypress input[type="button"]:hover.disabled,
-#buddypress input[type="reset"]:hover.disabled,
-#buddypress button.pending:hover,
-#buddypress button.disabled:hover,
-#buddypress div.pending a:hover,
-#buddypress a.disabled:hover {
+.buddypress .buddypress input[type="submit"]:hover.pending,
+.buddypress .buddypress input[type="button"]:hover.pending,
+.buddypress .buddypress input[type="reset"]:hover.pending,
+.buddypress .buddypress input[type="submit"]:hover.disabled,
+.buddypress .buddypress input[type="button"]:hover.disabled,
+.buddypress .buddypress input[type="reset"]:hover.disabled,
+.buddypress .buddypress button.pending:hover,
+.buddypress .buddypress button.disabled:hover,
+.buddypress .buddypress div.pending a:hover,
+.buddypress .buddypress a.disabled:hover {
 	border-color: #eee;
 	color: #888;
 }
 
-#buddypress .bp-invites-content ul.item-list li a.invite-button:hover {
+.buddypress .buddypress .bp-invites-content ul.item-list li a.invite-button:hover {
 	color: #1fb3dd;
 }
 
-#buddypress .bp-invites-content ul.item-list li.selected a.invite-button:hover,
-#buddypress .bp-invites-content ul.item-list li.selected a.group-remove-invite-button:hover,
-#buddypress .bp-invites-content ul.item-list li a.invite-button:hover,
-#buddypress .bp-invites-content ul.item-list li a.group-remove-invite-button:hover {
+.buddypress .buddypress .bp-invites-content ul.item-list li.selected a.invite-button:hover,
+.buddypress .buddypress .bp-invites-content ul.item-list li.selected a.group-remove-invite-button:hover,
+.buddypress .buddypress .bp-invites-content ul.item-list li a.invite-button:hover,
+.buddypress .buddypress .bp-invites-content ul.item-list li a.group-remove-invite-button:hover {
 	color: #a00;
 }
 
-#buddypress #item-buttons:empty {
+.buddypress .buddypress #item-buttons:empty {
 	display: none;
 }
 
