@@ -916,7 +916,7 @@ window.bp = window.bp || {};
 
 	bp.Views.Pagination = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'li',
-		className : 'last',
+		className : 'last filter',
 		template  :  bp.template( 'bp-messages-paginate' )
 	} );
 
@@ -970,7 +970,7 @@ window.bp = window.bp || {};
 
 				if ( 1 === ids.length ) {
 					options.data = {
-						'star_nonce' : this.collection.get( ids[0] ).get( 'star_nonce' )
+						'star_nonce' : threads[0].get( 'star_nonce' )
 					};
 				}
 

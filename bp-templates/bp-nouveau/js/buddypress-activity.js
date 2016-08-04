@@ -321,14 +321,16 @@ window.bp = window.bp || {};
 		 */
 		hideComments: function( event ) {
 			var comments = $( event.target ).find( '.activity-comments' ),
-				activity_item, comment_items, comment_count;
+				activity_item, comment_items, comment_count, comment_parents;
 
 			if ( ! comments.length ) {
 				return;
 			}
 
 			comments.each( function( c, comment ) {
-				comment_items = $( comment ).children( 'ul' ).find( 'li' );
+				comment_parents = $( comment ).children( 'ul' );
+				comment_items   = $( comment_parents ).find( 'li' );
+
 
 				if ( ! comment_items.length ) {
 					return;
@@ -340,11 +342,10 @@ window.bp = window.bp || {};
 				// Get the comment count
 				comment_count = $( '#acomment-comment-' + activity_item.data( 'bp-activity-id' ) + ' span.comment-count' ).html() || ' ';
 
-				// Keep first 5 root comments
+				// Keep latest 5 comments
 				comment_items.each( function( i, item ) {
 					if ( i < comment_items.length - 5 ) {
-						$( item ).addClass( 'hidden' );
-						$( item ).toggle();
+						$( item ).addClass( 'hidden' ).toggle();
 
 						// Prepend a link to display all
 						if ( ! i ) {
@@ -352,6 +353,11 @@ window.bp = window.bp || {};
 						}
 					}
 				} );
+
+				// If all parents are hidden, reveal at least the last on. It seems very risky to manipulate the DOM to keep exactly 5 comments!
+				if ( $( comment_parents ).children( '.hidden' ).length === $( comment_parents ).children( 'li' ).length - 1 && $( comment_parents ).find( 'li.show-all' ) ) {
+					$( comment_parents ).children( 'li' ).last().removeClass( 'hidden' ).toggle();
+				}
 			} );
 		},
 
@@ -368,7 +374,7 @@ window.bp = window.bp || {};
 
 			setTimeout( function() {
 				$( event.target ).closest( 'ul' ).find( 'li' ).fadeIn( 200, function() {
-					$( event.target ).remove();
+					$( event.target ).parent( 'li' ).remove();
 				} );
 			}, 600 );
 		},
