@@ -58,15 +58,17 @@
 
 <script type="text/html" id="tmpl-bp-messages-paginate">
 	<# if ( 1 !== data.page ) { #>
-		<a href="#" id="bp-messages-prev-page" title="<?php esc_attr_e( 'Prev', 'bp-nouveau' );?>" class="button messages-button">
+		<button id="bp-messages-prev-page"class="button messages-button">
+			<span class="dashicons dashicons-arrow-left"></span>
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'bp-nouveau' );?></span>
-		</a>
+		</button>
 	<# } #>
 
 	<# if ( data.total_page !== data.page ) { #>
-		<a href="#" id="bp-messages-next-page" title="<?php esc_attr_e( 'Next', 'bp-nouveau' );?>" class="button messages-button">
+		<button id="bp-messages-next-page"class="button messages-button">
+			<span class="dashicons dashicons-arrow-right"></span>
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'bp-nouveau' );?></span>
-		</a>
+		</button>
 	<# } #>
 </script>
 

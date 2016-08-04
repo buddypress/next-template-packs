@@ -916,7 +916,7 @@ window.bp = window.bp || {};
 
 	bp.Views.Pagination = bp.Nouveau.Messages.View.extend( {
 		tagName   : 'li',
-		className : 'last',
+		className : 'last filter',
 		template  :  bp.template( 'bp-messages-paginate' )
 	} );
 
