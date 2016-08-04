@@ -130,41 +130,49 @@
 
 <script type="text/html" id="tmpl-bp-messages-preview">
 	<# if ( undefined !== data.content ) { #>
-		<h4><?php esc_html_e( 'Active conversation:', 'bp-nouveau' ); ?> <# print( data.subject ); #></h4>
+
+		<h4 class=" message-title preview-thread-title"><?php esc_html_e( 'Active conversation:', 'bp-nouveau' ); ?><span class="messages-title"> <# print( data.subject ); #></span></h4>
 		<div class="preview-content">
-			<# if ( undefined !== data.recipients ) { #>
-				<ul class="thread-participants">
-					<li><?php esc_html_e( 'Participants:', 'bp-nouveau' ); ?></li>
-					<# for ( i in data.recipients ) { #>
-						<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img src="{{data.recipients[i].avatar}}" width="28px" class="avatar mini"></a></li>
-					<# } #>
-				</ul>
-			<# } #>
+			<header class="preview-pane-header">
 
-			<div class="actions">
-
-				<a href="#" class="message-action-delete" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
-					<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
-				</a>
-
-				<# if ( undefined !== data.star_link ) { #>
-
-					<# if ( false !== data.is_starred ) { #>
-						<a href="{{data.star_link}}" class="message-action-unstar" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
-							<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-nouveau' );?></span>
-						</a>
-					<# } else { #>
-						<a href="{{data.star_link}}" class="message-action-star" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
-							<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-nouveau' );?></span>
-						</a>
-					<# } #>
-
+				<# if ( undefined !== data.recipients ) { #>
+					<dl class="thread-participants">
+						<dt><?php esc_html_e( 'Participants:', 'bp-nouveau' ); ?></dt>
+						<dd>
+							<ul class="participants-list">
+								<# for ( i in data.recipients ) { #>
+									<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img src="{{data.recipients[i].avatar}}" width="28px" class="avatar mini"></a></li>
+								<# } #>
+							</ul>
+						</dd>
+					</dl>
 				<# } #>
 
-				<a href="#view/{{data.id}}" class="message-action-view" title="<?php esc_attr_e( 'View Full Conversation.', 'bp-nouveau' );?>">
-					<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'bp-nouveau' );?></span>
-				</a>
-			</div>
+				<div class="actions">
+
+					<a href="#" class="message-action-delete" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
+					</a>
+
+					<# if ( undefined !== data.star_link ) { #>
+
+						<# if ( false !== data.is_starred ) { #>
+							<a href="{{data.star_link}}" class="message-action-unstar" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
+								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-nouveau' );?></span>
+							</a>
+						<# } else { #>
+							<a href="{{data.star_link}}" class="message-action-star" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
+								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-nouveau' );?></span>
+							</a>
+						<# } #>
+
+					<# } #>
+
+					<a href="#view/{{data.id}}" class="message-action-view" title="<?php esc_attr_e( 'View Full Conversation.', 'bp-nouveau' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'bp-nouveau' );?></span>
+					</a>
+				</div>
+			</header>
 
 			<div class='preview-message'>
 				<# print( data.content ) #>
@@ -174,26 +182,30 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single-header">
-	<h4 id="message-subject"><# print( data.subject ); #></h4>
+	<h4 id="message-subject" class="message-title single-thread-title"><# print( data.subject ); #></h4>
+	<header class="single-message-thread-header">
+		<# if ( undefined !== data.recipients ) { #>
+			<dl class="thread-participants">
+				<dt><?php esc_html_e( 'Participants:', 'bp-nouveau' ); ?></dt>
+				<dd>
+					<ul class="participants-list">
+						<# for ( i in data.recipients ) { #>
+							<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img src="{{data.recipients[i].avatar}}" width="28px" class="avatar mini"></a></li>
+						<# } #>
+					</ul>
+				</dd>
+			</dl>
+		<# } #>
 
-	<# if ( undefined !== data.recipients ) { #>
-		<ul class="thread-participants">
-			<li><?php esc_html_e( 'Participants:', 'bp-nouveau' ); ?></li>
-			<# for ( i in data.recipients ) { #>
-				<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img src="{{data.recipients[i].avatar}}" width="28px" class="avatar mini"></a></li>
-			<# } #>
-		</ul>
-	<# } #>
+		<div class="actions">
 
-	<div class="actions">
+			<a href="#" class="message-action-delete" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
+			</a>
 
-		<a href="#" class="message-action-delete" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
-		</a>
-
-		<?php bp_nouveau_messages_hook( 'after', 'thread_header_actions' ); ?>
-	</div>
-
+			<?php bp_nouveau_messages_hook( 'after', 'thread_header_actions' ); ?>
+		</div>
+	</header>
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-single-list">
@@ -240,7 +252,7 @@
 <script type="text/html" id="tmpl-bp-messages-single">
 	<?php bp_nouveau_messages_hook( 'before', 'thread_content' ); ?>
 
-	<div id="bp-message-thread-header"></div>
+	<div id="bp-message-thread-header" class="message-thread-header"></div>
 
 	<?php bp_nouveau_messages_hook( 'before', 'thread_list' ); ?>
 
@@ -250,7 +262,7 @@
 
 	<?php bp_nouveau_messages_hook( 'before', 'thread_reply' ); ?>
 
-	<form id="send-reply" class="standard-form">
+	<form id="send-reply" class="standard-form send-reply">
 		<div class="message-box">
 			<div class="message-metadata">
 
