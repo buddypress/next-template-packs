@@ -1909,7 +1909,7 @@ li#compose-personal-li a#compose:before {
 }
 
 .bp-messages-content #message-threads li.selected .thread-subject .subject {
-	color: #7099e5;
+	color: #5087e5;
 }
 
 .bp-messages-content #message-threads li .thread-content {
@@ -2005,58 +2005,17 @@ li#compose-personal-li a#compose:before {
 	margin: 0.5em;
 }
 
-.bp-messages-content #thread-preview .preview-content .thread-participants {
-	float: left;
-	list-style: none;
-	margin: 5px 0;
-	overflow: hidden;
-	width: 70%;
-}
-
-.bp-messages-content #thread-preview .preview-content .thread-participants li {
-	float: left;
-	margin-left: 5px;
-}
-
-.bp-messages-content #thread-preview .preview-message ul,
-.bp-messages-content #thread-preview .preview-message ol,
-.bp-messages-content #thread-preview .preview-message blockquote,
-.bp-messages-content #bp-message-thread-list li .message-content ul,
-.bp-messages-content #bp-message-thread-list li .message-content ol,
-.bp-messages-content #bp-message-thread-list li .message-content blockquote {
-	list-style-position: inside;
-	margin-left: 0;
-}
-
-.bp-messages-content #thread-preview .preview-message,
-.bp-messages-content ul#bp-message-thread-list {
-	border-top: 1px solid #eaeaea;
-	overflow: hidden;
-	padding: 5px;
-	padding-top: 1em;
-}
-
-.bp-messages-content ul#message-threads:empty,
-.bp-messages-content #thread-preview:empty {
-	display: none;
-}
-
-.bp-messages-content #thread-preview h4:first-child,
-.bp-messages-content #bp-message-thread-header h4:first-child {
-	background-color: #eaeaea;
-	color: #555;
-	margin: 0;
-	padding: 0.5em;
-}
-
-.bp-messages-content #message-threads .thread-content a,
-.bp-messages-content #bp-message-thread-list li a.user-link {
-	border: 0;
-	text-decoration: none;
+.bp-messages-content #thread-preview .preview-content .preview-message {
+	background: #fafafa;
+	margin: 10px 0;
+	padding: 1em 0.3em 0.3em;
 }
 
 .bp-messages-content #bp-message-thread-list {
+	border-top: 1px solid #eaeaea;
 	clear: both;
+	list-style: none;
+	padding: 1em 0 0.3em;
 }
 
 .bp-messages-content #bp-message-thread-list li {
@@ -2102,6 +2061,76 @@ li#compose-personal-li a#compose:before {
 .bp-messages-content #bp-message-thread-list time {
 	color: #888;
 	font-size: 12px;
+}
+
+.bp-messages-content form.send-reply .avatar-box {
+	padding: 0.5em 0;
+}
+
+.bp-messages-content .preview-pane-header,
+.bp-messages-content .single-message-thread-header {
+	border-bottom: 1px solid #eaeaea;
+	overflow: hidden;
+}
+
+.bp-messages-content .preview-thread-title,
+.bp-messages-content .single-thread-title {
+	font-size: 20px;
+}
+
+.bp-messages-content .preview-thread-title .messages-title,
+.bp-messages-content .single-thread-title .messages-title {
+	color: #5087e5;
+}
+
+.bp-messages-content .thread-participants {
+	float: left;
+	margin: 5px 0;
+	width: 70%;
+}
+
+.bp-messages-content .thread-participants dd,
+.bp-messages-content .thread-participants ul {
+	margin-bottom: 10px;
+}
+
+.bp-messages-content .thread-participants ul {
+	list-style: none;
+	overflow: hidden;
+}
+
+.bp-messages-content .thread-participants li {
+	float: left;
+	margin-left: 5px;
+}
+
+.bp-messages-content #thread-preview .preview-message ul,
+.bp-messages-content #thread-preview .preview-message ol,
+.bp-messages-content #thread-preview .preview-message blockquote,
+.bp-messages-content #bp-message-thread-list li .message-content ul,
+.bp-messages-content #bp-message-thread-list li .message-content ol,
+.bp-messages-content #bp-message-thread-list li .message-content blockquote {
+	list-style-position: inside;
+	margin-left: 0;
+}
+
+.bp-messages-content ul#message-threads:empty,
+.bp-messages-content #thread-preview:empty {
+	display: none;
+}
+
+.bp-messages-content #thread-preview h4:first-child,
+.bp-messages-content #bp-message-thread-header h4:first-child {
+	background-color: #eaeaea;
+	color: #555;
+	margin: 0;
+	padding: 0.5em;
+}
+
+.bp-messages-content #message-threads .thread-content a,
+.bp-messages-content #bp-message-thread-list li a.user-link {
+	border: 0;
+	text-decoration: none;
 }
 
 div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {

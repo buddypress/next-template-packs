@@ -9,9 +9,10 @@
 // Spacing values - used primarilly for main elements to allow us
 // to adjust values in a grouped manner.
 
-$pad-sml: 0.5em;
-$pad-med: 1em;
-$pad-lrg: 2em;
+$pad-xsml: 0.3em;
+$pad-sml:  0.5em;
+$pad-med:  1em;
+$pad-lrg:  2em;
 
 $marg-xsml: 5px;
 $marg-sml:  10px;
@@ -24,16 +25,18 @@ $marg-xlrg: 30px;
 $light-text:           #888;
 $primary-grey:         #ccc;
 $dark-grey:            #555;
-
-$bp-border-color:      #eee;
-$buttons-background:   #ededed;
-$off-white:            #fafafa;
 $light-grey:           #eaeaea;
 $med-light-grey:       #e0e0e0;
+
+
+$bp-border-color:      #eee;
+$bp-border-dark:       $primary-grey;
+$buttons-background:   #ededed;
+$off-white:            #fafafa;
 $white:                #fff;
+$blue:                 #5087e5;
 $black:                #333;
 $grey:                 $primary-grey;
-$bp-border-dark:       $primary-grey;
 $form-border-color:    $primary-grey;
 $bp-text:              $dark-grey;
 $form-text:            $light-text;
@@ -46,7 +49,7 @@ $focussed-border-clr:  rgba(31, 179, 221, 0.9); // textareas? e.g whats-new
 // used on text == red
 $warn:           #b71717;
 
-//the colors for boxes
+// The colors for boxes
 $warnings:       #d33;
 $informational:  #38a;
 $loading:        #ffd087;

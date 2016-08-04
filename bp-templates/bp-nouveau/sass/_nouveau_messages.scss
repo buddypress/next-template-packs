@@ -92,7 +92,7 @@ li#compose-personal-li {
 
 				.thread-subject {
 					.subject {
-						color: #7099e5;
+						color: $blue;
 					}
 				}
 			}
@@ -189,6 +189,11 @@ li#compose-personal-li {
 		margin-top: 0.5em;
 		overflow: hidden;
 
+//		.preview-pane-header {
+//			border-bottom: 1px solid $light-grey;
+//			overflow: hidden;
+//		}
+
 		.preview-message {
 			clear: both;
 		}
@@ -196,69 +201,27 @@ li#compose-personal-li {
 		.preview-content {
 				margin: 0.5em;
 
-			.thread-participants {
-				float: left;
-				list-style: none;
-				margin: 5px 0;
-				overflow: hidden;
-				width: 70%;
-
-				li {
-					float: left;
-					margin-left: 5px;
-				}
+			.preview-message {
+				background: $off-white;
+				margin: $marg-sml 0;
+				padding: $pad-med $pad-xsml $pad-xsml;
 			}
 
 		} // close .preview-content
 
 	} // close .thread-preview
 
-	// Grouped rules for both inbox all messages lists &
-	// for single view conversation thread
-	#thread-preview .preview-message,
-	#bp-message-thread-list li .message-content {
-		ul,
-		ol,
-		blockquote {
-			list-style-position: inside;
-			margin-left: 0;
-		}
-	}
-
-	#thread-preview .preview-message,
-	ul#bp-message-thread-list {
-		border-top: 1px solid $light-grey;
-		overflow: hidden;
-		padding: 5px;
-		padding-top: 1em;
-	}
-
-	ul#message-threads:empty,
-	#thread-preview:empty {
-		display: none;
-	}
-
-	#thread-preview h4:first-child,
-	#bp-message-thread-header h4:first-child {
-		background-color: $light-grey;
-		color: #555;
-		margin: 0;
-		padding: 0.5em;
-	}
-
-	#message-threads .thread-content a,
-	#bp-message-thread-list li a.user-link {
-		border: 0;
-		text-decoration: none;
-	}
-
 	// The single view of messages in a conversation thread
 	#bp-message-thread-list  {
+		border-top: 1px solid $light-grey;
 		clear: both;
+		list-style: none;
+		padding: $pad-med 0 $pad-xsml;
 
 		li {
 			padding: $pad-sml;
 		}
+
 		li:nth-child(2n) {
 			background: $off-white;
 		}
@@ -296,6 +259,80 @@ li#compose-personal-li {
 		}
 
 	} // close #bp-message-thread-list
+
+	form.send-reply {
+		.avatar-box {
+			padding: $pad-sml 0;
+		}
+	}
+
+	// Grouped rules for both inbox all messages lists &
+	// for single view conversation thread
+
+	.preview-pane-header,
+	.single-message-thread-header {
+		border-bottom: 1px solid $light-grey;
+		overflow: hidden;
+	}
+
+	.preview-thread-title,
+	.single-thread-title {
+		@include font-size(20);
+
+		.messages-title {
+			color: $blue;
+		}
+	}
+
+	.thread-participants {
+		float: left;
+		margin: 5px 0;
+		width: 70%;
+
+		dd,
+		ul {
+			margin-bottom: $marg-sml;
+		}
+
+		ul {
+			list-style: none;
+			overflow: hidden;
+		}
+
+		li {
+			float: left;
+			margin-left: 5px;
+		}
+	}
+
+	#thread-preview .preview-message,
+	#bp-message-thread-list li .message-content {
+		ul,
+		ol,
+		blockquote {
+			list-style-position: inside;
+			margin-left: 0;
+		}
+	}
+
+	ul#message-threads:empty,
+	#thread-preview:empty {
+		display: none;
+	}
+
+	#thread-preview h4:first-child,
+	#bp-message-thread-header h4:first-child {
+		background-color: $light-grey;
+		color: $bp-text;
+		margin: 0;
+		padding: 0.5em;
+	}
+
+	#message-threads .thread-content a,
+	#bp-message-thread-list li a.user-link {
+		border: 0;
+		text-decoration: none;
+	}
 
 } // close .bp-messages-content
 
