@@ -93,14 +93,15 @@
 		<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Select All Messages', 'bp-nouveau' ) ); ?></span>
 	</label>
 	<div class="bulk-actions bp-hide">
-		<select id="user-messages-bulk-actions" class="filter">
+		<select id="user-messages-bulk-actions">
 			<# for ( i in data ) { #>
 				<option value="{{data[i].value}}">{{data[i].label}}</option>
 			<# } #>
 		</select>
-		<a href="#" class="messages-button bulk-apply" role="submit" title="<?php esc_attr_e( 'Apply', 'bp-nouveau' );?>">
+		<button class="messages-button bulk-apply" type="submit">
+			<span class="dashicons dashicons-yes"></span>
 			<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Apply', 'bp-nouveau' ) ); ?></span>
-		</a>
+		</button>
 	</div>
 </script>
 
