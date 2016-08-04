@@ -10,16 +10,18 @@ bp_nouveau_groups_create_hook( 'before', 'page' ); ?>
 
 <div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
+	<h2 class="bp-subhead"><?php _e('Create A New Group','bp-nouveau'); ?></h2>
+
 	<?php bp_nouveau_groups_create_hook( 'before', 'content_template' ); ?>
 
 	<form action="<?php bp_group_creation_form_action(); ?>" method="post" id="create-group-form" class="standard-form" enctype="multipart/form-data">
 
 		<?php bp_nouveau_groups_create_hook( 'before' ); ?>
 
-		<div class="item-list-tabs no-ajax" id="group-create-tabs" role="navigation">
-			<ul>
+		<div class="bp-navs group-create-links tabbed-links no-ajax" id="group-create-tabs" role="navigation">
+			<ul class="group-create-buttons button-tabs">
 
-				<?php bp_group_creation_tabs(); ?>
+				<?php bp_nouveau_group_creation_tabs(); ?>
 
 			</ul>
 		</div>

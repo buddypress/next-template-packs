@@ -232,6 +232,55 @@ function bp_nouveau_group_creation_screen() {
  *
  * @return string HTML Output.
  */
+
+/**
+ * Outputs the group creation numbered steps navbar
+ *
+ * @since 1.0.0
+ *
+ * @return string HTML Output
+ */
+function bp_nouveau_group_creation_tabs() {
+	$bp = buddypress();
+
+	if ( !is_array( $bp->groups->group_creation_steps ) ) {
+		return false;
+	}
+
+	if ( !bp_get_groups_current_create_step() ) {
+		$keys = array_keys( $bp->groups->group_creation_steps );
+		$bp->groups->current_create_step = array_shift( $keys );
+	}
+
+	$counter = 1;
+
+	foreach ( (array) $bp->groups->group_creation_steps as $slug => $step ) {
+		$is_enabled = bp_are_previous_group_creation_steps_complete( $slug ); ?>
+
+		<li<?php if ( bp_get_groups_current_create_step() == $slug ) : ?> class="current"<?php endif; ?>>
+			<?php if ( $is_enabled ) : ?>
+				<a href="<?php bp_groups_directory_permalink(); ?>create/step/<?php echo $slug ?>/">
+					<?php echo $counter ?> <?php echo $step['name'] ?>
+				</a>
+			<?php else: ?>
+				<a disabled="disabled"><?php echo $counter ?>. <?php echo $step['name'] ?></a>
+			<?php endif ?>
+		</li>
+			<?php
+		$counter++;
+	}
+
+	unset( $is_enabled );
+
+	/**
+	 * Fires at the end of the creation of the group tabs.
+	 *
+	 * @since 1.0.0
+	 */
+
+	do_action( 'groups_creation_tabs' );
+}
+
 function bp_nouveau_group_manage_screen() {
 	$action          = bp_action_variable(0);
 	$is_group_create = bp_is_group_create();
