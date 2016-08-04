@@ -9,6 +9,11 @@
 
 if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 	<?php if ( bp_is_group_create() ) : ?>
+
+		<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+			<?php _e( 'Group Avatar', 'bp-nouveau' ); ?>
+		</h2>
+
 		<div class="left-menu">
 
 			<?php bp_new_group_avatar(); ?>

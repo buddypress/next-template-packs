@@ -8,7 +8,9 @@
  */
 ?>
 
-<h2 class="bp-screen-title"><?php _e( 'Group Settings', 'bp-nouveau' ); ?></h2>
+<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+	<?php _e( 'Group Settings', 'bp-nouveau' ); ?>
+</h2>
 
 <fieldset class="radio privacy-options">
 	<legend><?php _e( 'Privacy Options', 'bp-nouveau' ); ?></legend>

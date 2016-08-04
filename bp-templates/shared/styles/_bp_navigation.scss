@@ -407,20 +407,34 @@
 	#item-body {
 		@include medium-up {
 
-		// Profile group name links
-		// Button navigation as tabbed effect for wide screen
-		@include tabbed-links();
+			// Profile group name links
+			// Button navigation as tabbed effect for wide screen
+			@include tabbed-links();
 
-		#subnav.tabbed-links {
-			background: none;
-			margin-top: 2px;
+			#subnav.tabbed-links {
+				background: none;
+				margin-top: 2px;
 
-			li#compose-personal-li {
-				margin-top: 6px;
+				li#compose-personal-li {
+					margin-top: 6px;
+				}
 			}
-		}
 
-		// For tabbed nav we remove any default button nav styles.
+			.bp-navs.group-create-links.tabbed-links {
+					background: none;
+
+					ul {
+						span {
+							background: none;
+							border: none;
+							border-radius: none;
+							@include font-size(19);
+							padding: 5px 10px;
+						}
+					}
+			}
+
+			// For tabbed nav we remove any default button nav styles.
 			ul.button-tabs {
 
 				li {

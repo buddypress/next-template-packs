@@ -10,6 +10,11 @@
  * @package BP Nouveau
  */
 ?>
+
+<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+	<?php _e( 'Invite Members', 'bp-nouveau' ); ?>
+</h2>
+
 <div class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav"></div>
 <div class="bp-navs bp-subnavs group-subnav bp-invites-filters" id="subsubnav"></div>
 <div class="members bp-invites-content"></div>

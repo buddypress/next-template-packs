@@ -38,7 +38,7 @@
 	3.4 - Members Loop
 
 4.0 - Directories - Members, Groups, Blogs, Register, activation
-
+	4.1 - Groups Creation Steps Screens
 5.0 - Single Item screens: User Account & Single Group Screens
 	5.1 - Item Headers: Global
 		5.1.1 - item-header: Groups
@@ -181,6 +181,19 @@
 *-------------------------------------------------------------------------------
 */
 
+/**
+*----------------------------------------------------------
+* @section 4.1 - Groups Creation Steps
+*----------------------------------------------------------
+*/
+
+	#group-create-body {
+		padding: $pad-sml $pad-lrg;
+
+		.creation-step-name {
+			text-align: center;
+		}
+	}
 /**
 *-------------------------------------------------------------------------------
 * @section 5.0 - Single Item screens: Groups, Users
