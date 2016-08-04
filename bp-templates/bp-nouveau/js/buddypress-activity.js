@@ -368,7 +368,7 @@ window.bp = window.bp || {};
 
 			setTimeout( function() {
 				$( event.target ).closest( 'ul' ).find( 'li' ).fadeIn( 200, function() {
-					$( event.target ).remove();
+					$( event.target ).parent( 'li' ).remove();
 				} );
 			}, 600 );
 		},
