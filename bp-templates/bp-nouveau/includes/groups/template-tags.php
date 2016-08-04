@@ -215,25 +215,6 @@ function bp_nouveau_groups_get_group_invites_setting() {
 }
 
 /**
- * Load the requested Create Screen for the new group.
- *
- * @since  1.0.0
- *
- * @return string HTML Output.
- */
-function bp_nouveau_group_creation_screen() {
-	return bp_nouveau_group_manage_screen();
-}
-
-/**
- * Load the requested Manage Screen for the current group.
- *
- * @since  1.0.0
- *
- * @return string HTML Output.
- */
-
-/**
  * Outputs the group creation numbered steps navbar
  *
  * @since 1.0.0
@@ -280,6 +261,25 @@ function bp_nouveau_group_creation_tabs() {
 
 	do_action( 'groups_creation_tabs' );
 }
+
+/**
+ * Load the requested Create Screen for the new group.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
+function bp_nouveau_group_creation_screen() {
+	return bp_nouveau_group_manage_screen();
+}
+
+/**
+ * Load the requested Manage Screen for the current group.
+ *
+ * @since  1.0.0
+ *
+ * @return string HTML Output.
+ */
 
 function bp_nouveau_group_manage_screen() {
 	$action          = bp_action_variable(0);
