@@ -71,7 +71,6 @@ input[type=password] {
 			background: $off-white;
 			border: 1px solid $form-border-color;
 			border-radius: 0;
-			color: $form-text;
 			font: inherit;
 			font-size: 100%;
 			padding: $pad-sml;
@@ -99,6 +98,7 @@ input[type=password] {
 		select:focus {
 			background: $off-white;
 			color: $bp-text;
+			outline: 0;
 		}
 
 		label,
