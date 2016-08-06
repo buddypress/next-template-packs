@@ -1,12 +1,44 @@
 // BP Directory Filters
-// Styling & Positioning
-
+// Specific Styling & Positioning
+// N.B. Please see _bp_navigation for additional rules and properties.
 .buddypress {
 
 	.dir-component-filters { // ul
 
 		.filter { // li
 
+		}
+	}
+
+	// User account filters .subnav-filters
+
+	.subnav-filters {
+		background: none;
+		overflow: hidden;
+
+		li {
+			float: none;
+			overflow: hidden;
+			margin-bottom: $marg-med;
+		}
+
+		//position for wider screens
+		@include medium-up() {
+
+			li {
+				margin-bottom: 0;
+			}
+
+			// @todo: this class needs to be a generic one, add ?'bp-search'
+
+			li.feed,
+			li.bp-search {
+				float: left;
+			}
+
+			.last {
+				float: right;
+			}
 		}
 	}
 

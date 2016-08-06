@@ -506,6 +506,30 @@ body .buddypress h6 {
 	}
 }
 
+.buddypress .subnav-filters {
+	background: none;
+	overflow: hidden;
+}
+
+.buddypress .subnav-filters li {
+	float: none;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .subnav-filters li {
+		margin-bottom: 0;
+	}
+	.buddypress .subnav-filters li.feed,
+	.buddypress .subnav-filters li.bp-search {
+		float: left;
+	}
+	.buddypress .subnav-filters .last {
+		float: right;
+	}
+}
+
 /**
 *----------------------------------------------------------
 * @section 2.2 - Pagination

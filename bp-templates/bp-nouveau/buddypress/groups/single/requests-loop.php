@@ -13,7 +13,7 @@
 
 	<?php bp_nouveau_pagination( 'top' ) ; ?>
 
-	<ul id="request-list" class="item-list">
+	<ul id="request-list" class="item-list bp-list">
 		<?php while ( bp_group_membership_requests() ) : bp_group_the_membership_request(); ?>
 
 			<li>

@@ -19,7 +19,7 @@
 
 <?php bp_nouveau_activity_member_post_form() ;?>
 
-<div class="bp-navs user-subnav no-ajax" id="subsubnav">
+
 	<ul class="subnav-filters filters">
 		<?php bp_nouveau_search_form(); ?>
 
@@ -31,8 +31,8 @@
 
 			</select>
 		</li>
-	</ul>
-</div><!-- // #subsubnav -->
+	</ul><!-- // .subnav-filters -->
+
 
 <?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 

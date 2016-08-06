@@ -23,7 +23,7 @@ switch ( bp_current_action() ) :
 	case 'unread' :
 	case 'read'   : ?>
 
-		<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subsubnav">
+
 			<ul class="subnav-filters filters">
 				<?php bp_nouveau_search_form(); ?>
 
@@ -35,8 +35,8 @@ switch ( bp_current_action() ) :
 
 					</select>
 				</li>
-			</ul>
-		</div><!-- .bp-navs#subsubnav -->
+			</ul><!-- .subnav-filters-->
+
 
 		<div id="notifications-user-list" class="notifications dir-list" data-bp-list="notifications">
 			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-notifications-loading' ) ;?></div>

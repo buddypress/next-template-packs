@@ -19,11 +19,11 @@
 		<?php endif ; ?>
 
 	</ul>
-</div><!-- .item-list-tabs -->
+</div><!-- .bp-navs -->
 
 <?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 
-	<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subsubnav">
+
 		<ul class="subnav-filters filters">
 			<?php bp_nouveau_search_form(); ?>
 
@@ -36,8 +36,7 @@
 
 				</select>
 			</li>
-		</ul>
-	</div><!-- .item-list-tabs#subsubnav -->
+		</ul><!-- .subnav-filters -->
 
 <?php endif; ?>
 

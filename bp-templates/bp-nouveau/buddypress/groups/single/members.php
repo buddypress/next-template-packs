@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="item-list-tabs bp-navs bp-subnavs group-subnav" id="subnav" role="navigation">
+
 	<ul class="subnav-filters filters clearfix">
 
 		<?php bp_nouveau_search_form(); ?>
@@ -25,7 +25,7 @@
 		</li>
 
 	</ul>
-</div>
+
 
 <div id="members-group-list" class="group_members dir-list" data-bp-list="group_members">
 
