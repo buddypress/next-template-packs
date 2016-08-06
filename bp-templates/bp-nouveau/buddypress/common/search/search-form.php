@@ -8,7 +8,7 @@
 */
 ?>
 
-<li class="<?php bp_nouveau_search_container_class(); ?>" role="search" data-bp-search="<?php bp_nouveau_search_object_data_attr() ;?>">
+<li class="<?php bp_nouveau_search_container_class(); ?> bp-search" role="search" data-bp-search="<?php bp_nouveau_search_object_data_attr() ;?>">
 
 	<form action="" method="get" id="<?php bp_nouveau_search_selector_id( 'search-form' ) ;?>">
 		<label for="<?php bp_nouveau_search_selector_id( 'search' ) ;?>">
