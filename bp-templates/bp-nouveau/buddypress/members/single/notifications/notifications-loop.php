@@ -11,7 +11,7 @@ if ( bp_has_notifications( bp_ajax_querystring( 'notifications' ) ) ) :
 
 	bp_nouveau_pagination( 'top' ); ?>
 
-	<form action="" method="post" id="notifications-bulk-management">
+	<form action="" method="post" id="notifications-bulk-management" class="standard-form">
 		<table class="notifications bp-tables-user">
 			<thead>
 				<tr>
