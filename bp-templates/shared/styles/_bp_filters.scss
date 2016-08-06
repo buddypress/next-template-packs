@@ -15,6 +15,7 @@
 	.subnav-filters {
 		background: none;
 		overflow: hidden;
+		margin: $marg-med 0;
 
 		li {
 			float: none;
@@ -29,8 +30,6 @@
 				margin-bottom: 0;
 			}
 
-			// @todo: this class needs to be a generic one, add ?'bp-search'
-
 			li.feed,
 			li.bp-search {
 				float: left;
@@ -38,6 +37,11 @@
 
 			.last {
 				float: right;
+				width: auto;
+
+				select {
+					max-width: 250px;
+				}
 			}
 		}
 	}

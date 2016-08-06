@@ -509,6 +509,7 @@ body .buddypress h6 {
 .buddypress .subnav-filters {
 	background: none;
 	overflow: hidden;
+	margin: 15px 0;
 }
 
 .buddypress .subnav-filters li {
@@ -527,6 +528,10 @@ body .buddypress h6 {
 	}
 	.buddypress .subnav-filters .last {
 		float: right;
+		width: auto;
+	}
+	.buddypress .subnav-filters .last select {
+		max-width: 250px;
 	}
 }
 
