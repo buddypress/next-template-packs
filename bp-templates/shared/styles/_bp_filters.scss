@@ -16,11 +16,32 @@
 		background: none;
 		overflow: hidden;
 		margin: $marg-med 0;
+		padding: 0 $marg-xsml;
+
+		ul {
+			margin-bottom: 0;
+		}
 
 		li {
 			float: none;
 			overflow: hidden;
 			margin-bottom: $marg-med;
+		}
+
+			.last.filter {
+				select {
+					@include font-size(16)
+					padding: 3px $marg-sml;
+				}
+			}
+
+		.user-subnav {
+			.last.filter {
+				select {
+					@include font-size(16);
+					padding: 3px $marg-sml;
+				}
+			}
 		}
 
 		//position for wider screens
@@ -30,12 +51,15 @@
 				margin-bottom: 0;
 			}
 
+			ul.subnav-search,
 			li.feed,
-			li.bp-search {
+			li.bp-search,
+			.dir-search {
 				float: left;
 			}
 
-			.last {
+			.last,
+			.dir-component-filters {
 				float: right;
 				width: auto;
 
@@ -43,7 +67,9 @@
 					max-width: 250px;
 				}
 			}
-		}
-	}
+
+		} // @media
+
+	} // close .subnav-filters
 
 } // close .buddypress

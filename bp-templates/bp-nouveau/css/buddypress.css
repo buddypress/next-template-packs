@@ -153,7 +153,7 @@ body .buddypress h6 {
 */
 /**
 *----------------------------------------------------------
-* @section 2.1 - Navs Object Nav / Sub Nav (item-list-tabs)
+* @section 2.1 - Navs Object Nav / Sub Nav (bp-list)
 *
 * The main navigational elements for all BP screens
 *----------------------------------------------------------
@@ -270,50 +270,23 @@ body .buddypress h6 {
 	width: 100%;
 }
 
-.buddypress .bp-subnavs,
-.buddypress .bp-subnavs#subsubnav {
+.buddypress .bp-subnavs {
 	margin: 10px 0;
 	overflow: hidden;
 }
 
-.buddypress .bp-subnavs ul li,
-.buddypress .bp-subnavs#subsubnav ul li {
+.buddypress .bp-subnavs ul li {
 	margin-top: 0;
 }
 
-.buddypress .bp-subnavs ul .last.filter select,
-.buddypress .bp-subnavs#subsubnav ul .last.filter select {
-	font-size: 16px;
-	padding: 5px 10px;
-}
-
-.buddypress .user-subnav .last.filter select {
-	font-size: 16px;
-	padding: 3px 10px;
-}
-
-.buddypress .dir-navs ul.subnav,
-.buddypress .dir-navs .feed,
-.buddypress .dir-navs .dir-search {
-	float: left;
-}
-
-.buddypress .dir-navs ul.subnav {
+.buddypress ul.subnav {
 	width: auto;
-}
-
-.buddypress .dir-navs .dir-component-filters {
-	float: right;
 }
 
 .buddypress .bp-navs.bp-invites-nav#subnav ul li.last,
 .buddypress .bp-navs.bp-invites-filters#subsubnav ul li.last,
 .buddypress .bp-navs.bp-messages-filters#subsubnav ul li.last {
 	margin-top: 0;
-}
-
-.buddypress .subnav-filters {
-	padding: 0 5px;
 }
 
 .buddypress_object_nav .bp-navs li.selected a span,
@@ -510,6 +483,11 @@ body .buddypress h6 {
 	background: none;
 	overflow: hidden;
 	margin: 15px 0;
+	padding: 0 5px;
+}
+
+.buddypress .subnav-filters ul {
+	margin-bottom: 0;
 }
 
 .buddypress .subnav-filters li {
@@ -518,19 +496,33 @@ body .buddypress h6 {
 	margin-bottom: 15px;
 }
 
+.buddypress .subnav-filters .last.filter select {
+	font-size: 16px;
+	padding: 3px 10px;
+}
+
+.buddypress .subnav-filters .user-subnav .last.filter select {
+	font-size: 16px;
+	padding: 3px 10px;
+}
+
 @media screen and (min-width: 46.8em) {
 	.buddypress .subnav-filters li {
 		margin-bottom: 0;
 	}
+	.buddypress .subnav-filters ul.subnav-search,
 	.buddypress .subnav-filters li.feed,
-	.buddypress .subnav-filters li.bp-search {
+	.buddypress .subnav-filters li.bp-search,
+	.buddypress .subnav-filters .dir-search {
 		float: left;
 	}
-	.buddypress .subnav-filters .last {
+	.buddypress .subnav-filters .last,
+	.buddypress .subnav-filters .dir-component-filters {
 		float: right;
 		width: auto;
 	}
-	.buddypress .subnav-filters .last select {
+	.buddypress .subnav-filters .last select,
+	.buddypress .subnav-filters .dir-component-filters select {
 		max-width: 250px;
 	}
 }
