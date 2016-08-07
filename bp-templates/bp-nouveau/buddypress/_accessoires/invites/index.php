@@ -16,7 +16,7 @@
 </h2>
 
 <div class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav"></div>
-<div class="bp-navs bp-subnavs group-subnav bp-invites-filters" id="subsubnav"></div>
+<div class="subnav-filters group-subnav-filters bp-invites-filters"></div>
 <div class="members bp-invites-content"></div>
 <div class="bp-invites-feedback"></div>
 

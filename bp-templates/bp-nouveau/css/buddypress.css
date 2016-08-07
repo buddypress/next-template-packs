@@ -482,8 +482,9 @@ body .buddypress h6 {
 .buddypress .subnav-filters {
 	background: none;
 	overflow: hidden;
+	list-style: none;
 	margin: 15px 0;
-	padding: 0 5px;
+	padding: 0 15px;
 }
 
 .buddypress .subnav-filters ul {
@@ -501,11 +502,6 @@ body .buddypress h6 {
 	padding: 3px 10px;
 }
 
-.buddypress .subnav-filters .user-subnav .last.filter select {
-	font-size: 16px;
-	padding: 3px 10px;
-}
-
 @media screen and (min-width: 46.8em) {
 	.buddypress .subnav-filters li {
 		margin-bottom: 0;
@@ -513,7 +509,10 @@ body .buddypress h6 {
 	.buddypress .subnav-filters ul.subnav-search,
 	.buddypress .subnav-filters li.feed,
 	.buddypress .subnav-filters li.bp-search,
-	.buddypress .subnav-filters .dir-search {
+	.buddypress .subnav-filters .dir-search,
+	.buddypress .subnav-filters .user-messages-bulk-actions,
+	.buddypress .subnav-filters .user-messages-search,
+	.buddypress .subnav-filters .group-invites-search {
 		float: left;
 	}
 	.buddypress .subnav-filters .last,

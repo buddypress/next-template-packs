@@ -15,8 +15,9 @@
 	.subnav-filters {
 		background: none;
 		overflow: hidden;
+		list-style: none;
 		margin: $marg-med 0;
-		padding: 0 $marg-xsml;
+		padding: 0 15px;
 
 		ul {
 			margin-bottom: 0;
@@ -28,19 +29,10 @@
 			margin-bottom: $marg-med;
 		}
 
-			.last.filter {
-				select {
-					@include font-size(16)
-					padding: 3px $marg-sml;
-				}
-			}
-
-		.user-subnav {
-			.last.filter {
-				select {
-					@include font-size(16);
-					padding: 3px $marg-sml;
-				}
+		.last.filter {
+			select {
+				@include font-size(16)
+				padding: 3px $marg-sml;
 			}
 		}
 
@@ -54,7 +46,10 @@
 			ul.subnav-search,
 			li.feed,
 			li.bp-search,
-			.dir-search {
+			.dir-search,
+			.user-messages-bulk-actions,
+			.user-messages-search,
+			.group-invites-search {
 				float: left;
 			}
 
