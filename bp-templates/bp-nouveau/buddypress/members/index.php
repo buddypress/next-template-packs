@@ -19,9 +19,9 @@
 
 	<?php endif; ?>
 
-	<div class="bp-navs bp-subnavs dir-navs no-ajax" id="subnav" role="navigation">
+	<div class="subnav-filters filters no-ajax" id="subnav-filters">
 
-		<ul type="list" class="subnav clearfix">
+		<ul class="subnav-search clearfix">
 
 			<?php bp_nouveau_search_form(); ?>
 

@@ -27,9 +27,9 @@
 
 	<?php endif; ?>
 
-	<div class="bp-navs bp-subnavs dir-navs no-ajax" id="subnav" role="navigation">
+	<div class="subnav-filters filters no-ajax" id="subnav-filters">
 
-		<ul type="list" class="subnav clearfix">
+		<ul class="subnav-search clearfix">
 			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
 			<?php bp_nouveau_search_form(); ?>
