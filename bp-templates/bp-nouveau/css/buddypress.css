@@ -1476,6 +1476,14 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin: 0 0 20px 20px;
 }
 
+.groups-manage-members-list {
+	padding: 0.5em;
+}
+
+.groups-manage-members-list ul {
+	list-style: none;
+}
+
 /**
 *-----------------------------------------
 * @subsection 5.2.1.2 - Group Members List

@@ -1,4 +1,6 @@
-// Single Groups Management screens // Groups settings screen
+// Single Groups Management screens
+
+// Groups settings screen
 .radio {
 	.group-conditions {
 		@include responsive-font(16);
@@ -13,6 +15,22 @@
 			ul {
 				margin: 0 0 $marg-lrg $marg-lrg;
 			}
+		}
+	}
+}
+
+// ==== Members manage ====
+
+.groups-manage-members-list {
+	padding: $pad-sml;
+
+	ul {
+		list-style: none;
+
+		.action {
+			margin-bottom: 0;
+
+			a.button: display: inline-block;
 		}
 	}
 }
