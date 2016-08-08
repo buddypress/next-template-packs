@@ -8,6 +8,10 @@
  */
 ?>
 
+<h2 class="bp-screen-title warn">
+	<?php _e( 'Delete this group', 'bp-nouveau' ); ?>
+</h2>
+
 <?php bp_nouveau_user_feedback( 'group-delete-warning' ); ?>
 
 <label for="delete-group-understand" class="bp-label-text warn">

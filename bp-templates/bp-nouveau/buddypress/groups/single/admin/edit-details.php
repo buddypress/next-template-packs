@@ -7,6 +7,9 @@
  * @package BP Nouveau
  */
 ?>
+<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+	<?php _e( 'Edit your groups name &amp; description', 'bp-nouveau' ); ?>
+</h2>
 
 <label for="group-name"><?php _e( 'Group Name (required)', 'bp-nouveau' ); ?></label>
 <input type="text" name="group-name" id="group-name" value="<?php bp_is_group_create() ? bp_new_group_name() : bp_group_name(); ?>" aria-required="true" />

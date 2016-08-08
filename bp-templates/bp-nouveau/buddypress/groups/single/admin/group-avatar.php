@@ -44,7 +44,7 @@
 			</p>
 
 	<?php if ( bp_is_group_create() ) : ?>
-			<p><?php _e( 'To skip the group profile photo upload process, hit the "Next Step" button.', 'bp-nouveau' ); ?></p>
+			<p class="bp-help-text"><?php _e( 'To skip the group profile photo upload process, hit the "Next Step" button.', 'bp-nouveau' ); ?></p>
 		</div><!-- .main-column -->
 
 	<?php elseif ( bp_get_group_has_avatar() ) : ?>

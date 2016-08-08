@@ -18,7 +18,7 @@
 
 <?php else : ?>
 
-	<h4><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h4>
+	<h2 class="bp-screen-title"><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h2>
 
 <?php endif ; ?>
 

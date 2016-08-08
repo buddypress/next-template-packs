@@ -8,6 +8,10 @@
  */
 ?>
 
+<h2 class="bp-screen-title">
+	<?php _e( 'Manage Group Members', 'bp-nouveau' ); ?>
+</h2>
+
 	<p class="bp-help-text"><?php _e('Manage your group members; promote to moderators, admins or demote or ban.', 'bp-nouveau'); ?></p>
 
 	<dl class="groups-manage-members-list">
