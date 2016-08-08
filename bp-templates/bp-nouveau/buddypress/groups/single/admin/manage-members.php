@@ -19,7 +19,7 @@
 			<ul id="admins-list" class="item-list single-line">
 
 				<?php while ( bp_members() ) : bp_the_member(); ?>
-				<li>
+				<li class="member-entry clearfix">
 
 					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
 					<p class="list-title member-name">
@@ -51,7 +51,7 @@
 			<ul id="mods-list" class="item-list single-line">
 
 				<?php while ( bp_members() ) : bp_the_member(); ?>
-				<li>
+				<li class="members-entry clearfix">
 
 					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
 					<p class="list-title member-name">
@@ -88,7 +88,7 @@
 			<ul id="members-list" class="item-list single-line">
 				<?php while ( bp_group_members() ) : bp_group_the_member(); ?>
 
-					<li class="<?php bp_group_member_css_class(); ?>">
+					<li class="<?php bp_group_member_css_class(); ?> members-entry clearfix">
 						<?php bp_group_member_avatar_mini(); ?>
 
 						<p class="list-title member-name">
