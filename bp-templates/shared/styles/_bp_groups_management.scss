@@ -24,13 +24,34 @@
 .groups-manage-members-list {
 	padding: $pad-sml;
 
+	dd {
+		padding-bottom: $pad-med;
+	}
+
+	.section-title {
+		background: $light-grey;
+		padding-left: $pad-xsml;
+	}
+
 	ul {
 		list-style: none;
+
+		li {
+			border-bottom: 1px solid $bp-border-color;
+			padding: $pad-xsml 0;
+		}
+
+		.member-name {
+			margin-bottom: 0;
+		}
 
 		.action {
 			margin-bottom: 0;
 
-			a.button: display: inline-block;
+			a.button {
+				display: inline-block;
+			}
 		}
 	}
-}
+
+} //close .groups-manage-members-list
