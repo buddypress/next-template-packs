@@ -1,5 +1,8 @@
 // BP Buttons, Submits, and general clicky things styling.
 
+// Buttons by default are styled as simple boxes but we may change that by adding
+// a parent class ( on any close parent) .text-link-list
+
 .buddypress {
 
 	// this doubling avoids issues applying styles from body class
@@ -101,6 +104,23 @@
 
 		#item-buttons:empty {
 			display: none;
+		}
+
+		.text-links-list {
+			a.button {
+				border: none;
+				border-right: 1px solid $bp-border-color;
+				display: inline-block;
+				padding: $pad-xsml $pad-med;
+			}
+
+			a:first-child {
+				padding-left: 0;
+			}
+
+			a:last-child {
+				border-right: none;
+			}
 		}
 
 	} // close .buddypress
