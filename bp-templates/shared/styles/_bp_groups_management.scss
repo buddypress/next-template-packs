@@ -38,7 +38,11 @@
 
 		li {
 			border-bottom: 1px solid $bp-border-color;
-			padding: $pad-xsml 0;
+			padding: $pad-xsml;
+		}
+
+		li.banned-user {
+			background: lighten($warn, 50%);
 		}
 
 		.member-name {

@@ -1507,7 +1507,11 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .groups-manage-members-list ul li {
 	border-bottom: 1px solid #eee;
-	padding: 0.3em 0;
+	padding: 0.3em;
+}
+
+.groups-manage-members-list ul li.banned-user {
+	background: #fad3d3;
 }
 
 .groups-manage-members-list ul .member-name {
@@ -2811,10 +2815,20 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress .buddypress .text-links-list a.button {
+	background: none;
 	border: none;
 	border-right: 1px solid #eee;
+	color: #med-light-grey;
 	display: inline-block;
 	padding: 0.3em 1em;
+}
+
+.buddypress .buddypress .text-links-list a.button:visited {
+	color: #med-light-grey;
+}
+
+.buddypress .buddypress .text-links-list a.button:focus, .buddypress .buddypress .text-links-list a.button:hover {
+	color: #5087e5;
 }
 
 .buddypress .buddypress .text-links-list a:first-child {
@@ -2843,9 +2857,16 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .bp-messages p,
 .buddypress .bp-messages .sitewide-notices {
 	display: block;
-	font-size: 90%;
+	font-size: 18px;
 	margin: 5px;
 	padding: 0.5em;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .bp-messages p,
+	.buddypress .bp-messages .sitewide-notices {
+		font-size: 22px;
+	}
 }
 
 .buddypress .bp-messages.info {
@@ -2878,6 +2899,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 0 3px;
 	position: absolute;
 	top: 0;
+}
+
+.buddypress a[data-bp-close] span:before {
+	font-size: 32px;
+}
+
+.buddypress a[data-bp-close] {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 32px;
 }
 
 .buddypress .bp-feedback.info:before,

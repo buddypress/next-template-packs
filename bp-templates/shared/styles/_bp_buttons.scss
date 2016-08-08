@@ -108,10 +108,22 @@
 
 		.text-links-list {
 			a.button {
+				background: none;
 				border: none;
 				border-right: 1px solid $bp-border-color;
+				color: $text-link-visited;
 				display: inline-block;
 				padding: $pad-xsml $pad-med;
+
+				&:visited {
+					color: $text-link-visited;
+				}
+
+				&:focus,
+				&:hover {
+					color: $text-link-hover;
+				}
+
 			}
 
 			a:first-child {

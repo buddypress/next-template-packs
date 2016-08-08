@@ -18,7 +18,7 @@
 		p,
 		.sitewide-notices {
 			display: block;
-			font-size: 90%;
+			@include responsive-font(22);
 			margin: $marg-xsml;
 			padding: $pad-sml;
 		}
@@ -77,6 +77,17 @@
 		padding: 0 3px;
 		position: absolute;
 		top: 0;
+	}
+
+	a[data-bp-close] span:before {
+		font-size: 32px;
+	}
+
+	a[data-bp-close] {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		width: 32px;
 	}
 
 	.bp-feedback.info:before,
