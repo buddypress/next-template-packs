@@ -85,14 +85,26 @@ body .buddypress h6 {
 	clear: both;
 }
 
+dt.section-title {
+	font-size: 18px;
+}
+
+@media screen and (min-width: 46.8em) {
+	dt.section-title {
+		font-size: 22px;
+	}
+}
+
 .bp-label-text,
-.activity-header {
+.activity-header,
+.message-threads {
 	font-size: 13px;
 }
 
 @media screen and (min-width: 46.8em) {
 	.bp-label-text,
-	.activity-header {
+	.activity-header,
+	.message-threads {
 		font-size: 16px;
 	}
 }
@@ -1480,8 +1492,34 @@ body.no-js .single-item-header .js-self-profile-button {
 	padding: 0.5em;
 }
 
+.groups-manage-members-list dd {
+	padding-bottom: 1em;
+}
+
+.groups-manage-members-list .section-title {
+	background: #eaeaea;
+	padding-left: 0.3em;
+}
+
 .groups-manage-members-list ul {
 	list-style: none;
+}
+
+.groups-manage-members-list ul li {
+	border-bottom: 1px solid #eee;
+	padding: 0.3em 0;
+}
+
+.groups-manage-members-list ul .member-name {
+	margin-bottom: 0;
+}
+
+.groups-manage-members-list ul .action {
+	margin-bottom: 0;
+}
+
+.groups-manage-members-list ul .action a.button {
+	display: inline-block;
 }
 
 /**
@@ -2757,6 +2795,21 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .buddypress #item-buttons:empty {
 	display: none;
+}
+
+.buddypress .buddypress .text-links-list a.button {
+	border: none;
+	border-right: 1px solid #eee;
+	display: inline-block;
+	padding: 0.3em 1em;
+}
+
+.buddypress .buddypress .text-links-list a:first-child {
+	padding-left: 0;
+}
+
+.buddypress .buddypress .text-links-list a:last-child {
+	border-right: none;
 }
 
 .buddypress .warn {

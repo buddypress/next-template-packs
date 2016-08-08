@@ -55,12 +55,18 @@ body { // add weight
 // but gropus single requires it.
 @include clearfix-element('.bp-wrap');
 
-// ====== BP Typograph Elements ======
+// ====== BP Typographic Elements ======
 
-// General labels text for controls
+// === Font sizing ===
+
+
+dt.section-title {
+	@include responsive-font(22);
+}
 
 .bp-label-text,
-.activity-header {
+.activity-header,
+.message-threads {
 	@include responsive-font(16);
 }
 
