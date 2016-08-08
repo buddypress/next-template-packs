@@ -1522,6 +1522,19 @@ body.no-js .single-item-header .js-self-profile-button {
 	display: inline-block;
 }
 
+@media screen and (min-width: 46.8em) {
+	.groups-manage-members-list ul li .avatar,
+	.groups-manage-members-list ul li .member-name {
+		float: left;
+	}
+	.groups-manage-members-list ul li .avatar {
+		margin-right: 15px;
+	}
+	.groups-manage-members-list ul li .action {
+		clear: both;
+	}
+}
+
 /**
 *-----------------------------------------
 * @subsection 5.2.1.2 - Group Members List

@@ -52,6 +52,25 @@
 				display: inline-block;
 			}
 		}
+
+		@include medium-up() {
+			li {
+				.avatar,
+				.member-name {
+					float: left;
+				}
+
+				.avatar {
+					margin-right: $marg-med;
+				}
+
+				.action {
+					clear: both;
+				}
+
+			}
+		} // close @media
+
 	}
 
 } //close .groups-manage-members-list
