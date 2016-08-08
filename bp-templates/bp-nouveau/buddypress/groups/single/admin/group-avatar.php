@@ -7,12 +7,23 @@
  * @package BP Nouveau
  */
 
-if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
+?>
+<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+	<?php _e( 'Group Avatar', 'bp-nouveau' ); ?>
+</h2>
+
+<?php if ( !bp_is_group_create() ) : ?>
+	<?php if( !bp_get_group_has_avatar() ): ?>
+		<p class="bp-help-text"><?php _e("Add an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
+	<?php else: ?>
+		<p class="bp-help-text"><?php _e("Edit or update your avatar image for this group.", 'bp-nouveau' ); ?></p>
+	<?php endif; ?>
+<?php endif; ?>
+
+
+<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 	<?php if ( bp_is_group_create() ) : ?>
 
-		<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
-			<?php _e( 'Group Avatar', 'bp-nouveau' ); ?>
-		</h2>
 
 		<div class="left-menu">
 
@@ -23,7 +34,7 @@ if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
 		<div class="main-column">
 	<?php endif; ?>
 
-			<p><?php _e("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
+			<p class="bp-help-text"><?php _e("Upload an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
 
 			<p>
 				<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-nouveau' ); ?></label>
