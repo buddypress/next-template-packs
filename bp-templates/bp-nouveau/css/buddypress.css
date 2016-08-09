@@ -331,19 +331,6 @@ dt.section-title {
 	display: none;
 }
 
-.buddypress .bp-subnavs.bp-messages-filters ul li a.bulk-apply {
-	border-left: 0;
-	border-radius: none;
-	font-weight: normal;
-	line-height: inherit;
-	margin: 0;
-	padding: 2.5px 10px;
-	text-align: center;
-	text-transform: none;
-	vertical-align: baseline;
-	width: auto;
-}
-
 @media screen and (min-width: 46.8em) {
 	.buddypress .bp-navs li {
 		float: left;
@@ -451,7 +438,7 @@ dt.section-title {
 	overflow: hidden;
 	list-style: none;
 	margin: 15px 0;
-	padding: 0 15px;
+	padding: 0;
 }
 
 .buddypress .subnav-filters ul {
@@ -491,6 +478,19 @@ dt.section-title {
 	.buddypress .subnav-filters .dir-component-filters select {
 		max-width: 250px;
 	}
+}
+
+.buddypress .bp-subnavs.bp-messages-filters ul li a.bulk-apply {
+	border-left: 0;
+	border-radius: none;
+	font-weight: normal;
+	line-height: inherit;
+	margin: 0;
+	padding: 2.5px 10px;
+	text-align: center;
+	text-transform: none;
+	vertical-align: baseline;
+	width: auto;
 }
 
 /**
@@ -1543,15 +1543,14 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 .buddypress .bp-invites-content ul.item-list li.selected {
-	-webkit-box-shadow: 0 0 0 4px #1fb3dd;
-	-moz-box-shadow: 0 0 0 4px #1fb3dd;
-	box-shadow: 0 0 0 4px #1fb3dd;
+	-webkit-box-shadow: inset 0 0 12px 0 rgba(237, 187, 52, 0.2);
+	-moz-box-shadow: inset 0 0 12px 0 rgba(237, 187, 52, 0.2);
+	box-shadow: inset 0 0 12px 0 rgba(237, 187, 52, 0.2);
 }
 
 .buddypress .bp-invites-content .item-list .item-meta span,
 .buddypress .bp-invites-content .group-inviters li {
-	color: #999;
-	font-size: 80%;
+	color: #888;
 }
 
 .buddypress .bp-invites-content li ul.group-inviters {

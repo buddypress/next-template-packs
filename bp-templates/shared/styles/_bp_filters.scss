@@ -17,7 +17,7 @@
 		overflow: hidden;
 		list-style: none;
 		margin: $marg-med 0;
-		padding: 0 15px;
+		padding: 0;
 
 		ul {
 			margin-bottom: 0;
@@ -66,5 +66,18 @@
 		} // @media
 
 	} // close .subnav-filters
+
+	.bp-subnavs.bp-messages-filters ul li a.bulk-apply {
+		border-left: 0;
+		border-radius: none;
+		font-weight: normal;
+		line-height: inherit;
+		margin: 0;
+		padding: 2.5px 10px;
+		text-align: center;
+		text-transform: none;
+		vertical-align: baseline;
+		width: auto;
+	}
 
 } // close .buddypress
