@@ -1,4 +1,4 @@
-// BP Buttons, Submits, and general clicky things styling.
+// BP Buttons, Submits, Icons and general clicky things styling.
 
 // Buttons by default are styled as simple boxes but we may change that by adding
 // a parent class ( on any close parent) .text-link-list
@@ -83,7 +83,7 @@
 		}
 
 		.bp-invites-content {
-			ul.item-list {
+			ul.bp-list {
 
 				li {
 					a.invite-button:hover {
@@ -139,3 +139,59 @@
 
 
 } // close body class .buddypress @todo this should be removed in time
+
+// ==== Icons ====
+
+.buddypress {
+	.bp-navs  li.filter label:before,
+	.bp-navs  li.feed a:before,
+	.bp-invites-content .item-list li a.invite-button:before,
+	.bp-invites-filters  li a.invite-button:before,
+	.bp-messages-filters li a.messages-button:before {
+		font-family: dashicons;
+		font-size: 18px;
+	}
+
+	.bp-invites-content .item-list li a.invite-button:before {
+		@include responsive-font(32);
+	}
+
+
+	ul {
+
+		li.filter label:before {
+			content: "\f536";
+		}
+
+		li.feed a:before {
+			content: "\f303";
+		}
+	} // close ul
+
+	ul.item-list {
+
+		li a.invite-button:not(.group-remove-invite-button):before {
+			content: "\f502";
+		}
+
+		li.selected a.invite-button:before,
+		li a.group-remove-invite-button:before {
+			content: "\f153";
+		}
+	} // close ul.item-list
+
+	.bp-invites-filters ul li a#bp-invites-next-page:before,
+	.bp-messages-filters ul li a#bp-messages-next-page:before {
+		content: "\f345";
+	}
+
+	.bp-invites-filters ul li a#bp-invites-prev-page:before,
+	.bp-messages-filters ul li a#bp-messages-prev-page:before {
+		content: "\f341";
+	}
+
+	.bp-messages-filters ul li a.messages-button.bulk-apply:before {
+		content: "\f147";
+		font-size: 18px;
+	}
+} // close .buddypress

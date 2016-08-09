@@ -210,9 +210,9 @@
 		li.dynamic.current {
 			a {
 				span {
-					background-color: #1fb3dd;
+					background-color: $highlight;
 					border: 0;
-					color: #fff;
+					color: $off-white;
 				}
 			}
 		}
@@ -220,9 +220,9 @@
 		li.dynamic {
 			a:hover {
 				span {
-					background-color: #1fb3dd;
+					background-color: highlight;
 					border: 0;
-					color: #fff;
+					color: $white;
 				}
 			}
 		} // li
@@ -237,62 +237,7 @@
 	} // bp-navs
 }
 
-// Icons
-.buddypress .bp-navs  li.filter label:before,
-.buddypress .bp-navs  li.feed a:before,
-.buddypress .bp-invites-content .item-list li a.invite-button:before,
-.buddypress .bp-invites-filters  li a.invite-button:before,
-.buddypress .bp-messages-filters li a.messages-button:before {
-	font-family: dashicons;
-	font-size: 18px;
-}
-
-.buddypress .bp-invites-content .item-list li a.invite-button:before {
-	font-size: 32px;
-}
-
 .buddypress {
-
-	.bp-navs {
-		ul {
-
-			li.filter label:before {
-				content: "\f536";
-			}
-
-			li.feed a:before {
-				content: "\f303";
-			}
-		} // close ul
-
-		ul.item-list {
-
-			li a.invite-button:not(.group-remove-invite-button):before {
-				content: "\f502";
-			}
-
-			li.selected a.invite-button:before,
-			li a.group-remove-invite-button:before {
-				content: "\f153";
-			}
-		} // close ul.item-list
-
-		.bp-invites-filters ul li a#bp-invites-next-page:before,
-		.bp-messages-filters ul li a#bp-messages-next-page:before {
-			content: "\f345";
-		}
-
-		.bp-invites-filters ul li a#bp-invites-prev-page:before,
-		.bp-messages-filters ul li a#bp-messages-prev-page:before {
-			content: "\f341";
-		}
-
-		.bp-messages-filters ul li a.messages-button.bulk-apply:before {
-			content: "\f147";
-			font-size: 18px;
-		}
-	} // close .bp-navs
-
 	.bp-subnavs.bp-messages-filters ul li a.bulk-apply {
 		border-left: 0;
 		border-radius: none;
