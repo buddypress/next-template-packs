@@ -807,18 +807,6 @@ dt.section-title {
 	padding-left: 1em;
 }
 
-.activity-list .activity-item.load-more, .activity-list .activity-item.load-newest {
-	background: #fafafa;
-	font-size: 110%;
-	margin: 15px 0;
-	padding: 10px 15px;
-	text-align: center;
-}
-
-.activity-list .activity-item.load-more a, .activity-list .activity-item.load-newest a {
-	color: #4d4d4d;
-}
-
 .activity-list .activity-item.newest_mentions_activity, .activity-list .activity-item.newest_friends_activity, .activity-list .activity-item.newest_groups_activity, .activity-list .activity-item.newest_blogs_activity {
 	background: rgba(31, 179, 221, 0.1);
 }
@@ -939,6 +927,38 @@ dt.section-title {
 	background: none;
 	color: #555;
 	font-weight: bold;
+}
+
+.buddypress .activity-list .load-more,
+.buddypress .activity-list .load-newest {
+	background: #fafafa;
+	border: 1px solid #eee;
+	font-size: 110%;
+	margin: 15px 0;
+	padding: 0;
+	text-align: center;
+}
+
+.buddypress .activity-list .load-more a,
+.buddypress .activity-list .load-newest a {
+	color: #555;
+	display: block;
+	padding: 0.5em 0;
+}
+
+.buddypress .activity-list .load-more a:focus, .buddypress .activity-list .load-more a:hover,
+.buddypress .activity-list .load-newest a:focus,
+.buddypress .activity-list .load-newest a:hover {
+	color: #333;
+}
+
+.buddypress .activity-list .load-more:focus, .buddypress .activity-list .load-more:hover,
+.buddypress .activity-list .load-newest:focus,
+.buddypress .activity-list .load-newest:hover {
+	border-color: #ccc;
+	-webkit-box-shadow: 0 0 6px 0 #eaeaea;
+	-moz-box-shadow: 0 0 6px 0 #eaeaea;
+	box-shadow: 0 0 6px 0 #eaeaea;
 }
 
 body.activity-permalink .activity-list li {

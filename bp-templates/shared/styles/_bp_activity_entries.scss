@@ -60,18 +60,6 @@
 			}
 		} // close li forum elements
 
-		&.load-more,
-		&.load-newest {
-			background: $off-white;
-			font-size: 110%;
-			margin: 15px 0;
-			padding: 10px 15px;
-			text-align: center;
-
-			a {
-				color: #4d4d4d;
-			}
-		}
 
 		&.newest_mentions_activity,
 		&.newest_friends_activity,
@@ -215,6 +203,39 @@
 	} // close .activity-item
 
 } // close .activity-list
+
+.buddypress {
+	.activity-list {
+
+		.load-more,
+		.load-newest {
+			background: $off-white;
+			border: 1px solid $bp-border-color;
+			font-size: 110%;
+			margin: $marg-med 0;
+			padding: 0;
+			text-align: center;
+
+			a {
+				color: $dark-grey;
+				display: block;
+				padding: $pad-sml 0;
+
+				&:focus,
+				&:hover, {
+					color: $black;
+				}
+			}
+
+			&:focus,
+			&:hover {
+				border-color: $bp-border-dark;
+				@include	box-shadow(0 0 6px 0 $light-grey);
+			}
+		}
+
+	}
+}
 
 
 // Single Activity Entry View
