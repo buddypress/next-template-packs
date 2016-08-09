@@ -1176,6 +1176,10 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'type'    => 'warning',
 			'message' => __( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'bp-nouveau' ),
 		),
+		'group-avatar-delete-info' => array(
+			'type'    => 'info',
+			'message' => __( 'If you\'d like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.', 'bp-nouveau' ),
+		),
 		'directory-members-loading' => array(
 			'type'    => 'loading',
 			'message' => __( 'Loading the members of your community, please wait.', 'bp-nouveau' ),
