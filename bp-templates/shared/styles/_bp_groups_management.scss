@@ -2,16 +2,18 @@
 
 // Groups settings screen
 .radio {
-	.group-conditions {
+	.group-conditions { // the dl
 		@include responsive-font(16);
 		margin-left: $marg-lrg;
 		width: 80%;
 
-	//dt {
+		//dt {
 
-	//	}
+		//	}
 
 		dd {
+			font-style: italic;
+
 			ul {
 				margin: 0 0 $marg-lrg $marg-lrg;
 			}
