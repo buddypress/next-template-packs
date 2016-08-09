@@ -37,7 +37,7 @@ do_action( 'bp_attachments_avatar_check_template' );
 		<p><?php _e( "If you'd like to delete your current profile photo but not upload a new one, please use the delete profile photo button.", 'bp-nouveau' ); ?></p>
 		<p><a class="button edit" id="bp-delete-avatar" href="#" title="<?php esc_attr_e( 'Delete Profile Photo', 'bp-nouveau' ); ?>"><?php esc_html_e( 'Delete My Profile Photo', 'bp-nouveau' ); ?></a></p>
 	<# } else if ( 'group' === data.object ) { #>
-		<p><?php _e( "If you'd like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.", 'bp-nouveau' ); ?></p>
+		<?php bp_nouveau_user_feedback( 'group-avatar-delete-info' ); ?>
 		<p><a class="button edit" id="bp-delete-avatar" href="#" title="<?php esc_attr_e( 'Delete Group Profile Photo', 'bp-nouveau' ); ?>"><?php esc_html_e( 'Delete Group Profile Photo', 'bp-nouveau' ); ?></a></p>
 	<# } else { #>
 		<?php do_action( 'bp_attachments_avatar_delete_template' ); ?>
