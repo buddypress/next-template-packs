@@ -213,8 +213,8 @@ dt.section-title {
 
 .bp-navs ul li.selected a,
 .bp-navs ul li.current a {
-	font-weight: bold;
-	opacity: 0.8;
+	color: #333;
+	opacity: 1;
 }
 
 .bp-navs.bp-invites-filters ul li a, .bp-navs.bp-messages-filters ul li a {
@@ -232,13 +232,6 @@ dt.section-title {
 	background-color: #ccc;
 }
 
-.buddypress .bp-navs li:not(.current) a:focus,
-.buddypress .bp-navs li:not(.current) a:hover,
-.buddypress .bp-navs li:not(.selected) a:focus,
-.buddypress .bp-navs li:not(.selected) a:hover {
-	background: #ccc;
-}
-
 .buddypress .bp-navs li.selected a,
 .buddypress .bp-navs li.selected a:focus,
 .buddypress .bp-navs li.selected a:hover,
@@ -247,6 +240,22 @@ dt.section-title {
 .buddypress .bp-navs li.current a:hover {
 	background: #555;
 	color: #fafafa;
+}
+
+.buddypress .bp-navs li.selected a span,
+.buddypress .bp-navs li.selected a:focus span,
+.buddypress .bp-navs li.selected a:hover span,
+.buddypress .bp-navs li.current a span,
+.buddypress .bp-navs li.current a:focus span,
+.buddypress .bp-navs li.current a:hover span {
+	border-color: #fafafa;
+}
+
+.buddypress .bp-navs li:not(.current) a:focus,
+.buddypress .bp-navs li:not(.current) a:hover,
+.buddypress .bp-navs li:not(.selected) a:focus,
+.buddypress .bp-navs li:not(.selected) a:hover {
+	background: #ccc;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -258,6 +267,8 @@ dt.section-title {
 	}
 	.buddypress .main-navs.vertical li.selected a,
 	.buddypress .main-navs.vertical li.current a {
+		background: #555;
+		color: #fafafa;
 		text-decoration: none;
 	}
 }
@@ -955,7 +966,7 @@ dt.section-title {
 .buddypress .activity-list .load-more:focus, .buddypress .activity-list .load-more:hover,
 .buddypress .activity-list .load-newest:focus,
 .buddypress .activity-list .load-newest:hover {
-	border-color: #ccc;
+	border-color: #e1e1e1;
 	-webkit-box-shadow: 0 0 6px 0 #eaeaea;
 	-moz-box-shadow: 0 0 6px 0 #eaeaea;
 	box-shadow: 0 0 6px 0 #eaeaea;

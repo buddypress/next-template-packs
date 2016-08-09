@@ -229,7 +229,7 @@
 
 			&:focus,
 			&:hover {
-				border-color: $bp-border-dark;
+				border-color: darken($bp-border-color, 5%);
 				@include	box-shadow(0 0 6px 0 $light-grey);
 			}
 		}

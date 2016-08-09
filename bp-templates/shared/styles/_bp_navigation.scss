@@ -16,7 +16,6 @@
 		}
 
 		li.last {
-			//margin: 7px 0 0;
 
 			select {
 				max-width: 185px;
@@ -51,8 +50,8 @@
 		li.selected,
 		li.current {
 			a {
-				font-weight: bold;
-				opacity: 0.8;
+				color: $black;
+				opacity: 1;
 			}
 		}
 
@@ -91,14 +90,6 @@
 			}
 		}
 
-		li:not(.current),
-		li:not(.selected), {
-			a:focus,
-			a:hover {
-				background: $grey;
-			}
-		}
-
 		li.selected,
 		li.current {
 			a,
@@ -106,6 +97,20 @@
 			a:hover {
 				background: $dark-grey;
 				color: $off-white;
+
+				span {
+					border-color: $off-white;
+				}
+
+			}
+
+		}
+
+		li:not(.current),
+		li:not(.selected), {
+			a:focus,
+			a:hover {
+				background: $grey;
 			}
 		}
 
@@ -115,6 +120,7 @@
 		.main-navs:not(.dir-navs) {
 			li.selected,
 			li.current {
+
 				a {
 					background: none;
 					color: $black;
@@ -126,14 +132,21 @@
 		.main-navs.vertical {
 			li.selected,
 			li.current {
-				a {text-decoration: none;}
+
+				a {
+					background: $dark-grey;
+					color: $off-white;
+					text-decoration: none;
+				}
 			}
 		}
-	}
+
+	} // close @media
 
 	.bp-subnavs {
 		li.selected,
 		li.current {
+
 			a {
 				background-color: $dark-grey;
 				color: $off-white;
@@ -155,7 +168,6 @@
 		background: none;
 	}
 }
-
 
 // Specifically default subnav elements
 .buddypress {
