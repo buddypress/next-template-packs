@@ -29,6 +29,10 @@
 			margin-bottom: $marg-med;
 		}
 
+		li.feed {
+			margin-right: $marg-med;
+		}
+
 		.last.filter {
 			select {
 				@include font-size(16)

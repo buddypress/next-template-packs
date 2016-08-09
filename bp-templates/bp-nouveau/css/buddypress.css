@@ -451,6 +451,10 @@ dt.section-title {
 	margin-bottom: 15px;
 }
 
+.buddypress .subnav-filters li.feed {
+	margin-right: 15px;
+}
+
 .buddypress .subnav-filters .last.filter select {
 	font-size: 16px;
 	padding: 3px 10px;
@@ -2797,9 +2801,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-right: none;
 }
 
-.buddypress .bp-navs li.filter label:before,
-.buddypress .bp-navs li.feed a:before,
-.buddypress .bp-invites-content .item-list li a.invite-button:before,
+.buddypress li.filter label:before,
+.buddypress li.feed a:before,
 .buddypress .bp-invites-filters li a.invite-button:before,
 .buddypress .bp-messages-filters li a.messages-button:before {
 	font-family: dashicons;

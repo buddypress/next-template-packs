@@ -143,9 +143,8 @@
 // ==== Icons ====
 
 .buddypress {
-	.bp-navs  li.filter label:before,
-	.bp-navs  li.feed a:before,
-	.bp-invites-content .item-list li a.invite-button:before,
+	 li.filter label:before,
+	 li.feed a:before,
 	.bp-invites-filters  li a.invite-button:before,
 	.bp-messages-filters li a.messages-button:before {
 		font-family: dashicons;
@@ -155,7 +154,6 @@
 	.bp-invites-content .item-list li a.invite-button:before {
 		@include responsive-font(32);
 	}
-
 
 	ul {
 
