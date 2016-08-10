@@ -759,7 +759,7 @@ dt.section-title {
 	.activity-update-form #whats-new-content,
 	.activity-update-form #whats-new-post-in-box,
 	.activity-update-form #whats-new-submit {
-		margin-left: 10%;
+		margin-left: 12%;
 	}
 }
 
@@ -2537,21 +2537,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	font-size: 18px;
 }
 
-.buddypress ul.filters form {
-	font-size: 15px;
-}
-
-.buddypress ul.filters li form button[type="submit"] {
-	font-size: inherit;
-	padding: .1em .7em;
-	line-height: 1.4;
-}
-
-.buddypress ul.filters li form button[type="submit"] span.dashicons {
-	font-size: 20px;
-	line-height: inherit;
-}
-
 .buddypress ul.filters li form label {
 	font-size: inherit !important;
 }
@@ -2568,6 +2553,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .dir-form {
 	clear: both;
+}
+
+.bp-user [data-bp-search] form button[type="submit"] {
+	padding: 0.6em 0.8em;
 }
 
 /**
@@ -3370,7 +3359,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		width: auto;
 	}
 	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li {
-		font-size: 14px;
+		font-size: 16px;
 		margin: 10px 0;
 	}
 	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a {

@@ -26,6 +26,7 @@
 				width: auto;
 			}
 
+
 			input[type="search"]::-webkit-search-cancel-button {
 				-webkit-appearance: searchfield-cancel-button;
 			}
@@ -40,28 +41,19 @@
 				border: 0;
 				font-family: dashicons;
 				@include font-size(18);
-
 			}
-
-			// Rough re-working to allo search to be re-sized
-
 
 		} // close form
 
 	} // close [data-bp-search]
 
-	ul.filters form {font-size: $search-element-size + px; }
-	ul.filters  li  form button[type="submit"] {
-		font-size: inherit;
-		padding: .1em .7em; line-height: 1.4;
-		span.dashicons {
-			font-size:  $search-element-button-size + px;
-			line-height: inherit;
-		}
-	}
 	ul.filters  li  form label {font-size: inherit !important;}
-	ul.filters  li  form label input {font-size: inherit !important; line-height: 1.4;padding: .1em .7em;}
 
+	ul.filters  li  form label input {
+		font-size: inherit !important;
+		line-height: 1.4;
+		padding: .1em .7em;
+	}
 
 	.current-member-type {
 		font-style: italic;
@@ -72,3 +64,15 @@
 	}
 
 } // close .buddypress
+
+// Try and correct user screens search
+.bp-user {
+	[data-bp-search] {
+
+		form {
+			button[type="submit"] {
+					padding: 0.6em 0.8em;
+			}
+		}
+	}
+}
