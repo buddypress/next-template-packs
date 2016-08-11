@@ -1160,6 +1160,10 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'type'    => 'info',
 			'message' => __( 'Sorry, there were no group members found.', 'bp-nouveau' ),
 		),
+		'group-members-search-none' => array(
+			'type'    => 'info',
+			'message' => __( 'Sorry, there was no member of that name found in this group.', 'bp-nouveau' ),
+		),
 		'group-manage-members-none' => array(
 			'type'    => 'info',
 			'message' => __( 'This group has no members.', 'bp-nouveau' ),

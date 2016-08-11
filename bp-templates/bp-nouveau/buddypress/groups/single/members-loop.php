@@ -8,8 +8,14 @@
  */
 ?>
 
-<?php if ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
+<?php if ( isset( $_REQUEST['members_search'] ) ) : ?>
 
+	<?php bp_nouveau_user_feedback( 'group-members-search-none' ); ?>
+
+<?php endif; ?>
+
+<?php if ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
+<p>there are members</p>
 	<?php bp_nouveau_group_hook( 'before', 'members_content' ); ?>
 
 	<?php bp_nouveau_pagination( 'top' ) ; ?>
@@ -54,8 +60,8 @@
 
 	<?php bp_nouveau_group_hook( 'after', 'members_content' ); ?>
 
-<?php else:
+	<?php else:
 
-	bp_nouveau_user_feedback( 'group-members-none' );
+		bp_nouveau_user_feedback( 'group-members-none' );
 
 endif; ?>
