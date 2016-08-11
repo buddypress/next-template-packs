@@ -84,7 +84,7 @@ li#compose-personal-li {
 			border-bottom: 1px solid $light-grey;
 			margin: 0;
 			overflow: hidden;
-			padding: 5px 0;
+			padding: $pad-sml 0;
 
 			// the selected parent li elements & message details
 			&.selected {

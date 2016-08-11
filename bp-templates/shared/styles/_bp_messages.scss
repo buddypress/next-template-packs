@@ -1,19 +1,29 @@
 // BP Private Messages:
 // messages lists, message single views, bulk actions
 
-table#message-threads tr.unread td {
-	background: #fff9db;
-	border-bottom: 1px solid #ffe8c4;
-	border-top: 1px solid #ffe8c4;
-	font-weight: bold;
-}
+#message-threads { // table element
 
-table#message-threads tr.unread td .thread-excerpt,
-table#message-threads tr.unread td .activity,
-table#message-threads tr.unread td.thread-options {
-	font-weight: normal;
-}
+	tr.unread {
+		td {
+			background: #fff9db;
+			border-bottom: 1px solid #ffe8c4;
+			border-top: 1px solid #ffe8c4;
+			font-weight: bold;
 
+			&.thread-options,
+			.activity,
+			.thread-excerpt {
+				font-weight: normal;
+			}
+
+		}
+
+	} // tr.unread
+
+} // close table#message-threads
+
+
+// Rules remain outside nesting dues to mixed elements
 li span.unread-count,
 tr.unread span.unread-count {
 	background: #d00;
@@ -27,61 +37,63 @@ tr.unread span.unread-count {
 	padding: 1px 6px;
 }
 
-div#message-thread div.message-box {
-	margin: 0;
-	padding: 15px;
-}
 
-div#message-thread div.alt {
-	background: #f4f4f4;
-}
+#message-thread {
 
-div#message-thread p#message-recipients {
-	margin: 10px 0 20px 0;
-}
+	div.message-box {
+		margin: 0;
+		padding: 15px;
+	}
 
-div#message-thread img.avatar {
-	float: left;
-	margin: 0 10px 0 0;
-	vertical-align: middle;
-}
+	div.alt {
+		background: #f4f4f4;
+	}
 
-div#message-thread strong {
-	font-size: 100%;
-	margin: 0;
-}
+	#message-recipients {
+		margin: 10px 0 20px 0;
+	}
 
-div#message-thread strong a {
-	text-decoration: none;
-}
+	img.avatar {
+		float: left;
+		margin: 0 10px 0 0;
+		vertical-align: middle;
+	}
 
-div#message-thread strong span.activity {
-	margin-top: 4px;
-}
+	strong {
+		font-size: 100%;
+		margin: 0;
 
-div#message-thread div.message-metadata {
-	overflow: hidden;
-}
+		a {
+			text-decoration: none;
+		}
 
-div#message-thread div.message-content {
-	margin-left: 45px;
-}
+		span.activity {
+			margin-top: 4px;
+		}
+	} // strong
 
-div#message-thread div.message-options {
-	text-align: right;
-}
+	.message-metadata {
+		overflow: hidden;
+		position: relative;
+	}
 
-#message-threads img.avatar {
-	max-width: none;
-}
+	.message-content {
+		margin-left: 45px;
+	}
 
-div.message-search {
-	float: right;
-	margin: 0 20px;
-}
+	.message-options {
+		text-align: right;
+	}
 
-.message-metadata {
-	position: relative;
+	img.avatar {
+		max-width: none;
+	}
+
+	.message-search {
+		float: right;
+		margin: 0 20px;
+	}
+
 }
 
 .message-star-actions {

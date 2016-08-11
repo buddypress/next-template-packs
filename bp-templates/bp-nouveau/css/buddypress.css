@@ -1805,16 +1805,16 @@ body.register .buddypress .page ul {
 	* @subsection 5.2.2.5 - Private Messaging
 	*-------------------------------------------
 	*/
-table#message-threads tr.unread td {
+#message-threads tr.unread td {
 	background: #fff9db;
 	border-bottom: 1px solid #ffe8c4;
 	border-top: 1px solid #ffe8c4;
 	font-weight: bold;
 }
 
-table#message-threads tr.unread td .thread-excerpt,
-table#message-threads tr.unread td .activity,
-table#message-threads tr.unread td.thread-options {
+#message-threads tr.unread td.thread-options,
+#message-threads tr.unread td .activity,
+#message-threads tr.unread td .thread-excerpt {
 	font-weight: normal;
 }
 
@@ -1831,61 +1831,58 @@ tr.unread span.unread-count {
 	padding: 1px 6px;
 }
 
-div#message-thread div.message-box {
+#message-thread div.message-box {
 	margin: 0;
 	padding: 15px;
 }
 
-div#message-thread div.alt {
+#message-thread div.alt {
 	background: #f4f4f4;
 }
 
-div#message-thread p#message-recipients {
+#message-thread #message-recipients {
 	margin: 10px 0 20px 0;
 }
 
-div#message-thread img.avatar {
+#message-thread img.avatar {
 	float: left;
 	margin: 0 10px 0 0;
 	vertical-align: middle;
 }
 
-div#message-thread strong {
+#message-thread strong {
 	font-size: 100%;
 	margin: 0;
 }
 
-div#message-thread strong a {
+#message-thread strong a {
 	text-decoration: none;
 }
 
-div#message-thread strong span.activity {
+#message-thread strong span.activity {
 	margin-top: 4px;
 }
 
-div#message-thread div.message-metadata {
+#message-thread .message-metadata {
 	overflow: hidden;
+	position: relative;
 }
 
-div#message-thread div.message-content {
+#message-thread .message-content {
 	margin-left: 45px;
 }
 
-div#message-thread div.message-options {
+#message-thread .message-options {
 	text-align: right;
 }
 
-#message-threads img.avatar {
+#message-thread img.avatar {
 	max-width: none;
 }
 
-div.message-search {
+#message-thread .message-search {
 	float: right;
 	margin: 0 20px;
-}
-
-.message-metadata {
-	position: relative;
 }
 
 .message-star-actions {
@@ -1999,7 +1996,7 @@ li#compose-personal-li a#compose:before {
 	border-bottom: 1px solid #eaeaea;
 	margin: 0;
 	overflow: hidden;
-	padding: 5px 0;
+	padding: 0.5em 0;
 }
 
 .bp-messages-content #message-threads li.selected {
