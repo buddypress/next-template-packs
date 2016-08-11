@@ -40,7 +40,6 @@ do_action( 'bp_attachments_avatar_check_template' );
 		<?php bp_nouveau_user_feedback( 'group-avatar-delete-info' ); ?>
 		<p><a class="button edit" id="bp-delete-avatar" href="#" title="<?php esc_attr_e( 'Delete Group Profile Photo', 'bp-nouveau' ); ?>"><?php esc_html_e( 'Delete Group Profile Photo', 'bp-nouveau' ); ?></a></p>
 	<# } else { #>
-
 		<?php do_action( 'bp_attachments_avatar_delete_template' ); ?>
 	<# } #>
 </script>
