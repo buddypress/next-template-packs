@@ -471,6 +471,18 @@ dt.section-title {
 	padding: 3px 10px;
 }
 
+.buddypress .subnav-filters .user-messages-bulk-actions .bulk-apply {
+	border-radius: none;
+	font-weight: normal;
+	line-height: 1.6;
+	margin: 0 10px 0;
+	padding: 6px 10px 4px;
+	text-align: center;
+	text-transform: none;
+	vertical-align: baseline;
+	width: auto;
+}
+
 @media screen and (min-width: 46.8em) {
 	.buddypress .subnav-filters li {
 		margin-bottom: 0;
@@ -493,19 +505,6 @@ dt.section-title {
 	.buddypress .subnav-filters .dir-component-filters select {
 		max-width: 250px;
 	}
-}
-
-.buddypress .bp-subnavs.bp-messages-filters ul li a.bulk-apply {
-	border-left: 0;
-	border-radius: none;
-	font-weight: normal;
-	line-height: inherit;
-	margin: 0;
-	padding: 2.5px 10px;
-	text-align: center;
-	text-transform: none;
-	vertical-align: baseline;
-	width: auto;
 }
 
 /**
