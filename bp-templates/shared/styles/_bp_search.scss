@@ -41,6 +41,7 @@
 				border: 0;
 				font-family: dashicons;
 				@include font-size(18);
+				line-height: 1.6;
 			}
 
 		} // close form
@@ -65,13 +66,13 @@
 
 } // close .buddypress
 
-// Try and correct user screens search
-.bp-user {
+// Try and correct group screens search
+.single-item.groups {
 	[data-bp-search] {
 
 		form {
 			button[type="submit"] {
-					padding: 0.6em 0.8em;
+				padding: 6px 0.8em 9px;
 			}
 		}
 	}

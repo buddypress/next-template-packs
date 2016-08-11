@@ -2535,6 +2535,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border: 0;
 	font-family: dashicons;
 	font-size: 18px;
+	line-height: 1.6;
 }
 
 .buddypress ul.filters li form label {
@@ -2555,8 +2556,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	clear: both;
 }
 
-.bp-user [data-bp-search] form button[type="submit"] {
-	padding: 0.6em 0.8em;
+.single-item.groups [data-bp-search] form button[type="submit"] {
+	padding: 6px 0.8em 9px;
 }
 
 /**
