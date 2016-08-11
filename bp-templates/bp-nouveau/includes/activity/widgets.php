@@ -29,7 +29,7 @@ class BP_Latest_Activities extends WP_Widget {
 			'customize_selective_refresh' => true,
 		) );
 
-		parent::__construct( false, __( '(BuddyPress) Latest Actities', 'bp-nouveau' ), $widget_ops );
+		parent::__construct( false, __( '(BuddyPress) Latest Activities', 'bp-nouveau' ), $widget_ops );
 	}
 
 	/**
