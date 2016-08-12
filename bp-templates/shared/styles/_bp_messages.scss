@@ -18,31 +18,25 @@
 
 		}
 
+		span.unread-count {
+			background: #d00;
+			color: #fff;
+			font-weight: bold;
+			padding: 2px 8px;
+		}
+
 	} // tr.unread
 
 } // close table#message-threads
 
-
-// Rules remain outside nesting dues to mixed elements
-li span.unread-count,
-tr.unread span.unread-count {
-	background: #d00;
-	color: #fff;
-	font-weight: bold;
-	padding: 2px 8px;
-}
-
-.bp-navs ul li a span.unread-count {
-	color: #fff;
-	padding: 1px 6px;
-}
-
+tr.unread
 
 #message-thread {
 
 	div.message-box {
 		margin: 0;
 		padding: 15px;
+
 	}
 
 	div.alt {
