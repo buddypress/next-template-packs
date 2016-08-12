@@ -1173,7 +1173,7 @@ form.ac-form .ac-reply-content input {
 
 .buddypress .groups-list li .item-desc {
 	clear: left;
-	color: #888;
+	color: #777;
 	font-style: italic;
 }
 
@@ -1211,7 +1211,7 @@ form.ac-form .ac-reply-content input {
 
 .buddypress .members-list li .user-update {
 	clear: both;
-	color: #888;
+	color: #777;
 	font-size: 12px;
 }
 
@@ -1584,7 +1584,7 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .buddypress .bp-invites-content .item-list .item-meta span,
 .buddypress .bp-invites-content .group-inviters li {
-	color: #888;
+	color: #777;
 }
 
 .buddypress .bp-invites-content li ul.group-inviters {
@@ -1861,7 +1861,7 @@ li#compose-personal-li a#compose:before {
 	list-style: none;
 }
 
-.bp-messages-content #message-threads {
+#message-threads {
 	border-top: 1px solid #eaeaea;
 	clear: both;
 	list-style: none;
@@ -1873,81 +1873,85 @@ li#compose-personal-li a#compose:before {
 	width: 100%;
 }
 
-.bp-messages-content #message-threads li {
+#message-threads li {
 	border-bottom: 1px solid #eaeaea;
 	margin: 0;
 	overflow: hidden;
 	padding: 0.5em 0;
 }
 
-.bp-messages-content #message-threads li.selected {
+#message-threads li.selected {
 	background-color: #eaeaea;
 }
 
-.bp-messages-content #message-threads li.selected .thread-subject .subject {
+#message-threads li.selected .thread-subject .subject {
 	color: #5087e5;
 }
 
-.bp-messages-content #message-threads li .thread-content {
+#message-threads li.selected .thread-content time {
+	color: #555;
+}
+
+#message-threads li .thread-content {
 	float: left;
 	width: 95%;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-from,
-.bp-messages-content #message-threads li .thread-content .thread-subject,
-.bp-messages-content #message-threads li .thread-content .thread-date {
+#message-threads li .thread-content .thread-from,
+#message-threads li .thread-content .thread-subject,
+#message-threads li .thread-content .thread-date {
 	float: left;
 	height: 32px;
 	overflow: hidden;
 }
 
-.bp-messages-content #message-threads li .thread-content span.excerpt,
-.bp-messages-content #message-threads li .thread-content .thread-date time {
-	color: #888;
+#message-threads li .thread-content span.excerpt,
+#message-threads li .thread-content time {
+	color: #777;
 	font-size: 12px;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-from,
-.bp-messages-content #message-threads li .thread-content .thread-subject {
+#message-threads li .thread-content .thread-from,
+#message-threads li .thread-content .thread-subject {
 	font-size: 13px;
 }
 
 @media screen and (min-width: 46.8em) {
-	.bp-messages-content #message-threads li .thread-content .thread-from,
-	.bp-messages-content #message-threads li .thread-content .thread-subject {
+	#message-threads li .thread-content .thread-from,
+	#message-threads li .thread-content .thread-subject {
 		font-size: 16px;
 	}
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-from {
+#message-threads li .thread-content .thread-from {
 	width: 35%;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-from img.avatar {
+#message-threads li .thread-content .thread-from img.avatar {
 	float: left;
 	margin: 0 10px 0 0;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-subject {
+#message-threads li .thread-content .thread-subject {
 	width: 48%;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-subject .excerpt {
+#message-threads li .thread-content .thread-subject .excerpt {
 	font-weight: normal;
 }
 
-.bp-messages-content #message-threads li .thread-content .thread-selected
+#message-threads li .thread-content .thread-selected
 .thread-date {
 	padding-right: 5px;
 	text-align: right;
 	width: 17%;
 }
 
-.bp-messages-content #message-threads li:not(.selected) .thread-content {
+#message-threads li:not(.selected) .thread-content {
 	cursor: s-resize;
 }
 
-.bp-messages-content #message-threads .thread-cb {
+#message-threads .thread-cb {
 	float: left;
 	text-align: center;
 	width: 5%;
@@ -2035,7 +2039,7 @@ li#compose-personal-li a#compose:before {
 }
 
 .bp-messages-content #bp-message-thread-list time {
-	color: #888;
+	color: #777;
 	font-size: 12px;
 }
 
@@ -2272,14 +2276,14 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 }
 
 .buddypress .standard-form p.description {
-	color: #888;
+	color: #777;
 	font-size: 80%;
 	margin: 5px 0;
 }
 
 .buddypress .standard-form div.checkbox label:nth-child(n+2),
 .buddypress .standard-form div.radio div label {
-	color: #888;
+	color: #777;
 	font-size: 100%;
 	font-weight: normal;
 	margin: 5px 0 0;
@@ -2540,7 +2544,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress table#message-threads .thread-info p.thread-excerpt {
-	color: #888;
+	color: #777;
 	font-size: 12px;
 	margin-top: 3px;
 }
@@ -2641,7 +2645,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress div.pending a,
 .buddypress .buddypress a.disabled {
 	border-color: #eee;
-	color: #888;
+	color: #777;
 	cursor: default;
 }
 
@@ -2656,7 +2660,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress div.pending a:hover,
 .buddypress .buddypress a.disabled:hover {
 	border-color: #eee;
-	color: #888;
+	color: #777;
 }
 
 .buddypress .buddypress .bp-invites-content ul.bp-list li a.invite-button:hover {
@@ -2976,7 +2980,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid > li .wrap .update {
-	color: #888;
+	color: #777;
 	padding: 0.5em 2em;
 }
 

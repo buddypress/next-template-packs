@@ -22,9 +22,9 @@ $marg-xlrg: 30px;
 
 // Colours
 
-$light-text:           #888;
-$primary-grey:         #ccc;
 $dark-grey:            #555;
+$light-text:           #777;
+$primary-grey:         #ccc;
 $light-grey:           #eaeaea;
 $med-light-grey:       #e0e0e0;
 $blue:                 #5087e5;
@@ -45,6 +45,7 @@ $bp-text:              $dark-grey;
 $form-text:            $light-text;
 $textarea-bck:         $white;
 $meta-text:            $light-text;
+$meta-text-dark:       $dark-grey;
 $focussed-border-clr:  rgba(31, 179, 221, 0.9); // textareas? e.g whats-new
 
 // Message colors
