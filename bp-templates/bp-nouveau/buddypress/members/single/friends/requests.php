@@ -13,7 +13,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 
 	<?php bp_nouveau_pagination( 'top' ); ?>
 
-	<ul id="friend-list" class="item-list" data-bp-list="friendship_requests">
+	<ul id="friend-list" class="<?php bp_nouveau_loop_classes(); ?>" <?php bp_member_class( array('item-entry') ); ?> data-bp-list="friendship_requests">
 		<?php while ( bp_members() ) : bp_the_member(); ?>
 
 			<li id="friendship-<?php bp_friend_friendship_id(); ?>" data-bp-item-id="<?php bp_friend_friendship_id(); ?>" data-bp-item-component="members">
