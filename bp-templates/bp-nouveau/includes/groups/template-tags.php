@@ -663,7 +663,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'must_be_logged_in' => true,
 				'link_href'         => esc_url( bp_get_group_accept_invite_link() ),
 				'link_class'        => 'button accept group-button accept-invite',
-				'link_title'        => esc_attr__( 'Accept', 'bp-nouveau' ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
 
@@ -675,7 +674,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'must_be_logged_in' => true,
 				'link_href'         => esc_url( bp_get_group_reject_invite_link() ),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
-				'link_title'        => __( 'Reject', 'bp-nouveau' ),
 				'link_class'        => 'button reject group-button reject-invite',
 			);
 
@@ -689,7 +687,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'must_be_logged_in' => true,
 				'wrapper_class'     => 'accept',
 				'link_href'         => esc_url( bp_get_group_request_accept_link() ),
-				'link_title'        => esc_attr__( 'Accept', 'bp-nouveau' ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
 
@@ -702,7 +699,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'wrapper_class'     => 'reject',
 				'link_href'         => esc_url( bp_get_group_request_reject_link() ),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
-				'link_title'        => __( 'Reject', 'bp-nouveau' ),
 			);
 
 		// Manage group members for the group's manage screen
@@ -716,7 +712,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'must_be_logged_in' => true,
 					'link_href'         => esc_url( bp_get_group_member_unban_link( $user_id ) ),
 					'link_text'         => __( 'Remove Ban', 'bp-nouveau' ),
-					'link_title'        => __( 'Unban this member', 'bp-nouveau' ),
 					'link_class'        => 'button confirm member-unban',
 				), 'ban_member' => array(
 					'id'                => 'ban_member',
@@ -725,7 +720,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'must_be_logged_in' => true,
 					'link_href'         => esc_url( bp_get_group_member_ban_link( $user_id ) ),
 					'link_text'         => __( 'Kick &amp; Ban', 'bp-nouveau' ),
-					'link_title'        => __( 'Kick and ban this member', 'bp-nouveau' ),
 					'link_class'        => 'button confirm member-ban',
 				), 'promote_mod' => array(
 					'id'                => 'promote_mod',
@@ -734,7 +728,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'must_be_logged_in' => true,
 					'link_href'         => esc_url( bp_get_group_member_promote_mod_link() ),
 					'link_text'         => __( 'Promote to Mod', 'bp-nouveau' ),
-					'link_title'        => __( 'Promote to Mod', 'bp-nouveau' ),
 					'link_class'        => 'button confirm member-promote-to-mod',
 				), 'promote_admin' => array(
 					'id'                => 'promote_admin',
@@ -743,7 +736,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'must_be_logged_in' => true,
 					'link_href'         => esc_url( bp_get_group_member_promote_admin_link() ),
 					'link_text'         => __( 'Promote to Admin', 'bp-nouveau' ),
-					'link_title'        => __( 'Promote to Admin', 'bp-nouveau' ),
 					'link_class'        => 'button confirm member-promote-to-admin',
 				), 'remove_member' => array(
 					'id'                => 'remove_member',
@@ -752,7 +744,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'must_be_logged_in' => true,
 					'link_href'         => esc_url( bp_get_group_member_remove_link( $user_id ) ),
 					'link_text'         => __( 'Remove from group', 'bp-nouveau' ),
-					'link_title'        => __( 'Remove this member', 'bp-nouveau' ),
 					'link_class'        => 'button confirm',
 				),
 			);

@@ -17,7 +17,7 @@
 			<?php while ( bp_nouveau_nav_items() ) : bp_nouveau_nav_item(); ?>
 
 				<li id="<?php bp_nouveau_nav_id(); ?>" class="<?php bp_nouveau_nav_classes(); ?>"<?php bp_nouveau_nav_scope(); ?> data-bp-object="<?php bp_nouveau_directory_nav_object(); ?>">
-					<a href="<?php bp_nouveau_nav_link(); ?>" title="<?php bp_nouveau_nav_link_title(); ?>">
+					<a href="<?php bp_nouveau_nav_link(); ?>">
 						<?php bp_nouveau_nav_link_text(); ?>
 
 						<?php if ( bp_nouveau_nav_has_count() ) : ?>
