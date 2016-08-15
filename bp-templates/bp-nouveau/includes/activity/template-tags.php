@@ -247,7 +247,6 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'must_be_logged_in' => false,
 				'link_href'         => esc_url( bp_get_activity_thread_permalink() ),
 				'link_class'        => 'button view bp-secondary-action',
-				'link_title'        => esc_attr__( 'View Conversation', 'bp-nouveau' ),
 				'link_text'         => esc_html__( 'View Conversation', 'bp-nouveau' ),
 			);
 

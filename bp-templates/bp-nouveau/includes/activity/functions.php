@@ -183,7 +183,6 @@ function bp_nouveau_get_activity_directory_nav_items() {
 		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
 		'li_class'  => array( 'dynamic' ),
 		'link'      => bp_get_activity_directory_permalink(),
-		'title'     => __( 'The public activity for everyone on this site.', 'bp-nouveau' ),
 		'text'      => __( 'All Members', 'bp-nouveau' ),
 		'count'     => '',
 		'position'  => 5,
@@ -212,7 +211,6 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'favorites', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array(),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/',
-				'title'     => __( 'The activity I\'ve marked as a favorite.', 'bp-nouveau' ),
 				'text'      => __( 'My Favorites', 'bp-nouveau' ),
 				'count'     => false,
 				'position'  => 35,
@@ -226,7 +224,6 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'friends', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'dynamic' ),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_friends_slug() . '/',
-				'title'     => __( 'The activity of my friends only.', 'bp-nouveau' ),
 				'text'      => __( 'My Friends', 'bp-nouveau' ),
 				'count'     => '',
 				'position'  => 15,
@@ -240,7 +237,6 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'groups', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'dynamic' ),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_groups_slug() . '/',
-				'title'     => __( 'The activity of groups I am a member of.', 'bp-nouveau' ),
 				'text'      => __( 'My Groups', 'bp-nouveau' ),
 				'count'     => '',
 				'position'  => 25,
@@ -261,7 +257,6 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'mentions', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'dynamic' ),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/',
-				'title'     => __( 'Activity that I have been mentioned in.', 'bp-nouveau' ),
 				'text'      => __( 'Mentions', 'bp-nouveau' ),
 				'count'     => $count,
 				'position'  => 45,
