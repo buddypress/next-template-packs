@@ -786,6 +786,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
+		'bp_nouveau_appearance[members_friends_layout]' => array(
+			'index'             => 'members_friends_layout',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
 	) );
 
 	// Add the settings
@@ -838,6 +845,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'label'      => __( 'Members loop - Single Groups:', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[members_group_layout]',
+			'type'       => 'select',
+			'choices'    => bp_nouveau_customizer_grid_choices(),
+		),
+		'members_friends_layout' => array(
+			'label'      => __( 'Members Friends - User Account:', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_loops_layout',
+			'settings'   => 'bp_nouveau_appearance[members_friends_layout]',
 			'type'       => 'select',
 			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),
