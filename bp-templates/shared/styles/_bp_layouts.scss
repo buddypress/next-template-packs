@@ -160,144 +160,144 @@
 	// if grid is set & this is a member, group or blog loop
 	// we want to re-style some of the elements in the item
 
-	.grid.bp-list {
-		padding-top: $pad-med;
+.grid.bp-list {
+	padding-top: $pad-med;
 
-		>li {
-			border-bottom: none;
+	>li {
+		border-bottom: none;
 
-			.wrap {
-				// make room for the action buttons to sit.
-				padding-bottom: 3rem;
-			}
+		.wrap {
+			// make room for the action buttons to sit.
+			padding-bottom: 3rem;
+		}
 
-			.item-avatar {
-				margin: 0;
-				text-align: center;
-				width: auto;
+		.item-avatar {
+			margin: 0;
+			text-align: center;
+			width: auto;
 
-				img.avatar {
-					display: inline-block;
-					height: auto;
-					width: 50%;
-				}
-			}
-
-			.item-meta,
-			.list-title {
-				float: none;
-				text-align: center;
-			}
-
-			.item {
-				@include responsive-font( 22 );
-				left: 0;
-				margin: 0 auto;
-				text-align: center;
-				width: 96%;
-
-				.user-update {
-					clear: both;
-					text-align: left;
-				}
-
-				.activity-read-more a {
-					display: inline;
-				}
-			}
-
-			div.action {
-				bottom: 5px;
-				float: none;
+			img.avatar {
+				display: inline-block;
 				height: auto;
-				left: 0;
+				width: 50%;
+			}
+		}
+
+		.item-meta,
+		.list-title {
+			float: none;
+			text-align: center;
+		}
+
+		.item {
+			@include responsive-font( 22 );
+			left: 0;
+			margin: 0 auto;
+			text-align: center;
+			width: 96%;
+
+			.user-update {
+				clear: both;
+				text-align: left;
+			}
+
+			.activity-read-more a {
+				display: inline;
+			}
+		}
+
+		div.action {
+			bottom: 5px;
+			float: none;
+			height: auto;
+			left: 0;
+			margin: 0;
+			padding: 0 5px;
+			position: absolute;
+			text-align: center;
+			top: auto;
+			width: 100%;
+
+			.generic-button {
+				display: block;
+				float: none;
 				margin: 0;
-				padding: 0 5px;
-				position: absolute;
 				text-align: center;
-				top: auto;
 				width: 100%;
 
-				.generic-button {
-					display: block;
-					float: none;
-					margin: 0;
-					text-align: center;
+				a {
+					display: inline-block;
 					width: 100%;
 
-					a {
-						display: inline-block;
-						width: 100%;
-
-						&:focus,
-						&:hover {
-							background: $med-light-grey;
-						}
+					&:focus,
+					&:hover {
+						background: $med-light-grey;
 					}
 				}
 			}
+		}
 
-			.item-avatar,
-			.avatar,
-			.item {
-				float: none;
-			}
+		.item-avatar,
+		.avatar,
+		.item {
+			float: none;
+		}
 
-		} // close >li
-	} // close .grid.bp-list
+	} // close >li
+} // close .grid.bp-list
 
 	// .wrap min-heights & other adjustments per component type loop
 	// this section needs review as tricky in trying to get equal height
 	// on elements and some rules here are repeated to allow for variable values.
-	.grid {
-		&.members-list {
-			.wrap {
-				min-height: 350px;
-			}
+.grid {
+	&.members-list {
+		.wrap {
+			min-height: 350px;
 		}
+	}
 
-		&.groups-list {
-			.wrap {
-				min-height: 350px;
+	&.groups-list {
+		.wrap {
+			min-height: 350px;
 
-				.list-title {
-					min-height: 3.5em;
-					padding: $pad-sml;
-				}
+			.list-title {
+				min-height: 3.5em;
+				padding: $pad-sml;
+			}
 
-				.last-activity,
-				.group-details,
-				.item-desc {
+			.last-activity,
+			.group-details,
+			.item-desc {
+				margin-bottom: 0;
+
+				p {
 					margin-bottom: 0;
-
-					p {
-						margin-bottom: 0;
-					}
 				}
+			}
 
-				.item-desc {
-					height: 4.5em;
-					margin: 0 auto 2.5em;
-					overflow: hidden;
-					text-overflow: ellipsis;
+			.item-desc {
+				height: 4.5em;
+				margin: 0 auto 2.5em;
+				overflow: hidden;
+				text-overflow: ellipsis;
 
-					&:focus,
-					&:hover {
-						left: 0;
-						height: auto;
-						overflow: visible;
-					}
+				&:focus,
+				&:hover {
+					left: 0;
+					height: auto;
+					overflow: visible;
 				}
 			}
 		}
+	}
 
-		&.blogs-list {
-			.wrap {
-				min-height: 350px;
-			}
+	&.blogs-list {
+		.wrap {
+			min-height: 350px;
 		}
+	}
 
-	} // close .grid
+} // close .grid
 
 	// ==== Vertical Navigation Classes ====
 

@@ -2113,6 +2113,10 @@ li#compose-personal-li a#compose:before {
 	text-decoration: none;
 }
 
+.bp-messages-content .standard-form #subject {
+	border-bottom: 0;
+}
+
 div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	margin-right: 15px;
 	max-width: 42.5%;

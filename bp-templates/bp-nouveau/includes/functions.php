@@ -731,10 +731,10 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'description' => __( 'Customize the members primary navigations. Navigate to any random member\'s profile to live preview your changes.', 'bp-nouveau' ),
 		),
 		'bp_nouveau_loops_layout' => array(
-			'title'       => __( 'Directories layout', 'bp-nouveau' ),
+			'title'       => __( 'Loops layouts', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
 			'priority'    => 50,
-			'description' => __( 'Set the number of columns to use for the BuddyPress Directories.', 'bp-nouveau' ),
+			'description' => __( 'Set the number of columns to use for the BuddyPress loops.', 'bp-nouveau' ),
 		),
 	) );
 
@@ -774,6 +774,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		),
 		'bp_nouveau_appearance[members_layout]' => array(
 			'index'             => 'members_layout',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[members_group_layout]' => array(
+			'index'             => 'members_group_layout',
 			'capability'        => 'bp_moderate',
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
@@ -824,6 +831,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'label'      => __( 'Members loop:', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[members_layout]',
+			'type'       => 'select',
+			'choices'    => bp_nouveau_customizer_grid_choices(),
+		),
+		'members_group_layout' => array(
+			'label'      => __( 'Members loop - Single Groups:', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_loops_layout',
+			'settings'   => 'bp_nouveau_appearance[members_group_layout]',
 			'type'       => 'select',
 			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),

@@ -343,6 +343,13 @@ li#compose-personal-li {
 		text-decoration: none;
 	}
 
+	// The general form elements for composing messages
+	.standard-form {
+		#subject {
+			border-bottom: 0;
+		}
+	}
+
 } // close .bp-messages-content
 
 // Bulk Message styles

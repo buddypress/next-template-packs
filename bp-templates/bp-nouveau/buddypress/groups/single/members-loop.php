@@ -16,30 +16,32 @@
 
 	<?php bp_nouveau_group_hook( 'before', 'members_list' ); ?>
 
-	<ul id="member-list" class="item-list members-list bp-list">
+	<ul id="member-list" class="<?php bp_nouveau_loop_classes(); ?>">
 
 		<?php while ( bp_group_members() ) : bp_group_the_member(); ?>
 
-			<li data-bp-item-id="<?php echo esc_attr( bp_get_group_member_id() ); ?>" data-bp-item-component="members">
+			<li <?php bp_member_class( array('item-entry') ); ?> data-bp-item-id="<?php echo esc_attr( bp_get_group_member_id() ); ?>" data-bp-item-component="members">
 
-				<div class="item-avatar">
-					<a href="<?php bp_group_member_domain(); ?>">
-						<?php bp_group_member_avatar_thumb(); ?>
-					</a>
-				</div>
+				<div class="wrap">
+					<div class="item-avatar">
+						<a href="<?php bp_group_member_domain(); ?>">
+							<?php bp_group_member_avatar_thumb(); ?>
+						</a>
+					</div>
 
-				<div class="item">
+					<div class="item">
 
-					<h2 class="list-title member-name"><?php bp_group_member_link(); ?></h2>
+						<h2 class="list-title member-name"><?php bp_group_member_link(); ?></h2>
 
-					<p class="joined item-meta">
-						<?php bp_group_member_joined_since(); ?>
-					</p>
+						<p class="joined item-meta">
+							<?php bp_group_member_joined_since(); ?>
+						</p>
 
-					<?php bp_nouveau_group_hook( '', 'members_list_item' ); ?>
+						<?php bp_nouveau_group_hook( '', 'members_list_item' ); ?>
 
-					<?php bp_nouveau_members_loop_buttons(); ?>
+						<?php bp_nouveau_members_loop_buttons(); ?>
 
+					</div>
 				</div>
 
 			</li>
