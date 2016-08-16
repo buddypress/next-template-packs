@@ -27,6 +27,19 @@
 			float: none;
 			overflow: hidden;
 			margin-bottom: $marg-med;
+
+			select,
+			input[type=search]	{
+				@include font-size(16);
+			}
+
+			button.nouveau-search-submit {
+				padding: 5px 0.8em 6px;
+			}
+
+			button#user_messages_search_submit {
+				padding: 7px 0.8em;
+			}
 		}
 
 		li.feed {
@@ -35,16 +48,12 @@
 
 		.last.filter {
 			select {
-				@include font-size(16)
+//				@include font-size(19)
 				padding: 3px $marg-sml;
 			}
 		}
 
 		.user-messages-bulk-actions {
-
-//			#user_messages_select_all {
-
-//			}
 
 			.bulk-apply {
 				border-radius: none;

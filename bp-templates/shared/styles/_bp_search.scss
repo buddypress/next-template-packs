@@ -9,8 +9,8 @@
 			input[type="search"],
 			input[type=text] {
 				float: left;
-				font-size: 90%;
-				padding: 5px 10px;
+//				font-size: 90%;
+				padding: 6px 10px;
 				width: 65%;
 			}
 
@@ -41,17 +41,14 @@
 				border: 0;
 				font-family: dashicons;
 				@include font-size(18);
-				line-height: 1.6;
+				line-height: 1.2;
 			}
 
 		} // close form
 
 	} // close [data-bp-search]
 
-	ul.filters  li  form label {font-size: inherit !important;}
-
 	ul.filters  li  form label input {
-		font-size: inherit !important;
 		line-height: 1.4;
 		padding: .1em .7em;
 	}
@@ -66,14 +63,27 @@
 
 } // close .buddypress
 
-// Try and correct group screens search
-.single-item.groups {
+// Try and apply correct tweaks for group/user screens search
+
+.bp-user {
 	[data-bp-search] {
 
 		form {
+
+			input[type="search"],
+			input[type=text] {
+				padding: 6px 10px 7px;
+			}
+
+		}
+	}
+
+	.user-messages-search {
+		form {
 			button[type="submit"] {
-				padding: 6px 0.8em 9px;
+					padding: 6px 10px 7px;
 			}
 		}
 	}
 }
+

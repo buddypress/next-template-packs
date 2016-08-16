@@ -462,12 +462,24 @@ dt.section-title {
 	margin-bottom: 15px;
 }
 
+.buddypress .subnav-filters li select,
+.buddypress .subnav-filters li input[type=search] {
+	font-size: 16px;
+}
+
+.buddypress .subnav-filters li button.nouveau-search-submit {
+	padding: 5px 0.8em 6px;
+}
+
+.buddypress .subnav-filters li button#user_messages_search_submit {
+	padding: 7px 0.8em;
+}
+
 .buddypress .subnav-filters li.feed {
 	margin-right: 15px;
 }
 
 .buddypress .subnav-filters .last.filter select {
-	font-size: 16px;
 	padding: 3px 10px;
 }
 
@@ -2389,8 +2401,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress [data-bp-search] form input[type="search"],
 .buddypress [data-bp-search] form input[type=text] {
 	float: left;
-	font-size: 90%;
-	padding: 5px 10px;
+	padding: 6px 10px;
 	width: 65%;
 }
 
@@ -2420,15 +2431,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border: 0;
 	font-family: dashicons;
 	font-size: 18px;
-	line-height: 1.6;
-}
-
-.buddypress ul.filters li form label {
-	font-size: inherit !important;
+	line-height: 1.2;
 }
 
 .buddypress ul.filters li form label input {
-	font-size: inherit !important;
 	line-height: 1.4;
 	padding: .1em .7em;
 }
@@ -2441,8 +2447,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	clear: both;
 }
 
-.single-item.groups [data-bp-search] form button[type="submit"] {
-	padding: 6px 0.8em 9px;
+.bp-user [data-bp-search] form input[type="search"],
+.bp-user [data-bp-search] form input[type=text] {
+	padding: 6px 10px 7px;
+}
+
+.bp-user .user-messages-search form button[type="submit"] {
+	padding: 6px 10px 7px;
 }
 
 /**
@@ -2907,7 +2918,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 #buddypress button,
-#buddypress .bp-navs a,
 #buddypress a.generic-button,
 #buddypress a.button,
 #buddypress input[type=submit],

@@ -5,7 +5,7 @@
 	* {transition: opacity .1s ease-in-out .1s; }
 
 	button,
-	.bp-navs a,
+	//.bp-navs a, // primary bp navigation links, lets not transition backgrounds
 	a.generic-button,
 	a.button,
 	input[type=submit],
