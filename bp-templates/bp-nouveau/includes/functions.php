@@ -633,6 +633,10 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 		'members_layout'   => 1,
 	);
 
+	if ( bp_is_active( 'friends' ) ) {
+		$default_args['members_friends_layout'] = 1;
+	}
+
 	if ( bp_is_active( 'groups' ) ) {
 		$default_args = array_merge( $default_args, array(
 			'group_front_page'        => 1,
@@ -641,6 +645,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_nav_display'       => 0,       // O is default (horizontally). 1 is vertically.
 			'group_nav_order'         => array(),
 			'groups_layout'           => 1,
+			'members_group_layout'    => 1,
 		) );
 	}
 
