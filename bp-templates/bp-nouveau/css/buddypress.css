@@ -2620,12 +2620,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .buddypress button:hover,
 .buddypress .buddypress button:focus,
+.buddypress .buddypress a.button:focus,
+.buddypress .buddypress a.button:hover,
 .buddypress .buddypress input[type=submit]:hover,
 .buddypress .buddypress input[type=button]:hover,
 .buddypress .buddypress input[type=reset]:hover,
 .buddypress .buddypress .button-nav li a:hover,
 .buddypress .buddypress .button-nav li.current a,
-.buddypress .buddypress div.generic-button a:hover,
+.buddypress .buddypress .generic-button a:hover,
 .buddypress .buddypress .comment-reply-link:hover {
 	background: #ededed;
 	border-color: #999999;
