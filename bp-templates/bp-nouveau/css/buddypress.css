@@ -2909,15 +2909,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 #buddypress button,
 #buddypress .bp-navs a,
 #buddypress a.generic-button,
+#buddypress a.button,
 #buddypress input[type=submit],
 #buddypress input[type=reset] {
-	transition: background .1s ease-in-out .1s, color .1s ease-in-out .1s, border-color .1s ease-in-out .1s;
+	transition: background 0.1s ease-in-out 0.1s, color 0.1s ease-in-out 0.1s, border-color 0.1s ease-in-out 0.1s;
 }
 
 .buddypress a.loading,
 .buddypress input.loading {
 	-moz-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
 	-webkit-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
+	animation: loader-pulsate 0.5s infinite ease-in-out alternate;
 	border-color: #aaa;
 }
 
@@ -2935,6 +2937,19 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 @-moz-keyframes loader-pulsate {
+	from {
+		border-color: #aaa;
+		-moz-box-shadow: 0 0 6px #ccc;
+		box-shadow: 0 0 6px #ccc;
+	}
+	to {
+		border-color: #ccc;
+		-moz-box-shadow: 0 0 6px #f8f8f8;
+		box-shadow: 0 0 6px #f8f8f8;
+	}
+}
+
+@keyframes loader-pulsate {
 	from {
 		border-color: #aaa;
 		-moz-box-shadow: 0 0 6px #ccc;

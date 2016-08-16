@@ -7,9 +7,10 @@
 	button,
 	.bp-navs a,
 	a.generic-button,
+	a.button,
 	input[type=submit],
 	input[type=reset] {
-		transition: background .1s ease-in-out .1s, color .1s ease-in-out .1s, border-color .1s ease-in-out .1s;
+		transition: background 0.1s ease-in-out 0.1s, color 0.1s ease-in-out 0.1s, border-color 0.1s ease-in-out 0.1s;
 	}
 
 }
@@ -22,36 +23,50 @@
 	input.loading {
 		-moz-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
 		-webkit-animation: loader-pulsate 0.5s infinite ease-in-out alternate;
+		animation: loader-pulsate 0.5s infinite ease-in-out alternate;
 		border-color: #aaa;
 	}
 
 	@-webkit-keyframes loader-pulsate {
 
 		from {
-			border-color: #aaa;
-			-webkit-box-shadow: 0 0 6px #ccc;
-			box-shadow: 0 0 6px #ccc;
+			border-color: $border-color-from;
+			-webkit-box-shadow: 0 0 6px $shadow-color-from;
+			box-shadow: 0 0 6px $shadow-color-from;
 		}
 
 		to {
-			border-color: #ccc;
-
-			-webkit-box-shadow: 0 0 6px #f8f8f8;
-			box-shadow: 0 0 6px #f8f8f8;
+			border-color: $border-color-to;
+			-webkit-box-shadow: 0 0 6px $shadow-color-to;
+			box-shadow: 0 0 6px $shadow-color-to;
 		}
 	}
 	@-moz-keyframes loader-pulsate {
 
 		from {
-			border-color: #aaa;
-			-moz-box-shadow: 0 0 6px #ccc;
-			box-shadow: 0 0 6px #ccc;
+			border-color: $border-color-from;
+			-moz-box-shadow: 0 0 6px $shadow-color-from;
+			box-shadow: 0 0 6px $shadow-color-from;
 		}
 
 		to {
-			border-color: #ccc;
-			-moz-box-shadow: 0 0 6px #f8f8f8;
-			box-shadow: 0 0 6px #f8f8f8;
+			border-color: $border-color-to;
+			-moz-box-shadow: 0 0 6px $shadow-color-to;
+			box-shadow: 0 0 6px $shadow-color-to;
+		}
+	}
+	@keyframes loader-pulsate {
+
+		from {
+			border-color: $border-color-from;
+			-moz-box-shadow: 0 0 6px $shadow-color-from;
+			box-shadow: 0 0 6px $shadow-color-from;
+		}
+
+		to {
+			border-color: $border-color-to;
+			-moz-box-shadow: 0 0 6px $shadow-color-to;
+			box-shadow: 0 0 6px $shadow-color-to;
 		}
 	}
 
