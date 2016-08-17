@@ -509,7 +509,6 @@ function bp_nouveau_loop_classes() {
 			'item-list',
 			sprintf( '%s-list', $component ),
 			'bp-list',
-			'members-list'
 		);
 
 		$available_components = array(
