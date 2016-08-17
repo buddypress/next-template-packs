@@ -162,6 +162,12 @@
 				padding: 4px 8px;
 			}
 
+			// we don't want a background hover if icons used
+			a.button:focus,
+			a.button:hover {
+				background: none;
+			}
+
 			.button:before {
 				font-family: dashicons;
 				font-size: 18px;
