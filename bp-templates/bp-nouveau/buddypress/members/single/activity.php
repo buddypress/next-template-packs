@@ -38,7 +38,7 @@
 
 <div class="activity single-user">
 
-	<ul id="activity-stream" class="<?php bp_nouveau_loop_classes(); ?>" data-bp-list="activity">
+	<ul id="activity-stream" class="<?php bp_nouveau_loop_classes(); ?> activity-list" data-bp-list="activity">
 
 		<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-activity-loading' ) ;?></li>
 
