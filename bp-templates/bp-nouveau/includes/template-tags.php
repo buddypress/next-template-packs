@@ -496,10 +496,14 @@ function bp_nouveau_loop_classes() {
 	function bp_nouveau_get_loop_classes() {
 		$bp_nouveau = bp_nouveau();
 
+		/**
+		* @todo: this function could do with passing args so we can pass simple strings in  or array of strings
+		*/
+
 		// The $component is faked if it's the single group member loop
-		if( bp_is_group() && bp_current_action('members') && !bp_is_directory() ) :
+		if( !bp_is_directory() && ( bp_is_group() && 'members' === bp_current_action() ) ) :
 			$component  = 'members_group';
-		elseif( bp_is_user() && bp_current_action('my-fiends') && !bp_is_directory() ) :
+		elseif( ! bp_is_directory() && ( bp_is_user() && 'my-friends' === bp_current_action() ) ):
 			$component  = 'members_friends';
 		else :
 			$component  = sanitize_key( bp_current_component() );
@@ -507,7 +511,7 @@ function bp_nouveau_loop_classes() {
 
 		$classes = array(
 			'item-list',
-			sprintf( '%s-list', $component ),
+			sprintf( '%s-list', str_replace('_', '-', $component ) ),
 			'bp-list',
 		);
 
