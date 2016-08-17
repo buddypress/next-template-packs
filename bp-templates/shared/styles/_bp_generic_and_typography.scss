@@ -10,7 +10,7 @@ body {
 				box-shadow: none;
 				text-decoration: none;
 			}
-		}
+		} // close * the kitchen sink of elements
 
 		// Some themes have a negative left margin on the blockquote element??
 		#item-body,
@@ -20,8 +20,16 @@ body {
 			}
 		}
 
+		// CSS Box Model - some themes will set all blocks to border box
+		// some will cherry pick - we will set elements as we need to,
+		// ( setting a global change might be better)
+		// box-modal() defaults to 'border-box' if no param passed
+		.bp-list .action {
+			@include box-model();
+		}
 	}
 }
+
 // Some themes have very restricted content widths for pages or entry-content (2013, 2014)
 // Lets adjust these restrictions
 body.buddypress {

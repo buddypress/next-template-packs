@@ -60,6 +60,12 @@ body .buddypress .bp-lists blockquote {
 	margin-left: 10px;
 }
 
+body .buddypress .bp-list .action {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body.buddypress .entry-content {
 	max-width: none;
 	padding: 0 0.5em;
@@ -567,9 +573,9 @@ dt.section-title {
 *-------------------------------------------------------------------------------
 */
 .buddypress .bp-list {
-	-webkit-box-sizing: "border-box";
-	-moz-box-sizing: "border-box";
-	box-sizing: "border-box";
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 	border-top: 1px solid #eaeaea;
 	clear: both;
 	list-style: none;
@@ -743,9 +749,9 @@ dt.section-title {
 
 .activity-update-form #whats-new-textarea textarea {
 	background: #fff;
-	-webkit-box-sizing: "border-box";
-	-moz-box-sizing: "border-box";
-	box-sizing: "border-box";
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 	color: #333;
 	font-family: inherit;
 	font-size: medium;
@@ -1662,9 +1668,9 @@ body.no-js .single-item-header .js-self-profile-button {
 
 @media screen and (min-width: 32em) {
 	.buddypress .bp-invites-content ul.item-list > li {
-		-webkit-box-sizing: "border-box";
-		-moz-box-sizing: "border-box";
-		box-sizing: "border-box";
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
 		border: 1px solid #eaeaea;
 		float: left;
 		padding-left: 0.5em;
@@ -2452,10 +2458,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 6px 10px 7px;
 }
 
-.bp-user .user-messages-search form button[type="submit"] {
-	padding: 6px 10px 7px;
-}
-
 /**
 *-------------------------------------------------------------------------------
 * @section 7.0 - Tables - General
@@ -2633,12 +2635,18 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress button:focus,
 .buddypress .buddypress a.button:focus,
 .buddypress .buddypress a.button:hover,
+.buddypress .buddypress input[type=submit]:focus,
 .buddypress .buddypress input[type=submit]:hover,
+.buddypress .buddypress input[type=button]:focus,
 .buddypress .buddypress input[type=button]:hover,
+.buddypress .buddypress input[type=reset]:focus,
 .buddypress .buddypress input[type=reset]:hover,
+.buddypress .buddypress .button-nav li a:focus,
 .buddypress .buddypress .button-nav li a:hover,
 .buddypress .buddypress .button-nav li.current a,
+.buddypress .buddypress .generic-button a:focus,
 .buddypress .buddypress .generic-button a:hover,
+.buddypress .buddypress .comment-reply-link:focus,
 .buddypress .buddypress .comment-reply-link:hover {
 	background: #ededed;
 	border-color: #999999;
@@ -2984,9 +2992,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 */
 #item-body,
 .single-screen-navs {
-	-webkit-box-sizing: "border-box";
-	-moz-box-sizing: "border-box";
-	box-sizing: "border-box";
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .grid > li,
@@ -3031,22 +3039,22 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		float: left;
 		margin: 0;
 	}
-	.grid.two > li {
+	.grid.two > li, .grid.three > li {
 		padding-bottom: 20px;
 		padding-top: 0;
 		width: 50%;
 	}
-	.grid.two > li:nth-child(odd) {
+	.grid.two > li:nth-child(odd), .grid.three > li:nth-child(odd) {
 		padding-right: 10px;
 	}
-	.grid.two > li:nth-child(even) {
+	.grid.two > li:nth-child(even), .grid.three > li:nth-child(even) {
 		padding-left: 10px;
 	}
-	.grid.two > li .item {
+	.grid.two > li .item, .grid.three > li .item {
 		margin: 1rem auto 0;
 		width: 80%;
 	}
-	.grid.two > li .item .item-title {
+	.grid.two > li .item .item-title, .grid.three > li .item .item-title {
 		width: auto;
 	}
 }
@@ -3162,9 +3170,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid.bp-list > li div.action .generic-button {
-	display: block;
 	float: none;
-	margin: 0;
+	margin: 5px 0 0;
 	text-align: center;
 	width: 100%;
 }
@@ -3189,7 +3196,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid.groups-list .wrap {
-	min-height: 350px;
+	min-height: 400px;
 }
 
 .grid.groups-list .wrap .list-title {
@@ -3211,7 +3218,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .grid.groups-list .wrap .item-desc {
 	height: 4.5em;
-	margin: 0 auto 2.5em;
+	margin: 0 auto 1.5em;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }

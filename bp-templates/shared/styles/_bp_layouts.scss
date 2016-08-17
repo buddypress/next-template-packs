@@ -63,7 +63,7 @@
 			margin: 0;
 		}
 
-		&.two {
+		&.two, &.three {
 			>li {
 				padding-bottom: 20px;
 				padding-top: 0;
@@ -222,9 +222,8 @@
 			width: 100%;
 
 			.generic-button {
-				display: block;
 				float: none;
-				margin: 0;
+				margin: $marg-xsml 0 0 ;
 				text-align: center;
 				width: 100%;
 
@@ -261,7 +260,7 @@
 
 	&.groups-list {
 		.wrap {
-			min-height: 350px;
+			min-height: 400px;
 
 			.list-title {
 				min-height: 3.5em;
@@ -280,7 +279,7 @@
 
 			.item-desc {
 				height: 4.5em;
-				margin: 0 auto 2.5em;
+				margin: 0 auto 1.5em;
 				overflow: hidden;
 				text-overflow: ellipsis;
 

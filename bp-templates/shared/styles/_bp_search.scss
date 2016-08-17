@@ -9,7 +9,6 @@
 			input[type="search"],
 			input[type=text] {
 				float: left;
-//				font-size: 90%;
 				padding: 6px 10px;
 				width: 65%;
 			}
@@ -75,14 +74,6 @@
 				padding: 6px 10px 7px;
 			}
 
-		}
-	}
-
-	.user-messages-search {
-		form {
-			button[type="submit"] {
-					padding: 6px 10px 7px;
-			}
 		}
 	}
 }

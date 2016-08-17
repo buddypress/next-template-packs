@@ -124,7 +124,7 @@
 		// if a param was passed through
 		$box-type: $box-type;
 	} @else {
-		$box-type: "border-box";
+		$box-type: border-box;
 	}
 
 	-webkit-box-sizing: $box-type;

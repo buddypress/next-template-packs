@@ -8,7 +8,7 @@
  */
 ?>
 
-<h2 class="bp-screen-title">
+<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
 	<?php _e( 'Manage Group Members', 'bp-nouveau' ); ?>
 </h2>
 
