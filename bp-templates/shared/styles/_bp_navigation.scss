@@ -33,9 +33,9 @@
 
 			span {
 				background: #eee;
-				border: 1px solid #ccc;
+				border: 1px solid $bp-border-dark;
 				border-radius: 50%;
-				color: #999;
+				color: $meta-text-dark;
 				display: inline;
 				font-size: 70%;
 				margin-left: 2px;
