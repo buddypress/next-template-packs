@@ -1224,12 +1224,8 @@ form.ac-form .ac-reply-content input {
 	padding-bottom: 0;
 }
 
-.buddypress .grid.three .group-desc p, .buddypress .grid.four .group-desc p {
-	font-size: 12px;
-}
-
 @media screen and (min-width: 46.8em) {
-	.buddypress .grid.three .group-desc p, .buddypress .grid.four .group-desc p {
+	.buddypress .grid.three .group-desc, .buddypress .grid.four .group-desc {
 		font-size: 14px;
 	}
 }
@@ -1423,7 +1419,7 @@ body.no-js .single-item-header .js-self-profile-button {
 
 #item-header-cover-image {
 	position: relative;
-	z-index: 999;
+	z-index: 2;
 }
 
 #item-header-cover-image #item-header-avatar {
