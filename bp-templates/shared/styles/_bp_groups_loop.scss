@@ -15,7 +15,7 @@
 			}
 
 			.group-desc {
-				@include responsive-font(18)
+				@include responsive-font(16)
 				clear: left;
 				color: $meta-text;
 				font-style: italic;
@@ -44,7 +44,7 @@
 					border-right: 1px solid $light-grey;
 					clear: left;
 					margin: $marg-med auto;
-					padding: $pad-med $pad-sml;
+					padding: 0 $pad-sml;
 					width: 90%;
 				}
 
@@ -52,8 +52,40 @@
 
 		} // close li
 
+		li.group-no-avatar div.group-desc {
+			margin-left: 0;
+		}
+
 	} // close .groups-list
+
+	// User account group loop
+	.mygroups {
+		.groups-list {
+			.wrap {
+				min-height: 400px;
+				padding-bottom: 0;
+
+				.group-desc {}
+			}
+		}
+	}
 
 }
 
+// If groups loop is in grid mode then desc on narrow multi grids
+// can be too large so modify font-size by grid class parents.
+
+.buddypress {
+
+	.grid {
+		&.three,
+		&.four {
+			.group-desc {
+				p {
+					@include responsive-font(14)
+				}
+			}
+		}
+	}
+}
 
