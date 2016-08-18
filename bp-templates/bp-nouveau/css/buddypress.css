@@ -533,7 +533,7 @@ dt.section-title {
 .buddypress .bp-pagination {
 	background: transparent;
 	border: 0;
-	color: #999;
+	color: #777;
 	float: left;
 	font-size: small;
 	margin: 0;
@@ -613,14 +613,14 @@ dt.section-title {
 
 .buddypress .bp-list li .item .list-title {
 	clear: none;
-	font-size: 18px;
+	font-size: 23px;
 	font-weight: normal;
 	margin: 0;
 }
 
 @media screen and (min-width: 46.8em) {
 	.buddypress .bp-list li .item .list-title {
-		font-size: 22px;
+		font-size: 28px;
 	}
 }
 
@@ -3023,7 +3023,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid > li .wrap {
-	background: #eaeaea;
+	background: #fafafa;
+	border: 1px solid #eee;
 	padding-bottom: 15px;
 	position: relative;
 	overflow: hidden;
