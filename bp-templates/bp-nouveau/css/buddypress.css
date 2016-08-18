@@ -624,19 +624,6 @@ dt.section-title {
 	}
 }
 
-.buddypress .bp-list li .group-desc {
-	color: #888;
-	font-size: 15px;
-	margin: 10px 0 0 60px;
-	width: 50%;
-}
-
-@media screen and (min-width: 46.8em) {
-	.buddypress .bp-list li .group-desc {
-		font-size: 18px;
-	}
-}
-
 .buddypress .bp-list li .meta,
 .buddypress .bp-list li .item-meta {
 	color: #888;
@@ -1195,9 +1182,18 @@ form.ac-form .ac-reply-content input {
 }
 
 .buddypress .groups-list li .group-desc {
+	font-size: 15px;
 	clear: left;
 	color: #777;
 	font-style: italic;
+	margin: 10px 0 0 60px;
+	width: 50%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .groups-list li .group-desc {
+		font-size: 18px;
+	}
 }
 
 .buddypress .groups-list li p {

@@ -15,9 +15,12 @@
 			}
 
 			.group-desc {
+				@include responsive-font(18)
 				clear: left;
 				color: $meta-text;
 				font-style: italic;
+				margin: $marg-sml 0 0 60px;
+				width: 50%;
 			}
 
 			p {

@@ -48,13 +48,6 @@
 				}
 			}
 
-			.group-desc {
-				color: #888;
-				@include responsive-font(18);
-				margin: $marg-sml 0 0 60px;
-				width: 50%;
-			}
-
 			.meta,
 			.item-meta {
 				color: #888;
