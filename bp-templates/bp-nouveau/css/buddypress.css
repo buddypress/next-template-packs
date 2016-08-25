@@ -899,6 +899,16 @@ dt.section-title {
 	white-space: nowrap;
 }
 
+.activity-list .activity-item .activity-meta {
+	margin: 0;
+	padding-left: 0;
+}
+
+.activity-list .activity-item .activity-meta li {
+	border: 0;
+	display: inline-block;
+}
+
 .activity-list .activity-item .activity-meta a {
 	padding: 4px 8px;
 }

@@ -156,6 +156,20 @@
 		}
 
 		// The footer elements, buttons etc
+
+		// if this is a ul then...
+		// else we'll skip this for the rules below.
+		ul.activity-meta {
+			margin: 0;
+			padding-left: 0;
+
+			li {
+				// if a list is being used keep it inline
+				border: 0;
+				display: inline-block;
+			}
+		}
+
 		.activity-meta {
 
 			a {

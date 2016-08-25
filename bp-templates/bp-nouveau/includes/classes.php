@@ -38,6 +38,13 @@ class BP_Buttons_Group {
 	 *     @type bool   $block_self        Optional. True if the button should be hidden when a user is viewing his own profile.
 	 *                                     Defaults to False.
 	 *     @type string $wrapper           Whether to use a wrapper. Defaults to false.
+	 *     @type string $wrapper_class     set a class for the elements wrapper.
+	 *     @type string $wrapper_id        Set a ID  for the elements wrapper
+	 *     @type string $element           Set this to 'button' to use button element, defaults to anchor.
+	 *     @type string $element_type      Is the button/input a type="button" or type="submit" or type="reset".
+	 *     @type string $name              The form name attr for button or input instances.
+	 *     @type string $value             The button or inputs value attr.
+	 *     @type string $data_attr         Set a data attr as key/value array pairs.
 	 *     @type string $link_id           The link ID attribute. Leave empty to not insert this attribute. Defaults to ''.
 	 *     @type string $link_href         The url for the link. Required.
 	 *     @type string $link_class        A space separated list of class to use as the class attribute for the link. Defaults to ''.
@@ -50,15 +57,22 @@ class BP_Buttons_Group {
 			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'bp-nouveau' ) );
 			return false;
 		}
-
+//return var_dump($args);
 		foreach ( $args as $arg ) {
 			$r = wp_parse_args( (array) $arg, array(
 				'id'                => '',
 				'position'          => 99,
 				'component'         => '',
+				'li_item'           => false,
 				'must_be_logged_in' => true,
 				'block_self'        => false,
 				'wrapper'           => false,
+				'wrapper_class'     => '',
+				'element'           => 'anchor',
+				'element_type'      => 'submit',
+				'name'              => '',
+				'value'             => '',
+				'data_attr'         => array(),
 				'link_id'           => '',
 				'link_href'         => '',
 				'link_class'        => '',
@@ -81,11 +95,15 @@ class BP_Buttons_Group {
 			// Set the wrapper to default value if a class or an id for it is defined.
 			if ( ( ! empty( $r['wrapper_class'] ) || ! empty( $r['wrapper_id'] ) ) && false === $r['wrapper'] ) {
 				$r['wrapper'] = 'div';
+
+			} elseif( true === $r['li_item'] ) {
+				$r['wrapper'] = 'li';
 			}
 
 			$this->group[ $r['id'] ] = $r;
 		}
 	}
+
 
 	/**
 	 * Sort the Buttons of the group according to their position attribute
@@ -148,7 +166,7 @@ class BP_Buttons_Group {
 				unset( $this->group[ $key_button ] );
 			}
 
-			$buttons[ $button['id'] ] = bp_get_button( $button );
+			$buttons[ $button['id'] ] = bp_get_button( $button);
 		}
 
 		return $buttons;

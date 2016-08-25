@@ -186,7 +186,7 @@ function bp_nouveau_activity_content() {
  * @return string HTML Output
  */
 function bp_nouveau_activity_entry_buttons( $args = array() ) {
-	$output = join( ' ', bp_nouveau_get_activity_entry_buttons() );
+	$output = join( ' ', bp_nouveau_get_activity_entry_buttons( $args ) );
 
 	ob_start();
 
@@ -217,7 +217,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_activity_entry_buttons() {
+	function bp_nouveau_get_activity_entry_buttons( $args ) {
 		$buttons = array();
 
 		if ( ! isset( $GLOBALS['activities_template'] ) ) {
@@ -232,6 +232,36 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		}
 
 		/**
+		* If the wrapper is set to 'ul'
+		* use to pass through a boolean to set:
+		* $li_item  => true / false
+		* Will render li elements around anchors/buttons.
+		*/
+		if( 'ul' == $args['container']  ) {
+			$wrapper = 'li';
+		} elseif( ! empty( $args['wrapper'] ) ) {
+			$wrapper = esc_html( $args['wrapper'] );
+		} else {
+			$wrapper = false;
+		}
+
+		$wrapper_class = ( ! empty( $args['wrapper_class'] ) )?   esc_attr( $args['wrapper_class'] ) : '';
+
+		/**
+		 * If we have a arg value for $element passed through
+		 * use it to default all the $buttons['element'] values
+		 * otherwise pass through as empyty string and class BP_button() will use it's default
+		 * 'anchor' or override & hardcode the 'element' string on $buttons array.
+		 *
+		 */
+		if( !empty( $args['element'] ) ) {
+			$element = esc_html( $args['element'] );
+		} else {
+			$element = '';
+		}
+
+	//	var_dump($args);
+		/**
 		 * The view conversation button and the comment one are sharing
 		 * the same id because when display_comments is on stream mode,
 		 * it is not possible to comment an activity comment and as we
@@ -244,7 +274,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_conversation',
 				'position'          => 5,
 				'component'         => 'activity',
+				'wrapper'           => $wrapper,
+				'wrapper_class'     => $wrapper_class,
 				'must_be_logged_in' => false,
+				'element'           => $element,
 				'link_href'         => esc_url( bp_get_activity_thread_permalink() ),
 				'link_class'        => 'button view bp-secondary-action',
 				'link_text'         => esc_html__( 'View Conversation', 'bp-nouveau' ),
@@ -260,7 +293,15 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_conversation',
 				'position'          => 5,
 				'component'         => 'activity',
+				'wrapper'           => $wrapper,
+				'wrapper_class'     => $wrapper_class,
 				'must_be_logged_in' => true,
+				'element'           => $element,
+				'name'              => '',
+				'value'             => '',
+				'data-attr'         => array (
+					'nouv-thingy' => 'blah',
+					),
 				'link_id'           => 'acomment-comment-' . $activity_id,
 				'link_href'         => esc_url( bp_get_activity_comment_link() ),
 				'link_class'        => 'button acomment-reply bp-primary-action',
@@ -272,17 +313,23 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		if ( bp_activity_can_favorite() ) {
 			if ( ! bp_get_activity_is_favorite() ) {
 				$fav_args = array(
-					'link_href'  => bp_get_activity_favorite_link(),
-					'link_class' => 'button fav bp-secondary-action',
-					'link_title' => __( 'Mark as Favorite', 'bp-nouveau' ),
-					'link_text'    => __( 'Favorite', 'bp-nouveau' ),
+					'wrapper'         => $wrapper,
+					'wrapper_class'   => $wrapper_class,
+					'element'         => $element,
+					'link_href'       => bp_get_activity_favorite_link(),
+					'link_class'      => 'button fav bp-secondary-action',
+					'link_title'      => __( 'Mark as Favorite', 'bp-nouveau' ),
+					'link_text'       => __( 'Favorite', 'bp-nouveau' ),
 				);
 			} else {
 				$fav_args = array(
-					'link_href'  => bp_get_activity_unfavorite_link(),
-					'link_class' => 'button unfav bp-secondary-action',
-					'link_title' => __( 'Remove Favorite', 'bp-nouveau' ),
-					'link_text'    => __( 'Remove Favorite', 'bp-nouveau' ),
+					'wrapper'         => $wrapper,
+					'wrapper_class'   => $wrapper_class,
+					'element'         => $element,
+					'link_href'       => bp_get_activity_unfavorite_link(),
+					'link_class'      => 'button unfav bp-secondary-action',
+					'link_title'      => __( 'Remove Favorite', 'bp-nouveau' ),
+					'link_text'       => __( 'Remove Favorite', 'bp-nouveau' ),
 				);
 			}
 
@@ -290,7 +337,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_favorite',
 				'position'          => 15,
 				'component'         => 'activity',
+				'wrapper'            => $wrapper,
+				'wrapper_class'     => $wrapper_class,
 				'must_be_logged_in' => true,
+				'element'           => $element,
 				'link_href'         => esc_url( $fav_args['link_href'] ),
 				'link_class'        => $fav_args['link_class'],
 				'link_title'        => esc_attr( $fav_args['link_title'] ),
@@ -337,6 +387,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			$class = 'delete-activity';
 
 			$delete_args = array(
+				'element'    => $element,
 				'link_href'  => bp_get_activity_delete_url(),
 				'link_class' => 'button item-button bp-secondary-action ' . $class . ' confirm',
 				'link_rel'   => 'nofollow',
@@ -350,7 +401,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			'id'                => 'activity_delete',
 			'position'          => 35,
 			'component'         => 'activity',
+			'wrapper'           => $wrapper,
+			'wrapper_class'     => $wrapper_class,
 			'must_be_logged_in' => true,
+			'element'           => $element,
 			'link_id'           => esc_attr( $delete_args['link_id'] ),
 			'link_href'         => esc_url( $delete_args['link_href'] ),
 			'link_class'        => $delete_args['link_class'],
@@ -364,7 +418,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_spam',
 				'position'          => 45,
 				'component'         => 'activity',
+				'wrapper'           => $wrapper,
+				'wrapper_class'     => $wrapper_class,
 				'must_be_logged_in' => true,
+				'element'           => $element,
 				'link_id'           => 'activity_make_spam_' . $activity_id,
 				'link_href'         => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id ),
 				'link_class'        => 'bp-secondary-action spam-activity confirm button item-button',
@@ -390,7 +447,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		if ( empty( $buttons_group ) ) {
 			return $buttons;
 		}
-
+//return var_dump($args['wrapper']);
 		// It's the first entry of the loop, so build the Group and sort it
 		if ( ! isset( bp_nouveau()->activity->entry_buttons ) || false === is_a( bp_nouveau()->activity->entry_buttons, 'BP_Buttons_Group' ) ) {
 			$sort = true;

@@ -66,11 +66,17 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  * @param  array  $args {
  *     Array of arguments.
  *
- *     @type string      $container         String HTML element type that should wrap
- *                                          the buttons: 'div', 'span', or 'p'. Required.
+ *     @type string      $container         String HTML container type that should wrap
+ *                                          the items as a group: 'div', 'ul', or 'p'. Required.
+ *     @type string      $container_id      The group wrapping container element ID
+ *
+ *     @type string      $container_class   The group wrapping container elements class
+ *
+ *     @type string      $element           String element type for the items: 'anchor', 'button', 'input'
+ *                                          passed through to bp_nouveau_get_activity_entry_buttons() as a global default.
  *     @type array       $classes           Optional. DOM classes of the button wrapper
  *                                          Default: array ( 'action' ).
- *     @type string      $id                Optional. DOM ID of the button wrapper element.
+ *     @type string      $wrapper_id        Optional. DOM ID of the button wrapper element.
  *                                          Default: ''.
  *     @type string      $output            The HTML to output. Required.
  * }
@@ -78,37 +84,40 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  */
 function bp_nouveau_wrapper( $args = array() ) {
 	$r = wp_parse_args( $args, array(
-		'wrapper' => 'div',
-		'classes' => array( 'action' ),
-		'id'      => '',
-		'output'  => '',
+		'container'       => 'div',
+		'container_id'    => '',
+		'container_classes' => array(),
+		'classes'         => array( 'action'	),
+		'wrapper_id'      => '',
+		'output'          => '',
 	) );
 
-	$valid_wrappers = array(
+	$valid_containers = array(
 		'div'  => true,
+		'ul'   => true,
 		'span' => true,
 		'p'    => true,
 	);
 
-	if ( empty( $r['wrapper'] ) || ! isset( $valid_wrappers[ $r['wrapper'] ] ) || empty( $r['output'] ) ) {
+	if ( empty( $r['container'] ) || ! isset( $valid_containers[ $r['container'] ] ) || empty( $r['output'] ) ) {
 		return;
 	}
 
-	$wrapper = $r['wrapper'];
+	$container   = $r['container'];
 	$id        = '';
 	$class     = '';
 	$output    = $r['output'];
 
-	if ( ! empty( $r['id'] ) ) {
-		$id = ' id="' . esc_attr( $r['id'] ) . '"';
+	if ( ! empty( $r['container_id'] ) ) {
+		$container_id = ' id="' . esc_attr( $r['container_id'] ) . '"';
 	}
 
-	if ( ! empty( $r['classes'] ) && is_array( $r['classes'] ) ) {
-		$class = ' class="' . join( ' ', array_map( 'sanitize_html_class', $r['classes'] ) ) .'"';
+	if ( ! empty( $r['container_classes'] ) && is_array( $r['container_classes'] ) ) {
+		$container_classes = ' class="' . join( ' ', array_map( 'sanitize_html_class', $r['container_classes'] ) ) .'"';
 	}
 
 	// Print the wrapper and its content.
-	printf( '<%1$s%2$s%3$s>%4$s</%1$s>', $wrapper, $id, $class, $output );
+	printf( '<%1$s%2$s%3$s>%4$s</%1$s>', $container, $container_id, $container_classes, $output );
 }
 
 /**
