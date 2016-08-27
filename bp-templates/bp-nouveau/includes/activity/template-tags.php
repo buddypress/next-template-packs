@@ -238,29 +238,28 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		* Will render li elements around anchors/buttons.
 		*/
 		if( 'ul' == $args['container']  ) {
-			$wrapper = 'li';
-		} elseif( ! empty( $args['wrapper'] ) ) {
-			$wrapper = esc_html( $args['wrapper'] );
+			$parent_element = 'li';
+		} elseif( ! empty( $args['parent_element'] ) ) {
+			$parent_element = esc_html( $args['parent_element'] );
 		} else {
-			$wrapper = false;
+			$parent_element = false;
 		}
 
-		$wrapper_class = ( ! empty( $args['wrapper_class'] ) )?   esc_attr( $args['wrapper_class'] ) : '';
+		$parent_attr = ( ! empty( $args['parent_attr'] ) )? $args['parent_attr']  : '';
 
 		/**
-		 * If we have a arg value for $element passed through
+		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['element'] values
 		 * otherwise pass through as empyty string and class BP_button() will use it's default
 		 * 'anchor' or override & hardcode the 'element' string on $buttons array.
 		 *
 		 */
-		if( !empty( $args['element'] ) ) {
-			$element = esc_html( $args['element'] );
+		if( !empty( $args['button_element'] ) ) {
+			$button_element = $args['button_element'] ;
 		} else {
-			$element = '';
+			$button_element = false;
 		}
 
-	//	var_dump($args);
 		/**
 		 * The view conversation button and the comment one are sharing
 		 * the same id because when display_comments is on stream mode,
@@ -274,13 +273,15 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_conversation',
 				'position'          => 5,
 				'component'         => 'activity',
-				'wrapper'           => $wrapper,
-				'wrapper_class'     => $wrapper_class,
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
 				'must_be_logged_in' => false,
-				'element'           => $element,
-				'link_href'         => esc_url( bp_get_activity_thread_permalink() ),
-				'link_class'        => 'button view bp-secondary-action',
-				'link_text'         => esc_html__( 'View Conversation', 'bp-nouveau' ),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'         => esc_url( bp_get_activity_thread_permalink() ),
+					'class'        => 'button view bp-secondary-action',
+					),
+				'link_text'  => esc_html__( 'View Conversation', 'bp-nouveau' ),
 			);
 
 		/**
@@ -293,29 +294,27 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_conversation',
 				'position'          => 5,
 				'component'         => 'activity',
-				'wrapper'           => $wrapper,
-				'wrapper_class'     => $wrapper_class,
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
 				'must_be_logged_in' => true,
-				'element'           => $element,
-				'name'              => '',
-				'value'             => '',
-				'data-attr'         => array (
-					'nouv-thingy' => 'blah',
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'id'           => 'acomment-comment-' . $activity_id,
+					'href'         => esc_url( bp_get_activity_comment_link() ),
+					'class'        => 'button acomment-reply bp-primary-action',
+					'title'        => esc_attr__( 'Comment', 'bp-nouveau' ),
+					'data-bp-thingy' => 'the-thing',
 					),
-				'link_id'           => 'acomment-comment-' . $activity_id,
-				'link_href'         => esc_url( bp_get_activity_comment_link() ),
-				'link_class'        => 'button acomment-reply bp-primary-action',
-				'link_title'        => esc_attr__( 'Comment', 'bp-nouveau' ),
-				'link_text'         => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
+				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
 			);
 		}
 
 		if ( bp_activity_can_favorite() ) {
 			if ( ! bp_get_activity_is_favorite() ) {
 				$fav_args = array(
-					'wrapper'         => $wrapper,
-					'wrapper_class'   => $wrapper_class,
-					'element'         => $element,
+					'parent_element'  => $parent_element,
+					'parent_attr'     => $parent_attr,
+					'button_element'  => $button_element,
 					'link_href'       => bp_get_activity_favorite_link(),
 					'link_class'      => 'button fav bp-secondary-action',
 					'link_title'      => __( 'Mark as Favorite', 'bp-nouveau' ),
@@ -323,13 +322,13 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				);
 			} else {
 				$fav_args = array(
-					'wrapper'         => $wrapper,
-					'wrapper_class'   => $wrapper_class,
-					'element'         => $element,
+					'parent_element'  => $parent_element,
+					'parent_attr'     => $parent_attr,
+					'button_element'  => $button_element,
 					'link_href'       => bp_get_activity_unfavorite_link(),
 					'link_class'      => 'button unfav bp-secondary-action',
 					'link_title'      => __( 'Remove Favorite', 'bp-nouveau' ),
-					'link_text'       => __( 'Remove Favorite', 'bp-nouveau' ),
+					'link_text'   => __( 'Remove Favorite', 'bp-nouveau' ),
 				);
 			}
 
@@ -337,14 +336,16 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_favorite',
 				'position'          => 15,
 				'component'         => 'activity',
-				'wrapper'            => $wrapper,
-				'wrapper_class'     => $wrapper_class,
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
 				'must_be_logged_in' => true,
-				'element'           => $element,
-				'link_href'         => esc_url( $fav_args['link_href'] ),
-				'link_class'        => $fav_args['link_class'],
-				'link_title'        => esc_attr( $fav_args['link_title'] ),
-				'link_text'         => sprintf( '<span class="bp-screen-reader-text">%1$s</span>', esc_html( $fav_args['link_text'] ) ),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'    => esc_url( $fav_args['link_href'] ),
+					'class'   => $fav_args['link_class'],
+					'title'   => esc_attr( $fav_args['link_title'] ),
+					),
+				'link_text'   => sprintf( '<span class="bp-screen-reader-text">%1$s</span>', esc_html( $fav_args['link_text'] ) ),
 			);
 		}
 
@@ -373,12 +374,14 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			}
 
 			$delete_args = wp_parse_args( $delete_args, array(
-				'link_href'  => '',
-				'link_class' => '',
-				'link_rel'   => 'nofollow',
+				'button_attr'  => array(
+					'link_id'    => '',
+					'link_href'  => '',
+					'link_class' => '',
+					'link_rel'   => 'nofollow',
+					'link_title' => '',
+					),
 				'link_text'  => '',
-				'link_title' => '',
-				'link_id'    => '',
 			) );
 		}
 
@@ -387,13 +390,13 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			$class = 'delete-activity';
 
 			$delete_args = array(
-				'element'    => $element,
-				'link_href'  => bp_get_activity_delete_url(),
-				'link_class' => 'button item-button bp-secondary-action ' . $class . ' confirm',
-				'link_rel'   => 'nofollow',
+				'button_element'    => $button_element,
+				'link_id'           => '',
+				'link_href'         => bp_get_activity_delete_url(),
+				'link_class'        => 'button item-button bp-secondary-action ' . $class . ' confirm',
+				'link_rel'          => 'nofollow',
+				'link_title'   => __( 'Delete', 'bp-nouveau' ),
 				'link_text'  => __( 'Delete', 'bp-nouveau' ),
-				'link_title' => __( 'Delete', 'bp-nouveau' ),
-				'link_id'    => '',
 			);
 		}
 
@@ -401,15 +404,17 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			'id'                => 'activity_delete',
 			'position'          => 35,
 			'component'         => 'activity',
-			'wrapper'           => $wrapper,
-			'wrapper_class'     => $wrapper_class,
+			'parent_element'    => $parent_element,
+			'parent_attr'       => $parent_attr,
 			'must_be_logged_in' => true,
-			'element'           => $element,
-			'link_id'           => esc_attr( $delete_args['link_id'] ),
-			'link_href'         => esc_url( $delete_args['link_href'] ),
-			'link_class'        => $delete_args['link_class'],
-			'link_title'        => esc_attr( $delete_args['link_title'] ),
-			'link_text'         => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
+			'button_element'    => $button_element,
+			'button_attr'       => array(
+				'id'       => esc_attr( $delete_args['link_id'] ),
+				'href'     => esc_url( $delete_args['link_href'] ),
+				'class'    => $delete_args['link_class'],
+				'title'    => esc_attr( $delete_args['link_title'] ),
+				),
+			'link_text'  => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
 		);
 
 		// Add the Spam Button if supported
@@ -418,15 +423,17 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'id'                => 'activity_spam',
 				'position'          => 45,
 				'component'         => 'activity',
-				'wrapper'           => $wrapper,
-				'wrapper_class'     => $wrapper_class,
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
 				'must_be_logged_in' => true,
-				'element'           => $element,
-				'link_id'           => 'activity_make_spam_' . $activity_id,
-				'link_href'         => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id ),
-				'link_class'        => 'bp-secondary-action spam-activity confirm button item-button',
-				'link_title'        => esc_attr__( 'Spam', 'bp-nouveau' ),
-				'link_text'         => sprintf(
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'    =>  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id ),
+					'class'   => 'bp-secondary-action spam-activity confirm button item-button',
+					'id'      =>  'activity_make_spam_' . $activity_id,
+					'title'   =>  esc_attr__( 'Spam', 'bp-nouveau' ),
+					),
+				'link_text'  => sprintf(
 					/** @todo: use a specific css rule for this *************************************************************/
 					'<span class="dashicons dashicons-flag" style="color:#a00;vertical-align:baseline;width:18px;height:18px"></span><span class="bp-screen-reader-text">%s</span>',
 					esc_html__( 'Spam', 'bp-nouveau' )
@@ -447,7 +454,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		if ( empty( $buttons_group ) ) {
 			return $buttons;
 		}
-//return var_dump($args['wrapper']);
+//var_dump( $buttons_group );
 		// It's the first entry of the loop, so build the Group and sort it
 		if ( ! isset( bp_nouveau()->activity->entry_buttons ) || false === is_a( bp_nouveau()->activity->entry_buttons, 'BP_Buttons_Group' ) ) {
 			$sort = true;

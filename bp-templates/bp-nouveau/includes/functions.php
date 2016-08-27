@@ -66,30 +66,22 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  * @param  array  $args {
  *     Array of arguments.
  *
- *     @type string      $container         String HTML container type that should wrap
- *                                          the items as a group: 'div', 'ul', or 'p'. Required.
- *     @type string      $container_id      The group wrapping container element ID
+ *     @type string      $container          String HTML container type that should wrap
+ *                                           the items as a group: 'div', 'ul', or 'p'. Required.
+ *     @type string      $container_id       The group wrapping container element ID
  *
- *     @type string      $container_class   The group wrapping container elements class
+ *     @type string      $container_classes  The group wrapping container elements class
  *
- *     @type string      $element           String element type for the items: 'anchor', 'button', 'input'
- *                                          passed through to bp_nouveau_get_activity_entry_buttons() as a global default.
- *     @type array       $classes           Optional. DOM classes of the button wrapper
- *                                          Default: array ( 'action' ).
- *     @type string      $wrapper_id        Optional. DOM ID of the button wrapper element.
- *                                          Default: ''.
- *     @type string      $output            The HTML to output. Required.
+ *     @type string      $output             The HTML to output. Required.
  * }
  * @return string       HTML Output
  */
 function bp_nouveau_wrapper( $args = array() ) {
 	$r = wp_parse_args( $args, array(
-		'container'       => 'div',
-		'container_id'    => '',
-		'container_classes' => array(),
-		'classes'         => array( 'action'	),
-		'wrapper_id'      => '',
-		'output'          => '',
+		'container'         => 'div',
+		'container_id'      => '',
+		'container_classes' => array( 'activity-meta ' ),
+		'output'            => '',
 	) );
 
 	$valid_containers = array(
@@ -103,10 +95,10 @@ function bp_nouveau_wrapper( $args = array() ) {
 		return;
 	}
 
-	$container   = $r['container'];
-	$id        = '';
-	$class     = '';
-	$output    = $r['output'];
+	$container        = $r['container'];
+	$container_id     = '';
+	$container_class  = '';
+	$output           = $r['output'];
 
 	if ( ! empty( $r['container_id'] ) ) {
 		$container_id = ' id="' . esc_attr( $r['container_id'] ) . '"';

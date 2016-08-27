@@ -27,37 +27,29 @@ class BP_Buttons_Group {
 
 	/**
 	 * Constructor
-	 *
+		*
 	 * @since 1.0.0
 	 *
-	 * @param array $args An array of array having the following parameters {
-	 *     @type string $id                A string to use as the unique ID for the button. Required.
-	 *     @type int    $position          Where to insert the Button. Defaults to 99.
-	 *     @type string $component         The Component's the button is build for (eg: Activity, Groups..). Required.
-	 *     @type bool   $must_be_logged_in Whether the button should only be displayed to logged in users. Defaults to True.
-	 *     @type bool   $block_self        Optional. True if the button should be hidden when a user is viewing his own profile.
-	 *                                     Defaults to False.
-	 *     @type string $wrapper           Whether to use a wrapper. Defaults to false.
-	 *     @type string $wrapper_class     set a class for the elements wrapper.
-	 *     @type string $wrapper_id        Set a ID  for the elements wrapper
-	 *     @type string $element           Set this to 'button' to use button element, defaults to anchor.
-	 *     @type string $element_type      Is the button/input a type="button" or type="submit" or type="reset".
-	 *     @type string $name              The form name attr for button or input instances.
-	 *     @type string $value             The button or inputs value attr.
-	 *     @type string $data_attr         Set a data attr as key/value array pairs.
-	 *     @type string $link_id           The link ID attribute. Leave empty to not insert this attribute. Defaults to ''.
-	 *     @type string $link_href         The url for the link. Required.
-	 *     @type string $link_class        A space separated list of class to use as the class attribute for the link. Defaults to ''.
-	 *     @type string $link_title        The link title attribute. Defaults to ''.
-	 *     @type string $link_text         The text of the link. Required.
-	 * }
+		* @param array $args An array of array having the following parameters {
+		*     @type string $id                A string to use as the unique ID for the button. Required.
+		*     @type int    $position          Where to insert the Button. Defaults to 99.
+		*     @type string $component         The Component's the button is build for (eg: Activity, Groups..). Required.
+		*     @type bool   $must_be_logged_in Whether the button should only be displayed to logged in users. Defaults to True.
+		*     @type bool   $block_self        Optional. True if the button should be hidden when a user is viewing his own profile.
+		*                                     Defaults to False.
+		*     @type string $parent_element    Whether to use a wrapper. Defaults to false.
+		*     @type string $parent_attr       set an array of attributes for the parent element.
+		*     @type string $button_element    Set this to 'button', 'img', or 'a', defaults to anchor.
+		*     @type string $button_attr       Any attributes required for the button_element
+		*     @type string $link_text         The text of the link. Required.
+		* }
 	 */
 	public function __construct( $args = array() ) {
 		if ( empty( $args ) || ! is_array( $args ) ) {
 			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'bp-nouveau' ) );
 			return false;
 		}
-//return var_dump($args);
+
 		foreach ( $args as $arg ) {
 			$r = wp_parse_args( (array) $arg, array(
 				'id'                => '',
@@ -66,22 +58,15 @@ class BP_Buttons_Group {
 				'li_item'           => false,
 				'must_be_logged_in' => true,
 				'block_self'        => false,
-				'wrapper'           => false,
-				'wrapper_class'     => '',
-				'element'           => 'anchor',
-				'element_type'      => 'submit',
-				'name'              => '',
-				'value'             => '',
-				'data_attr'         => array(),
-				'link_id'           => '',
-				'link_href'         => '',
-				'link_class'        => '',
-				'link_title'        => '',
+				'parent_element'    => false,
+				'parent_attr'       => array(),
+				'button_element'    => 'a',
+				'button_attr'       => array(),
 				'link_text'         => '',
 			) );
 
 			// Just don't set the button if a param is missing
-			if ( empty( $r['id'] ) || empty( $r['component'] ) || empty( $r['link_href'] ) || empty( $r['link_text'] ) ) {
+			if ( empty( $r['id'] ) || empty( $r['component'] )  || empty( $r['link_text'] ) ) {
 				continue;
 			}
 
@@ -93,11 +78,11 @@ class BP_Buttons_Group {
 			}
 
 			// Set the wrapper to default value if a class or an id for it is defined.
-			if ( ( ! empty( $r['wrapper_class'] ) || ! empty( $r['wrapper_id'] ) ) && false === $r['wrapper'] ) {
-				$r['wrapper'] = 'div';
+			if ( ( ! empty( $r['parent_attr'] ) ) && false === $r['parent_element'] ) {
+				$r['parent_element'] = 'div';
 
 			} elseif( true === $r['li_item'] ) {
-				$r['wrapper'] = 'li';
+				$r['parent_element'] = 'li';
 			}
 
 			$this->group[ $r['id'] ] = $r;
@@ -168,8 +153,7 @@ class BP_Buttons_Group {
 
 			$buttons[ $button['id'] ] = bp_get_button( $button);
 		}
-
-		return $buttons;
+	return $buttons;
 	}
 
 	/**
