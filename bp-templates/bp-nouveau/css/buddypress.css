@@ -68,7 +68,7 @@ body .buddypress .bp-list .action {
 
 body.buddypress .entry-content {
 	max-width: none;
-	padding: 0 0.5em;
+	padding: 0 4em;
 }
 
 body .buddypress h1,
@@ -89,6 +89,10 @@ body .buddypress h6 {
 
 .bp-wrap:after {
 	clear: both;
+}
+
+.buddypress.round-avatars .avatar {
+	border-radius: 50%;
 }
 
 dt.section-title {
@@ -899,12 +903,12 @@ dt.section-title {
 	white-space: nowrap;
 }
 
-.activity-list .activity-item .activity-meta {
+.activity-list .activity-item ul.activity-meta {
 	margin: 0;
 	padding-left: 0;
 }
 
-.activity-list .activity-item .activity-meta li {
+.activity-list .activity-item ul.activity-meta li {
 	border: 0;
 	display: inline-block;
 }

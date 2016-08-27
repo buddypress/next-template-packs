@@ -1266,6 +1266,11 @@ function bp_nouveau_buddypress_classes() {
 		}
 
 		// Add classes according to site owners preferences.
+
+		if ( $general_settings = bp_nouveau_get_temporary_setting( 'avatar_style', bp_nouveau_get_appearance_settings( 'avatar_style' ) ) ) {
+			$classes[] = 'round-avatars';
+		}
+
 		if ( ! empty( $customizer_option ) ) {
 			$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 

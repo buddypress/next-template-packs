@@ -35,7 +35,7 @@ body {
 body.buddypress {
 	.entry-content {
 		max-width: none;
-		padding: 0 $pad-sml;
+		padding: 0 $pad-xlrg;
 	}
 }
 
@@ -62,6 +62,15 @@ body { // add weight
 // Ensure the .bp-wrap element always contains it's children - this may cause issues
 // but gropus single requires it.
 @include clearfix-element('.bp-wrap');
+
+// General site avatars round or square ?
+
+.buddypress.round-avatars {
+
+	.avatar {
+		border-radius: 50%;
+	}
+}
 
 // ====== BP Typographic Elements ======
 

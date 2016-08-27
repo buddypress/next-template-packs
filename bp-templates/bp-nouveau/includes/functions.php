@@ -87,6 +87,7 @@ function bp_nouveau_wrapper( $args = array() ) {
 	$valid_containers = array(
 		'div'  => true,
 		'ul'   => true,
+		'ol'   => true,
 		'span' => true,
 		'p'    => true,
 	);
@@ -627,6 +628,7 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
+		'avatar_style'  => 0,
 		'user_front_page'  => 1,
 		'user_front_bio'   => 0,
 		'user_nav_display' => 0,       // O is default (horizontally). 1 is vertically.
@@ -724,22 +726,28 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	) );
 
 	$sections = apply_filters( 'bp_nouveau_customizer_sections', array(
+		'bp_nouveau_general_settings' => array(
+			'title'       => __( 'General BP Settings', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 10,
+			'description' => __( 'Set general BuddyPress styles', 'bp-nouveau' ),
+		),
 		'bp_nouveau_user_front_page' => array(
 			'title'       => __( 'User\'s front page', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
-			'priority'    => 10,
+			'priority'    => 30,
 			'description' => __( 'Set your preferences about the members default front page.', 'bp-nouveau' ),
 		),
 		'bp_nouveau_user_primary_nav' => array(
 			'title'       => __( 'User\'s navigation', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
-			'priority'    => 30,
+			'priority'    => 50,
 			'description' => __( 'Customize the members primary navigations. Navigate to any random member\'s profile to live preview your changes.', 'bp-nouveau' ),
 		),
 		'bp_nouveau_loops_layout' => array(
 			'title'       => __( 'Loops layouts', 'bp-nouveau' ),
 			'panel'       => 'bp_nouveau_panel',
-			'priority'    => 50,
+			'priority'    => 70,
 			'description' => __( 'Set the number of columns to use for the BuddyPress loops.', 'bp-nouveau' ),
 		),
 	) );
@@ -750,6 +758,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	}
 
 	$settings = apply_filters( 'bp_nouveau_customizer_settings', array(
+		'bp_nouveau_appearance[avatar_style]' => array(
+			'index'             => 'avatar_style',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
 		'bp_nouveau_appearance[user_front_page]' => array(
 			'index'             => 'user_front_page',
 			'capability'        => 'bp_moderate',
@@ -815,6 +830,12 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	}
 
 	$controls = apply_filters( 'bp_nouveau_customizer_controls', array(
+		'bp_site_avatars' => array(
+			'label'      => __( 'Set BP User, Group avatars to rounded style.', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_general_settings',
+			'settings'   => 'bp_nouveau_appearance[avatar_style]',
+			'type'       => 'checkbox',
+		),
 		'user_front_page' => array(
 			'label'      => __( 'Enable default front page for user profiles.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_user_front_page',
@@ -834,7 +855,7 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'type'       => 'checkbox',
 		),
 		'user_nav_order' => array(
-			'class'       => 'BP_Nouveau_Nav_Customize_Control',
+			'class'      => 'BP_Nouveau_Nav_Customize_Control',
 			'label'      => __( 'Reorder the Members single items primary navigation.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_user_primary_nav',
 			'settings'   => 'bp_nouveau_appearance[user_nav_order]',
