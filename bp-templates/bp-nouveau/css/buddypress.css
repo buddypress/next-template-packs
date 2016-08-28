@@ -1130,8 +1130,7 @@ form.ac-form .ac-reply-avatar img {
 }
 
 form.ac-form .ac-reply-content {
-	color: #888;
-	margin-left: 20px;
+	color: #777;
 	padding-left: 1em;
 }
 
@@ -1140,15 +1139,13 @@ form.ac-form .ac-reply-content a {
 }
 
 form.ac-form .ac-reply-content .ac-textarea {
-	background: #fff;
-	border: 1px inset #ccc;
 	margin-bottom: 15px;
-	padding: 0.5em;
+	padding: 0 0.5em;
+	overflow: hidden;
 }
 
 form.ac-form .ac-reply-content .ac-textarea textarea {
 	background: transparent;
-	border: 0;
 	box-shadow: none;
 	color: #555;
 	font-family: inherit;
@@ -1156,8 +1153,14 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	height: 60px;
 	margin: 0;
 	outline: none;
-	padding: 0;
+	padding: .5em;
 	width: 100%;
+}
+
+form.ac-form .ac-reply-content .ac-textarea textarea:focus {
+	-webkit-box-shadow: 0 0 6px #e0e0e0;
+	-moz-box-shadow: 0 0 6px #e0e0e0;
+	box-shadow: 0 0 6px #e0e0e0;
 }
 
 form.ac-form .ac-reply-content input {

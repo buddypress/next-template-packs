@@ -303,7 +303,6 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'href'         => esc_url( bp_get_activity_comment_link() ),
 					'class'        => 'button acomment-reply bp-primary-action',
 					'title'        => esc_attr__( 'Comment', 'bp-nouveau' ),
-					'data-bp-thingy' => 'the-thing',
 					),
 				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
 			);
@@ -640,7 +639,7 @@ function bp_nouveau_activity_comment_form() {
  * @return string HTML Output
  */
 function bp_nouveau_activity_comment_buttons( $args = array() ) {
-	$output = join( ' ', bp_nouveau_get_activity_comment_buttons() );
+	$output = join( ' ', bp_nouveau_get_activity_comment_buttons($args) );
 
 	ob_start();
 	/**
@@ -669,7 +668,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_activity_comment_buttons() {
+	function bp_nouveau_get_activity_comment_buttons($args) {
 		$buttons = array();
 
 		if ( ! isset( $GLOBALS['activities_template'] ) ) {
@@ -683,14 +682,48 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 			return $buttons;
 		}
 
+		/**
+		* If the wrapper is set to 'ul'
+		* use to pass through a boolean to set:
+		* $li_item  => true / false
+		* Will render li elements around anchors/buttons.
+		*/
+		if( 'ul' == $args['container']  ) {
+			$parent_element = 'li';
+		} elseif( ! empty( $args['parent_element'] ) ) {
+			$parent_element = esc_html( $args['parent_element'] );
+		} else {
+			$parent_element = false;
+		}
+
+		$parent_attr = ( ! empty( $args['parent_attr'] ) )? $args['parent_attr']  : '';
+
+		/**
+		 * If we have a arg value for $button_element passed through
+		 * use it to default all the $buttons['element'] values
+		 * otherwise pass through as empyty string and class BP_button() will use it's default
+		 * 'anchor' or override & hardcode the 'element' string on $buttons array.
+		 *
+		 */
+		if( !empty( $args['button_element'] ) ) {
+			$button_element = $args['button_element'] ;
+		} else {
+			$button_element = 'a';
+		}
+
 		$buttons = array( 'activity_comment_reply' => array(
 				'id'                => 'activity_comment_reply',
 				'position'          => 5,
 				'component'         => 'activity',
 				'must_be_logged_in' => true,
-				'link_href'         => sprintf( '#acomment-%s', $activity_comment_id ),
-				'link_class'        => 'acomment-reply bp-primary-action',
-				'link_id'           => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
+				'button_element'    => $button_element,
+				'button_attr'       =>  array(
+					'href'   => sprintf( '#acomment-%s', $activity_comment_id ),
+					'class'  => 'acomment-reply bp-primary-action',
+					'id'     => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
+				),
 				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
 			),
 			'activity_comment_delete' => array(
@@ -698,9 +731,14 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'position'          => 15,
 				'component'         => 'activity',
 				'must_be_logged_in' => true,
-				'link_href'         => esc_url( bp_get_activity_comment_delete_link() ),
-				'link_class'        => 'delete acomment-delete confirm bp-secondary-action',
-				'link_rel'          => 'nofollow',
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'   => esc_url( bp_get_activity_comment_delete_link() ),
+					'class'  => 'delete acomment-delete confirm bp-secondary-action',
+					'rel'    => 'nofollow',
+					),
 				'link_text'         => esc_html__( 'Delete', 'bp-nouveau' ),
 			),
 		);
@@ -712,11 +750,16 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'position'          => 25,
 				'component'         => 'activity',
 				'must_be_logged_in' => true,
-				'link_id'           => 'activity_make_spam_' . $activity_comment_id,
-				'link_href'         => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id ),
-				'link_class'        => 'bp-secondary-action spam-activity-comment confirm',
-				'link_rel'          => 'nofollow',
-				'link_text'         => esc_html__( 'Spam', 'bp-nouveau' ),
+				'parent_element'    => $parent_element,
+				'parent_attr'       => $parent_attr,
+				'button_element'    => $button_element,
+				'button_attr'       =>  array(
+					'id'     => 'activity_make_spam_' . $activity_comment_id,
+					'href'   => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id ),
+					'class'  => 'bp-secondary-action spam-activity-comment confirm',
+					'rel'    => 'nofollow',
+				),
+				'link_text'          => esc_html__( 'Spam', 'bp-nouveau' ),
 			);
 		}
 

@@ -12,8 +12,7 @@ form.ac-form {
 	}
 
 	.ac-reply-content {
-		color: #888;
-		margin-left: $marg-lrg;
+		color: $light-text;
 		padding-left: $pad-med;
 
 		a {
@@ -21,14 +20,12 @@ form.ac-form {
 		}
 
 		.ac-textarea {
-			background: #fff;
-			border: 1px inset #ccc;
 			margin-bottom: $marg-med;
-			padding: $pad-sml;
+			padding: 0 $pad-sml;
+			overflow: hidden;
 
 			textarea {
 				background: transparent;
-				border: 0;
 				box-shadow: none;
 				color: $bp-text;
 				font-family: inherit;
@@ -36,8 +33,12 @@ form.ac-form {
 				height: 60px;
 				margin: 0;
 				outline: none;
-				padding: 0;
+				padding: .5em;
 				width: 100%;
+
+				&:focus {
+					@include box-shadow( 0 0 6px $med-light-grey );
+				}
 			}
 		}
 
