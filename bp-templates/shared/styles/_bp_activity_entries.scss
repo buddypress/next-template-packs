@@ -30,10 +30,6 @@
 			}
 		}
 
-		.activity-header {
-
-		}
-
 		&.mini {
 			@include font-size(13);
 			position: relative;
@@ -69,9 +65,8 @@
 			background: rgba(31, 179, 221, 0.1);
 		}
 
-// === review this inreplyto block feels wrong and badly nested ============================================
 		.activity-inreplyto {
-			color: #888;
+			color: $light-text;
 			@include font-size(13);
 
 			> p {
@@ -89,8 +84,6 @@
 				padding: 0;
 			}
 		}
-// ====== review this block! ===================================
-
 
 		// The header elements: date stamp, author etc;
 		.activity-header {
@@ -182,7 +175,8 @@
 				background: none;
 			}
 
-			.button:before {
+			.button:before,
+			.icons:before {
 				font-family: dashicons;
 				font-size: 18px;
 				vertical-align: bottom;

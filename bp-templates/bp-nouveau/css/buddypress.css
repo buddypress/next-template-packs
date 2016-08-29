@@ -827,7 +827,7 @@ dt.section-title {
 }
 
 .activity-list .activity-item .activity-inreplyto {
-	color: #888;
+	color: #777;
 	font-size: 13px;
 }
 
@@ -922,7 +922,8 @@ dt.section-title {
 	background: none;
 }
 
-.activity-list .activity-item .activity-meta .button:before {
+.activity-list .activity-item .activity-meta .button:before,
+.activity-list .activity-item .activity-meta .icons:before {
 	font-family: dashicons;
 	font-size: 18px;
 	vertical-align: bottom;
@@ -1095,6 +1096,16 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-comments .acomment-options a:focus, .buddypress .activity-comments .acomment-options a:hover {
 	color: inherit;
+}
+
+.buddypress .activity-comments .activity-meta {
+	margin-top: 10px;
+}
+
+.buddypress .activity-comments .activity-meta button {
+	font-size: 14px;
+	font-weight: normal;
+	text-transform: none;
 }
 
 .buddypress .mini .activity-comments {

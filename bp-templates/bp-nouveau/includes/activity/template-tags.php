@@ -705,10 +705,14 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		 * 'anchor' or override & hardcode the 'element' string on $buttons array.
 		 *
 		 */
+
+		//Icons sets a class for icon display if not using th button element
+		$icons = '';
 		if( !empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
+			$icons = ' icons';
 		}
 
 		$buttons = array( 'activity_comment_reply' => array(
@@ -721,7 +725,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'button_element'    => $button_element,
 				'button_attr'       =>  array(
 					'href'   => sprintf( '#acomment-%s', $activity_comment_id ),
-					'class'  => 'acomment-reply bp-primary-action',
+					'class'  => 'acomment-reply bp-primary-action' . $icons . '',
 					'id'     => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
 				),
 				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
@@ -736,7 +740,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'button_element'    => $button_element,
 				'button_attr'       => array(
 					'href'   => esc_url( bp_get_activity_comment_delete_link() ),
-					'class'  => 'delete acomment-delete confirm bp-secondary-action',
+					'class'  => 'delete acomment-delete confirm bp-secondary-action' . $icons . '',
 					'rel'    => 'nofollow',
 					),
 				'link_text'         => esc_html__( 'Delete', 'bp-nouveau' ),
@@ -756,7 +760,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'button_attr'       =>  array(
 					'id'     => 'activity_make_spam_' . $activity_comment_id,
 					'href'   => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id ),
-					'class'  => 'bp-secondary-action spam-activity-comment confirm',
+					'class'  => 'bp-secondary-action spam-activity-comment confirm' . $icon . '' ,
 					'rel'    => 'nofollow',
 				),
 				'link_text'          => esc_html__( 'Spam', 'bp-nouveau' ),

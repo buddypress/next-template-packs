@@ -64,6 +64,16 @@
 
 		} // close .acomment-options
 
+		.activity-meta {
+			margin-top: $marg-sml;
+			// if button element in use
+			button {
+				@include font-size(14);
+				font-weight: normal;
+				text-transform: none;
+			}
+		}
+
 	} // close .activity-comments
 
 
