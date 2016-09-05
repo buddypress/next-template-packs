@@ -87,7 +87,8 @@
 
 		// The header elements: date stamp, author etc;
 		.activity-header {
-			margin-right: $marg-med;
+			margin: 0 auto;
+			width: 80%;
 
 			// ensure elements are display inline, some themes setting avatars as block
 			a,
@@ -105,7 +106,7 @@
 				text-decoration: none;
 
 				&:hover {
-					color: #888;
+					color: $light-text;
 					text-decoration: underline;
 				}
 			}
@@ -113,9 +114,6 @@
 		} // close .activity-header
 
 		.activity-content {
-			margin: 0 5% 0 0;
-			overflow: hidden;
-			position: relative;
 
 			.activity-header,
 			.comment-header {
@@ -171,14 +169,7 @@
 			.button {
 				background: transparent;
 			}
-/*			&:hover {
-				border: 1px solid $bp-border-dark;
-				@include box-shadow(  0 0 5px 0 #eee);
-				display: inline-block;
 
-
-			}
-*/
 			a {
 				padding: 4px 8px;
 			}
@@ -219,6 +210,7 @@
 			.button {
 				border: 0;
 				box-shadow: none;
+
 				span {
 					background: none;
 					color: #555;
@@ -231,6 +223,30 @@
 	} // close .activity-item
 
 } // close .activity-list
+
+@include small-up() {
+
+	.activity-list {
+		.activity-item {
+
+			.activity-content {
+				margin: 0 5% 0 0;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.activity-header {
+				margin: 0 $marg-med 0 0;
+				width: auto;
+			}
+
+			.activity-inner {
+
+			}
+
+		}
+	}
+}
 
 .buddypress {
 	.activity-list {
@@ -251,6 +267,7 @@
 
 				&:focus,
 				&:hover, {
+					background: $white;
 					color: $black;
 				}
 			}
@@ -264,7 +281,6 @@
 
 	}
 }
-
 
 // Single Activity Entry View
 body.activity-permalink {

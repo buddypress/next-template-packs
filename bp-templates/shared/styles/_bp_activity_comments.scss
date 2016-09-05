@@ -10,7 +10,7 @@
 		ul {
 			clear: both;
 			list-style: none;
-			margin: 0 0 0 5%;
+		//	margin: 0 0 0 5%;
 			padding: 0;
 
 			li {
@@ -32,10 +32,6 @@
 				width: 25px;
 			}
 		}
-
-//		.acomment-meta {
-
-//		}
 
 		.acomment-content {
 			border-left: 1px solid $bp-border-dark;
@@ -76,8 +72,6 @@
 
 	} // close .activity-comments
 
-
-
 	// Activity li.mini Comments
 
 	.mini {
@@ -90,6 +84,16 @@
 	}
 
 } // close .buddypress
+
+@include small-up() {
+	.buddypress {
+		.activity-comments {
+			ul {
+				margin: 0 0 0 5% !important;
+			}
+		}
+	}
+}
 
 // Single Activity Comment Entry View
 body.activity-permalink {

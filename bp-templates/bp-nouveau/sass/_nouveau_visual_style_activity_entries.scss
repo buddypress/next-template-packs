@@ -8,7 +8,7 @@
 
 		background: $off-white;
 		border: 1px solid $bp-border-color;
-		padding: 50px;
+		padding: 10px;
 
 		.activity-item {
 			background: $white;
@@ -16,5 +16,16 @@
 			@include box-shadow(0 0 8px #bebebe);
 			margin: $marg-lrg 0;
 		}
+
+		li:first-child {
+			margin-top: 0;
+		}
 	}
+
+	@include medium-up() {
+			.activity-list.bp-list {
+				padding: 50px;
+			}
+	}
+
 }

@@ -33,9 +33,11 @@ body {
 // Some themes have very restricted content widths for pages or entry-content (2013, 2014)
 // Lets adjust these restrictions
 body.buddypress {
-	.entry-content {
-		max-width: none;
-		padding: 0 $pad-xlrg;
+	@include medium-up() {
+		.entry-content {
+			max-width: none;
+			padding: 0 $pad-xlrg;
+		}
 	}
 }
 
@@ -53,7 +55,7 @@ body { // add weight
 		h5,
 		h6 {
 			clear: none;
-			// some themes set massive margins ensure we avoid thse in bp elements
+			// some themes set massive margins ensure we avoid these in bp elements
 			margin: 1em 0;
 		}
 	}
@@ -64,7 +66,7 @@ body { // add weight
 @include clearfix-element('.bp-wrap');
 
 // General site avatars round or square ?
-
+// User set
 .buddypress.round-avatars {
 
 	.avatar {
@@ -82,9 +84,12 @@ dt.section-title {
 }
 
 .bp-label-text,
-.activity-header,
 .message-threads {
 	@include responsive-font(16);
+}
+
+.activity-header {
+	@include responsive-font(18);
 }
 
 #whats-new-post-in {
@@ -93,7 +98,7 @@ dt.section-title {
 
 .mini .activity-header,
 .acomment-meta {
-	@include font-size(14);
+	@include font-size(16);
 }
 
 .dir-component-filters {
