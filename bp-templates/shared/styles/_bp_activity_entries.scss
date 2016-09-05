@@ -22,7 +22,7 @@
 
 
 		div.item-avatar { // 'div' for weight
-			margin-right: 5%;
+			margin: 0 2% 0 2%;
 			width: auto;
 
 			img {
@@ -35,12 +35,12 @@
 			position: relative;
 
 			.activity-avatar {
+				text-align: center;
 				width: auto;
 
 				img.avatar,
 				img.FB_profile_pic {
 					height: 30px;
-					margin-left: 30px;  // change to $marg-med or...
 					width: 30px;
 				}
 			}
@@ -126,7 +126,7 @@
 			.activity-inner,
 			blockquote {
 				background: $off-white;
-				margin: $marg-med $marg-med $marg-sml 0;
+				margin: $marg-med 0 $marg-sml;
 				overflow: hidden;
 				padding: $pad-med;
 			}
@@ -164,7 +164,21 @@
 		}
 
 		.activity-meta {
+			border: 1px solid transparent;
+			background: $off-white;
+			padding: 2px;
 
+			.button {
+				background: transparent;
+			}
+/*			&:hover {
+				border: 1px solid $bp-border-dark;
+				@include box-shadow(  0 0 5px 0 #eee);
+				display: inline-block;
+
+
+			}
+*/
 			a {
 				padding: 4px 8px;
 			}
