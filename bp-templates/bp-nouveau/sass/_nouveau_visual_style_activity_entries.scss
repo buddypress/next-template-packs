@@ -1,0 +1,20 @@
+// ======= Visual Style Module =======
+// TP: Nouveau
+// Module: Activity stream entries
+
+
+.buddypress {
+	.activity-list.bp-list {
+
+		background: $off-white;
+		border: 1px solid $bp-border-color;
+		padding: 50px;
+
+		.activity-item {
+			background: $white;
+			border: 1px solid #bbb;
+			@include box-shadow(0 0 8px #bebebe);
+			margin: $marg-lrg 0;
+		}
+	}
+}
