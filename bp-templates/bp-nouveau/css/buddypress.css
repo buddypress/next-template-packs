@@ -609,8 +609,11 @@ dt.section-title {
 	clear: both;
 }
 
-.buddypress .bp-list li {
+.buddypress .bp-list > li {
 	border-bottom: 1px solid #eaeaea;
+}
+
+.buddypress .bp-list li {
 	list-style: none;
 	margin: 10px 0;
 	padding: 0.5em 0;
@@ -1167,7 +1170,7 @@ body.activity-permalink .activity-list .activity-meta {
 
 @media screen and (min-width: 24em) {
 	.buddypress .activity-comments ul {
-		margin: 0 0 0 5% !important;
+		margin: 0 0 0 5%;
 	}
 }
 

@@ -138,7 +138,7 @@ function bp_nouveau_member_email_notice_settings() {
 function bp_nouveau_member_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	$output = join( ' ', bp_nouveau_get_members_buttons() );
+	$output = join( ' ', bp_nouveau_get_members_buttons( $type = '', $args ) );
 
 	/**
 	 * On the member's header we need to reset the group button's global
@@ -193,7 +193,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		$action = 'bp_friend_requests_item_action';
 	}
 
-	$output = join( ' ', bp_nouveau_get_members_buttons( $type ) );
+	$output = join( ' ', bp_nouveau_get_members_buttons( $type, $args ) );
 
 	ob_start();
 	/**
@@ -216,7 +216,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_members_buttons( $type = 'profile' ) {
+	function bp_nouveau_get_members_buttons( $type = 'profile', $args ) {
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'profile' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return;
@@ -236,6 +236,33 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 			return $buttons;
 		}
 
+
+		if ( ! empty( $args ) ) {
+
+			/**
+			* If the wrapper is set to 'ul'
+			* use to pass through a boolean to set:
+			* $li_item  => true / false
+			* Will render li elements around anchors/buttons.
+			*/
+			if( 'ul' == $args['container']  ) {
+				$parent_element = 'li';
+			} elseif( ! empty( $args['parent_element'] ) ) {
+				$parent_element = esc_html( $args['parent_element'] );
+			} else {
+				$parent_element = false;
+			}
+
+			$icons = '';
+			if( !empty( $args['button_element'] ) ) {
+				$button_element = $args['button_element'] ;
+			} else {
+				$button_element = 'a';
+				$icons = ' icons';
+			}
+		}
+
+
 		if ( bp_is_active( 'friends' ) ) {
 			// It's the member's friendship requests screen
 			if (  'friendship_request' === $type ) {
@@ -244,19 +271,31 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'position'          => 5,
 						'component'         => 'friends',
 						'must_be_logged_in' => true,
-						'link_href'         => esc_url( bp_get_friend_accept_request_link() ),
+						'parent_element'    => $parent_element,
+						'parent_attr'       => array(),
+						'button_element'    => $button_element,
+						'button_attr'       => array (
+							'href'             => esc_url( bp_get_friend_accept_request_link() ),
+							'class'            => 'button accept',
+							'rel'              => '',
+							'title'            => __( 'Accept', 'bp-nouveau' ),
+							),
 						'link_text'         => __( 'Accept', 'bp-nouveau' ),
-						'link_title'        => __( 'Accept', 'bp-nouveau' ),
-						'link_class'        => 'button accept',
 					), 'reject_friendship' => array(
 						'id'                => 'reject_friendship',
 						'position'          => 15,
 						'component'         => 'friends',
 						'must_be_logged_in' => true,
-						'link_href'         => esc_url( bp_get_friend_reject_request_link() ),
+						'parent_element'    => $parent_element,
+						'parent_attr'       => array(),
+						'button_element'    => $button_element,
+						'button_attr'       => array (
+							'href'             => esc_url( bp_get_friend_reject_request_link() ),
+							'class'            => 'button reject',
+							'rel'              => '',
+							'title'            => __( 'Reject', 'bp-nouveau' ),
+							),
 						'link_text'         => __( 'Reject', 'bp-nouveau' ),
-						'link_title'        => __( 'Reject', 'bp-nouveau' ),
-						'link_class'        => 'button reject',
 					),
 				);
 
@@ -275,10 +314,29 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				remove_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
-					$buttons['member_friendship'] = wp_parse_args( array(
-						'id'       => 'member_friendship',
-						'position' => 5,
-					), bp_nouveau()->members->button_args );
+					$button_args = bp_nouveau()->members->button_args;
+					//var_dump( $button_args );
+					$buttons['member_friendship'] = array(
+						'id'                => 'member_friendship',
+						'position'          => 5,
+						'component'         => $button_args['component'],
+						'must_be_logged_in' => $button_args['must_be_logged_in'],
+						'block_self'        => $button_args['block_self'],
+						'parent_element'    => $parent_element,
+						'parent_attr'       => array(
+								'id'              => $button_args['wrapper_id'],
+								'class'           => $button_args['wrapper_class'],
+							),
+						'button_element'    => $button_element,
+						'button_attr'       => array(
+							'href'             => $button_args['link_href'],
+							'id'               => $button_args['link_id'],
+							'class'            => $button_args['link_class'],
+							'rel'              => $button_args['link_rel'],
+							'title'            => '',
+							),
+						'link_text'         => $button_args['link_text'],
+					);
 
 					unset( bp_nouveau()->members->button_args );
 				}
@@ -348,6 +406,8 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		if ( empty( $buttons_group ) ) {
 			return $buttons;
 		}
+
+
 
 		// It's the first entry of the loop, so build the Group and sort it
 		if ( ! isset( bp_nouveau()->members->member_buttons ) || false === is_a( bp_nouveau()->members->member_buttons, 'BP_Buttons_Group' ) ) {

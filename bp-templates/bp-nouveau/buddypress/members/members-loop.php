@@ -52,7 +52,7 @@ bp_nouveau_before_loop(); ?>
 
 				</div><!-- // .item -->
 
-				<?php bp_nouveau_members_loop_buttons(); ?>
+				<?php bp_nouveau_members_loop_buttons( array('container' => 'ul', 'container_classes' => array('members-meta', 'action') ) ); ?>
 
 			</div>
 		</li>

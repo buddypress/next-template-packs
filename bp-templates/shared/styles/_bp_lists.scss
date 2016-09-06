@@ -23,8 +23,9 @@
 			clear: both;
 		}
 
+		> li { border-bottom: 1px solid $light-grey; }
+
 		li {
-			border-bottom: 1px solid $light-grey;
 			list-style: none;
 			margin: $marg-sml 0;
 			padding: $pad-sml 0;
