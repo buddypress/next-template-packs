@@ -236,16 +236,13 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-
-		if ( ! empty( $args ) ) {
-
 			/**
 			* If the wrapper is set to 'ul'
 			* use to pass through a boolean to set:
 			* $li_item  => true / false
 			* Will render li elements around anchors/buttons.
 			*/
-			if( 'ul' == $args['container']  ) {
+			if( ! empty( $args ) && 'ul' == $args['container']  ) {
 				$parent_element = 'li';
 			} elseif( ! empty( $args['parent_element'] ) ) {
 				$parent_element = esc_html( $args['parent_element'] );
@@ -260,7 +257,6 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				$button_element = 'a';
 				$icons = ' icons';
 			}
-		}
 
 
 		if ( bp_is_active( 'friends' ) ) {
@@ -315,7 +311,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
 					$button_args = bp_nouveau()->members->button_args;
-					//var_dump( $button_args );
+
 					$buttons['member_friendship'] = array(
 						'id'                => 'member_friendship',
 						'position'          => 5,
