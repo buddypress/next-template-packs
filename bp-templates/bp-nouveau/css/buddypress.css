@@ -1311,8 +1311,8 @@ form.ac-form .ac-reply-content input {
 	margin-left: 0;
 }
 
-.buddypress .mygroups .groups-list .wrap {
-	min-height: 400px;
+.buddypress .mygroups .groups-list.grid .wrap {
+	min-height: 450px;
 	padding-bottom: 0;
 }
 
@@ -3324,7 +3324,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid.groups-list .wrap .list-title {
-	min-height: 3.5em;
+	min-height: 1.5em;
 	padding: 0.5em;
 }
 
