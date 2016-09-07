@@ -925,58 +925,60 @@ dt.section-title {
 	display: inline-block;
 }
 
-.activity-list .activity-item .activity-meta {
+.activity-list .activity-item .activity-meta.action {
 	border: 1px solid transparent;
 	background: #fafafa;
 	padding: 2px;
+	position: relative;
+	text-align: left;
 }
 
-.activity-list .activity-item .activity-meta .button {
+.activity-list .activity-item .activity-meta.action .button {
 	background: transparent;
 }
 
-.activity-list .activity-item .activity-meta a {
+.activity-list .activity-item .activity-meta.action a {
 	padding: 4px 8px;
 }
 
-.activity-list .activity-item .activity-meta a.button:focus,
-.activity-list .activity-item .activity-meta a.button:hover {
+.activity-list .activity-item .activity-meta.action a.button:focus,
+.activity-list .activity-item .activity-meta.action a.button:hover {
 	background: none;
 }
 
-.activity-list .activity-item .activity-meta .button:before,
-.activity-list .activity-item .activity-meta .icons:before {
+.activity-list .activity-item .activity-meta.action .button:before,
+.activity-list .activity-item .activity-meta.action .icons:before {
 	font-family: dashicons;
 	font-size: 18px;
 	vertical-align: bottom;
 }
 
-.activity-list .activity-item .activity-meta a.acomment-reply:before {
+.activity-list .activity-item .activity-meta.action a.acomment-reply:before {
 	content: "\f101";
 }
 
-.activity-list .activity-item .activity-meta a.fav:before {
+.activity-list .activity-item .activity-meta.action a.fav:before {
 	content: "\f154";
 }
 
-.activity-list .activity-item .activity-meta a.unfav:before {
+.activity-list .activity-item .activity-meta.action a.unfav:before {
 	content: "\f155";
 }
 
-.activity-list .activity-item .activity-meta a.delete-activity:before {
+.activity-list .activity-item .activity-meta.action a.delete-activity:before {
 	content: "\f153";
 }
 
-.activity-list .activity-item .activity-meta a.delete-activity:hover {
+.activity-list .activity-item .activity-meta.action a.delete-activity:hover {
 	color: #800;
 }
 
-.activity-list .activity-item .activity-meta .button {
+.activity-list .activity-item .activity-meta.action .button {
 	border: 0;
 	box-shadow: none;
 }
 
-.activity-list .activity-item .activity-meta .button span {
+.activity-list .activity-item .activity-meta.action .button span {
 	background: none;
 	color: #555;
 	font-weight: bold;

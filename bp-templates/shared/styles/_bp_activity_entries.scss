@@ -161,10 +161,12 @@
 			}
 		}
 
-		.activity-meta {
+		.activity-meta.action {
 			border: 1px solid transparent;
 			background: $off-white;
 			padding: 2px;
+			position: relative;
+			text-align: left;
 
 			.button {
 				background: transparent;
@@ -238,10 +240,6 @@
 			.activity-header {
 				margin: 0 $marg-med 0 0;
 				width: auto;
-			}
-
-			.activity-inner {
-
 			}
 
 		}

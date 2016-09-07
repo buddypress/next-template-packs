@@ -403,8 +403,6 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-
-
 		// It's the first entry of the loop, so build the Group and sort it
 		if ( ! isset( bp_nouveau()->members->member_buttons ) || false === is_a( bp_nouveau()->members->member_buttons, 'BP_Buttons_Group' ) ) {
 			$sort = true;

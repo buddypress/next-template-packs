@@ -77,10 +77,19 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  * @return string       HTML Output
  */
 function bp_nouveau_wrapper( $args = array() ) {
+
+/*
+	* Classes need to be determined & set by component to a certain degree
+	*
+	* Check the component to find a default container_class to add
+	*/
+
+	$current_component_class = bp_current_component() . '-meta';
+
 	$r = wp_parse_args( $args, array(
 		'container'         => 'div',
 		'container_id'      => '',
-		'container_classes' => array( 'activity-meta ' ),
+		'container_classes' => array( 'action',  $current_component_class   ),
 		'output'            => '',
 	) );
 
@@ -628,7 +637,7 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
-		'avatar_style'  => 0,
+		'avatar_style'     => 0,
 		'user_front_page'  => 1,
 		'user_front_bio'   => 0,
 		'user_nav_display' => 0,       // O is default (horizontally). 1 is vertically.
