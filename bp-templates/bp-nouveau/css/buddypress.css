@@ -3336,9 +3336,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	margin-bottom: 0;
 }
 
-.grid.groups-list .wrap .item-desc {
-	height: 4.5em;
-	margin: 0 auto 1.5em;
+.grid.groups-list .wrap .group-desc {
+	margin: 15px auto 20px;
+	min-height: 5em;
 	overflow: hidden;
 }
 

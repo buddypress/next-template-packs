@@ -273,9 +273,9 @@
 				}
 			}
 
-			.item-desc {
-				height: 4.5em;
-				margin: 0 auto 1.5em;
+			.group-desc {
+				margin: $marg-med auto $marg-lrg;
+				min-height: 5em;
 				overflow: hidden;
 			}
 		}
