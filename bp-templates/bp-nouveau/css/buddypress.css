@@ -303,6 +303,10 @@ dt.section-title {
 	background: #eaeaea;
 }
 
+.buddypress:not(.bp-vertical-nav) .main-navs > ul > li > a {
+	padding: 8px 10px;
+}
+
 .buddypress:not(.bp-vertical-nav) .user-subnav#subsubnav,
 .buddypress:not(.bp-vertical-nav) .group-subnav#subsubnav {
 	background: none;

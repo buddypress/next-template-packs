@@ -156,12 +156,18 @@
 	}
 }
 
-// visual styling of default single navs - adds background to
+// visual styling of default single navs - adds background/padding to
 // the parent elements if vertical nav not selected
 .buddypress:not(.bp-vertical-nav) {
-		.bp-navs:not(.dir-navs) {
-				background: $light-grey;
+	.bp-navs:not(.dir-navs) {
+		background: $light-grey;
+	}
+
+	.main-navs {
+		>ul >li >a {
+			padding: 8px 10px;
 		}
+	}
 
 	.user-subnav#subsubnav,
 	.group-subnav#subsubnav {
