@@ -23,7 +23,7 @@
 
 	>li {
 		border-bottom: 0;
-		padding-bottom: 0;
+		padding-bottom: 20px;
 		padding-top: 0;
 
 		.wrap {
@@ -66,8 +66,6 @@
 
 		&.two, &.three {
 			>li {
-				padding-bottom: 10px;
-				padding-top: 0;
 				width: 50%;
 
 				&:nth-child(odd) {
@@ -95,9 +93,6 @@
 @include medium-up() {
 
 	.grid {
-		>li {
-			padding-bottom: 10px;
-		}
 
 		// Set three to a row
 		&.three {
@@ -134,7 +129,6 @@
 		&.four {
 
 			>li {
-				padding-top: 0;
 				width: 25%;
 
 				&:nth-child(1n+1) {

@@ -3128,7 +3128,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .grid > li {
 	border-bottom: 0;
-	padding-bottom: 0;
+	padding-bottom: 20px;
 	padding-top: 0;
 }
 
@@ -3163,8 +3163,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		margin: 0;
 	}
 	.grid.two > li, .grid.three > li {
-		padding-bottom: 10px;
-		padding-top: 0;
 		width: 50%;
 	}
 	.grid.two > li:nth-child(odd), .grid.three > li:nth-child(odd) {
@@ -3184,9 +3182,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 /* Build the three column class medium up */
 @media screen and (min-width: 46.8em) {
-	.grid > li {
-		padding-bottom: 10px;
-	}
 	.grid.three > li {
 		padding-top: 0;
 		width: 33.333333%;
@@ -3209,7 +3204,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 /* Build the four column class medium up */
 @media screen and (min-width: 46.8em) {
 	.grid.four > li {
-		padding-top: 0;
 		width: 25%;
 	}
 	.grid.four > li:nth-child(1n+1) {
