@@ -31,6 +31,12 @@
 			text-decoration: none;
 		}
 
+		// Reduce padding for messages screens compose button
+		// to prevent border clipping in tab visual layout
+		li.last a#compose {
+			padding: 2px 8px;
+		}
+
 		button:hover,
 		button:focus,
 		a.button:focus,

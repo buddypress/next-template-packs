@@ -447,7 +447,7 @@ dt.section-title {
 		margin: 0;
 	}
 	.buddypress #item-body ul.button-tabs li.last a {
-		margin-top: -1em;
+		margin-top: -0.5em;
 	}
 	.buddypress #item-body ul.button-tabs li a,
 	.buddypress #item-body ul.button-tabs li a:focus,
@@ -1979,6 +1979,12 @@ li#compose-personal-li a#compose:before {
 	content: "\f464";
 }
 
+li#compose-personal-li a#compose:focus,
+li#compose-personal-li a#compose:hover {
+	background: #eee;
+	color: #e8861e;
+}
+
 .bp-messages-content {
 	margin: 15px 0;
 }
@@ -2737,6 +2743,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 4px 10px;
 	text-align: center;
 	text-decoration: none;
+}
+
+.buddypress .buddypress li.last a#compose {
+	padding: 2px 8px;
 }
 
 .buddypress .buddypress button:hover,

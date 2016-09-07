@@ -58,6 +58,12 @@ li#compose-personal-li {
 		content: "\f464";
 	}
 
+	a#compose:focus,
+	a#compose:hover {
+		background: #eee;
+		color: #e8861e;
+	}
+
 } // close li#compose-personal-li
 
 // Visual message threads & preview pane styles
