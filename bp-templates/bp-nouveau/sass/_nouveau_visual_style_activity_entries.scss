@@ -12,8 +12,8 @@
 
 		.activity-item {
 			background: $white;
-			border: 1px solid #bbb;
-			@include box-shadow(0 0 8px #bebebe);
+			border: 1px solid #ddd;
+			@include box-shadow(0 0 6px #bebebe);
 			margin: $marg-lrg 0;
 		}
 

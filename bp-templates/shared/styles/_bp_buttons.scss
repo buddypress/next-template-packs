@@ -1,7 +1,7 @@
 // BP Buttons, Submits, Icons and general clicky things styling.
 
 // Buttons by default are styled as simple boxes but we may change that by adding
-// a parent class ( on any close parent) .text-link-list
+// a parent class ( on any close parent to the element ) .text-link-list
 
 .buddypress {
 
@@ -61,12 +61,6 @@
 			text-decoration: none;
 		}
 
-		.activity-list {
-			a.button {
-				border: none;
-			}
-		}
-
 		input[type="submit"].pending,
 		input[type="button"].pending,
 		input[type="reset"].pending,
@@ -94,6 +88,13 @@
 		a.disabled:hover {
 			border-color: $bp-border-color;
 			color: $light-text;
+		}
+
+
+		.activity-list {
+			a.button {
+				border: none;
+			}
 		}
 
 		.bp-invites-content {
@@ -146,6 +147,24 @@
 
 			a:last-child {
 				border-right: none;
+			}
+		}
+
+		// In grids style the basic action button a little differently
+
+		.bp-list.grid {
+			.action {
+				a,
+				button {
+					border: 1px solid $bp-border-dark;
+					display: block;
+					margin: $marg-sml 0;
+
+					&:focus,
+					&:hover {
+						background: $buttons-background;
+					}
+				}
 			}
 		}
 

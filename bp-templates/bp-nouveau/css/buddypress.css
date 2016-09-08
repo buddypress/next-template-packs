@@ -1081,10 +1081,10 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-list.bp-list .activity-item {
 	background: #fff;
-	border: 1px solid #bbb;
-	-webkit-box-shadow: 0 0 8px #bebebe;
-	-moz-box-shadow: 0 0 8px #bebebe;
-	box-shadow: 0 0 8px #bebebe;
+	border: 1px solid #ddd;
+	-webkit-box-shadow: 0 0 6px #bebebe;
+	-moz-box-shadow: 0 0 6px #bebebe;
+	box-shadow: 0 0 6px #bebebe;
 	margin: 20px 0;
 }
 
@@ -1114,6 +1114,7 @@ body.activity-permalink .activity-list .activity-meta {
 .buddypress .activity-comments ul {
 	clear: both;
 	list-style: none;
+	margin-top: 15px;
 	padding: 0;
 }
 
@@ -1121,6 +1122,10 @@ body.activity-permalink .activity-list .activity-meta {
 	border-top: 1px solid #eee;
 	border-bottom: 0;
 	padding: 1em 0 0;
+}
+
+.buddypress .activity-comments ul li:first-child {
+	border-top: 0;
 }
 
 .buddypress .activity-comments ul li:last-child {
@@ -1176,7 +1181,7 @@ body.activity-permalink .activity-list .activity-meta {
 
 @media screen and (min-width: 24em) {
 	.buddypress .activity-comments ul {
-		margin: 0 0 0 5%;
+		margin: 15px 0 0 5%;
 	}
 }
 
@@ -2779,10 +2784,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	text-decoration: none;
 }
 
-.buddypress .buddypress .activity-list a.button {
-	border: none;
-}
-
 .buddypress .buddypress input[type="submit"].pending,
 .buddypress .buddypress input[type="button"].pending,
 .buddypress .buddypress input[type="reset"].pending,
@@ -2810,6 +2811,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress a.disabled:hover {
 	border-color: #eee;
 	color: #777;
+}
+
+.buddypress .buddypress .activity-list a.button {
+	border: none;
 }
 
 .buddypress .buddypress .bp-invites-content ul.bp-list li a.invite-button:hover {
@@ -2850,6 +2855,19 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .buddypress .text-links-list a:last-child {
 	border-right: none;
+}
+
+.buddypress .buddypress .bp-list.grid .action a,
+.buddypress .buddypress .bp-list.grid .action button {
+	border: 1px solid #ccc;
+	display: block;
+	margin: 10px 0;
+}
+
+.buddypress .buddypress .bp-list.grid .action a:focus, .buddypress .buddypress .bp-list.grid .action a:hover,
+.buddypress .buddypress .bp-list.grid .action button:focus,
+.buddypress .buddypress .bp-list.grid .action button:hover {
+	background: #ededed;
 }
 
 .buddypress li.filter label:before,
@@ -3276,33 +3294,23 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: inline;
 }
 
-.grid.bp-list > li div.action {
+.grid.bp-list > li .action {
 	bottom: 5px;
 	float: none;
 	height: auto;
 	left: 0;
 	margin: 0;
 	padding: 0 5px;
-	position: absolute;
 	text-align: center;
 	top: auto;
 	width: 100%;
 }
 
-.grid.bp-list > li div.action .generic-button {
+.grid.bp-list > li .action .generic-button {
 	float: none;
 	margin: 5px 0 0;
 	text-align: center;
 	width: 100%;
-}
-
-.grid.bp-list > li div.action .generic-button a {
-	display: inline-block;
-	width: 100%;
-}
-
-.grid.bp-list > li div.action .generic-button a:focus, .grid.bp-list > li div.action .generic-button a:hover {
-	background: #e0e0e0;
 }
 
 .grid.bp-list > li .item-avatar,

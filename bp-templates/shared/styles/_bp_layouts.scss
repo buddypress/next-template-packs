@@ -205,14 +205,14 @@
 			}
 		}
 
-		div.action {
+		.action {
 			bottom: 5px;
 			float: none;
 			height: auto;
 			left: 0;
 			margin: 0;
 			padding: 0 5px;
-			position: absolute;
+			//position: absolute;
 			text-align: center;
 			top: auto;
 			width: 100%;
@@ -222,16 +222,6 @@
 				margin: $marg-xsml 0 0 ;
 				text-align: center;
 				width: 100%;
-
-				a {
-					display: inline-block;
-					width: 100%;
-
-					&:focus,
-					&:hover {
-						background: $med-light-grey;
-					}
-				}
 			}
 		}
 

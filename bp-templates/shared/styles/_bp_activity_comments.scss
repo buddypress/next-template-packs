@@ -10,13 +10,18 @@
 		ul {
 			clear: both;
 			list-style: none;
-		//	margin: 0 0 0 5%;
+			margin-top: $marg-med;
 			padding: 0;
 
 			li {
 				border-top: 1px solid $bp-border-color;
 				border-bottom: 0;
 				padding: $pad-med 0 0;
+
+			}
+
+			li:first-child {
+				border-top: 0;
 			}
 
 			li:last-child {
@@ -89,7 +94,7 @@
 	.buddypress {
 		.activity-comments {
 			ul {
-				margin: 0 0 0 5%;
+				margin: $marg-med 0 0 5%;
 			}
 		}
 	}
