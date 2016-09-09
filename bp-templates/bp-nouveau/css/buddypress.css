@@ -1359,6 +1359,35 @@ form.ac-form .ac-reply-content input {
 	margin-top: 20px;
 }
 
+.register-page .editfield {
+	border: 1px solid #eee;
+	margin: 20px 0;
+	padding: 5px;
+}
+
+.register-page .editfield label,
+.register-page .editfield legend {
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+.register-page .editfield fieldset {
+	border: 0;
+	padding: 0;
+}
+
+.register-page .editfield fieldset legend {
+	text-indent: 0;
+}
+
+.register-page .editfield .field-visibility-settings {
+	padding: 0.5em;
+}
+
+.register-page .editfield .field-visibility-settings fieldset {
+	margin: 0 0 10px;
+}
+
 .register-page #signup-avatar img {
 	margin: 0 15px 10px 0;
 }
@@ -2994,6 +3023,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 0 3px;
 	position: absolute;
 	top: 0;
+}
+
+.buddypress .bp-feedback.small:before {
+	line-height: inherit;
+}
+
+.buddypress .bp-feedback.small span {
+	display: inline-block;
+	padding-left: 3em;
 }
 
 .buddypress a[data-bp-close] span:before {

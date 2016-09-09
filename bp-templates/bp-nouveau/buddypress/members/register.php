@@ -62,9 +62,8 @@
 								?>
 
 								<?php if( bp_get_the_profile_field_description() ) : ?>
-									<p class="description"><?php bp_the_profile_field_description(); ?></p>
+								<p class="description  bp-feedback info small"><span><?php bp_the_profile_field_description(); ?></span></p>
 								<?php endif; ?>
-
 							</div>
 
 						<?php endwhile; ?>

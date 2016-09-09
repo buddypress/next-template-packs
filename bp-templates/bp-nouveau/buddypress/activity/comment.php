@@ -26,7 +26,7 @@
 
 	<div class="acomment-content"><?php bp_activity_comment_content(); ?></div>
 
-	<?php bp_nouveau_activity_comment_buttons( array() );?>
+	<?php bp_nouveau_activity_comment_buttons();?>
 
 	<?php bp_nouveau_activity_recurse_comments( bp_activity_current_comment() ); ?>
 </li>

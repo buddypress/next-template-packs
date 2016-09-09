@@ -1,0 +1,72 @@
+// Registration Screen
+// Styles the registration index.php form and elements.
+
+.register-page {
+
+	.register-section {
+		@include box-model();
+	}
+
+	.signup-form {
+		margin-top: $marg-lrg;
+	}
+
+	.editfield {
+		border: 1px solid $bp-border-color;
+		margin: $marg-lrg 0;
+		padding: 5px;
+
+		// try and set labels and legends to same visual styles.
+		label,
+		legend {
+			font-weight: bold;
+			margin: $marg-sml 0;
+		}
+
+		fieldset {
+			border: 0;
+			padding: 0;
+
+			legend {
+				text-indent: 0;
+			}
+		}
+
+		.field-visibility-settings {
+			padding: $pad-sml;
+			fieldset {
+				margin: 0 0 $marg-sml;
+			}
+		}
+	} // editfield
+
+
+	#signup-avatar img {
+		margin: 0 $marg-med $marg-sml 0;
+	}
+
+	@include medium-up() {
+
+			.default-profile,
+			.extended-profile {
+				padding: 0.2em;
+				width: 50%;
+			}
+
+			.default-profile {
+				float: left;
+				padding-right: $pad-med;
+			}
+
+			.extended-profile {
+				float: right;
+				padding-left: $pad-med;
+			}
+
+			.blog-details {
+				clear: left;
+			}
+
+		} // close @media
+
+}

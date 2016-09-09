@@ -79,6 +79,15 @@
 		top: 0;
 	}
 
+	.bp-feedback.small:before {
+		line-height: inherit;
+	}
+
+	.bp-feedback.small span {
+		display: inline-block;
+		padding-left: 3em;
+	}
+
 	a[data-bp-close] span:before {
 		font-size: 32px;
 	}
