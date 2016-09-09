@@ -38,7 +38,7 @@
 	3.3 - Groups Loop
 	3.4 - Members Loop
 
-4.0 - Directories - Members, Groups, Blogs, Register, activation
+4.0 - Directories - Members, Groups, Blogs, Register, Activation
 	4.1 - Groups Creation Steps Screens
 5.0 - Single Item screens: User Account & Single Group Screens
 	5.1 - Item Headers: Global
@@ -184,6 +184,11 @@
 * @section 4.0 - Directories
 *-------------------------------------------------------------------------------
 */
+
+
+// Registration index screen (directory)
+@import "../../shared/styles/_bp_registration.scss";
+
 
 /**
 *----------------------------------------------------------

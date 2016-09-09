@@ -13,9 +13,9 @@
 
 	<?php bp_nouveau_signup_hook( 'before', 'page' ); ?>
 
-	<div class="page" id="register-page">
+	<div class="page register-page" id="register-page">
 
-		<form action="" name="signup_form" id="signup_form" class="standard-form" method="post" enctype="multipart/form-data">
+		<form action="" name="signup_form" id="signup_form" class="standard-form clearfix" method="post" enctype="multipart/form-data">
 
 			<?php bp_nouveau_template_notices(); ?>
 
@@ -25,11 +25,11 @@
 
 			<?php bp_nouveau_signup_hook( 'before', 'account_details' ); ?>
 
-			<div class="register-section" id="basic-details-section">
+			<div class="register-section bp-default" id="basic-details-section">
 
 				<?php /***** Basic Account Details ******/ ?>
 
-				<h2><?php _e( 'Account Details', 'bp-nouveau' ); ?></h2>
+				<h2 class="bp-heading"><?php _e( 'Account Details', 'bp-nouveau' ); ?></h2>
 
 				<?php bp_nouveau_signup_form(); ?>
 
@@ -43,9 +43,9 @@
 
 				<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
 
-				<div class="register-section" id="profile-details-section">
+				<div class="register-section extended-details" id="profile-details-section">
 
-					<h2><?php _e( 'Profile Details', 'bp-nouveau' ); ?></h2>
+					<h2 class="bp-heading"><?php _e( 'Profile Details', 'bp-nouveau' ); ?></h2>
 
 					<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
 					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>

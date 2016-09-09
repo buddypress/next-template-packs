@@ -16,7 +16,7 @@
 	3.3 - Groups Loop
 	3.4 - Members Loop
 
-4.0 - Directories - Members, Groups, Blogs, Register, activation
+4.0 - Directories - Members, Groups, Blogs, Register, Activation
 	4.1 - Groups Creation Steps Screens
 5.0 - Single Item screens: User Account & Single Group Screens
 	5.1 - Item Headers: Global
@@ -2453,16 +2453,6 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress .standard-form #basic-details-section input[type=password],
 .buddypress .standard-form #basic-details-section input#signup_blog_url {
 	width: 35%;
-}
-
-.buddypress .standard-form#signup_form,
-.buddypress .standard-form .form-allowed-tags,
-.buddypress .standard-form #commentform {
-	width: 90%;
-}
-
-.buddypress .standard-form#signup_form .submit {
-	float: right;
 }
 
 .buddypress .standard-form #signup-avatar img {
