@@ -15,101 +15,103 @@
 
 	<div class="page register-page" id="register-page">
 
-		<form action="" name="signup_form" id="signup_form" class="standard-form clearfix" method="post" enctype="multipart/form-data">
-
-			<?php bp_nouveau_template_notices(); ?>
+		<?php bp_nouveau_template_notices(); ?>
 
 			<?php bp_nouveau_user_feedback( bp_get_current_signup_step() ); ?>
 
-		<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
+			<form action="" name="signup_form" id="signup_form" class="standard-form signup-form clearfix" method="post" enctype="multipart/form-data">
 
-			<?php bp_nouveau_signup_hook( 'before', 'account_details' ); ?>
+			<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
 
-			<div class="register-section bp-default" id="basic-details-section">
+				<?php bp_nouveau_signup_hook( 'before', 'account_details' ); ?>
 
-				<?php /***** Basic Account Details ******/ ?>
+				<div class="register-section default-profile" id="basic-details-section">
 
-				<h2 class="bp-heading"><?php _e( 'Account Details', 'bp-nouveau' ); ?></h2>
+					<?php /***** Basic Account Details ******/ ?>
 
-				<?php bp_nouveau_signup_form(); ?>
+					<h2 class="bp-heading"><?php _e( 'Account Details', 'bp-nouveau' ); ?></h2>
 
-			</div><!-- #basic-details-section -->
+					<?php bp_nouveau_signup_form(); ?>
 
-			<?php bp_nouveau_signup_hook( 'after', 'account_details' ); ?>
+				</div><!-- #basic-details-section -->
 
-			<?php /***** Extra Profile Details ******/ ?>
+				<?php bp_nouveau_signup_hook( 'after', 'account_details' ); ?>
 
-			<?php if ( bp_is_active( 'xprofile' ) ) : ?>
+				<?php /***** Extra Profile Details ******/ ?>
 
-				<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
+				<?php if ( bp_is_active( 'xprofile' ) ) : ?>
 
-				<div class="register-section extended-details" id="profile-details-section">
+					<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
 
-					<h2 class="bp-heading"><?php _e( 'Profile Details', 'bp-nouveau' ); ?></h2>
+					<div class="register-section extended-profile" id="profile-details-section">
 
-					<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-					<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+						<h2 class="bp-heading"><?php _e( 'Profile Details', 'bp-nouveau' ); ?></h2>
 
-					<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+						<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
+						<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
 
-						<div<?php bp_field_css_class( 'editfield' ); ?>>
+						<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
-							<?php
-							$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-							$field_type->edit_field_html();
+							<div<?php bp_field_css_class( 'editfield' ); ?>>
 
-							bp_nouveau_xprofile_edit_visibilty();
-							?>
+								<?php
+								$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
+								$field_type->edit_field_html();
 
-							<p class="description"><?php bp_the_profile_field_description(); ?></p>
+								bp_nouveau_xprofile_edit_visibilty();
+								?>
+
+								<?php if( bp_get_the_profile_field_description() ) : ?>
+									<p class="description"><?php bp_the_profile_field_description(); ?></p>
+								<?php endif; ?>
+
+							</div>
+
+						<?php endwhile; ?>
+
+						<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+
+						<?php endwhile; endif; endif; ?>
+
+						<?php bp_nouveau_signup_hook( '', 'signup_profile' ); ?>
+
+					</div><!-- #profile-details-section -->
+
+					<?php bp_nouveau_signup_hook( 'after', 'signup_profile' ); ?>
+
+				<?php endif; ?>
+
+				<?php if ( bp_get_blog_signup_allowed() ) : ?>
+
+					<?php bp_nouveau_signup_hook( 'before', 'blog_details' ); ?>
+
+					<?php /***** Blog Creation Details ******/ ?>
+
+					<div class="register-section blog-details" id="blog-details-section">
+
+						<h2><?php _e( 'Blog Details', 'bp-nouveau' ); ?></h2>
+
+						<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes, I\'d like to create a new site', 'bp-nouveau' ); ?></label></p>
+
+						<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
+
+							<?php bp_nouveau_signup_form( 'blog_details' ); ?>
 
 						</div>
 
-					<?php endwhile; ?>
+					</div><!-- #blog-details-section -->
 
-					<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
+					<?php bp_nouveau_signup_hook( 'after', 'blog_details' ); ?>
 
-					<?php endwhile; endif; endif; ?>
+				<?php endif; ?>
 
-					<?php bp_nouveau_signup_hook( '', 'signup_profile' ); ?>
+				<?php bp_nouveau_submit_button( 'register' ); ?>
 
-				</div><!-- #profile-details-section -->
+			<?php endif; // request-details signup step ?>
 
-				<?php bp_nouveau_signup_hook( 'after', 'signup_profile' ); ?>
+			<?php bp_nouveau_signup_hook( 'custom', 'steps' ); ?>
 
-			<?php endif; ?>
-
-			<?php if ( bp_get_blog_signup_allowed() ) : ?>
-
-				<?php bp_nouveau_signup_hook( 'before', 'blog_details' ); ?>
-
-				<?php /***** Blog Creation Details ******/ ?>
-
-				<div class="register-section" id="blog-details-section">
-
-					<h2><?php _e( 'Blog Details', 'bp-nouveau' ); ?></h2>
-
-					<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes, I\'d like to create a new site', 'bp-nouveau' ); ?></label></p>
-
-					<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
-
-						<?php bp_nouveau_signup_form( 'blog_details' ); ?>
-
-					</div>
-
-				</div><!-- #blog-details-section -->
-
-				<?php bp_nouveau_signup_hook( 'after', 'blog_details' ); ?>
-
-			<?php endif; ?>
-
-			<?php bp_nouveau_submit_button( 'register' ); ?>
-
-		<?php endif; // request-details signup step ?>
-
-		<?php bp_nouveau_signup_hook( 'custom', 'steps' ); ?>
-
-		</form>
+			</form>
 
 	</div>
 

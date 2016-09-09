@@ -1349,6 +1349,39 @@ form.ac-form .ac-reply-content input {
 * @section 4.0 - Directories
 *-------------------------------------------------------------------------------
 */
+.register-page .register-section {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.register-page .signup-form {
+	margin-top: 20px;
+}
+
+.register-page #signup-avatar img {
+	margin: 0 15px 10px 0;
+}
+
+@media screen and (min-width: 46.8em) {
+	.register-page .default-profile,
+	.register-page .extended-profile {
+		padding: 0.2em;
+		width: 50%;
+	}
+	.register-page .default-profile {
+		float: left;
+		padding-right: 1em;
+	}
+	.register-page .extended-profile {
+		float: right;
+		padding-left: 1em;
+	}
+	.register-page .blog-details {
+		clear: left;
+	}
+}
+
 /**
 *----------------------------------------------------------
 * @section 4.1 - Groups Creation Steps
@@ -2365,6 +2398,18 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	padding: 0.5em;
 }
 
+.buddypress .standard-form input,
+.buddypress .standard-form select,
+.buddypress .standard-form textarea {
+	width: 100%;
+}
+
+.buddypress .standard-form input[type=radio],
+.buddypress .standard-form input[type=checkbox] {
+	margin-right: 5px;
+	width: auto;
+}
+
 .buddypress .standard-form select {
 	padding: 3px;
 }
@@ -2450,28 +2495,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	width: 95%;
 }
 
-.buddypress .standard-form #basic-details-section input[type=password],
-.buddypress .standard-form #basic-details-section input#signup_blog_url {
-	width: 35%;
-}
-
-.buddypress .standard-form #signup-avatar img {
-	margin: 0 15px 10px 0;
-}
-
 @media screen and (min-width: 46.8em) {
-	.buddypress .standard-form #basic-details-section,
-	.buddypress .standard-form #blog-details-section,
-	.buddypress .standard-form #profile-details-section {
-		float: left;
-		width: 48%;
-	}
-	.buddypress .standard-form #profile-details-section {
-		float: right;
-	}
-	.buddypress .standard-form #blog-details-section {
-		clear: left;
-	}
 	.buddypress .standard-form .left-menu {
 		float: left;
 	}

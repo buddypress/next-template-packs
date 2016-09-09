@@ -76,6 +76,18 @@ input[type=password] {
 			padding: $pad-sml;
 		}
 
+		input,
+		select,
+		textarea {
+			width: 100%;
+		}
+
+		input[type=radio],
+		input[type=checkbox] {
+			margin-right: $marg-xsml;
+			width: auto;
+		}
+
 		select {
 			padding: 3px;
 		}
@@ -167,41 +179,9 @@ input[type=password] {
 			}
 		} // close &#sidebar-login-form
 
-		// These ID's need to be changed
-		#basic-details-section {
-			input[type=password],
-			input#signup_blog_url {
-				width: 35%;
-			}
-		}
-
-		// more ID's to change
-
-
-		#signup-avatar img {
-			margin: 0 $marg-med $marg-sml 0;
-		}
-
 		@include medium-up() {
 
-			// ID's need sorting out, replace with classes.
-			#basic-details-section,
-			#blog-details-section,
-			#profile-details-section {
-				float: left;
-				width: 48%;
-			}
-
-			#profile-details-section {
-				float: right;
-			}
-
-			#blog-details-section {
-				clear: left;
-			}
-
 				// The Group invites form lists (not required if Ajax templates in use)
-
 			.left-menu {
 				float: left;
 			}
