@@ -37,6 +37,12 @@
 			padding: 2px 8px;
 		}
 
+		// Re-instate the quick-tag padding to avoid the above ruleset
+		// causing styling issues.
+		.button-small[type=button] {
+			padding: 0 8px 1px;
+		}
+
 		button:hover,
 		button:focus,
 		a.button:focus,
