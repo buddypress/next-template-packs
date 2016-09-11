@@ -1359,54 +1359,54 @@ form.ac-form .ac-reply-content input {
 	margin-top: 20px;
 }
 
-.register-page .editfield {
+.register-page .signup-form .editfield {
 	border: 1px solid #eee;
 	margin: 20px 0;
 	padding: 5px;
 }
 
-.register-page .editfield label,
-.register-page .editfield legend {
+.register-page .signup-form .editfield label,
+.register-page .signup-form .editfield legend {
 	font-weight: bold;
-	margin: 10px 0;
+	margin: 10px 0 0;
 }
 
-.register-page .editfield fieldset {
+.register-page .signup-form .editfield fieldset {
 	border: 0;
 	padding: 0;
 }
 
-.register-page .editfield fieldset legend {
+.register-page .signup-form .editfield fieldset legend {
 	text-indent: 0;
 }
 
-.register-page .editfield .field-visibility-settings {
+.register-page .signup-form .editfield .field-visibility-settings {
 	padding: 0.5em;
 }
 
-.register-page .editfield .field-visibility-settings fieldset {
+.register-page .signup-form .editfield .field-visibility-settings fieldset {
 	margin: 0 0 10px;
 }
 
-.register-page #signup-avatar img {
+.register-page .signup-form #signup-avatar img {
 	margin: 0 15px 10px 0;
 }
 
 @media screen and (min-width: 46.8em) {
-	.register-page .default-profile,
-	.register-page .extended-profile {
+	.register-page .signup-form .default-profile,
+	.register-page .signup-form .extended-profile {
 		padding: 0.2em;
 		width: 50%;
 	}
-	.register-page .default-profile {
+	.register-page .signup-form .default-profile {
 		float: left;
 		padding-right: 1em;
 	}
-	.register-page .extended-profile {
+	.register-page .signup-form .extended-profile {
 		float: right;
 		padding-left: 1em;
 	}
-	.register-page .blog-details {
+	.register-page .signup-form .blog-details {
 		clear: left;
 	}
 }
@@ -1916,7 +1916,7 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress .field-visibility-settings {
 	display: none;
-	margin-top: 10px;
+	margin: 10px 0;
 }
 
 .buddypress .current-visibility-level {
@@ -1926,7 +1926,11 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress .field-visibility-settings,
 .buddypress .field-visibility-settings-header {
-	color: #888;
+	color: #777;
+}
+
+.buddypress .field-visibility-settings fieldset {
+	margin: 5px 0;
 }
 
 .buddypress .field-visibility-settings a {
@@ -2427,7 +2431,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	padding: 0.5em;
 }
 
-.buddypress .standard-form input,
+.buddypress .standard-form input:not(.button-small),
 .buddypress .standard-form select,
 .buddypress .standard-form textarea {
 	width: 100%;
@@ -2803,6 +2807,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 2px 8px;
 }
 
+.buddypress .buddypress .button-small[type=button] {
+	padding: 0 8px 1px;
+}
+
 .buddypress .buddypress button:hover,
 .buddypress .buddypress button:focus,
 .buddypress .buddypress a.button:focus,
@@ -3029,9 +3037,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	line-height: inherit;
 }
 
-.buddypress .bp-feedback.small span {
+.buddypress .bp-feedback.small span.text {
 	display: inline-block;
-	padding-left: 3em;
+	margin-left: 30px;
 }
 
 .buddypress a[data-bp-close] span:before {

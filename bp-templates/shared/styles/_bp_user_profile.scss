@@ -39,7 +39,7 @@ body.no-js {
 
 	.field-visibility-settings {
 		display: none;
-		margin-top: $marg-sml;
+		margin: $marg-sml 0;
 	}
 
 	.current-visibility-level {
@@ -49,10 +49,15 @@ body.no-js {
 
 	.field-visibility-settings,
 	.field-visibility-settings-header {
-		color: #888;
+		color: $light-text;
 	}
 
 	.field-visibility-settings {
+
+		fieldset {
+			margin: $marg-xsml 0;
+		}
+
 		a {
 			font-size: 80%;
 		}

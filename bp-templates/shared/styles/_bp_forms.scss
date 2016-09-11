@@ -76,7 +76,7 @@ input[type=password] {
 			padding: $pad-sml;
 		}
 
-		input,
+		input:not(.button-small),
 		select,
 		textarea {
 			width: 100%;
