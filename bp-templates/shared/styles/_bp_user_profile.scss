@@ -63,7 +63,15 @@ body.no-js {
 		}
 	}
 
-	.standard-form {
+	.standard-form { // this needs to be a specific profile edit form class
+
+		.editfield {
+
+			fieldset {
+				margin: 0;
+			}
+		}
+
 		.field-visibility-settings {
 			label {
 				font-weight: normal;

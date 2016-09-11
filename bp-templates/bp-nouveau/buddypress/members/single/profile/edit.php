@@ -16,8 +16,6 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 
 	<?php bp_nouveau_xprofile_hook( 'before', 'field_content' ); ?>
 
-
-
 		<?php if ( bp_profile_has_multiple_groups() ) : ?>
 			<ul class="button-tabs button-nav">
 
@@ -37,7 +35,9 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 				$field_type->edit_field_html();
 				?>
 
-				<p class="description"><?php bp_the_profile_field_description(); ?></p>
+				<?php if( bp_get_the_profile_field_description() ) : ?>
+					<p class="description bp-feedback info small"><span class="icon"></span><span class="text"><?php bp_the_profile_field_description(); ?></span></p>
+				<?php endif; ?>
 
 				<?php bp_nouveau_xprofile_edit_visibilty(); ?>
 

@@ -1937,6 +1937,10 @@ body.no-js .buddypress .field-visibility-settings {
 	font-size: 80%;
 }
 
+.buddypress .standard-form .editfield fieldset {
+	margin: 0;
+}
+
 .buddypress .standard-form .field-visibility-settings label {
 	font-weight: normal;
 	margin: 0;
