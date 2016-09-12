@@ -160,18 +160,19 @@
 
 		.bp-list.grid {
 			.action {
+
 				a,
 				button {
 					border: 1px solid $bp-border-dark;
 					display: block;
-					margin: $marg-sml 0;
+					margin: 0;
 
 					&:focus,
 					&:hover {
 						background: $buttons-background;
 					}
 				}
-			}
+			} // .action
 		}
 
 	} // close .buddypress
