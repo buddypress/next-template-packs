@@ -46,7 +46,7 @@ bp_nouveau_before_loop(); ?>
 
 				</div>
 
-				<?php bp_nouveau_groups_loop_buttons(); ?>
+				<?php bp_nouveau_groups_loop_buttons( ); ?>
 
 			</div>
 		</li>

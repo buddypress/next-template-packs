@@ -2916,7 +2916,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress .bp-list.grid .action button {
 	border: 1px solid #ccc;
 	display: block;
-	margin: 10px 0;
+	margin: 0;
 }
 
 .buddypress .buddypress .bp-list.grid .action a:focus, .buddypress .buddypress .bp-list.grid .action a:hover,

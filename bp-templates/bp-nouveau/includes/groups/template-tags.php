@@ -509,7 +509,9 @@ function bp_nouveau_groups_loop_buttons( $args = array() ) {
 		return;
 	}
 
-	$output = join( ' ', bp_nouveau_get_groups_buttons( 'loop' ) );
+	$args['type'] = 'loop';
+
+	$output = join( ' ', bp_nouveau_get_groups_buttons( $args ) );
 
 	ob_start();
 	/**
@@ -540,7 +542,9 @@ function bp_nouveau_groups_invite_buttons( $args = array() ) {
 		return;
 	}
 
-	$output = join( ' ', bp_nouveau_get_groups_buttons( 'invite' ) );
+	$args['type'] = 'invite';
+
+	$output = join( ' ', bp_nouveau_get_groups_buttons( $args ) );
 
 	ob_start();
 	/**
@@ -571,7 +575,9 @@ function bp_nouveau_groups_request_buttons( $args = array() ) {
 		return;
 	}
 
-	$output = join( ' ', bp_nouveau_get_groups_buttons( 'request' ) );
+	$args['type'] = 'request';
+
+	$output = join( ' ', bp_nouveau_get_groups_buttons( $args ) );
 
 	ob_start();
 	/**
@@ -602,7 +608,9 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		return;
 	}
 
-	$output = join( ' ', bp_nouveau_get_groups_buttons( 'manage_members' ) );
+	$args['type'] = 'manage_members';
+
+	$output = join( ' ', bp_nouveau_get_groups_buttons( $args ) );
 
 	ob_start();
 	/**
@@ -630,7 +638,10 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_groups_buttons( $type = 'group' ) {
+	function bp_nouveau_get_groups_buttons( $args ) {
+
+		$type = ( ! empty( $args['type'] ) ) ?  $args['type'] : 'group';
+
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'group' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return;
@@ -648,11 +659,39 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			return $buttons;
 		}
 
+		/**
+		 * If the wrapper is set to 'ul'
+		 * use to pass through a boolean to set:
+		 * $li_item  => true / false
+		 * Will render li elements around anchors/buttons.
+		 */
+		if( ! empty( $args ) && 'ul' == $args['container']  ) {
+			$parent_element = 'li';
+		} elseif( ! empty( $args['parent_element'] ) ) {
+			$parent_element = esc_html( $args['parent_element'] );
+		} else {
+			$parent_element = false;
+		}
+
+		$icons = '';
+		if( ! empty( $args['button_element'] ) ) {
+			$button_element = $args['button_element'] ;
+		} else {
+			$button_element = 'a';
+			$icons = ' icons';
+		}
+
+
 		// Invite buttons on member's invites screen
 		if ( 'invite' === $type ) {
 			// Don't show button if not logged in or previously banned
 			if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) || empty( $group->status ) ) {
 				return $buttons;
+			}
+
+			// If we pass through parent classes add them
+			if( ! empty( $args['parent_attr']['class'] ) ) {
+				$parent_class = $args['parent_attr']['class'];
 			}
 
 			// Setup Accept button attributes
@@ -661,8 +700,19 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'position'          => 5,
 				'component'         => 'groups',
 				'must_be_logged_in' => true,
-				'link_href'         => esc_url( bp_get_group_accept_invite_link() ),
-				'link_class'        => 'button accept group-button accept-invite',
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'               => '',
+					'class'            => $parent_class . 'accept',
+				 ),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'             => esc_url( bp_get_group_accept_invite_link() ),
+					'id'               => '',
+					'class'            => 'button accept group-button accept-invite',
+					'rel'              => '',
+					'title'            => '',
+				 ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
 
@@ -672,9 +722,20 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'position'          => 15,
 				'component'         => 'groups',
 				'must_be_logged_in' => true,
-				'link_href'         => esc_url( bp_get_group_reject_invite_link() ),
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'               => '',
+					'class'            => $parent_class . 'reject',
+				 ),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'             => esc_url( bp_get_group_reject_invite_link() ),
+					'id'               => '',
+					'class'            => 'button reject group-button reject-invite',
+					'rel'              => '',
+					'title'            => '',
+				 ),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
-				'link_class'        => 'button reject group-button reject-invite',
 			);
 
 		// Request button for the group's manage screen
@@ -685,8 +746,19 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'position'          => 5,
 				'component'         => 'groups',
 				'must_be_logged_in' => true,
-				'wrapper_class'     => 'accept',
-				'link_href'         => esc_url( bp_get_group_request_accept_link() ),
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'               => '',
+					'class'            => $parent_class . 'accept',
+				 ),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'             => esc_url( bp_get_group_request_accept_link() ),
+					'id'               => '',
+					'class'            => 'button',
+					'rel'              => '',
+					'title'            => '',
+				 ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
 
@@ -696,8 +768,19 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'position'          => 15,
 				'component'         => 'groups',
 				'must_be_logged_in' => true,
-				'wrapper_class'     => 'reject',
-				'link_href'         => esc_url( bp_get_group_request_reject_link() ),
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'               => '',
+					'class'            => $parent_class . 'reject',
+				 ),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'             => esc_url( bp_get_group_request_reject_link() ),
+					'id'               => '',
+					'class'            => 'button',
+					'rel'              => '',
+					'title'            => '',
+				 ),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
 			);
 
@@ -705,46 +788,106 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		} elseif ( 'manage_members' === $type && isset( $GLOBALS['members_template']->member->user_id ) ) {
 			$user_id = $GLOBALS['members_template']->member->user_id;
 
+			// If we pass through parent classes add them
+			if( ! empty( $args['parent_attr']['class'] ) ) {
+				$parent_class = $args['parent_attr']['class'];
+			}
+
 			$buttons = array( 'unban_member' => array(
 					'id'                => 'unban_member',
 					'position'          => 5,
 					'component'         => 'groups',
 					'must_be_logged_in' => true,
-					'link_href'         => esc_url( bp_get_group_member_unban_link( $user_id ) ),
+					'parent_element'    => $parent_element,
+					'parent_attr'       => array(
+						'id'               => '',
+						'class'            => $parent_class,
+					 ),
+					'button_element'    => $button_element,
+					'button_attr'       => array(
+						'href'             => esc_url( bp_get_group_member_unban_link( $user_id ) ),
+						'id'               => '',
+						'class'            => 'button confirm member-unban',
+						'rel'              => '',
+						'title'            => '',
+					 ),
 					'link_text'         => __( 'Remove Ban', 'bp-nouveau' ),
-					'link_class'        => 'button confirm member-unban',
 				), 'ban_member' => array(
 					'id'                => 'ban_member',
 					'position'          => 15,
 					'component'         => 'groups',
 					'must_be_logged_in' => true,
-					'link_href'         => esc_url( bp_get_group_member_ban_link( $user_id ) ),
+					'parent_element'    => $parent_element,
+					'parent_attr'       => array(
+						'id'               => '',
+						'class'            => $parent_class,
+					),
+					'button_element'    => $button_element,
+					'button_attr'       => array(
+						'href'             => esc_url( bp_get_group_member_ban_link( $user_id ) ),
+						'id'               => '',
+						'class'            => 'button confirm member-ban',
+						'rel'              => '',
+						'title'            => '',
+					),
 					'link_text'         => __( 'Kick &amp; Ban', 'bp-nouveau' ),
-					'link_class'        => 'button confirm member-ban',
 				), 'promote_mod' => array(
 					'id'                => 'promote_mod',
 					'position'          => 25,
 					'component'         => 'groups',
 					'must_be_logged_in' => true,
-					'link_href'         => esc_url( bp_get_group_member_promote_mod_link() ),
+					'parent_element'    => $parent_element,
+					'parent_attr'       => array(
+						'id'               => '',
+						'class'            => $parent_class,
+					),
+					'button_element'    => $button_element,
+					'button_attr'       => array(
+						'href'             => esc_url( bp_get_group_member_promote_mod_link() ),
+						'id'               => '',
+						'class'            => 'button confirm member-promote-to-mod',
+						'rel'              => '',
+						'title'            => '',
+					),
 					'link_text'         => __( 'Promote to Mod', 'bp-nouveau' ),
-					'link_class'        => 'button confirm member-promote-to-mod',
 				), 'promote_admin' => array(
 					'id'                => 'promote_admin',
 					'position'          => 35,
 					'component'         => 'groups',
 					'must_be_logged_in' => true,
-					'link_href'         => esc_url( bp_get_group_member_promote_admin_link() ),
+					'parent_element'    => $parent_element,
+					'parent_attr'       => array(
+						'id'               => '',
+						'class'            => $parent_class,
+					),
+					'button_element'    => $button_element,
+					'button_attr'       => array(
+						'href'             => esc_url( bp_get_group_member_promote_admin_link() ),
+						'id'               => '',
+						'class'            => 'button confirm member-promote-to-admin',
+						'rel'              => '',
+						'title'            => '',
+					),
 					'link_text'         => __( 'Promote to Admin', 'bp-nouveau' ),
-					'link_class'        => 'button confirm member-promote-to-admin',
 				), 'remove_member' => array(
 					'id'                => 'remove_member',
 					'position'          => 45,
 					'component'         => 'groups',
 					'must_be_logged_in' => true,
-					'link_href'         => esc_url( bp_get_group_member_remove_link( $user_id ) ),
+					'parent_element'    => $parent_element,
+					'parent_attr'       => array(
+						'id'               => '',
+						'class'            => $parent_class,
+					),
+					'button_element'    => $button_element,
+					'button_attr'       => array(
+						'href'             => esc_url( bp_get_group_member_remove_link( $user_id ) ),
+						'id'               => '',
+						'class'            => 'button confirm',
+						'rel'              => '',
+						'title'            => '',
+					),
 					'link_text'         => __( 'Remove from group', 'bp-nouveau' ),
-					'link_class'        => 'button confirm',
 				),
 			);
 
@@ -763,11 +906,34 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			remove_filter( 'bp_get_group_join_button', 'bp_nouveau_groups_catch_button_args', 100, 1 );
 
 			if ( ! empty( bp_nouveau()->groups->button_args ) ) {
-				$buttons['group_membership'] = wp_parse_args( array(
-					'id'       => 'group_membership',
-					'position' => 5,
-				), bp_nouveau()->groups->button_args );
+				$button_args = bp_nouveau()->groups->button_args;
 
+				// If we pass through parent classes merge those into the existing ones
+				if( ! empty( $args['parent_attr']['class'] ) ) {
+					$parent_class = $args['parent_attr']['class'] . ' ' . $button_args['wrapper_class'];
+				}
+
+				$buttons['group_membership'] = array(
+					'id'                => 'group_membership',
+					'position'          => 5,
+					'component'         => $button_args['component'],
+					'must_be_logged_in' => $button_args['must_be_logged_in'],
+					'block_self'        => $button_args['block_self'],
+					'parent_element'    => $parent_element,
+					'parent_attr'       => array(
+							'id'              => $button_args['wrapper_id'],
+							'class'           => $parent_class,
+					),
+					'button_element'    => $button_element,
+					'button_attr'       => array(
+						'href'             => $button_args['link_href'],
+						'id'               => $button_args['link_id'],
+						'class'            => $button_args['link_class'] . ' button',
+						'rel'              => $button_args['link_rel'],
+						'title'            => '',
+					),
+					'link_text'         => $button_args['link_text'],
+				);
 				unset( bp_nouveau()->groups->button_args );
 			}
 		}
