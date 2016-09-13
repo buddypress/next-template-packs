@@ -2426,7 +2426,6 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 }
 
 .buddypress .standard-form input:not(.button-small),
-.buddypress .standard-form select,
 .buddypress .standard-form textarea {
 	width: 100%;
 }
