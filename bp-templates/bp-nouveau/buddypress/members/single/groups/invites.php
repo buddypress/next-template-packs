@@ -11,18 +11,20 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 <?php if ( bp_has_groups( 'type=invites&user_id=' . bp_loggedin_user_id() ) ) : ?>
 
-	<ul id="group-list" class="invites item-list" data-bp-list="groups_invites">
+	<ul id="group-list" class="invites item-list bp-list" data-bp-list="groups_invites">
 
 		<?php while ( bp_groups() ) : bp_the_group(); ?>
 
-			<li data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
+			<li class="item-entry invites-list" data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
+
 				<?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 					<div class="item-avatar">
 						<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ); ?></a>
 					</div>
 				<?php endif; ?>
 
-				<h4><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span></h4>
+				<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
+				<p><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span></p>
 
 				<p class="desc">
 					<?php bp_group_description_excerpt(); ?>
