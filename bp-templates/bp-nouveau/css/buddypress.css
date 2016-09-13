@@ -1417,7 +1417,7 @@ form.ac-form .ac-reply-content input {
 *----------------------------------------------------------
 */
 #group-create-body {
-	padding: 0.5em 2em;
+	padding: 0.5em;
 }
 
 #group-create-body .creation-step-name {
@@ -1757,7 +1757,7 @@ body.no-js .single-item-header .js-self-profile-button {
 	width: auto;
 }
 
-.buddypress .bp-invites-content ul.item-list li .item-title {
+.buddypress .bp-invites-content ul.item-list li .list-title {
 	width: auto;
 }
 
@@ -1788,13 +1788,23 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .buddypress .bp-invites-content li ul.group-inviters {
 	clear: both;
+	margin: 0;
 	overflow: hidden;
 }
 
 .buddypress .bp-invites-content li ul.group-inviters li {
 	border: 0;
 	float: left;
+	font-size: 20px;
 	width: inherit;
+}
+
+.buddypress .bp-invites-content li .status {
+	font-size: 20px;
+	font-style: italic;
+	clear: both;
+	color: #555;
+	margin: 10px 0;
 }
 
 .buddypress .bp-invites-content #send-invites-editor {
@@ -2805,6 +2815,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 4px 10px;
 	text-align: center;
 	text-decoration: none;
+	width: auto;
 }
 
 .buddypress .buddypress li.last a#compose {
@@ -2927,6 +2938,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress li.filter label:before,
 .buddypress li.feed a:before,
+.buddypress .action a,
 .buddypress .bp-invites-filters li a.invite-button:before,
 .buddypress .bp-messages-filters li a.messages-button:before {
 	font-family: dashicons;
@@ -2941,6 +2953,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress .bp-invites-content .item-list li a.invite-button:before {
 		font-size: 32px;
 	}
+}
+
+.buddypress .bp-list a.button.invite-button:focus, .buddypress .bp-list a.button.invite-button:hover {
+	background: none;
 }
 
 .buddypress ul li.filter label:before {

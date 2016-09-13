@@ -30,28 +30,30 @@
 	</div>
 
 	<div class="item">
-		<div class="item-title">
+		<div class="list-title member-name">
 			{{data.name}}
 		</div>
 
 		<# if ( undefined !== data.is_sent ) { #>
 			<div class="item-meta">
-				<span class="status">
-					<# if ( false === data.is_sent ) { #>
-						<?php esc_html_e( 'The invite has not been sent yet.', 'bp-nouveau' ); ?>
-					<# } else { #>
-						<?php esc_html_e( 'The invite has been sent.', 'bp-nouveau' ); ?>
-					<# } #>
-				</span>
 
 				<# if ( undefined !== data.invited_by ) { #>
 					<ul class="group-inviters">
 						<li><?php esc_html_e( 'Invited by:', 'bp-nouveau' ); ?></li>
 						<# for ( i in data.invited_by ) { #>
-							<li><a href="{{data.invited_by[i].user_link}}" title="{{data.invited_by[i].user_name}}"><img src="{{data.invited_by[i].avatar}}" width="20px" class="avatar mini"></a></li>
+							<li><a href="{{data.invited_by[i].user_link}}" title="{{data.invited_by[i].user_name}}"><img src="{{data.invited_by[i].avatar}}" width="30px" class="avatar mini"></a></li>
 						<# } #>
 					</ul>
 				<# } #>
+
+				<p class="status">
+					<# if ( false === data.is_sent ) { #>
+						<?php esc_html_e( 'The invite has not been sent yet.', 'bp-nouveau' ); ?>
+					<# } else { #>
+						<?php esc_html_e( 'The invite has been sent.', 'bp-nouveau' ); ?>
+					<# } #>
+				</p>
+
 			</div>
 		<# } #>
 	</div>
@@ -82,8 +84,8 @@
 	<textarea placeholder="<?php esc_attr_e( 'Optional: add a message to your invite.', 'bp-nouveau' ); ?>"></textarea>
 
 	<div class="action">
-		<input type="button" id="bp-invites-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Cancel', 'bp-nouveau' ); ?>"/>
-		<input type="button" id="bp-invites-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-nouveau' ); ?>"/>
+		<button  type="button" id="bp-invites-reset" class="button bp-secondary-action" ><?php esc_attr_e( 'Cancel', 'bp-nouveau' ); ?></button>
+		<button type="button" id="bp-invites-send" class="button bp-primary-action"  ><?php esc_attr_e( 'Send', 'bp-nouveau' ); ?></button>
 	</div>
 </script>
 

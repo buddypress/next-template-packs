@@ -6,5 +6,5 @@
  *
  * @package BP Nouveau
  */
-
+// Runs do_action & calls_accessoires/invites/index
 bp_nouveau_group_invites_interface(); ?>

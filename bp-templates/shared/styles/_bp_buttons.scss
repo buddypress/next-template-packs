@@ -29,6 +29,7 @@
 			padding: 4px 10px;
 			text-align: center;
 			text-decoration: none;
+			width: auto;
 		}
 
 		// Reduce padding for messages screens compose button
@@ -183,8 +184,9 @@
 // ==== Icons ====
 
 .buddypress {
-	 li.filter label:before,
-	 li.feed a:before,
+	li.filter label:before,
+	li.feed a:before,
+	.action a,
 	.bp-invites-filters  li a.invite-button:before,
 	.bp-messages-filters li a.messages-button:before {
 		font-family: dashicons;
@@ -193,6 +195,22 @@
 
 	.bp-invites-content .item-list li a.invite-button:before {
 		@include responsive-font(32);
+	}
+
+	// If icons are required for anchors e.g '<a class="button"'
+	// then we may have .button background hovers being inherited
+	// Use this grouped selector ruleset to add elements that need
+	// no change. As we need weight this is specific to bp-lists
+
+	// This is probably a less than optimal solution & a better one will exist to
+	// implemented when time allows.
+	.bp-list {
+		a.button.invite-button {
+			&:focus,
+			&:hover {
+				background: none;
+			}
+		}
 	}
 
 	ul {

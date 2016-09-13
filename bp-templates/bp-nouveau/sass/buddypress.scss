@@ -185,10 +185,8 @@
 *-------------------------------------------------------------------------------
 */
 
-
 // Registration index screen (directory)
 @import "../../shared/styles/_bp_registration.scss";
-
 
 /**
 *----------------------------------------------------------
@@ -196,13 +194,9 @@
 *----------------------------------------------------------
 */
 
-	#group-create-body {
-		padding: $pad-sml $pad-lrg;
+// Registration index screen (directory)
+@import "../../shared/styles/_bp_groups_create.scss";
 
-		.creation-step-name {
-			text-align: center;
-		}
-	}
 /**
 *-------------------------------------------------------------------------------
 * @section 5.0 - Single Item screens: Groups, Users
@@ -281,8 +275,10 @@
 *-----------------------------------------
 */
 
+// Import Group Invites screens
+//@import "../../shared/styles/_bp_groups_invites";
 
-// Import nouveau invites
+// Import nouveau style Group Invites screens
 @import "_nouveau_invites";
 
 

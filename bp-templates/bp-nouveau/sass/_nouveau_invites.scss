@@ -15,7 +15,7 @@
 				padding-right: 5px;
 				width: auto;
 
-				.item-title {
+				.list-title {
 					width: auto;
 				}
 
@@ -50,14 +50,25 @@
 		li {
 			ul.group-inviters {
 				clear: both;
+				margin: 0;
 				overflow: hidden;
 
 				li {
 					border: 0;
 					float: left;
+					@include font-size(20) ;
 					width: inherit;
 				}
 			} // close .group-inviters
+
+			.status {
+				@include font-size(20);
+				font-style: italic;
+				clear: both;
+				color: $bp-text;
+				margin: $marg-sml 0;
+			}
+
 		} // close li
 
 		#send-invites-editor {
