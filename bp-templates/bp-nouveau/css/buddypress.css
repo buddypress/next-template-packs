@@ -1820,6 +1820,7 @@ body.no-js .single-item-header .js-self-profile-button {
 .buddypress .bp-invites-content #send-invites-editor ul {
 	clear: both;
 	list-style: none;
+	margin: 10px 0;
 	overflow: hidden;
 }
 

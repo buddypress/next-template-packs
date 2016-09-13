@@ -76,7 +76,7 @@
 
 <script type="text/html" id="tmpl-bp-invites-selection">
 	<a href="#" title="{{data.name}}">
-		<img src="{{data.avatar}}" class="avatar" alt="{{data.name}}">
+		<img src="{{data.avatar}}" class="avatar" alt="{{data.name}}" />
 	</a>
 </script>
 
