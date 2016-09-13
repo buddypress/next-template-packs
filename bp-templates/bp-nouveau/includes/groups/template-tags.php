@@ -467,7 +467,7 @@ function bp_nouveau_group_manage_screen() {
 function bp_nouveau_group_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	$output = join( ' ', bp_nouveau_get_groups_buttons( $args ) );
+	$output = join( ' ', bp_nouveau_get_groups_buttons( $args) );
 
 	/**
 	 * On the group's header we need to reset the group button's global
@@ -665,7 +665,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		 * $li_item  => true / false
 		 * Will render li elements around anchors/buttons.
 		 */
-		if( ! empty( $args ) && 'ul' == $args['container']  ) {
+		if( ! empty( $args ) && isset( $args['container'] ) && 'ul' == $args['container']  ) {
 			$parent_element = 'li';
 		} elseif( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
@@ -690,6 +690,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			}
 
 			// If we pass through parent classes add them
+			$parent_class = '';
 			if( ! empty( $args['parent_attr']['class'] ) ) {
 				$parent_class = $args['parent_attr']['class'];
 			}
