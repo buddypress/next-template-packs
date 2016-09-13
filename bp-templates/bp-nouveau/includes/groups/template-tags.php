@@ -467,7 +467,7 @@ function bp_nouveau_group_manage_screen() {
 function bp_nouveau_group_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	$output = join( ' ', bp_nouveau_get_groups_buttons() );
+	$output = join( ' ', bp_nouveau_get_groups_buttons( $args ) );
 
 	/**
 	 * On the group's header we need to reset the group button's global

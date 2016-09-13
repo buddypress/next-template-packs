@@ -1754,17 +1754,19 @@ body.no-js .single-item-header .js-self-profile-button {
 	overflow: hidden;
 	padding-left: 5px;
 	padding-right: 5px;
+	position: relative;
 	width: auto;
 }
 
 .buddypress .bp-invites-content ul.item-list li .list-title {
+	text-align: center;
 	width: auto;
 }
 
 .buddypress .bp-invites-content ul.item-list li .action {
-	position: inherit;
-	top: inherit;
-	right: inherit;
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
 .buddypress .bp-invites-content ul.item-list li .action a.button.invite-button {
@@ -1828,36 +1830,16 @@ body.no-js .single-item-header .js-self-profile-button {
 	max-width: 50px;
 }
 
-.buddypress .bp-invites-content #send-invites-editor ul .action {
-	float: right;
-	margin-top: 1em;
-}
-
-.buddypress .bp-invites-content #send-invites-editor ul .action a {
-	border: 0;
-	display: inline-block;
-	position: relative;
-	text-decoration: none;
-}
-
-.buddypress .bp-invites-content #send-invites-editor ul .action a:before {
-	color: rgba(170, 0, 0, 0.7);
-	content: "\f153";
-	display: none;
-	font-family: dashicons;
-	font-size: 50px;
-	left: 0;
-	line-height: 50px;
-	position: absolute;
-	top: 0;
-	vertical-align: top;
+.buddypress .bp-invites-content #send-invites-editor .action {
+	margin-top: 10px;
+	padding-top: 10px;
 }
 
 .buddypress .bp-invites-content #send-invites-editor.bp-hide {
 	display: none;
 }
 
-@media screen and (min-width: 32em) {
+@media screen and (min-width: 46.8em) {
 	.buddypress .bp-invites-content ul.item-list > li {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -1877,9 +1859,6 @@ body.no-js .single-item-header .js-self-profile-button {
 	.buddypress .bp-invites-content ul.item-list ul.group-inviters {
 		float: left;
 		width: auto;
-	}
-	.buddypress .bp-invites-content ul.item-list .action {
-		float: right;
 	}
 }
 

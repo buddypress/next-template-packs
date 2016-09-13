@@ -17,8 +17,8 @@
 </h2>
 
 <div class="subnav-filters group-subnav-filters bp-invites-filters"></div>
-<div class="members bp-invites-content"></div>
 <div class="bp-invites-feedback"></div>
+<div class="members bp-invites-content"></div>
 
 <script type="text/html" id="tmpl-bp-invites-nav">
 	<a href="{{data.href}}" class="bp-invites-nav-item" data-nav="{{data.id}}">{{data.name}}</a>

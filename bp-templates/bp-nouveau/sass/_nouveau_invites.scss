@@ -13,16 +13,18 @@
 				overflow: hidden;
 				padding-left: 5px;
 				padding-right: 5px;
+				position: relative;
 				width: auto;
 
 				.list-title {
+					text-align: center;
 					width: auto;
 				}
 
 				.action {
-					position: inherit;
-					top: inherit;
-					right: inherit;
+					position: absolute;
+					top: 10px;
+					right: 10px;
 
 					a.button.invite-button {
 						border: 0;
@@ -88,40 +90,13 @@
 					margin: 0.5%;
 					max-height: 50px;
 					max-width: 50px;
-
-				}
-
-				.action {
-					float: right;
-					margin-top: 1em;
-				}
-
-			} // ul
-
-			ul {
-
-				.action {
-					a {
-						border: 0;
-						display: inline-block;
-						position: relative;
-						text-decoration: none;
-					}
-
-					a:before {
-						color: rgba(170, 0, 0, 0.7);
-						content: "\f153";
-						display: none;
-						font-family: dashicons;
-						font-size: 50px;
-						left: 0;
-						line-height: 50px;
-						position: absolute;
-						top: 0;
-						vertical-align: top;
-					}
 				}
 			} // ul
+
+			.action {
+				margin-top: $marg-sml;
+				padding-top: 10px;
+			}
 
 		} // close #send-invites-editor
 
@@ -129,7 +104,7 @@
 			display: none;
 		}
 
-		@include medium-small-up() {
+		@include medium-up() {
 
 			ul.item-list {
 				> li {
@@ -153,9 +128,7 @@
 					float: left;
 					width: auto;
 				}
-				.action {
-					float: right;
-				}
+
 			} // ul
 
 		} // close @media
