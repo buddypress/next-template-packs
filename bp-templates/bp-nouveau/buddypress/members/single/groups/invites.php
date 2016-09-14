@@ -17,22 +17,28 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 			<li class="item-entry invites-list" data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
 
+				<div class="wrap">
+
 				<?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 					<div class="item-avatar">
-						<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar( 'type=thumb&width=50&height=50' ); ?></a>
+						<a href="<?php bp_group_permalink(); ?>"><?php bp_group_avatar(  ); ?></a>
 					</div>
 				<?php endif; ?>
 
-				<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
-				<p><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span></p>
+					<div class="item">
+						<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
+						<p><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span></p>
 
-				<p class="desc">
-					<?php bp_group_description_excerpt(); ?>
-				</p>
+						<p class="desc">
+							<?php bp_group_description_excerpt(); ?>
+						</p>
 
-				<?php bp_nouveau_group_hook( '', 'invites_item' ); ?>
+						<?php bp_nouveau_group_hook( '', 'invites_item' ); ?>
 
-				<?php bp_nouveau_groups_invite_buttons(); ?>
+						<?php bp_nouveau_groups_invite_buttons( array('container' => 'ul', 'parent_attr' => array('class' => 'super duper tokens') ) ); ?>
+					</div>
+
+				</div>
 			</li>
 
 		<?php endwhile; ?>
