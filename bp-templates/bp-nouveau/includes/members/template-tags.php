@@ -236,28 +236,33 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-			/**
-			* If the wrapper is set to 'ul'
-			* use to pass through a boolean to set:
-			* $li_item  => true / false
-			* Will render li elements around anchors/buttons.
-			*/
-			if( ! empty( $args ) && 'ul' == $args['container']  ) {
-				$parent_element = 'li';
-			} elseif( ! empty( $args['parent_element'] ) ) {
-				$parent_element = esc_html( $args['parent_element'] );
-			} else {
-				$parent_element = false;
-			}
+		/**
+		 * If the wrapper is set to 'ul'
+		 * use to pass through a boolean to set:
+		 * $li_item  => true / false
+		 * Will render li elements around anchors/buttons.
+		 */
+		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
+			$parent_element = 'li';
+		} elseif( ! empty( $args['parent_element'] ) ) {
+			$parent_element = esc_html( $args['parent_element'] );
+		} else {
+			$parent_element = false;
+		}
 
-			$icons = '';
-			if( !empty( $args['button_element'] ) ) {
-				$button_element = $args['button_element'] ;
-			} else {
-				$button_element = 'a';
-				$icons = ' icons';
-			}
+		$icons = '';
+		if( ! empty( $args['button_element'] ) ) {
+			$button_element = $args['button_element'] ;
+		} else {
+			$button_element = 'a';
+			$icons = ' icons';
+		}
 
+		// If we pass through parent classes add them to $button array
+		$parent_class = '';
+		if( ! empty( $args['parent_attr']['class'] ) ) {
+			$parent_class = sanitize_text_field( $args['parent_attr']['class'] );
+		}
 
 		if ( bp_is_active( 'friends' ) ) {
 			// It's the member's friendship requests screen
@@ -268,7 +273,10 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'component'         => 'friends',
 						'must_be_logged_in' => true,
 						'parent_element'    => $parent_element,
-						'parent_attr'       => array(),
+						'parent_attr'       => array(
+							'id'               => '',
+							'class'            => $parent_class,
+							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
 							'href'             => esc_url( bp_get_friend_accept_request_link() ),
@@ -283,7 +291,10 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'component'         => 'friends',
 						'must_be_logged_in' => true,
 						'parent_element'    => $parent_element,
-						'parent_attr'       => array(),
+						'parent_attr'       => array(
+							'id'               => '',
+							'class'            => $parent_class,
+							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
 							'href'             => esc_url( bp_get_friend_reject_request_link() ),
@@ -321,7 +332,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'parent_element'    => $parent_element,
 						'parent_attr'       => array(
 								'id'              => $button_args['wrapper_id'],
-								'class'           => $button_args['wrapper_class'],
+								'class'           => $parent_class . ' ' . $button_args['wrapper_class'],
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array(

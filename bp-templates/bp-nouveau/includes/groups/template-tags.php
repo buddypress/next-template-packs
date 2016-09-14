@@ -665,7 +665,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		 * $li_item  => true / false
 		 * Will render li elements around anchors/buttons.
 		 */
-		if( ! empty( $args ) && isset( $args['container'] ) && 'ul' == $args['container']  ) {
+		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
 			$parent_element = 'li';
 		} elseif( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
@@ -689,10 +689,10 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				return $buttons;
 			}
 
-			// If we pass through parent classes add them
+			// If we pass through parent classes add them to $button array
 			$parent_class = '';
 			if( ! empty( $args['parent_attr']['class'] ) ) {
-				$parent_class = $args['parent_attr']['class'];
+				$parent_class = esc_html( $args['parent_attr']['class'] );
 			}
 
 			// Setup Accept button attributes
@@ -704,7 +704,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'parent_element'    => $parent_element,
 				'parent_attr'       => array(
 					'id'               => '',
-					'class'            => $parent_class . 'accept',
+					'class'            => $parent_class . ' ' . 'accept',
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
