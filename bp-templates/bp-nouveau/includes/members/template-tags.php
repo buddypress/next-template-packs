@@ -427,7 +427,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
 					$button_args = bp_nouveau()->members->button_args;
-var_dump($button_args);
+
 					$buttons['private_message'] = array(
 						'id'                => $button_args['id'],
 						'position'          => 25,
