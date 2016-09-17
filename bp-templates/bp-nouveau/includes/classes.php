@@ -55,7 +55,7 @@ class BP_Buttons_Group {
 				'id'                => '',
 				'position'          => 99,
 				'component'         => '',
-				'li_item'           => false,
+//				'li_item'           => false,
 				'must_be_logged_in' => true,
 				'block_self'        => false,
 				'parent_element'    => false,
@@ -64,7 +64,7 @@ class BP_Buttons_Group {
 				'button_attr'       => array(),
 				'link_text'         => '',
 			) );
-
+//var_dump($r);
 			// Just don't set the button if a param is missing
 			if ( empty( $r['id'] ) || empty( $r['component'] )  || empty( $r['link_text'] ) ) {
 				continue;
@@ -77,12 +77,15 @@ class BP_Buttons_Group {
 				continue;
 			}
 
-			// Set the wrapper to default value if a class or an id for it is defined.
+			/**
+			 * if in bp_nouveau_get_*_buttons() we pass through a false value for
+			 * 'parent_element' but we have attributtes for it in the array lets default
+			 * to setting a div.
+			 * Otherwise the original false value will be passed through to bp buttons.
+			 * @todo: this needs review, probably trying to be too clever
+			 */
 			if ( ( ! empty( $r['parent_attr'] ) ) && false === $r['parent_element'] ) {
 				$r['parent_element'] = 'div';
-
-			} elseif( true === $r['li_item'] ) {
-				$r['parent_element'] = 'li';
 			}
 
 			$this->group[ $r['id'] ] = $r;
