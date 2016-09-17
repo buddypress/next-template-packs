@@ -683,11 +683,11 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		}
 
 		/**
-		* If the wrapper is set to 'ul'
-		* use to pass through a boolean to set:
-		* $li_item  => true / false
-		* Will render li elements around anchors/buttons.
-		*/
+		 * If the 'container' is set to 'ul'
+		 * set a var $parent_element to li
+		 * otherwise simply pass any value found in args
+		 * or set var false.
+		 */
 		if( 'ul' == $args['container']  ) {
 			$parent_element = 'li';
 		} elseif( ! empty( $args['parent_element'] ) ) {
@@ -700,13 +700,12 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 
 		/**
 		 * If we have a arg value for $button_element passed through
-		 * use it to default all the $buttons['element'] values
-		 * otherwise pass through as empyty string and class BP_button() will use it's default
-		 * 'anchor' or override & hardcode the 'element' string on $buttons array.
+		 * use it to default all the $buttons['button_element'] values
+		 * otherwise default to 'a' (anchor)
+		 * Or override & hardcode the 'element' string on $buttons array.
 		 *
+		 * Icons sets a class for icon display if not using the button element
 		 */
-
-		//Icons sets a class for icon display if not using th button element
 		$icons = '';
 		if( !empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;

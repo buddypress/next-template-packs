@@ -660,10 +660,10 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		}
 
 		/**
-		 * If the wrapper is set to 'ul'
-		 * use to pass through a boolean to set:
-		 * $li_item  => true / false
-		 * Will render li elements around anchors/buttons.
+		 * If the 'container' is set to 'ul'
+		 * set a var $parent_element to li
+		 * otherwise simply pass any value found in args
+		 * or set var false.
 		 */
 		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
 			$parent_element = 'li';
@@ -673,6 +673,14 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			$parent_element = false;
 		}
 
+		/**
+		 * If we have a arg value for $button_element passed through
+		 * use it to default all the $buttons['button_element'] values
+		 * otherwise default to 'a' (anchor)
+		 * Or override & hardcode the 'element' string on $buttons array.
+		 *
+		 * Icons sets a class for icon display if not using the button element
+		 */
 		$icons = '';
 		if( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
@@ -726,7 +734,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'parent_element'    => $parent_element,
 				'parent_attr'       => array(
 					'id'               => '',
-					'class'            => $parent_class . 'reject',
+					'class'            => $parent_class . ' ' . 'reject',
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
@@ -750,7 +758,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'parent_element'    => $parent_element,
 				'parent_attr'       => array(
 					'id'               => '',
-					'class'            => $parent_class . 'accept',
+					'class'            => $parent_class . ' ' . 'accept',
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
@@ -772,7 +780,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'parent_element'    => $parent_element,
 				'parent_attr'       => array(
 					'id'               => '',
-					'class'            => $parent_class . 'reject',
+					'class'            => $parent_class . ' ' . 'reject',
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(

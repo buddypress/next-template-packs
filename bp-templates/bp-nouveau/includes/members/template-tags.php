@@ -138,7 +138,13 @@ function bp_nouveau_member_email_notice_settings() {
 function bp_nouveau_member_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	$output = join( ' ', bp_nouveau_get_members_buttons( $type = '', $args ) );
+	if( bp_is_user() ) {
+		$args['type'] = 'profile';
+	} else {
+		$args['type'] = 'header';// we have no real need for this 'type' on header actions
+	}
+
+	$output = join( ' ', bp_nouveau_get_members_buttons( $args ) );
 
 	/**
 	 * On the member's header we need to reset the group button's global
@@ -181,19 +187,19 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		return;
 	}
 
-	$type   = 'loop';
+	$args['type'] = 'loop';
 	$action = 'bp_directory_members_actions';
 
 	// specific case for group members
 	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
-		$type   = 'group_member';
+		$args['type']   = 'group_member';
 		$action = 'bp_group_members_list_item_action';
 	} elseif ( bp_is_active( 'friends' ) && bp_is_user_friend_requests() ) {
-		$type   = 'friendship_request';
+		$args['type']   = 'friendship_request';
 		$action = 'bp_friend_requests_item_action';
 	}
 
-	$output = join( ' ', bp_nouveau_get_members_buttons( $type, $args ) );
+	$output = join( ' ', bp_nouveau_get_members_buttons( $args ) );
 
 	ob_start();
 	/**
@@ -216,7 +222,10 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 */
-	function bp_nouveau_get_members_buttons( $type = 'profile', $args ) {
+	function bp_nouveau_get_members_buttons( $args ) {
+
+		$type = ( ! empty( $args['type'] ) ) ?  $args['type'] : '';
+
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'profile' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return;
@@ -238,9 +247,9 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 
 		/**
 		 * If the 'container' is set to 'ul'
-		 * use to pass through a boolean to set:
-		 * $li_item  => true / false
-		 * Will render li elements around anchors/buttons.
+		 * set a var $parent_element to li
+		 * otherwise simply pass any value found in args
+		 * or set var false.
 		 */
 		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
 			$parent_element = 'li';
@@ -250,6 +259,14 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 			$parent_element = false;
 		}
 
+		/**
+		 * If we have a arg value for $button_element passed through
+		 * use it to default all the $buttons['button_element'] values
+		 * otherwise default to 'a' (anchor)
+		 * Or override & hardcode the 'element' string on $buttons array.
+		 *
+		 * Icons sets a class for icon display if not using the button element
+		 */
 		$icons = '';
 		if( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
@@ -299,7 +316,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'button_attr'       => array (
 							'href'             => esc_url( bp_get_friend_reject_request_link() ),
 							'class'            => 'button reject',
-							'rel'              => '',
+							//'rel'              => '',
 							'title'            => __( 'Reject', 'bp-nouveau' ),
 							),
 						'link_text'         => __( 'Reject', 'bp-nouveau' ),
@@ -367,9 +384,29 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				remove_filter( 'bp_get_send_public_message_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
-					$buttons['public_message'] = wp_parse_args( array(
-						'position' => 15,
-					), bp_nouveau()->members->button_args );
+					$button_args = bp_nouveau()->members->button_args;
+
+					$buttons['public_message'] = array(
+						'id'                => $button_args['id'],
+						'position'          => 15,
+						'component'         => $button_args['component'],
+						'must_be_logged_in' => $button_args['must_be_logged_in'],
+						'block_self'        => $button_args['block_self'],
+						'parent_element'    => $parent_element,
+						'parent_attr'       => array(
+								'id'              => $button_args['wrapper_id'],
+								'class'           => $parent_class,
+							),
+						'button_element'    => $button_element,
+						'button_attr'       => array(
+							'href'             => $button_args['link_href'],
+							'id'               => '',
+							'class'            => $button_args['link_class'],
+							//'rel'              => '',
+							//'title'            => '',
+							),
+						'link_text'         => $button_args['link_text'],
+					);
 
 					unset( bp_nouveau()->members->button_args );
 				}
@@ -389,10 +426,29 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				remove_filter( 'bp_get_send_message_button_args', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
-					$buttons['private_message'] = wp_parse_args( array(
-						'position'  => 25,
-						'link_href' => esc_url( trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ) ),
-					), bp_nouveau()->members->button_args );
+					$button_args = bp_nouveau()->members->button_args;
+var_dump($button_args);
+					$buttons['private_message'] = array(
+						'id'                => $button_args['id'],
+						'position'          => 25,
+						'component'         => $button_args['component'],
+						'must_be_logged_in' => $button_args['must_be_logged_in'],
+						'block_self'        => $button_args['block_self'],
+						'parent_element'    => $parent_element,
+						'parent_attr'       => array(
+								'id'              => $button_args['wrapper_id'],
+								'class'           => $parent_class,
+							),
+						'button_element'    => $button_element,
+						'button_attr'       => array(
+							'href'             => esc_url( trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ) ),
+							'id'               => false,
+							'class'            => $button_args['link_class'],
+							//'rel'              => '',
+							//'title'            => __('', 'buddypress'),
+							),
+						'link_text'         => $button_args['link_text'],
+					);
 
 					unset( bp_nouveau()->members->button_args );
 				}
