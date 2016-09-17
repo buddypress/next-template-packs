@@ -27,7 +27,9 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 					<div class="item">
 						<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
-						<p><span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span></p>
+						<p class="meta group-details">
+							<span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span>
+						</p>
 
 						<p class="desc">
 							<?php bp_group_description_excerpt(); ?>
@@ -35,7 +37,7 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 
 						<?php bp_nouveau_group_hook( '', 'invites_item' ); ?>
 
-						<?php bp_nouveau_groups_invite_buttons( array('container' => 'ul', 'parent_attr' => array('class' => 'super duper tokens') ) ); ?>
+						<?php bp_nouveau_groups_invite_buttons( array('container' => 'ul' ) ); ?>
 					</div>
 
 				</div>

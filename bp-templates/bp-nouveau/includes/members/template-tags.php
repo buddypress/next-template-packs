@@ -237,7 +237,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		}
 
 		/**
-		 * If the wrapper is set to 'ul'
+		 * If the 'container' is set to 'ul'
 		 * use to pass through a boolean to set:
 		 * $li_item  => true / false
 		 * Will render li elements around anchors/buttons.
@@ -261,7 +261,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		// If we pass through parent classes add them to $button array
 		$parent_class = '';
 		if( ! empty( $args['parent_attr']['class'] ) ) {
-			$parent_class = sanitize_text_field( $args['parent_attr']['class'] );
+			$parent_class = esc_html( $args['parent_attr']['class'] );
 		}
 
 		if ( bp_is_active( 'friends' ) ) {
@@ -275,7 +275,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'parent_element'    => $parent_element,
 						'parent_attr'       => array(
 							'id'               => '',
-							'class'            => $parent_class,
+							'class'            => $parent_class ,
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
