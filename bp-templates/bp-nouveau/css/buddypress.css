@@ -1911,7 +1911,7 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress .current-visibility-level {
 	font-style: normal;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .buddypress .field-visibility-settings,
@@ -1932,7 +1932,7 @@ body.no-js .buddypress .field-visibility-settings {
 }
 
 .buddypress .standard-form .field-visibility-settings label {
-	font-weight: normal;
+	font-weight: 400;
 	margin: 0;
 }
 
@@ -2654,7 +2654,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress table.wp-profile-fields tr td.label,
 .buddypress table.forum tr td.label {
 	border-right: 1px solid #eaeaea;
-	font-weight: bold;
+	font-weight: 700;
 	width: 25%;
 }
 
@@ -2881,13 +2881,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: none;
 	border: none;
 	border-right: 1px solid #eee;
-	color: #med-light-grey;
+	color: #e0e0e0;
 	display: inline-block;
 	padding: 0.3em 1em;
 }
 
 .buddypress .buddypress .text-links-list a.button:visited {
-	color: #med-light-grey;
+	color: #e0e0e0;
 }
 
 .buddypress .buddypress .text-links-list a.button:focus, .buddypress .buddypress .text-links-list a.button:hover {

@@ -10,7 +10,9 @@
 	.bp-tables-user,
 	table.wp-profile-fields,
 	table.forum {
+
 		thead {
+
 			tr {
 				background: $light-grey;
 			}
@@ -20,9 +22,11 @@
 	.bp-tables-user,
 	table.wp-profile-fields,
 	table.forum {
+
 		tr {
-		 th,
-		 td {
+
+			th,
+			td {
 				padding: $pad-sml;
 				vertical-align: middle;
 			}
@@ -32,10 +36,12 @@
 	.bp-tables-user,
 	table.wp-profile-fields,
 	table.forum {
+
 		tr {
+
 			td.label {
 				border-right: 1px solid $light-grey;
-				font-weight: bold;
+				font-weight: 700;
 				width: 25%;
 			}
 		}
@@ -43,7 +49,9 @@
 
 	.bp-tables-user,
 	table.wp-profile-fields, {
+
 		tr.alt {
+
 			td {
 				background: $off-white;
 			}
@@ -52,6 +60,7 @@
 
 	// Set various tables th/td cell sizes
 	table.notifications {
+
 		.bulk-select-all,
 		.bulk-select-check {
 			width: 7%;
@@ -72,6 +81,7 @@
 
 	table.notification-settings,
 	table.profile-settings {
+
 		th.title {
 			width: 80%;
 		}
@@ -79,6 +89,7 @@
 	// end cell sizings
 
 	table.notifications {
+
 		.notification-actions {
 			a.delete,
 			a.mark-read {
@@ -98,6 +109,7 @@
 
 	table.notifications,
 	table.notification-settings {
+
 		th.icon,
 		td:first-child {
 			display: none;
@@ -105,6 +117,7 @@
 	}
 
 	table.notification-settings {
+
 		.no,
 		.yes {
 			text-align: center;
@@ -119,7 +132,9 @@
 		.thread-info {
 			min-width: 40%;
 
-			p { margin: 0; }
+			p {
+				margin: 0;
+			}
 
 			p.thread-excerpt {
 				color: $form-text;

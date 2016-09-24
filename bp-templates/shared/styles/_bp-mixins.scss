@@ -2,20 +2,23 @@
 // BuddyPress Sass Mixins
 //
 
-// This file provides some basic mixins for BP elements such as box sizing
-// radius, calc etc
+// This file provides some basic mixins for BP elements
+// such as box sizing, radius, calc etc
 
 
 // ======= Typography ======
 
-// BP provides two mixins for font size, one basic  that states a value and can
-// produce rem & px versions the other that calculates  a reduced size for small
-// screen sizes or series of screens described as breakpoints & can be termed responsive font sizing.
+// BP provides two mixins for font size, one basic  that states
+// a value and can produce rem & px versions the other that calculates
+// a reduced size for small
+// screen sizes or series of screens described as breakpoints & can
+// be termed responsive font sizing.
 
 
 
 // Font size decs are used with caution BP doesn't manage
 // layout sizes & must take care to work with existing layout sizes.
+
 @mixin font-size($font-size: 16) {
 	$rem-font-value: ($font-size / 10);
 	font-size: ($font-size * 1px);
@@ -25,8 +28,10 @@
 
 // The following Sass map handles some basic re-sizing of BP fonts.
 // Sizes are set to change on the medium breakpoint.
-// It is hard for BP to know what the theme is doing so we are limited in what we can do here.
-// The dev can feed a value to the mixin which will then be calculated below to find a reduced size
+// It is hard for BP to know what the theme is doing so we are
+// limited in what we can do here.
+// The dev can feed a value to the mixin which will then be calculated
+// below to find a reduced size.
 
 @mixin responsive-font($res-size: 16) {
 
@@ -36,20 +41,20 @@
 	$larger: $the-sizes;
 
 	$the-sizes: (
-  null:   $small,
-  46.8em: $larger
+		null:   $small,
+		46.8em: $larger
 	);
 
-  @each $font-breakpoint, $resonsive-font-size in $the-sizes {
-    @if $font-breakpoint == null {
-      font-size: $resonsive-font-size + px;
-    }
-    @else {
-      @media screen and (min-width: $font-breakpoint) {
-        font-size: $resonsive-font-size + px;
-      }
-    }
-  }
+	@each $font-breakpoint, $resonsive-font-size in $the-sizes {
+		@if $font-breakpoint == null {
+			font-size: $resonsive-font-size + px;
+		}
+		@else {
+			@media screen and (min-width: $font-breakpoint) {
+				font-size: $resonsive-font-size + px;
+			}
+		}
+	}
 
 }
 

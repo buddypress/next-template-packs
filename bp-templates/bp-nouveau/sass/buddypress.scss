@@ -6,7 +6,8 @@
 // This file compiles to buddypress.css.
 //
 // Imported into this file are the building block partial files
-// that form the base level styles plus any files from the new theme/template pack
+// that form the base level styles plus any files from the new
+// theme/template pack.
 
 
 // Import our partials mixins & variables files
@@ -20,6 +21,7 @@
 // be used, default modular styles imported may provide
 // all the rules needed for the section.
 //
+
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -81,7 +83,6 @@
 * @section 2.0 - Navigation - General
 *-------------------------------------------------------------------------------
 */
-
 
 
 /**
@@ -148,7 +149,6 @@
 */
 
 @import "../../shared/styles/_bp_activity_comments";
-
 @import "../../shared/styles/_bp_comment_form";
 
 /**

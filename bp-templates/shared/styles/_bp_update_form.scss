@@ -1,7 +1,9 @@
 // BP Whats new form handles user updates to groups or profiles
 
 .item-body {
+
 	.activity-update-form {
+
 		.activity-form {
 			margin: 0;
 			padding: 0;
@@ -17,7 +19,6 @@
 	}
 
 	#whats-new-avatar {
-		//float: left;
 		margin-right: $marg-sml;
 		text-align: center;
 
@@ -47,6 +48,7 @@
 	//.textarea-wrap { // #whats-new-textarea
 
 	#whats-new-textarea {
+
 		textarea {
 			background: $textarea-bck;
 			@include box-model();
@@ -60,7 +62,7 @@
 
 			&:focus {
 				background: $off-white;
-				border-color: 	$focussed-border-clr;
+				border-color: $focussed-border-clr;
 				outline-color: $focussed-border-clr;
 			}
 		}
