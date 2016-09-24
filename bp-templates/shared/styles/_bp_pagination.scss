@@ -31,13 +31,16 @@
 		}
 
 		.bp-pagination-links {
+
 			a:focus,
 			a:hover {
 				opacity: 1;
 			}
 		}
 
-		p {margin: 0;}
+		p {
+			margin: 0;
+		}
 
 	} // close .bp-pagination
 

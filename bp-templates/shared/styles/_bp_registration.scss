@@ -10,41 +10,41 @@
 	.signup-form {
 		margin-top: $marg-lrg;
 
-	.editfield {
-		border: 1px solid $bp-border-color;
-		margin: $marg-lrg 0;
-		padding: 5px;
+		.editfield {
+			border: 1px solid $bp-border-color;
+			margin: $marg-lrg 0;
+			padding: 5px;
 
-		// try and set labels and legends to same visual styles.
-		label,
-		legend {
-			font-weight: bold;
-			margin: $marg-sml 0 0;
-		}
-
-		fieldset {
-			border: 0;
-			padding: 0;
-
+			// try and set labels and legends to same visual styles.
+			label,
 			legend {
-				text-indent: 0;
+				font-weight: 700;
+				margin: $marg-sml 0 0;
 			}
-		}
 
-		.field-visibility-settings {
-			padding: $pad-sml;
 			fieldset {
-				margin: 0 0 $marg-sml;
+				border: 0;
+				padding: 0;
+
+				legend {
+					text-indent: 0;
+				}
 			}
+
+			.field-visibility-settings {
+				padding: $pad-sml;
+
+				fieldset {
+					margin: 0 0 $marg-sml;
+				}
+			}
+		} // editfield
+
+		#signup-avatar img {
+			margin: 0 $marg-med $marg-sml 0;
 		}
-	} // editfield
 
-
-	#signup-avatar img {
-		margin: 0 $marg-med $marg-sml 0;
-	}
-
-	@include medium-up() {
+		@include medium-up() {
 
 			.default-profile,
 			.extended-profile {
@@ -67,6 +67,5 @@
 			}
 
 		} // close @media
-
-		} // close .register-form
+	} // close .signup-form
 }

@@ -1,6 +1,6 @@
 // BP primary & secondary navigation - directory and single screens
 
-	// all devices
+// all devices
 .bp-navs {
 	background: transparent;
 	clear: both;
@@ -23,6 +23,7 @@
 		}
 
 		li {
+
 			a,
 			span {
 				border: 0;
@@ -49,6 +50,7 @@
 		// if not pull out & move to end.
 		li.selected,
 		li.current {
+
 			a {
 				color: $black;
 				opacity: 1;
@@ -59,8 +61,11 @@
 
 	&.bp-invites-filters,
 	&.bp-messages-filters {
+
 		ul {
+
 			li {
+
 				a {
 					border: 1px solid #ccc;
 					display: inline-block;
@@ -83,7 +88,9 @@
 		li.selected,
 		li.current,
 		li a:hover {
+
 			a {
+
 				span {
 					background-color: $grey;
 				}
@@ -92,6 +99,7 @@
 
 		li.selected,
 		li.current {
+
 			a,
 			a:focus,
 			a:hover {
@@ -101,23 +109,23 @@
 				span {
 					border-color: $off-white;
 				}
-
 			}
-
 		}
 
 		li:not(.current),
 		li:not(.selected), {
+
 			a:focus,
 			a:hover {
 				background: $grey;
 			}
 		}
-
 	}
 
 	@include medium-up() {
+
 		.main-navs:not(.dir-navs) {
+
 			li.selected,
 			li.current {
 
@@ -130,6 +138,7 @@
 		}
 
 		.main-navs.vertical {
+
 			li.selected,
 			li.current {
 
@@ -144,6 +153,7 @@
 	} // close @media
 
 	.bp-subnavs {
+
 		li.selected,
 		li.current {
 
@@ -152,19 +162,20 @@
 				color: $off-white;
 			}
 		}
-
 	}
 }
 
 // visual styling of default single navs - adds background/padding to
 // the parent elements if vertical nav not selected
 .buddypress:not(.bp-vertical-nav) {
+
 	.bp-navs:not(.dir-navs) {
 		background: $light-grey;
 	}
 
 	.main-navs {
-		>ul >li >a {
+
+		> ul > li > a {
 			padding: 8px 10px;
 		}
 	}
@@ -183,12 +194,13 @@
 		width: 100%;
 	}
 
-	.bp-subnavs
-	/*.bp-subnavs#subsubnav*/ {
-		margin: $marg-sml 0 ;
+	.bp-subnavs {
+
+		margin: $marg-sml 0;
 		overflow: hidden;
 
 		ul {
+
 			li {
 				margin-top: 0;
 			}
@@ -202,7 +214,9 @@
 	.bp-navs.bp-invites-nav#subnav,
 	.bp-navs.bp-invites-filters#subsubnav,
 	.bp-navs.bp-messages-filters#subsubnav {
+
 		ul {
+
 			li.last {
 				margin-top: 0;
 			}
@@ -213,10 +227,14 @@
 
 .buddypress_object_nav,
 .buddypress {
+
 	.bp-navs {
+
 		li.selected,
 		li.current {
+
 			a {
+
 				span {
 					background-color: $white;
 				}
@@ -226,7 +244,9 @@
 		li.dynamic,
 		li.dynamic.selected,
 		li.dynamic.current {
+
 			a {
+
 				span {
 					background-color: $highlight;
 					border: 0;
@@ -236,7 +256,9 @@
 		}
 
 		li.dynamic {
+
 			a:hover {
+
 				span {
 					background-color: highlight;
 					border: 0;
@@ -246,7 +268,9 @@
 		} // li
 
 		li {
+
 			a {
+
 				span:empty {
 					display: none;
 				}
@@ -261,6 +285,7 @@
 	@include medium-up() {
 
 		.bp-navs {
+
 			li { // set the list links of all navs to shrinkwrap/width auto
 				float: left;
 			}
@@ -293,13 +318,17 @@
 
 // Just buddypress_object_nav rules
 .buddypress_object_nav {
+
 	.bp-navs {
+
 		ul {
 			// yes it's empty, I know that!
 		}
 
 		li {
+
 			a {
+
 				span {
 					display: inline-block;
 					float: right;
@@ -317,7 +346,9 @@
 // medium screens up
 
 .buddypress {
+
 	#item-body {
+
 		@include medium-up {
 
 			// Profile group name links
@@ -334,23 +365,25 @@
 			}
 
 			.bp-navs.group-create-links.tabbed-links {
-					background: none;
+				background: none;
 
-					ul {
-						span {
-							background: none;
-							border: none;
-							border-radius: none;
-							@include font-size(19);
-							padding: 5px 10px;
-						}
+				ul {
+
+					span {
+						background: none;
+						border: none;
+						border-radius: none;
+						@include font-size(19);
+						padding: 5px 10px;
 					}
+				}
 			}
 
 			// For tabbed nav we remove any default button nav styles.
 			ul.button-tabs {
 
 				li {
+
 					a {
 						border-right: 0;
 					}
@@ -367,6 +400,7 @@
 
 				li,
 				li.current {
+
 					a,
 					a:focus,
 					a:hover {
@@ -381,6 +415,5 @@
 			}
 
 		} // @media
-
 	}
 }

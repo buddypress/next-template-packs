@@ -7,7 +7,7 @@
 		form {
 
 			input[type="search"],
-			input[type=text] {
+			input[type="text"] {
 				float: left;
 				padding: 6px 10px;
 				width: 65%;
@@ -17,7 +17,7 @@
 				border-left: 0;
 				display: none;
 				float: left;
-				font-weight: normal;
+				font-weight: 400;
 				line-height: inherit;
 				padding: 0.5em 0.8em;
 				text-align: center;
@@ -49,7 +49,7 @@
 
 	ul.filters  li  form label input {
 		line-height: 1.4;
-		padding: .1em .7em;
+		padding: 0.1em 0.7em;
 	}
 
 	.current-member-type {
@@ -65,12 +65,13 @@
 // Try and apply correct tweaks for group/user screens search
 
 .bp-user {
+
 	[data-bp-search] {
 
 		form {
 
 			input[type="search"],
-			input[type=text] {
+			input[type="text"] {
 				padding: 6px 10px 7px;
 			}
 
