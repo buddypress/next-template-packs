@@ -4,16 +4,17 @@
 #message-threads { // table element
 
 	tr.unread {
+
 		td {
 			background: #fff9db;
 			border-bottom: 1px solid #ffe8c4;
 			border-top: 1px solid #ffe8c4;
-			font-weight: bold;
+			font-weight: 700;
 
 			&.thread-options,
 			.activity,
 			.thread-excerpt {
-				font-weight: normal;
+				font-weight: 400;
 			}
 
 		}
@@ -21,15 +22,13 @@
 		span.unread-count {
 			background: #d00;
 			color: #fff;
-			font-weight: bold;
+			font-weight: 700;
 			padding: 2px 8px;
 		}
 
 	} // tr.unread
 
 } // close table#message-threads
-
-tr.unread
 
 #message-thread {
 
@@ -44,7 +43,7 @@ tr.unread
 	}
 
 	#message-recipients {
-		margin: 10px 0 20px 0;
+		margin: 10px 0 20px;
 	}
 
 	img.avatar {

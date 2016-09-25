@@ -1,6 +1,7 @@
 // BP Layouts
-// Layouts provides classes to handle specific module layouts on a user selectable basis
-// The sheet also adds layout properties such border-box
+// Layouts provides classes to handle specific module
+// layouts on a user selectable basis.
+// The sheet also adds layout properties such as border-box
 
 #item-body,
 .single-screen-navs {
@@ -16,12 +17,12 @@
 .grid {
 	// the parent element (usually the ul)
 
-	>li,
-	>li .generic-button a {
+	> li,
+	> li .generic-button a {
 		@include box-model( border-box );
 	}
 
-	>li {
+	> li {
 		border-bottom: 0;
 		padding-bottom: 20px;
 		padding-top: 0;
@@ -50,22 +51,26 @@
 			}
 		}
 
-	} // close >li
+	} // close > li
 
 }
 
 /* Build the two column class small up */
+
 @include small-up() {
+
 	// Set the column  or item numbers to span horizontally
 	.grid {
 
-		>li.item-entry {
+		> li.item-entry {
 			float: left;
 			margin: 0;
 		}
 
-		&.two, &.three {
-			>li {
+		&.two,
+		&.three {
+
+			> li {
 				width: 50%;
 
 				&:nth-child(odd) {
@@ -84,12 +89,13 @@
 						width: auto;
 					}
 				}
-			} // close >li
+			} // close > li
 		}
 	}
 }
 
 /* Build the three column class medium up */
+
 @include medium-up() {
 
 	.grid {
@@ -97,10 +103,10 @@
 		// Set three to a row
 		&.three {
 
-			>li {
+			> li {
 				padding-top: 0;
 				width: 33.333333%;
-				width: calc(100% /3);
+				width: calc(100% / 3);
 
 				&:nth-child(1n+1) {
 					padding-left: 5px;
@@ -123,12 +129,15 @@
 } // close @media
 
 /* Build the four column class medium up */
+
 @include medium-up() {
+
 	// Set four to a row
 	.grid {
+
 		&.four {
 
-			>li {
+			> li {
 				width: 25%;
 
 				&:nth-child(1n+1) {
@@ -146,7 +155,7 @@
 					padding-right: 5px;
 				}
 
-			} // close >li
+			} // close > li
 		}
 	} // .grid
 } // close @media
@@ -156,13 +165,13 @@
 
 /* Style the .bp-list li elements if a 'grid' class added to the ul*/
 
-	// if grid is set & this is a member, group or blog loop
-	// we want to re-style some of the elements in the item
+// if grid is set & this is a member, group or blog loop
+// we want to re-style some of the elements in the item
 
 .grid.bp-list {
 	padding-top: $pad-med;
 
-	>li {
+	> li {
 		border-bottom: none;
 
 		.wrap {
@@ -219,7 +228,7 @@
 
 			.generic-button {
 				float: none;
-				margin: $marg-xsml 0 0 ;
+				margin: $marg-xsml 0 0;
 				text-align: center;
 				width: 100%;
 			}
@@ -231,20 +240,23 @@
 			float: none;
 		}
 
-	} // close >li
+	} // close > li
 } // close .grid.bp-list
 
-	// .wrap min-heights & other adjustments per component type loop
-	// this section needs review as tricky in trying to get equal height
-	// on elements and some rules here are repeated to allow for variable values.
+// .wrap min-heights & other adjustments per component type loop
+// this section needs review as tricky in trying to get equal height
+// on elements and some rules here are repeated to allow for variable values.
 .grid {
+
 	&.members-list {
+
 		.wrap {
 			min-height: 350px;
 		}
 	}
 
 	&.groups-list {
+
 		.wrap {
 			min-height: 450px;
 
@@ -272,6 +284,7 @@
 	}
 
 	&.blogs-list {
+
 		.wrap {
 			min-height: 350px;
 		}
@@ -279,7 +292,7 @@
 
 } // close .grid
 
-	// ==== Vertical Navigation Classes ====
+// ==== Vertical Navigation Classes ====
 
 // These classes added to the BP user navigation elements
 // will provide rules to modify the layout to present the
@@ -287,7 +300,9 @@
 // horizontally across the item-body
 
 @include medium-up() {
+
 	.buddypress {
+
 		.vertical {
 			overflow: visible;
 
@@ -307,7 +322,7 @@
 				}
 
 				&:focus,
-				&:hover  {
+				&:hover {
 					background: $grey;
 				}
 
@@ -326,7 +341,8 @@
 		}
 	} // close .buddypress
 
-	// re-factor the related elements like the #item-body so it sits alongside(floated)
+	// re-factor the related elements like the #item-body so it sits
+	// to the side(floated)
 
 	.bp-vertical-nav { // the body or additional #buddypress element class
 
@@ -364,6 +380,7 @@
 				}
 
 				li.current {
+
 					a {
 						background: none;
 						color: $black;
@@ -372,6 +389,7 @@
 				}
 
 				li:last-child {
+
 					a {
 						border: none;
 					}

@@ -23,7 +23,9 @@
 			clear: both;
 		}
 
-		> li { border-bottom: 1px solid $light-grey; }
+		> li {
+			border-bottom: 1px solid $light-grey;
+		}
 
 		li {
 			list-style: none;
@@ -44,7 +46,7 @@
 				.list-title {
 					clear: none; // some WP themes state clear:both
 					@include responsive-font(28);
-					font-weight: normal;
+					font-weight: 400;
 					margin: 0;
 				}
 			}
@@ -62,6 +64,7 @@
 			}
 
 			@include small-up() {
+
 				.item-avatar {
 					float: left;
 					text-align: center;

@@ -635,7 +635,7 @@ dt.section-title {
 .buddypress .bp-list li .item .list-title {
 	clear: none;
 	font-size: 23px;
-	font-weight: normal;
+	font-weight: 400;
 	margin: 0;
 }
 
@@ -1367,7 +1367,7 @@ form.ac-form .ac-reply-content input {
 
 .register-page .signup-form .editfield label,
 .register-page .signup-form .editfield legend {
-	font-weight: bold;
+	font-weight: 700;
 	margin: 10px 0 0;
 }
 
@@ -2570,7 +2570,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 *----------------------------------------------------------
 */
 .buddypress [data-bp-search] form input[type="search"],
-.buddypress [data-bp-search] form input[type=text] {
+.buddypress [data-bp-search] form input[type="text"] {
 	float: left;
 	padding: 6px 10px;
 	width: 65%;
@@ -2580,7 +2580,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-left: 0;
 	display: none;
 	float: left;
-	font-weight: normal;
+	font-weight: 400;
 	line-height: inherit;
 	padding: 0.5em 0.8em;
 	text-align: center;
@@ -2607,7 +2607,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress ul.filters li form label input {
 	line-height: 1.4;
-	padding: .1em .7em;
+	padding: 0.1em 0.7em;
 }
 
 .buddypress .current-member-type {
@@ -2619,7 +2619,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .bp-user [data-bp-search] form input[type="search"],
-.bp-user [data-bp-search] form input[type=text] {
+.bp-user [data-bp-search] form input[type="text"] {
 	padding: 6px 10px 7px;
 }
 
@@ -3264,7 +3264,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.grid.three > li {
 		padding-top: 0;
 		width: 33.333333%;
-		width: calc(100% /3);
+		width: calc(100% / 3);
 	}
 	.grid.three > li:nth-child(1n+1) {
 		padding-left: 5px;
