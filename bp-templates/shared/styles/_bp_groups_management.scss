@@ -2,6 +2,7 @@
 
 // Groups settings screen
 .radio {
+
 	.group-conditions { // the dl
 		@include responsive-font(16);
 		margin-left: $marg-lrg;
@@ -60,7 +61,9 @@
 		}
 
 		@include medium-up() {
+
 			li {
+
 				.avatar,
 				.member-name {
 					float: left;

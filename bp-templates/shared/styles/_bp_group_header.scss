@@ -3,13 +3,16 @@
 .groups-header {
 
 	// The admin & mod list display for a group.
-	// 'moderators-lists' is used to refer to generic members with elevated access
+	// 'moderators-lists' is used to refer to
+	// generic members with elevated access.
 	.moderators-lists {
+
 		.moderators-title {
 			@include font-size(14);
 		}
 
 		.user-list {
+
 			ul {
 				overflow: hidden;
 			}

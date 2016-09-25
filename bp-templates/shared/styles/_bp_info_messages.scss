@@ -36,17 +36,18 @@
 
 		// Error message boxes
 		&.error {
+
 			p {
 				// oh linter you're too boringly pedantic, there will be properties!
 			}
 		}
 
 		// Warning boxes
-		&.warning {
-			p {
-				// oh linter you're too boringly pedantic, there will be properties!
-			}
-		}
+		//		&.warning {
+
+		//			p {
+		//			}
+		//		}
 
 		&.sitewide-notice {
 			// rebuild these rules and classes
@@ -138,7 +139,7 @@
 
 		&.error,
 		&.bad {
-		@include pwd-bad-colors();
+			@include pwd-bad-colors();
 			display: block;
 		}
 
