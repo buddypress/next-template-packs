@@ -83,6 +83,7 @@ body .buddypress h6 {
 	margin: 1em 0;
 }
 
+/* Ensure .bp-wrap encloses it's children */
 .bp-wrap:before,
 .bp-wrap:after {
 	content: " ";
@@ -1292,7 +1293,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .buddypress .groups-list li p {
-	margin: 0 0 .5em;
+	margin: 0 0 0.5em;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -1445,7 +1446,7 @@ form.ac-form .ac-reply-content input {
 	color: #777;
 	display: inline-block;
 	font-size: 120%;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .single-headers div#message p,
@@ -1453,7 +1454,7 @@ form.ac-form .ac-reply-content input {
 	background-color: #ffd;
 	border: 1px solid #cb2;
 	color: #440;
-	font-weight: normal;
+	font-weight: 400;
 	margin-top: 3px;
 	text-decoration: none;
 }
@@ -1476,7 +1477,7 @@ form.ac-form .ac-reply-content input {
 .single-headers h2 span.highlight {
 	display: inline-block;
 	font-size: 60%;
-	font-weight: normal;
+	font-weight: 400;
 	line-height: 170%;
 	vertical-align: middle;
 }
@@ -1486,7 +1487,7 @@ form.ac-form .ac-reply-content input {
 	color: #fff;
 	cursor: pointer;
 	font-size: 80%;
-	font-weight: bold;
+	font-weight: 700;
 	margin-bottom: 2px;
 	padding: 1px 4px;
 	position: relative;
@@ -1503,7 +1504,7 @@ form.ac-form .ac-reply-content input {
 .single-headers div#item-meta {
 	color: #aaa;
 	font-size: 80%;
-	margin: 15px 0 5px 0;
+	margin: 15px 0 5px;
 	overflow: hidden;
 	padding-bottom: 10px;
 }
@@ -1516,7 +1517,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .single-headers div#item-actions h3 {
-	margin: 0 0 5px 0;
+	margin: 0 0 5px;
 }
 
 .single-headers ul {
@@ -2378,15 +2379,15 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 
 .buddypress fieldset legend {
 	font-size: inherit;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 .buddypress textarea:focus,
-.buddypress input[type=text]:focus,
-.buddypress input[type=email]:focus,
-.buddypress input[type=url]:focus,
-.buddypress input[type=tel]:focus,
-.buddypress input[type=password]:focus {
+.buddypress input[type="text"]:focus,
+.buddypress input[type="email"]:focus,
+.buddypress input[type="url"]:focus,
+.buddypress input[type="tel"]:focus,
+.buddypress input[type="password"]:focus {
 	-webkit-box-shadow: 0 0 8px #eee;
 	-moz-box-shadow: 0 0 8px #eee;
 	box-shadow: 0 0 8px #eee;
@@ -2397,26 +2398,26 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 }
 
 .buddypress .standard-form textarea,
-.buddypress .standard-form input[type=text],
-.buddypress .standard-form input[type=color],
-.buddypress .standard-form input[type=date],
-.buddypress .standard-form input[type=datetime],
-.buddypress .standard-form input[type=datetime-local],
-.buddypress .standard-form input[type=email],
-.buddypress .standard-form input[type=month],
-.buddypress .standard-form input[type=number],
-.buddypress .standard-form input[type=range],
-.buddypress .standard-form input[type=search],
-.buddypress .standard-form input[type=tel],
-.buddypress .standard-form input[type=time],
-.buddypress .standard-form input[type=url],
-.buddypress .standard-form input[type=week],
+.buddypress .standard-form input[type="text"],
+.buddypress .standard-form input[type="color"],
+.buddypress .standard-form input[type="date"],
+.buddypress .standard-form input[type="datetime"],
+.buddypress .standard-form input[type="datetime-local"],
+.buddypress .standard-form input[type="email"],
+.buddypress .standard-form input[type="month"],
+.buddypress .standard-form input[type="number"],
+.buddypress .standard-form input[type="range"],
+.buddypress .standard-form input[type="search"],
+.buddypress .standard-form input[type="tel"],
+.buddypress .standard-form input[type="time"],
+.buddypress .standard-form input[type="url"],
+.buddypress .standard-form input[type="week"],
 .buddypress .standard-form select,
-.buddypress .standard-form input[type=password],
-.buddypress .standard-form [data-bp-search] input[type=search],
-.buddypress .standard-form [data-bp-search] input[type=text],
-.buddypress .standard-form .groups-members-search input[type=search],
-.buddypress .standard-form .groups-members-search input[type=text] {
+.buddypress .standard-form input[type="password"],
+.buddypress .standard-form [data-bp-search] input[type="search"],
+.buddypress .standard-form [data-bp-search] input[type="text"],
+.buddypress .standard-form .groups-members-search input[type="search"],
+.buddypress .standard-form .groups-members-search input[type="text"] {
 	background: #fafafa;
 	border: 1px solid #ccc;
 	border-radius: 0;
@@ -2430,8 +2431,8 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	width: 100%;
 }
 
-.buddypress .standard-form input[type=radio],
-.buddypress .standard-form input[type=checkbox] {
+.buddypress .standard-form input[type="radio"],
+.buddypress .standard-form input[type="checkbox"] {
 	margin-right: 5px;
 	width: auto;
 }
@@ -2448,7 +2449,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	height: 200px;
 }
 
-.buddypress .standard-form input[type=password] {
+.buddypress .standard-form input[type="password"] {
 	margin-bottom: 5px;
 }
 
@@ -2463,7 +2464,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress .standard-form label,
 .buddypress .standard-form span.label {
 	display: block;
-	font-weight: bold;
+	font-weight: 700;
 	margin: 15px 0 5px;
 	width: auto;
 }
@@ -2489,7 +2490,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 
 .buddypress .standard-form p label,
 .buddypress .standard-form #invite-list label {
-	font-weight: normal;
+	font-weight: 400;
 	margin: auto;
 }
 
@@ -2503,7 +2504,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress .standard-form div.radio div label {
 	color: #777;
 	font-size: 100%;
-	font-weight: normal;
+	font-weight: 400;
 	margin: 5px 0 0;
 }
 
@@ -2515,8 +2516,8 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	margin-top: 5px;
 }
 
-.buddypress .standard-form#sidebar-login-form input[type=text],
-.buddypress .standard-form#sidebar-login-form input[type=password] {
+.buddypress .standard-form#sidebar-login-form input[type="text"],
+.buddypress .standard-form#sidebar-login-form input[type="password"] {
 	padding: 4px;
 	width: 95%;
 }
@@ -2556,9 +2557,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 /* Overrides for embedded WP editors */
 .buddypress .wp-editor-wrap a.button,
 .buddypress .wp-editor-wrap .wp-editor-wrap button,
-.buddypress .wp-editor-wrap .wp-editor-wrap input[type=submit],
-.buddypress .wp-editor-wrap .wp-editor-wrap input[type=button],
-.buddypress .wp-editor-wrap input[type=reset] {
+.buddypress .wp-editor-wrap .wp-editor-wrap input[type="submit"],
+.buddypress .wp-editor-wrap .wp-editor-wrap input[type="button"],
+.buddypress .wp-editor-wrap input[type="reset"] {
 	padding: 0 8px 1px;
 }
 

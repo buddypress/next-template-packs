@@ -2,7 +2,9 @@
 
 // ========= Generic Sitewide elements ========
 body {
+
 	.buddypress {
+
 		* {
 			// some WP themes add anchor border bottom :(
 			a {
@@ -15,6 +17,7 @@ body {
 		// Some themes have a negative left margin on the blockquote element??
 		#item-body,
 		.bp-lists {
+
 			blockquote {
 				margin-left: $marg-sml;
 			}
@@ -30,10 +33,12 @@ body {
 	}
 }
 
-// Some themes have very restricted content widths for pages or entry-content (2013, 2014)
-// Lets adjust these restrictions
+// Some themes have very restricted content widths for pages
+// or entry-content (2013, 2014) Lets adjust these restrictions
 body.buddypress {
+
 	@include medium-up() {
+
 		.entry-content {
 			max-width: none;
 			padding: 0 $pad-xlrg;
@@ -48,6 +53,7 @@ body.buddypress {
 // Ensure themes can't cause issues with headings.
 body { // add weight
 	.buddypress {
+
 		h1,
 		h2,
 		h3,
@@ -61,9 +67,10 @@ body { // add weight
 	}
 }
 
-// Ensure the .bp-wrap element always contains it's children - this may cause issues
-// but gropus single requires it.
-@include clearfix-element('.bp-wrap');
+// Ensure the .bp-wrap element always contains it's children,
+// this may cause issues but gropus single requires it.
+/* Ensure .bp-wrap encloses it's children */
+@include clearfix-element(".bp-wrap");
 
 // General site avatars round or square ?
 // User set
@@ -102,6 +109,7 @@ dt.section-title {
 }
 
 .dir-component-filters {
+
 	#activity-filter-by {
 		@include responsive-font(16);
 	}
@@ -110,14 +118,17 @@ dt.section-title {
 $search-element-size: 15;
 $search-element-button-size: $search-element-size + 5;
 
-	.bp-tables-user {
-		th {
-			@include responsive-font(16);
-		}
+.bp-tables-user {
 
-		td {
-			@include responsive-font(14);
-		}
+	th {
+		@include responsive-font(16);
 	}
 
-#notification-select { @include responsive-font(14) }
+	td {
+		@include responsive-font(14);
+	}
+}
+
+#notification-select {
+	@include responsive-font(14);
+}

@@ -4,18 +4,17 @@
 // labels - sizing especially for standalone controls
 // 'bp-label-text'
 //
-// Where a 'p' element is used to wrap form controls that element should be classed with
-// 'bp-controls-wrap'
+// Where a 'p' element is used to wrap form controls
+// that element should be classed with 'bp-controls-wrap'
 
 .buddypress {
 
-
 	.filter,
 	#whats-new-post-in-box { // has no form element and can't hold rules below.
-			select {
-				border: 1px solid $form-border-color;
-			}
+		select {
+			border: 1px solid $form-border-color;
 		}
+	}
 
 	*[disabled="disabled"] {
 		cursor: default;
@@ -23,23 +22,24 @@
 	}
 
 	fieldset {
+
 		legend {
 			font-size: inherit;
-			font-weight: bold;
+			font-weight: 700;
 		}
 	}
 
-textarea,
-input[type=text],
-input[type=email],
-input[type=url],
-input[type=tel],
-input[type=password] {
+	textarea,
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="tel"],
+	input[type="password"] {
 
-	&:focus {
+		&:focus {
 			@include box-shadow(0 0 8px #eee);
+		}
 	}
-}
 
 	.standard-form {
 
@@ -48,26 +48,26 @@ input[type=password] {
 		}
 
 		textarea,
-		input[type=text],
-		input[type=color],
-		input[type=date],
- 	input[type=datetime],
- 	input[type=datetime-local],
- 	input[type=email],
- 	input[type=month],
- 	input[type=number],
- 	input[type=range],
- 	input[type=search],
- 	input[type=tel],
- 	input[type=time],
- 	input[type=url],
- 	input[type=week],
- 	select,
-		input[type=password],
-		[data-bp-search] input[type=search],
-		[data-bp-search] input[type=text],
-		.groups-members-search input[type=search],
-		.groups-members-search input[type=text] {
+		input[type="text"],
+		input[type="color"],
+		input[type="date"],
+		input[type="datetime"],
+		input[type="datetime-local"],
+		input[type="email"],
+		input[type="month"],
+		input[type="number"],
+		input[type="range"],
+		input[type="search"],
+		input[type="tel"],
+		input[type="time"],
+		input[type="url"],
+		input[type="week"],
+		select,
+		input[type="password"],
+		[data-bp-search] input[type="search"],
+		[data-bp-search] input[type="text"],
+		.groups-members-search input[type="search"],
+		.groups-members-search input[type="text"] {
 			background: $off-white;
 			border: 1px solid $form-border-color;
 			border-radius: 0;
@@ -81,8 +81,8 @@ input[type=password] {
 			width: 100%;
 		}
 
-		input[type=radio],
-		input[type=checkbox] {
+		input[type="radio"],
+		input[type="checkbox"] {
 			margin-right: $marg-xsml;
 			width: auto;
 		}
@@ -93,14 +93,13 @@ input[type=password] {
 
 		textarea {
 			height: 120px; // bad rule! ?
-		//	width: 75%;
 		}
 
 		textarea#message_content {
 			height: 200px; // bad rule! ?
 		}
 
-		input[type=password] {
+		input[type="password"] {
 			margin-bottom: $marg-xsml;
 		}
 
@@ -115,7 +114,7 @@ input[type=password] {
 		label,
 		span.label {
 			display: block;
-			font-weight: bold;
+			font-weight: 700;
 			margin: $marg-med 0 $marg-xsml;
 			width: auto;
 		}
@@ -141,7 +140,7 @@ input[type=password] {
 
 		p label,
 		#invite-list label {
-			font-weight: normal;
+			font-weight: 400;
 			margin: auto;
 		}
 
@@ -155,11 +154,12 @@ input[type=password] {
 		div.radio div label {
 			color: $form-text;
 			font-size: 100%;
-			font-weight: normal;
+			font-weight: 400;
 			margin: $marg-xsml 0 0;
 		}
 
 		&#send-reply {
+
 			textarea {
 				width: 97.5%;
 			}
@@ -171,8 +171,8 @@ input[type=password] {
 				margin-top: $marg-xsml;
 			}
 
-			input[type=text],
-			input[type=password] {
+			input[type="text"],
+			input[type="password"] {
 				padding: 4px;
 				width: 95%;
 			}
@@ -180,7 +180,7 @@ input[type=password] {
 
 		@include medium-up() {
 
-				// The Group invites form lists (not required if Ajax templates in use)
+			// The Group invites form lists (not required if Ajax templates in use)
 			.left-menu {
 				float: left;
 			}
@@ -213,8 +213,10 @@ input[type=password] {
 
 } // close .buddypress
 
-// These rules do not belong here really but it's where original styles placed them
+// These rules do not belong here really but it's
+// where original styles placed them
 body.no-js {
+
 	.buddypress {
 
 		#notifications-bulk-management #select-all-notifications,
@@ -230,12 +232,14 @@ body.no-js {
 
 /* Overrides for embedded WP editors */
 .buddypress {
+
 	.wp-editor-wrap {
+
 		a.button,
 		.wp-editor-wrap button,
-		.wp-editor-wrap input[type=submit],
-		.wp-editor-wrap input[type=button],
-		input[type=reset] {
+		.wp-editor-wrap input[type="submit"],
+		.wp-editor-wrap input[type="button"],
+		input[type="reset"] {
 			padding: 0 8px 1px;
 		}
 	}
