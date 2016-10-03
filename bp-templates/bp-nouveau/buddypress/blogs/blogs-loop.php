@@ -36,7 +36,7 @@ bp_nouveau_before_loop(); ?>
 
 				</div>
 
-				<?php bp_nouveau_blogs_loop_buttons(); ?>
+				<?php bp_nouveau_blogs_loop_buttons( array( 'container' => 'ul' ) ); ?>
 
 				<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
 					<p class="meta last-post">

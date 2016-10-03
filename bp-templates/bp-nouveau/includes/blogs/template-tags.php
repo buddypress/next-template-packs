@@ -138,7 +138,9 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		return;
 	}
 
-	$output = join( ' ', bp_nouveau_get_blogs_buttons() );
+	$args['type'] = 'loop';
+
+	$output = join( ' ', bp_nouveau_get_blogs_buttons( $args ) );
 
 	ob_start();
 	/**
@@ -163,7 +165,9 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	 *
 	 * @param  string $type Type of Group of buttons to get.
 	 */
-	function bp_nouveau_get_blogs_buttons( $type = 'loop' ) {
+	function bp_nouveau_get_blogs_buttons( $args ) {
+		$type = ( ! empty( $args['type'] ) ) ?  $args['type'] : 'loop';
+
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'loop' !== $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return;
@@ -180,6 +184,37 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		}
 
 		/**
+		 * If the 'container' is set to 'ul'
+		 * set a var $parent_element to li
+		 * otherwise simply pass any value found in args
+		 * or set var false.
+		 */
+		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
+			$parent_element = 'li';
+		} elseif( ! empty( $args['parent_element'] ) ) {
+			$parent_element = esc_html( $args['parent_element'] );
+		} else {
+			$parent_element = false;
+		}
+
+
+		/**
+		 * If we have a arg value for $button_element passed through
+		 * use it to default all the $buttons['button_element'] values
+		 * otherwise default to 'a' (anchor)
+		 * Or override & hardcode the 'element' string on $buttons array.
+		 *
+		 * Icons sets a class for icon display if not using the button element
+		 */
+		$icons = '';
+		if( ! empty( $args['button_element'] ) ) {
+			$button_element = $args['button_element'] ;
+		} else {
+			$button_element = 'a';
+			$icons = ' icons';
+		}
+
+		/**
 		 * This filter workaround is waiting for a core adaptation
 		 * so that we can directly get the groups button arguments
 		 * instead of the button.
@@ -192,10 +227,35 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		remove_filter( 'bp_get_blogs_visit_blog_button', 'bp_nouveau_blogs_catch_button_args', 100, 1 );
 
 		if ( ! empty( bp_nouveau()->blogs->button_args ) ) {
-			$buttons['visit_blog'] = wp_parse_args( array(
-				'id'       => 'visit_blog',
-				'position' => 5,
-			), bp_nouveau()->blogs->button_args );
+			$button_args = bp_nouveau()->blogs->button_args ;
+
+		// If we pass through parent classes add them to $button array
+		$parent_class = '';
+		if( ! empty( $args['parent_attr']['class'] ) ) {
+			$parent_class = esc_html( $args['parent_attr']['class'] );
+		}
+
+			$buttons['visit_blog'] = array(
+				'id'                => 'visit_blog',
+				'position'          => 5,
+				'component'         => $button_args['component'],
+				'must_be_logged_in' => $button_args['must_be_logged_in'],
+				'block_self'        => $button_args['block_self'],
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'              => $button_args['wrapper_id'],
+					'class'           => $parent_class,
+				),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'href'             => $button_args['link_href'],
+					'id'               => $button_args['link_id'],
+					'class'            => $button_args['link_class'] . ' button',
+					'rel'              => $button_args['link_rel'],
+					'title'            => '',
+				),
+				'link_text'         => $button_args['link_text'],
+			);
 
 			unset( bp_nouveau()->blogs->button_args );
 		}
