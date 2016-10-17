@@ -39,8 +39,15 @@ body.buddypress {
 
 	@include medium-up() {
 
+		.entry-header,
+		.site-content .entry-header,
+		.entry-content {
+			max-width: none;
+		}
+
 		.entry-header {
 			float: none;
+			max-width: none;
 		}
 
 		.entry-content {

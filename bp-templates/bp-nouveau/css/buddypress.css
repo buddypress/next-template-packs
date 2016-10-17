@@ -67,8 +67,14 @@ body .buddypress .bp-list .action {
 }
 
 @media screen and (min-width: 46.8em) {
+	body.buddypress .entry-header,
+	body.buddypress .site-content .entry-header,
+	body.buddypress .entry-content {
+		max-width: none;
+	}
 	body.buddypress .entry-header {
 		float: none;
+		max-width: none;
 	}
 	body.buddypress .entry-content {
 		float: none;
