@@ -488,7 +488,7 @@ dt.section-title {
 }
 
 .buddypress .subnav-filters li select,
-.buddypress .subnav-filters li input[type=search] {
+.buddypress .subnav-filters li input[type="search"] {
 	font-size: 16px;
 }
 
@@ -510,9 +510,9 @@ dt.section-title {
 
 .buddypress .subnav-filters .user-messages-bulk-actions .bulk-apply {
 	border-radius: none;
-	font-weight: normal;
+	font-weight: 400;
 	line-height: 1.6;
-	margin: 0 10px 0;
+	margin: 0 10px;
 	padding: 6px 10px 4px;
 	text-align: center;
 	text-transform: none;
@@ -810,7 +810,7 @@ dt.section-title {
 }
 
 .activity-list .activity-item div.item-avatar {
-	margin: 0 2% 0 2%;
+	margin: 0 2%;
 	width: auto;
 }
 
@@ -982,7 +982,7 @@ dt.section-title {
 .activity-list .activity-item .activity-meta.action .button span {
 	background: none;
 	color: #555;
-	font-weight: bold;
+	font-weight: 700;
 }
 
 @media screen and (min-width: 24em) {
@@ -1171,7 +1171,7 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-comments .activity-meta button {
 	font-size: 14px;
-	font-weight: normal;
+	font-weight: 400;
 	text-transform: none;
 }
 
@@ -1236,7 +1236,7 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 	height: 60px;
 	margin: 0;
 	outline: none;
-	padding: .5em;
+	padding: 0.5em;
 	width: 100%;
 }
 
@@ -1596,7 +1596,9 @@ body.no-js .single-item-header .js-self-profile-button {
 	padding: 0 1em;
 }
 
-/* end cover image block */
+/*
+* end cover image block
+*/
 /**
 *-----------------------------------------------------
 * @subsection 5.1.1 - item-header Groups
@@ -2776,9 +2778,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .buddypress button,
 .buddypress .buddypress a.button,
-.buddypress .buddypress input[type=submit],
-.buddypress .buddypress input[type=button],
-.buddypress .buddypress input[type=reset],
+.buddypress .buddypress input[type="submit"],
+.buddypress .buddypress input[type="button"],
+.buddypress .buddypress input[type="reset"],
 .buddypress .buddypress ul.button-nav li a,
 .buddypress .buddypress .generic-button a,
 .buddypress .buddypress .comment-reply-link,
@@ -2802,7 +2804,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 2px 8px;
 }
 
-.buddypress .buddypress .button-small[type=button] {
+.buddypress .buddypress .button-small[type="button"] {
 	padding: 0 8px 1px;
 }
 
@@ -2810,12 +2812,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress button:focus,
 .buddypress .buddypress a.button:focus,
 .buddypress .buddypress a.button:hover,
-.buddypress .buddypress input[type=submit]:focus,
-.buddypress .buddypress input[type=submit]:hover,
-.buddypress .buddypress input[type=button]:focus,
-.buddypress .buddypress input[type=button]:hover,
-.buddypress .buddypress input[type=reset]:focus,
-.buddypress .buddypress input[type=reset]:hover,
+.buddypress .buddypress input[type="submit"]:focus,
+.buddypress .buddypress input[type="submit"]:hover,
+.buddypress .buddypress input[type="button"]:focus,
+.buddypress .buddypress input[type="button"]:hover,
+.buddypress .buddypress input[type="reset"]:focus,
+.buddypress .buddypress input[type="reset"]:hover,
 .buddypress .buddypress .button-nav li a:focus,
 .buddypress .buddypress .button-nav li a:hover,
 .buddypress .buddypress .button-nav li.current a,
@@ -2835,7 +2837,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress input[type="reset"].pending,
 .buddypress .buddypress input[type="button"].disabled,
 .buddypress .buddypress input[type="reset"].disabled,
-.buddypress .buddypress input[type="submit"][disabled=disabled],
+.buddypress .buddypress input[type="submit"][disabled="disabled"],
 .buddypress .buddypress button.pending,
 .buddypress .buddypress button.disabled,
 .buddypress .buddypress div.pending a,
@@ -3124,14 +3126,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 #buddypress * {
-	transition: opacity .1s ease-in-out .1s;
+	transition: opacity 0.1s ease-in-out 0.1s;
 }
 
 #buddypress button,
 #buddypress a.generic-button,
 #buddypress a.button,
-#buddypress input[type=submit],
-#buddypress input[type=reset] {
+#buddypress input[type="submit"],
+#buddypress input[type="reset"] {
 	transition: background 0.1s ease-in-out 0.1s, color 0.1s ease-in-out 0.1s, border-color 0.1s ease-in-out 0.1s;
 }
 

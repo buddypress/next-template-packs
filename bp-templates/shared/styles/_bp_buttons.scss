@@ -1,7 +1,8 @@
 // BP Buttons, Submits, Icons and general clicky things styling.
 
-// Buttons by default are styled as simple boxes but we may change that by adding
-// a parent class ( on any close parent to the element ) .text-link-list
+// Buttons by default are styled as simple boxes but we may
+// change that by adding a parent class ( on any close parent to
+// the element ) .text-link-list
 
 .buddypress {
 
@@ -11,9 +12,9 @@
 
 		button,
 		a.button,
-		input[type=submit],
-		input[type=button],
-		input[type=reset],
+		input[type="submit"],
+		input[type="button"],
+		input[type="reset"],
 		ul.button-nav li a,
 		.generic-button a,
 		.comment-reply-link,
@@ -40,7 +41,7 @@
 
 		// Re-instate the quick-tag padding to avoid the above ruleset
 		// causing styling issues.
-		.button-small[type=button] {
+		.button-small[type="button"] {
 			padding: 0 8px 1px;
 		}
 
@@ -48,12 +49,12 @@
 		button:focus,
 		a.button:focus,
 		a.button:hover,
-		input[type=submit]:focus,
-		input[type=submit]:hover,
-		input[type=button]:focus,
-		input[type=button]:hover,
-		input[type=reset]:focus,
-		input[type=reset]:hover,
+		input[type="submit"]:focus,
+		input[type="submit"]:hover,
+		input[type="button"]:focus,
+		input[type="button"]:hover,
+		input[type="reset"]:focus,
+		input[type="reset"]:hover,
 		.button-nav li a:focus,
 		.button-nav li a:hover,
 		.button-nav li.current a,
@@ -73,7 +74,7 @@
 		input[type="reset"].pending,
 		input[type="button"].disabled,
 		input[type="reset"].disabled,
-		input[type="submit"][disabled=disabled],
+		input[type="submit"][disabled="disabled"],
 		button.pending,
 		button.disabled,
 		div.pending a,
@@ -99,15 +100,18 @@
 
 
 		.activity-list {
+
 			a.button {
 				border: none;
 			}
 		}
 
 		.bp-invites-content {
+
 			ul.bp-list {
 
 				li {
+
 					a.invite-button:hover {
 						color: #1fb3dd;
 					}
@@ -115,6 +119,7 @@
 
 				li.selected,
 				li {
+
 					a.invite-button:hover,
 					a.group-remove-invite-button:hover {
 						color: #a00;
@@ -129,6 +134,7 @@
 		}
 
 		.text-links-list {
+
 			a.button {
 				background: none;
 				border: none;
@@ -160,6 +166,7 @@
 		// In grids style the basic action button a little differently
 
 		.bp-list.grid {
+
 			.action {
 
 				a,
@@ -184,6 +191,7 @@
 // ==== Icons ====
 
 .buddypress {
+
 	li.filter label:before,
 	li.feed a:before,
 	.action a,
@@ -205,7 +213,9 @@
 	// This is probably a less than optimal solution & a better one will exist to
 	// implemented when time allows.
 	.bp-list {
+
 		a.button.invite-button {
+
 			&:focus,
 			&:hover {
 				background: none;

@@ -22,7 +22,7 @@
 
 
 		div.item-avatar { // 'div' for weight
-			margin: 0 2% 0 2%;
+			margin: 0 2%;
 			width: auto;
 
 			img {
@@ -49,6 +49,7 @@
 
 		&.new_forum_post,
 		&.new_forum_topic {
+
 			.activity-inner {
 				border-left: 2px solid $light-grey;
 				margin-left: $marg-sml;
@@ -136,6 +137,7 @@
 		} // close .activity-content
 
 		.activity-inner {
+
 			p {
 				word-wrap: break-word;
 			}
@@ -216,7 +218,7 @@
 				span {
 					background: none;
 					color: #555;
-					font-weight: bold;
+					font-weight: 700;
 				}
 			}
 
@@ -229,6 +231,7 @@
 @include small-up() {
 
 	.activity-list {
+
 		.activity-item {
 
 			.activity-content {
@@ -247,6 +250,7 @@
 }
 
 .buddypress {
+
 	.activity-list {
 
 		.load-more,
@@ -273,7 +277,7 @@
 			&:focus,
 			&:hover {
 				border-color: darken($bp-border-color, 5%);
-				@include	box-shadow(0 0 6px 0 $light-grey);
+				@include box-shadow(0 0 6px 0 $light-grey);
 			}
 		}
 
@@ -298,6 +302,7 @@ body.activity-permalink {
 			}
 
 			&.mini {
+
 				img.avatar,
 				img.FB_profile_pic {
 					height: auto;

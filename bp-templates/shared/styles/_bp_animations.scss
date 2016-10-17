@@ -2,14 +2,16 @@
 
 // Fade in hover transition
 #buddypress {
-	* {transition: opacity .1s ease-in-out .1s; }
+
+	* {
+		transition: opacity 0.1s ease-in-out 0.1s;
+	}
 
 	button,
-	//.bp-navs a, // primary bp navigation links, lets not transition backgrounds
 	a.generic-button,
 	a.button,
-	input[type=submit],
-	input[type=reset] {
+	input[type="submit"],
+	input[type="reset"] {
 		transition: background 0.1s ease-in-out 0.1s, color 0.1s ease-in-out 0.1s, border-color 0.1s ease-in-out 0.1s;
 	}
 
@@ -19,6 +21,7 @@
 // Ajax Animations and styles
 // scss-lint:disable VendorPrefix
 .buddypress {
+
 	a.loading,
 	input.loading {
 		-moz-animation: loader-pulsate 0.5s infinite ease-in-out alternate;

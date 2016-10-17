@@ -11,6 +11,7 @@
 
 
 // Import our partials mixins & variables files
+
 @import "../../shared/styles/_bp-variables";
 @import "../../shared/styles/_bp-mixins";
 
@@ -76,6 +77,7 @@
 */
 
 // Import our generic elements & typography styles
+
 @import "../../shared/styles/_bp_generic_and_typography";
 
 /**
@@ -94,9 +96,11 @@
 */
 
 // Import our generic navigation styles
+
 @import "../../shared/styles/_bp_navigation";
 
 // Import our Filter styles
+
 @import "../../shared/styles/_bp_filters";
 
 /**
@@ -106,6 +110,7 @@
 */
 
 // Import our generic pagination styles
+
 @import "../../shared/styles/_bp_pagination";
 
 /**
@@ -115,6 +120,7 @@
 */
 
 // Import our generic list styles
+
 @import "../../shared/styles/_bp_lists";
 
 /**
@@ -140,6 +146,7 @@
 @import "../../shared/styles/_bp_activity_entries";
 
 // Import Nouveau specific visual styling for act entries
+
 @import "_nouveau_visual_style_activity_entries";
 
 /**
@@ -158,6 +165,7 @@
 */
 
 // Blogs loop
+
 @import "../../shared/styles/_bp_blogs_loop";
 
 /**
@@ -167,6 +175,7 @@
 */
 
 // Groups loop
+
 @import "../../shared/styles/_bp_groups_loop";
 
 
@@ -177,6 +186,7 @@
 */
 
 // Members loop
+
 @import "../../shared/styles/_bp_members_loop";
 
 /**
@@ -186,6 +196,7 @@
 */
 
 // Registration index screen (directory)
+
 @import "../../shared/styles/_bp_registration.scss";
 
 /**
@@ -195,6 +206,7 @@
 */
 
 // Registration index screen (directory)
+
 @import "../../shared/styles/_bp_groups_create.scss";
 
 /**
@@ -210,9 +222,11 @@
 */
 
 // Import general global styles for single screen headers
+
 @import "../../shared/styles/_bp_item_header_general";
 
 // Import Cover Image container defaults
+
 @import "../../shared/styles/_bp_cover_image";
 
 /**
@@ -224,6 +238,7 @@
 */
 
 // Single Group specific header rules
+
 @import "../../shared/styles/_bp_group_header";
 
 /**
@@ -235,6 +250,7 @@
 */
 
 // Single User specific header rules
+
 @import "../../shared/styles/_bp_user_header";
 
 /**
@@ -244,6 +260,7 @@
 */
 
 // Import general global styles for single screen item-body
+
 @import "../../shared/styles/_bp_item_body_general";
 
 /**
@@ -261,6 +278,7 @@
 */
 
 // Import general global styles for single screen item-body
+
 @import "../../shared/styles/_bp_groups_management";
 
 /**
@@ -276,9 +294,11 @@
 */
 
 // Import Group Invites screens
+
 //@import "../../shared/styles/_bp_groups_invites";
 
 // Import nouveau style Group Invites screens
+
 @import "_nouveau_invites";
 
 
@@ -303,6 +323,7 @@
 */
 
 // Import User Profile
+
 @import "../../shared/styles/_bp_user_profile";
 
 /**
@@ -320,9 +341,11 @@
 // Import Messages module
 // Nouveau is using custom markup and only needs to load
 // it's own partial file for styles.
+
 // @import "../../shared/styles/_bp_messages";
 
 // Import Nouveau specific Messages module styles
+
 @import "_nouveau_messages";
 
 /**
@@ -332,6 +355,7 @@
 */
 
 // Import settings screens
+
 @import "../../shared/styles/_bp_user_settings";
 
 /**
@@ -341,6 +365,7 @@
 */
 
 // Import general forms rules
+
 @import "../../shared/styles/_bp_forms";
 
 
@@ -353,6 +378,7 @@
 */
 
 // Import our generic list styles
+
 @import "../../shared/styles/_bp_search";
 
 /**
@@ -362,6 +388,7 @@
 */
 
 // Import Table defaults rules
+
 @import "../../shared/styles/_bp_tables";
 
 /**
@@ -370,18 +397,23 @@
 *-------------------------------------------------------------------------------
 */
 // Import General useful classes: clearfix, screen-reader etc
+
 @import "../../shared/styles/_bp_general_classes";
 
 // Import Buttons styles
+
 @import "../../shared/styles/_bp_buttons";
 
 // Import Messages/info dialogues
+
 @import "../../shared/styles/_bp_info_messages";
 
 // Import BP Widget styles
+
 @import "../../shared/styles/_bp_widgets";
 
 // Import BP Animations & Transitions - fluffy effects :)
+
 @import "../../shared/styles/_bp_animations";
 
 /**
@@ -390,4 +422,5 @@
 *-------------------------------------------------------------------------------
 */
 // Import Layout classes
+
 @import "../../shared/styles/_bp_layouts";
