@@ -113,6 +113,17 @@ body .buddypress h6 {
 	border-radius: 50%;
 }
 
+body.directory article.page > .entry-header .entry-title {
+	font-size: 28px;
+	font-weight: inherit;
+}
+
+@media screen and (min-width: 46.8em) {
+	body.directory article.page > .entry-header .entry-title {
+		font-size: 34px;
+	}
+}
+
 dt.section-title {
 	font-size: 18px;
 }
