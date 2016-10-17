@@ -34,16 +34,33 @@ body {
 }
 
 // Some themes have very restricted content widths for pages
-// or entry-content (2013, 2014) Lets adjust these restrictions
+// or entry-content (2013, 2014, 2017) Lets adjust these restrictions
 body.buddypress {
 
 	@include medium-up() {
 
+		.entry-header {
+			float: none;
+		}
+
 		.entry-content {
+			float: none;
 			max-width: none;
 			padding: 0 $pad-xlrg;
 		}
-	}
+
+		// Some themes are styling on ID's making it hard to override
+		// Adding a common ID for site here to add weight '#page'
+		// In part this will help with 2017 floats & narrow widths
+
+		#page {
+			.entry-header,
+			.entry-content {
+				float: none;
+				width: auto;
+			}
+		}
+	} // @media
 }
 
 // BP Theme Compatibility isn't technically a theme and has to
