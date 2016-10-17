@@ -756,13 +756,15 @@ dt.section-title {
 }
 
 .activity-update-form #whats-new-submit {
-	margin: 20px 0 15px 0;
+	margin: 0 0 20px;
 }
 
 .activity-update-form #whats-new-submit input {
+	line-height: inherit;
 	margin-right: 2px;
-	width: 10em;
+	padding: 0.5em;
 	text-align: center;
+	width: 10em;
 }
 
 .activity-update-form #whats-new-textarea textarea {
@@ -1087,6 +1089,19 @@ body.activity-permalink .activity-list .activity-meta {
 	margin: 10px 0 10px;
 }
 
+.buddypress .activity-update-form {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	border-radius: 2px;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: inset 0 0 6px #eee;
+	-moz-box-shadow: inset 0 0 6px #eee;
+	box-shadow: inset 0 0 6px #eee;
+	padding: 10px;
+}
+
 .buddypress .activity-list.bp-list {
 	background: #fafafa;
 	border: 1px solid #eee;
@@ -1095,10 +1110,10 @@ body.activity-permalink .activity-list .activity-meta {
 
 .buddypress .activity-list.bp-list .activity-item {
 	background: #fff;
-	border: 1px solid #ddd;
-	-webkit-box-shadow: 0 0 6px #bebebe;
-	-moz-box-shadow: 0 0 6px #bebebe;
-	box-shadow: 0 0 6px #bebebe;
+	border: 1px solid #b7b7b7;
+	-webkit-box-shadow: 0 0 6px #d2d2d2;
+	-moz-box-shadow: 0 0 6px #d2d2d2;
+	box-shadow: 0 0 6px #d2d2d2;
 	margin: 20px 0;
 }
 

@@ -35,12 +35,14 @@
 	}
 
 	#whats-new-submit {
-		margin: $marg-lrg 0 $marg-med 0;
+		margin: 0 0 $marg-lrg;
 
 		input {
+			line-height: inherit;
 			margin-right: 2px;
-			width: 10em;
+			padding: $pad-sml;
 			text-align: center;
+			width: 10em;
 		}
 	}
 
