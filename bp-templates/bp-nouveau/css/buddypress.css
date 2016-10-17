@@ -67,9 +67,18 @@ body .buddypress .bp-list .action {
 }
 
 @media screen and (min-width: 46.8em) {
+	body.buddypress .entry-header {
+		float: none;
+	}
 	body.buddypress .entry-content {
+		float: none;
 		max-width: none;
 		padding: 0 4em;
+	}
+	body.buddypress #page .entry-header,
+	body.buddypress #page .entry-content {
+		float: none;
+		width: auto;
 	}
 }
 
@@ -467,6 +476,10 @@ dt.section-title {
 	.buddypress #item-body ul.button-tabs li.current a:active {
 		outline: none;
 	}
+}
+
+.buddypress .dir-component-filters .filter label {
+	display: inline;
 }
 
 .buddypress .subnav-filters {

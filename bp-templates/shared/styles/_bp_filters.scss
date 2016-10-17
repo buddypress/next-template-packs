@@ -1,12 +1,15 @@
 // BP Directory Filters
 // Specific Styling & Positioning
-// N.B. Please see _bp_navigation for additional rules and properties.
+// N.B. See _bp_navigation for additional rules and properties.
 .buddypress {
 
 	.dir-component-filters { // ul
 
 		.filter { // li
 
+			label {
+				display: inline;
+			}
 		}
 	}
 
