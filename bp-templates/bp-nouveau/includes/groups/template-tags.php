@@ -1053,12 +1053,14 @@ function bp_nouveau_group_meta() {
 			// It's a single group
 			if ( $is_group ) {
 				/**
-				 * If the Group's default front page issn't set to display
+				 * If the Group's default front page isn't set to display
 				 * the description inside it, include the description to metas
 				 */
 				if ( ! bp_nouveau_groups_front_page_description() ) {
 					$meta = array(
-						'description' => bp_get_group_description(),
+						'description'     =>  bp_get_group_description(),
+						'status'          =>  bp_get_group_type(),
+						'group_type_list' =>  bp_group_type_list(),
 					);
 				}
 
