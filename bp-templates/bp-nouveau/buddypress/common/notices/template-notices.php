@@ -9,7 +9,7 @@
 ?>
 <div class="<?php bp_nouveau_template_message_classes(); ?>">
 
-	<p><?php bp_nouveau_template_message(); ?></p>
+	<?php bp_nouveau_template_message(); ?>
 
 	<?php if ( bp_nouveau_has_dismiss_button() ) : ?>
 
