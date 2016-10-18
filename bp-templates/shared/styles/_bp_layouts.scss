@@ -174,7 +174,7 @@
 	> li {
 		border-bottom: none;
 
-		.wrap {
+		.list-wrap {
 			// make room for the action buttons to sit.
 			padding-bottom: 3rem;
 		}
@@ -250,14 +250,14 @@
 
 	&.members-list {
 
-		.wrap {
+		.list-wrap {
 			min-height: 350px;
 		}
 	}
 
 	&.groups-list {
 
-		.wrap {
+		.list-wrap {
 			min-height: 450px;
 
 			.list-title {
@@ -285,7 +285,7 @@
 
 	&.blogs-list {
 
-		.wrap {
+		.list-wrap {
 			min-height: 350px;
 		}
 	}

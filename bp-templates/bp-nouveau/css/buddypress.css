@@ -3365,7 +3365,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-bottom: none;
 }
 
-.grid.bp-list > li .wrap {
+.grid.bp-list > li .list-wrap {
 	padding-bottom: 3rem;
 }
 
@@ -3435,38 +3435,38 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	float: none;
 }
 
-.grid.members-list .wrap {
+.grid.members-list .list-wrap {
 	min-height: 350px;
 }
 
-.grid.groups-list .wrap {
+.grid.groups-list .list-wrap {
 	min-height: 450px;
 }
 
-.grid.groups-list .wrap .list-title {
+.grid.groups-list .list-wrap .list-title {
 	min-height: 1.5em;
 	padding: 0.5em;
 }
 
-.grid.groups-list .wrap .last-activity,
-.grid.groups-list .wrap .group-details,
-.grid.groups-list .wrap .item-desc {
+.grid.groups-list .list-wrap .last-activity,
+.grid.groups-list .list-wrap .group-details,
+.grid.groups-list .list-wrap .item-desc {
 	margin-bottom: 0;
 }
 
-.grid.groups-list .wrap .last-activity p,
-.grid.groups-list .wrap .group-details p,
-.grid.groups-list .wrap .item-desc p {
+.grid.groups-list .list-wrap .last-activity p,
+.grid.groups-list .list-wrap .group-details p,
+.grid.groups-list .list-wrap .item-desc p {
 	margin-bottom: 0;
 }
 
-.grid.groups-list .wrap .group-desc {
+.grid.groups-list .list-wrap .group-desc {
 	margin: 15px auto 20px;
 	min-height: 5em;
 	overflow: hidden;
 }
 
-.grid.blogs-list .wrap {
+.grid.blogs-list .list-wrap {
 	min-height: 350px;
 }
 
