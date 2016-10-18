@@ -79,7 +79,6 @@ body .buddypress .bp-list .action {
 	body.buddypress .entry-content {
 		float: none;
 		max-width: none;
-		padding: 0 4em;
 	}
 	body.buddypress #page .entry-header,
 	body.buddypress #page .entry-content {
@@ -111,6 +110,21 @@ body .buddypress h6 {
 
 .buddypress.round-avatars .avatar {
 	border-radius: 50%;
+}
+
+div,
+dl,
+li,
+textarea,
+select,
+input[type="search"],
+input[type="submit"],
+input[type="reset"] {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	border-radius: 2px;
+	background-clip: padding-box;
 }
 
 body.directory article.page > .entry-header .entry-title {
@@ -1107,11 +1121,6 @@ body.activity-permalink .activity-list .activity-meta {
 }
 
 .buddypress .activity-update-form {
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	-ms-border-radius: 2px;
-	border-radius: 2px;
-	background-clip: padding-box;
 	border: 1px solid #ccc;
 	-webkit-box-shadow: inset 0 0 6px #eee;
 	-moz-box-shadow: inset 0 0 6px #eee;
@@ -3259,7 +3268,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding-top: 0;
 }
 
-.grid > li .wrap {
+.grid > li .list-wrap {
 	background: #fafafa;
 	border: 1px solid #eee;
 	padding-bottom: 15px;
@@ -3268,7 +3277,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding-top: 14px;
 }
 
-.grid > li .wrap .update {
+.grid > li .list-wrap .update {
 	color: #777;
 	padding: 0.5em 2em;
 }

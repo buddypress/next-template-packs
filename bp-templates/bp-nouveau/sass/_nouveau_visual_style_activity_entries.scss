@@ -6,7 +6,6 @@
 .buddypress {
 
 	.activity-update-form {
-		@include border-radius(2px);
 		border: 1px solid $bp-border-dark;
 		@include box-shadow( inset 0 0 6px #eee);
 		padding: 10px;
