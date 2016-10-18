@@ -20,7 +20,7 @@ bp_nouveau_before_loop(); ?>
 	<?php while ( bp_groups() ) : bp_the_group(); ?>
 
 		<li <?php bp_group_class( array( 'item-entry' ) ); ?> data-bp-item-id="<?php bp_group_id(); ?>" data-bp-item-component="groups">
-			<div class="wrap">
+			<div class="list-wrap">
 
 				<?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 					<div class="item-avatar">

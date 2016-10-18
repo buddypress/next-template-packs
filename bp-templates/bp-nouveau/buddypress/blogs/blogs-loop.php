@@ -20,7 +20,7 @@ bp_nouveau_before_loop(); ?>
 	<?php while ( bp_blogs() ) : bp_the_blog(); ?>
 
 		<li <?php bp_blog_class( array( 'item-entry' ) ) ?>>
-			<div class="wrap">
+			<div class="list-wrap">
 
 				<div class="item-avatar">
 					<a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_avatar( bp_nouveau_avatar_args() ); ?></a>
