@@ -1660,6 +1660,10 @@ body.no-js .single-item-header .js-self-profile-button {
 * Group Specific Item Header
 *-----------------------------------------------------
 */
+.groups-header .bp-feedback {
+	clear: both;
+}
+
 .groups-header .moderators-lists .moderators-title {
 	font-size: 14px;
 }
