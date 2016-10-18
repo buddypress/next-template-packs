@@ -125,14 +125,17 @@ input[type="reset"] {
 // === Font sizing ===
 
 
-// Directory component titles
+// Directory component titles, groups/user single, create & register
 // Entry headers are outside the BP injection point for pages.
 // & get styles by the theme, we'll attempt to over specify
-// the selector to ensure we target the right elements (no BP classes!)
+// the selector to ensure we target the right elements
+// (no BP classes available other than body classes!)
 
-body.directory article.page > .entry-header .entry-title {
-	@include responsive-font(34);
-	font-weight: inherit;
+body.buddypress {
+	article.page > .entry-header .entry-title {
+		@include responsive-font(34);
+		font-weight: inherit;
+	}
 }
 
 dt.section-title {

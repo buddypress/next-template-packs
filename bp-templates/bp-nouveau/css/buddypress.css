@@ -127,13 +127,13 @@ input[type="reset"] {
 	background-clip: padding-box;
 }
 
-body.directory article.page > .entry-header .entry-title {
+body.buddypress article.page > .entry-header .entry-title {
 	font-size: 28px;
 	font-weight: inherit;
 }
 
 @media screen and (min-width: 46.8em) {
-	body.directory article.page > .entry-header .entry-title {
+	body.buddypress article.page > .entry-header .entry-title {
 		font-size: 34px;
 	}
 }
