@@ -1721,24 +1721,28 @@ body.no-js .single-item-header .js-self-profile-button {
 * @subsection 5.2.1.1 - Management Settings Screens
 *-----------------------------------------
 */
-.radio .group-conditions {
-	font-size: 13px;
-	margin-left: 20px;
+.group-status-type {
+	border: 0;
+	padding: 0;
+}
+
+.group-status-type .group-conditions {
+	font-size: 12px;
 	width: 80%;
 }
 
 @media screen and (min-width: 46.8em) {
-	.radio .group-conditions {
-		font-size: 16px;
+	.group-status-type .group-conditions {
+		font-size: 14px;
 	}
 }
 
-.radio .group-conditions dd {
+.group-status-type .group-conditions dd {
 	font-style: italic;
 }
 
-.radio .group-conditions dd ul {
-	margin: 0 0 20px 20px;
+.group-status-type .group-conditions dd ul {
+	margin: 0 0 20px 15px;
 }
 
 .groups-manage-members-list {
