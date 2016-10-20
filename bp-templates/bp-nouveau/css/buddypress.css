@@ -80,6 +80,9 @@ body .buddypress .bp-list .action {
 		float: none;
 		max-width: none;
 	}
+	body.buddypress #page #primary {
+		max-width: none;
+	}
 	body.buddypress #page .entry-header,
 	body.buddypress #page .entry-content {
 		float: none;
@@ -127,13 +130,22 @@ input[type="reset"] {
 	background-clip: padding-box;
 }
 
-body.buddypress article.page > .entry-header .entry-title {
+body.buddypress article.page
+> .entry-header {
+	margin-bottom: 2em;
+	padding: 0;
+}
+
+body.buddypress article.page
+> .entry-header .entry-title {
 	font-size: 28px;
 	font-weight: inherit;
+	color: #777;
 }
 
 @media screen and (min-width: 46.8em) {
-	body.buddypress article.page > .entry-header .entry-title {
+	body.buddypress article.page
+> .entry-header .entry-title {
 		font-size: 34px;
 	}
 }

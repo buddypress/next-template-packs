@@ -61,6 +61,15 @@ body.buddypress {
 		// In part this will help with 2017 floats & narrow widths
 
 		#page {
+
+			// If 2017 page choice is 'One Column' #primary is a narrow width
+			// remove width to allow BP screens to mirror post layout widths
+			// The .wrap element will serve still to provide a max width @ 1000px
+
+			#primary {
+				max-width: none;
+			}
+
 			.entry-header,
 			.entry-content {
 				float: none;
@@ -132,9 +141,16 @@ input[type="reset"] {
 // (no BP classes available other than body classes!)
 
 body.buddypress {
-	article.page > .entry-header .entry-title {
-		@include responsive-font(34);
-		font-weight: inherit;
+	article.page
+		> .entry-header {
+			margin-bottom: 2em;
+			padding: 0;
+
+			.entry-title {
+				@include responsive-font(34);
+				font-weight: inherit;
+				color: $primary-headings;
+		}
 	}
 }
 
