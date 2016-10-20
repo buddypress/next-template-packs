@@ -3,7 +3,7 @@
 // ========= Generic Sitewide elements ========
 body {
 
-	.buddypress {
+	#buddypress { // needs the weight of the id here
 
 		* {
 			// some WP themes add anchor border bottom :(

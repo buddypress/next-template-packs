@@ -49,18 +49,18 @@
 * @section 1.0 - BP Generic, Typography & Imagery
 *-------------------------------------------------------------------------------
 */
-body .buddypress * a {
+body #buddypress * a {
 	border-bottom: 0;
 	box-shadow: none;
 	text-decoration: none;
 }
 
-body .buddypress #item-body blockquote,
-body .buddypress .bp-lists blockquote {
+body #buddypress #item-body blockquote,
+body #buddypress .bp-lists blockquote {
 	margin-left: 10px;
 }
 
-body .buddypress .bp-list .action {
+body #buddypress .bp-list .action {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
