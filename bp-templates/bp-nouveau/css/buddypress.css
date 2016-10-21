@@ -305,6 +305,14 @@ dt.section-title {
 	background-color: #ccc;
 }
 
+.buddypress .bp-navs li:not(.current) a:focus,
+.buddypress .bp-navs li:not(.current) a:hover,
+.buddypress .bp-navs li:not(.selected) a:focus,
+.buddypress .bp-navs li:not(.selected) a:hover {
+	background: #ccc;
+	color: #333;
+}
+
 .buddypress .bp-navs li.selected a,
 .buddypress .bp-navs li.selected a:focus,
 .buddypress .bp-navs li.selected a:hover,
@@ -322,13 +330,6 @@ dt.section-title {
 .buddypress .bp-navs li.current a:focus span,
 .buddypress .bp-navs li.current a:hover span {
 	border-color: #fafafa;
-}
-
-.buddypress .bp-navs li:not(.current) a:focus,
-.buddypress .bp-navs li:not(.current) a:hover,
-.buddypress .bp-navs li:not(.selected) a:focus,
-.buddypress .bp-navs li:not(.selected) a:hover {
-	background: #ccc;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -2848,6 +2849,16 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .clearfix:after {
 	clear: both;
+}
+
+.center-vert {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
 }
 
 .buddypress .buddypress button,

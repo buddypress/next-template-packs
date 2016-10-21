@@ -97,6 +97,16 @@
 			}
 		}
 
+		li:not(.current),
+		li:not(.selected), {
+
+			a:focus,
+			a:hover {
+				background: $grey;
+				color: $black;
+			}
+		}
+
 		li.selected,
 		li.current {
 
@@ -109,15 +119,6 @@
 				span {
 					border-color: $off-white;
 				}
-			}
-		}
-
-		li:not(.current),
-		li:not(.selected), {
-
-			a:focus,
-			a:hover {
-				background: $grey;
 			}
 		}
 	}

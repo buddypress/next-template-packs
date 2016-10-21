@@ -193,6 +193,24 @@
 	#{$property}: calc(#{$expression});
 }
 
+
+// Vertical centering
+// This class allows us to center child elements
+// using flexbox this is a progressive enhancement,
+// it won't work in all browsers, older browser will simply
+// fall back to non centered or using older techniques.
+// N.B It would be prefereable to remove the older property syntax
+@mixin center-vert() {
+		display: -webkit-box; // older
+		display: -ms-flexbox; // older
+		display: -webkit-flex; // current prefix
+		display: flex; // current specs
+		-ms-flex-align: center; //older?
+		-webkit-align-items: center;
+		-webkit-box-align: center; // old
+		align-items: center; // current specs
+}
+
 // Re-enable the VendorPrefix lint test
 // scss-lint:enable VendorPrefix
 
