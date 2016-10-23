@@ -872,12 +872,24 @@ dt.section-title {
 }
 
 .activity-list .activity-item div.item-avatar {
-	margin: 0 2%;
+	margin: 0 auto;
+	text-align: center;
 	width: auto;
 }
 
 .activity-list .activity-item div.item-avatar img {
-	width: auto;
+	max-width: 40%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.activity-list .activity-item div.item-avatar {
+		margin: 0 2% 0 0;
+		text-align: left;
+		width: 15%;
+	}
+	.activity-list .activity-item div.item-avatar img {
+		max-width: 80%;
+	}
 }
 
 .activity-list .activity-item.mini {
@@ -886,14 +898,26 @@ dt.section-title {
 }
 
 .activity-list .activity-item.mini .activity-avatar {
+	margin-left: 0 auto;
 	text-align: center;
 	width: auto;
 }
 
 .activity-list .activity-item.mini .activity-avatar img.avatar,
 .activity-list .activity-item.mini .activity-avatar img.FB_profile_pic {
-	height: 30px;
-	width: 30px;
+	max-width: 15%;
+}
+
+@media screen and (min-width: 46.8em) {
+	.activity-list .activity-item.mini .activity-avatar {
+		margin-left: 15px;
+		text-align: left;
+		width: 10%;
+	}
+	.activity-list .activity-item.mini .activity-avatar img.avatar,
+	.activity-list .activity-item.mini .activity-avatar img.FB_profile_pic {
+		max-width: 60%;
+	}
 }
 
 .activity-list .activity-item.new_forum_post .activity-inner, .activity-list .activity-item.new_forum_topic .activity-inner {

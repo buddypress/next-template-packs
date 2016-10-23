@@ -22,11 +22,25 @@
 
 
 		div.item-avatar { // 'div' for weight
-			margin: 0 2%;
+			margin: 0 auto;
+			text-align: center;
 			width: auto;
 
 			img {
-				width: auto;
+				max-width: 40%;
+			}
+		}
+
+		@include medium-up() {
+
+			div.item-avatar { // 'div' for weight
+				margin: 0 2% 0 0;
+				text-align: left;
+				width: 15%;
+
+				img {
+					max-width: 80%;
+				}
 			}
 		}
 
@@ -35,16 +49,30 @@
 			position: relative;
 
 			.activity-avatar {
+				margin-left: 0 auto;
 				text-align: center;
 				width: auto;
 
 				img.avatar,
 				img.FB_profile_pic {
-					height: 30px;
-					width: 30px;
+				max-width: 15%;
+
 				}
 			}
 
+			@include medium-up() {
+
+				.activity-avatar {
+					margin-left: $marg-med;
+					text-align: left;
+					width: 10%;
+
+					img.avatar,
+					img.FB_profile_pic {
+						max-width: 60%;
+					}
+				}
+			}
 		} // close .mini
 
 		&.new_forum_post,

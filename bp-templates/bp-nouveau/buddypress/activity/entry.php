@@ -18,7 +18,7 @@ bp_nouveau_activity_hook( 'before', 'entry' ); ?>
 
 		<a href="<?php bp_activity_user_link(); ?>">
 
-			<?php bp_activity_avatar(); ?>
+			<?php bp_activity_avatar( array('type' => 'full') ); ?>
 
 		</a>
 
