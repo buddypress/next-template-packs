@@ -723,15 +723,6 @@ dt.section-title {
 }
 
 @media screen and (min-width: 46.8em) {
-	.bp-list li li {
-		background: red;
-	}
-}
-
-@media screen and (min-width: 46.8em) {
-	.bp-list li li {
-		background: yellow;
-	}
 	.bp-list li .item-avatar {
 		float: left;
 		margin-right: 5%;
@@ -800,6 +791,10 @@ dt.section-title {
 
 .activity-update-form #whats-new-content {
 	padding: 0 0 20px 0;
+}
+
+.activity-update-form #whats-new-post-in-box {
+	margin: 10px 0;
 }
 
 .activity-update-form #whats-new-submit {
@@ -2521,6 +2516,10 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	-webkit-box-shadow: 0 0 8px #eee;
 	-moz-box-shadow: 0 0 8px #eee;
 	box-shadow: 0 0 8px #eee;
+}
+
+.buddypress select {
+	height: auto;
 }
 
 .buddypress .standard-form .bp-controls-wrap {

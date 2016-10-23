@@ -41,6 +41,12 @@
 		}
 	}
 
+	// Ensure select elements aren't given a relative/fixed height.
+
+	select {
+		height: auto;
+	}
+
 	.standard-form {
 
 		.bp-controls-wrap {

@@ -85,21 +85,7 @@
 			}
 
 			@include medium-up() {
-li {background: red;}
 
-				.item-meta,
-				.action {
-//					clear: left;
-				}
-
-				.action {
-//					padding: $pad-sml 0 0;
-				}
-
-			} // close @media
-
-			@include medium-up() {
-li {background: yellow;}
 				.item-avatar {
 					float: left;
 					margin-right: 5%;
