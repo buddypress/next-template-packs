@@ -34,15 +34,19 @@ bp_nouveau_before_loop(); ?>
 
 				<div class="item">
 
-					<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
+					<div class="item-block">
 
-					<?php if ( bp_nouveau_group_has_meta() ) : ?>
+						<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
 
-						<p class="meta group-details"><?php bp_nouveau_group_meta(); ?></p>
+						<?php if ( bp_nouveau_group_has_meta() ) : ?>
 
-					<?php endif; ?>
+							<p class="meta group-details"><?php bp_nouveau_group_meta(); ?></p>
 
-					<p class="last-activity item-meta"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></p>
+						<?php endif; ?>
+
+						<p class="last-activity item-meta"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></p>
+
+					</div>
 
 					<div class="group-desc"><?php bp_group_description_excerpt(); ?></div>
 

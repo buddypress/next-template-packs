@@ -12,9 +12,9 @@
 		clear: both;
 	}
 
-	.activity-item { // li element
+	.activity-item { // li element - (entries)
 		list-style: none;
-		padding: $pad-med 0 0;
+		padding: $pad-med;
 
 		&.has-comments {
 			padding-bottom: $pad-med;
@@ -228,7 +228,7 @@
 
 } // close .activity-list
 
-@include small-up() {
+@include medium-up() {
 
 	.activity-list {
 
@@ -245,12 +245,13 @@
 				width: auto;
 			}
 
-		}
+		} // li entry item
 	}
 }
 
 .buddypress {
 
+	// load more link
 	.activity-list {
 
 		.load-more,

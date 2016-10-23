@@ -10,9 +10,26 @@
 			}
 
 			.user-update {
+				border: 1px solid $light-grey;
+				@include border-radius(10px);
 				clear: both;
 				color: $meta-text;
 				@include font-size(12);
+				margin: $marg-med auto;
+				padding: $pad-med;
+				width: 80%;
+			}
+
+			@include medium-small-up() {
+				.user-update {
+					width: 60%;
+				}
+			}
+
+			@include medium-up() {
+				.user-update {
+
+				}
 			}
 
 		} // close li

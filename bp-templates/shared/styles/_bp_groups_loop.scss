@@ -15,12 +15,15 @@
 			}
 
 			.group-desc {
+				border: 1px solid $light-grey;
+				@include border-radius(10px);
 				@include responsive-font(16);
 				clear: left;
 				color: $meta-text;
 				font-style: italic;
-				margin: $marg-sml 0 0 60px;
-				width: 50%;
+				margin: $marg-sml auto 0;
+				padding: $pad-med;
+				width: 80%;
 			}
 
 			p {
@@ -28,6 +31,14 @@
 			}
 
 			@include medium-up() {
+
+				.item {
+					margin-right: 0;
+				}
+
+				.item-block { // element is a styling div for positional purposes only
+					float: left;
+				}
 
 				.list-title,
 				.item-meta {
@@ -40,12 +51,10 @@
 				}
 
 				.group-desc {
-					border-left: 1px solid $light-grey;
-					border-right: 1px solid $light-grey;
-					clear: left;
+					clear: none;
+					float: right;
 					margin: $marg-med auto;
-					padding: 0 $pad-sml;
-					width: 90%;
+					width: 45%;
 				}
 
 			} // close @media

@@ -1,6 +1,10 @@
 // BP Lists Global Styles.
 
-.buddypress {
+// @todo decide whether using .buddypress quasi namespace parent
+// is useful, causing issue with specificity on other
+// lists if they do not use it.
+
+//.buddypress {
 
 	.bp-list {
 		@include box-model();
@@ -43,11 +47,19 @@
 
 			.item {
 
+				.item-avatar,
+				.list-title,
+				.item-meta,
+				.group-details {
+					text-align: center;
+				}
+
 				.list-title {
 					clear: none; // some WP themes state clear:both
 					@include responsive-font(28);
 					font-weight: 400;
-					margin: 0;
+					margin: 0 auto;
+					width: 60%;
 				}
 			}
 
@@ -58,48 +70,53 @@
 				margin-top: $marg-sml;
 			}
 
-			.generic-button {
-				display: inline-block;
-				margin: 0 $marg-sml 0 0;
+			.action {
+				.generic-button {
+					display: inline-block;
+					margin: 0 $marg-sml 0 0;
+				}
 			}
 
-			@include small-up() {
+			@include medium-small-up() {
 
-				.item-avatar {
-					float: left;
-					text-align: center;
-					width: 15%; // review whether we really need this width
+				.item {
 
-					img {
-						width: 86%;
-					}
 				}
+			}
 
-				.list-title,
-				.item-meta {
-					float: left;
-				}
+			@include medium-up() {
+li {background: red;}
 
 				.item-meta,
 				.action {
-					clear: left;
+//					clear: left;
 				}
 
 				.action {
-					padding: $pad-sml 0 0;
+//					padding: $pad-sml 0 0;
 				}
 
 			} // close @media
 
 			@include medium-up() {
-
+li {background: yellow;}
 				.item-avatar {
+					float: left;
 					margin-right: 5%;
 				}
 
 				.item {
 					margin: 0 10% 0 0;
 					overflow: hidden;
+
+					.list-title,
+					.item-meta {
+						float: left;
+						text-align: left;
+					}
+					.group-details {
+						text-align: left;
+					}
 				}
 
 				.action {
@@ -121,7 +138,7 @@
 
 	} // close .bp-list
 
-} // .buddypress
+//} // .buddypress
 
 // body class: single act items screens.
 .activity-permalink {
