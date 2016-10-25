@@ -1550,18 +1550,22 @@ form.ac-form .ac-reply-content input {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
-.single-headers span.activity {
-	display: inline-block;
-	font-size: small;
-	opacity: 0.8;
-	padding: 0;
+.single-headers .group-status,
+.single-headers .activity {
+	display: inline;
 }
 
-.single-headers span.user-nicename {
-	color: #777;
+.single-headers .group-status {
+	font-size: 18px;
+	color: #333;
+	padding-right: 1em;
+}
+
+.single-headers .activity {
 	display: inline-block;
-	font-size: 120%;
-	font-weight: 700;
+	font-size: 12px;
+	opacity: 0.8;
+	padding: 0;
 }
 
 .single-headers div#message p,
@@ -1616,45 +1620,20 @@ form.ac-form .ac-reply-content input {
 	margin: 0 15px 19px 0;
 }
 
-.single-headers div#item-meta {
-	color: #aaa;
-	font-size: 80%;
+.single-headers .item-meta {
+	color: #777;
+	font-size: 14px;
 	margin: 15px 0 5px;
-	overflow: hidden;
-	padding-bottom: 10px;
-}
-
-.single-headers div#item-actions {
-	float: right;
-	margin: 0 0 15px 15px;
-	text-align: right;
-	width: 20%;
-}
-
-.single-headers div#item-actions h3 {
-	margin: 0 0 5px;
+	padding-bottom: 0.5em;
 }
 
 .single-headers ul {
 	margin-bottom: 15px;
-	overflow: hidden;
-}
-
-.single-headers ul h5,
-.single-headers ul span,
-.single-headers ul hr {
-	display: none;
 }
 
 .single-headers ul li {
 	float: right;
 	list-style: none;
-}
-
-.single-headers ul.avatars img.avatar {
-	height: 30px;
-	margin: 2px;
-	width: 30px;
 }
 
 .single-headers div.generic-button,
@@ -1723,6 +1702,13 @@ body.no-js .single-item-header .js-self-profile-button {
 */
 .groups-header .bp-feedback {
 	clear: both;
+}
+
+.groups-header .group-item-actions {
+	float: right;
+	margin: 0 0 15px 15px;
+	text-align: right;
+	width: 20%;
 }
 
 .groups-header .moderators-lists .moderators-title {
@@ -2699,23 +2685,43 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * The Search form & controls in directory pages
 *----------------------------------------------------------
 */
+.buddypress [data-bp-search] form:before,
+.buddypress [data-bp-search] form:after {
+	content: " ";
+	display: table;
+}
+
+.buddypress [data-bp-search] form:after {
+	clear: both;
+}
+
+.buddypress [data-bp-search] form {
+	border: 1px solid #eee;
+}
+
+.buddypress [data-bp-search] form label {
+	margin: 0;
+	display: inline;
+}
+
 .buddypress [data-bp-search] form input[type="search"],
 .buddypress [data-bp-search] form input[type="text"] {
+	border: 0;
 	float: left;
 	padding: 6px 10px;
-	width: 65%;
+	width: 80%;
 }
 
 .buddypress [data-bp-search] form button[type="submit"] {
-	border-left: 0;
+	border: 0;
 	display: none;
-	float: left;
+	float: right;
 	font-weight: 400;
 	line-height: inherit;
 	padding: 0.5em 0.8em;
 	text-align: center;
 	text-transform: none;
-	width: auto;
+	width: 20%;
 }
 
 .buddypress [data-bp-search] form input[type="search"]::-webkit-search-cancel-button {

@@ -7,7 +7,7 @@
  * @package BP Nouveau
  */
 ?>
-<div id="item-actions">
+<div id="item-actions" class="group-item-actions">
 
 	<?php if ( bp_group_is_visible() ) : ?>
 
@@ -34,4 +34,4 @@
 
 	endif; ?>
 
-</div><!-- #item-actions -->
+</div><!-- .item-actions -->

@@ -2,18 +2,22 @@
 
 .single-headers {
 
-	span.activity {
-		display: inline-block;
-		font-size: small;
-		opacity: 0.8;
-		padding: 0;
+	.group-status,
+	.activity {
+		display: inline;
 	}
 
-	span.user-nicename {
-		color: #777;
+	.group-status {
+		@include font-size(18);
+		color: $black;
+		padding-right: $pad-med;
+	}
+
+	.activity {
 		display: inline-block;
-		font-size: 120%;
-		font-weight: 700;
+		@include font-size(12);
+		opacity: 0.8;
+		padding: 0;
 	}
 
 	div#message,
@@ -34,6 +38,7 @@
 		margin-left: 0;
 	}
 
+	// @mention user name
 	h2 {
 		line-height: 120%;
 		margin: 0 0 $marg-xsml;
@@ -74,47 +79,23 @@
 		margin: 0 15px 19px 0;
 	}
 
-	div#item-meta {
-		color: #aaa;
-		font-size: 80%;
-		margin: 15px 0 5px;
-		overflow: hidden;
-		padding-bottom: 10px;
-	}
 
-	div#item-actions {
-		float: right;
-		margin: 0 0 15px 15px;
-		text-align: right;
-		width: 20%;
-
-		h3 {
-			margin: 0 0 5px;
-		}
-
+	.item-meta {
+		color: $light-text;
+		@include font-size(14);
+		margin: $marg-med 0 $marg-xsml;
+		//overflow: hidden;
+		padding-bottom: $pad-sml;
 	}
 
 	ul {
-		margin-bottom: 15px;
-		overflow: hidden;
-
-		h5,
-		span,
-		hr {
-			display: none;
-		}
+		margin-bottom: $marg-med;
 
 		li {
 			float: right;
 			list-style: none;
 		}
 
-	}
-
-	ul.avatars img.avatar {
-		height: 30px;
-		margin: 2px;
-		width: 30px;
 	}
 
 	div.generic-button,

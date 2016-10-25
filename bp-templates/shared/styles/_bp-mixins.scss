@@ -61,7 +61,7 @@
 // Essential em based breakpoints
 // mixin wraps rulesets or properties.
 // written as:
-// @include medium-up {
+// @include medium-up() {
 //  body {property: value;}
 // }
 
@@ -95,8 +95,8 @@
 	}
 }
 
-// 'clearfix' allows us to pass a element, class or id through of an element
-// we need to have float containment on and where getting to the physical element
+// 'clearfix-element' allows us to pass an element, class or id to the mixin.
+// Use where we need to have float containment and where getting to the physical element
 // to add a class of 'clearfix' is problematic.
 @mixin clearfix-element($item) {
 

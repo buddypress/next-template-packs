@@ -6,6 +6,14 @@
 		clear: both;
 	}
 
+	// groups admin/mod wrapper block
+	.group-item-actions {
+		float: right;
+		margin: 0 0 15px 15px;
+		text-align: right;
+		width: 20%;
+	}
+
 
 	// The admin & mod list display for a group.
 	// 'moderators-lists' is used to refer to
