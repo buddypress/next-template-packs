@@ -1014,6 +1014,17 @@ function bp_nouveau_group_has_meta() {
 }
 
 /**
+ * Does the group have extra meta?
+ *
+ * @since  1.0.0
+ *
+ * @return bool True if the group has meta. False otherwise.
+ */
+function bp_nouveau_group_has_meta_extra() {
+	return (bool) bp_nouveau_get_hooked_group_meta();
+}
+
+/**
  * Display the group meta.
  *
  * @since  1.0.0
@@ -1026,7 +1037,13 @@ function bp_nouveau_group_meta() {
 	if ( ! bp_is_group() ) {
 		echo join( ' / ', array_map( 'esc_html', (array) $meta ) );
 	} else {
-		echo join( "\n", $meta );
+
+		/**
+		* Lets return an object not echo an array here for the single groups,
+		* more flexible for the template!!?? ~hnla
+		*/
+		//echo join( "\n", $meta );
+		return  (object) bp_nouveau_get_group_meta();
 	}
 }
 
@@ -1038,6 +1055,13 @@ function bp_nouveau_group_meta() {
 	 * @return array The group meta.
 	 */
 	function bp_nouveau_get_group_meta() {
+
+/**
+ * @todo For brevity required approapriate markup is added here as strings
+ * this needs to be either filterable or the function needs to be able to accept
+ * & parse args!
+ */
+
 		$meta     = array();
 		$is_group = bp_is_group();
 
@@ -1058,9 +1082,9 @@ function bp_nouveau_group_meta() {
 				 */
 				if ( ! bp_nouveau_groups_front_page_description() ) {
 					$meta = array(
-						'description'     =>  bp_get_group_description(),
 						'status'          =>  bp_get_group_type(),
-						'group_type_list' =>  bp_group_type_list(),
+						'group_type_list' =>  bp_get_group_type_list(),
+						'description'     =>  bp_get_group_description(),
 					);
 				}
 
