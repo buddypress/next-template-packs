@@ -55,6 +55,11 @@ body.buddypress {
 			//padding: 0 $pad-xlrg;
 		}
 
+		// 2017 has a very large top padding we'll reduce that for bp screens
+		.site-content {
+			padding-top: 2.5em;
+		}
+
 		// Some themes are styling on ID's making it hard to override
 		// Adding a commononly used ID for site here to add weight '#page'
 		// In part this will help with 2017 floats & narrow widths
@@ -193,6 +198,19 @@ $search-element-button-size: $search-element-size + 5;
 
 	td {
 		@include responsive-font(14);
+	}
+}
+
+// Setting the profile fields to be a larger
+// font than all general user tables is open for review.
+.profile-fields {
+
+	th {
+		@include responsive-font(18);
+	}
+
+	td {
+		@include responsive-font(16);
 	}
 }
 

@@ -144,12 +144,18 @@ body.no-js {
 
 } // close .buddypress
 
-body.register .buddypress .page ul {
-	list-style: none;
-}
-
-// Profile Change Avatar
+// Public Profile
 
 .buddypress {
 
+	.profile-group-title {
+		border-bottom: 1px solid $bp-border-dark;
+		@include box-shadow( 3px 3px 9px 0 #eee); }
+
+}
+
+
+// This needs to be reviewed and re-located!?
+body.register .buddypress .page ul {
+	list-style: none;
 }

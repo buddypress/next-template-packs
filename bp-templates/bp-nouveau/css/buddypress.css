@@ -79,6 +79,9 @@ body #buddypress .bp-list .action {
 		float: none;
 		max-width: none;
 	}
+	body.buddypress .site-content {
+		padding-top: 2.5em;
+	}
 	body.buddypress #page #primary {
 		max-width: none;
 	}
@@ -217,6 +220,26 @@ dt.section-title {
 @media screen and (min-width: 46.8em) {
 	.bp-tables-user td {
 		font-size: 14px;
+	}
+}
+
+.profile-fields th {
+	font-size: 15px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.profile-fields th {
+		font-size: 18px;
+	}
+}
+
+.profile-fields td {
+	font-size: 13px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.profile-fields td {
+		font-size: 16px;
 	}
 }
 
@@ -558,6 +581,10 @@ dt.section-title {
 
 .buddypress .subnav-filters li.feed {
 	margin-right: 15px;
+}
+
+.buddypress .subnav-filters .last.filter label {
+	display: inline;
 }
 
 .buddypress .subnav-filters .last.filter select {
@@ -2100,6 +2127,13 @@ body.no-js .buddypress .field-visibility-settings {
 	border-bottom-right-radius: 0;
 }
 
+.buddypress .profile-group-title {
+	border-bottom: 1px solid #ccc;
+	-webkit-box-shadow: 3px 3px 9px 0 #eee;
+	-moz-box-shadow: 3px 3px 9px 0 #eee;
+	box-shadow: 3px 3px 9px 0 #eee;
+}
+
 body.register .buddypress .page ul {
 	list-style: none;
 }
@@ -2797,6 +2831,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .bp-tables-user tr.alt td,
 .buddypress table.wp-profile-fields tr.alt td {
 	background: #fafafa;
+}
+
+.buddypress table.profile-fields .data {
+	padding: 0 1em;
+}
+
+.buddypress table.profile-fields tr:last-child {
+	border-bottom: none;
 }
 
 .buddypress table.notifications .bulk-select-all,

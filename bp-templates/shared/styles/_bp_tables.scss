@@ -58,6 +58,18 @@
 		}
 	}
 
+
+	table.profile-fields {
+
+		.data {
+			padding: 0 $pad-med;
+		}
+
+		tr:last-child {
+			border-bottom: none;
+		}
+	}
+
 	// Set various tables th/td cell sizes
 	table.notifications {
 

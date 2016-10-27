@@ -51,6 +51,10 @@
 
 		.last.filter {
 
+			label {
+				display: inline;
+			}
+
 			select {
 				padding: 3px $marg-sml;
 			}

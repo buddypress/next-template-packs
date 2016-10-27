@@ -3,26 +3,32 @@
 .buddypress {
 
 	[data-bp-search] {
+		@include  clearfix-element(form);
 
 		form {
+			border: 1px solid $bp-border-color;
+
+			label {
+				margin: 0;display: inline;
+			}
 
 			input[type="search"],
-			input[type="text"] {
+			input[type="text"] { border: 0;
 				float: left;
 				padding: 6px 10px;
-				width: 65%;
+				width: 80%;
 			}
 
 			button[type="submit"] {
-				border-left: 0;
+				border: 0;
 				display: none;
-				float: left;
+				float: right;
 				font-weight: 400;
 				line-height: inherit;
 				padding: 0.5em 0.8em;
 				text-align: center;
 				text-transform: none;
-				width: auto;
+				width: 20%;
 			}
 
 
