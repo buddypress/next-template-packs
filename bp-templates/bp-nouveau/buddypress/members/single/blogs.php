@@ -10,21 +10,28 @@
 ?>
 
 <div class="bp-navs bp-subnavs user-subnav" id="subnav" role="navigation">
-	<ul class="subnav subnav-filters filters">
+	<ul class="subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
-		<li id="blogs-order-select" class="last filter">
-
-			<label for="blogs-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
-			<select id="blogs-order-by" data-bp-filter="blogs">
-
-				<?php bp_nouveau_filter_options() ;?>
-
-			</select>
-		</li>
 	</ul>
-</div><!-- .item-list-tabs -->
+</div><!-- .bp-navs -->
+
+<ul class="subnav-filters filters">
+
+	<?php bp_nouveau_search_form(); ?>
+
+	<li id="blogs-order-select" class="last filter">
+
+		<label for="blogs-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
+		<select id="blogs-order-by" data-bp-filter="blogs">
+
+			<?php bp_nouveau_filter_options() ;?>
+
+		</select>
+	</li>
+</ul>
+
 
 <?php
 switch ( bp_current_action() ) :

@@ -25,6 +25,7 @@
 
 
 		<ul class="subnav-filters filters">
+
 			<?php bp_nouveau_search_form(); ?>
 
 			<li id="groups-order-select" class="last filter">
