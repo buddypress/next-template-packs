@@ -64,22 +64,26 @@ body.buddypress {
 		// Adding a commononly used ID for site here to add weight '#page'
 		// In part this will help with 2017 floats & narrow widths
 
-		#page {
 
-			// If 2017 page choice is 'One Column' #primary is a narrow width
-			// remove width to allow BP screens to mirror post layout widths
-			// The .wrap element will serve still to provide a max width @ 1000px
+			#page {
 
-			#primary {
-				max-width: none;
+				// If 2017 page choice is 'One Column' #primary is a narrow width
+				// Current RC has removed the customizer column switch !!
+				// remove width to allow BP screens to mirror post layout widths
+				// The .wrap element will serve still to provide a max width @ 1000px
+
+				#primary {
+					max-width: none;
+
+					.entry-header,
+					.entry-content {
+						float: none;
+						width: auto;
+					}
+				}
 			}
 
-			.entry-header,
-			.entry-content {
-				float: none;
-				width: auto;
-			}
-		}
+
 	} // @media
 }
 
@@ -100,7 +104,7 @@ body { // add weight
 			clear: none;
 			// some themes set massive margins ensure we avoid these in bp elements
 			margin: 1em 0;
-			// some themes add padding top lets manage that
+			// some themes add padding top lets manage that generically sitewide
 			padding: 0;
 		}
 	}

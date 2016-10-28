@@ -1,12 +1,22 @@
 // BP User Profiles screen
+// 0/ General :)
 // 1/ Profile Edit
 // 2/ Profile Public Display
+
+// General
+
+.buddypress {
+
+	.profile {
+		margin-top: $marg-xlrg;
+	}
+}
 
 // Edit Screen
 
 .buddypress {
 
-	.profile {
+	.profile.edit {
 
 		// The groups tabs
 		.button-nav {

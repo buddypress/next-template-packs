@@ -85,8 +85,8 @@ body #buddypress .bp-list .action {
 	body.buddypress #page #primary {
 		max-width: none;
 	}
-	body.buddypress #page .entry-header,
-	body.buddypress #page .entry-content {
+	body.buddypress #page #primary .entry-header,
+	body.buddypress #page #primary .entry-content {
 		float: none;
 		width: auto;
 	}
@@ -2022,35 +2022,39 @@ body.no-js .single-item-header .js-self-profile-button {
 * @subsection 5.2.2.2 - Extended Profiles
 *-------------------------------------------
 */
-.buddypress .profile .button-nav {
+.buddypress .profile {
+	margin-top: 30px;
+}
+
+.buddypress .profile.edit .button-nav {
 	list-style: none;
 	margin: 30px 0 10px;
 }
 
-.buddypress .profile .button-nav li {
+.buddypress .profile.edit .button-nav li {
 	display: inline-block;
 	margin-right: 10px;
 }
 
-.buddypress .profile .button-nav li a {
+.buddypress .profile.edit .button-nav li a {
 	font-size: 18px;
 }
 
-.buddypress .profile .editfield {
+.buddypress .profile.edit .editfield {
 	display: flex;
 	flex-direction: column;
 }
 
-.buddypress .profile .editfield .description {
+.buddypress .profile.edit .editfield .description {
 	order: 2;
 }
 
-.buddypress .profile .editfield > fieldset {
+.buddypress .profile.edit .editfield > fieldset {
 	order: 1;
 }
 
-.buddypress .profile .editfield .field-visibility-settings-toggle,
-.buddypress .profile .editfield .field-visibility-settings {
+.buddypress .profile.edit .editfield .field-visibility-settings-toggle,
+.buddypress .profile.edit .editfield .field-visibility-settings {
 	order: 3;
 }
 
