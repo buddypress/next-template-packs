@@ -24,20 +24,20 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 			</ul>
 		<?php endif ;?>
 
-		<h2 class="screen-heading profile-group-title"><?php printf( __( 'Editing \'%s\' Profile Group', 'bp-nouveau' ), bp_get_the_profile_group_name() ); ?></h2>
+		<h2 class="screen-heading profile-group-title edit"><?php printf( __( 'Editing \'%s\' Profile Group', 'bp-nouveau' ), bp_get_the_profile_group_name() ); ?></h2>
 
 		<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
 			<div<?php bp_field_css_class( 'editfield' ); ?>>
 
+				<?php if( bp_get_the_profile_field_description() ) : ?>
+					<p class="description bp-feedback info small"><span class="icon"></span><span class="text"><?php bp_the_profile_field_description(); ?></span></p>
+				<?php endif; ?>
+
 				<?php
 				$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
 				$field_type->edit_field_html();
 				?>
-
-				<?php if( bp_get_the_profile_field_description() ) : ?>
-					<p class="description bp-feedback info small"><span class="icon"></span><span class="text"><?php bp_the_profile_field_description(); ?></span></p>
-				<?php endif; ?>
 
 				<?php bp_nouveau_xprofile_edit_visibilty(); ?>
 

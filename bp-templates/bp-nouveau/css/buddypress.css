@@ -2034,6 +2034,24 @@ body.no-js .single-item-header .js-self-profile-button {
 	font-size: 18px;
 }
 
+.buddypress .profile .editfield {
+	display: flex;
+	flex-direction: column;
+}
+
+.buddypress .profile .editfield .description {
+	order: 2;
+}
+
+.buddypress .profile .editfield > fieldset {
+	order: 1;
+}
+
+.buddypress .profile .editfield .field-visibility-settings-toggle,
+.buddypress .profile .editfield .field-visibility-settings {
+	order: 3;
+}
+
 body.no-js .buddypress .field-visibility-settings-toggle,
 body.no-js .buddypress .field-visibility-settings-close {
 	display: none;
@@ -2127,7 +2145,7 @@ body.no-js .buddypress .field-visibility-settings {
 	border-bottom-right-radius: 0;
 }
 
-.buddypress .profile-group-title {
+.buddypress .profile.public .profile-group-title {
 	border-bottom: 1px solid #ccc;
 	-webkit-box-shadow: 3px 3px 9px 0 #eee;
 	-moz-box-shadow: 3px 3px 9px 0 #eee;

@@ -19,7 +19,7 @@
 
 <?php bp_nouveau_xprofile_hook( 'before', 'profile_content' ); ?>
 
-<div class="profile">
+<div class="profile <?php echo bp_current_action(); ?>">
 
 <?php switch ( bp_current_action() ) :
 

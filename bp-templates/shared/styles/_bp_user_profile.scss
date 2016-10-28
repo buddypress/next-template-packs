@@ -8,6 +8,7 @@
 
 	.profile {
 
+		// The groups tabs
 		.button-nav {
 			list-style: none;
 			margin: $marg-xlrg 0 $marg-sml;
@@ -22,7 +23,27 @@
 				}
 			}
 		}
-	}
+
+		// The visual layout of the form controls and group description
+		.editfield {
+			display: flex;
+			flex-direction: column;
+
+			.description {
+				order: 2;
+			}
+
+			> fieldset {
+				order: 1;
+			}
+
+			.field-visibility-settings-toggle,
+			.field-visibility-settings {
+				order: 3;
+			}
+		}
+
+	} // .profile
 } // close .buddypress
 
 body.no-js {
@@ -148,10 +169,13 @@ body.no-js {
 
 .buddypress {
 
-	.profile-group-title {
-		border-bottom: 1px solid $bp-border-dark;
-		@include box-shadow( 3px 3px 9px 0 #eee); }
+	.profile.public {
 
+		.profile-group-title {
+			border-bottom: 1px solid $bp-border-dark;
+			@include box-shadow( 3px 3px 9px 0 #eee);
+		}
+	}
 }
 
 
