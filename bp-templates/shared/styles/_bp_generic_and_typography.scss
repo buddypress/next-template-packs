@@ -100,6 +100,8 @@ body { // add weight
 			clear: none;
 			// some themes set massive margins ensure we avoid these in bp elements
 			margin: 1em 0;
+			// some themes add padding top lets manage that
+			padding: 0;
 		}
 	}
 }
