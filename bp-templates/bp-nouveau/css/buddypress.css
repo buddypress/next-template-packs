@@ -2532,22 +2532,6 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	width: 100%;
 }
 
-.buddypress.settings .notification-settings tr,
-.buddypress.settings .profile-settings tr {
-	background: #fafafa;
-}
-
-.buddypress.settings .notification-settings thead tr,
-.buddypress.settings .profile-settings thead tr {
-	background: none;
-	border-bottom: 1px solid #ccc;
-}
-
-.buddypress.settings .notification-settings thead tr th,
-.buddypress.settings .profile-settings thead tr th {
-	border-bottom: none;
-}
-
 /*__ General __*/
 /*__ Email notifications __*/
 /*__ Profile visibility __*/
@@ -2853,6 +2837,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress table.wp-profile-fields thead tr,
 .buddypress table.forum thead tr {
 	background: none;
+	border-bottom: 2px solid #ccc;
 }
 
 .buddypress .bp-tables-user tbody tr,

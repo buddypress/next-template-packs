@@ -15,13 +15,16 @@
 
 			tr {
 				background: none;
+				border-bottom: 2px solid $bp-border-dark;
 			}
 		}
-tbody {
-	tr {
-		background: $off-white;
-	}
-}
+
+		tbody {
+
+			tr {
+				background: $off-white;
+			}
+		}
 
 	}
 

@@ -510,6 +510,7 @@ function bp_nouveau_loop_classes() {
 		endif;
 
 			// if this is friends loop we still need the general members-list class
+			$members_loop_class = '';
 			if( bp_is_user() && 'my-friends' === bp_current_action() ) {
 				$member_loop_class = 'members-list';
 			}

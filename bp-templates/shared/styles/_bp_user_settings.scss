@@ -21,26 +21,6 @@
 		}
 	}
 
-	.notification-settings,
-	.profile-settings { //tables
-		tr {
-			background: $off-white;
-		}
-
-		thead {
-
-			tr {
-				background: none;
-				border-bottom: 1px solid $bp-border-dark;
-
-				th {
-					border-bottom: none;
-				}
-			}
-
-		}
-	}
-
 }
 
 
