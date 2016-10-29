@@ -16,25 +16,25 @@
 			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 		<?php endif ; ?>
+	</ul>
+</div><!-- .bp-navs -->
 
+<ul class="subnav-filters filters">
 		<?php if ( ! bp_is_current_action( 'requests' ) ) : ?>
 
-			<li id="members-order-select" class="last filter">
+		<li id="members-order-select" class="last filter">
 
-				<label for="members-friends">
-					<span class="bp-screen-reader-text"><?php esc_html_e( 'Order By:', 'bp-nouveau' ); ?></span>
-				</label>
-				<select id="members-friends" data-bp-filter="members">
-
+			<label for="members-friends">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Order By:', 'bp-nouveau' ); ?></span>
+			</label>
+			<select id="members-friends" data-bp-filter="members">
 					<?php bp_nouveau_filter_options(); ?>
+			</select>
 
-				</select>
-			</li>
-
+		</li>
 		<?php endif ; ?>
+</ul>
 
-	</ul>
-</div>
 
 <?php
 switch ( bp_current_action() ) :

@@ -14,9 +14,15 @@
 		thead {
 
 			tr {
-				background: $light-grey;
+				background: none;
 			}
 		}
+tbody {
+	tr {
+		background: $off-white;
+	}
+}
+
 	}
 
 	.bp-tables-user,
