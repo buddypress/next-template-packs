@@ -33,11 +33,13 @@
 			@include medium-up() {
 
 				.item {
-					margin-right: 0;
+					//margin-right: 0;
 				}
 
 				.item-block { // element is a styling div for positional purposes only
 					float: left;
+					margin-right: 2%;
+					width: 46%;
 				}
 
 				.list-title,
@@ -52,9 +54,9 @@
 
 				.group-desc {
 					clear: none;
-					float: right;
-					margin: $marg-med auto;
-					width: 45%;
+					margin: $marg-med $marg-sml $marg-med 0;
+					overflow: hidden;
+					width: auto;
 				}
 
 			} // close @media

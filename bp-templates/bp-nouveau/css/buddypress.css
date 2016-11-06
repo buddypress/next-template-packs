@@ -322,6 +322,18 @@ dt.section-title {
 	margin-bottom: 20px;
 }
 
+.buddypress .bp-navs li.selected,
+.buddypress .bp-navs li.current,
+.buddypress .bp-navs li a:hover {
+	background: #555;
+}
+
+.buddypress .bp-navs li.selected a,
+.buddypress .bp-navs li.current a,
+.buddypress .bp-navs li a:hover a {
+	color: #fff;
+}
+
 .buddypress .bp-navs li.selected a span,
 .buddypress .bp-navs li.current a span,
 .buddypress .bp-navs li a:hover a span {
@@ -359,7 +371,7 @@ dt.section-title {
 	.buddypress .main-navs:not(.dir-navs) li.selected a,
 	.buddypress .main-navs:not(.dir-navs) li.current a {
 		background: none;
-		color: #333;
+		color: #fff;
 		text-decoration: underline;
 	}
 	.buddypress .main-navs.vertical li.selected a,
@@ -757,7 +769,7 @@ dt.section-title {
 		margin-right: 5%;
 	}
 	.bp-list li .item {
-		margin: 0 10% 0 0;
+		margin: 0 12% 0 0;
 		overflow: hidden;
 	}
 	.bp-list li .item .list-title,
@@ -1422,11 +1434,10 @@ form.ac-form .ac-reply-content input {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress .groups-list li .item {
-		margin-right: 0;
-	}
 	.buddypress .groups-list li .item-block {
 		float: left;
+		margin-right: 2%;
+		width: 46%;
 	}
 	.buddypress .groups-list li .list-title,
 	.buddypress .groups-list li .item-meta {
@@ -1438,9 +1449,9 @@ form.ac-form .ac-reply-content input {
 	}
 	.buddypress .groups-list li .group-desc {
 		clear: none;
-		float: right;
-		margin: 15px auto;
-		width: 45%;
+		margin: 15px 10px 15px 0;
+		overflow: hidden;
+		width: auto;
 	}
 }
 
