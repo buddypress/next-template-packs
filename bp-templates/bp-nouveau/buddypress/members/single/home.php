@@ -28,7 +28,7 @@
 
 		<div id="item-body" class="item-body">
 
-			<?php bp_nouveau_member_template_part();?>
+			<?php bp_nouveau_member_template_part(); ?>
 
 		</div><!-- #item-body -->
 	</div><!-- // .bp-wrap -->

@@ -295,7 +295,7 @@ dt.section-title {
 }
 
 .bp-navs ul li span {
-	background: #eee;
+	background: #eaeaea;
 	border: 1px solid #ccc;
 	border-radius: 50%;
 	color: #555;
@@ -320,18 +320,6 @@ dt.section-title {
 
 .main-navs.dir-navs {
 	margin-bottom: 20px;
-}
-
-.buddypress .bp-navs li.selected,
-.buddypress .bp-navs li.current,
-.buddypress .bp-navs li a:hover {
-	background: #555;
-}
-
-.buddypress .bp-navs li.selected a,
-.buddypress .bp-navs li.current a,
-.buddypress .bp-navs li a:hover a {
-	color: #fff;
 }
 
 .buddypress .bp-navs li.selected a span,
@@ -370,7 +358,7 @@ dt.section-title {
 @media screen and (min-width: 46.8em) {
 	.buddypress .main-navs:not(.dir-navs) li.selected a,
 	.buddypress .main-navs:not(.dir-navs) li.current a {
-		background: none;
+		background: #555;
 		color: #fff;
 		text-decoration: underline;
 	}
@@ -388,12 +376,12 @@ dt.section-title {
 	color: #fafafa;
 }
 
-.buddypress:not(.bp-vertical-nav) .bp-navs:not(.dir-navs) {
+.buddypress:not(.bp-vertical-nav) .bp-navs {
 	background: #eaeaea;
 }
 
 .buddypress:not(.bp-vertical-nav) .main-navs > ul > li > a {
-	padding: 8px 10px;
+	padding: 0.5em calc(0.5em + 2px);
 }
 
 .buddypress:not(.bp-vertical-nav) .user-subnav#subsubnav,
@@ -2775,7 +2763,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress [data-bp-search] form label {
 	margin: 0;
-	display: inline;
 }
 
 .buddypress [data-bp-search] form input[type="search"],
@@ -3713,5 +3700,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li:last-child a {
 		border: none;
+	}
+	.bp-dir-nav-vert .dir-navs {
+		float: left;
+		width: 18%;
+	}
+	.bp-dir-nav-vert .screen-content {
+		float: right;
+		width: 80%;
 	}
 }

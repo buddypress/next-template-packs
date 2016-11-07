@@ -9,11 +9,12 @@
 			border: 1px solid $bp-border-color;
 
 			label {
-				margin: 0;display: inline;
+				margin: 0;
 			}
 
 			input[type="search"],
-			input[type="text"] { border: 0;
+			input[type="text"] {
+				border: 0;
 				float: left;
 				padding: 6px 10px;
 				width: 80%;
@@ -30,7 +31,6 @@
 				text-transform: none;
 				width: 20%;
 			}
-
 
 			input[type="search"]::-webkit-search-cancel-button {
 				-webkit-appearance: searchfield-cancel-button;

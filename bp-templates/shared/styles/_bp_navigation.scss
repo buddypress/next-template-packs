@@ -1,6 +1,6 @@
 // BP primary & secondary navigation - directory and single screens
 
-// all devices & ceneric styles sitewide
+// all devices & generic styles sitewide
 .bp-navs {
 	background: transparent;
 	clear: both;
@@ -33,7 +33,7 @@
 			}
 
 			span {
-				background: #eee;
+				background: $light-grey;
 				border: 1px solid $bp-border-dark;
 				border-radius: 50%;
 				color: $meta-text-dark;
@@ -67,7 +67,7 @@
 			li {
 
 				a {
-					border: 1px solid #ccc;
+					border: 1px solid $bp-border-dark;
 					display: inline-block;
 				}
 			}
@@ -88,10 +88,8 @@
 		li.selected,
 		li.current,
 		li a:hover {
-			background: $dark-grey;
 
 			a {
-				color: $white;
 
 				span {
 					background-color: $grey;
@@ -133,7 +131,7 @@
 			li.current {
 
 				a {
-					background: none;
+					background: $dark-grey;
 					color: $white;
 					text-decoration: underline;
 				}
@@ -172,14 +170,14 @@
 // the parent elements if vertical nav not selected
 .buddypress:not(.bp-vertical-nav) {
 
-	.bp-navs:not(.dir-navs) {
+	.bp-navs {
 		background: $light-grey;
 	}
 
 	.main-navs {
 
 		> ul > li > a {
-			padding: 8px 10px;
+			padding: $pad-sml calc(0.5em + 2px);
 		}
 	}
 
