@@ -3,7 +3,8 @@
 .buddypress {
 
 	[data-bp-search] {
-		@include  clearfix-element(form);
+
+		@include clearfix-element(form);
 
 		form {
 			border: 1px solid $bp-border-color;

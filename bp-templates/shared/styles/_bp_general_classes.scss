@@ -30,14 +30,15 @@
 // using flexbox this is a progressive enhancement,
 // it won't work in all browsers, older browser will simply
 // fall back to non centered or to using older techniques.
-// N.B. A mixin exists '@include center-vert()' for rulesets to use to add the properties below
+// N.B. A mixin exists '@include center-vert()' for rulesets
+// to use to add the properties below.
 .center-vert {
-		display: -ms-flexbox;
-		display: -webkit-flex;
-		display: flex;
-		-ms-flex-align: center;
-		-webkit-align-items: center;
-		-webkit-box-align: center;
-		align-items: center;
-	}
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
+}
 

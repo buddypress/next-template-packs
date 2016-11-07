@@ -4,128 +4,125 @@
 // is useful, causing issue with specificity on other
 // lists if they do not use it.
 
-//.buddypress {
+.bp-list {
+	@include box-model();
+	border-top: 1px solid $light-grey;
+	clear: both;
+	list-style: none;
+	margin: $marg-med 0;
+	overflow: hidden;
+	padding: 0;
+	width: 100%;
 
-	.bp-list {
-		@include box-model();
-		border-top: 1px solid $light-grey;
+	// these clearfix rules simply because the element can't be classed
+	li:before,
+	li:after {
+		content: " ";
+		display: table;
+	}
+
+	li:after {
 		clear: both;
+	}
+
+	> li {
+		border-bottom: 1px solid $light-grey;
+	}
+
+	li {
 		list-style: none;
-		margin: $marg-med 0;
-		overflow: hidden;
-		padding: 0;
-		width: 100%;
+		margin: $marg-sml 0;
+		padding: $pad-sml 0;
+		position: relative;
 
-		// these clearfix rules simply because the element can't be classed
-		li:before,
-		li:after {
-			content: " ";
-			display: table;
-		}
+		.item-avatar {
+			text-align: center;
 
-		li:after {
-			clear: both;
-		}
-
-		> li {
-			border-bottom: 1px solid $light-grey;
-		}
-
-		li {
-			list-style: none;
-			margin: $marg-sml 0;
-			padding: $pad-sml 0;
-			position: relative;
-
-			.item-avatar {
-				text-align: center;
-
-				img.avatar {
-					display: inline;
-				}
+			img.avatar {
+				display: inline;
 			}
+		}
+
+		.item {
+
+			.item-avatar,
+			.list-title,
+			.item-meta,
+			.group-details {
+				text-align: center;
+			}
+
+			.list-title {
+				clear: none; // some WP themes state clear:both
+				@include responsive-font(28);
+				font-weight: 400;
+				margin: 0 auto;
+				width: 60%;
+			}
+		}
+
+		.meta,
+		.item-meta {
+			color: #888;
+			@include font-size(12);
+			margin-top: $marg-sml;
+		}
+
+		.action {
+
+			.generic-button {
+				display: inline-block;
+				margin: 0 $marg-sml 0 0;
+			}
+		}
+
+		@include medium-small-up() {
 
 			.item {
 
-				.item-avatar,
-				.list-title,
-				.item-meta,
-				.group-details {
-					text-align: center;
-				}
+			}
+		}
 
-				.list-title {
-					clear: none; // some WP themes state clear:both
-					@include responsive-font(28);
-					font-weight: 400;
-					margin: 0 auto;
-					width: 60%;
-				}
+		@include medium-up() {
+
+			.item-avatar {
+				float: left;
+				margin-right: 5%;
 			}
 
-			.meta,
-			.item-meta {
-				color: #888;
-				@include font-size(12);
-				margin-top: $marg-sml;
+			.item {
+				margin: 0 12% 0 0;
+				overflow: hidden;
+
+				.list-title,
+				.item-meta {
+					float: left;
+					text-align: left;
+				}
+
+				.group-details {
+					text-align: left;
+				}
 			}
 
 			.action {
-				.generic-button {
-					display: inline-block;
-					margin: 0 $marg-sml 0 0;
-				}
+				padding: 0;
+				position: absolute;
+				right: 0;
+				text-align: right;
+				top: 0;
 			}
 
-			@include medium-small-up() {
-
-				.item {
-
-				}
+			.generic-button {
+				display: block;
+				margin: 0  0 $marg-xsml 0;
 			}
 
-			@include medium-up() {
+		} // close @media
 
-				.item-avatar {
-					float: left;
-					margin-right: 5%;
-				}
+	} // close li
 
-				.item {
-					margin: 0 12% 0 0;
-					overflow: hidden;
-
-					.list-title,
-					.item-meta {
-						float: left;
-						text-align: left;
-					}
-
-					.group-details {
-						text-align: left;
-					}
-				}
-
-				.action {
-					padding: 0;
-					position: absolute;
-					right: 0;
-					text-align: right;
-					top: 0;
-				}
-
-				.generic-button {
-					display: block;
-					margin: 0  0 $marg-xsml 0;
-				}
-
-			} // close @media
-
-		} // close li
-
-	} // close .bp-list
-
-//} // .buddypress
+} // close .bp-list
 
 // body class: single act items screens.
 .activity-permalink {
