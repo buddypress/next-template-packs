@@ -9,7 +9,7 @@
 ?>
 
 <div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
+<?php var_dump(bp_dir_is_vert_layout() ); ?>
 	<?php bp_nouveau_before_blogs_directory_content() ;?>
 
 	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
@@ -18,21 +18,24 @@
 
 	<?php endif; ?>
 
-	<div class="subnav-filters filters no-ajax" id="subnav-filters">
-		<ul class="subnav-search clearfix">
+	<div class="screen-content" role="content">
 
-			<?php bp_nouveau_search_form(); ?>
+		<div class="subnav-filters filters no-ajax" id="subnav-filters">
+			<ul class="subnav-search clearfix">
 
-		</ul>
+				<?php bp_nouveau_search_form(); ?>
 
-		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
+			</ul>
 
-	</div>
+			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
-	<div id="blogs-dir-list" class="blogs dir-list" data-bp-list="blogs">
-		<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-blogs-loading' ) ;?></div>
-	</div><!-- #blogs-dir-list -->
+		</div>
 
-	<?php bp_nouveau_after_blogs_directory_content() ;?>
+		<div id="blogs-dir-list" class="blogs dir-list" data-bp-list="blogs">
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-blogs-loading' ) ;?></div>
+		</div><!-- #blogs-dir-list -->
+
+		<?php bp_nouveau_after_blogs_directory_content() ;?>
+	</div><!-- // .screen-content -->
 
 </div><!-- //.buddypress -->

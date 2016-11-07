@@ -10,7 +10,9 @@
 ?>
 
 <div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
+<?php //var_dump(bp_nouveau()->members); ?>
 
+<?php var_dump(bp_dir_is_vert_layout() ); ?>
 	<?php bp_nouveau_before_members_directory_content() ?>
 
 	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>

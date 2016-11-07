@@ -399,7 +399,7 @@
 		}
 	}
 
-	.bp-dir-nav-vert {
+	.bp-dir-vert-nav {
 
 		.dir-navs {
 			float: left;
@@ -409,6 +409,10 @@
 		.screen-content {
 			float: right;
 			width: 80%;
+
+			.subnav-filters {
+				margin-top: 0;
+			}
 		}
 	}
 } // close @media

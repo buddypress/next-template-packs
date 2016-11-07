@@ -20,22 +20,25 @@
 
 	<?php endif; ?>
 
-	<div class="subnav-filters filters no-ajax" id="subnav-filters">
+	<div class="screen-content" role="content">
 
-		<ul class="subnav-search clearfix">
+		<div class="subnav-filters filters no-ajax" id="subnav-filters">
 
-			<?php bp_nouveau_search_form(); ?>
+			<ul class="subnav-search clearfix">
 
-		</ul>
+				<?php bp_nouveau_search_form(); ?>
 
-		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
+			</ul>
 
-	</div>
+			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
-	<div id="groups-dir-list" class="groups dir-list" data-bp-list="groups">
-		<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-groups-loading' ) ;?></div>
-	</div><!-- #groups-dir-list -->
+		</div>
+
+		<div id="groups-dir-list" class="groups dir-list" data-bp-list="groups">
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-groups-loading' ) ;?></div>
+		</div><!-- #groups-dir-list -->
 
 	<?php bp_nouveau_after_groups_directory_content(); ?>
+	</div><!-- // .screen-content -->
 
 </div><!-- //.buddypress -->

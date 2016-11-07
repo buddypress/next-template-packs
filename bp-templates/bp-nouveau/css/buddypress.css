@@ -3698,12 +3698,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li:last-child a {
 		border: none;
 	}
-	.bp-dir-nav-vert .dir-navs {
+	.bp-dir-vert-nav .dir-navs {
 		float: left;
 		width: 18%;
 	}
-	.bp-dir-nav-vert .screen-content {
+	.bp-dir-vert-nav .screen-content {
 		float: right;
 		width: 80%;
+	}
+	.bp-dir-vert-nav .screen-content .subnav-filters {
+		margin-top: 0;
 	}
 }

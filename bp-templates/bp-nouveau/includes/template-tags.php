@@ -602,6 +602,25 @@ function bp_nouveau_loop_get_grid_columns() {
 }
 
 /**
+ * Return a bool check for component directory layout.
+ * Checks if activity, members, groups, blogs has the vert nav layout selected
+ *
+ * @since 1.0.0
+ *
+ * @return bool.
+ */
+function bp_dir_is_vert_layout() {
+		$bp_nouveau = bp_nouveau();
+		$component  = sanitize_key( bp_current_component() );
+
+		if ( $bp_nouveau->{$component}->directory_vertical_layout ):
+			return true;
+		else:
+			return false;
+		endif;
+}
+
+/**
  * Get the full size avatar args.
  *
  * @since  1.0.0
@@ -1323,7 +1342,8 @@ function bp_nouveau_buddypress_classes() {
 			}
 
 			if ( ! empty( $layout_prefs ) && bp_is_directory() ) {
-				$classes[] = 'bp-dir-nav-vert';
+				$classes[] = 'bp-dir-vert-nav';
+				$bp_nouveau->{$component}->directory_vertical_layout = $layout_prefs;
 			}
 		}
 
