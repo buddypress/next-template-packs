@@ -759,6 +759,12 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'priority'    => 70,
 			'description' => __( 'Set the number of columns to use for the BuddyPress loops.', 'bp-nouveau' ),
 		),
+			'bp_nouveau_dir_layout' => array(
+			'title'       => __( 'Directory layouts', 'bp-nouveau' ),
+			'panel'       => 'bp_nouveau_panel',
+			'priority'    => 80,
+			'description' => __( 'Select the layout style for directory content &amp; navigation.', 'bp-nouveau' ),
+		),
 	) );
 
 	// Add the sections to the customizer
@@ -822,6 +828,34 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'sanitize_callback' => 'absint',
 			'transport'         => 'refresh',
 			'type'              => 'option',
+		),
+		'bp_nouveau_appearance[activity_dir_layout]' => array(
+		'index'             => 'activity_dir_layout',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
+		'bp_nouveau_appearance[members_dir_layout]' => array(
+		'index'             => 'members_dir_layout',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
+		'bp_nouveau_appearance[groups_dir_layout]' => array(
+		'index'             => 'groups_dir_layout',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
+		'bp_nouveau_appearance[sites_dir_layout]' => array(
+		'index'             => 'sites_dir_layout',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
 		),
 	) );
 
@@ -890,6 +924,30 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'settings'   => 'bp_nouveau_appearance[members_friends_layout]',
 			'type'       => 'select',
 			'choices'    => bp_nouveau_customizer_grid_choices(),
+		),
+		'act_dir_layout' => array(
+		'label'      => __( 'Set Activity dir nav to column:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[activity_dir_layout]',
+		'type'       => 'checkbox',
+		),
+		'members_dir_layout' => array(
+		'label'      => __( 'Set Members dir nav to column:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[members_dir_layout]',
+		'type'       => 'checkbox',
+		),
+		'group_dir_layout' => array(
+		'label'      => __( 'Set Groups dir nav to column:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[groups_dir_layout]',
+		'type'       => 'checkbox',
+		),
+		'sites_dir_layout' => array(
+		'label'      => __( 'Set Sites dir nav to column:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[sites_dir_layout]',
+		'type'       => 'checkbox',
 		),
 	) );
 

@@ -399,4 +399,17 @@
 		}
 	}
 
+	.bp-dir-nav-vert {
+		.dir-navs {
+			float: left;
+			width: 18%;
+		}
+
+		.screen-content {
+			float: right;
+			width: 80%;
+		}
+	}
 } // close @media
+
+

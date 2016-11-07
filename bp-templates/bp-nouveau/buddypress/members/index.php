@@ -19,22 +19,25 @@
 
 	<?php endif; ?>
 
-	<div class="subnav-filters filters no-ajax" id="subnav-filters">
+	<div class="screen-content" role="content">
 
-		<ul class="subnav-search clearfix">
+		<div class="subnav-filters filters no-ajax" id="subnav-filters">
 
-			<?php bp_nouveau_search_form(); ?>
+			<ul class="subnav-search clearfix">
 
-		</ul>
+				<?php bp_nouveau_search_form(); ?>
 
-		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
+			</ul>
 
-	</div>
+			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
-	<div id="members-dir-list" class="members dir-list" data-bp-list="members">
-		<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-members-loading' ) ;?></div>
-	</div><!-- #members-dir-list -->
+		</div>
 
-	<?php bp_nouveau_after_members_directory_content() ?>
+		<div id="members-dir-list" class="members dir-list" data-bp-list="members">
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-members-loading' ) ;?></div>
+		</div><!-- #members-dir-list -->
+
+		<?php bp_nouveau_after_members_directory_content() ?>
+	</div><!-- // .screen-content -->
 
 </div><!-- //.buddypress -->

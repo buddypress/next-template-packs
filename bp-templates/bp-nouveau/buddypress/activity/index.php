@@ -27,31 +27,34 @@
 
 	<?php endif; ?>
 
-	<div class="subnav-filters filters no-ajax" id="subnav-filters">
+	<div class="screen-content" role="content">
 
-		<ul class="subnav-search clearfix">
-			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
+		<div class="subnav-filters filters no-ajax" id="subnav-filters">
 
-			<?php bp_nouveau_search_form(); ?>
+			<ul class="subnav-search clearfix">
+				<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
-		</ul>
+				<?php bp_nouveau_search_form(); ?>
 
-		<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
+			</ul>
 
-	</div><!-- .item-list-tabs -->
+			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
 
-	<?php bp_nouveau_activity_hook( 'before_directory', 'list' ); ?>
+		</div><!-- .item-list-tabs -->
 
-	<div class="activity">
+		<?php bp_nouveau_activity_hook( 'before_directory', 'list' ); ?>
 
-		<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
+		<div class="activity">
 
-		 	<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-activity-loading' ) ;?></li>
+			<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
-		</ul>
+			 	<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-activity-loading' ) ;?></li>
 
-	</div><!-- .activity -->
+			</ul>
 
-	<?php bp_nouveau_after_activity_directory_content() ;?>
+		</div><!-- .activity -->
+
+		<?php bp_nouveau_after_activity_directory_content() ;?>
+	</div><!-- // .screen-content -->
 
 </div>

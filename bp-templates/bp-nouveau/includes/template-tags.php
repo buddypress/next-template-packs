@@ -1268,8 +1268,31 @@ function bp_nouveau_buddypress_classes() {
 			$component         = 'members';
 			$user_type = bp_get_member_type( bp_displayed_user_id() );
 			$member_type_class = ( $user_type )? $user_type : '';
+
 		} elseif ( bp_is_group() ) {
 			$customizer_option = 'group_nav_display';
+
+		} elseif ( bp_is_directory() ) {
+
+			switch ( $component ) {
+				case 'activity':
+					$customizer_option = 'activity_dir_layout';
+					break;
+				case 'members':
+					$customizer_option = 'members_dir_layout';
+					break;
+				case 'groups':
+					$customizer_option = 'groups_dir_layout';
+					break;
+				case 'blogs':
+					$customizer_option = 'sites_dir_layout';
+					break;
+
+				default:
+					$customizer_option = '';
+					break;
+			}
+
 		} else {
 			$customizer_option = apply_filters( 'bp_nouveau_single_item_display_settings_id', '' );
 			$member_type_class = '';
@@ -1292,11 +1315,15 @@ function bp_nouveau_buddypress_classes() {
 		if ( ! empty( $customizer_option ) ) {
 			$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 
-			if ( ! empty( $layout_prefs ) && (int) $layout_prefs === 1 ) {
+			if ( ! empty( $layout_prefs ) && (int) $layout_prefs === 1 && ( bp_is_user() || bp_is_group() ) ) {
 				$classes[] = 'bp-vertical-nav';
 
 				// Set the global for a later use.
 				$bp_nouveau->{$component}->single_primary_nav_layout = $layout_prefs;
+			}
+
+			if ( ! empty( $layout_prefs ) && bp_is_directory() ) {
+				$classes[] = 'bp-dir-nav-vert';
 			}
 		}
 
