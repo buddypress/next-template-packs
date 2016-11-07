@@ -403,11 +403,13 @@
 
 		.dir-navs {
 			float: left;
-			width: 18%;
+			width: 20%;
 		}
 
 		.screen-content {
+			border-left: 1px solid $bp-border-color;
 			float: right;
+			padding-left: $pad-med;
 			width: 80%;
 
 			.subnav-filters {

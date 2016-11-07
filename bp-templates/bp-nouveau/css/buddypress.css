@@ -464,6 +464,12 @@ dt.section-title {
 }
 
 @media screen and (min-width: 46.8em) {
+	.bp-dir-vert-nav .bp-navs.dir-navs {
+		background: none;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
 	.buddypress #item-body .button-tabs {
 		border-bottom: 1px solid #ccc;
 		float: none;
@@ -3700,10 +3706,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.bp-dir-vert-nav .dir-navs {
 		float: left;
-		width: 18%;
+		width: 20%;
 	}
 	.bp-dir-vert-nav .screen-content {
+		border-left: 1px solid #eee;
 		float: right;
+		padding-left: 1em;
 		width: 80%;
 	}
 	.bp-dir-vert-nav .screen-content .subnav-filters {

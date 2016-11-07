@@ -340,6 +340,18 @@
 	}
 }
 
+// Directory screens vertical nav rules
+
+@include medium-up() {
+
+	// the top level class activating vert layout
+	.bp-dir-vert-nav {
+		.bp-navs.dir-navs {
+			background: none;
+		}
+	}
+}
+
 // Tabbed links
 
 // Our tabbed links are pulled in via a mixin
