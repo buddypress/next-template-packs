@@ -613,11 +613,8 @@ function bp_dir_is_vert_layout() {
 		$bp_nouveau = bp_nouveau();
 		$component  = sanitize_key( bp_current_component() );
 
-		if ( $bp_nouveau->{$component}->directory_vertical_layout ):
-			return true;
-		else:
-			return false;
-		endif;
+		return (bool) $bp_nouveau->{$component}->directory_vertical_layout;
+
 }
 
 /**
