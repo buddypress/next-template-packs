@@ -5,10 +5,6 @@
 	.members-list { // ul
 		li {
 
-			.member-name { // .list-title _bp_lists.scss handles site wide
-				@include font-size(18);
-			}
-
 			.user-update {
 				border: 1px solid $light-grey;
 				@include border-radius(10px);
@@ -27,15 +23,26 @@
 				}
 			}
 
+		} // close li
+
+	} // close .members-list
+
+	// Members group specific list
+	.members-group-list {
+		li {
+
 			@include medium-up() {
+
+				.joined {
+					clear: left;
+					float: none;
+				}
 
 				.user-update {
 
 				}
 			}
-
-		} // close li
-
-	} // close .members-list
+		}
+	}
 
 }

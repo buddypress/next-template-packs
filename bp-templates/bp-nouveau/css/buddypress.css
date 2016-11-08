@@ -1466,10 +1466,6 @@ form.ac-form .ac-reply-content input {
 * @section 3.2 - Members Loop
 *----------------------------------------------------------
 */
-.buddypress .members-list li .member-name {
-	font-size: 18px;
-}
-
 .buddypress .members-list li .user-update {
 	border: 1px solid #eaeaea;
 	-webkit-border-radius: 10px;
@@ -1488,6 +1484,13 @@ form.ac-form .ac-reply-content input {
 @media screen and (min-width: 32em) {
 	.buddypress .members-list li .user-update {
 		width: 60%;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .members-group-list li .joined {
+		clear: left;
+		float: none;
 	}
 }
 
@@ -3142,7 +3145,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress li.filter label:before,
 .buddypress li.feed a:before,
-.buddypress .action a,
 .buddypress .bp-invites-filters li a.invite-button:before,
 .buddypress .bp-messages-filters li a.messages-button:before {
 	font-family: dashicons;
