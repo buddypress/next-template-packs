@@ -83,13 +83,19 @@ function bp_nouveau_wrapper( $args = array() ) {
 	*
 	* Check the component to find a default container_class to add
 	*/
-
+// 'activity-meta'
 	$current_component_class = bp_current_component() . '-meta';
+
+	if ( 'groups' == bp_current_component() && 'activity' == bp_current_action() ) :
+		$generic_class = ' activity-meta ';
+	else:
+		$generic_class = '';
+	endif;
 
 	$r = wp_parse_args( $args, array(
 		'container'         => 'div',
 		'container_id'      => '',
-		'container_classes' => array( 'action',  $current_component_class   ),
+		'container_classes' => array( 'action',  $generic_class, $current_component_class   ),
 		'output'            => '',
 	) );
 
