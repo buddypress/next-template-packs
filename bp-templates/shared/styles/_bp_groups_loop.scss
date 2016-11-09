@@ -103,3 +103,25 @@
 	}
 }
 
+// If BP Dir Navs are selected as vertical
+// We need to just adjust the loop item elements a little
+// to cope with the decreased width.
+
+.buddypress {
+
+	.bp-dir-vert-nav {
+
+		.groups-list {
+
+			.item-block,
+			.group-desc {
+				float: none;
+				width: auto;
+			}
+
+			.group-desc {
+				clear: left;
+			}
+		}
+	}
+}

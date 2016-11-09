@@ -1461,6 +1461,16 @@ form.ac-form .ac-reply-content input {
 	}
 }
 
+.buddypress .bp-dir-vert-nav .groups-list .item-block,
+.buddypress .bp-dir-vert-nav .groups-list .group-desc {
+	float: none;
+	width: auto;
+}
+
+.buddypress .bp-dir-vert-nav .groups-list .group-desc {
+	clear: left;
+}
+
 /**
 *----------------------------------------------------------
 * @section 3.2 - Members Loop
@@ -1741,8 +1751,13 @@ body.no-js .single-item-header .js-self-profile-button {
 .groups-header .group-item-actions {
 	float: right;
 	margin: 0 0 15px 15px;
+	padding-top: 0;
 	text-align: right;
 	width: 20%;
+}
+
+.groups-header .moderators-lists {
+	margin-top: 0;
 }
 
 .groups-header .moderators-lists .moderators-title {
@@ -1760,6 +1775,20 @@ body.no-js .single-item-header .js-self-profile-button {
 .groups-header .moderators-lists img.avatar {
 	height: 20px;
 	width: 20px;
+}
+
+.groups-header .desc-wrap {
+	background: #eaeaea;
+	margin: 0 0 15px;
+	padding: 1em;
+	text-align: center;
+}
+
+.groups-header .desc-wrap .group-description {
+	background: #fafafa;
+	display: inline-block;
+	padding: 1em;
+	text-align: left;
 }
 
 /**
