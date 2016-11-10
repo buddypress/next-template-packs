@@ -1385,6 +1385,19 @@ form.ac-form .ac-reply-content input {
 * @section 3.2 - Blogs Loop
 *----------------------------------------------------------
 */
+@media screen and (min-width: 46.8em) {
+	.buddypress .blogs-list li .item-meta {
+		clear: left;
+		float: none;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress .bp-dir-vert-nav .blogs-list .list-title {
+		width: auto;
+	}
+}
+
 /**
 *----------------------------------------------------------
 * @section 3.2 - Groups Loop
