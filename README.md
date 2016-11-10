@@ -1,6 +1,5 @@
 # BP Nouveau - Next Generation Template Packs
 
-**
 
 This repo is a work in progress and represents the work to bring the next generation of improved,radically updated and re-worked BuddyPress templates to completion.
 
@@ -8,9 +7,9 @@ The estimated time of arrival is hopefully to be around the end of the current B
 
 ## Some notes about the progess so far...
 
-The initial backend prep has been provided by imath, adding the base templates and a good deal of new and customized functionality such as backbone views for component loops along with an advanced structure for includes.
+The initial backend prep has been provided by imath, adding the base templates and a good deal of new and customized functionality such as backbone views for component loops along with an advanced structure for includes below can be seen screen shots & explanations of some of the features imath has added to improve various components.
 
-A new and updated approach to SCSS partial stylefiles is provided and itteration over thse to establish a whole new  styling and layout for this and future packs/themes is nearing completion.
+A new and updated approach to SCSS partial style files is provided and itteration over these to establish a whole new  styling and layout for this and future packs/themes is nearing completion.
 
 
 
