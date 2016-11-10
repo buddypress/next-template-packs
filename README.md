@@ -1,14 +1,20 @@
-# Next Template Packs
+# BP Nouveau - Next Generation Template Packs
 
-*bp-nouveau*
+**
 
-This is a work in progress to illustrate what i have in mind for a next BuddyPress Template Pack. *DO NOT USE* on a live website! I repeat: *DO NOT USE* on a live website!
+This repo is a work in progress and represents the work to bring the next generation of improved,radically updated and re-worked BuddyPress templates to completion.
 
-## Some notes about my progess so far...
+The estimated time of arrival is hopefully to be around the end of the current BP 2.8 release cycle, however that may be delayed depending on how functional and tested the theme is.
 
-I mainly focused on Javascript and Ajax actions, by trying to split the huge buddypress.js file into smaller parts, loading it into the footer and loading smaller parts only when neede and by using json replies into the Ajax actions.
+## Some notes about the progess so far...
 
-### This is actually a template pack and tools to manage template packs!
+The initial backend prep has been provided by imath, adding the base templates and a good deal of new and customized functionality such as backbone views for component loops along with an advanced structure for includes.
+
+A new and updated approach to SCSS partial stylefiles is provided and itteration over thse to establish a whole new  styling and layout for this and future packs/themes is nearing completion.
+
+
+
+### This repo is designed to work as a plugin and is fully functional representing a template pack and tools to manage template packs!
 
 Once activated, this plugin will first create a new Admin tabs in the BuddyPress settings *Template Packs*. It displays a list of the available template packs for the site and it helped me to come back to Legacy while building the "BP Nouveau" one. This screenshot will explain itself what this UI could bring to the user...
 ![The Primary Nav Widget](https://cldup.com/bAj2DOrkq7.png)
@@ -21,6 +27,10 @@ Another tool is more for developers: the directory tools/i18n of this repo conta
 
 I've added new templates to be able to load the primary nav dynamically: where it is today or in a widget. This leaves the choice to the user about the layout of this area. (horizontally or vertically)
 ![The Primary Nav Widget](https://cldup.com/a8FG-YCoMG.png)
+
+### Javascript - updated and improved ###
+
+A primary focus has been on Javascript and Ajax actions, by trying to split the huge buddypress.js file into smaller parts, loading it into the footer and loading smaller parts only when needed and by using json replies into the Ajax actions.
 
 ### A more dynamic activity stream
 
