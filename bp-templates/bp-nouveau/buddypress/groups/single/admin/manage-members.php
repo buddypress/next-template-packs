@@ -28,16 +28,15 @@
 					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
 					<p class="list-title member-name">
 						<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
-						<?php if ( count( bp_group_admin_ids( false, 'array' ) ) > 1 ) : ?>
+					</p>
+
+					<?php if ( count( bp_group_admin_ids( false, 'array' ) ) > 1 ) : ?>
 
 						<p class="action text-links-list">
 							<a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-nouveau' ); ?></a>
 						</p>
 
-						</li>
-
 						<?php endif; ?>
-					</p>
 
 				</li>
 				<?php endwhile; ?>
@@ -100,7 +99,7 @@
 							<span class="banned warn"><?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?></span>
 						</p>
 
-						<?php bp_nouveau_groups_manage_members_buttons( array('container' => 'ul', 'container_classes' => array('group-manage-buttons', 'text-links-list') ) ) ; ?>
+						<?php bp_nouveau_groups_manage_members_buttons( array('container' => 'p', 'container_classes' => array('group-manage-buttons', 'text-links-list'), 'parent_element' => '  ' ) ) ; ?>
 
 					</li>
 
