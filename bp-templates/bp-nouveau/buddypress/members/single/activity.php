@@ -33,7 +33,6 @@
 		</li>
 	</ul><!-- // .subnav-filters -->
 
-
 <?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 
 <div class="activity single-user">
