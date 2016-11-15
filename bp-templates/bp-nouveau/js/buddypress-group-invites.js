@@ -445,7 +445,7 @@ window.bp = window.bp || {};
 			}
 
 			if ( 'invited' === this.model.get( 'id' ) ) {
-				this.el.className += ' last';
+				this.el.className += ' pending';
 			}
 
 			this.model.on( 'change:active', this.toggleClass, this );
