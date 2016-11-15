@@ -186,6 +186,14 @@
 	box-shadow: $values;
 }
 
+// There can be a need to override the themes global styles
+// Provide a box-shadow: none;
+@mixin box-shadow-none() {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	}
+
 // Calc e.g (100% - 10px)
 @mixin calc($property, $expression) {
 	#{$property}: -webkit-calc(#{$expression});
