@@ -107,20 +107,22 @@
 // We need to just adjust the loop item elements a little
 // to cope with the decreased width.
 
-.buddypress {
+@include medium-up() {
+	.buddypress {
 
-	.bp-dir-vert-nav {
+		.bp-dir-vert-nav {
 
-		.groups-list {
+			.groups-list {
 
-			.item-block,
-			.group-desc {
-				float: none;
-				width: auto;
-			}
+				.item-block,
+				.group-desc {
+					float: none;
+					width: auto;
+				}
 
-			.group-desc {
-				clear: left;
+				.group-desc {
+					clear: left;
+				}
 			}
 		}
 	}
