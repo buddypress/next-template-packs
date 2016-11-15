@@ -25,7 +25,8 @@
 	padding: $pad-sml;
 
 	dd {
-		padding-bottom: $pad-med;
+		margin: 0;
+		padding: $pad-med 0;
 	}
 
 	.section-title {
@@ -35,6 +36,7 @@
 
 	ul {
 		list-style: none;
+		margin-bottom: 0;
 
 		li {
 			border-bottom: 1px solid $bp-border-color;
@@ -49,10 +51,11 @@
 			margin-bottom: 0;
 		}
 
-		.action {
+		.action.text-links-list {
 			margin-bottom: 0;
 
 			a.button {
+				color: $light-text;
 				display: inline-block;
 			}
 		}
