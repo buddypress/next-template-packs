@@ -100,7 +100,7 @@
 							<span class="banned warn"><?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?></span>
 						</p>
 
-						<?php bp_nouveau_groups_manage_members_buttons( array('wrapper' => 'p', 'classes' => array('action', 'text-links-list') ) ) ; ?>
+						<?php bp_nouveau_groups_manage_members_buttons( array('container' => 'ul', 'container_classes' => array('group-manage-buttons', 'text-links-list') ) ) ; ?>
 
 					</li>
 

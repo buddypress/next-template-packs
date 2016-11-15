@@ -95,7 +95,7 @@ function bp_nouveau_wrapper( $args = array() ) {
 	$r = wp_parse_args( $args, array(
 		'container'         => 'div',
 		'container_id'      => '',
-		'container_classes' => array( 'action',  $generic_class, $current_component_class   ),
+		'container_classes' => array( $generic_class, $current_component_class   ),
 		'output'            => '',
 	) );
 
@@ -107,14 +107,18 @@ function bp_nouveau_wrapper( $args = array() ) {
 		'p'    => true,
 	);
 
+//Actually merge some classes defaults and $args
+$default_classes = array('action');
+$r['container_classes'] = array_merge( $r['container_classes'], $default_classes );
+
 	if ( empty( $r['container'] ) || ! isset( $valid_containers[ $r['container'] ] ) || empty( $r['output'] ) ) {
 		return;
 	}
 
-	$container        = $r['container'];
-	$container_id     = '';
-	$container_class  = '';
-	$output           = $r['output'];
+	$container          = $r['container'];
+	$container_id       = '';
+	$container_classes  = '';
+	$output             = $r['output'];
 
 	if ( ! empty( $r['container_id'] ) ) {
 		$container_id = ' id="' . esc_attr( $r['container_id'] ) . '"';
