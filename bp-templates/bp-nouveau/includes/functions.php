@@ -107,9 +107,10 @@ function bp_nouveau_wrapper( $args = array() ) {
 		'p'    => true,
 	);
 
-//Actually merge some classes defaults and $args
-$default_classes = array('action');
-$r['container_classes'] = array_merge( $r['container_classes'], $default_classes );
+	// Actually merge some classes defaults and $args
+	// @todo This is temp, we need certain classes but maybe improve this approach.
+	$default_classes = array('action');
+	$r['container_classes'] = array_merge( $r['container_classes'], $default_classes );
 
 	if ( empty( $r['container'] ) || ! isset( $valid_containers[ $r['container'] ] ) || empty( $r['output'] ) ) {
 		return;
