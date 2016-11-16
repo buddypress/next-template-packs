@@ -749,9 +749,17 @@ dt.section-title {
 	margin-top: 10px;
 }
 
+.bp-list li .action {
+	margin: 0;
+}
+
 .bp-list li .action .generic-button {
 	display: inline-block;
 	margin: 0 10px 0 0;
+}
+
+.bp-list li .action div.generic-button {
+	margin: 10px 0;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -777,6 +785,12 @@ dt.section-title {
 		right: 0;
 		text-align: right;
 		top: 0;
+	}
+	.bp-list li .action li.generic-button {
+		margin-right: 0;
+	}
+	.bp-list li .action div.generic-button {
+		margin: 0 0 10px;
 	}
 	.bp-list li .generic-button {
 		display: block;
@@ -1045,6 +1059,10 @@ dt.section-title {
 	padding: 2px;
 	position: relative;
 	text-align: left;
+}
+
+.activity-list .activity-item .activity-meta.action div.generic-button {
+	margin: 0;
 }
 
 .activity-list .activity-item .activity-meta.action .button {

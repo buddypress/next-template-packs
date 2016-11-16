@@ -69,10 +69,16 @@
 		}
 
 		.action {
+			margin: 0;
 
 			.generic-button {
 				display: inline-block;
 				margin: 0 $marg-sml 0 0;
+			}
+
+			// if this is a div wrapper
+			div.generic-button {
+				margin: $marg-sml 0;
 			}
 		}
 
@@ -104,12 +110,24 @@
 				right: 0;
 				text-align: right;
 				top: 0;
+
+				// if it's a ul/li wrapper
+				li.generic-button {
+					margin-right: 0;
+				}
+
+				// if this is a div wrapper
+				div.generic-button {
+					margin: 0 0 $marg-sml;
+				}
 			}
 
 			.generic-button {
 				display: block;
 				margin: 0  0 $marg-xsml 0;
 			}
+
+
 
 		} // close @media
 

@@ -197,6 +197,12 @@
 			position: relative;
 			text-align: left;
 
+			// this wrapper has generic margins in _bp_lists.scss
+			// remove for act stream actions.
+			div.generic-button {
+				margin: 0;
+			}
+
 			.button {
 				background: transparent;
 			}
