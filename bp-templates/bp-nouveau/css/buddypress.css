@@ -1181,18 +1181,30 @@ body.activity-permalink .activity-list li.mini img.FB_profile_pic {
 	width: auto;
 }
 
-body.activity-permalink .activity-list .activity-header {
-	margin: 0;
-	padding: 0.5em 0 0 0;
+body.activity-permalink .activity-list .activity-avatar {
+	width: auto;
+}
+
+body.activity-permalink .activity-list .activity-avatar a {
+	display: block;
+}
+
+body.activity-permalink .activity-list .activity-avatar img {
+	max-width: 100%;
 }
 
 body.activity-permalink .activity-list .activity-content {
 	border: 0;
 	font-size: 100%;
 	line-height: 150%;
-	margin-left: 170px;
-	margin-right: 0;
 	padding: 0;
+}
+
+body.activity-permalink .activity-list .activity-content .activity-header {
+	margin: 0;
+	padding: 0.5em 0 0 0;
+	text-align: center;
+	width: 100%;
 }
 
 body.activity-permalink .activity-list .activity-content .activity-inner,
@@ -1203,6 +1215,21 @@ body.activity-permalink .activity-list .activity-content blockquote {
 
 body.activity-permalink .activity-list .activity-meta {
 	margin: 10px 0 10px;
+}
+
+@media screen and (min-width: 46.8em) {
+	body.activity-permalink .activity-list .activity-avatar {
+		left: -20px;
+		margin-right: 0;
+		position: relative;
+		top: -20px;
+	}
+	body.activity-permalink .activity-list .activity-content {
+		margin-right: 10px;
+	}
+	body.activity-permalink .activity-list .activity-content .activity-header p {
+		text-align: left;
+	}
 }
 
 .buddypress .activity-update-form {

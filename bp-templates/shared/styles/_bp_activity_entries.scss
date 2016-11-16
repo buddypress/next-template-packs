@@ -347,18 +347,33 @@ body.activity-permalink {
 
 		} // close li
 
-		.activity-header {
-			margin: 0;
-			padding: $pad-sml 0 0 0;
+		.activity-avatar {
+			width: auto;
+
+			a {
+				display: block;
+			}
+
+			img {
+				max-width: 100%;
+			}
 		}
+
+
 
 		.activity-content {
 			border: 0;
 			font-size: 100%;
 			line-height: 150%;
-			margin-left: 170px;
-			margin-right: 0;
+//			margin-right: $marg-sml;
 			padding: 0;
+
+			.activity-header {
+				margin: 0;
+				padding: $pad-sml 0 0 0;
+				text-align: center;
+				width: 100%;
+			}
 
 			.activity-inner,
 			blockquote {
@@ -370,6 +385,27 @@ body.activity-permalink {
 		.activity-meta {
 			margin: $marg-sml 0 $marg-sml;
 		}
+
+		@include medium-up() {
+
+			.activity-avatar {
+				left: -20px;
+				margin-right: 0;
+				position: relative;
+				top: -20px;
+			}
+
+			.activity-content {
+				margin-right: $marg-sml;
+
+				.activity-header {
+					p {
+						text-align: left;
+					}
+				}
+			}
+
+		} // close @media
 
 	}
 }
