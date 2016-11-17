@@ -2894,23 +2894,39 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress [data-bp-search] form input[type="search"],
-.buddypress [data-bp-search] form input[type="text"] {
+.buddypress [data-bp-search] form input[type="text"],
+.buddypress [data-bp-search] form button[type="submit"] {
 	border: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-ms-border-radius: 0;
+	border-radius: 0;
+	background-clip: padding-box;
+}
+
+.buddypress [data-bp-search] form input[type="search"],
+.buddypress [data-bp-search] form input[type="text"] {
 	float: left;
 	padding: 6px 10px;
 	width: 80%;
 }
 
 .buddypress [data-bp-search] form button[type="submit"] {
-	border: 0;
 	display: none;
 	float: right;
+	font-size: inherit;
 	font-weight: 400;
 	line-height: inherit;
-	padding: 0.5em 0.8em;
+	padding: 6px 0.8em;
 	text-align: center;
 	text-transform: none;
 	width: 20%;
+}
+
+.buddypress [data-bp-search] form button[type="submit"] span {
+	font-family: dashicons;
+	font-size: 18px;
+	line-height: 1.6;
 }
 
 .buddypress [data-bp-search] form input[type="search"]::-webkit-search-cancel-button {
@@ -2920,14 +2936,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress [data-bp-search] form input[type="search"]::-webkit-search-results-button,
 .buddypress [data-bp-search] form input[type="search"]::-webkit-search-results-decoration {
 	display: none;
-}
-
-.buddypress [data-bp-search] form button[type="submit"] span {
-	background: none;
-	border: 0;
-	font-family: dashicons;
-	font-size: 18px;
-	line-height: 1.2;
 }
 
 .buddypress ul.filters li form label input {

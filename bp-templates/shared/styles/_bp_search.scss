@@ -14,23 +14,35 @@
 			}
 
 			input[type="search"],
-			input[type="text"] {
+			input[type="text"],
+			button[type="submit"] {
 				border: 0;
+				@include border-radius(0);
+			}
+
+			input[type="search"],
+			input[type="text"] {
 				float: left;
 				padding: 6px 10px;
 				width: 80%;
 			}
 
 			button[type="submit"] {
-				border: 0;
 				display: none;
 				float: right;
+				font-size: inherit;
 				font-weight: 400;
 				line-height: inherit;
-				padding: 0.5em 0.8em;
+				padding: 6px 0.8em;
 				text-align: center;
 				text-transform: none;
 				width: 20%;
+
+				span {
+					font-family: dashicons;
+					@include font-size(18);
+					line-height: 1.6;
+				}
 			}
 
 			input[type="search"]::-webkit-search-cancel-button {
@@ -40,14 +52,6 @@
 			input[type="search"]::-webkit-search-results-button,
 			input[type="search"]::-webkit-search-results-decoration {
 				display: none;
-			}
-
-			button[type="submit"] span { // why seperate add to above ruleset?
-				background: none;
-				border: 0;
-				font-family: dashicons;
-				@include font-size(18);
-				line-height: 1.2;
 			}
 
 		} // close form
