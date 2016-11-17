@@ -396,7 +396,10 @@
 		}
 	}
 
-	.bp-dir-vert-nav {
+	// Set the directory screens main navs as vertical aligned
+	// medium breakpoint up only
+
+	.bp-dir-vert-nav { // described for the #buddypress element
 
 		.dir-navs {
 			float: left;
