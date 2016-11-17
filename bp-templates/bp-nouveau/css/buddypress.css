@@ -3763,32 +3763,32 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress .vertical {
+	.bp-vertical-nav .vertical {
 		overflow: visible;
 	}
-	.buddypress .vertical ul {
+	.bp-vertical-nav .vertical ul {
 		border-right: 1px solid #e0e0e0;
 		float: left;
 		margin-right: -1px;
 		width: 30%;
 	}
-	.buddypress .vertical li {
+	.bp-vertical-nav .vertical li {
 		float: none;
 	}
-	.buddypress .vertical li.selected a {
+	.bp-vertical-nav .vertical li.selected a {
 		background: #ccc;
 		color: #333;
 	}
-	.buddypress .vertical li:focus, .buddypress .vertical li:hover {
+	.bp-vertical-nav .vertical li:focus, .bp-vertical-nav .vertical li:hover {
 		background: #ccc;
 	}
-	.buddypress .vertical li span {
+	.bp-vertical-nav .vertical li span {
 		background: #e0e0e0;
 		border-radius: 10%;
 		float: right;
 		margin-right: 2px;
 	}
-	.buddypress .vertical li:hover span {
+	.bp-vertical-nav .vertical li:hover span {
 		border-color: #eaeaea;
 	}
 	.bp-vertical-nav .bp-wrap {

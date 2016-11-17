@@ -301,7 +301,7 @@
 
 @include medium-up() {
 
-	.buddypress {
+	.bp-vertical-nav { // described for the #buddypress element
 
 		.vertical {
 			overflow: visible;
@@ -339,12 +339,9 @@
 			} // li
 
 		}
-	} // close .buddypress
 
 	// re-factor the related elements like the #item-body so it sits
 	// to the side(floated)
-
-	.bp-vertical-nav { // the body or additional #buddypress element class
 
 		.bp-wrap {
 			background: $light-grey;
