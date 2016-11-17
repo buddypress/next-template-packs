@@ -592,8 +592,42 @@ dt.section-title {
 	display: inline;
 }
 
-.buddypress .subnav-filters .last.filter select {
-	padding: 3px 10px;
+.buddypress .subnav-filters .last.filter .select-wrap {
+	border: 1px solid #eee;
+}
+
+.buddypress .subnav-filters .last.filter .select-wrap select {
+	-moz-appearance: none;
+	-webkit-appearence: none;
+	appearence: none;
+	background: transparent;
+	border: 0;
+	cursor: pointer;
+	padding: 6px 25px 6px 10px;
+	position: relative;
+	text-indent: -2px;
+	z-index: 1;
+}
+
+.buddypress .subnav-filters .last.filter .select-wrap span.select-arrow {
+	display: inline-block;
+	position: relative;
+	margin-left: -25px;
+	z-index: 0;
+}
+
+.buddypress .subnav-filters .last.filter .select-wrap span.select-arrow:before {
+	color: #ccc;
+	content: '\25BC';
+}
+
+.buddypress .subnav-filters .last.filter .select-wrap:focus, .buddypress .subnav-filters .last.filter .select-wrap:hover {
+	border: 1px solid #d5d5d5;
+	box-shadow: inset 0 0 3px #eee;
+}
+
+.buddypress .subnav-filters .last.filter .select-wrap:focus .select-arrow:before, .buddypress .subnav-filters .last.filter .select-wrap:hover .select-arrow:before {
+	color: #a6a6a6;
 }
 
 .buddypress .subnav-filters .user-messages-bulk-actions .bulk-apply {
@@ -608,7 +642,7 @@ dt.section-title {
 	width: auto;
 }
 
-@media screen and (min-width: 46.8em) {
+@media screen and (min-width: 32em) {
 	.buddypress .subnav-filters li {
 		margin-bottom: 0;
 	}
