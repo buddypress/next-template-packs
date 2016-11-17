@@ -19,21 +19,12 @@
 	</ul>
 </div><!-- .bp-navs -->
 
-<ul class="subnav-filters filters">
+<div class="subnav-filters filters">
 		<?php if ( ! bp_is_current_action( 'requests' ) ) : ?>
 
-		<li id="members-order-select" class="last filter">
-
-			<label for="members-friends">
-				<span class="bp-screen-reader-text"><?php esc_html_e( 'Order By:', 'bp-nouveau' ); ?></span>
-			</label>
-			<select id="members-friends" data-bp-filter="members">
-					<?php bp_nouveau_filter_options(); ?>
-			</select>
-
-		</li>
+		<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
 		<?php endif ; ?>
-</ul>
+</div>
 
 
 <?php

@@ -1602,15 +1602,16 @@ function bp_nouveau_search_form() {
 	}
 }
 
-/** Template tags for the directory filters **********************************/
+/** Template tags for the directory & user screen filters **********************************/
 
-function bp_nouveau_directory_filter_container_id() {
-	echo bp_nouveau_get_directory_filter_container_id();
+function bp_nouveau_filter_container_id() {
+	echo bp_nouveau_get_filter_container_id();
 }
 
-	function bp_nouveau_get_directory_filter_container_id() {
+	function bp_nouveau_get_filter_container_id() {
 		$ids = array(
 			'members'  => 'members-order-select',
+			'friends'  => 'members-friends-select',
 			'activity' => 'activity-filter-select',
 			'groups'   => 'groups-order-select',
 			'blogs'    => 'blogs-order-select',
@@ -1619,17 +1620,19 @@ function bp_nouveau_directory_filter_container_id() {
 		$component = bp_current_component();
 
 		if ( isset( $ids[ $component ] ) ) {
-			return esc_attr( apply_filters( 'bp_nouveau_get_directory_filter_container_id', $ids[ $component ] ) );
+			return esc_attr( apply_filters( 'bp_nouveau_get_filter_container_id', $ids[ $component ] ) );
 		}
 	}
 
-function bp_nouveau_directory_filter_id() {
-	echo bp_nouveau_get_directory_filter_id();
+function bp_nouveau_filter_id() {
+	echo bp_nouveau_get_filter_id();
 }
 
-	function bp_nouveau_get_directory_filter_id() {
+	function bp_nouveau_get_filter_id() {
+
 		$ids = array(
 			'members'  => 'members-order-by',
+			'friends'  => 'members-friends',
 			'activity' => 'activity-filter-by',
 			'groups'   => 'groups-order-by',
 			'blogs'    => 'blogs-order-by',
@@ -1638,27 +1641,27 @@ function bp_nouveau_directory_filter_id() {
 		$component = bp_current_component();
 
 		if ( isset( $ids[ $component ] ) ) {
-			return esc_attr( apply_filters( 'bp_nouveau_get_directory_filter_id', $ids[ $component ] ) );
+			return esc_attr( apply_filters( 'bp_nouveau_get_filter_id', $ids[ $component ] ) );
 		}
 	}
 
-function bp_nouveau_directory_filter_label() {
-	echo bp_nouveau_get_directory_filter_label();
+function bp_nouveau_filter_label() {
+	echo bp_nouveau_get_filter_label();
 }
 
-	function bp_nouveau_get_directory_filter_label() {
+	function bp_nouveau_get_filter_label() {
 		$component = bp_current_component();
 
 		$label = __( 'Order By:', 'bp-nouveau' );
 
-		if ( 'activity' === $component ) {
+		if ( 'activity' === $component || 'friends' === $component ) {
 			$label = __( 'Show:', 'bp-nouveau' );
 		}
 
-		return esc_html( apply_filters( 'bp_nouveau_get_directory_filter_label', $label ) );
+		return esc_html( apply_filters( 'bp_nouveau_get_filter_label', $label ) );
 	}
 
-function bp_nouveau_directory_filter_component() {
+function bp_nouveau_filter_component() {
 	echo esc_attr( bp_current_component() );
 }
 

@@ -20,18 +20,14 @@
 <?php bp_nouveau_activity_member_post_form() ;?>
 
 
-	<ul class="subnav-filters filters">
-		<?php bp_nouveau_search_form(); ?>
+	<div class="subnav-filters filters">
+		<ul>
+			<?php bp_nouveau_search_form(); ?>
+		</ul>
 
-		<li id="activity-filter-select" class="last filter">
-			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
-			<select id="activity-filter-by" data-bp-filter="activity">
+			<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
 
-				<?php bp_nouveau_filter_options() ;?>
-
-			</select>
-		</li>
-	</ul><!-- // .subnav-filters -->
+	</div><!-- // .subnav-filters -->
 
 <?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 

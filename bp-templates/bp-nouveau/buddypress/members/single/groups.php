@@ -24,20 +24,14 @@
 <?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 
 
-		<ul class="subnav-filters filters">
-
+		<div class="subnav-filters filters">
+			<ul>
 			<?php bp_nouveau_search_form(); ?>
+			</ul>
 
-			<li id="groups-order-select" class="last filter">
+			<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
 
-				<label for="groups-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
-				<select id="groups-order-by" data-bp-filter="groups">
-
-					<?php bp_nouveau_filter_options() ;?>
-
-				</select>
-			</li>
-		</ul><!-- .subnav-filters -->
+		</div><!-- .subnav-filters -->
 
 <?php endif; ?>
 

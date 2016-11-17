@@ -656,12 +656,12 @@ dt.section-title {
 		float: left;
 	}
 	.buddypress .subnav-filters .last,
-	.buddypress .subnav-filters .dir-component-filters {
+	.buddypress .subnav-filters .component-filters {
 		float: right;
 		width: auto;
 	}
 	.buddypress .subnav-filters .last select,
-	.buddypress .subnav-filters .dir-component-filters select {
+	.buddypress .subnav-filters .component-filters select {
 		max-width: 250px;
 	}
 }

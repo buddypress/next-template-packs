@@ -17,20 +17,14 @@
 	</ul>
 </div><!-- .bp-navs -->
 
-<ul class="subnav-filters filters">
-
+<div class="subnav-filters filters">
+	<ul>
 	<?php bp_nouveau_search_form(); ?>
-
-	<li id="blogs-order-select" class="last filter">
-
-		<label for="blogs-order-by"><span class="bp-screen-reader-text"><?php _e( 'Order By:', 'bp-nouveau' ); ?></span></label>
-		<select id="blogs-order-by" data-bp-filter="blogs">
-
-			<?php bp_nouveau_filter_options() ;?>
-
-		</select>
-	</li>
 </ul>
+
+	<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
+
+</div>
 
 
 <?php
