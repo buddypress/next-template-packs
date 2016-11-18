@@ -1561,11 +1561,14 @@ form.ac-form .ac-reply-content input {
 
 @media screen and (min-width: 46.8em) {
 	.buddypress .bp-dir-vert-nav .groups-list .item-block,
-	.buddypress .bp-dir-vert-nav .groups-list .group-desc {
+	.buddypress .bp-dir-vert-nav .groups-list .group-desc,
+	.buddypress .bp-vertical-nav .groups-list .item-block,
+	.buddypress .bp-vertical-nav .groups-list .group-desc {
 		float: none;
 		width: auto;
 	}
-	.buddypress .bp-dir-vert-nav .groups-list .group-desc {
+	.buddypress .bp-dir-vert-nav .groups-list .group-desc,
+	.buddypress .bp-vertical-nav .groups-list .group-desc {
 		clear: left;
 	}
 }

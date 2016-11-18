@@ -103,14 +103,15 @@
 	}
 }
 
-// If BP Dir Navs are selected as vertical
+// If BP Dir Navs or user screen main navs are selected as vertical
 // We need to just adjust the loop item elements a little
 // to cope with the decreased width.
 
 @include medium-up() {
 	.buddypress {
 
-		.bp-dir-vert-nav {
+		.bp-dir-vert-nav,
+		.bp-vertical-nav {
 
 			.groups-list {
 
