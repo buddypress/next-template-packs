@@ -24,18 +24,14 @@ switch ( bp_current_action() ) :
 	case 'read'   : ?>
 
 
-			<ul class="subnav-filters filters">
-				<?php bp_nouveau_search_form(); ?>
+			<div class="subnav-filters filters">
 
-				<li id="notifications-filter-select" class="last filter">
-					<label for="notifications-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
-					<select id="notifications-filter-by" data-bp-filter="notifications">
+				<ul>
+					<?php bp_nouveau_search_form(); ?>
+				</ul>
 
-						<?php bp_nouveau_notifications_filters() ;?>
-
-					</select>
-				</li>
-			</ul><!-- .subnav-filters-->
+				<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
+			</div><!-- .subnav-filters-->
 
 
 		<div id="notifications-user-list" class="notifications dir-list" data-bp-list="notifications">

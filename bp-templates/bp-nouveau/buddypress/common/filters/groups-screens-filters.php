@@ -1,6 +1,6 @@
 <?php
 /**
-* BP Nouveau User screens filters
+* BP Nouveau Groups screens filters
 *
 * @since 1.0.0
 *

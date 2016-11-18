@@ -1602,25 +1602,59 @@ function bp_nouveau_search_form() {
 	}
 }
 
-/** Template tags for the directory & user screen filters **********************************/
+/** Template tags for the directory & user/group screen filters **********************************/
+
+/**
+ * Get the current component or action
+ * If on single group screens we need to switch from component
+ * to bp_current_action() to add the correct id's/labels
+ * for group/activity & similar screens.
+ *
+ */
+
+	function bp_nouveau_current_object() {
+		// If we're looking at groups single screens we need to factor in current action
+		// to avoid the component check adding the wrong id for the main dir e.g 'groups' instead of
+		// 'activity'.
+		// We also need to check for group screens to adjust the id's for prefixes.
+
+		$component = array();
+
+		if ( bp_is_group() ) :
+			$component['members_select']   = 'groups_members-order-select';
+			$component['members_order_by'] = 'groups_members-order-by';
+			$component['object']        = bp_current_action();
+			$component['data_filter']   = 'group_' . bp_current_action();
+
+		else:
+			$component['members_select']   = 'members-order-select';
+			$component['members_order_by'] = 'members-order-by';
+			$component['object']       = bp_current_component();
+			$component['data_filter']  = bp_current_component();
+		endif;
+
+		return $component;
+	}
 
 function bp_nouveau_filter_container_id() {
 	echo bp_nouveau_get_filter_container_id();
 }
 
 	function bp_nouveau_get_filter_container_id() {
+
+		$component = bp_nouveau_current_object();
+
 		$ids = array(
-			'members'  => 'members-order-select',
-			'friends'  => 'members-friends-select',
-			'activity' => 'activity-filter-select',
-			'groups'   => 'groups-order-select',
-			'blogs'    => 'blogs-order-select',
+			'members'       =>  $component['members_select'],
+			'friends'       => 'members-friends-select',
+			'notifications' => 'notifications-filter-select',
+			'activity'      => 'activity-filter-select',
+			'groups'        => 'groups-order-select',
+			'blogs'         => 'blogs-order-select',
 		);
 
-		$component = bp_current_component();
-
-		if ( isset( $ids[ $component ] ) ) {
-			return esc_attr( apply_filters( 'bp_nouveau_get_filter_container_id', $ids[ $component ] ) );
+		if ( isset( $ids[ $component['object'] ] ) ) {
+			return esc_attr( apply_filters( 'bp_nouveau_get_filter_container_id', $ids[ $component['object'] ] ) );
 		}
 	}
 
@@ -1630,18 +1664,21 @@ function bp_nouveau_filter_id() {
 
 	function bp_nouveau_get_filter_id() {
 
+		$component = bp_nouveau_current_object();
+
 		$ids = array(
-			'members'  => 'members-order-by',
-			'friends'  => 'members-friends',
-			'activity' => 'activity-filter-by',
-			'groups'   => 'groups-order-by',
-			'blogs'    => 'blogs-order-by',
+			'members'       => $component['members_order_by'],
+			'friends'       => 'members-friends',
+			'notifications' => 'notifications-filter-by',
+			'activity'      => 'activity-filter-by',
+			'groups'        => 'groups-order-by',
+			'blogs'         => 'blogs-order-by',
 		);
 
-		$component = bp_current_component();
 
-		if ( isset( $ids[ $component ] ) ) {
-			return esc_attr( apply_filters( 'bp_nouveau_get_filter_id', $ids[ $component ] ) );
+
+		if ( isset( $ids[ $component['object'] ] ) ) {
+			return esc_attr( apply_filters( 'bp_nouveau_get_filter_id', $ids[ $component['object'] ] ) );
 		}
 	}
 
@@ -1650,11 +1687,12 @@ function bp_nouveau_filter_label() {
 }
 
 	function bp_nouveau_get_filter_label() {
-		$component = bp_current_component();
+
+		$component = bp_nouveau_current_object();
 
 		$label = __( 'Order By:', 'bp-nouveau' );
 
-		if ( 'activity' === $component || 'friends' === $component ) {
+		if ( 'activity' === $component['object'] || 'friends' === $component['object'] ) {
 			$label = __( 'Show:', 'bp-nouveau' );
 		}
 
@@ -1662,7 +1700,8 @@ function bp_nouveau_filter_label() {
 	}
 
 function bp_nouveau_filter_component() {
-	echo esc_attr( bp_current_component() );
+	$component = bp_nouveau_current_object();
+	echo esc_attr( $component['data_filter'] );
 }
 
 function bp_nouveau_filter_options() {
@@ -1670,7 +1709,13 @@ function bp_nouveau_filter_options() {
 }
 
 	function bp_nouveau_get_filter_options() {
-		$filters = bp_nouveau_get_component_filters();
+
+		if('notifications' === bp_current_component() ) :
+			$filters = bp_nouveau_notifications_filters();
+		else:
+			$filters = bp_nouveau_get_component_filters();
+		endif;
+
 		$output = '';
 
 		foreach ( $filters as $key => $value ) {

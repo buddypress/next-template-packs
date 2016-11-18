@@ -12,20 +12,15 @@
 <?php bp_nouveau_groups_activity_post_form(); ?>
 
 
-	<ul class="subnav-filters filters clearfix">
+	<div class="subnav-filters filters clearfix">
+
+		<ul>
 		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
 		<?php bp_nouveau_search_form(); ?>
-
-		<li id="activity-filter-select" class="last filter">
-			<label for="activity-filter-by"><span class="bp-screen-reader-text"><?php _e( 'Show:', 'bp-nouveau' ); ?></span></label>
-			<select id="activity-filter-by" data-bp-filter="activity">
-
-				<?php bp_nouveau_filter_options() ;?>
-
-			</select>
-		</li>
-	</ul><!-- // .subnav-filters -->
+</ul>
+<?php bp_get_template_part('common/filters/groups-screens-filters'); ?>
+	</div><!-- // .subnav-filters -->
 
 
 <?php bp_nouveau_group_hook( 'before', 'activity_content' ); ?>
