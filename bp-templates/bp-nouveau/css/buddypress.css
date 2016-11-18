@@ -27,6 +27,7 @@
 			5.2.1.1 - Management settings screens
 			5.2.1.2 - Group Members list
 			5.2.1.3 - Group Invite list
+			5.2.1.4 - Group Activity
 		5.2.2 - item-body: User Accounts
 			5.2.2.1 - classes, pag, filters
 			5.2.2.2 - Extended Profiles
@@ -607,6 +608,11 @@ dt.section-title {
 	position: relative;
 	text-indent: -2px;
 	z-index: 1;
+	width: 100%;
+}
+
+.buddypress .subnav-filters .last.filter .select-wrap select option {
+	border: 0;
 }
 
 .buddypress .subnav-filters .last.filter .select-wrap span.select-arrow {
@@ -2166,6 +2172,15 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 /* End nuoveau invites */
+/*
+*-----------------------------------------
+* @subsection 5.2.1.4 - Group Activity
+*-----------------------------------------
+*/
+.buddypress.groups .activity-update-form {
+	margin-top: 0;
+}
+
 /**
 *-----------------------------------------------------
 * @subsection 5.2.2 - Item Body User Accounts
