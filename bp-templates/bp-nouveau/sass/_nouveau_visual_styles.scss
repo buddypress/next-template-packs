@@ -1,10 +1,20 @@
 // ======= Visual Style Module =======
-// TP: Nouveau
-// Module: Activity stream entries, comments & whats new form
+// Theme: Nouveau
+
+// This file provides just visual styles  backgrounds, colors etc specific
+// to the current theme & are not critical to the primary layout & element styling.
+
+
+
+
+
 
 
 .buddypress {
 
+	// Navigation elements
+
+	// Activity stream entries, comments & whats new form
 	.activity-update-form {
 		border: 1px solid $bp-border-dark;
 		@include box-shadow( inset 0 0 6px #eee);
@@ -15,7 +25,6 @@
 
 		background: $off-white;
 		border: 1px solid $bp-border-color;
-		padding: 10px;
 
 		.activity-item {
 			background: $white;
@@ -28,11 +37,4 @@
 			margin-top: 0;
 		}
 	}
-
-	@include medium-up() {
-			.activity-list.bp-list {
-				padding: 50px;
-			}
-	}
-
 }
