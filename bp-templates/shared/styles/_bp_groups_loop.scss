@@ -108,12 +108,18 @@
 // to cope with the decreased width.
 
 @include medium-up() {
+
 	.buddypress {
 
 		.bp-dir-vert-nav,
 		.bp-vertical-nav {
 
 			.groups-list {
+
+				.item-avatar {
+					margin-right: 3%;
+					width: 15%;
+				}
 
 				.item-block,
 				.group-desc {

@@ -1,6 +1,9 @@
 // BP Activity Entries - activity loop
 
+
 .activity-list {
+
+	padding: $pad-sml;
 
 	.activity-item:before,
 	.activity-item:after {
@@ -263,6 +266,10 @@
 
 @include medium-up() {
 
+	.activity-list.bp-list {
+		padding: 30px;
+	}
+
 	.activity-list {
 
 		.activity-item {
@@ -359,13 +366,10 @@ body.activity-permalink {
 			}
 		}
 
-
-
 		.activity-content {
 			border: 0;
 			font-size: 100%;
 			line-height: 150%;
-//			margin-right: $marg-sml;
 			padding: 0;
 
 			.activity-header {
