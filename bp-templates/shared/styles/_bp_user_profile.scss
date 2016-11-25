@@ -34,12 +34,28 @@
 			}
 		}
 
+		.editfield {
+			background: $off-white;
+			border: 1px solid $bp-border-color;
+			margin: $marg-med 0;
+			padding: $pad-med;
+
+			fieldset {
+				border: 0;
+
+				label {
+					font-weight: 400;
+				}
+			}
+		}
+
 		// The visual layout of the form controls and group description
 		.editfield {
 			display: flex;
 			flex-direction: column;
 
 			.description {
+				margin-top: $marg-sml;
 				order: 2;
 			}
 
@@ -131,6 +147,7 @@ body.no-js {
 		// field item description
 		.description {
 			background: $off-white;
+			font-size: inherit;
 			padding: $pad-sml;
 		}
 

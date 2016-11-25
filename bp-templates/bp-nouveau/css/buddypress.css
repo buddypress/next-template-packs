@@ -2200,11 +2200,27 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 .buddypress .profile.edit .editfield {
+	background: #fafafa;
+	border: 1px solid #eee;
+	margin: 15px 0;
+	padding: 1em;
+}
+
+.buddypress .profile.edit .editfield fieldset {
+	border: 0;
+}
+
+.buddypress .profile.edit .editfield fieldset label {
+	font-weight: 400;
+}
+
+.buddypress .profile.edit .editfield {
 	display: flex;
 	flex-direction: column;
 }
 
 .buddypress .profile.edit .editfield .description {
+	margin-top: 10px;
 	order: 2;
 }
 
@@ -2275,6 +2291,7 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress .standard-form .description {
 	background: #fafafa;
+	font-size: inherit;
 	padding: 0.5em;
 }
 
@@ -2837,7 +2854,6 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 
 .buddypress .standard-form p.description {
 	color: #777;
-	font-size: 80%;
 	margin: 5px 0;
 }
 
@@ -3298,6 +3314,14 @@ label {
 .buddypress .buddypress a.disabled:hover {
 	border-color: #eee;
 	color: #777;
+}
+
+.buddypress .buddypress button.text-button {
+	background: none;
+	border: 0;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .buddypress .buddypress .activity-list a.button {
