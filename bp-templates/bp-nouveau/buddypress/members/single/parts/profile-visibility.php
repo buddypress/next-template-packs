@@ -18,7 +18,7 @@ if ( empty( $GLOBALS['profile_template'] ) ) return;
 			__( 'This field may be seen by: %s', 'bp-nouveau' ),
 			'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
 		); ?>
-		<a href="#" class="visibility-toggle-link"><?php _e( 'Change', 'bp-nouveau' ); ?></a>
+		<button class="visibility-toggle-link text-button" type="button"><?php _e( 'Change', 'bp-nouveau' ); ?></button>
 
 	</p>
 
@@ -29,7 +29,7 @@ if ( empty( $GLOBALS['profile_template'] ) ) return;
 			<?php bp_profile_visibility_radio_buttons() ?>
 
 		</fieldset>
-		<a class="field-visibility-settings-close button" href="#"><?php _e( 'Close', 'bp-nouveau' ) ?></a>
+		<button class="field-visibility-settings-close button" type="button"><?php _e( 'Close', 'bp-nouveau' ) ?></button>
 	</div>
 
 <?php else : ?>

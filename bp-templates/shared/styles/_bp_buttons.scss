@@ -98,6 +98,12 @@
 			color: $light-text;
 		}
 
+		// provide a class to style button elements as text only non button appearence
+		button.text-button {
+			background: none;
+			border: 0;
+			@include box-shadow-none();
+		}
 
 		.activity-list {
 
