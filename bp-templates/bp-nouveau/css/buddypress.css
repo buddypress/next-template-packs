@@ -2338,6 +2338,10 @@ body.register .buddypress .page ul {
 	list-style: none;
 }
 
+.buddypress .profile .bp-avatar-nav {
+	margin-top: 20px;
+}
+
 /**
 *-------------------------------------------
 * @subsection 5.2.2.3 - Groups
@@ -2920,24 +2924,23 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 0 8px 1px;
 }
 
-label {
-	display: inline;
-}
-
-.select-wrap {
+.buddypress .select-wrap {
 	border: 1px solid #eee;
 }
 
-.select-wrap select::-ms-expand {
+.buddypress .select-wrap label {
+	display: inline;
+}
+
+.buddypress .select-wrap select::-ms-expand {
 	display: none;
 }
 
-.select-wrap select {
+.buddypress .select-wrap select {
 	-moz-appearance: none;
 	-webkit-appearence: none;
 	-o-appearence: none;
 	appearence: none;
-	background: transparent;
 	border: 0;
 	cursor: pointer;
 	padding: 6px 25px 6px 10px;
@@ -2947,24 +2950,30 @@ label {
 	width: 100%;
 }
 
-.select-wrap span.select-arrow {
+.buddypress .select-wrap select,
+.buddypress .select-wrap select:focus,
+.buddypress .select-wrap select:active {
+	background: transparent;
+}
+
+.buddypress .select-wrap span.select-arrow {
 	display: inline-block;
 	position: relative;
 	margin-left: -25px;
 	z-index: 0;
 }
 
-.select-wrap span.select-arrow:before {
+.buddypress .select-wrap span.select-arrow:before {
 	color: #ccc;
 	content: '\25BC';
 }
 
-.select-wrap:focus, .select-wrap:hover {
+.buddypress .select-wrap:focus, .buddypress .select-wrap:hover {
 	border: 1px solid #d5d5d5;
 	box-shadow: inset 0 0 3px #eee;
 }
 
-.select-wrap:focus .select-arrow:before, .select-wrap:hover .select-arrow:before {
+.buddypress .select-wrap:focus .select-arrow:before, .buddypress .select-wrap:hover .select-arrow:before {
 	color: #a6a6a6;
 }
 

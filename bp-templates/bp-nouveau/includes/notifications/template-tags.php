@@ -93,3 +93,39 @@ function bp_nouveau_notifications_sort_order_links() {
 
 	<?php
 }
+
+/**
+ * Output the dropdown for bulk management of notifications.
+ *
+ * @since 1.0.0
+ *
+ * @return string HTML output.
+ */
+function bp_nouveau_notifications_bulk_management_dropdown() {
+	?>
+
+	<div class="select-wrap">
+
+		<label class="bp-screen-reader-text" for="notification-select"><?php
+			/* translators: accessibility text */
+			_e( 'Select Bulk Action', 'buddypress' );
+		?></label>
+
+		<select name="notification_bulk_action" id="notification-select">
+			<option value="" selected="selected"><?php _e( 'Bulk Actions', 'buddypress' ); ?></option>
+
+			<?php if ( bp_is_current_action( 'unread' ) ) : ?>
+				<option value="read"><?php _e( 'Mark read', 'buddypress' ); ?></option>
+			<?php elseif ( bp_is_current_action( 'read' ) ) : ?>
+				<option value="unread"><?php _e( 'Mark unread', 'buddypress' ); ?></option>
+			<?php endif; ?>
+			<option value="delete"><?php _e( 'Delete', 'buddypress' ); ?></option>
+		</select>
+
+		<span class="select-arrow"></span>
+
+</div><!-- // .select-wrap -->
+
+	<input type="submit" id="notification-bulk-manage" class="button action" value="<?php esc_attr_e( 'Apply', 'buddypress' ); ?>">
+	<?php
+}

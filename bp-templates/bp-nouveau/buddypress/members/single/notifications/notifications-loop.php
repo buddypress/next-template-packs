@@ -44,7 +44,7 @@ if ( bp_has_notifications( bp_ajax_querystring( 'notifications' ) ) ) :
 		</table>
 
 		<div class="notifications-options-nav">
-			<?php bp_notifications_bulk_management_dropdown(); ?>
+			<?php bp_nouveau_notifications_bulk_management_dropdown(); ?>
 		</div><!-- .notifications-options-nav -->
 
 		<?php wp_nonce_field( 'notifications_bulk_nonce', 'notifications_bulk_nonce' ); ?>
