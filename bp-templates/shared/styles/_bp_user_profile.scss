@@ -2,6 +2,7 @@
 // 0/ General :)
 // 1/ Profile Edit
 // 2/ Profile Public Display
+// 3/ Profile Photo
 
 // General
 
@@ -205,8 +206,17 @@ body.no-js {
 	}
 }
 
-
 // This needs to be reviewed and re-located!?
 body.register .buddypress .page ul {
 	list-style: none;
+}
+
+// Avatars & Cover Image
+
+.buddypress {
+	.profile {
+		.bp-avatar-nav {
+			margin-top: $marg-lrg;
+		}
+	}
 }
