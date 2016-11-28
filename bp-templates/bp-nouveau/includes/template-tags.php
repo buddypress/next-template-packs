@@ -1710,11 +1710,12 @@ function bp_nouveau_filter_options() {
 
 	function bp_nouveau_get_filter_options() {
 
-		if('notifications' === bp_current_component() ) :
-			$filters = bp_nouveau_notifications_filters();
-		else:
-			$filters = bp_nouveau_get_component_filters();
-		endif;
+	if('notifications' === bp_current_component() ) :
+			bp_nouveau_notifications_filters();
+		return;
+
+	else:
+		$filters = bp_nouveau_get_component_filters();
 
 		$output = '';
 
@@ -1724,9 +1725,12 @@ function bp_nouveau_filter_options() {
 				esc_html( $value ),
 				"\n"
 			);
+
 		}
 
 		return $output;
+
+	endif;
 	}
 
 /** Template tags for the customizer ******************************************/
