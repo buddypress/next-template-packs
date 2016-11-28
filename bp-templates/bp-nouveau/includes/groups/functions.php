@@ -460,7 +460,7 @@ function bp_nouveau_get_groups_directory_nav_items() {
 			$nav_items['create'] = array(
 				'component' => 'groups',
 				'slug'      => 'create', // slug is used because BP_Core_Nav requires it, but it's the scope
-				'li_class'  => array( 'no-ajax' ),
+				'li_class'  => array( 'no-ajax', 'group-create' ),
 				'link'      => trailingslashit( bp_get_groups_directory_permalink() . 'create' ),
 				'title'     => __( 'Create a Group', 'bp-nouveau' ),
 				'text'      => __( 'Create a Group', 'bp-nouveau' ),

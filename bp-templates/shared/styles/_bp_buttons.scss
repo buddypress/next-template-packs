@@ -139,6 +139,9 @@
 			display: none;
 		}
 
+		// Style action links as text links
+		// .text-links-list would be stated for anchors parent wrapping element
+		// Example usage on group members manage screen.
 		.text-links-list {
 
 			a.button {
@@ -191,6 +194,29 @@
 
 	} // close .buddypress
 
+	// The group create link as either a button or plain link.
+	// @todo this will need further classes & styles depending on nav layouts?
+	#buddypress {
+		.group-create { // the parent, i.e li element.
+			text-align: center;
+
+			a {
+				border: 1px solid $bp-border-color;
+				@include border-radius(5px);
+				@include box-shadow(inset 0 0 3px 0 #cde2ff);
+				margin: 0.2em 0.5em;
+				width: auto;
+
+				&:focus,
+				&:hover {
+					background: none;
+					border-color: $bp-border-dark;
+					@include box-shadow(inset 0 0 16px 0 #cde2ff );
+					color: #5c66ff;
+				}
+			}
+		}
+	}
 
 } // close body class .buddypress @todo this should be removed in time
 

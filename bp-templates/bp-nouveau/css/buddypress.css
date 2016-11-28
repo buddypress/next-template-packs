@@ -3390,6 +3390,33 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: #ededed;
 }
 
+.buddypress #buddypress .group-create {
+	text-align: center;
+}
+
+.buddypress #buddypress .group-create a {
+	border: 1px solid #eee;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	border-radius: 5px;
+	background-clip: padding-box;
+	-webkit-box-shadow: inset 0 0 3px 0 #cde2ff;
+	-moz-box-shadow: inset 0 0 3px 0 #cde2ff;
+	box-shadow: inset 0 0 3px 0 #cde2ff;
+	margin: 0.2em 0.5em;
+	width: auto;
+}
+
+.buddypress #buddypress .group-create a:focus, .buddypress #buddypress .group-create a:hover {
+	background: none;
+	border-color: #ccc;
+	-webkit-box-shadow: inset 0 0 16px 0 #cde2ff;
+	-moz-box-shadow: inset 0 0 16px 0 #cde2ff;
+	box-shadow: inset 0 0 16px 0 #cde2ff;
+	color: #5c66ff;
+}
+
 .buddypress li.filter label:before,
 .buddypress li.feed a:before,
 .buddypress .bp-invites-filters li a.invite-button:before,
