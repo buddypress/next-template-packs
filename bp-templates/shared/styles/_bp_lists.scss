@@ -135,6 +135,21 @@
 
 } // close .bp-list
 
+// If logged out we don't display action buttons
+// so lets remove the margin right creating the white-space
+// for the buttons - max out the item element width.
+body:not(.logged-in) {
+
+		.bp-list {
+
+		@include medium-up() {
+			.item {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
 // body class: single act items screens.
 .activity-permalink {
 

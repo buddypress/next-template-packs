@@ -37,12 +37,23 @@
 					clear: left;
 					float: none;
 				}
-
-				.user-update {
-
-				}
 			}
 		}
 	}
 
+}
+body:not(.logged-in) {
+
+		// If logged out we don't display action buttons
+		// so lets remove the update width making room
+		// for the buttons - max out the user-update width.
+		@include medium-small-up() {
+
+		.members-list {
+
+			.user-update {
+				width: 98%;
+			}
+		}
+	}
 }
