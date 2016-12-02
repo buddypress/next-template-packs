@@ -1604,6 +1604,15 @@ form.ac-form .ac-reply-content input {
 	}
 }
 
+@media screen and (min-width: 32em) {
+	.buddypress .members-list .is-current-user .item {
+		margin-right: 0;
+	}
+	.buddypress .members-list .is-current-user .user-update {
+		width: 98%;
+	}
+}
+
 /**
 *-------------------------------------------------------------------------------
 * @section 4.0 - Directories
