@@ -22,7 +22,7 @@
 
 			<li <?php bp_member_class( array('item-entry') ); ?> data-bp-item-id="<?php echo esc_attr( bp_get_group_member_id() ); ?>" data-bp-item-component="members">
 
-				<div class="wrap">
+				<div class="list-wrap">
 					<div class="item-avatar">
 						<a href="<?php bp_group_member_domain(); ?>">
 							<?php bp_group_member_avatar_thumb(); ?>

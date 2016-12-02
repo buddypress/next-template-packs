@@ -1957,6 +1957,10 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin: 30px 0 15px;
 }
 
+.buddypress.bp-vertical-nav .bp-list .item-entry {
+	padding-left: 0.5em;
+}
+
 /**
 *----------------------------------------------------
 * @subsection 5.2.1 - Item Body Groups
