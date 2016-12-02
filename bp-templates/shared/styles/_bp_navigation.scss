@@ -346,8 +346,17 @@
 
 	// the top level class activating vert layout
 	.bp-dir-vert-nav {
+
 		.bp-navs.dir-navs {
 			background: none;
+
+			a {
+
+				span {
+					float: right;
+					padding: 3px 8px;
+				}
+			}
 		}
 	}
 }
