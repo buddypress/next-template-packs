@@ -468,6 +468,10 @@ dt.section-title {
 	.bp-dir-vert-nav .bp-navs.dir-navs {
 		background: none;
 	}
+	.bp-dir-vert-nav .bp-navs.dir-navs a span {
+		float: right;
+		padding: 3px 8px;
+	}
 }
 
 @media screen and (min-width: 46.8em) {
@@ -3411,11 +3415,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: #ededed;
 }
 
-.buddypress #buddypress .group-create {
+.buddypress #buddypress .create-button {
 	text-align: center;
 }
 
-.buddypress #buddypress .group-create a {
+.buddypress #buddypress .create-button a {
 	border: 1px solid #eee;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -3429,7 +3433,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: auto;
 }
 
-.buddypress #buddypress .group-create a:focus, .buddypress #buddypress .group-create a:hover {
+.buddypress #buddypress .create-button a:focus, .buddypress #buddypress .create-button a:hover {
 	background: none;
 	border-color: #ccc;
 	-webkit-box-shadow: inset 0 0 16px 0 #cde2ff;

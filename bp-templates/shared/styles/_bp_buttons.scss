@@ -194,10 +194,14 @@
 
 	} // close .buddypress
 
-	// The group create link as either a button or plain link.
+	// The group or site create link as either a button or plain link.
 	// @todo this will need further classes & styles depending on nav layouts?
+	// The class 'create-button' will be hardcoded for the moment on the li element
+	// this could be a user selected choice to style as a button though?
+
 	#buddypress {
-		.group-create { // the parent, i.e li element.
+
+		.create-button { // the parent, i.e li element.
 			text-align: center;
 
 			a {
