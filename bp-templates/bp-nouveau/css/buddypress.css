@@ -4035,9 +4035,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.bp-dir-vert-nav .dir-navs ul li.selected a span {
 		background: #eaeaea;
 		border-color: #ccc;
-		-webkit-box-shadow: inset 0 0 3px 0 #edbb34;
-		-moz-box-shadow: inset 0 0 3px 0 #edbb34;
-		box-shadow: inset 0 0 3px 0 #edbb34;
 		color: #5087e5;
 	}
 	.bp-dir-vert-nav .dir-navs ul li a:hover,

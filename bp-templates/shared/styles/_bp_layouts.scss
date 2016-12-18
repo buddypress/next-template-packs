@@ -424,7 +424,6 @@
 							span {
 								background: $light-grey;
 								border-color: $grey;
-								@include box-shadow(inset 0 0 3px 0 $golden);
 								color: $highlight;
 							}
 						}
