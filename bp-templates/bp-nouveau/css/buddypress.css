@@ -1968,6 +1968,12 @@ body.no-js .single-item-header .js-self-profile-button {
 * Groups specific item body rules -  screens
 *----------------------------------------------------
 */
+.single-item.group-members .item-body .filters {
+	border-top: 5px solid #eaeaea;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
 /**
 *-----------------------------------------
 * @subsection 5.2.1.1 - Management Settings Screens
@@ -3424,26 +3430,25 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress #buddypress .create-button a {
-	border: 1px solid #eee;
+	border: 1px solid #ccc;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-ms-border-radius: 5px;
 	border-radius: 5px;
 	background-clip: padding-box;
-	-webkit-box-shadow: inset 0 0 3px 0 #cde2ff;
-	-moz-box-shadow: inset 0 0 3px 0 #cde2ff;
-	box-shadow: inset 0 0 3px 0 #cde2ff;
-	margin: 0.2em 0.5em;
+	-webkit-box-shadow: inset 0 0 6px 0 #eaeaea;
+	-moz-box-shadow: inset 0 0 6px 0 #eaeaea;
+	box-shadow: inset 0 0 6px 0 #eaeaea;
+	margin: 0.2em 0.5em 0.2em 0;
 	width: auto;
 }
 
 .buddypress #buddypress .create-button a:focus, .buddypress #buddypress .create-button a:hover {
 	background: none;
 	border-color: #ccc;
-	-webkit-box-shadow: inset 0 0 16px 0 #cde2ff;
-	-moz-box-shadow: inset 0 0 16px 0 #cde2ff;
-	box-shadow: inset 0 0 16px 0 #cde2ff;
-	color: #5c66ff;
+	-webkit-box-shadow: inset 0 0 12px 0 #eaeaea;
+	-moz-box-shadow: inset 0 0 12px 0 #eaeaea;
+	box-shadow: inset 0 0 12px 0 #eaeaea;
 }
 
 .buddypress li.filter label:before,
