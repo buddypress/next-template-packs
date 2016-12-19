@@ -55,6 +55,20 @@
 
 	} // close .bp-messages
 
+	// This is an anomaly, this screen message is locked away in
+	// core avatar styles and ought to be pulled out, markup & styles to nouveau
+	#group-create-body {
+		.bp-cover-image-status {
+			p.warning {
+				background: $informational;
+				border: 0;
+				@include box-shadow( 0 0 3px 0 rgba(0, 0, 0, 0.2) );
+				color: $white;
+			}
+		}
+	}
+
+
 	// message-box() may be have params passed through:
 	// ($background: #fff, $text-color: #000, $border: #eee)
 	// '$border: none' ensures border turned off in favour off
@@ -69,7 +83,7 @@
 	}
 
 	.bp-feedback:before {
-		color: #fff;
+		color: $white;
 		font-family: dashicons;
 		font-size: 24px;
 		height: 100%;

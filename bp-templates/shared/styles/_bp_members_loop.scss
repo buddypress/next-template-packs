@@ -3,7 +3,12 @@
 .buddypress {
 
 	.members-list { // ul
+
 		li {
+
+			.member-name {
+				margin-bottom: $marg-sml;
+			}
 
 			.user-update {
 				border: 1px solid $light-grey;
@@ -40,8 +45,7 @@
 			}
 		}
 	}
-
-}
+} // close .buddypress
 
 // If logged out or if the loop item is
 // current user we don't display action buttons

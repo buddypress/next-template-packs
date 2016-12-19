@@ -174,11 +174,21 @@ dt.section-title {
 }
 
 .activity-header {
-	font-size: 15px;
+	font-size: 13px;
 }
 
 @media screen and (min-width: 46.8em) {
 	.activity-header {
+		font-size: 16px;
+	}
+}
+
+.activity-inner {
+	font-size: 15px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.activity-inner {
 		font-size: 18px;
 	}
 }
@@ -1568,6 +1578,10 @@ form.ac-form .ac-reply-content input {
 * @section 3.2 - Members Loop
 *----------------------------------------------------------
 */
+.buddypress .members-list li .member-name {
+	margin-bottom: 10px;
+}
+
 .buddypress .members-list li .user-update {
 	border: 1px solid #eaeaea;
 	-webkit-border-radius: 10px;
@@ -3546,6 +3560,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: block;
 }
 
+.buddypress #group-create-body .bp-cover-image-status p.warning {
+	background: #38a;
+	border: 0;
+	-webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+	color: #fff;
+}
+
 .buddypress .bp-feedback {
 	background: #fff;
 	color: gray;
@@ -3983,7 +4006,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		background: #eaeaea;
 		margin-bottom: 15px;
 	}
-	.bp-vertical-nav .item-body {
+	.bp-vertical-nav .item-body:not(#group-create-body) {
 		background: #fff;
 		border-left: 1px solid #e0e0e0;
 		margin: 0;
@@ -3991,29 +4014,29 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		overflow: hidden;
 		padding: 0 0 0 0.5em;
 	}
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) {
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) {
 		background: #eaeaea;
 		margin: 0 0 0 -5px;
 		width: auto;
 	}
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li {
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) li {
 		font-size: 16px;
 		margin: 10px 0;
 	}
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a {
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) li a {
 		border-right: 1px solid #ccc;
 		padding: 0 0.5em;
 	}
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a:focus,
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li a:hover {
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) li a:focus,
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) li a:hover {
 		background: none;
 	}
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li.current a {
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) li.current a {
 		background: none;
 		color: #333;
 		text-decoration: underline;
 	}
-	.bp-vertical-nav .item-body #subnav:not(.tabbed-links) li:last-child a {
+	.bp-vertical-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) li:last-child a {
 		border: none;
 	}
 	.bp-dir-vert-nav .dir-navs {

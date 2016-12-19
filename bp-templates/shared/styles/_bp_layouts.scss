@@ -348,7 +348,7 @@
 			margin-bottom: $marg-med;
 		}
 
-		.item-body {
+		.item-body:not(#group-create-body) {
 			background: #fff;
 			border-left: 1px solid $med-light-grey;
 			margin: 0;
