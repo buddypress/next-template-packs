@@ -1074,7 +1074,7 @@ dt.section-title {
 .activity-list .activity-item .activity-content .activity-header,
 .activity-list .activity-item .activity-content .comment-header {
 	color: #888;
-	line-height: 220%;
+	margin-bottom: 10px;
 }
 
 .activity-list .activity-item .activity-content .activity-inner,
