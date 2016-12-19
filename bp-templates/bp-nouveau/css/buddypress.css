@@ -3003,13 +3003,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	content: '\25BC';
 }
 
-.buddypress .select-wrap:focus, .buddypress .select-wrap:hover {
-	border: 1px solid #d5d5d5;
-	box-shadow: inset 0 0 3px #eee;
-}
-
 .buddypress .select-wrap:focus .select-arrow:before, .buddypress .select-wrap:hover .select-arrow:before {
 	color: #a6a6a6;
+}
+
+.buddypress .select-wrap:focus, .buddypress .select-wrap:hover,
+.buddypress .bp-search form:focus,
+.buddypress .bp-search form:hover {
+	border: 1px solid #d5d5d5;
+	box-shadow: inset 0 0 3px #eee;
 }
 
 /**

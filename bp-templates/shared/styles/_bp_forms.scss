@@ -284,6 +284,7 @@ body.no-js {
 			z-index: 1;
 			width: 100%;
 		}
+
 		select,
 		select:focus,
 		select:active {
@@ -304,12 +305,21 @@ body.no-js {
 
 		&:focus,
 		&:hover {
-			border: 1px solid darken($bp-border-color, 10%);
-			box-shadow: inset 0 0 3px #eee;
 
 			.select-arrow:before {
 				color: darken($primary-grey, 15%);
 			}
 		}
 	} // close .select-wrap
+
+	// Add a little on hover inset shadow for  subnav search & filters
+	.select-wrap,
+	.bp-search form {
+		&:focus,
+		&:hover {
+			border: 1px solid darken($bp-border-color, 10%);
+			box-shadow: inset 0 0 3px #eee;
+		}
+	}
+
 }
