@@ -177,6 +177,10 @@ dt.section-title {
 }
 
 .activity-header {
+	@include responsive-font(16);
+}
+
+.activity-inner {
 	@include responsive-font(18);
 }
 
