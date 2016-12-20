@@ -451,6 +451,16 @@ dt.section-title {
 	display: none;
 }
 
+.buddypress_object_nav .bp-navs.group-create-links ul li a,
+.buddypress .bp-navs.group-create-links ul li a {
+	color: #e0e0e0;
+}
+
+.buddypress_object_nav .bp-navs.group-create-links ul li.current a,
+.buddypress .bp-navs.group-create-links ul li.current a {
+	color: #333;
+}
+
 @media screen and (min-width: 46.8em) {
 	.buddypress .bp-navs li {
 		float: left;
@@ -485,29 +495,29 @@ dt.section-title {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress #item-body .button-tabs {
+	.buddypress .item-body .button-tabs {
 		border-bottom: 1px solid #ccc;
 		float: none;
 		margin: 20px 0 10px;
 	}
-	.buddypress #item-body .button-tabs:before, .buddypress #item-body .button-tabs:after {
+	.buddypress .item-body .button-tabs:before, .buddypress .item-body .button-tabs:after {
 		content: " ";
 		display: block;
 	}
-	.buddypress #item-body .button-tabs:after {
+	.buddypress .item-body .button-tabs:after {
 		clear: both;
 	}
-	.buddypress #item-body .button-tabs li {
+	.buddypress .item-body .button-tabs li {
 		float: left;
 		list-style: none;
 		margin: 0 15px 0 0;
 	}
-	.buddypress #item-body .button-tabs li a {
+	.buddypress .item-body .button-tabs li a {
 		background: none;
 		border: none;
 		display: block;
 	}
-	.buddypress #item-body .button-tabs li.current {
+	.buddypress .item-body .button-tabs li.current {
 		border-color: #ccc #ccc #fff;
 		border-style: solid;
 		border-top-left-radius: 4px;
@@ -516,51 +526,41 @@ dt.section-title {
 		margin-bottom: -1px;
 		padding: 0 0.5em;
 	}
-	.buddypress #item-body .button-tabs li.current a {
+	.buddypress .item-body .button-tabs li.current a {
 		color: #333;
 	}
-	.buddypress #item-body .tabbed-links > .button-tabs {
+	.buddypress .item-body .tabbed-links > .button-tabs {
 		margin-top: 0;
 	}
-	.buddypress #item-body #subnav.tabbed-links {
+	.buddypress .item-body .bp-navs.tabbed-links {
 		background: none;
 		margin-top: 2px;
 	}
-	.buddypress #item-body #subnav.tabbed-links li#compose-personal-li {
+	.buddypress .item-body .bp-navs.tabbed-links li#compose-personal-li {
 		margin-top: 6px;
 	}
-	.buddypress #item-body .bp-navs.group-create-links.tabbed-links {
-		background: none;
-	}
-	.buddypress #item-body .bp-navs.group-create-links.tabbed-links ul span {
-		background: none;
-		border: none;
-		border-radius: none;
-		font-size: 19px;
-		padding: 5px 10px;
-	}
-	.buddypress #item-body ul.button-tabs li a {
+	.buddypress .item-body ul.button-tabs li a {
 		border-right: 0;
 		font-size: inherit;
 	}
-	.buddypress #item-body ul.button-tabs li.last {
+	.buddypress .item-body ul.button-tabs li.last {
 		float: right;
 		margin: 0;
 	}
-	.buddypress #item-body ul.button-tabs li.last a {
+	.buddypress .item-body ul.button-tabs li.last a {
 		margin-top: -0.5em;
 	}
-	.buddypress #item-body ul.button-tabs li a,
-	.buddypress #item-body ul.button-tabs li a:focus,
-	.buddypress #item-body ul.button-tabs li a:hover,
-	.buddypress #item-body ul.button-tabs li.current a,
-	.buddypress #item-body ul.button-tabs li.current a:focus,
-	.buddypress #item-body ul.button-tabs li.current a:hover {
+	.buddypress .item-body ul.button-tabs li a,
+	.buddypress .item-body ul.button-tabs li a:focus,
+	.buddypress .item-body ul.button-tabs li a:hover,
+	.buddypress .item-body ul.button-tabs li.current a,
+	.buddypress .item-body ul.button-tabs li.current a:focus,
+	.buddypress .item-body ul.button-tabs li.current a:hover {
 		background: none;
 		border: 0;
 	}
-	.buddypress #item-body ul.button-tabs li a:active,
-	.buddypress #item-body ul.button-tabs li.current a:active {
+	.buddypress .item-body ul.button-tabs li a:active,
+	.buddypress .item-body ul.button-tabs li.current a:active {
 		outline: none;
 	}
 }

@@ -18,17 +18,17 @@ bp_nouveau_groups_create_hook( 'before', 'page' ); ?>
 
 		<?php bp_nouveau_groups_create_hook( 'before' ); ?>
 
-		<div class="bp-navs group-create-links tabbed-links no-ajax" id="group-create-tabs" role="navigation">
-			<ul class="group-create-buttons button-tabs">
-
-				<?php bp_nouveau_group_creation_tabs(); ?>
-
-			</ul>
-		</div>
-
 		<?php bp_nouveau_template_notices(); ?>
 
 		<div class="item-body" id="group-create-body">
+
+			<div class="bp-navs group-create-links tabbed-links no-ajax" id="group-create-tabs" role="navigation">
+				<ul class="group-create-buttons button-tabs">
+
+					<?php bp_nouveau_group_creation_tabs(); ?>
+
+				</ul>
+			</div>
 
 			<?php bp_nouveau_group_creation_screen(); ?>
 

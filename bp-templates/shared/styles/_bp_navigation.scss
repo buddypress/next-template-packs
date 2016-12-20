@@ -278,6 +278,25 @@
 			}
 		}
 	} // bp-navs
+
+	// Create steps current postion tabs highlight
+	.bp-navs.group-create-links {
+
+		ul {
+
+			li {
+				a {
+					color: $med-light-grey;
+				}
+			}
+
+			li.current {
+				a {
+					color: $black;
+				}
+			}
+		}
+	}
 }
 
 .buddypress {
@@ -364,12 +383,12 @@
 // Tabbed links
 
 // Our tabbed links are pulled in via a mixin
-// BP element must have 'tabbed-links' added and the ul 'button-tabs'
+// UL parent element must have 'tabbed-links' added and the ul 'button-tabs'
 // medium screens up
 
 .buddypress {
 
-	#item-body {
+	.item-body {
 
 		@include medium-up {
 
@@ -377,27 +396,12 @@
 			// Button navigation as tabbed effect for wide screen
 			@include tabbed-links();
 
-			#subnav.tabbed-links {
+			.bp-navs.tabbed-links {
 				background: none;
 				margin-top: 2px;
 
 				li#compose-personal-li {
 					margin-top: 6px;
-				}
-			}
-
-			.bp-navs.group-create-links.tabbed-links {
-				background: none;
-
-				ul {
-
-					span {
-						background: none;
-						border: none;
-						border-radius: none;
-						@include font-size(19);
-						padding: 5px 10px;
-					}
 				}
 			}
 
