@@ -66,3 +66,29 @@ function bp_nouveau_xprofile_edit_visibilty() {
 	 */
 	do_action( 'bp_custom_profile_edit_fields' );
 }
+
+
+/*
+
+// in progress - change the xprofile group name 'base' to something better or user set
+// primary function xprofile/bp-xprofile-template.php L: 273
+function nouveau_the_profile_group_name( $base_name = null ) {
+	echo nouveau_get_the_profile_group_name( $base_name );
+}
+
+function nouveau_get_the_profile_group_name( $base_name ) {
+	global $group;
+
+	if( empty( $base_name ) )
+		$base_name = 'Primary Account';
+
+	if('Base' == $group->name ) {
+		$group->name = $base_name;
+	}
+
+	$base_name = apply_filters('nouveau_get_the_profile_group_name', $group->name );
+
+	return $base_name;
+}
+add_filter('bp_get_the_profile_group_name', 'nouveau_get_the_profile_group_name');
+*/

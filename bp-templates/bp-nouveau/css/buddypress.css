@@ -3307,7 +3307,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-width: 1px;
 	color: #555;
 	cursor: pointer;
-	font-size: small;
+	font-size: inherit;
+	font-weight: 400;
 	outline: none;
 	padding: 4px 10px;
 	text-align: center;
