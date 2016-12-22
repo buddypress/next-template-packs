@@ -10,6 +10,13 @@
 	.signup-form {
 		margin-top: $marg-lrg;
 
+		.default-profile {
+			input {
+				margin-bottom: $marg-lrg;
+			}
+		}
+
+		// profile extra element wrapper
 		.editfield {
 			border: 1px solid $bp-border-color;
 			margin: $marg-lrg 0;
@@ -43,29 +50,58 @@
 		#signup-avatar img {
 			margin: 0 $marg-med $marg-sml 0;
 		}
+	} // close .signup-form
 
-		@include medium-up() {
+} // close .register-page
 
-			.default-profile,
-			.extended-profile {
-				padding: 0.2em;
-				width: 50%;
+// Flex layout containers for registration sections
+
+@include medium-up() {
+	.buddypress {
+		.register-page {
+
+			.layout-wrap {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-around;
+
+				.default-profile {
+					flex: 1;
+					padding-right: $pad-lrg;
+				}
+
+				.blog-details {
+					flex: 1;
+					padding-left: $pad-lrg;
+				}
 			}
 
+			.submit {clear: both;}
+
+		}
+	}
+}
+
+// have we got extended profiles to factor in,
+// if so we'll adjust the child item elements.
+
+@include medium-up() {
+	.buddypress.extended-default-reg {
+		.register-page {
+
 			.default-profile {
-				float: left;
+				flex: 1;
 				padding-right: $pad-med;
 			}
 
 			.extended-profile {
-				float: right;
+				flex: 2 ;
 				padding-left: $pad-med;
 			}
 
 			.blog-details {
-				clear: left;
+				flex:  1 100%;
 			}
-
-		} // close @media
-	} // close .signup-form
+		}
+	}
 }

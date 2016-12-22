@@ -1646,6 +1646,10 @@ form.ac-form .ac-reply-content input {
 	margin-top: 20px;
 }
 
+.register-page .signup-form .default-profile input {
+	margin-bottom: 20px;
+}
+
 .register-page .signup-form .editfield {
 	border: 1px solid #eee;
 	margin: 20px 0;
@@ -1680,21 +1684,35 @@ form.ac-form .ac-reply-content input {
 }
 
 @media screen and (min-width: 46.8em) {
-	.register-page .signup-form .default-profile,
-	.register-page .signup-form .extended-profile {
-		padding: 0.2em;
-		width: 50%;
+	.buddypress .register-page .layout-wrap {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-around;
 	}
-	.register-page .signup-form .default-profile {
-		float: left;
+	.buddypress .register-page .layout-wrap .default-profile {
+		flex: 1;
+		padding-right: 2em;
+	}
+	.buddypress .register-page .layout-wrap .blog-details {
+		flex: 1;
+		padding-left: 2em;
+	}
+	.buddypress .register-page .submit {
+		clear: both;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress.extended-default-reg .register-page .default-profile {
+		flex: 1;
 		padding-right: 1em;
 	}
-	.register-page .signup-form .extended-profile {
-		float: right;
+	.buddypress.extended-default-reg .register-page .extended-profile {
+		flex: 2;
 		padding-left: 1em;
 	}
-	.register-page .signup-form .blog-details {
-		clear: left;
+	.buddypress.extended-default-reg .register-page .blog-details {
+		flex: 1 100%;
 	}
 }
 
@@ -3645,10 +3663,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-style: solid;
 	border-width: 1px;
 	display: none;
-	margin: 10px 10px 10px 0;
+	margin: 10px 0 10px 0;
 	padding: 0.5em;
 	text-align: center;
-	width: 150px;
+	width: auto;
 }
 
 .buddypress #pass-strength-result.error, .buddypress #pass-strength-result.bad {
