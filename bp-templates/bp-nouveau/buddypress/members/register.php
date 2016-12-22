@@ -13,13 +13,15 @@
 
 	<?php bp_nouveau_signup_hook( 'before', 'page' ); ?>
 
-	<div class="page register-page" id="register-page">
+	<div id="register-page"class="page register-page">
 
 		<?php bp_nouveau_template_notices(); ?>
 
 			<?php bp_nouveau_user_feedback( bp_get_current_signup_step() ); ?>
 
-			<form action="" name="signup_form" id="signup_form" class="standard-form signup-form clearfix" method="post" enctype="multipart/form-data">
+			<form action="" name="signup_form" id="signup-form" class="standard-form signup-form clearfix" method="post" enctype="multipart/form-data">
+
+			<div class="layout-wrap">
 
 			<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
 
@@ -39,7 +41,7 @@
 
 				<?php /***** Extra Profile Details ******/ ?>
 
-				<?php if ( bp_is_active( 'xprofile' ) ) : ?>
+				<?php if ( bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile() ) : ?>
 
 					<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
 
@@ -48,29 +50,29 @@
 						<h2 class="bp-heading"><?php _e( 'Profile Details', 'bp-nouveau' ); ?></h2>
 
 						<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-						<?php if ( bp_is_active( 'xprofile' ) ) : if ( bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) ) ) : while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
+						<?php while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
 
-						<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
+							<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
-							<div<?php bp_field_css_class( 'editfield' ); ?>>
+								<div<?php bp_field_css_class( 'editfield' ); ?>>
 
-								<?php
-								$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-								$field_type->edit_field_html();
+									<?php
+									$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
+									$field_type->edit_field_html();
 
-								bp_nouveau_xprofile_edit_visibilty();
-								?>
+									bp_nouveau_xprofile_edit_visibilty();
+									?>
 
-								<?php if( bp_get_the_profile_field_description() ) : ?>
-								<p class="description bp-feedback info small"><span class="icon"></span><span class="text"><?php bp_the_profile_field_description(); ?></span></p>
-								<?php endif; ?>
-							</div>
+									<?php if( bp_get_the_profile_field_description() ) : ?>
+									<p class="description bp-feedback info small"><span class="icon"></span><span class="text"><?php bp_the_profile_field_description(); ?></span></p>
+									<?php endif; ?>
+								</div>
 
-						<?php endwhile; ?>
+							<?php endwhile; ?>
 
 						<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
 
-						<?php endwhile; endif; endif; ?>
+						<?php endwhile; ?>
 
 						<?php bp_nouveau_signup_hook( '', 'signup_profile' ); ?>
 
@@ -103,6 +105,8 @@
 					<?php bp_nouveau_signup_hook( 'after', 'blog_details' ); ?>
 
 				<?php endif; ?>
+
+				</div><!-- //.layout-wrap -->
 
 				<?php bp_nouveau_submit_button( 'register' ); ?>
 

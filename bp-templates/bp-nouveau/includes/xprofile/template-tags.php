@@ -41,6 +41,7 @@ function bp_nouveau_xprofile_hook( $when = '', $suffix = '' ) {
 	return bp_nouveau_hook( $hook );
 }
 
+
 /**
  * Template tag to output the field visibility markup in
  * edit and signup screens.
@@ -67,6 +68,16 @@ function bp_nouveau_xprofile_edit_visibilty() {
 	do_action( 'bp_custom_profile_edit_fields' );
 }
 
+/**
+ * Return a bool check to see whether the base re group has had extended
+ * profile fields added to it for the registration screen.
+ *
+ * @since 1.0.0
+ *
+ */
+function bp_nouveau_base_account_has_xprofile() {
+	return (bool) bp_has_profile( array( 'profile_group_id' => 1, 'fetch_field_data' => false ) );
+}
 
 /*
 

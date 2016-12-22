@@ -1314,11 +1314,7 @@ function bp_nouveau_buddypress_classes() {
 			$member_type_class = '';
 		}
 
-		// Add classes according to site owners preferences.
 
-		if ( $general_settings = bp_nouveau_get_temporary_setting( 'avatar_style', bp_nouveau_get_appearance_settings( 'avatar_style' ) ) ) {
-			$classes[] = 'round-avatars';
-		}
 
 		if( $member_type_class ) {
 			$classes[] = $member_type_class;
@@ -1328,6 +1324,19 @@ function bp_nouveau_buddypress_classes() {
 			$classes[] = $group_type_class;
 		}
 
+		// Provide a class token to acknowledge additional extended profile fields added to default account reg screen
+		if( 'register' === bp_current_component() && bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile() ){
+			$classes[] = 'extended-default-reg';
+		}
+
+		// Add classes according to site owners preferences. these are options set via Customizer
+
+		// These are general site wide Cust options falling outside component checks
+		if ( $general_settings = bp_nouveau_get_temporary_setting( 'avatar_style', bp_nouveau_get_appearance_settings( 'avatar_style' ) ) ) {
+			$classes[] = 'round-avatars';
+		}
+
+		// Set via earlier switch for component check to provide correct option key.
 		if ( ! empty( $customizer_option ) ) {
 			$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 
