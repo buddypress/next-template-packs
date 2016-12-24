@@ -15,11 +15,12 @@
 	<div class="subnav-filters filters clearfix">
 
 		<ul>
-		<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
+			<li class="feed"><a href="<?php bp_group_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>" class="no-ajax"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
 
-		<?php bp_nouveau_search_form(); ?>
-</ul>
-<?php bp_get_template_part('common/filters/groups-screens-filters'); ?>
+			<?php bp_nouveau_search_form(); ?>
+		</ul>
+
+		<?php bp_get_template_part('common/filters/groups-screens-filters'); ?>
 	</div><!-- // .subnav-filters -->
 
 
