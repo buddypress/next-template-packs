@@ -709,8 +709,20 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		$icons = '';
 		if( !empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
+
+				// If this is a true button element then we need to move the href values
+				// around onto button value & empty the href attr.
+				if( 'button' === $args['button_element'] ) {
+					$data_attr_delete = esc_url( bp_get_activity_comment_delete_link() );
+					$data_attr_reply  = sprintf( '#acomment-%s', $activity_comment_id );
+					$href_reply = $href_delete = '';
+				}
 		} else {
-			$button_element = 'a';
+			$button_element   = 'a';
+			$data_attr_reply  = '';
+			$data_attr_delete = '';
+			$href_reply  = sprintf( '#acomment-%s', $activity_comment_id );
+			$href_delete = esc_url( bp_get_activity_comment_delete_link() );
 			$icons = ' icons';
 		}
 
@@ -723,11 +735,12 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'parent_attr'       => $parent_attr,
 				'button_element'    => $button_element,
 				'button_attr'       =>  array(
-					'href'   => sprintf( '#acomment-%s', $activity_comment_id ),
+					'data-do-comment'  => $data_attr_reply,
+					'href'   => $href_reply,
 					'class'  => 'acomment-reply bp-primary-action' . $icons . '',
 					'id'     => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
 				),
-				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'reply', 'bp-nouveau' ),
 			),
 			'activity_comment_delete' => array(
 				'id'                => 'activity_comment_delete',
@@ -738,7 +751,8 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'parent_attr'       => $parent_attr,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'   => esc_url( bp_get_activity_comment_delete_link() ),
+					'data-do-delete'   => $data_attr_delete,
+					'href'   => $href_delete,
 					'class'  => 'delete acomment-delete confirm bp-secondary-action' . $icons . '',
 					'rel'    => 'nofollow',
 					),
