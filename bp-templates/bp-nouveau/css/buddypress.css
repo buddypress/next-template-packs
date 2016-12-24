@@ -1307,7 +1307,7 @@ body.activity-permalink .activity-list .activity-meta {
 */
 .buddypress .activity-comments {
 	clear: both;
-	margin: 0 5% 0 10%;
+	margin: 0 5%;
 	overflow: hidden;
 	position: relative;
 	width: auto;
@@ -1316,7 +1316,7 @@ body.activity-permalink .activity-list .activity-meta {
 .buddypress .activity-comments ul {
 	clear: both;
 	list-style: none;
-	margin-top: 15px;
+	margin: 15px 0 0;
 	padding: 0;
 }
 
@@ -1324,6 +1324,10 @@ body.activity-permalink .activity-list .activity-meta {
 	border-top: 1px solid #eee;
 	border-bottom: 0;
 	padding: 1em 0 0;
+}
+
+.buddypress .activity-comments ul li ul {
+	margin-left: 5%;
 }
 
 .buddypress .activity-comments ul li:first-child {
@@ -1334,11 +1338,27 @@ body.activity-permalink .activity-list .activity-meta {
 	margin-bottom: 0;
 }
 
-.buddypress .activity-comments .acomment-avatar img {
+.buddypress .activity-comments div.acomment-avatar {
+	width: auto;
+}
+
+.buddypress .activity-comments div.acomment-avatar img {
 	border-width: 1px;
 	float: left;
 	height: 25px;
+	max-width: none;
 	width: 25px;
+}
+
+.buddypress .activity-comments .acomment-meta,
+.buddypress .activity-comments .acomment-content p {
+	font-size: 14px;
+}
+
+.buddypress .activity-comments .acomment-meta {
+	color: #555;
+	overflow: hidden;
+	padding-left: 2%;
 }
 
 .buddypress .activity-comments .acomment-content {
@@ -1348,7 +1368,6 @@ body.activity-permalink .activity-list .activity-meta {
 }
 
 .buddypress .activity-comments .acomment-content p {
-	font-size: 14px;
 	margin-bottom: 0.5em;
 }
 
@@ -1382,9 +1401,9 @@ body.activity-permalink .activity-list .activity-meta {
 	margin-top: 0;
 }
 
-@media screen and (min-width: 24em) {
-	.buddypress .activity-comments ul {
-		margin: 15px 0 0 5%;
+@media screen and (min-width: 46.8em) {
+	.buddypress .activity-comments {
+		margin-left: 17%;
 	}
 }
 

@@ -3,7 +3,7 @@
 
 	.activity-comments {
 		clear: both;
-		margin: 0 5% 0 10%;
+		margin: 0 5%;
 		overflow: hidden;
 		position: relative;
 		width: auto;
@@ -11,13 +11,18 @@
 		ul {
 			clear: both;
 			list-style: none;
-			margin-top: $marg-med;
+			margin: $marg-med 0 0;
 			padding: 0;
 
 			li {
 				border-top: 1px solid $bp-border-color;
 				border-bottom: 0;
 				padding: $pad-med 0 0;
+
+				ul {
+					// indent any nested comments - comment to a comment
+					margin-left: 5%;
+				}
 			}
 
 			li:first-child {
@@ -29,14 +34,27 @@
 			}
 		} // close ul
 
-		.acomment-avatar {
+		div.acomment-avatar {
+			width: auto;
 
 			img {
 				border-width: 1px;
 				float: left;
 				height: 25px;
+				max-width: none;
 				width: 25px;
 			}
+		}
+
+		.acomment-meta,
+		.acomment-content p {
+				@include font-size(14);
+		}
+
+		.acomment-meta {
+			color: $dark-grey ;
+			overflow: hidden;
+			padding-left: 2%;
 		}
 
 		.acomment-content {
@@ -45,7 +63,6 @@
 			padding: $pad-sml $pad-med;
 
 			p {
-				@include font-size(14);
 				margin-bottom: 0.5em;
 			}
 		}
@@ -69,6 +86,7 @@
 		.activity-meta.action {
 			background: none;
 			margin-top: $marg-sml;
+
 			// if button element in use
 			button {
 				@include font-size(14);
@@ -92,14 +110,15 @@
 
 } // close .buddypress
 
-@include small-up() {
+@include medium-up() {
 
 	.buddypress {
 
 		.activity-comments {
+			margin-left: 17%;
 
 			ul {
-				margin: $marg-med 0 0 5%;
+			//	margin: $marg-med 0 0;
 			}
 		}
 	}
