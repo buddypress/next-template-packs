@@ -42,7 +42,7 @@
 		.acomment-content {
 			border-left: 1px solid $bp-border-dark;
 			margin: $marg-med 0 0 10%;
-			padding: $pad-med;
+			padding: $pad-sml $pad-med;
 
 			p {
 				@include font-size(14);
@@ -66,7 +66,8 @@
 
 		} // close .acomment-options
 
-		.activity-meta {
+		.activity-meta.action {
+			background: none;
 			margin-top: $marg-sml;
 			// if button element in use
 			button {

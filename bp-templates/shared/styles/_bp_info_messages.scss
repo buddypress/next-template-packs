@@ -146,10 +146,10 @@
 		border-style: solid;
 		border-width: 1px;
 		display: none;
-		margin: $marg-sml $marg-sml $marg-sml 0;
+		margin: $marg-sml 0 $marg-sml 0;
 		padding: $pad-sml;
 		text-align: center;
-		width: 150px;
+		width: auto;
 
 		&.error,
 		&.bad {

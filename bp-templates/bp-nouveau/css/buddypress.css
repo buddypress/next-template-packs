@@ -453,7 +453,7 @@ dt.section-title {
 
 .buddypress_object_nav .bp-navs.group-create-links ul li a,
 .buddypress .bp-navs.group-create-links ul li a {
-	color: #e0e0e0;
+	color: #d6d6d6;
 }
 
 .buddypress_object_nav .bp-navs.group-create-links ul li.current a,
@@ -1344,7 +1344,7 @@ body.activity-permalink .activity-list .activity-meta {
 .buddypress .activity-comments .acomment-content {
 	border-left: 1px solid #ccc;
 	margin: 15px 0 0 10%;
-	padding: 1em;
+	padding: 0.5em 1em;
 }
 
 .buddypress .activity-comments .acomment-content p {
@@ -1366,11 +1366,12 @@ body.activity-permalink .activity-list .activity-meta {
 	color: inherit;
 }
 
-.buddypress .activity-comments .activity-meta {
+.buddypress .activity-comments .activity-meta.action {
+	background: none;
 	margin-top: 10px;
 }
 
-.buddypress .activity-comments .activity-meta button {
+.buddypress .activity-comments .activity-meta.action button {
 	font-size: 14px;
 	font-weight: 400;
 	text-transform: none;
@@ -1442,9 +1443,9 @@ form.ac-form .ac-reply-content .ac-textarea textarea {
 }
 
 form.ac-form .ac-reply-content .ac-textarea textarea:focus {
-	-webkit-box-shadow: 0 0 6px #e0e0e0;
-	-moz-box-shadow: 0 0 6px #e0e0e0;
-	box-shadow: 0 0 6px #e0e0e0;
+	-webkit-box-shadow: 0 0 6px #d6d6d6;
+	-moz-box-shadow: 0 0 6px #d6d6d6;
+	box-shadow: 0 0 6px #d6d6d6;
 }
 
 form.ac-form .ac-reply-content input {
@@ -2790,7 +2791,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 */
 .buddypress .filter select,
 .buddypress #whats-new-post-in-box select {
-	border: 1px solid #ccc;
+	border: 1px solid #d6d6d6;
 }
 
 .buddypress input.action[disabled] {
@@ -2848,7 +2849,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress .standard-form .groups-members-search input[type="search"],
 .buddypress .standard-form .groups-members-search input[type="text"] {
 	background: #fafafa;
-	border: 1px solid #ccc;
+	border: 1px solid #d6d6d6;
 	border-radius: 0;
 	font: inherit;
 	font-size: 100%;
@@ -3426,13 +3427,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: none;
 	border: none;
 	border-right: 1px solid #eee;
-	color: #e0e0e0;
+	color: #d6d6d6;
 	display: inline-block;
 	padding: 0.3em 1em;
 }
 
 .buddypress .buddypress .text-links-list a.button:visited {
-	color: #e0e0e0;
+	color: #d6d6d6;
 }
 
 .buddypress .buddypress .text-links-list a.button:focus, .buddypress .buddypress .text-links-list a.button:hover {
@@ -3997,7 +3998,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		overflow: visible;
 	}
 	.bp-vertical-nav .vertical ul {
-		border-right: 1px solid #e0e0e0;
+		border-right: 1px solid #d6d6d6;
 		float: left;
 		margin-right: -1px;
 		width: 25%;
@@ -4013,7 +4014,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		background: #ccc;
 	}
 	.bp-vertical-nav .vertical li span {
-		background: #e0e0e0;
+		background: #d6d6d6;
 		border-radius: 10%;
 		float: right;
 		margin-right: 2px;
@@ -4027,7 +4028,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.bp-vertical-nav .item-body:not(#group-create-body) {
 		background: #fff;
-		border-left: 1px solid #e0e0e0;
+		border-left: 1px solid #d6d6d6;
 		margin: 0;
 		min-height: 400px;
 		overflow: hidden;

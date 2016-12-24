@@ -89,6 +89,12 @@
 	}
 }
 
+@mixin medium-lrg-up {
+	@media screen and (min-width: 55em) {
+		@content;
+	}
+}
+
 @mixin large-up {
 	@media screen and (min-width: 75em) {
 		@content;
