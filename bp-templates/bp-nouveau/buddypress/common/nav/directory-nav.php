@@ -32,4 +32,4 @@
 
 	<?php endif ; ?>
 
-</div><!-- .item-list-tabs -->
+</div><!-- .bp-navs -->
