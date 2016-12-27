@@ -567,6 +567,7 @@ function bp_nouveau_loop_classes() {
 		return join( ' ', array_map( 'sanitize_html_class', $class_list ) );
 	}
 
+
 /**
  * Checks if the layout preferences is set to grid (2 or more columns).
  *
@@ -1200,14 +1201,43 @@ function bp_nouveau_directory_type_navs_class() {
 }
 
 	/**
-	 * Gets the directory nav class.
+	 * Provides default nav wrapper classes.
+	 * Gets the directory component nav class.
+	 * gets user selection Customizer options
 	 *
 	 * @since 1.0.0
+	 * @return string classes
 	 */
 	function bp_nouveau_get_directory_type_navs_class() {
-		$class = sprintf( '%s-type-navs', bp_current_component() );
 
-		return sanitize_html_class( $class );
+			$component  = sanitize_key( bp_current_component() );
+			$customizer_option = sprintf( '%s_dir_tabs', $component );
+			$nav_style  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+
+			if( 1 === $nav_style ) {
+				$tab_style = bp_current_component() . '-nav-tabs';
+			}
+
+		$nav_wrapper_classes = array(
+			sprintf( '%s-type-navs', bp_current_component() ),
+			'main-navs',
+			'bp-navs',
+			'dir-navs',
+			$tab_style
+		);
+
+		/**
+		 * Filter here to edit/add classes.
+		 *
+		 * NB: you can also directly add classes to the class attr.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array  $nav_wrapper_classes  The list of classes.
+		 */
+		$nav_wrapper_classes = (array) apply_filters( 'bp_nouveau_get_directory_type_navs_class', $nav_wrapper_classes );
+
+		return join( ' ', array_map( 'sanitize_html_class', $nav_wrapper_classes ) );
 	}
 
 /**

@@ -665,10 +665,14 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_front_page'        => 1,
 			'group_front_boxes'       => 1,
 			'group_front_description' => 0,
-			'group_nav_display'       => 0,       // O is default (horizontally). 1 is vertically.
+			'group_nav_display'       => 0,   // O is default (horizontally). 1 is vertically.
 			'group_nav_order'         => array(),
 			'groups_layout'           => 1,
 			'members_group_layout'    => 1,
+			'activity_dir_tabs'       => 0,   // default = no tabs
+			'blogs_dir_tabs'          => 0,
+			'groups_dir_tabs'         => 0,
+			'members_dir_tabs'        => 0,
 		) );
 	}
 
@@ -847,8 +851,22 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		'transport'         => 'refresh',
 		'type'              => 'option',
 		),
+		'bp_nouveau_appearance[activity_dir_tabs]' => array(
+		'index'             => 'activity_dir_tabs',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
 		'bp_nouveau_appearance[members_dir_layout]' => array(
 		'index'             => 'members_dir_layout',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
+		'bp_nouveau_appearance[members_dir_tabs]' => array(
+		'index'             => 'members_dir_tabs',
 		'capability'        => 'bp_moderate',
 		'sanitize_callback' => 'absint',
 		'transport'         => 'refresh',
@@ -861,8 +879,22 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		'transport'         => 'refresh',
 		'type'              => 'option',
 		),
+		'bp_nouveau_appearance[groups_dir_tabs]' => array(
+		'index'             => 'groups_dir_tabs',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
 		'bp_nouveau_appearance[sites_dir_layout]' => array(
 		'index'             => 'sites_dir_layout',
+		'capability'        => 'bp_moderate',
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+		'type'              => 'option',
+		),
+		'bp_nouveau_appearance[sites_dir_tabs]' => array(
+		'index'             => 'sites_dir_tabs',
 		'capability'        => 'bp_moderate',
 		'sanitize_callback' => 'absint',
 		'transport'         => 'refresh',
@@ -942,10 +974,22 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		'settings'   => 'bp_nouveau_appearance[activity_dir_layout]',
 		'type'       => 'checkbox',
 		),
+		'act_dir_tabs' => array(
+		'label'      => __( 'Set Activity nav to tab style:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[activity_dir_tabs]',
+		'type'       => 'checkbox',
+		),
 		'members_dir_layout' => array(
 		'label'      => __( 'Set Members dir nav to column:', 'bp-nouveau' ),
 		'section'    => 'bp_nouveau_dir_layout',
 		'settings'   => 'bp_nouveau_appearance[members_dir_layout]',
+		'type'       => 'checkbox',
+		),
+		'members_dir_tabs' => array(
+		'label'      => __( 'Set Members nav to tab style:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[members_dir_tabs]',
 		'type'       => 'checkbox',
 		),
 		'group_dir_layout' => array(
@@ -954,10 +998,22 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		'settings'   => 'bp_nouveau_appearance[groups_dir_layout]',
 		'type'       => 'checkbox',
 		),
+		'group_dir_tabs' => array(
+		'label'      => __( 'Set Groups nav to tab style:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[groups_dir_tabs]',
+		'type'       => 'checkbox',
+		),
 		'sites_dir_layout' => array(
 		'label'      => __( 'Set Sites dir nav to column:', 'bp-nouveau' ),
 		'section'    => 'bp_nouveau_dir_layout',
 		'settings'   => 'bp_nouveau_appearance[sites_dir_layout]',
+		'type'       => 'checkbox',
+		),
+		'sites_dir_tabs' => array(
+		'label'      => __( 'Set Sites nav to tab style:', 'bp-nouveau' ),
+		'section'    => 'bp_nouveau_dir_layout',
+		'settings'   => 'bp_nouveau_appearance[sites_dir_tabs]',
 		'type'       => 'checkbox',
 		),
 	) );

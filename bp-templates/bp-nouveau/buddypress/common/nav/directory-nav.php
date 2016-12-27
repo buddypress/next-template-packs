@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="main-navs bp-navs dir-navs <?php bp_nouveau_directory_type_navs_class(); ?>" role="navigation">
+<div class="<?php bp_nouveau_directory_type_navs_class(); ?>" role="navigation">
 
 	<?php if ( bp_nouveau_has_nav( array( 'object' => 'directory' ) ) ) : ?>
 
