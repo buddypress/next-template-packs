@@ -384,8 +384,10 @@ dt.section-title {
 	color: #fafafa;
 }
 
-.buddypress:not(.bp-vertical-nav) .bp-navs {
-	background: #eaeaea;
+@media screen and (max-width: 46.8em) {
+	.buddypress:not(.bp-vertical-nav) .bp-navs li {
+		background: #eaeaea;
+	}
 }
 
 .buddypress:not(.bp-vertical-nav) .main-navs > ul > li > a {
@@ -3481,6 +3483,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress #buddypress .create-button {
+	background: none;
+	padding-top: 1em;
 	text-align: center;
 }
 
@@ -3494,7 +3498,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-box-shadow: inset 0 0 6px 0 #eaeaea;
 	-moz-box-shadow: inset 0 0 6px 0 #eaeaea;
 	box-shadow: inset 0 0 6px 0 #eaeaea;
-	margin: 0.2em 0.5em 0.2em 0;
+	margin: 0.2em 0 0.2em;
 	width: auto;
 }
 
@@ -3504,6 +3508,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-box-shadow: inset 0 0 12px 0 #eaeaea;
 	-moz-box-shadow: inset 0 0 12px 0 #eaeaea;
 	box-shadow: inset 0 0 12px 0 #eaeaea;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress #buddypress .create-button {
+		padding-top: 2em;
+	}
+	.buddypress #buddypress .create-button a {
+		margin-right: 0.5em;
+	}
 }
 
 .buddypress li.filter label:before,
@@ -4115,16 +4128,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.bp-dir-vert-nav .dir-navs.members-nav-tabs ul li:not(.selected) a:hover,
 	.bp-dir-vert-nav .dir-navs.members-nav-tabs ul li:not(.selected) a:focus {
 		background: none;
-	}
-	.bp-dir-vert-nav .dir-navs.activity-nav-tabs ul li:not(.selected) a:hover:after,
-	.bp-dir-vert-nav .dir-navs.activity-nav-tabs ul li:not(.selected) a:focus:after,
-	.bp-dir-vert-nav .dir-navs.sites-nav-tabs ul li:not(.selected) a:hover:after,
-	.bp-dir-vert-nav .dir-navs.sites-nav-tabs ul li:not(.selected) a:focus:after,
-	.bp-dir-vert-nav .dir-navs.groups-nav-tabs ul li:not(.selected) a:hover:after,
-	.bp-dir-vert-nav .dir-navs.groups-nav-tabs ul li:not(.selected) a:focus:after,
-	.bp-dir-vert-nav .dir-navs.members-nav-tabs ul li:not(.selected) a:hover:after,
-	.bp-dir-vert-nav .dir-navs.members-nav-tabs ul li:not(.selected) a:focus:after {
-		content: " \f139";
 	}
 	.bp-dir-vert-nav .dir-navs.activity-nav-tabs ul li.selected,
 	.bp-dir-vert-nav .dir-navs.sites-nav-tabs ul li.selected,

@@ -170,8 +170,13 @@
 // the parent elements if vertical nav not selected
 .buddypress:not(.bp-vertical-nav) {
 
-	.bp-navs {
-		background: $light-grey;
+	@include medium-max {
+
+		.bp-navs {
+			li {
+				background: $light-grey;
+			}
+		}
 	}
 
 	.main-navs {
@@ -392,7 +397,7 @@
 
 		@include medium-up {
 
-			// Profile group name links
+			// Profile group labels links
 			// Button navigation as tabbed effect for wide screen
 			@include tabbed-links();
 

@@ -205,13 +205,15 @@
 	#buddypress {
 
 		.create-button { // the parent, i.e li element.
+			background: none;
+			padding-top: $pad-med;
 			text-align: center;
 
 			a {
 				border: 1px solid $bp-border-dark;
 				@include border-radius(5px);
 				@include box-shadow(inset 0 0 6px 0 $light-grey);
-				margin: 0.2em 0.5em 0.2em 0;
+				margin: 0.2em 0 0.2em;
 				width: auto;
 
 				&:focus,
@@ -221,7 +223,15 @@
 					@include box-shadow(inset 0 0 12px 0 $light-grey );
 				}
 			}
-		}
+
+			@include medium-up {
+				padding-top: $pad-lrg;
+
+				a {
+					margin-right: 0.5em ;
+				}
+			}
+		} // .create-button
 	}
 
 } // close body class .buddypress @todo this should be removed in time
