@@ -414,12 +414,10 @@
 					width: auto;
 
 					&.selected {
-						border: 1px solid $bp-border-color;
-						border-right-color: #fff;
 
 						a {
-							background: none;
-							color: $black;
+							background: $dark-grey;
+							color: $white;
 
 							span {
 								background: $light-grey;
@@ -430,17 +428,59 @@
 					} // close .selected
 				}
 
-				li,
-				li.selected {
+				li {
+
 					a:hover,
 					a:focus {
 						background: $grey;
 						color: $black;
+
+						span {
+							border: 1px solid $dark-grey;
+						}
 					}
 				}
 
 			}
 		} // close .dir-navs
+
+		// Style main dir navs as tabs effect
+		// if user selects options in the Customizer
+		// and classes are set.
+		// N.B This is in addition to the  standalone visual tab style classes
+		// provided so any elements may be styled.
+		.dir-navs.activity-nav-tabs,
+		.dir-navs.sites-nav-tabs,
+		.dir-navs.groups-nav-tabs,
+		.dir-navs.members-nav-tabs {
+
+			ul {
+
+				li:not(.selected) {
+
+					a:hover,
+					a:focus {
+						background: none;
+
+						&:after {
+							content: " \f139";
+						}
+					}
+				}
+
+				li.selected {
+					border: 1px solid $bp-border-color;
+					border-right-color: #fff;
+
+					a {
+						background: none;
+						color: $black;
+					}
+				}
+
+			}
+		}
+
 
 		.screen-content {
 			border-left: 1px solid $bp-border-color;
