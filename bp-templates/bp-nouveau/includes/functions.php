@@ -652,6 +652,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 		'user_front_page'  => 1,
 		'user_front_bio'   => 0,
 		'user_nav_display' => 0,       // O is default (horizontally). 1 is vertically.
+		'user_nav_tabs'    => 0,
 		'user_nav_order'   => array(),
 		'members_layout'   => 1,
 	);
@@ -667,6 +668,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_front_description' => 0,
 			'group_nav_display'       => 0,   // O is default (horizontally). 1 is vertically.
 			'group_nav_order'         => array(),
+			'group_nav_tabs'          => 0,
 			'groups_layout'           => 1,
 			'members_group_layout'    => 1,
 			'activity_dir_tabs'       => 0,   // default = no tabs
@@ -816,6 +818,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
+		'bp_nouveau_appearance[user_nav_tabs]' => array(
+			'index'             => 'user_nav_tabs',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
 		'bp_nouveau_appearance[user_nav_order]' => array(
 			'index'             => 'user_nav_order',
 			'capability'        => 'bp_moderate',
@@ -938,6 +947,12 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'label'      => __( 'Display the User\'s primary nav vertically.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_user_primary_nav',
 			'settings'   => 'bp_nouveau_appearance[user_nav_display]',
+			'type'       => 'checkbox',
+		),
+		'user_nav_tabs' => array(
+			'label'      => __( 'Set User nav to tab style:', 'bp-nouveau' ),
+			'section'    => 'bp_nouveau_user_primary_nav',
+			'settings'   => 'bp_nouveau_appearance[user_nav_tabs]',
 			'type'       => 'checkbox',
 		),
 		'user_nav_order' => array(

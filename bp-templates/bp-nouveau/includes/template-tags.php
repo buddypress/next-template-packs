@@ -1411,6 +1411,20 @@ function bp_nouveau_single_item_nav_classes() {
 		$component  = bp_current_component();
 		$bp_nouveau = bp_nouveau();
 
+		// @todo wasn't able to get $customizer_option to pass a string to get_settings
+		// this is a temp workaround but differs from earlier dir approach- bad!
+		if ( bp_is_group() ) {
+			$nav_tabs = bp_nouveau_get_temporary_setting( 'group_nav_tabs', bp_nouveau_get_appearance_settings( 'group_nav_tabs' ) );
+		} elseif( bp_is_user() ) {
+			$nav_tabs = bp_nouveau_get_temporary_setting( 'user_nav_tabs', bp_nouveau_get_appearance_settings( 'user_nav_tabs' ) );
+		}
+
+		if(  bp_is_group() && 1 === $nav_tabs) {
+			$classes[] = 'group-nav-tabs';
+		} elseif( bp_is_user() && 1 === $nav_tabs ) {
+			$classes[] = 'user-nav-tabs';
+		}
+
 		if ( bp_is_user() ) {
 			$component = 'members';
 			$menu_type = 'users-nav';
