@@ -1967,12 +1967,6 @@ body.no-js .single-item-header .js-self-profile-button {
 		text-align: right;
 		width: 20%;
 	}
-	.groups-header .moderators-lists li {
-		display: list-item;
-		float: right;
-		margin-left: 4px;
-		padding: 4px;
-	}
 }
 
 .groups-header .desc-wrap {

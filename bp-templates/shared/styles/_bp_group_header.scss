@@ -37,6 +37,14 @@
 				overflow: hidden;
 			}
 
+			li {
+				display: inline-block;
+				float: none;
+				margin-left: 4px;
+				padding: 4px;
+			}
+		}
+
 		img.avatar {
 			@include box-shadow-none();
 			float: none;
