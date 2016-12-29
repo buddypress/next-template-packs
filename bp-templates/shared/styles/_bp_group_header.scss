@@ -12,11 +12,11 @@
 
 	// groups admin/mod wrapper block
 	.group-item-actions {
-		float: right;
+		float: left;
 		margin: 0 0 15px 15px;
 		padding-top: 0;
-		text-align: right;
-		width: 20%;
+		//text-align: left;
+		width: 100%;
 	}
 
 
@@ -37,31 +37,25 @@
 				overflow: hidden;
 			}
 
-			li {
-				float: right;
-				height: 40px;
-				margin-left: 4px;
-				padding: 4px;
-				width: 40px;
-			}
-
-			@include medium-up() {
-
-				li {
-					height: 50px;
-					width: 50px;
-				}
-			}
-		}
-
 		img.avatar {
 			@include box-shadow-none();
 			float: none;
-			height: auto;
+			height: 30px;
 			margin: 0;
 			max-width: 100%;
+			width: 30px;
 		}
 	} // close moderators-lists
+
+	@include medium-up {
+
+		.group-item-actions {
+			float: right;
+			margin: 0 0 15px 15px;
+			text-align: right;
+			width: 20%;
+		}
+	}
 
 	.desc-wrap {
 		background: $light-grey;

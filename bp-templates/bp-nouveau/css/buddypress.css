@@ -1920,11 +1920,10 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 .groups-header .group-item-actions {
-	float: right;
+	float: left;
 	margin: 0 0 15px 15px;
 	padding-top: 0;
-	text-align: right;
-	width: 20%;
+	width: 100%;
 }
 
 .groups-header .moderators-lists {
@@ -1944,18 +1943,10 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 .groups-header .moderators-lists .user-list li {
-	float: right;
-	height: 40px;
+	display: inline-block;
+	float: none;
 	margin-left: 4px;
 	padding: 4px;
-	width: 40px;
-}
-
-@media screen and (min-width: 46.8em) {
-	.groups-header .moderators-lists .user-list li {
-		height: 50px;
-		width: 50px;
-	}
 }
 
 .groups-header .moderators-lists img.avatar {
@@ -1963,9 +1954,25 @@ body.no-js .single-item-header .js-self-profile-button {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	float: none;
-	height: auto;
+	height: 30px;
 	margin: 0;
 	max-width: 100%;
+	width: 30px;
+}
+
+@media screen and (min-width: 46.8em) {
+	.groups-header .group-item-actions {
+		float: right;
+		margin: 0 0 15px 15px;
+		text-align: right;
+		width: 20%;
+	}
+	.groups-header .moderators-lists li {
+		display: list-item;
+		float: right;
+		margin-left: 4px;
+		padding: 4px;
+	}
 }
 
 .groups-header .desc-wrap {
