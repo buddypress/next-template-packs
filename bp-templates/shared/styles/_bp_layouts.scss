@@ -344,8 +344,17 @@
 	// to the side(floated)
 
 		.bp-wrap {
-			background: $light-grey;
 			margin-bottom: $marg-med;
+
+			.user-nav-tabs.users-nav,
+			.group-nav-tabs.groups-nav {
+				ul {
+					li {
+						left: 1px;
+						position: relative;
+					}
+				}
+			}
 		}
 
 		.item-body:not(#group-create-body) {
@@ -354,7 +363,7 @@
 			margin: 0;
 			min-height: 400px;
 			overflow: hidden;
-			padding: 0 0 0 $pad-sml;
+			padding: 0 0 0 $pad-med;
 
 			#subnav:not(.tabbed-links) {
 				background: $light-grey;
@@ -444,42 +453,8 @@
 			}
 		} // close .dir-navs
 
-		// Style main dir navs as tabs effect
-		// if user selects options in the Customizer
-		// and classes are set.
-		// N.B This is in addition to the  standalone visual tab style classes
-		// provided so any elements may be styled.
-		.dir-navs.activity-nav-tabs,
-		.dir-navs.sites-nav-tabs,
-		.dir-navs.groups-nav-tabs,
-		.dir-navs.members-nav-tabs {
-
-			ul {
-
-				li:not(.selected) {
-
-					a:hover,
-					a:focus {
-						background: none;
-					}
-				}
-
-				li.selected {
-					border: 1px solid $bp-border-color;
-					border-right-color: #fff;
-
-					a {
-						background: none;
-						color: $black;
-					}
-				}
-
-			}
-		}
-
-
 		.screen-content {
-			border-left: 1px solid $bp-border-color;
+			border-left: 1px solid $med-light-grey;
 			margin-left: 20%;
 			overflow: hidden;
 			padding-left: $pad-med;
@@ -489,6 +464,25 @@
 			}
 		}
 	}
+
+	// Style main navs as visual tabs effect
+	// if user selects options in the Customizer
+	// and classes are set.
+	// N.B This is in addition to the  standalone visual tab style classes
+	// provided so any elements may be styled.
+
+	.buddypress {
+		.dir-navs.activity-nav-tabs,
+		.dir-navs.sites-nav-tabs,
+		.dir-navs.groups-nav-tabs,
+		.dir-navs.members-nav-tabs,
+		.main-navs.user-nav-tabs,
+		.main-navs.group-nav-tabs {
+
+			@include primary-navs-vert-tabs();
+		}
+	}
+
 } // close @media
 
 

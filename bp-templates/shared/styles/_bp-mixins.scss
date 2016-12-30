@@ -299,6 +299,41 @@
 	}
 }
 
+// Provides the properties to style vert navs in a visual tab style.
+// This allows rulesets to be applied without having to re-write.
+// e.g dir-navs use this in _bp_layouts.scss applied if the navs tabs class is set.
+
+@mixin primary-navs-vert-tabs() {
+
+	ul {
+
+		li:not(.selected) {
+
+			a:hover,
+			a:focus {
+				background: none;
+			}
+		}
+
+		li.selected {
+			background: none;
+			border: 1px solid $med-light-grey;
+			border-right-color: #fff;
+
+			a {
+				background: none;
+				color: $black;
+
+				span:focus,
+				span:hover {
+					border: 1px solid $black;
+				}
+			}
+		}
+
+	}
+}
+
 // BP message boxes
 @mixin message-box($background: #fff, $text-color: null, $border: null) {
 
