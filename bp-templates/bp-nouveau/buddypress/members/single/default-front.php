@@ -10,7 +10,7 @@
 
 <div class="member-front-page">
 
-	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
+	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) && ! is_active_sidebar( 'sidebar-buddypress-members' ) ) : ?>
 
 		<div class="bp-feedback info">
 			<strong><?php esc_html_e( 'Manage the members default front page', 'bp-nouveau' ) ;?></strong> <a href="#" title="close" data-bp-close="remove"><span class="dashicons dashicons-dismiss"></span></a><br/>
