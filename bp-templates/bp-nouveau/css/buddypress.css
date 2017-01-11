@@ -1156,6 +1156,10 @@ dt.section-title {
 	content: "\f101";
 }
 
+.activity-list .activity-item .activity-meta.action a.view:before {
+	content: "\f125";
+}
+
 .activity-list .activity-item .activity-meta.action a.fav:before {
 	content: "\f154";
 }

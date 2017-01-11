@@ -281,7 +281,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'href'         => esc_url( bp_get_activity_thread_permalink() ),
 					'class'        => 'button view bp-secondary-action',
 					),
-				'link_text'  => esc_html__( 'View Conversation', 'bp-nouveau' ),
+				'link_text'  => sprintf('<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
 			);
 
 		/**
