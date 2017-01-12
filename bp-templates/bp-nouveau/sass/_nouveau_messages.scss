@@ -12,6 +12,10 @@
 	font-size: 18px;
 }
 
+.bp-navs ul li#compose-personal-li a#compose:before {
+	font-size: 22px;
+}
+
 .message-action-star:before {
 	color: #aaa;
 	content: "\f154";
@@ -50,8 +54,8 @@ li#compose-personal-li {
 	}
 
 	a#compose {
-		border: 1px solid $bp-border-dark;
 		display: inline-block;
+		padding: 1px 6px;
 	}
 
 	a#compose:before {
@@ -70,6 +74,10 @@ li#compose-personal-li {
 
 .bp-messages-content {
 	margin: $marg-med 0;
+
+	.avatar {
+		@include box-shadow-none();
+	}
 
 	.thread-participants {
 		list-style: none;

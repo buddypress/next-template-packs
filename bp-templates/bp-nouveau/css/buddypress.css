@@ -2471,6 +2471,10 @@ body.register .buddypress .page ul {
 	font-size: 18px;
 }
 
+.bp-navs ul li#compose-personal-li a#compose:before {
+	font-size: 22px;
+}
+
 .message-action-star:before {
 	color: #aaa;
 	content: "\f154";
@@ -2502,8 +2506,8 @@ li#compose-personal-li.last {
 }
 
 li#compose-personal-li a#compose {
-	border: 1px solid #ccc;
 	display: inline-block;
+	padding: 1px 6px;
 }
 
 li#compose-personal-li a#compose:before {
@@ -2518,6 +2522,12 @@ li#compose-personal-li a#compose:hover {
 
 .bp-messages-content {
 	margin: 15px 0;
+}
+
+.bp-messages-content .avatar {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .bp-messages-content .thread-participants {
