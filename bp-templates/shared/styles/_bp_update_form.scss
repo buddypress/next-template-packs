@@ -57,6 +57,7 @@
 
 		textarea {
 			background: $textarea-bck;
+			border: 0;
 			@include box-model();
 			color: #333;
 			font-family: inherit;
@@ -67,9 +68,8 @@
 			width: 100%;
 
 			&:focus {
-				background: $off-white;
-				border-color: $focussed-border-clr;
-				outline-color: $focussed-border-clr;
+				@include box-shadow(0 0 6px 0 $med-light-grey);
+				border: 1px solid $form-border-color;
 			}
 		}
 	}

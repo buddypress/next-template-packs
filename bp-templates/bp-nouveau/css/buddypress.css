@@ -531,6 +531,7 @@ dt.section-title {
 		background: none;
 		border: none;
 		display: block;
+		padding: 4px 10px;
 	}
 	.buddypress .item-body .button-tabs li.current {
 		border-color: #ccc #ccc #fff;
@@ -933,6 +934,7 @@ dt.section-title {
 
 .activity-update-form #whats-new-textarea textarea {
 	background: #fff;
+	border: 0;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -946,9 +948,10 @@ dt.section-title {
 }
 
 .activity-update-form #whats-new-textarea textarea:focus {
-	background: #fafafa;
-	border-color: rgba(31, 179, 221, 0.9);
-	outline-color: rgba(31, 179, 221, 0.9);
+	-webkit-box-shadow: 0 0 6px 0 #d6d6d6;
+	-moz-box-shadow: 0 0 6px 0 #d6d6d6;
+	box-shadow: 0 0 6px 0 #d6d6d6;
+	border: 1px solid #d6d6d6;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -3354,7 +3357,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress input[type="submit"],
 .buddypress .buddypress input[type="button"],
 .buddypress .buddypress input[type="reset"],
-.buddypress .buddypress ul.button-nav li a,
+.buddypress .buddypress ul.button-nav:not(.button-tabs) li a,
 .buddypress .buddypress .generic-button a,
 .buddypress .buddypress .comment-reply-link,
 .buddypress .buddypress a.bp-title-button {
