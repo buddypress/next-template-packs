@@ -289,15 +289,31 @@
 
 		ul {
 
-			li {
+			li:not(.current) {
+
 				a {
-					color: $med-light-grey;
+					color: $light-text;
+
+					&:focus,
+					&:hover {
+						background: none;
+						color: $black;
+					}
+				}
+
+				a[disabled] {
+
+					&:focus,
+					&:hover {
+						color: $light-text;
+					}
 				}
 			}
 
 			li.current {
+
 				a {
-					color: $black;
+					text-align: center;
 				}
 			}
 		}

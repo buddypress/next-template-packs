@@ -453,14 +453,27 @@ dt.section-title {
 	display: none;
 }
 
-.buddypress_object_nav .bp-navs.group-create-links ul li a,
-.buddypress .bp-navs.group-create-links ul li a {
-	color: #d6d6d6;
+.buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a,
+.buddypress .bp-navs.group-create-links ul li:not(.current) a {
+	color: #777;
+}
+
+.buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a:focus, .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a:hover,
+.buddypress .bp-navs.group-create-links ul li:not(.current) a:focus,
+.buddypress .bp-navs.group-create-links ul li:not(.current) a:hover {
+	background: none;
+	color: #333;
+}
+
+.buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a[disabled]:focus, .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a[disabled]:hover,
+.buddypress .bp-navs.group-create-links ul li:not(.current) a[disabled]:focus,
+.buddypress .bp-navs.group-create-links ul li:not(.current) a[disabled]:hover {
+	color: #777;
 }
 
 .buddypress_object_nav .bp-navs.group-create-links ul li.current a,
 .buddypress .bp-navs.group-create-links ul li.current a {
-	color: #333;
+	text-align: center;
 }
 
 @media screen and (min-width: 46.8em) {
