@@ -221,6 +221,15 @@
 
 	} // close .standard-form
 
+	// Register page
+	.signup-form {
+
+		label,
+		legend {
+			font-weight: 400;
+		}
+	}
+
 } // close .buddypress
 
 // These rules do not belong here really but it's

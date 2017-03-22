@@ -16,18 +16,18 @@
 			}
 		}
 
+		label,
+		legend {
+			margin: $marg-sml 0 0;
+		}
+
 		// profile extra element wrapper
 		.editfield {
 			border: 1px solid $bp-border-color;
 			margin: $marg-lrg 0;
 			padding: 5px;
 
-			// try and set labels and legends to same visual styles.
-			label,
-			legend {
-				font-weight: 700;
-				margin: $marg-sml 0 0;
-			}
+
 
 			fieldset {
 				border: 0;

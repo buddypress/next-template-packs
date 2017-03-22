@@ -1650,16 +1650,15 @@ form.ac-form .ac-reply-content input {
 	margin-bottom: 20px;
 }
 
+.register-page .signup-form label,
+.register-page .signup-form legend {
+	margin: 10px 0 0;
+}
+
 .register-page .signup-form .editfield {
 	border: 1px solid #eee;
 	margin: 20px 0;
 	padding: 5px;
-}
-
-.register-page .signup-form .editfield label,
-.register-page .signup-form .editfield legend {
-	font-weight: 700;
-	margin: 10px 0 0;
 }
 
 .register-page .signup-form .editfield fieldset {
@@ -2982,6 +2981,11 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	.buddypress .standard-form .main-column ul#friend-list h4 {
 		clear: none;
 	}
+}
+
+.buddypress .signup-form label,
+.buddypress .signup-form legend {
+	font-weight: 400;
 }
 
 body.no-js .buddypress #notifications-bulk-management #select-all-notifications,
