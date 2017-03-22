@@ -640,9 +640,10 @@ dt.section-title {
 	.buddypress .subnav-filters li {
 		margin-bottom: 0;
 	}
-	.buddypress .subnav-filters ul.subnav-search,
-	.buddypress .subnav-filters li.feed,
-	.buddypress .subnav-filters li.bp-search,
+	.buddypress .subnav-filters .subnav-search,
+	.buddypress .subnav-filters .subnav-search form,
+	.buddypress .subnav-filters .feed,
+	.buddypress .subnav-filters .bp-search,
 	.buddypress .subnav-filters .dir-search,
 	.buddypress .subnav-filters .user-messages-bulk-actions,
 	.buddypress .subnav-filters .user-messages-search,
