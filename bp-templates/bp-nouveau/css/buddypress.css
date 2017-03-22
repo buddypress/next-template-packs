@@ -3015,16 +3015,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress .select-wrap select {
 	-moz-appearance: none;
-	-webkit-appearence: none;
-	-o-appearence: none;
-	appearence: none;
+	-webkit-appearance: none;
+	-o-appearance: none;
+	appearance: none;
 	border: 0;
 	cursor: pointer;
 	padding: 6px 25px 6px 10px;
 	position: relative;
 	text-indent: -2px;
+	text-overflow: '';
 	z-index: 1;
-	width: 100%;
+	width: auto;
 }
 
 .buddypress .select-wrap select,

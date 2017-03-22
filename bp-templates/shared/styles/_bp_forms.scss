@@ -273,16 +273,17 @@ body.no-js {
 
 		select {
 			-moz-appearance: none;
-			-webkit-appearence: none;
-			-o-appearence: none;
-			appearence: none;
+			-webkit-appearance: none;
+			-o-appearance: none;
+			appearance: none;
 			border: 0;
 			cursor: pointer;
 			padding: 6px 25px 6px $marg-sml;
 			position: relative;
 			text-indent: -2px;
+			text-overflow: '';
 			z-index: 1;
-			width: 100%;
+			width: auto;
 		}
 
 		select,
