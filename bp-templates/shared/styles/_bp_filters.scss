@@ -55,45 +55,6 @@
 				display: inline;
 			}
 
-			.select-wrap {
-				border: 1px solid $bp-border-color;
-
-				select {
-					-moz-appearance: none;
-					-webkit-appearence: none;
-					appearence: none;
-					background: transparent;
-					border: 0;
-					cursor: pointer;
-					padding: 6px 25px 6px $marg-sml;
-					position: relative;
-					text-indent: -2px;
-					z-index: 1;width: 100%;
-					option { border: 0;}
-				}
-
-				span.select-arrow {
-					display: inline-block;
-					position: relative;
-					margin-left: -25px;
-					z-index: 0;
-
-					&:before {
-						color: $primary-grey;
-						content:'\25BC';
-					}
-				}
-
-				&:focus,
-				&:hover {
-					border: 1px solid darken($bp-border-color, 10%);
-					box-shadow: inset 0 0 3px #eee;
-
-					.select-arrow:before {
-						color: darken($primary-grey, 15%);
-					}
-				}
-			} // close .select-wrap
 		}
 
 		.user-messages-bulk-actions {
