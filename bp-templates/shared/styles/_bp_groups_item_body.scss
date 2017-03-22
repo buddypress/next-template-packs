@@ -1,0 +1,16 @@
+// Groups specific Item-body content
+
+// Members list doesn't generate  subnav items items
+// so we need  to deal with the filters top margin &
+// add something (border) to tie in to style of other screens.
+.single-item.group-members {
+
+	.item-body {
+
+		.filters {
+			border-top: 5px solid $light-grey;
+			margin-top: 0;
+			padding-top: $pad-med;
+		}
+	}
+}
