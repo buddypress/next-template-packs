@@ -207,6 +207,50 @@
 	#{$property}: calc(#{$expression});
 }
 
+// Flexbox Mixins
+
+// Set display to box flex & set the direcction and wrapping behavour
+// shorthand for flex-direction & flex wrap - default ( row wrap )
+@mixin flex-box-dir($flex-dir: 'row', $flex-wrap: 'nowrap') {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-flow: unquote($flex-dir) unquote($flex-wrap);
+	-moz-flex-flow: unquote($flex-dir) unquote($flex-wrap);
+	-ms-flex-flow: unquote($flex-dir) unquote($flex-wrap);
+	-o-flex-flow: unquote($flex-dir) unquote($flex-wrap);
+	flex-flow: unquote($flex-dir) unquote($flex-wrap);
+}
+
+// align child items
+// flex-start | flex-end | center | baseline | stretch (default)
+@mixin flex-align($align: stretch) {
+	-ms-flex-align: $align; //older?
+	-webkit-align-items: $align;
+	-webkit-box-align: $align; // old
+	align-items: $align; // current specs
+}
+
+// Box-order  - shuffle item order for columns
+@mixin box-order($box-order-number: 1) {
+	-webkit-box-order: $box-order-number;
+	-moz-order: $box-order-number;
+	-ms-order: $box-order-number;
+	-o-order: $box-order-number;
+	order: $box-order-number;
+}
+
+// shorthand: flex-grow, flex-shrink, flex-basis
+// default 0 1 auto
+@mixin box-item-size($grow: 0, $shrink: 1, $basis: auto) {
+	-webkit-flex: $grow $shrink $basis;
+	-moz-flex: $grow $shrink $basis;
+	-ms-flex: $grow $shrink $basis;
+	-o-flex: $grow $shrink $basis;
+	flex: $grow $shrink $basis;
+}
 
 // Vertical centering
 // This class allows us to center child elements
@@ -224,6 +268,8 @@
 		-webkit-box-align: center; // old
 		align-items: center; // current specs
 }
+
+
 
 // Re-enable the VendorPrefix lint test
 // scss-lint:enable VendorPrefix
