@@ -12,8 +12,8 @@
 
 // Import our partials mixins & variables files
 
-@import "../../shared/styles/_bp-variables";
-@import "../../shared/styles/_bp-mixins";
+@import "../common-styles/_bp-variables";
+@import "../common-styles/_bp-mixins";
 
 //
 // Sectional structuring allows us to locate elements
@@ -79,7 +79,7 @@
 
 // Import our generic elements & typography styles
 
-@import "../../shared/styles/_bp_generic_and_typography";
+@import "../common-styles/_bp_generic_and_typography";
 
 /**
 *-------------------------------------------------------------------------------
@@ -98,11 +98,11 @@
 
 // Import our generic navigation styles
 
-@import "../../shared/styles/_bp_navigation";
+@import "../common-styles/_bp_navigation";
 
 // Import our Filter styles
 
-@import "../../shared/styles/_bp_filters";
+@import "../common-styles/_bp_filters";
 
 /**
 *----------------------------------------------------------
@@ -112,7 +112,7 @@
 
 // Import our generic pagination styles
 
-@import "../../shared/styles/_bp_pagination";
+@import "../common-styles/_bp_pagination";
 
 /**
 *-------------------------------------------------------------------------------
@@ -122,7 +122,7 @@
 
 // Import our generic list styles
 
-@import "../../shared/styles/_bp_lists";
+@import "../common-styles/_bp_lists";
 
 /**
 *----------------------------------------------------------
@@ -136,7 +136,7 @@
 *-----------------------------------------------------
 */
 
-@import "../../shared/styles/_bp_update_form";
+@import "../common-styles/_bp_update_form";
 
 /**
 *-----------------------------------------------------
@@ -144,7 +144,7 @@
 *-----------------------------------------------------
 */
 
-@import "../../shared/styles/_bp_activity_entries";
+@import "../common-styles/_bp_activity_entries";
 
 /**
 *-----------------------------------------------------
@@ -152,8 +152,8 @@
 *-----------------------------------------------------
 */
 
-@import "../../shared/styles/_bp_activity_comments";
-@import "../../shared/styles/_bp_comment_form";
+@import "../common-styles/_bp_activity_comments";
+@import "../common-styles/_bp_comment_form";
 
 /**
 *----------------------------------------------------------
@@ -163,7 +163,7 @@
 
 // Blogs loop
 
-@import "../../shared/styles/_bp_blogs_loop";
+@import "../common-styles/_bp_blogs_loop";
 
 /**
 *----------------------------------------------------------
@@ -173,7 +173,7 @@
 
 // Groups loop
 
-@import "../../shared/styles/_bp_groups_loop";
+@import "../common-styles/_bp_groups_loop";
 
 
 /**
@@ -184,7 +184,7 @@
 
 // Members loop
 
-@import "../../shared/styles/_bp_members_loop";
+@import "../common-styles/_bp_members_loop";
 
 /**
 *-------------------------------------------------------------------------------
@@ -194,7 +194,7 @@
 
 // Registration index screen (directory)
 
-@import "../../shared/styles/_bp_registration.scss";
+@import "../common-styles/_bp_registration.scss";
 
 /**
 *----------------------------------------------------------
@@ -204,7 +204,7 @@
 
 // Registration index screen (directory)
 
-@import "../../shared/styles/_bp_groups_create.scss";
+@import "../common-styles/_bp_groups_create.scss";
 
 /**
 *-------------------------------------------------------------------------------
@@ -220,11 +220,11 @@
 
 // Import general global styles for single screen headers
 
-@import "../../shared/styles/_bp_item_header_general";
+@import "../common-styles/_bp_item_header_general";
 
 // Import Cover Image container defaults
 
-@import "../../shared/styles/_bp_cover_image";
+@import "../common-styles/_bp_cover_image";
 
 /**
 *-----------------------------------------------------
@@ -236,7 +236,7 @@
 
 // Single Group specific header rules
 
-@import "../../shared/styles/_bp_group_header";
+@import "../common-styles/_bp_group_header";
 
 /**
 *-----------------------------------------------------
@@ -248,7 +248,7 @@
 
 // Single User specific header rules
 
-@import "../../shared/styles/_bp_user_header";
+@import "../common-styles/_bp_user_header";
 
 /**
 *-----------------------------------------------------------
@@ -258,7 +258,7 @@
 
 // Import general global styles for single screen item-body
 
-@import "../../shared/styles/_bp_item_body_general";
+@import "../common-styles/_bp_item_body_general";
 
 /**
 *----------------------------------------------------
@@ -270,7 +270,7 @@
 
 // Import general global styles for single screen item-body
 
-@import "../../shared/styles/_bp_groups_item_body";
+@import "../common-styles/_bp_groups_item_body";
 
 /**
 *-----------------------------------------
@@ -280,7 +280,7 @@
 
 // Import general global styles for single screen item-body
 
-@import "../../shared/styles/_bp_groups_management";
+@import "../common-styles/_bp_groups_management";
 
 /**
 *-----------------------------------------
@@ -296,9 +296,9 @@
 
 // Import Group Invites screens
 
-//@import "../../shared/styles/_bp_groups_invites";
+//@import "../common-styles/_bp_groups_invites";
 
-// Import nouveau style Group Invites screens
+// Import Nouveau style Group Invites screens
 
 @import "_nouveau_invites";
 
@@ -308,7 +308,7 @@
 *-----------------------------------------
 */
 
-@import "../../shared/styles/_bp_groups_activity";
+@import "../common-styles/_bp_groups_activity";
 
 /**
 *-----------------------------------------------------
@@ -332,7 +332,7 @@
 
 // Import User Profile
 
-@import "../../shared/styles/_bp_user_profile";
+@import "../common-styles/_bp_user_profile";
 
 /**
 *-------------------------------------------
@@ -350,7 +350,7 @@
 // Nouveau is using custom markup and only needs to load
 // it's own partial file for styles.
 
-// @import "../../shared/styles/_bp_messages";
+// @import "../common-styles/_bp_messages";
 
 // Import Nouveau specific Messages module styles
 
@@ -364,7 +364,7 @@
 
 // Import settings screens
 
-@import "../../shared/styles/_bp_user_settings";
+@import "../common-styles/_bp_user_settings";
 
 /**
 *-------------------------------------------------------------------------------
@@ -374,7 +374,7 @@
 
 // Import general forms rules
 
-@import "../../shared/styles/_bp_forms";
+@import "../common-styles/_bp_forms";
 
 
 /**
@@ -387,7 +387,7 @@
 
 // Import our generic list styles
 
-@import "../../shared/styles/_bp_search";
+@import "../common-styles/_bp_search";
 
 /**
 *-------------------------------------------------------------------------------
@@ -397,7 +397,7 @@
 
 // Import Table defaults rules
 
-@import "../../shared/styles/_bp_tables";
+@import "../common-styles/_bp_tables";
 
 /**
 *-------------------------------------------------------------------------------
@@ -406,23 +406,23 @@
 */
 // Import General useful classes: clearfix, screen-reader etc
 
-@import "../../shared/styles/_bp_general_classes";
+@import "../common-styles/_bp_general_classes";
 
 // Import Buttons styles
 
-@import "../../shared/styles/_bp_buttons";
+@import "../common-styles/_bp_buttons";
 
 // Import Messages/info dialogues
 
-@import "../../shared/styles/_bp_info_messages";
+@import "../common-styles/_bp_info_messages";
 
 // Import BP Widget styles
 
-@import "../../shared/styles/_bp_widgets";
+@import "../common-styles/_bp_widgets";
 
 // Import BP Animations & Transitions - fluffy effects :)
 
-@import "../../shared/styles/_bp_animations";
+@import "../common-styles/_bp_animations";
 
 /**
 *-------------------------------------------------------------------------------
@@ -431,7 +431,7 @@
 */
 // Import Layout classes
 
-@import "../../shared/styles/_bp_layouts";
+@import "../common-styles/_bp_layouts";
 
 /**
 *-------------------------------------------------------------------------------
