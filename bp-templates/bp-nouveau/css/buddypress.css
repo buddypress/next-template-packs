@@ -2328,10 +2328,6 @@ body.no-js .buddypress .field-visibility-settings {
 	margin: 5px 0;
 }
 
-.buddypress .field-visibility-settings a {
-	font-size: 80%;
-}
-
 .buddypress .standard-form .editfield fieldset {
 	margin: 0;
 }
@@ -2344,6 +2340,10 @@ body.no-js .buddypress .field-visibility-settings {
 .buddypress .standard-form .field-visibility-settings .radio {
 	list-style: none;
 	margin-bottom: 0;
+}
+
+.buddypress .standard-form .field-visibility-settings .field-visibility-settings-close {
+	font-size: 12px;
 }
 
 .buddypress .standard-form .wp-editor-container {
@@ -2368,7 +2368,7 @@ body.no-js .buddypress .field-visibility-settings {
 }
 
 .buddypress .standard-form .field-visibility-settings-header {
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .buddypress .standard-form .field-visibility-settings legend,
@@ -3635,6 +3635,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	line-height: 200%;
 	padding: 0 3px;
 	position: absolute;
+	display: block;
 	top: 0;
 }
 

@@ -107,10 +107,6 @@ body.no-js {
 		fieldset {
 			margin: $marg-xsml 0;
 		}
-
-		a {
-			font-size: 80%;
-		}
 	}
 
 	.standard-form { // this needs to be a specific profile edit form class
@@ -132,6 +128,10 @@ body.no-js {
 			.radio {
 				list-style: none;
 				margin-bottom: 0;
+			}
+
+			.field-visibility-settings-close {
+				@include font-size(12);
 			}
 		}
 
@@ -159,7 +159,7 @@ body.no-js {
 
 		.field-visibility-settings-header {
 
-			@include font-size(16);
+			@include font-size(14);
 		}
 
 		.field-visibility-settings {
