@@ -74,6 +74,8 @@
 	// '$border: none' ensures border turned off in favour off
 	// box shadow.
 
+
+
 	.bp-feedback {
 		@include message-box( $border: none);
 		@include box-shadow( 0 1px 1px 1px rgba(0, 0, 0, 0.1) );
@@ -90,7 +92,7 @@
 		left: 0;
 		line-height: 200%;
 		padding: 0 3px;
-		position: absolute;
+		position: absolute;display: block;
 		top: 0;
 	}
 

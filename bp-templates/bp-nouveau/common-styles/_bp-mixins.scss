@@ -242,8 +242,8 @@
 	order: $box-order-number;
 }
 
-// shorthand: flex-grow, flex-shrink, flex-basis
-// default 0 1 auto
+// shorthand: flex-grow, flex-shrink, flex-basis for child items
+// defaults 0 | 1 | auto
 @mixin box-item-size($grow: 0, $shrink: 1, $basis: auto) {
 	-webkit-flex: $grow $shrink $basis;
 	-moz-flex: $grow $shrink $basis;
@@ -252,7 +252,7 @@
 	flex: $grow $shrink $basis;
 }
 
-// Vertical centering
+// Vertical centering - an all in one, this is a fixed mixin for one result/requirement
 // This class allows us to center child elements
 // using flexbox this is a progressive enhancement,
 // it won't work in all browsers, older browser will simply
