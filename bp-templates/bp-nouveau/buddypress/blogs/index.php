@@ -18,7 +18,7 @@
 
 	<?php endif; ?>
 
-	<div class="screen-content" role="content">
+	<div class="screen-content">
 
 		<div class="subnav-filters filters no-ajax" id="subnav-filters">
 			<ul class="subnav-search clearfix">
