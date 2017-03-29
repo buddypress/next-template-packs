@@ -18,6 +18,8 @@ A new and updated approach to SCSS partial style files is provided and itteratio
 Once activated, this plugin will first create a new Admin tabs in the BuddyPress settings *Template Packs*. It displays a list of the available template packs for the site and it helped me to come back to Legacy while building the "BP Nouveau" one. This screenshot will explain itself what this UI could bring to the user...
 ![The Primary Nav Widget](https://cldup.com/bAj2DOrkq7.png)
 
+N.B. For testing please add `define('SCRIPT_DEBUG', true);` to your wp-config.php file just below the wp_debug define or set from false to true if already present.
+
 The supports column is there to inform what components are supported by the template pack. For instance, the "Retired" forums component is not supported by this template pack (for now...)
 
 Another tool is more for developers: the directory tools/i18n of this repo contains a script to easily create a pot file for a standalone template pack. So far we haven't figured out this as Legacy is using the 'buddypress' text domain, but as it's possible with this plugin to add new template packs inside the `/wp-content/bp-templates` repository (or any other location using the `next_template_packs_locations` and `next_template_packs_url` filters by the way) I thought this possibility was lacking (`wp-plugin` doesn't match our needs i think).
