@@ -1308,12 +1308,14 @@ function bp_nouveau_buddypress_classes() {
 		$classes    = array( 'buddypress' );
 		$component  = bp_current_component();
 		$bp_nouveau = bp_nouveau();
+		$member_type_class = '';
 
 		if ( bp_is_user() ) {
 			$customizer_option = 'user_nav_display';
 			$component         = 'members';
 			$user_type = bp_get_member_type( bp_displayed_user_id() );
 			$member_type_class = ( $user_type )? $user_type : '';
+
 
 		} elseif ( bp_is_group() ) {
 			$customizer_option = 'group_nav_display';
@@ -1341,17 +1343,10 @@ function bp_nouveau_buddypress_classes() {
 
 		} else {
 			$customizer_option = apply_filters( 'bp_nouveau_single_item_display_settings_id', '' );
-			$member_type_class = '';
 		}
-
-
 
 		if( $member_type_class ) {
 			$classes[] = $member_type_class;
-		}
-
-		if( $group_type_class ) {
-			$classes[] = $group_type_class;
 		}
 
 		// Provide a class token to acknowledge additional extended profile fields added to default account reg screen
