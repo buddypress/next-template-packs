@@ -3467,8 +3467,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress #buddypress .create-button {
 	background: none;
-	padding-top: 1em;
 	text-align: center;
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress #buddypress .create-button {
+		float: right;
+	}
 }
 
 .buddypress #buddypress .create-button a {
@@ -3494,10 +3499,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress #buddypress .create-button {
+	.buddypress #buddypress.bp-dir-vert-nav .create-button {
+		float: none;
 		padding-top: 2em;
 	}
-	.buddypress #buddypress .create-button a {
+	.buddypress #buddypress.bp-dir-vert-nav .create-button a {
 		margin-right: 0.5em;
 	}
 }

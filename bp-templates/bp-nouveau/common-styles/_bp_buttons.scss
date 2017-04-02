@@ -206,7 +206,10 @@
 
 		.create-button { // the parent, i.e li element.
 			background: none;
-			padding-top: $pad-med;
+			@include medium-up {
+				float: right;
+			}
+			//padding-top: $pad-med;
 			text-align: center;
 
 			a {
@@ -224,15 +227,25 @@
 				}
 			}
 
-			@include medium-up {
-				padding-top: $pad-lrg;
+		} // .create-button
 
-				a {
-					margin-right: 0.5em ;
+		&.bp-dir-vert-nav {
+
+			@include medium-up {
+
+				.create-button {
+					float: none;
+					padding-top: $pad-lrg;
+
+
+					a {
+						margin-right: 0.5em ;
+					}
 				}
 			}
-		} // .create-button
-	}
+		}
+
+	} // close #buddypress
 
 } // close body class .buddypress @todo this should be removed in time
 
