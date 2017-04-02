@@ -121,16 +121,10 @@
 					width: 15%;
 				}
 
-				.item-block,
-				.group-desc {
-					float: none;
-					width: auto;
-				}
-
-				.group-desc {
-					clear: left;
-				}
+//				.group-desc {
+//					clear: left;
+//				}
 			}
-		}
-	}
+		} // close bp-dir-vert-nav / .bp-vertical-nav
+	} // close .buddypress
 }

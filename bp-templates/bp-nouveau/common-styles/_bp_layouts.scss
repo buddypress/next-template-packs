@@ -163,7 +163,7 @@
 // This block styles the loop items for a grid layout
 // The block might be better located in the generic bp-lists section
 
-/* Style the .bp-list li elements if a 'grid' class added to the ul*/
+// Style the .bp-list li elements if a 'grid' class is set on the ul
 
 // if grid is set & this is a member, group or blog loop
 // we want to re-style some of the elements in the item
@@ -204,6 +204,16 @@
 				margin: 0 auto;
 				text-align: center;
 				width: 96%;
+
+				.item-block,
+				.group-desc {
+					float: none;
+					width: auto;
+				}
+
+				.group-desc {
+					clear: none;
+				}
 
 				.user-update {
 					clear: both;
@@ -425,7 +435,7 @@
 					width: auto;
 
 					&.selected {
-
+border: 1px solid #eee;
 						a {
 							background: $dark-grey;
 							color: $white;
@@ -473,7 +483,7 @@
 	// N.B This is in addition to the  standalone visual tab style classes
 	// provided so any elements may be styled.
 
-	.buddypress {
+	.buddypress.bp-dir-vert-nav {
 		.dir-navs.activity-nav-tabs,
 		.dir-navs.sites-nav-tabs,
 		.dir-navs.groups-nav-tabs,
