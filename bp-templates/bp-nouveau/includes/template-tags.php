@@ -1213,6 +1213,7 @@ function bp_nouveau_directory_type_navs_class() {
 			$component  = sanitize_key( bp_current_component() );
 			$customizer_option = sprintf( '%s_dir_tabs', $component );
 			$nav_style  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+			$tab_style = '';
 
 			if( 1 === $nav_style ) {
 				$tab_style = bp_current_component() . '-nav-tabs';
