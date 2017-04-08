@@ -2,11 +2,9 @@
 
 .buddypress {
 
-	[data-bp-search] {
+		@include clearfix-element('.bp-dir-search-form');
 
-		@include clearfix-element(form);
-
-		form {
+		form.bp-dir-search-form {
 			border: 1px solid $bp-border-color;
 
 			label {
@@ -56,11 +54,22 @@
 
 		} // close form
 
-	} // close [data-bp-search]
+	// this block needs to be moved really.
+	ul.filters {
 
-	ul.filters  li  form label input {
-		line-height: 1.4;
-		padding: 0.1em 0.7em;
+		li {
+
+			form {
+
+				label {
+
+					input {
+						line-height: 1.4;
+						padding: 0.1em 0.7em;
+					}
+				}
+			}
+		}
 	}
 
 	.current-member-type {

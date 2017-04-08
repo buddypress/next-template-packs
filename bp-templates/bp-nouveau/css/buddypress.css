@@ -3058,27 +3058,27 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * The Search form & controls in directory pages
 *----------------------------------------------------------
 */
-.buddypress [data-bp-search] form:before,
-.buddypress [data-bp-search] form:after {
+.buddypress .bp-dir-search-form:before,
+.buddypress .bp-dir-search-form:after {
 	content: " ";
 	display: table;
 }
 
-.buddypress [data-bp-search] form:after {
+.buddypress .bp-dir-search-form:after {
 	clear: both;
 }
 
-.buddypress [data-bp-search] form {
+.buddypress form.bp-dir-search-form {
 	border: 1px solid #eee;
 }
 
-.buddypress [data-bp-search] form label {
+.buddypress form.bp-dir-search-form label {
 	margin: 0;
 }
 
-.buddypress [data-bp-search] form input[type="search"],
-.buddypress [data-bp-search] form input[type="text"],
-.buddypress [data-bp-search] form button[type="submit"] {
+.buddypress form.bp-dir-search-form input[type="search"],
+.buddypress form.bp-dir-search-form input[type="text"],
+.buddypress form.bp-dir-search-form button[type="submit"] {
 	border: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -3087,14 +3087,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background-clip: padding-box;
 }
 
-.buddypress [data-bp-search] form input[type="search"],
-.buddypress [data-bp-search] form input[type="text"] {
+.buddypress form.bp-dir-search-form input[type="search"],
+.buddypress form.bp-dir-search-form input[type="text"] {
 	float: left;
 	padding: 6px 10px;
 	width: 80%;
 }
 
-.buddypress [data-bp-search] form button[type="submit"] {
+.buddypress form.bp-dir-search-form button[type="submit"] {
 	display: none;
 	float: right;
 	font-size: inherit;
@@ -3106,18 +3106,18 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: 20%;
 }
 
-.buddypress [data-bp-search] form button[type="submit"] span {
+.buddypress form.bp-dir-search-form button[type="submit"] span {
 	font-family: dashicons;
 	font-size: 18px;
 	line-height: 1.6;
 }
 
-.buddypress [data-bp-search] form input[type="search"]::-webkit-search-cancel-button {
+.buddypress form.bp-dir-search-form input[type="search"]::-webkit-search-cancel-button {
 	-webkit-appearance: searchfield-cancel-button;
 }
 
-.buddypress [data-bp-search] form input[type="search"]::-webkit-search-results-button,
-.buddypress [data-bp-search] form input[type="search"]::-webkit-search-results-decoration {
+.buddypress form.bp-dir-search-form input[type="search"]::-webkit-search-results-button,
+.buddypress form.bp-dir-search-form input[type="search"]::-webkit-search-results-decoration {
 	display: none;
 }
 
