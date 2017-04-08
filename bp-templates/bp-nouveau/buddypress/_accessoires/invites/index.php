@@ -96,7 +96,7 @@
 				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
 			</label>
 			<button type="submit" id="group_invites_search_submit">
-				<span class="dashicons dashicons-search"></span>
+				<span class="dashicons dashicons-search" aria-hidden="true"></span>
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
 			</button>
 		</form>
