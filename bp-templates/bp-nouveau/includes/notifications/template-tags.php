@@ -88,7 +88,7 @@ function bp_nouveau_notifications_sort_order_links() {
 
 	<span class="notifications-order-actions">
 		<a href="<?php echo esc_url( $desc ); ?>" title="<?php esc_attr_e( 'Newest First', 'bp-nouveau'); ?>" data-bp-notifications-order="DESC"><span class="dashicons dashicons-arrow-down"></span></a>
-		<a href="<?php echo esc_url( $asc ); ?>" title="<?php esc_attr_e( 'Older First', 'bp-nouveau'); ?>" data-bp-notifications-order="ASC"><span class="dashicons dashicons-arrow-up"></span></a>
+		<a href="<?php echo esc_url( $asc ); ?>" title="<?php esc_attr_e( 'Older First', 'bp-nouveau'); ?>" data-bp-notifications-order="ASC"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span></a>
 	</span>
 
 	<?php

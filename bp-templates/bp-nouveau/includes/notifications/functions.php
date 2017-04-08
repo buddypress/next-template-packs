@@ -185,7 +185,7 @@ function bp_nouveau_notifications_dashiconified_link( $link = '', $title = '', $
 		$link = str_replace(
 			'>' . $match[1] . '<',
 			sprintf(
-				' title="%1$s"><span class="dashicons %2$s"></span><span class="bp-screen-reader-text">%3$s</span><',
+				' title="%1$s"><span class="dashicons %2$s" aria-hidden="true"></span><span class="bp-screen-reader-text">%3$s</span><',
 				esc_attr( $title ),
 				sanitize_html_class( $dashicon ),
 				$match[1]

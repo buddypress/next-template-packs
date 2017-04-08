@@ -434,7 +434,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					),
 				'link_text'  => sprintf(
 					/** @todo: use a specific css rule for this *************************************************************/
-					'<span class="dashicons dashicons-flag" style="color:#a00;vertical-align:baseline;width:18px;height:18px"></span><span class="bp-screen-reader-text">%s</span>',
+					'<span class="dashicons dashicons-flag" style="color:#a00;vertical-align:baseline;width:18px;height:18px" aria-hidden="true"></span><span class="bp-screen-reader-text">%s</span>',
 					esc_html__( 'Spam', 'bp-nouveau' )
 				),
 			);
