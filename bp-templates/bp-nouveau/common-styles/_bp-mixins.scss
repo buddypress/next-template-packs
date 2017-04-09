@@ -117,6 +117,24 @@
 
 }
 
+// Add screen reader type hide on screen properties to rulesets
+@mixin hide() {
+	height: 0;
+	left: -999em;
+	overflow: hidden;
+	position: absolute;
+	top: -999em;
+
+}
+
+// companion mixins properties for showing the element for :focus/:hover
+@mixin show() {
+	height: auto;
+	left: 0;
+	overflow: visible;
+	position: static;
+	top: 0;
+}
 
 // To allow mixins to pass VendorPrefix scss-lint tests we disable lint-test
 // for specific blocks / rulesets

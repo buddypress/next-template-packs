@@ -2,57 +2,65 @@
 
 .buddypress {
 
-		@include clearfix-element('.bp-dir-search-form');
+	@include clearfix-element('.bp-dir-search-form');
 
-		form.bp-dir-search-form {
-			border: 1px solid $bp-border-color;
+	form.bp-dir-search-form {
+		border: 1px solid $bp-border-color;
 
-			label {
-				margin: 0;
+		label {
+			margin: 0;
+		}
+
+		input[type="search"],
+		input[type="text"],
+		button[type="submit"] {
+			border: 0;
+			@include border-radius(0);
+		}
+
+		input[type="search"],
+		input[type="text"] {
+			float: left;
+			padding: 6px 10px;
+			width: 80%;
+		}
+
+		button[type="submit"] {
+			float: right;
+			font-size: inherit;
+			font-weight: 400;
+			line-height: inherit;
+			padding: 6px 0.8em;
+			text-align: center;
+			text-transform: none;
+			width: 20%;
+
+			span {
+				font-family: dashicons;
+				@include font-size(18);
+				line-height: 1.6;
 			}
+		}
 
-			input[type="search"],
-			input[type="text"],
-			button[type="submit"] {
-				border: 0;
-				@include border-radius(0);
-			}
+		// For non no-js we'll add back in show() further on below
+		button[type="submit"] {
+			@include hide();
+		}
 
-			input[type="search"],
-			input[type="text"] {
-				float: left;
-				padding: 6px 10px;
-				width: 80%;
-			}
+		button[type="submit"].bp-show {
+			@include show();
+		}
 
-			button[type="submit"] {
-				display: none;
-				float: right;
-				font-size: inherit;
-				font-weight: 400;
-				line-height: inherit;
-				padding: 6px 0.8em;
-				text-align: center;
-				text-transform: none;
-				width: 20%;
+		input[type="search"]::-webkit-search-cancel-button {
+			-webkit-appearance: searchfield-cancel-button;
+		}
 
-				span {
-					font-family: dashicons;
-					@include font-size(18);
-					line-height: 1.6;
-				}
-			}
+		input[type="search"]::-webkit-search-results-button,
+		input[type="search"]::-webkit-search-results-decoration {
+			display: none;
+		}
 
-			input[type="search"]::-webkit-search-cancel-button {
-				-webkit-appearance: searchfield-cancel-button;
-			}
-
-			input[type="search"]::-webkit-search-results-button,
-			input[type="search"]::-webkit-search-results-decoration {
-				display: none;
-			}
-
-		} // close form
+	} // close form
 
 	// this block needs to be moved really.
 	ul.filters {
@@ -81,6 +89,16 @@
 	}
 
 } // close .buddypress
+
+.budypress.no-js {
+
+	form.bp-dir-search-form {
+
+		button[type="submit"] {
+			@include show();
+		}
+	}
+}
 
 // Try and apply correct tweaks for group/user screens search
 

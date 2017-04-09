@@ -658,7 +658,10 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		showSearchSubmit: function( event ) {
-			$( event.delegateTarget ).find( '[type=submit]' ).show();
+			$( event.delegateTarget ).find( '[type=submit]' ).addClass( 'bp-show' );
+			if( $('[type=submit]').hasClass( 'bp-hide' ) ) {
+				$( '[type=submit]' ).removeClass( 'bp-hide' );
+			}
 		},
 
 		/**
@@ -668,7 +671,7 @@ window.bp = window.bp || {};
 		 */
 		hideSearchSubmit: function( event ) {
 			if ( ! $( event.target ).val() ) {
-				$( event.delegateTarget ).find( '[type=submit]' ).hide();
+				$( event.delegateTarget ).find( '[type=submit]' ).addClass('bp-hide').removeClass('bp-show');
 			}
 		},
 
