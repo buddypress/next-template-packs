@@ -18,7 +18,7 @@
 					<?php bp_nouveau_filter_options(); ?>
 
 				</select>
-				<span class="select-arrow"></span>
+				<span class="select-arrow" aria-hidden="true"></span>
 			</div>
 		</li>
 </ul>
