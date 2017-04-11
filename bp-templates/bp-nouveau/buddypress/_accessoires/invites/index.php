@@ -84,8 +84,8 @@
 	<textarea placeholder="<?php esc_attr_e( 'Optional: add a message to your invite.', 'bp-nouveau' ); ?>"></textarea>
 
 	<div class="action">
-		<button  type="button" id="bp-invites-reset" class="button bp-secondary-action" ><?php esc_attr_e( 'Cancel', 'bp-nouveau' ); ?></button>
-		<button type="button" id="bp-invites-send" class="button bp-primary-action"  ><?php esc_attr_e( 'Send', 'bp-nouveau' ); ?></button>
+		<button type="button" id="bp-invites-reset" class="button bp-secondary-action"><?php _ex( 'Cancel', 'Cancel invitation', 'bp-nouveau' ); ?></button>
+		<button type="button" id="bp-invites-send" class="button bp-primary-action"><?php _ex( 'Send', 'Send invitation', 'bp-nouveau' ); ?></button>
 	</div>
 </script>
 
