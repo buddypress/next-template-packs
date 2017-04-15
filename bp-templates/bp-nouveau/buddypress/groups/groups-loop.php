@@ -40,7 +40,7 @@ bp_nouveau_before_loop(); ?>
 
 						<?php if ( bp_nouveau_group_has_meta() ) : ?>
 
-							<p class="meta group-details"><?php bp_nouveau_group_meta(); ?></p>
+							<p class="item-meta group-details"><?php bp_nouveau_group_meta(); ?></p>
 
 						<?php endif; ?>
 
@@ -48,7 +48,7 @@ bp_nouveau_before_loop(); ?>
 
 					</div>
 
-					<div class="group-desc"><?php bp_group_description_excerpt(); ?></div>
+					<div class="group-desc"><?php bp_nouveau_group_description_excerpt(); ?></div>
 
 					<?php bp_nouveau_groups_loop_item(); ?>
 

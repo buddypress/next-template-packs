@@ -1261,3 +1261,64 @@ function bp_nouveau_groups_get_customizer_widgets_link() {
 		'text'      => esc_html__( '(BuddyPress) Widgets', 'bp-nouveau' ),
 	) );
 }
+
+/**
+ * Output the group description excerpt
+ *
+ * @since 1.0.0
+ *
+ * @param object|bool  $group  Optional. The group being referenced.
+	*                             Defaults to the group currently being
+	*                             iterated on in the groups loop.
+	* @param int          $length Optional. Length of returned string, including ellipsis.
+	*                             Default: 225.
+	* @return string Excerpt.
+ *
+ */
+function bp_nouveau_group_description_excerpt( $group = false, $length = false) {
+	echo bp_nouveau_get_group_description_excerpt( $group, $length);
+}
+
+/**
+* Filters the excerpt  of a group description.
+*
+* Checks if the group loop is set as a 'Grid' layout and returns a reduced excerpt.
+*
+* @since 1.0.0
+*
+* @param object|bool  $group  Optional. The group being referenced.
+*                             Defaults to the group currently being
+*                             iterated on in the groups loop.
+* @param int          $length Optional. Length of returned string, including ellipsis.
+*                             Default: 225.
+* @return string Excerpt.
+*/
+function bp_nouveau_get_group_description_excerpt( $group =false, $length = false) {
+	global $groups_template;
+
+	if ( empty( $group ) ) {
+		$group =& $groups_template->group;
+	}
+
+	// If this is a grid layout but no length is passed in set shorter
+	// default value otherwise use the passed in value.
+	// If not a grid then the BP core default is used or passed in value.
+	if( bp_nouveau_loop_is_grid() && 'groups' == bp_current_component() ) {
+		if ( false == $length ) {
+			$length = 100;
+		} elseif ( $length ) {
+			$length = $length;
+		}
+	}
+
+	/**
+		* Filters the excerpt of a group description.
+		*
+		* @since 1.0.0
+		*
+		* @param string $value Excerpt of a group description.
+		* @param object $group Object for group whose description is made into an excerpt.
+		*/
+
+	return apply_filters( 'bp_nouveau_get_group_description_excerpt', bp_create_excerpt( $group->description, $length ), $group );
+}
