@@ -3644,14 +3644,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-ms-flex-flow: row nowrap;
 	-o-flex-flow: row nowrap;
 	flex-flow: row nowrap;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-ms-flex-align: center;
-	-webkit-align-items: center;
-	-webkit-box-align: center;
-	align-items: center;
+	-ms-flex-align: stretch;
+	-webkit-align-items: stretch;
+	-webkit-box-align: stretch;
+	align-items: stretch;
 	background: #fff;
 	color: gray;
 	-webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -3670,18 +3666,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 0 .5em;
 }
 
-.buddypress .bp-feedback span.bp-help-text {
+.buddypress .bp-feedback span.bp-help-text,
+.buddypress .bp-feedback span.text {
 	margin: 0;
 	padding: 0 0 0 1em;
 }
 
 .buddypress .bp-feedback.small:before {
 	line-height: inherit;
-}
-
-.buddypress .bp-feedback.small span.text {
-	display: inline-block;
-	margin-left: 30px;
 }
 
 .buddypress a[data-bp-close] span:before {
