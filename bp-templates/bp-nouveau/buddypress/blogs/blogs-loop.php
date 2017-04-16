@@ -28,9 +28,13 @@ bp_nouveau_before_loop(); ?>
 
 				<div class="item">
 
-					<h2 class="list-title blogs-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></h2>
+					<div class="item-block">
 
-					<p class="last-activity item-meta"><?php bp_blog_last_active(); ?></p>
+						<h2 class="list-title blogs-title"><a href="<?php bp_blog_permalink(); ?>"><?php bp_blog_name(); ?></a></h2>
+
+						<p class="last-activity item-meta"><?php bp_blog_last_active(); ?></p>
+
+					</div>
 
 					<?php bp_nouveau_blogs_loop_item(); ?>
 

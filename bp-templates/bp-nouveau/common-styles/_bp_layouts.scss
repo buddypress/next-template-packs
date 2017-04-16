@@ -35,6 +35,10 @@
 			overflow: hidden;
 			padding-top: 14px;
 
+			.list-title {
+				padding: $pad-sml;
+			}
+
 			.update {
 				color: $meta-text;
 				padding: $pad-sml $pad-lrg;
@@ -50,10 +54,64 @@
 				width: 50%;
 			}
 		}
-
 	} // close > li
 
-}
+	// min-height rules to line up grid box elements
+	// to prevent breaking grid layout through uneven heights
+	// one column or single column mobile can have varying heights
+	@include small-up() {
+
+		&.members-list {
+
+			.list-wrap {
+				min-height: 350px;
+
+				.item-block {
+					min-height: 7rem;
+				}
+			}
+		}
+
+		&.groups-list {
+
+			.list-wrap {
+				min-height: 450px;
+
+				.item-block {
+					min-height: 8rem;
+				}
+
+				.group-desc {
+					margin: $marg-med auto $marg-lrg;
+					min-height: 5em;
+					overflow: hidden;
+				}
+
+				.last-activity,
+				.group-details,
+				.item-desc {
+					margin-bottom: 0;
+
+					p {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+
+		&.blogs-list {
+
+			.list-wrap {
+				min-height: 350px;
+
+				.item-block {
+					min-height: 7rem;
+				}
+			}
+		}
+	} // close @media small-up
+
+} // close .grid
 
 /* Build the two column class small up */
 
@@ -175,9 +233,11 @@
 		> li {
 			border-bottom: none;
 
-			.list-wrap {
-				// make room for the action buttons to sit.
-				padding-bottom: 3rem;
+			// make room for the action buttons to sit @ small-up.
+			@include small-up() {
+				.list-wrap {
+					padding-bottom: 3rem;
+				}
 			}
 
 			.item-avatar {
@@ -198,6 +258,11 @@
 				text-align: center;
 			}
 
+			.list-title {
+				font-size: inherit;
+				line-height: 1.1;
+			}
+
 			.item {
 				@include responsive-font( 22 );
 				left: 0;
@@ -209,6 +274,10 @@
 				.group-desc {
 					float: none;
 					width: auto;
+				}
+
+				.item-block {
+					margin-bottom: $marg-sml;
 				}
 
 				.group-desc {
@@ -254,55 +323,6 @@
 		} // close > li
 	} // close .grid.bp-list
 } // close .buddypress
-
-// .wrap min-heights & other adjustments per component type loop
-// this section needs review as tricky in trying to get equal height
-// on elements and some rules here are repeated to allow for variable values.
-.grid {
-
-	&.members-list {
-
-		.list-wrap {
-			min-height: 350px;
-		}
-	}
-
-	&.groups-list {
-
-		.list-wrap {
-			min-height: 450px;
-
-			.list-title {
-				min-height: 1.5em;
-				padding: $pad-sml;
-			}
-
-			.last-activity,
-			.group-details,
-			.item-desc {
-				margin-bottom: 0;
-
-				p {
-					margin-bottom: 0;
-				}
-			}
-
-			.group-desc {
-				margin: $marg-med auto $marg-lrg;
-				min-height: 5em;
-				overflow: hidden;
-			}
-		}
-	}
-
-	&.blogs-list {
-
-		.list-wrap {
-			min-height: 350px;
-		}
-	}
-
-} // close .grid
 
 // ==== Vertical Navigation Classes ====
 

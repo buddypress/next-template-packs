@@ -3845,6 +3845,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding-top: 14px;
 }
 
+.grid > li .list-wrap .list-title {
+	padding: 0.5em;
+}
+
 .grid > li .list-wrap .update {
 	color: #777;
 	padding: 0.5em 2em;
@@ -3858,6 +3862,42 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-radius: 50%;
 	display: inline-block;
 	width: 50%;
+}
+
+@media screen and (min-width: 24em) {
+	.grid.members-list .list-wrap {
+		min-height: 350px;
+	}
+	.grid.members-list .list-wrap .item-block {
+		min-height: 7rem;
+	}
+	.grid.groups-list .list-wrap {
+		min-height: 450px;
+	}
+	.grid.groups-list .list-wrap .item-block {
+		min-height: 8rem;
+	}
+	.grid.groups-list .list-wrap .group-desc {
+		margin: 15px auto 20px;
+		min-height: 5em;
+		overflow: hidden;
+	}
+	.grid.groups-list .list-wrap .last-activity,
+	.grid.groups-list .list-wrap .group-details,
+	.grid.groups-list .list-wrap .item-desc {
+		margin-bottom: 0;
+	}
+	.grid.groups-list .list-wrap .last-activity p,
+	.grid.groups-list .list-wrap .group-details p,
+	.grid.groups-list .list-wrap .item-desc p {
+		margin-bottom: 0;
+	}
+	.grid.blogs-list .list-wrap {
+		min-height: 350px;
+	}
+	.grid.blogs-list .list-wrap .item-block {
+		min-height: 7rem;
+	}
 }
 
 /* Build the two column class small up */
@@ -3932,8 +3972,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-bottom: none;
 }
 
-.buddypress .grid.bp-list > li .list-wrap {
-	padding-bottom: 3rem;
+@media screen and (min-width: 24em) {
+	.buddypress .grid.bp-list > li .list-wrap {
+		padding-bottom: 3rem;
+	}
 }
 
 .buddypress .grid.bp-list > li .item-avatar {
@@ -3954,6 +3996,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	text-align: center;
 }
 
+.buddypress .grid.bp-list > li .list-title {
+	font-size: inherit;
+	line-height: 1.1;
+}
+
 .buddypress .grid.bp-list > li .item {
 	font-size: 18px;
 	left: 0;
@@ -3972,6 +4019,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .grid.bp-list > li .item .group-desc {
 	float: none;
 	width: auto;
+}
+
+.buddypress .grid.bp-list > li .item .item-block {
+	margin-bottom: 10px;
 }
 
 .buddypress .grid.bp-list > li .item .group-desc {
@@ -4010,41 +4061,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .grid.bp-list > li .avatar,
 .buddypress .grid.bp-list > li .item {
 	float: none;
-}
-
-.grid.members-list .list-wrap {
-	min-height: 350px;
-}
-
-.grid.groups-list .list-wrap {
-	min-height: 450px;
-}
-
-.grid.groups-list .list-wrap .list-title {
-	min-height: 1.5em;
-	padding: 0.5em;
-}
-
-.grid.groups-list .list-wrap .last-activity,
-.grid.groups-list .list-wrap .group-details,
-.grid.groups-list .list-wrap .item-desc {
-	margin-bottom: 0;
-}
-
-.grid.groups-list .list-wrap .last-activity p,
-.grid.groups-list .list-wrap .group-details p,
-.grid.groups-list .list-wrap .item-desc p {
-	margin-bottom: 0;
-}
-
-.grid.groups-list .list-wrap .group-desc {
-	margin: 15px auto 20px;
-	min-height: 5em;
-	overflow: hidden;
-}
-
-.grid.blogs-list .list-wrap {
-	min-height: 350px;
 }
 
 @media screen and (min-width: 46.8em) {
