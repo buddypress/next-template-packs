@@ -30,6 +30,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	<input type="email" name="email" id="email" value="<?php echo bp_get_displayed_user_email(); ?>" class="settings-input" <?php bp_form_field_attributes( 'email' ); ?>/>
 
 	<p class="info bp-feedback">
+		<span class="bp-icon"></span>
 		<span class="bp-help-text"><?php _e( 'Leave password fields blank for no change', 'bp-nouveau' ); ?></span>
 	</p>
 
@@ -39,7 +40,9 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 
 	<label for="pass2" class="repeated-pwd"><?php _e( 'Repeat Your New Password', 'bp-nouveau' ); ?></label>
 	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?>/>
-<div id="pass-strength-result"></div>
+
+	<div id="pass-strength-result"></div>
+
 	<?php bp_nouveau_submit_button( 'members-general-settings' ); ?>
 
 </form>

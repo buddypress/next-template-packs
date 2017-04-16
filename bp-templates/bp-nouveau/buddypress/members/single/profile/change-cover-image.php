@@ -13,7 +13,10 @@
 
 <?php bp_nouveau_xprofile_hook( 'before', 'edit_cover_image' ); ?>
 
-<p class="info bp-feedback"><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'bp-nouveau' ); ?></p>
+<p class="info bp-feedback">
+	<span class="bp-icon"></span>
+	<span class="bp-help-text"><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'bp-nouveau' ); ?></span>
+</p>
 
 <?php
 // Load the cover image UI
