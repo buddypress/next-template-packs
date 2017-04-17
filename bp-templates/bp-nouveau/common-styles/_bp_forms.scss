@@ -7,7 +7,7 @@
 // Where a 'p' element is used to wrap form controls
 // that element should be classed with 'bp-controls-wrap'
 
-.buddypress {
+.buddypress-wrap {
 
 	.filter,
 	#whats-new-post-in-box { // has no form element and can't hold rules below.
@@ -230,7 +230,7 @@
 		}
 	}
 
-} // close .buddypress
+} // close .buddypress-wrap
 
 // These rules do not belong here really but it's
 // where original styles placed them
@@ -250,7 +250,7 @@ body.no-js {
 }
 
 /* Overrides for embedded WP editors */
-.buddypress {
+.buddypress-wrap {
 
 	.wp-editor-wrap {
 
@@ -267,7 +267,7 @@ body.no-js {
 // Style the select element  - generic sitewide styling
 // Remove the browser chrome & add our own arrow styles, borders, hovers.
 
-.buddypress {
+.buddypress-wrap {
 
 	.select-wrap {
 		border: 1px solid $bp-border-color;

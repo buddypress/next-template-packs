@@ -4,7 +4,7 @@
 // change that by adding a parent class ( on any close parent to
 // the element ) .text-link-list
 
-.buddypress {
+.buddypress-wrap {
 
 	// this doubling avoids issues applying styles from body class
 	// to general theme elements - changing body class would be better though.
@@ -251,7 +251,7 @@
 
 // ==== Icons ====
 
-.buddypress {
+.buddypress-wrap {
 
 	li.filter label:before,
 	li.feed a:before,
@@ -321,4 +321,4 @@
 		content: "\f147";
 		font-size: 18px;
 	}
-} // close .buddypress
+} // close .buddypress-wrap

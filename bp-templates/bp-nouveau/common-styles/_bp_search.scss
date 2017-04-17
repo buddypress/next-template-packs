@@ -1,6 +1,6 @@
 // BP Directory Search elements
 
-.buddypress {
+.buddypress-wrap {
 
 	@include clearfix-element('.bp-dir-search-form');
 
@@ -88,8 +88,10 @@
 		clear: both;
 	}
 
-} // close .buddypress
+} // close .buddypress-wrap
 
+// If js disabled ensure we show the submit ovveriding earlier rule
+// @todo the whole show/hide could be wrapped in a :not(.no-js)
 .budypress.no-js {
 
 	form.bp-dir-search-form {

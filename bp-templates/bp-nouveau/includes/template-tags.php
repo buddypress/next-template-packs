@@ -1306,7 +1306,7 @@ function bp_nouveau_buddypress_classes() {
 	 * @return string CSS classes
 	 */
 	function bp_nouveau_get_buddypress_classes() {
-		$classes    = array( 'buddypress' );
+		$classes    = array( 'buddypress-wrap' );
 		$component  = bp_current_component();
 		$bp_nouveau = bp_nouveau();
 		$member_type_class = '';

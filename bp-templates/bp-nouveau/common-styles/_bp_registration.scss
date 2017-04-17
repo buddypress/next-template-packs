@@ -57,7 +57,7 @@
 // Flex layout containers for registration sections
 
 @include medium-up() {
-	.buddypress {
+	.buddypress-wrap {
 		.register-page {
 
 			.layout-wrap {
@@ -86,7 +86,7 @@
 // if so we'll adjust the child item elements.
 
 @include medium-up() {
-	.buddypress.extended-default-reg {
+	.buddypress-wrap.extended-default-reg {
 		.register-page {
 
 			.default-profile {

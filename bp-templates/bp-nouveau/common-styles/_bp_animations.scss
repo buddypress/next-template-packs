@@ -1,7 +1,7 @@
 // Provides any animation or transition type effects for BP elements
 
 // Fade in hover transition
-#buddypress {
+#buddypress-wrap {
 
 	* {
 		transition: opacity 0.1s ease-in-out 0.1s;
@@ -20,7 +20,7 @@
 // Historical animation sequence for ajax loading effects.
 // Ajax Animations and styles
 // scss-lint:disable VendorPrefix
-.buddypress {
+.buddypress-wrap {
 
 	a.loading,
 	input.loading {

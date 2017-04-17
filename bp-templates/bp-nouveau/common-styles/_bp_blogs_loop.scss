@@ -1,6 +1,6 @@
 // BP Blogs loop.
 
-.buddypress {
+.buddypress-wrap {
 
 	.blogs-list { // ul
 		li {
@@ -23,7 +23,7 @@
 // to cope with the decreased width.
 
 @include medium-up() {
-	.buddypress {
+	.buddypress-wrap {
 
 		.bp-dir-vert-nav {
 

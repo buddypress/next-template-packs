@@ -1,6 +1,6 @@
 // BP Single Screens Item Body General Styles.
 
-.buddypress {
+.buddypress-wrap {
 
 	.item-body {
 		margin: $marg-lrg 0;
@@ -19,7 +19,7 @@
 // If vertical primary nav is in use the item body
 // needs a little left padding on loops to let the content breath.
 
-	.buddypress.bp-vertical-nav {
+	.buddypress-wrap.bp-vertical-nav {
 
 		.bp-list {
 

@@ -225,7 +225,7 @@
 
 // if grid is set & this is a member, group or blog loop
 // we want to re-style some of the elements in the item
-.buddypress {
+.buddypress-wrap {
 
 	.grid.bp-list {
 		padding-top: $pad-med;
@@ -322,7 +322,7 @@
 
 		} // close > li
 	} // close .grid.bp-list
-} // close .buddypress
+} // close .buddypress-wrap
 
 // ==== Vertical Navigation Classes ====
 
@@ -455,7 +455,8 @@
 					width: auto;
 
 					&.selected {
-border: 1px solid #eee;
+						border: 1px solid #eee;
+
 						a {
 							background: $dark-grey;
 							color: $white;
@@ -503,7 +504,7 @@ border: 1px solid #eee;
 	// N.B This is in addition to the  standalone visual tab style classes
 	// provided so any elements may be styled.
 
-	.buddypress.bp-dir-vert-nav {
+	.buddypress-wrap.bp-dir-vert-nav {
 		.dir-navs.activity-nav-tabs,
 		.dir-navs.sites-nav-tabs,
 		.dir-navs.groups-nav-tabs,

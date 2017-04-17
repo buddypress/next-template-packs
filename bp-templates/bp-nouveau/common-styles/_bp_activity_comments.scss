@@ -1,5 +1,5 @@
 // BP activity comment entries in response to activity loop entries
-.buddypress {
+.buddypress-wrap {
 
 	.activity-comments {
 		clear: both;
@@ -108,11 +108,11 @@
 
 	}
 
-} // close .buddypress
+} // close .buddypress-wrap
 
 @include medium-up() {
 
-	.buddypress {
+	.buddypress-wrap {
 
 		.activity-comments {
 			margin-left: 17%;

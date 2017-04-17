@@ -93,7 +93,7 @@ body.buddypress {
 
 // Ensure themes can't cause issues with headings.
 body { // add weight
-	.buddypress {
+	.buddypress-wrap {
 
 		h1,
 		h2,
@@ -119,7 +119,7 @@ body { // add weight
 
 // General site avatars round or square ?
 // User set
-.buddypress.round-avatars {
+.buddypress-wrap.round-avatars {
 
 	.avatar {
 		border-radius: 50%;

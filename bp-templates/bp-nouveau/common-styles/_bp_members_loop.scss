@@ -1,6 +1,6 @@
 // BP Members loop.
 
-.buddypress {
+.buddypress-wrap {
 
 	.members-list { // ul
 
@@ -45,7 +45,7 @@
 			}
 		}
 	}
-} // close .buddypress
+} // close .buddypress-wrap
 
 // If logged out or if the loop item is
 // current user we don't display action buttons
@@ -68,7 +68,7 @@ body:not(.logged-in) {
 // Is current user - i.e it's me!
 
 @include medium-small-up() {
-	.buddypress {
+	.buddypress-wrap {
 
 		.members-list {
 

@@ -6,7 +6,7 @@
 
 // General
 
-.buddypress {
+.buddypress-wrap {
 
 	.profile {
 		margin-top: $marg-xlrg;
@@ -15,7 +15,7 @@
 
 // Edit Screen
 
-.buddypress {
+.buddypress-wrap {
 
 	.profile.edit {
 
@@ -71,7 +71,7 @@
 		}
 
 	} // .profile
-} // close .buddypress
+} // close .buddypress-wrap
 
 body.no-js {
 
@@ -85,7 +85,7 @@ body.no-js {
 	}
 }
 
-.buddypress {
+.buddypress-wrap {
 
 	.field-visibility-settings {
 		display: none;
@@ -191,11 +191,11 @@ body.no-js {
 		border-bottom-right-radius: 0;
 	}
 
-} // close .buddypress
+} // close .buddypress-wrap
 
 // Public Profile
 
-.buddypress {
+.buddypress-wrap {
 
 	.profile.public {
 
@@ -207,13 +207,13 @@ body.no-js {
 }
 
 // This needs to be reviewed and re-located!?
-body.register .buddypress .page ul {
+body.register .buddypress-wrap .page ul {
 	list-style: none;
 }
 
 // Avatars & Cover Image
 
-.buddypress {
+.buddypress-wrap {
 	.profile {
 		.bp-avatar-nav {
 			margin-top: $marg-lrg;
