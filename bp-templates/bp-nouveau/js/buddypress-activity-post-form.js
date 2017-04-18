@@ -530,12 +530,14 @@ window.bp = window.bp || {};
 			var reset = new bp.Views.ActivityInput( {
 				type  : 'reset',
 				id    : 'aw-whats-new-reset',
+				className : 'button',
 				value : 'Cancel'
 			} );
 
 			var submit = new bp.Views.ActivityInput( {
 				type  : 'submit',
 				id    : 'aw-whats-new-submit',
+				className : 'button',
 				name  : 'aw-whats-new-submit',
 				value : 'Post Update'
 			} );
