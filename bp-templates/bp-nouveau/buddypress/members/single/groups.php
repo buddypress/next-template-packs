@@ -24,14 +24,7 @@
 <?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 
 
-		<div class="subnav-filters filters">
-			<ul>
-			<?php bp_nouveau_search_form(); ?>
-			</ul>
-
-			<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
-
-		</div><!-- .subnav-filters -->
+	<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
 
 <?php endif; ?>
 

@@ -21,17 +21,7 @@
 
 	<div class="screen-content">
 
-		<div class="subnav-filters filters no-ajax" id="subnav-filters">
-
-			<ul class="subnav-search clearfix">
-
-				<?php bp_nouveau_search_form(); ?>
-
-			</ul>
-
-			<?php bp_get_template_part( 'common/filters/directory-filters' ); ?>
-
-		</div>
+	<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
 
 		<div id="members-dir-list" class="members dir-list" data-bp-list="members">
 			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-members-loading' ) ;?></div>

@@ -19,13 +19,7 @@
 	</ul>
 </div><!-- .bp-navs -->
 
-<div class="subnav-filters filters">
-		<?php if ( ! bp_is_current_action( 'requests' ) ) : ?>
-
-		<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
-		<?php endif ; ?>
-</div>
-
+<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
 
 <?php
 switch ( bp_current_action() ) :

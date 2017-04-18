@@ -17,15 +17,7 @@
 	</ul>
 </div><!-- .bp-navs -->
 
-<div class="subnav-filters filters">
-	<ul>
-	<?php bp_nouveau_search_form(); ?>
-</ul>
-
-	<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
-
-</div>
-
+<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
 
 <?php
 switch ( bp_current_action() ) :

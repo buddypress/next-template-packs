@@ -20,14 +20,7 @@
 <?php bp_nouveau_activity_member_post_form() ;?>
 
 
-	<div class="subnav-filters filters">
-		<ul>
-			<?php bp_nouveau_search_form(); ?>
-		</ul>
-
-			<?php bp_get_template_part('common/filters/user-screens-filters'); ?>
-
-	</div><!-- // .subnav-filters -->
+<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
 
 <?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 
