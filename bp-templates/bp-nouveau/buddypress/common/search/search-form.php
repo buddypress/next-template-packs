@@ -8,7 +8,7 @@
 */
 ?>
 
-<li class="<?php bp_nouveau_search_container_class(); ?> bp-search">
+<div class="<?php bp_nouveau_search_container_class(); ?> bp-search">
 	<form action="" method="get" class="bp-dir-search-form" id="<?php bp_nouveau_search_selector_id( 'search-form' ) ;?>" role="search" data-bp-search="groups">
 
 		<label for="dir-groups-search" class="bp-screen-reader-text"><?php bp_nouveau_search_default_text( '', false ); ?></label>
@@ -21,5 +21,5 @@
 		</button>
 
 	</form>
-</li>
+</div>
 

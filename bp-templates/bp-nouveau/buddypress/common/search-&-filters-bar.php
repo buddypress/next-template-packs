@@ -10,15 +10,15 @@
 <div class="subnav-filters filters no-ajax" id="subnav-filters">
 
 	<?php if ( 'friends' !== bp_is_current_component() ) : ?>
-	<ul class="subnav-search clearfix">
+	<div class="subnav-search clearfix">
 
 		<?php if ( 'activity' == bp_current_component() ) :?>
-			<li class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></li>
+			<div class="feed"><a href="<?php bp_sitewide_activity_feed_link(); ?>" title="<?php esc_attr_e( 'RSS Feed', 'bp-nouveau' ); ?>"><span class="bp-screen-reader-text"><?php _e( 'RSS', 'bp-nouveau' ); ?></span></a></div>
 		<?php endif; ?>
 
 		<?php bp_nouveau_search_form(); ?>
 
-	</ul>
+	</div>
 	<?php endif; ?>
 
 		<?php if ( bp_is_user() && ! bp_is_current_action( 'requests') ) : ?>

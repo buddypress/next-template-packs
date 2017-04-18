@@ -22,14 +22,12 @@
 		margin: $marg-med 0;
 		padding: 0;
 
-		ul {
+		div {
 			margin: 0;
 		}
 
-		li {
+		div {
 			float: none;
-			overflow: hidden;
-			margin-bottom: $marg-med;
 
 			select,
 			input[type="search"] {
@@ -45,7 +43,7 @@
 			}
 		}
 
-		li.feed {
+		.feed {
 			margin-right: $marg-med;
 		}
 

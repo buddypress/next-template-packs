@@ -593,30 +593,28 @@ dt.section-title {
 	padding: 0;
 }
 
-.buddypress-wrap .subnav-filters ul {
+.buddypress-wrap .subnav-filters div {
 	margin: 0;
 }
 
-.buddypress-wrap .subnav-filters li {
+.buddypress-wrap .subnav-filters div {
 	float: none;
-	overflow: hidden;
-	margin-bottom: 15px;
 }
 
-.buddypress-wrap .subnav-filters li select,
-.buddypress-wrap .subnav-filters li input[type="search"] {
+.buddypress-wrap .subnav-filters div select,
+.buddypress-wrap .subnav-filters div input[type="search"] {
 	font-size: 16px;
 }
 
-.buddypress-wrap .subnav-filters li button.nouveau-search-submit {
+.buddypress-wrap .subnav-filters div button.nouveau-search-submit {
 	padding: 5px 0.8em 6px;
 }
 
-.buddypress-wrap .subnav-filters li button#user_messages_search_submit {
+.buddypress-wrap .subnav-filters div button#user_messages_search_submit {
 	padding: 7px 0.8em;
 }
 
-.buddypress-wrap .subnav-filters li.feed {
+.buddypress-wrap .subnav-filters .feed {
 	margin-right: 15px;
 }
 
@@ -3531,8 +3529,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
-.buddypress-wrap li.filter label:before,
-.buddypress-wrap li.feed a:before,
+.buddypress-wrap .filter label:before,
+.buddypress-wrap .feed a:before,
 .buddypress-wrap .bp-invites-filters li a.invite-button:before,
 .buddypress-wrap .bp-messages-filters li a.messages-button:before {
 	font-family: dashicons;
@@ -3553,11 +3551,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: none;
 }
 
-.buddypress-wrap ul li.filter label:before {
+.buddypress-wrap .filter label:before {
 	content: "\f536";
 }
 
-.buddypress-wrap ul li.feed a:before {
+.buddypress-wrap div.feed a:before {
 	content: "\f303";
 }
 

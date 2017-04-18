@@ -7,8 +7,8 @@
 * @package BP Nouveau
 */
 ?>
-<ul id="comp-filters" class="component-filters clearfix">
-		<li id="<?php bp_nouveau_filter_container_id(); ?>" class="last filter">
+<div id="comp-filters" class="component-filters clearfix">
+		<div id="<?php bp_nouveau_filter_container_id(); ?>" class="last filter">
 			<label for="<?php bp_nouveau_filter_id(); ?>" class="bp-screen-reader-text">
 				<span ><?php bp_nouveau_filter_label(); ?></span>
 			</label>
@@ -20,5 +20,5 @@
 				</select>
 				<span class="select-arrow" aria-hidden="true"></span>
 			</div>
-		</li>
-</ul>
+		</div>
+</div>

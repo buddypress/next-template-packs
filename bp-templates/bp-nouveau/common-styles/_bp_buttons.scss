@@ -253,8 +253,8 @@
 
 .buddypress-wrap {
 
-	li.filter label:before,
-	li.feed a:before,
+	.filter label:before,
+	.feed a:before,
 	//.action a,
 	.bp-invites-filters  li a.invite-button:before,
 	.bp-messages-filters li a.messages-button:before {
@@ -284,16 +284,13 @@
 		}
 	}
 
-	ul {
+	.filter label:before {
+		content: "\f536";
+	}
 
-		li.filter label:before {
-			content: "\f536";
-		}
-
-		li.feed a:before {
-			content: "\f303";
-		}
-	} // close ul
+	div.feed a:before {
+		content: "\f303";
+	}
 
 	ul.item-list {
 
