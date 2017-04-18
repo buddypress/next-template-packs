@@ -4,11 +4,11 @@
 // change that by adding a parent class ( on any close parent to
 // the element ) .text-link-list
 
-.buddypress-wrap {
+.buddypress {
 
 	// this doubling avoids issues applying styles from body class
 	// to general theme elements - changing body class would be better though.
-	.buddypress {
+	.buddypress-wrap {
 
 		button,
 		a.button,
