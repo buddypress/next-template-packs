@@ -16,7 +16,7 @@
 <?php if ( !(int)bp_get_option( 'bp-disable-avatar-uploads' ) ) : ?>
 
 	<p class="bp-feedback info">
-		<span class="bp-icon"></span>
+		<span class="bp-icon" aria-hidden="true"></span>
 		<span class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. If there is a <a href="http://gravatar.com">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer.', 'bp-nouveau' ); ?></span>
 	</p>
 
