@@ -9,7 +9,7 @@
 ?>
 <div class="subnav-filters filters no-ajax" id="subnav-filters">
 
-	<?php if ( 'friends' !== bp_is_current_component() ) : ?>
+	<?php if ( 'friends' !== bp_current_component() ) : ?>
 	<div class="subnav-search clearfix">
 
 		<?php if ( 'activity' == bp_current_component() ) :?>
