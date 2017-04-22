@@ -65,7 +65,7 @@
 
 									<?php if( bp_get_the_profile_field_description() ) : ?>
 									<p class="description bp-feedback info small">
-										<span class="bp-icon"></span>
+										<span class="bp-icon" aria-hidden="true"></span>
 										<span class="text"><?php bp_the_profile_field_description(); ?></span>
 									</p>
 									<?php endif; ?>

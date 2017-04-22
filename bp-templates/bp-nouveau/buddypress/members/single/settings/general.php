@@ -30,7 +30,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	<input type="email" name="email" id="email" value="<?php echo bp_get_displayed_user_email(); ?>" class="settings-input" <?php bp_form_field_attributes( 'email' ); ?>/>
 
 	<p class="info bp-feedback">
-		<span class="bp-icon"></span>
+		<span class="bp-icon" aria-hidden="true"></span>
 		<span class="bp-help-text"><?php _e( 'Leave password fields blank for no change', 'bp-nouveau' ); ?></span>
 	</p>
 
