@@ -82,7 +82,7 @@
 				}
 
 				.group-desc {
-					margin: $marg-med auto $marg-lrg;
+					margin: $marg-med auto 0;
 					min-height: 5em;
 					overflow: hidden;
 				}
@@ -233,11 +233,8 @@
 		> li {
 			border-bottom: none;
 
-			// make room for the action buttons to sit @ small-up.
-			@include small-up() {
-				.list-wrap {
-					padding-bottom: 3rem;
-				}
+			.list-wrap {
+				padding-bottom: 3em;
 			}
 
 			.item-avatar {
@@ -301,7 +298,7 @@
 				left: 0;
 				margin: 0;
 				padding: 0 5px;
-				//position: absolute;
+				position: absolute;
 				text-align: center;
 				top: auto;
 				width: 100%;
@@ -322,6 +319,21 @@
 
 		} // close > li
 	} // close .grid.bp-list
+
+	// where three or four items to a row we need to increase the desc height as
+	// narrow widths force the box taller & adjust some padding values.
+
+	.grid.three,
+	.grid.four {
+
+		>li {
+
+			.group-desc {
+				min-height: 8em;
+			}
+		}
+	}
+
 } // close .buddypress-wrap
 
 // ==== Vertical Navigation Classes ====

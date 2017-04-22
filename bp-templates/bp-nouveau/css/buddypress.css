@@ -3900,7 +3900,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		min-height: 8rem;
 	}
 	.grid.groups-list .list-wrap .group-desc {
-		margin: 15px auto 20px;
+		margin: 15px auto 0;
 		min-height: 5em;
 		overflow: hidden;
 	}
@@ -3994,10 +3994,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-bottom: none;
 }
 
-@media screen and (min-width: 24em) {
-	.buddypress-wrap .grid.bp-list > li .list-wrap {
-		padding-bottom: 3rem;
-	}
+.buddypress-wrap .grid.bp-list > li .list-wrap {
+	padding-bottom: 3em;
 }
 
 .buddypress-wrap .grid.bp-list > li .item-avatar {
@@ -4067,6 +4065,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	left: 0;
 	margin: 0;
 	padding: 0 5px;
+	position: absolute;
 	text-align: center;
 	top: auto;
 	width: 100%;
@@ -4083,6 +4082,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .grid.bp-list > li .avatar,
 .buddypress-wrap .grid.bp-list > li .item {
 	float: none;
+}
+
+.buddypress-wrap .grid.three > li .group-desc,
+.buddypress-wrap .grid.four > li .group-desc {
+	min-height: 8em;
 }
 
 @media screen and (min-width: 46.8em) {
