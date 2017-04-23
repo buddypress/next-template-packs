@@ -1618,7 +1618,7 @@ form.ac-form .ac-reply-content input {
 
 @media screen and (min-width: 32em) {
 	body:not(.logged-in) .members-list .user-update {
-		width: 98%;
+		width: 96%;
 	}
 }
 

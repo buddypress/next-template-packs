@@ -13,19 +13,10 @@
 			.user-update {
 				border: 1px solid $light-grey;
 				@include border-radius(10px);
-//				clear: both;
 				color: $meta-text;
 				@include responsive-font(16);
 				margin: $marg-med auto;
 				padding: $pad-med;
-//				width: 80%;
-			}
-
-			@include medium-small-up() {
-
-				.user-update {
-//					width: 60%;
-				}
 			}
 
 			@include medium-up() {
@@ -42,6 +33,7 @@
 
 	// Members group specific list
 	.members-group-list {
+
 		li {
 
 			@include medium-up() {
@@ -67,7 +59,7 @@ body:not(.logged-in) {
 		.members-list {
 
 			.user-update {
-				width: 98%;
+				width: 96%;
 			}
 		}
 	}
