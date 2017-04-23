@@ -28,6 +28,14 @@
 				}
 			}
 
+			@include medium-up() {
+
+				.last-activity {
+					clear: left;
+					margin-top: -10px;
+				}
+			}
+
 		} // close li
 
 	} // close .members-list

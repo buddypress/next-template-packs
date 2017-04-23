@@ -782,6 +782,7 @@ dt.section-title {
 
 .bp-list li .action .generic-button {
 	display: inline-block;
+	font-size: 12px;
 	margin: 0 10px 0 0;
 }
 
@@ -1593,6 +1594,13 @@ form.ac-form .ac-reply-content input {
 @media screen and (min-width: 32em) {
 	.buddypress-wrap .members-list li .user-update {
 		width: 60%;
+	}
+}
+
+@media screen and (min-width: 46.8em) {
+	.buddypress-wrap .members-list li .last-activity {
+		clear: left;
+		margin-top: -10px;
 	}
 }
 

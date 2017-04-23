@@ -73,6 +73,7 @@
 
 			.generic-button {
 				display: inline-block;
+				@include font-size(12)
 				margin: 0 $marg-sml 0 0;
 			}
 
