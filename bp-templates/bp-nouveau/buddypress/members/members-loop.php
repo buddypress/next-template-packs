@@ -44,6 +44,8 @@ bp_nouveau_before_loop(); ?>
 							</p><!-- #item-meta -->
 						<?php endif ; ?>
 
+						<?php bp_nouveau_members_loop_buttons( array('container' => 'ul' ) ); ?>
+
 					</div>
 
 					<?php if ( bp_get_member_latest_update() && ! bp_nouveau_loop_is_grid() ) : ?>
@@ -54,7 +56,7 @@ bp_nouveau_before_loop(); ?>
 
 				</div><!-- // .item -->
 
-				<?php bp_nouveau_members_loop_buttons( array('container' => 'ul' ) ); ?>
+
 
 			</div>
 		</li>

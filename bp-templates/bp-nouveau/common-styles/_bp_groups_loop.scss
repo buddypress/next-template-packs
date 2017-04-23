@@ -18,16 +18,10 @@
 				border: 1px solid $light-grey;
 				@include border-radius(10px);
 				@include responsive-font(16);
-				clear: left;
 				color: $meta-text;
 				font-style: italic;
 				margin: $marg-sml auto 0;
 				padding: $pad-med;
-				width: 80%;
-			}
-
-			.action {
-				text-align: center;
 			}
 
 			p {
@@ -38,12 +32,6 @@
 
 				.item {
 					margin-right: 0;
-				}
-
-				.item-block { // element is a styling div for positional purposes only
-					float: left;
-					margin-right: 2%;
-					width: 46%;
 				}
 
 				.list-title,
@@ -59,18 +47,6 @@
 				.last-activity {
 					clear: left;
 					margin-top: -20px;
-				}
-
-				.action {
-					clear: left;
-					position: static;
-					text-align: left;
-				}
-
-				.group-desc {
-					clear: none;
-					overflow: hidden;
-					width: auto;
 				}
 
 			} // close @media

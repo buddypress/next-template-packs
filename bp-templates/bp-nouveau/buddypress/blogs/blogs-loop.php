@@ -34,21 +34,23 @@ bp_nouveau_before_loop(); ?>
 
 						<p class="last-activity item-meta"><?php bp_blog_last_active(); ?></p>
 
+						<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
+						<p class="meta last-post">
+
+							<?php bp_blog_latest_post(); ?>
+
+						</p>
+						<?php endif; ?>
+
+						<?php bp_nouveau_blogs_loop_buttons( array( 'container' => 'ul' ) ); ?>
+
 					</div>
 
 					<?php bp_nouveau_blogs_loop_item(); ?>
 
 				</div>
 
-				<?php bp_nouveau_blogs_loop_buttons( array( 'container' => 'ul' ) ); ?>
 
-				<?php if ( bp_nouveau_blog_has_latest_post() ) : ?>
-					<p class="meta last-post">
-
-						<?php bp_blog_latest_post(); ?>
-
-					</p>
-				<?php endif; ?>
 
 			</div>
 		</li>

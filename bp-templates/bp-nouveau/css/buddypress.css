@@ -776,8 +776,13 @@ dt.section-title {
 	margin-top: 10px;
 }
 
+.bp-list li .last-post {
+	text-align: center;
+}
+
 .bp-list li .action {
 	margin: 0;
+	text-align: center;
 }
 
 .bp-list li .action .generic-button {
@@ -796,23 +801,34 @@ dt.section-title {
 		margin-right: 5%;
 	}
 	.bp-list li .item {
-		margin: 0 12% 0 0;
+		margin: 0;
 		overflow: hidden;
+	}
+	.bp-list li .item .item-block {
+		float: left;
+		margin-right: 2%;
+		width: 46%;
 	}
 	.bp-list li .item .list-title,
 	.bp-list li .item .item-meta {
 		float: left;
 		text-align: left;
 	}
-	.bp-list li .item .group-details {
+	.bp-list li .item .group-details,
+	.bp-list li .item .last-post {
 		text-align: left;
 	}
+	.bp-list li .group-desc,
+	.bp-list li .user-update,
+	.bp-list li .last-post {
+		clear: none;
+		overflow: hidden;
+		width: auto;
+	}
 	.bp-list li .action {
+		clear: left;
 		padding: 0;
-		position: absolute;
-		right: 0;
-		text-align: right;
-		top: 0;
+		text-align: left;
 	}
 	.bp-list li .action li.generic-button {
 		margin-right: 0;
@@ -1465,6 +1481,9 @@ form.ac-form .ac-reply-content input {
 *----------------------------------------------------------
 */
 @media screen and (min-width: 46.8em) {
+	.buddypress-wrap .blogs-list li .item-block {
+		width: 66%;
+	}
 	.buddypress-wrap .blogs-list li .item-meta {
 		clear: left;
 		float: none;
@@ -1498,22 +1517,16 @@ form.ac-form .ac-reply-content input {
 	border-radius: 10px;
 	background-clip: padding-box;
 	font-size: 13px;
-	clear: left;
 	color: #777;
 	font-style: italic;
 	margin: 10px auto 0;
 	padding: 1em;
-	width: 80%;
 }
 
 @media screen and (min-width: 46.8em) {
 	.buddypress-wrap .groups-list li .group-desc {
 		font-size: 16px;
 	}
-}
-
-.buddypress-wrap .groups-list li .action {
-	text-align: center;
 }
 
 .buddypress-wrap .groups-list li p {
@@ -1523,11 +1536,6 @@ form.ac-form .ac-reply-content input {
 @media screen and (min-width: 46.8em) {
 	.buddypress-wrap .groups-list li .item {
 		margin-right: 0;
-	}
-	.buddypress-wrap .groups-list li .item-block {
-		float: left;
-		margin-right: 2%;
-		width: 46%;
 	}
 	.buddypress-wrap .groups-list li .list-title,
 	.buddypress-wrap .groups-list li .item-meta {
@@ -1540,16 +1548,6 @@ form.ac-form .ac-reply-content input {
 	.buddypress-wrap .groups-list li .last-activity {
 		clear: left;
 		margin-top: -20px;
-	}
-	.buddypress-wrap .groups-list li .action {
-		clear: left;
-		position: static;
-		text-align: left;
-	}
-	.buddypress-wrap .groups-list li .group-desc {
-		clear: none;
-		overflow: hidden;
-		width: auto;
 	}
 }
 
@@ -1592,23 +1590,15 @@ form.ac-form .ac-reply-content input {
 	-ms-border-radius: 10px;
 	border-radius: 10px;
 	background-clip: padding-box;
-	clear: both;
 	color: #777;
 	font-size: 13px;
 	margin: 15px auto;
 	padding: 1em;
-	width: 80%;
 }
 
 @media screen and (min-width: 46.8em) {
 	.buddypress-wrap .members-list li .user-update {
 		font-size: 16px;
-	}
-}
-
-@media screen and (min-width: 32em) {
-	.buddypress-wrap .members-list li .user-update {
-		width: 60%;
 	}
 }
 
@@ -1628,15 +1618,6 @@ form.ac-form .ac-reply-content input {
 
 @media screen and (min-width: 32em) {
 	body:not(.logged-in) .members-list .user-update {
-		width: 98%;
-	}
-}
-
-@media screen and (min-width: 32em) {
-	.buddypress-wrap .members-list .is-current-user .item {
-		margin-right: 0;
-	}
-	.buddypress-wrap .members-list .is-current-user .user-update {
 		width: 98%;
 	}
 }

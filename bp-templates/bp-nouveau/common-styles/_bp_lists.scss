@@ -68,8 +68,13 @@
 			margin-top: $marg-sml;
 		}
 
+		.last-post {
+			text-align: center;
+		}
+
 		.action {
 			margin: 0;
+			text-align: center;
 
 			.generic-button {
 				display: inline-block;
@@ -91,8 +96,14 @@
 			}
 
 			.item {
-				margin: 0 12% 0 0;
+				margin: 0;
 				overflow: hidden;
+
+				.item-block { // element is a styling div for positional purposes only
+					float: left;
+					margin-right: 2%;
+					width: 46%;
+				}
 
 				.list-title,
 				.item-meta {
@@ -100,17 +111,24 @@
 					text-align: left;
 				}
 
-				.group-details {
+				.group-details,
+				.last-post {
 					text-align: left;
 				}
 			}
 
+			.group-desc,
+			.user-update,
+			.last-post {
+					clear: none;
+					overflow: hidden;
+					width: auto;
+				}
+
 			.action {
+				clear: left;
 				padding: 0;
-				position: absolute;
-				right: 0;
-				text-align: right;
-				top: 0;
+				text-align: left;
 
 				// if it's a ul/li wrapper
 				li.generic-button {

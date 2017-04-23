@@ -3,9 +3,14 @@
 .buddypress-wrap {
 
 	.blogs-list { // ul
+
 		li {
 
 			@include medium-up() {
+
+				.item-block {
+					width: 66%;
+				}
 
 				.item-meta {
 					clear: left;
