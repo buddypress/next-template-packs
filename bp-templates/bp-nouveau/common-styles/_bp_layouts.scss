@@ -270,11 +270,15 @@
 				.item-block,
 				.group-desc {
 					float: none;
-					width: auto;
+					width: 96%;
 				}
 
 				.item-block {
 					margin-bottom: $marg-sml;
+				}
+
+				.last-activity {
+					margin-top: 5px;
 				}
 
 				.group-desc {

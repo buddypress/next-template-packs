@@ -26,6 +26,10 @@
 				width: 80%;
 			}
 
+			.action {
+				text-align: center;
+			}
+
 			p {
 				margin: 0 0 0.5em;
 			}
@@ -33,7 +37,7 @@
 			@include medium-up() {
 
 				.item {
-					//margin-right: 0;
+					margin-right: 0;
 				}
 
 				.item-block { // element is a styling div for positional purposes only
@@ -52,9 +56,19 @@
 					margin-bottom: $marg-lrg;
 				}
 
+				.last-activity {
+					clear: left;
+					margin-top: -20px;
+				}
+
+				.action {
+					clear: left;
+					position: static;
+					text-align: left;
+				}
+
 				.group-desc {
 					clear: none;
-					margin: $marg-med $marg-sml $marg-med 0;
 					overflow: hidden;
 					width: auto;
 				}
@@ -88,7 +102,8 @@
 
 .buddypress-wrap {
 
-	.grid {
+	.groups-list.grid {
+
 		@include medium-up {
 
 			&.three,
@@ -98,7 +113,6 @@
 					@include font-size(14);
 				}
 			}
-
 		} // @media
 	}
 }

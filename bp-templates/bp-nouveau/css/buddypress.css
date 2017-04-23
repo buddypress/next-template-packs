@@ -1512,11 +1512,18 @@ form.ac-form .ac-reply-content input {
 	}
 }
 
+.buddypress-wrap .groups-list li .action {
+	text-align: center;
+}
+
 .buddypress-wrap .groups-list li p {
 	margin: 0 0 0.5em;
 }
 
 @media screen and (min-width: 46.8em) {
+	.buddypress-wrap .groups-list li .item {
+		margin-right: 0;
+	}
 	.buddypress-wrap .groups-list li .item-block {
 		float: left;
 		margin-right: 2%;
@@ -1530,9 +1537,17 @@ form.ac-form .ac-reply-content input {
 	.buddypress-wrap .groups-list li .item-meta {
 		margin-bottom: 20px;
 	}
+	.buddypress-wrap .groups-list li .last-activity {
+		clear: left;
+		margin-top: -20px;
+	}
+	.buddypress-wrap .groups-list li .action {
+		clear: left;
+		position: static;
+		text-align: left;
+	}
 	.buddypress-wrap .groups-list li .group-desc {
 		clear: none;
-		margin: 15px 10px 15px 0;
 		overflow: hidden;
 		width: auto;
 	}
@@ -1548,7 +1563,7 @@ form.ac-form .ac-reply-content input {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress-wrap .grid.three .group-desc, .buddypress-wrap .grid.four .group-desc {
+	.buddypress-wrap .groups-list.grid.three .group-desc, .buddypress-wrap .groups-list.grid.four .group-desc {
 		font-size: 14px;
 	}
 }
@@ -4046,11 +4061,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .grid.bp-list > li .item .item-block,
 .buddypress-wrap .grid.bp-list > li .item .group-desc {
 	float: none;
-	width: auto;
+	width: 96%;
 }
 
 .buddypress-wrap .grid.bp-list > li .item .item-block {
 	margin-bottom: 10px;
+}
+
+.buddypress-wrap .grid.bp-list > li .item .last-activity {
+	margin-top: 5px;
 }
 
 .buddypress-wrap .grid.bp-list > li .item .group-desc {
