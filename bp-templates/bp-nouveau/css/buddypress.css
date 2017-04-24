@@ -757,15 +757,15 @@ dt.section-title {
 
 .bp-list li .item .list-title {
 	clear: none;
-	font-size: 23px;
+	font-size: 22px;
 	font-weight: 400;
+	line-height: 1.1;
 	margin: 0 auto;
-	width: 60%;
 }
 
 @media screen and (min-width: 46.8em) {
 	.bp-list li .item .list-title {
-		font-size: 28px;
+		font-size: 26px;
 	}
 }
 
@@ -807,7 +807,7 @@ dt.section-title {
 	.bp-list li .item .item-block {
 		float: left;
 		margin-right: 2%;
-		width: 46%;
+		width: 50%;
 	}
 	.bp-list li .item .list-title,
 	.bp-list li .item .item-meta {
@@ -1600,6 +1600,22 @@ form.ac-form .ac-reply-content input {
 	.buddypress-wrap .members-list li .user-update {
 		font-size: 16px;
 	}
+}
+
+.buddypress-wrap .members-list li .user-update .activity-read-more {
+	background: #fafafa;
+	display: block;
+	font-size: 12px;
+	margin-top: 10px;
+	padding-left: 2px;
+}
+
+.buddypress-wrap .members-list li .user-update .activity-read-more:focus, .buddypress-wrap .members-list li .user-update .activity-read-more:hover {
+	background: #f7f7f7;
+}
+
+.buddypress-wrap .members-list li .user-update .activity-read-more a {
+	display: block;
 }
 
 @media screen and (min-width: 46.8em) {
