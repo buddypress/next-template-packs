@@ -159,12 +159,12 @@
 		li.current {
 
 			a {
-				background-color: $dark-grey;
+				background-color: lighten($dark-grey, 10%);
 				color: $off-white;
 			}
 		}
 	}
-}
+} // close .buddypress-wrap - current & selected states.
 
 // visual styling of default single navs - adds background/padding to
 // the parent elements if vertical nav not selected
@@ -189,6 +189,36 @@
 	.user-subnav#subsubnav,
 	.group-subnav#subsubnav {
 		background: none;
+	}
+}
+
+// Single screens object navs
+// Adjusts visual styling for small screens only
+
+@include medium-max {
+	.buddypress-wrap {
+
+		.single-screen-navs {
+			border: 1px solid #eee;
+
+			li {
+				border-bottom: 1px solid #eee;
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+
+		.bp-subnavs {
+
+			li {
+
+				a {
+					@include font-size(14);
+				}
+			}
+		}
 	}
 }
 

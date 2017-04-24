@@ -380,7 +380,7 @@ dt.section-title {
 
 .buddypress-wrap .bp-subnavs li.selected a,
 .buddypress-wrap .bp-subnavs li.current a {
-	background-color: #555;
+	background-color: #6f6f6f;
 	color: #fafafa;
 }
 
@@ -397,6 +397,21 @@ dt.section-title {
 .buddypress-wrap:not(.bp-vertical-nav) .user-subnav#subsubnav,
 .buddypress-wrap:not(.bp-vertical-nav) .group-subnav#subsubnav {
 	background: none;
+}
+
+@media screen and (max-width: 46.8em) {
+	.buddypress-wrap .single-screen-navs {
+		border: 1px solid #eee;
+	}
+	.buddypress-wrap .single-screen-navs li {
+		border-bottom: 1px solid #eee;
+	}
+	.buddypress-wrap .single-screen-navs li:last-child {
+		border-bottom: none;
+	}
+	.buddypress-wrap .bp-subnavs li a {
+		font-size: 14px;
+	}
 }
 
 .buddypress-wrap .bp-subnavs,
@@ -4191,6 +4206,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 	.bp-dir-vert-nav .dir-navs ul li {
 		float: none;
+		overflow: hidden;
 		width: auto;
 	}
 	.bp-dir-vert-nav .dir-navs ul li.selected {
