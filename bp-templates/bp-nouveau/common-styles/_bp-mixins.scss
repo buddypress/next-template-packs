@@ -22,7 +22,7 @@
 @mixin font-size($font-size: 16) {
 	$rem-font-value: ($font-size / 10);
 	font-size: ($font-size * 1px);
-	//font-size: $rem-font-value + rem;
+//	font-size: $rem-font-value + rem;
 }
 
 
@@ -117,17 +117,21 @@
 
 }
 
-// Add screen reader type hide on screen properties to rulesets
+// These two mixins add hide/show properties for clicked/focussed elements.
+// They may be added to existing rulesets or added to a class selector
+// rulesets to use hardoced to template markup.
+
+// Convenience helper to add hide properties to rulesets
 @mixin hide() {
 	height: 0;
 	left: -999em;
 	overflow: hidden;
 	position: absolute;
 	top: -999em;
-
 }
 
 // companion mixins properties for showing the element for :focus/:hover
+// or via JS added hooks.
 @mixin show() {
 	height: auto;
 	left: 0;
