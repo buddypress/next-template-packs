@@ -3908,7 +3908,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 @media screen and (min-width: 24em) {
 	.grid.members-list .list-wrap {
-		min-height: 350px;
+		min-height: 300px;
 	}
 	.grid.members-list .list-wrap .item-block {
 		min-height: 7rem;
