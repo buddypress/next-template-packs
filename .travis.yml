@@ -22,7 +22,7 @@ before_script:
   - nvm install 6
   - node --version
   - npm --version
-  - grunt --version
   - npm install -g grunt-cli
+  - grunt --version
   - npm install
 script: grunt $BP_NTP_TRAVISCI
