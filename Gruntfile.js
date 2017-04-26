@@ -157,7 +157,7 @@ module.exports = function(grunt) {
 		//grunt.loadNpmTasks('grunt-scss-lint');
 		grunt.loadNpmTasks('grunt-rtlcss');
 		grunt.loadNpmTasks('grunt-contrib-jshint');
-		grunt.loadNpmTasks('grunt-postcss');
+	//	grunt.loadNpmTasks('grunt-postcss');
 		grunt.loadNpmTasks('grunt-stylelint');
 
 		// Lint & Build rtl css
