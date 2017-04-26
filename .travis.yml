@@ -14,5 +14,14 @@ matrix:
     - php: 7.1
       env: BP_NTP_TRAVISCI=travis:grunt
 before_script:
+  - mysql --version
+  - php --version
+  - phpenv versions
+  - phpunit --version
+  - node --version
+  - nvm install 6
+  - node --version
+  - npm --version
+  - grunt --version
   - npm install
 script: grunt $BP_NTP_TRAVISCI
