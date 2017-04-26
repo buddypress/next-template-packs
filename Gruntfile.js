@@ -165,6 +165,11 @@ module.exports = function(grunt) {
 
 		// Default task(s).
 		// ?
-		grunt.registerTask('default', ['uglify', 'postcss']);
 
+	//  Register tasks.
+	grunt.registerTask( 'build',   ['jshint', 'stylelint'] );
+
+	// Travis CI Tasks.
+	grunt.registerTask( 'travis:grunt', 'Runs the Grunt build task.', [ 'build' ]);
+	grunt.registerTask( 'travis:phpunit', 'Runs the PHPUnit tasks.',['jsvalidate:src', 'jshint', 'test'] );
 };

@@ -7,6 +7,12 @@ php:
   - 5.5
   - 5.4
   - 5.3
+env:
+  - BP_NTP_TRAVISCI=travis:phpunit
+matrix:
+  include:
+    - php: 7.1
+      env: BP_NTP_TRAVISCI=travis:grunt
 before_script:
   - npm install
-script: grunt
+script: grunt $BP_NTP_TRAVISCI
