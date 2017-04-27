@@ -3636,16 +3636,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .bp-messages p,
 .buddypress-wrap .bp-messages .sitewide-notices {
 	display: block;
-	font-size: 18px;
 	margin: 5px;
 	padding: 0.5em;
-}
-
-@media screen and (min-width: 46.8em) {
-	.buddypress-wrap .bp-messages p,
-	.buddypress-wrap .bp-messages .sitewide-notices {
-		font-size: 22px;
-	}
 }
 
 .buddypress-wrap .bp-messages.info {

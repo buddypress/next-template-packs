@@ -18,7 +18,6 @@
 		p,
 		.sitewide-notices {
 			display: block;
-			@include responsive-font(22);
 			margin: $marg-xsml;
 			padding: $pad-sml;
 		}

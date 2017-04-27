@@ -198,7 +198,7 @@ function bp_nouveau_template_message() {
 				$user_feedback = call_user_func( $filter, $user_feedback );
 			}
 
-			return $user_feedback;
+			return '<p>' . $user_feedback . '</p>';
 		} elseif ( ! empty( $bp_nouveau->template_message['message'] ) ) {
 			/**
 			 * Filters the 'template_notices' feedback message content.
