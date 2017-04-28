@@ -13,7 +13,10 @@ module.exports = function(grunt) {
 
 		BP_NTP_JS = [
 			'**/*.js'
-		];
+		],
+
+		stylelintConfigCss  = require('stylelint-config-wordpress/index.js'),
+		stylelintConfigScss = require('stylelint-config-wordpress/scss.js');
 
 	require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
 
@@ -76,7 +79,7 @@ module.exports = function(grunt) {
 		stylelint: {
 			css: {
 				options: {
-					configFile: '.stylelintrc',
+					config: stylelintConfigCss,
 					format: 'css'
 				},
 				expand: true,
@@ -90,16 +93,16 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				options: {
-					configFile: '.stylelintrc',
+					config: stylelintConfigScss,
 					format: 'scss'
 				},
 				expand: true,
 				cwd: WORKING_DIR,
 				src: [
 					'bp-nouveau/sass/buddypress.scss',
-				'common-styles/*.scss',
-				'!common-styles/_bp-mixins.scss',
-				'!common-styles/_bp-variables.scss'
+					'common-styles/*.scss',
+					'!common-styles/_bp-mixins.scss',
+					'!common-styles/_bp-variables.scss'
 				]
 			}
 		},
@@ -120,7 +123,7 @@ module.exports = function(grunt) {
 	});
 
 	// Lint CSS & JavaScript
-	grunt.registerTask( 'lint', ['jshint', 'stylelint' ] );
+	grunt.registerTask( 'lint', ['stylelint', 'jshint' ] );
 
 	// Build CSS & JavaScript
 	grunt.registerTask( 'build', [ 'sass', 'rtlcss' ] );
