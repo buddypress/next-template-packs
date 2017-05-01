@@ -5,6 +5,7 @@
 // lists if they do not use it.
 
 .bp-list {
+
 	@include box-model();
 	border-top: 1px solid $light-grey;
 	clear: both;
@@ -54,17 +55,18 @@
 
 			.list-title {
 				clear: none; // some WP themes state clear:both
+
 				@include responsive-font(26);
 				font-weight: 400;
 				line-height: 1.1;
 				margin: 0 auto;
-//				width: 60%;
 			}
 		}
 
 		.meta,
 		.item-meta {
 			color: #888;
+
 			@include font-size(12);
 			margin-top: $marg-sml;
 		}
@@ -79,7 +81,8 @@
 
 			.generic-button {
 				display: inline-block;
-				@include font-size(12)
+
+				@include font-size(12);
 				margin: 0 $marg-sml 0 0;
 			}
 
@@ -121,10 +124,10 @@
 			.group-desc,
 			.user-update,
 			.last-post {
-					clear: none;
-					overflow: hidden;
-					width: auto;
-				}
+				clear: none;
+				overflow: hidden;
+				width: auto;
+			}
 
 			.action {
 				clear: left;
@@ -158,9 +161,10 @@
 // for the buttons - max out the item element width.
 body:not(.logged-in) {
 
-		.bp-list {
+	.bp-list {
 
 		@include medium-up() {
+
 			.item {
 				margin-right: 0;
 			}

@@ -27,6 +27,7 @@
 		margin-top: 0;
 
 		.moderators-title {
+
 			@include font-size(14);
 		}
 
@@ -46,6 +47,7 @@
 		}
 
 		img.avatar {
+
 			@include box-shadow-none();
 			float: none;
 			height: 30px;

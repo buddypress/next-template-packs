@@ -173,6 +173,7 @@
 	@include medium-max {
 
 		.bp-navs {
+
 			li {
 				background: $light-grey;
 			}
@@ -196,6 +197,7 @@
 // Adjusts visual styling for small screens only
 
 @include medium-max {
+
 	.buddypress-wrap {
 
 		.single-screen-navs {
@@ -215,6 +217,7 @@
 			li {
 
 				a {
+
 					@include font-size(14);
 				}
 			}
@@ -353,6 +356,7 @@
 .buddypress-wrap {
 
 	// position our nav elements at larger screen widths
+
 	@include medium-up() {
 
 		.bp-navs {
@@ -445,6 +449,7 @@
 
 			// Profile group labels links
 			// Button navigation as tabbed effect for wide screen
+
 			@include tabbed-links();
 
 			.bp-navs.tabbed-links {

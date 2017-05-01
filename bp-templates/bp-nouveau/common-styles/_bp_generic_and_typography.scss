@@ -27,6 +27,7 @@ body {
 		// ( setting a global change might be better)
 		// box-modal() defaults to 'border-box' if no param passed
 		.bp-list .action {
+
 			@include box-model();
 		}
 	}
@@ -136,6 +137,7 @@ select,
 input[type="search"],
 input[type="submit"],
 input[type="reset"] {
+
 	@include border-radius(2px);
 }
 
@@ -159,6 +161,7 @@ body.buddypress {
 			padding: 0;
 
 			.entry-title {
+
 				@include responsive-font(34);
 				font-weight: inherit;
 				color: $primary-headings;
@@ -168,34 +171,41 @@ body.buddypress {
 }
 
 dt.section-title {
+
 	@include responsive-font(22);
 }
 
 .bp-label-text,
 .message-threads {
+
 	@include responsive-font(16);
 }
 
 .activity-header {
+
 	@include responsive-font(16);
 }
 
 .activity-inner {
+
 	@include responsive-font(18);
 }
 
 #whats-new-post-in {
+
 	@include font-size(16);
 }
 
 .mini .activity-header,
 .acomment-meta {
+
 	@include font-size(16);
 }
 
 .dir-component-filters {
 
 	#activity-filter-by {
+
 		@include responsive-font(16);
 	}
 }
@@ -206,10 +216,12 @@ $search-element-button-size: $search-element-size + 5;
 .bp-tables-user {
 
 	th {
+
 		@include responsive-font(16);
 	}
 
 	td {
+
 		@include responsive-font(14);
 	}
 }
@@ -219,14 +231,17 @@ $search-element-button-size: $search-element-size + 5;
 .profile-fields {
 
 	th {
+
 		@include responsive-font(18);
 	}
 
 	td {
+
 		@include responsive-font(16);
 	}
 }
 
 #notification-select {
+
 	@include responsive-font(14);
 }

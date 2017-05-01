@@ -58,6 +58,7 @@
 		textarea {
 			background: $textarea-bck;
 			border: 0;
+
 			@include box-model();
 			color: #333;
 			font-family: inherit;
@@ -68,6 +69,7 @@
 			width: 100%;
 
 			&:focus {
+
 				@include box-shadow(0 0 6px 0 $med-light-grey);
 				border: 1px solid $form-border-color;
 			}

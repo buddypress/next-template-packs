@@ -6,6 +6,7 @@
 	padding: 0;
 
 	.group-conditions { // the dl
+
 		@include responsive-font(14);
 		width: 80%;
 

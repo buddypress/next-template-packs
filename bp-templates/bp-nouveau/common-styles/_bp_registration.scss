@@ -4,6 +4,7 @@
 .register-page {
 
 	.register-section {
+
 		@include box-model();
 	}
 
@@ -11,6 +12,7 @@
 		margin-top: $marg-lrg;
 
 		.default-profile {
+
 			input {
 				margin-bottom: $marg-lrg;
 			}
@@ -26,8 +28,6 @@
 			border: 1px solid $bp-border-color;
 			margin: $marg-lrg 0;
 			padding: 5px;
-
-
 
 			fieldset {
 				border: 0;
@@ -57,7 +57,9 @@
 // Flex layout containers for registration sections
 
 @include medium-up() {
+
 	.buddypress-wrap {
+
 		.register-page {
 
 			.layout-wrap {
@@ -76,7 +78,9 @@
 				}
 			}
 
-			.submit {clear: both;}
+			.submit {
+				clear: both;
+			}
 
 		}
 	}
@@ -86,7 +90,9 @@
 // if so we'll adjust the child item elements.
 
 @include medium-up() {
+
 	.buddypress-wrap.extended-default-reg {
+
 		.register-page {
 
 			.default-profile {
@@ -95,12 +101,12 @@
 			}
 
 			.extended-profile {
-				flex: 2 ;
+				flex: 2;
 				padding-left: $pad-med;
 			}
 
 			.blog-details {
-				flex:  1 100%;
+				flex: 1 100%;
 			}
 		}
 	}

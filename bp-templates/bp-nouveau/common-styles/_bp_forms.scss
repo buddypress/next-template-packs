@@ -41,6 +41,7 @@
 	input[type="password"] {
 
 		&:focus {
+
 			@include box-shadow(0 0 8px #eee);
 		}
 	}
@@ -290,7 +291,6 @@ body.no-js {
 			padding: 6px 25px 6px $marg-sml;
 			position: relative;
 			text-indent: -2px;
-			text-overflow: '';
 			z-index: 1;
 			width: auto;
 		}
@@ -309,7 +309,7 @@ body.no-js {
 
 			&:before {
 				color: $primary-grey;
-				content:'\25BC';
+				content: "\25BC";
 			}
 		}
 
@@ -325,6 +325,7 @@ body.no-js {
 	// Add a little on hover inset shadow for  subnav search & filters
 	.select-wrap,
 	.bp-search form {
+
 		&:focus,
 		&:hover {
 			border: 1px solid darken($bp-border-color, 10%);

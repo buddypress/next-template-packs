@@ -99,10 +99,11 @@
 			color: $light-text;
 		}
 
-		// provide a class to style button elements as text only non button appearence
+		// provide a class to style button elements as text only non button.
 		button.text-button {
 			background: none;
 			border: 0;
+
 			@include box-shadow-none();
 		}
 
@@ -199,13 +200,14 @@
 
 	// The group or site create link as either a button or plain link.
 	// @todo this will need further classes & styles depending on nav layouts?
-	// The class 'create-button' will be hardcoded for the moment on the li element
+	// The class 'create-button' will be hardcoded for the moment on the li
 	// this could be a user selected choice to style as a button though?
 
 	#buddypress {
 
 		.create-button { // the parent, i.e li element.
 			background: none;
+
 			@include medium-up {
 				float: right;
 			}
@@ -214,15 +216,18 @@
 
 			a {
 				border: 1px solid $bp-border-dark;
+
 				@include border-radius(5px);
+
 				@include box-shadow(inset 0 0 6px 0 $light-grey);
-				margin: 0.2em 0 0.2em;
+				margin: 0.2em 0;
 				width: auto;
 
 				&:focus,
 				&:hover {
 					background: none;
 					border-color: $bp-border-dark;
+
 					@include box-shadow(inset 0 0 12px 0 $light-grey );
 				}
 			}
@@ -239,7 +244,7 @@
 
 
 					a {
-						margin-right: 0.5em ;
+						margin-right: 0.5em;
 					}
 				}
 			}
@@ -263,6 +268,7 @@
 	}
 
 	.bp-invites-content .item-list li a.invite-button:before {
+
 		@include responsive-font(32);
 	}
 

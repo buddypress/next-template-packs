@@ -31,6 +31,7 @@
 
 			select,
 			input[type="search"] {
+
 				@include font-size(16);
 			}
 
@@ -71,6 +72,7 @@
 		}
 
 		//position for wider screens
+
 		@include medium-small-up() {
 
 			li {

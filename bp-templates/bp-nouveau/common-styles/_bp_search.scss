@@ -2,7 +2,7 @@
 
 .buddypress-wrap {
 
-	@include clearfix-element('.bp-dir-search-form');
+	@include clearfix-element(".bp-dir-search-form");
 
 	form.bp-dir-search-form {
 		border: 1px solid $bp-border-color;
@@ -15,6 +15,7 @@
 		input[type="text"],
 		button[type="submit"] {
 			border: 0;
+
 			@include border-radius(0);
 		}
 
@@ -37,6 +38,7 @@
 
 			span {
 				font-family: dashicons;
+
 				@include font-size(18);
 				line-height: 1.6;
 			}
@@ -44,10 +46,12 @@
 
 		// For non no-js we'll add back in show() further on below
 		button[type="submit"] {
+
 			@include hide();
 		}
 
 		button[type="submit"].bp-show {
+
 			@include show();
 		}
 
@@ -97,6 +101,7 @@
 	form.bp-dir-search-form {
 
 		button[type="submit"] {
+
 			@include show();
 		}
 	}

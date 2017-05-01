@@ -37,6 +37,7 @@ form.ac-form {
 				width: 100%;
 
 				&:focus {
+
 					@include box-shadow( 0 0 6px $med-light-grey );
 				}
 			}

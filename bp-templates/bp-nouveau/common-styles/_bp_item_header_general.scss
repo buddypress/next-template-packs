@@ -8,6 +8,7 @@
 	}
 
 	.group-status {
+
 		@include font-size(18);
 		color: $black;
 		padding-right: $pad-med;
@@ -15,6 +16,7 @@
 
 	.activity {
 		display: inline-block;
+
 		@include font-size(12);
 		opacity: 0.8;
 		padding: 0;
@@ -82,6 +84,7 @@
 
 	.item-meta {
 		color: $light-text;
+
 		@include font-size(14);
 		margin: $marg-med 0 $marg-xsml;
 		//overflow: hidden;

@@ -12,8 +12,10 @@
 
 			.user-update {
 				border: 1px solid $light-grey;
+
 				@include border-radius(10px);
 				color: $meta-text;
+
 				@include responsive-font(16);
 				margin: $marg-med auto;
 				padding: $pad-med;
@@ -21,6 +23,7 @@
 				.activity-read-more {
 					background: $off-white;
 					display: block;
+
 					@include font-size(12);
 					margin-top: $marg-sml;
 					padding-left: 2px;
@@ -71,7 +74,7 @@
 
 body:not(.logged-in) {
 
-		@include medium-small-up() {
+	@include medium-small-up() {
 
 		.members-list {
 

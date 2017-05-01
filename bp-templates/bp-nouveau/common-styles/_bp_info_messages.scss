@@ -48,12 +48,11 @@
 		//			}
 		//		}
 
-
-
 	} // close .bp-messages
 
 	.bp-sitewide-notice {
 		border: 1px solid $bp-border-dark;
+
 		@include box-shadow( 0 0 2px 0 $med-light-grey);
 		margin: $marg-med 0;
 		padding: $pad-sml;
@@ -67,10 +66,13 @@
 	// This is an anomaly, this screen message is locked away in
 	// core avatar styles and ought to be pulled out, markup & styles to nouveau
 	#group-create-body {
+
 		.bp-cover-image-status {
+
 			p.warning {
 				background: $informational;
 				border: 0;
+
 				@include box-shadow( 0 0 3px 0 rgba(0, 0, 0, 0.2) );
 				color: $white;
 			}
@@ -84,9 +86,13 @@
 	// box shadow.
 
 	.bp-feedback {
+
 		@include flex-box-dir();
+
 		@include flex-align();
+
 		@include message-box( $border: none);
+
 		@include box-shadow( 0 1px 1px 1px rgba(0, 0, 0, 0.1) );
 		margin: 10px 0;
 		position: relative;
@@ -97,7 +103,7 @@
 			font-family: dashicons;
 			left: 0;
 			position: relative;
-			padding: 0 .5em;
+			padding: 0  0.5em;
 		}
 
 		span.bp-help-text,
@@ -112,8 +118,8 @@
 	}
 
 	.bp-feedback.small span.text {
-//		display: inline-block;
-//		margin-left: 30px;
+		//		display: inline-block;
+		//		margin-left: 30px;
 	}
 
 	a[data-bp-close] span:before {
@@ -196,16 +202,19 @@
 
 		&.error,
 		&.bad {
+
 			@include pwd-bad-colors();
 			display: block;
 		}
 
 		&.short {
+
 			@include pwd-short-colors();
 			display: block;
 		}
 
 		&.strong {
+
 			@include pwd-good-colors();
 			display: block;
 		}

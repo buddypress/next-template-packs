@@ -131,6 +131,7 @@ body.no-js {
 			}
 
 			.field-visibility-settings-close {
+
 				@include font-size(12);
 			}
 		}
@@ -201,6 +202,7 @@ body.no-js {
 
 		.profile-group-title {
 			border-bottom: 1px solid $bp-border-dark;
+
 			@include box-shadow( 3px 3px 9px 0 #eee);
 		}
 	}
@@ -214,7 +216,9 @@ body.register .buddypress-wrap .page ul {
 // Avatars & Cover Image
 
 .buddypress-wrap {
+
 	.profile {
+
 		.bp-avatar-nav {
 			margin-top: $marg-lrg;
 		}

@@ -5,6 +5,7 @@
 
 #item-body,
 .single-screen-navs {
+
 	@include box-model();
 }
 
@@ -19,6 +20,7 @@
 
 	> li,
 	> li .generic-button a {
+
 		@include box-model( border-box );
 	}
 
@@ -59,6 +61,7 @@
 	// min-height rules to line up grid box elements
 	// to prevent breaking grid layout through uneven heights
 	// one column or single column mobile can have varying heights
+
 	@include small-up() {
 
 		&.members-list {
@@ -261,6 +264,7 @@
 			}
 
 			.item {
+
 				@include responsive-font( 22 );
 				left: 0;
 				margin: 0 auto;
@@ -330,7 +334,7 @@
 	.grid.three,
 	.grid.four {
 
-		>li {
+		> li {
 
 			.group-desc {
 				min-height: 8em;
@@ -388,15 +392,16 @@
 
 		}
 
-	// re-factor the related elements like the #item-body so it sits
-	// to the side(floated)
-
+		// re-factor the related elements like the #item-body so it sits
+		// to the side(floated)
 		.bp-wrap {
 			margin-bottom: $marg-med;
 
 			.user-nav-tabs.users-nav,
 			.group-nav-tabs.groups-nav {
+
 				ul {
+
 					li {
 						left: 1px;
 						position: relative;
@@ -419,6 +424,7 @@
 				width: auto;
 
 				li {
+
 					@include font-size(16);
 					margin: $marg-sml 0;
 
@@ -522,6 +528,7 @@
 	// provided so any elements may be styled.
 
 	.buddypress-wrap.bp-dir-vert-nav {
+
 		.dir-navs.activity-nav-tabs,
 		.dir-navs.sites-nav-tabs,
 		.dir-navs.groups-nav-tabs,
