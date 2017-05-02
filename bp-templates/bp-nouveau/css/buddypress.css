@@ -1153,7 +1153,11 @@ dt.section-title {
 .activity-list .activity-item .activity-meta.action .icons:before {
 	font-family: dashicons;
 	font-size: 18px;
-	vertical-align: bottom;
+	vertical-align: middle;
+}
+
+.activity-list .activity-item .activity-meta.action a.acomment-reply:before {
+	content: "\f101";
 }
 
 .activity-list .activity-item .activity-meta.action .view:before {
