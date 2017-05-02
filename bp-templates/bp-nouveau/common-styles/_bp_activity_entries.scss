@@ -217,8 +217,8 @@
 			}
 
 			// we don't want a background hover if icons used
-			a.button:focus,
-			a.button:hover {
+			.button:focus,
+			.button:hover {
 				background: none;
 			}
 
@@ -229,27 +229,27 @@
 				vertical-align: bottom;
 			}
 
-			a.acomment-reply:before {
+			.acomment-reply:before {
 				content: "\f101";
 			}
 
-			a.view:before {
+			.view:before {
 				content: "\f125";
 			}
 
-			a.fav:before {
+			.fav:before {
 				content: "\f154";
 			}
 
-			a.unfav:before {
+			.unfav:before {
 				content: "\f155";
 			}
 
-			a.delete-activity:before {
+			.delete-activity:before {
 				content: "\f153";
 			}
 
-			a.delete-activity:hover {
+			.delete-activity:hover {
 				color: #800;
 			}
 
