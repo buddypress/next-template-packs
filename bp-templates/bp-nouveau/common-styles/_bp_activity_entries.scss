@@ -222,6 +222,8 @@
 				background: none;
 			}
 
+			// Uncomment comment class for icon use
+			//.acomment-reply,
 			.button:before,
 			.icons:before {
 				font-family: dashicons;
@@ -229,9 +231,10 @@
 				vertical-align: bottom;
 			}
 
-			.acomment-reply:before {
-				content: "\f101";
-			}
+			// Uncomment ruleset for icon rendering
+			//.acomment-reply:before {
+				//content: "\f101";
+			//}
 
 			.view:before {
 				content: "\f125";

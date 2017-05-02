@@ -1156,10 +1156,6 @@ dt.section-title {
 	vertical-align: bottom;
 }
 
-.activity-list .activity-item .activity-meta.action .acomment-reply:before {
-	content: "\f101";
-}
-
 .activity-list .activity-item .activity-meta.action .view:before {
 	content: "\f125";
 }
