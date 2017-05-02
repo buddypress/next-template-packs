@@ -3050,7 +3050,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	padding: 6px 10px 6px 25px;
 	position: relative;
 	text-indent: -2px;
-	text-overflow: '';
 	z-index: 1;
 	width: auto;
 }
@@ -3070,7 +3069,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress-wrap .select-wrap span.select-arrow:before {
 	color: #ccc;
-	content: '\25BC';
+	content: "\25BC";
 }
 
 .buddypress-wrap .select-wrap:focus .select-arrow:before, .buddypress-wrap .select-wrap:hover .select-arrow:before {
@@ -3542,7 +3541,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-box-shadow: inset 0 0 6px 0 #eaeaea;
 	-moz-box-shadow: inset 0 0 6px 0 #eaeaea;
 	box-shadow: inset 0 0 6px 0 #eaeaea;
-	margin: 0.2em 0 0.2em;
+	margin: 0.2em 0;
 	width: auto;
 }
 
@@ -3636,16 +3635,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .bp-messages p,
 .buddypress-wrap .bp-messages .sitewide-notices {
 	display: block;
-	font-size: 18px;
 	margin: 5px;
 	padding: 0.5em;
-}
-
-@media screen and (min-width: 46.8em) {
-	.buddypress-wrap .bp-messages p,
-	.buddypress-wrap .bp-messages .sitewide-notices {
-		font-size: 22px;
-	}
 }
 
 .buddypress-wrap .bp-messages.info {
@@ -3655,6 +3646,19 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .bp-messages.updated {
 	clear: both;
 	display: block;
+}
+
+.buddypress-wrap .bp-sitewide-notice {
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0 0 2px 0 #d6d6d6;
+	-moz-box-shadow: 0 0 2px 0 #d6d6d6;
+	box-shadow: 0 0 2px 0 #d6d6d6;
+	margin: 15px 0;
+	padding: 0.5em;
+}
+
+.buddypress-wrap .bp-sitewide-notice p {
+	margin: 0.5em 0;
 }
 
 .buddypress-wrap #group-create-body .bp-cover-image-status p.warning {
@@ -3696,7 +3700,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	font-family: dashicons;
 	right: 0;
 	position: relative;
-	padding: 0 .5em;
+	padding: 0  0.5em;
 }
 
 .buddypress-wrap .bp-feedback span.bp-help-text,
