@@ -43,3 +43,10 @@
 	align-items: center;
 }
 
+.bp-hide {
+	@include hide();
+}
+
+.bp-show {
+	@include show();
+}

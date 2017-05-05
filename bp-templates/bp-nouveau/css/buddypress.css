@@ -3369,6 +3369,22 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	align-items: center;
 }
 
+.bp-hide {
+	height: 0;
+	left: -999em;
+	overflow: hidden;
+	position: absolute;
+	top: -999em;
+}
+
+.bp-show {
+	height: auto;
+	left: 0;
+	overflow: visible;
+	position: static;
+	top: 0;
+}
+
 .buddypress .buddypress-wrap button,
 .buddypress .buddypress-wrap a.button,
 .buddypress .buddypress-wrap input[type="submit"],
