@@ -11,8 +11,9 @@
 	// Activity stream entries, comments & whats new form
 	.activity-update-form {
 		border: 1px solid $bp-border-dark;
+
 		@include box-shadow( inset 0 0 6px #eee);
-		padding: 10px;
+
 	}
 
 	.activity-list.bp-list {

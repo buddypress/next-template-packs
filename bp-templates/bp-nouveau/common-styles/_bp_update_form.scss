@@ -1,5 +1,9 @@
 // BP Whats new form handles user updates to groups or profiles
 
+.activity-update-form {
+	padding: 10px 10px 0;
+}
+
 .item-body {
 
 	.activity-update-form {
@@ -14,12 +18,8 @@
 .activity-update-form {
 	margin: $marg-med 0;
 
-	.activity-form { // #whats-new-form
-		margin-bottom: $marg-xlrg;
-	}
-
 	#whats-new-avatar {
-		margin-right: $marg-sml;
+		margin: $marg-sml 0;
 		text-align: center;
 
 		img {
@@ -34,22 +34,6 @@
 		padding: 0 0 $marg-lrg 0;
 	}
 
-	#whats-new-post-in-box {
-		margin: $marg-sml 0;
-	}
-
-	#whats-new-submit {
-		margin: 0 0 $marg-lrg;
-
-		input {
-			line-height: inherit;
-			margin-right: 2px;
-			padding: $pad-sml;
-			text-align: center;
-			width: 10em;
-		}
-	}
-
 	// these ID's need replacing with this!
 	//.textarea-wrap { // #whats-new-textarea
 
@@ -57,7 +41,6 @@
 
 		textarea {
 			background: $textarea-bck;
-			border: 0;
 
 			@include box-model();
 			color: #333;
@@ -71,8 +54,65 @@
 			&:focus {
 
 				@include box-shadow(0 0 6px 0 $med-light-grey);
-				border: 1px solid $form-border-color;
 			}
+		}
+	}
+
+	#whats-new-post-in-box {
+		margin: $marg-sml 0;
+
+		#whats-new-post-in-box-items {
+			list-style: none;
+			margin: $marg-sml 0;
+
+			li {
+				margin-bottom: $marg-sml;
+			}
+
+			#activity-autocomplete {
+				padding: 0.3em;
+			}
+
+			.bp-activity-object {
+
+				@include center-vert();
+				padding: 0.2em;
+
+				.avatar {
+					width: 30px;
+				}
+
+				span {
+					padding-left: $marg-sml;
+					vertical-align: middle;
+				}
+
+				&:focus,
+				&:hover {
+					background: $light-grey;
+					cursor: pointer;
+				}
+
+				&.selected {
+					border: 1px solid $med-light-grey;
+				}
+			}
+		}
+
+	}
+
+	#whats-new-submit {
+		margin: $marg-med 0 $marg-sml;
+
+		input {
+
+			@include font-size(14);
+			line-height: inherit;
+			margin-bottom: $marg-sml;
+			margin-right: $marg-sml;
+			padding: 0.2em 0;
+			text-align: center;
+			width: 100%;
 		}
 	}
 
@@ -81,7 +121,7 @@
 		#whats-new-avatar {
 			display: block;
 			float: left;
-			margin-right: $marg-sml;
+			margin: 0 $marg-sml 0 0;
 		}
 
 		#whats-new-content,
@@ -90,6 +130,13 @@
 			margin-left: 12%;
 		}
 
-	} // close @media
+		#whats-new-submit {
 
+			input {
+				margin-bottom: 0;
+				margin-right: $marg-sml;
+				width: 8em;
+			}
+		}
+	} // close @media
 }

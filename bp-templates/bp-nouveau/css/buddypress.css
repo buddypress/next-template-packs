@@ -878,6 +878,10 @@ dt.section-title {
 * @section 3.1.1 - Activity Whats New
 *-----------------------------------------------------
 */
+.activity-update-form {
+	padding: 10px 10px 0;
+}
+
 .item-body .activity-update-form .activity-form {
 	margin: 0;
 	padding: 0;
@@ -887,12 +891,8 @@ dt.section-title {
 	margin: 15px 0;
 }
 
-.activity-update-form .activity-form {
-	margin-bottom: 30px;
-}
-
 .activity-update-form #whats-new-avatar {
-	margin-right: 10px;
+	margin: 10px 0;
 	text-align: center;
 }
 
@@ -904,25 +904,8 @@ dt.section-title {
 	padding: 0 0 20px 0;
 }
 
-.activity-update-form #whats-new-post-in-box {
-	margin: 10px 0;
-}
-
-.activity-update-form #whats-new-submit {
-	margin: 0 0 20px;
-}
-
-.activity-update-form #whats-new-submit input {
-	line-height: inherit;
-	margin-right: 2px;
-	padding: 0.5em;
-	text-align: center;
-	width: 10em;
-}
-
 .activity-update-form #whats-new-textarea textarea {
 	background: #fff;
-	border: 0;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -939,19 +922,84 @@ dt.section-title {
 	-webkit-box-shadow: 0 0 6px 0 #d6d6d6;
 	-moz-box-shadow: 0 0 6px 0 #d6d6d6;
 	box-shadow: 0 0 6px 0 #d6d6d6;
+}
+
+.activity-update-form #whats-new-post-in-box {
+	margin: 10px 0;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items {
+	list-style: none;
+	margin: 10px 0;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items li {
+	margin-bottom: 10px;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items #activity-autocomplete {
+	padding: 0.3em;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items .bp-activity-object {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 0.2em;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items .bp-activity-object .avatar {
+	width: 30px;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items .bp-activity-object span {
+	padding-left: 10px;
+	vertical-align: middle;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items .bp-activity-object:focus, .activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items .bp-activity-object:hover {
+	background: #eaeaea;
+	cursor: pointer;
+}
+
+.activity-update-form #whats-new-post-in-box #whats-new-post-in-box-items .bp-activity-object.selected {
 	border: 1px solid #d6d6d6;
+}
+
+.activity-update-form #whats-new-submit {
+	margin: 15px 0 10px;
+}
+
+.activity-update-form #whats-new-submit input {
+	font-size: 14px;
+	line-height: inherit;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	padding: 0.2em 0;
+	text-align: center;
+	width: 100%;
 }
 
 @media screen and (min-width: 46.8em) {
 	.activity-update-form #whats-new-avatar {
 		display: block;
 		float: left;
-		margin-right: 10px;
+		margin: 0 10px 0 0;
 	}
 	.activity-update-form #whats-new-content,
 	.activity-update-form #whats-new-post-in-box,
 	.activity-update-form #whats-new-submit {
 		margin-left: 12%;
+	}
+	.activity-update-form #whats-new-submit input {
+		margin-bottom: 0;
+		margin-right: 10px;
+		width: 8em;
 	}
 }
 
@@ -4318,7 +4366,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-box-shadow: inset 0 0 6px #eee;
 	-moz-box-shadow: inset 0 0 6px #eee;
 	box-shadow: inset 0 0 6px #eee;
-	padding: 10px;
 }
 
 .buddypress-wrap .activity-list.bp-list {
