@@ -681,6 +681,9 @@ dt.section-title {
 	.buddypress-wrap .subnav-filters .component-filters select {
 		max-width: 250px;
 	}
+	.buddypress-wrap .subnav-filters .user-messages-search {
+		float: right;
+	}
 }
 
 /**
@@ -3158,27 +3161,32 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 * The Search form & controls in directory pages
 *----------------------------------------------------------
 */
-.buddypress-wrap .bp-dir-search-form:before,
-.buddypress-wrap .bp-dir-search-form:after {
+.buddypress-wrap .bp-dir-search-form, .buddypress-wrap .bp-messages-search-form:before,
+.buddypress-wrap .bp-dir-search-form, .buddypress-wrap .bp-messages-search-form:after {
 	content: " ";
 	display: table;
 }
 
-.buddypress-wrap .bp-dir-search-form:after {
+.buddypress-wrap .bp-dir-search-form, .buddypress-wrap .bp-messages-search-form:after {
 	clear: both;
 }
 
-.buddypress-wrap form.bp-dir-search-form {
+.buddypress-wrap form.bp-dir-search-form,
+.buddypress-wrap form.bp-messages-search-form {
 	border: 1px solid #eee;
 }
 
-.buddypress-wrap form.bp-dir-search-form label {
+.buddypress-wrap form.bp-dir-search-form label,
+.buddypress-wrap form.bp-messages-search-form label {
 	margin: 0;
 }
 
 .buddypress-wrap form.bp-dir-search-form input[type="search"],
 .buddypress-wrap form.bp-dir-search-form input[type="text"],
-.buddypress-wrap form.bp-dir-search-form button[type="submit"] {
+.buddypress-wrap form.bp-dir-search-form button[type="submit"],
+.buddypress-wrap form.bp-messages-search-form input[type="search"],
+.buddypress-wrap form.bp-messages-search-form input[type="text"],
+.buddypress-wrap form.bp-messages-search-form button[type="submit"] {
 	border: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -3188,30 +3196,35 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap form.bp-dir-search-form input[type="search"],
-.buddypress-wrap form.bp-dir-search-form input[type="text"] {
+.buddypress-wrap form.bp-dir-search-form input[type="text"],
+.buddypress-wrap form.bp-messages-search-form input[type="search"],
+.buddypress-wrap form.bp-messages-search-form input[type="text"] {
 	float: left;
 	padding: 3px 10px;
 	width: 80%;
 }
 
-.buddypress-wrap form.bp-dir-search-form button[type="submit"] {
+.buddypress-wrap form.bp-dir-search-form button[type="submit"],
+.buddypress-wrap form.bp-messages-search-form button[type="submit"] {
 	float: right;
 	font-size: inherit;
 	font-weight: 400;
 	line-height: inherit;
-	padding: 6px 0.8em;
+	padding: 3px 0.8em;
 	text-align: center;
 	text-transform: none;
 	width: 20%;
 }
 
-.buddypress-wrap form.bp-dir-search-form button[type="submit"] span {
+.buddypress-wrap form.bp-dir-search-form button[type="submit"] span,
+.buddypress-wrap form.bp-messages-search-form button[type="submit"] span {
 	font-family: dashicons;
 	font-size: 18px;
 	line-height: 1.6;
 }
 
-.buddypress-wrap form.bp-dir-search-form button[type="submit"] {
+.buddypress-wrap form.bp-dir-search-form button[type="submit"],
+.buddypress-wrap form.bp-messages-search-form button[type="submit"] {
 	height: 0;
 	left: -999em;
 	overflow: hidden;
@@ -3219,7 +3232,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	top: -999em;
 }
 
-.buddypress-wrap form.bp-dir-search-form button[type="submit"].bp-show {
+.buddypress-wrap form.bp-dir-search-form button[type="submit"].bp-show,
+.buddypress-wrap form.bp-messages-search-form button[type="submit"].bp-show {
 	height: auto;
 	left: 0;
 	overflow: visible;
@@ -3227,12 +3241,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	top: 0;
 }
 
-.buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-cancel-button {
+.buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-cancel-button,
+.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-cancel-button {
 	-webkit-appearance: searchfield-cancel-button;
 }
 
 .buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-results-button,
-.buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-results-decoration {
+.buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-results-decoration,
+.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-results-button,
+.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-results-decoration {
 	display: none;
 }
 

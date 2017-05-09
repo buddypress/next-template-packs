@@ -75,15 +75,18 @@
 <script type="text/html" id="tmpl-bp-messages-filters">
 	<li class="user-messages-bulk-actions"></div>
 	<li class="user-messages-search" role="search" data-bp-search="{{data.box}}">
-		<form action="" method="get" id="user_messages_search_form">
-			<label for="user_messages_search">
+		<div class="bp-search messages-search">
+			<form action="" method="get" id="user_messages_search_form" class="bp-messages-search-form" data-bp-search="messages">
+				<label for="user_messages_search" class="bp-screen-reader-text">
+					<?php _e('Search Messages', 'bp-nouveau'); ?>
+				</label>
 				<input type="search" id="user_messages_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
-			</label>
-			<button type="submit" id="user_messages_search_submit">
-				<span class="dashicons dashicons-search" aria-hidden="true"></span>
-				<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
-			</button>
-		</form>
+				<button type="submit" id="user_messages_search_submit">
+					<span class="dashicons dashicons-search" aria-hidden="true"></span>
+					<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
+				</button>
+			</form>
+		</div>
 	</li>
 </script>
 

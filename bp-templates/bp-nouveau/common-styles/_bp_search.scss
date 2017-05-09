@@ -2,9 +2,10 @@
 
 .buddypress-wrap {
 
-	@include clearfix-element(".bp-dir-search-form");
+	@include clearfix-element(".bp-dir-search-form, .bp-messages-search-form");
 
-	form.bp-dir-search-form {
+	form.bp-dir-search-form,
+	form.bp-messages-search-form {
 		border: 1px solid $bp-border-color;
 
 		label {
@@ -31,7 +32,7 @@
 			font-size: inherit;
 			font-weight: 400;
 			line-height: inherit;
-			padding: 6px 0.8em;
+			padding: 3px 0.8em;
 			text-align: center;
 			text-transform: none;
 			width: 20%;
@@ -44,7 +45,7 @@
 			}
 		}
 
-		// For non no-js we'll add back in show() further on below
+		// For non no-js we'll add back in show() further down.
 		button[type="submit"] {
 
 			@include hide();
