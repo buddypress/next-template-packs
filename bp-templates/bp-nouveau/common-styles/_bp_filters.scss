@@ -26,6 +26,11 @@
 			margin: 0;
 		}
 
+		// specifically user messages screen
+		ul {
+			list-style: none;
+		}
+
 		div {
 			float: none;
 
@@ -42,6 +47,10 @@
 			button#user_messages_search_submit {
 				padding: 7px 0.8em;
 			}
+		}
+
+		.component-filters {
+			margin-top: $marg-sml;
 		}
 
 		.feed {
@@ -93,6 +102,7 @@
 			.last,
 			.component-filters {
 				float: right;
+				margin-top: 0;
 				width: auto;
 
 				select {

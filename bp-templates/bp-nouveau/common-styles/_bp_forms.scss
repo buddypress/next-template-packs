@@ -299,7 +299,7 @@ body.no-js {
 			position: relative;
 			text-indent: -2px;
 			z-index: 1;
-			width: auto;
+			width: 100%;
 		}
 
 		select,
@@ -340,4 +340,14 @@ body.no-js {
 		}
 	}
 
+	// Manage select wrap for notification actions, wide screens
+	// ensures a shrink wrap width.
+	@include medium-small-up() {
+		.notifications-options-nav {
+
+			.select-wrap {
+				float: left;
+			}
+		}
+	}
 }
