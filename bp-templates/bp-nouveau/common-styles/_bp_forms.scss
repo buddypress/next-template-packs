@@ -157,7 +157,6 @@
 
 		p.description {
 			color: $form-text;
-			//font-size: 80%;
 			margin: $marg-xsml 0;
 		}
 
@@ -342,7 +341,9 @@ body.no-js {
 
 	// Manage select wrap for notification actions, wide screens
 	// ensures a shrink wrap width.
+
 	@include medium-small-up() {
+
 		.notifications-options-nav {
 
 			.select-wrap {

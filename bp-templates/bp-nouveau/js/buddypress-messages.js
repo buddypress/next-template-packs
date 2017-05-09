@@ -809,9 +809,9 @@ window.bp = window.bp || {};
 			} );
 
 			if ( hasChecked ) {
-				$( '#user-messages-bulk-actions' ).closest( '.bulk-actions' ).removeClass( 'bp-hide' );
+				$( '#user-messages-bulk-actions' ).closest( '.bulk-actions-wrap' ).removeClass( 'bp-hide' );
 			} else {
-				$( '#user-messages-bulk-actions' ).closest( '.bulk-actions' ).addClass( 'bp-hide' );
+				$( '#user-messages-bulk-actions' ).closest( '.bulk-actions-wrap' ).addClass( 'bp-hide' );
 			}
 		},
 
@@ -933,9 +933,9 @@ window.bp = window.bp || {};
 			var isChecked = $( event.currentTarget ).prop( 'checked' );
 
 			if ( isChecked ) {
-				$( this.el ).find( '.bulk-actions' ).removeClass( 'bp-hide' );
+				$( this.el ).find( '.bulk-actions-wrap' ).removeClass( 'bp-hide' );
 			} else {
-				$( this.el ).find( '.bulk-actions' ).addClass( 'bp-hide' );
+				$( this.el ).find( '.bulk-actions-wrap' ).addClass( 'bp-hide' );
 			}
 
 			_.each( this.collection.models, function( model ) {

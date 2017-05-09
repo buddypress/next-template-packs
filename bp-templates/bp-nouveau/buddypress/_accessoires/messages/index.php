@@ -95,12 +95,15 @@
 		<input type="checkbox" id="user_messages_select_all" value="1"/>
 		<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Select All Messages', 'bp-nouveau' ) ); ?></span>
 	</label>
-	<div class="bulk-actions bp-hide">
-		<select id="user-messages-bulk-actions">
-			<# for ( i in data ) { #>
-				<option value="{{data[i].value}}">{{data[i].label}}</option>
-			<# } #>
-		</select>
+<div class="bulk-actions-wrap bp-hide">
+		<div class="bulk-actions select-wrap ">
+			<select id="user-messages-bulk-actions">
+				<# for ( i in data ) { #>
+					<option value="{{data[i].value}}">{{data[i].label}}</option>
+				<# } #>
+			</select>
+			<span class="select-arrow" aria-hidden="true"></span>
+		</div>
 		<button class="messages-button bulk-apply" type="submit">
 			<span class="dashicons dashicons-yes" aria-hidden="true"></span>
 			<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Apply', 'bp-nouveau' ) ); ?></span>

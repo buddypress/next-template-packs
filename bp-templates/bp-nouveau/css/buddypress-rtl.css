@@ -612,8 +612,14 @@ dt.section-title {
 	margin: 0;
 }
 
-.buddypress-wrap .subnav-filters ul {
+.buddypress-wrap .subnav-filters.bp-messages-filters ul {
 	list-style: none;
+}
+
+@media screen and (max-width: 46.8em) {
+	.buddypress-wrap .subnav-filters.bp-messages-filters .messages-search {
+		clear: both;
+	}
 }
 
 .buddypress-wrap .subnav-filters div {
@@ -645,16 +651,54 @@ dt.section-title {
 	display: inline;
 }
 
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions-wrap:before,
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions-wrap:after {
+	content: " ";
+	display: table;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions-wrap:after {
+	clear: both;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions-wrap {
+	border: 1px solid #eee;
+	float: right;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .select-wrap {
+	border: 0;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions,
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions label {
+	float: right;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions label {
+	padding: 5px 0;
+	text-align: center;
+	width: 30px;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions div select {
+	-webkit-appearance: textfield;
+}
+
 .buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-apply {
 	border-radius: none;
+	border: 0;
 	font-weight: 400;
-	line-height: 1.6;
-	margin: 0 10px;
-	padding: 6px 10px 4px;
+	line-height: 1.8;
+	margin: 0 10px 0 0;
+	padding: 3px 5px;
 	text-align: center;
 	text-transform: none;
-	vertical-align: baseline;
 	width: auto;
+}
+
+.buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-apply span {
+	vertical-align: middle;
 }
 
 @media screen and (min-width: 32em) {
@@ -2833,33 +2877,6 @@ li#compose-personal-li a#compose:hover {
 div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	margin-left: 15px;
 	max-width: 42.5%;
-}
-
-.bp-messages-filters .user-messages-bulk-actions .bulk-actions,
-.bp-messages-filters .user-messages-bulk-actions label {
-	float: right;
-}
-
-.bp-messages-filters .user-messages-bulk-actions label {
-	padding: 5px 0;
-	text-align: center;
-	width: 30px;
-}
-
-.bp-messages-filters .user-messages-bulk-actions div select {
-	-webkit-appearance: textfield;
-	border: 1px solid #ccc;
-	color: #888;
-	float: right;
-	font: inherit;
-	font-size: 90%;
-	line-height: inherit;
-	max-width: 80%;
-	padding: 2.5px 10px;
-}
-
-.bp-messages-filters .user-messages-bulk-actions .bulk-actions.bp-hide {
-	display: none;
 }
 
 /**

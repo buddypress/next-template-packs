@@ -368,44 +368,10 @@ li#compose-personal-li {
 
 // Bulk Message styles
 
-div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
-	margin-right: 15px;
-	max-width: 42.5%;
-}
-
-.bp-messages-filters {
+div.bp-navs#subsubnav.bp-messages-filters {
 
 	.user-messages-bulk-actions {
-
-		.bulk-actions,
-		label {
-			float: left;
-		}
-
-		label {
-			padding: 5px 0;
-			text-align: center;
-			width: 30px;
-		}
-
-		div {
-			select {
-				-webkit-appearance: textfield;
-				border: 1px solid #ccc;
-				color: #888;
-				float: left;
-				font: inherit;
-				font-size: 90%;
-				line-height: inherit;
-				max-width: 80%;
-				padding: 2.5px 10px;
-			}
-		}
-
-		.bulk-actions.bp-hide {
-			display: none;
-		}
-
-	} // close .user-messages-bulk-actions
-
+		margin-right: 15px;
+		max-width: 42.5%;
+	}
 }

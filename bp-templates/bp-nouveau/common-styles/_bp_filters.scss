@@ -26,9 +26,18 @@
 			margin: 0;
 		}
 
-		// specifically user messages screen
-		ul {
-			list-style: none;
+		&.bp-messages-filters {
+
+			ul {
+				list-style: none;
+			}
+
+			@include medium-max {
+
+				.messages-search {
+					clear: both;
+				}
+			}
 		}
 
 		div {
@@ -67,12 +76,42 @@
 
 		.user-messages-bulk-actions {
 
+			@include clearfix-element(".bulk-actions-wrap");
+
+			.bulk-actions-wrap {
+				border: 1px solid $bp-border-color;
+				float: left;
+			}
+
+			.select-wrap {
+				border: 0;
+			}
+
+			.bulk-actions,
+			label {
+				float: left;
+			}
+
+			label {
+				padding: 5px 0;
+				text-align: center;
+				width: 30px;
+			}
+
+			div {
+
+				select {
+					-webkit-appearance: textfield;
+				}
+			}
+
 			.bulk-apply {
 				border-radius: none;
+				border: 0;
 				font-weight: 400;
-				line-height: 1.6;
-				margin: 0 10px;
-				padding: 0 4px;
+				line-height: 1.8;
+				margin: 0 0 0 10px;
+				padding: 3px 5px;
 				text-align: center;
 				text-transform: none;
 				width: auto;
