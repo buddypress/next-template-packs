@@ -12,7 +12,7 @@ bp_nouveau_xprofile_hook( 'before', 'edit_content' );
 if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) ) :
 	while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
 
-<form action="<?php bp_the_profile_group_edit_form_action(); ?>" method="post" id="profile-edit-form" class="standard-form <?php bp_the_profile_group_slug(); ?>">
+<form action="<?php bp_the_profile_group_edit_form_action(); ?>" method="post" id="profile-edit-form" class="standard-form profile-edit <?php bp_the_profile_group_slug(); ?>">
 
 	<?php bp_nouveau_xprofile_hook( 'before', 'field_content' ); ?>
 

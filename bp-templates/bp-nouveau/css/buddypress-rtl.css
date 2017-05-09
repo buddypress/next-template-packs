@@ -2052,7 +2052,8 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 .buddypress-wrap .item-body .screen-heading {
-	font-size: 22px;
+	font-size: 20px;
+	font-weight: 400;
 }
 
 .buddypress-wrap .item-body .button-tabs {
@@ -2322,6 +2323,10 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin-top: 30px;
 }
 
+.buddypress-wrap .public .profile-fields td.label {
+	width: 30%;
+}
+
 .buddypress-wrap .profile.edit .button-nav {
 	list-style: none;
 	margin: 30px 0 10px;
@@ -2421,8 +2426,7 @@ body.no-js .buddypress .field-visibility-settings {
 }
 
 .buddypress-wrap .standard-form .wp-editor-container textarea {
-	padding-bottom: 0;
-	padding-top: 0;
+	background: #fff;
 	width: 100%;
 }
 
@@ -2466,9 +2470,6 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress-wrap .profile.public .profile-group-title {
 	border-bottom: 1px solid #ccc;
-	-webkit-box-shadow: -3px 3px 9px 0 #eee;
-	-moz-box-shadow: -3px 3px 9px 0 #eee;
-	box-shadow: -3px 3px 9px 0 #eee;
 }
 
 body.register .buddypress-wrap .page ul {
@@ -2884,7 +2885,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 
 .buddypress-wrap fieldset legend {
 	font-size: inherit;
-	font-weight: 700;
+	font-weight: 600;
 }
 
 .buddypress-wrap textarea:focus,
@@ -2973,7 +2974,7 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress-wrap .standard-form label,
 .buddypress-wrap .standard-form span.label {
 	display: block;
-	font-weight: 700;
+	font-weight: 600;
 	margin: 15px 0 5px;
 	width: auto;
 }
@@ -3028,6 +3029,10 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress-wrap .standard-form#sidebar-login-form input[type="password"] {
 	padding: 4px;
 	width: 95%;
+}
+
+.buddypress-wrap .standard-form.profile-edit input:focus {
+	background: #fff;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -3280,7 +3285,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap table.wp-profile-fields tr td.label,
 .buddypress-wrap table.forum tr td.label {
 	border-left: 1px solid #eaeaea;
-	font-weight: 700;
+	font-weight: 600;
 	width: 25%;
 }
 
@@ -3290,7 +3295,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap table.profile-fields .data {
-	padding: 0 1em;
+	padding: 0.5em 1em;
 }
 
 .buddypress-wrap table.profile-fields tr:last-child {

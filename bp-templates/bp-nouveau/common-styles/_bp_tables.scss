@@ -50,7 +50,7 @@
 
 			td.label {
 				border-right: 1px solid $light-grey;
-				font-weight: 700;
+				font-weight: 600;
 				width: 25%;
 			}
 		}
@@ -71,7 +71,7 @@
 	table.profile-fields {
 
 		.data {
-			padding: 0 $pad-med;
+			padding: $pad-sml $pad-med;
 		}
 
 		tr:last-child {

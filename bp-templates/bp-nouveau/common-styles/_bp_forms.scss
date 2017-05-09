@@ -29,7 +29,7 @@
 
 		legend {
 			font-size: inherit;
-			font-weight: 700;
+			font-weight: 600;
 		}
 	}
 
@@ -125,7 +125,7 @@
 		label,
 		span.label {
 			display: block;
-			font-weight: 700;
+			font-weight: 600;
 			margin: $marg-med 0 $marg-xsml;
 			width: auto;
 		}
@@ -188,6 +188,13 @@
 				width: 95%;
 			}
 		} // close &#sidebar-login-form
+
+		&.profile-edit {
+
+			input:focus {
+				background: $white;
+			}
+		}
 
 		@include medium-up() {
 

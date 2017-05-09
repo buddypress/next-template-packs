@@ -11,6 +11,17 @@
 	.profile {
 		margin-top: $marg-xlrg;
 	}
+
+	.public {
+
+		.profile-fields {
+
+			td.label {
+				width: 30%;
+			}
+		}
+	}
+
 }
 
 // Edit Screen
@@ -140,8 +151,7 @@ body.no-js {
 			border: 1px solid #dedede;
 
 			textarea {
-				padding-bottom: 0;
-				padding-top: 0;
+				background: $white;
 				width: 100%;
 			}
 		}
@@ -202,8 +212,6 @@ body.no-js {
 
 		.profile-group-title {
 			border-bottom: 1px solid $bp-border-dark;
-
-			@include box-shadow( 3px 3px 9px 0 #eee);
 		}
 	}
 }
