@@ -2719,13 +2719,14 @@ li#compose-personal-li a#compose:hover {
 	max-width: 30%;
 }
 
-.bp-messages-content .actions a {
+.bp-messages-content .actions .bp-icons {
 	display: inline-block;
-	margin: 0 5px;
+	margin: 0;
+	padding: 0.3em 0.5em;
 }
 
-.bp-messages-content .actions a:before {
-	font-size: 28px;
+.bp-messages-content .actions .bp-icons:before {
+	font-size: 26px;
 }
 
 .bp-messages-content #thread-preview {
@@ -3679,6 +3680,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress #buddypress.bp-dir-vert-nav .create-button a {
 		margin-right: 0.5em;
 	}
+}
+
+.buddypress-wrap button.bp-icons {
+	border: 0;
+}
+
+.buddypress-wrap button.bp-icons:focus, .buddypress-wrap button.bp-icons:hover {
+	background: none;
 }
 
 .buddypress-wrap .filter label:before,

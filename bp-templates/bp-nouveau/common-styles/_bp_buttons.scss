@@ -258,9 +258,20 @@
 
 .buddypress-wrap {
 
+	// buttons that are visually rendering as icons only won't
+	// want the general button styles.
+	// We'll use a class hook to identify those elements.
+	button.bp-icons {
+		border: 0;
+
+		&:focus,
+		&:hover {
+			background: none;
+		}
+	}
+
 	.filter label:before,
 	.feed a:before,
-	//.action a,
 	.bp-invites-filters  li a.invite-button:before,
 	.bp-messages-filters li a.messages-button:before {
 		font-family: dashicons;

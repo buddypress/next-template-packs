@@ -196,12 +196,13 @@ li#compose-personal-li {
 		float: right;
 		max-width: 30%;
 
-		a {
+		.bp-icons {
 			display: inline-block;
-			margin: 0 5px;
+			margin: 0;
+			padding: $pad-xsml $pad-sml;
 
 			&:before {
-				font-size: 28px;
+				@include font-size(26);
 			}
 		}
 	}
