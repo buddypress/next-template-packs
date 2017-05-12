@@ -51,7 +51,13 @@ class BP_Nouveau_Messages {
 		require( trailingslashit( $this->dir ) . 'classes.php'       );
 		require( trailingslashit( $this->dir ) . 'functions.php'     );
 		require( trailingslashit( $this->dir ) . 'template-tags.php' );
-		require( trailingslashit( $this->dir ) . 'ajax.php'          );
+
+		// Load AJAX code only on AJAX requests.
+		add_action( 'admin_init', function() {
+			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'messages_' ) ) {
+				require( trailingslashit( $this->dir ) . 'ajax.php' );
+			}
+		} );
 	}
 
 	/**

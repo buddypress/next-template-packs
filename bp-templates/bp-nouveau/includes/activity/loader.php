@@ -52,8 +52,18 @@ class BP_Nouveau_Activity {
 
 		require "{$dir}functions.php";
 		require "{$dir}template-tags.php";
-		require "{$dir}ajax.php";
 		require "{$dir}widgets.php";
+
+		// Load AJAX code only on AJAX requests.
+		add_action( 'admin_init', function() {
+			// AJAX condtion.
+			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX &&
+				// Check to see if action is activity-specific.
+				( false !== strpos( $_REQUEST['action'], 'activity' ) || ( 'post_update' === $_REQUEST['action'] ) )
+			) {
+				require "{$dir}ajax.php";
+			}
+		} );
 	}
 
 	/**

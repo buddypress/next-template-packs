@@ -48,7 +48,12 @@ class BP_Nouveau_Friends {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require( trailingslashit( $this->dir ) . 'ajax.php' );
+		// Load AJAX code only on AJAX requests.
+		add_action( 'admin_init', function() {
+			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'friends_' ) ) {
+				require( trailingslashit( $this->dir ) . 'ajax.php' );
+			}
+		} );
 	}
 
 	/**
