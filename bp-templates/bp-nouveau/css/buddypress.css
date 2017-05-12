@@ -2618,6 +2618,10 @@ li#compose-personal-li a#compose:hover {
 	list-style: none;
 }
 
+.bp-messages-content .thread-participants dd {
+	margin-left: 0;
+}
+
 #message-threads {
 	border-top: 1px solid #eaeaea;
 	clear: both;
@@ -2769,17 +2773,36 @@ li#compose-personal-li a#compose:hover {
 	-webkit-box-shadow: -2px 1px 9px 0 #eee;
 	-moz-box-shadow: -2px 1px 9px 0 #eee;
 	box-shadow: -2px 1px 9px 0 #eee;
-	padding: .2em 0;
+	overflow: hidden;
+	padding: 0.2em;
+}
+
+.bp-messages-content #bp-message-thread-list .message-metadata .avatar {
+	width: 40%;
 }
 
 .bp-messages-content #bp-message-thread-list .message-metadata .user-link {
+	display: block;
 	font-size: 13px;
+	float: left;
 }
 
 @media screen and (min-width: 46.8em) {
 	.bp-messages-content #bp-message-thread-list .message-metadata .user-link {
 		font-size: 16px;
 	}
+}
+
+.bp-messages-content #bp-message-thread-list .message-metadata time {
+	padding: 0 0.5em;
+}
+
+.bp-messages-content #bp-message-thread-list .message-metadata button {
+	padding: 0 0.3em;
+}
+
+.bp-messages-content #bp-message-thread-list .message-metadata button:before {
+	font-size: 20px;
 }
 
 .bp-messages-content #bp-message-thread-list .message-content {
