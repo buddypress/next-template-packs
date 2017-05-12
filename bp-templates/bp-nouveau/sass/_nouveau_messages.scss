@@ -81,6 +81,10 @@ li#compose-personal-li {
 
 	.thread-participants {
 		list-style: none;
+
+		dd {
+			margin-left: 0;
+		}
 	}
 }
 
@@ -253,10 +257,29 @@ li#compose-personal-li {
 		.message-metadata {
 			border-bottom: 1px solid $bp-border-dark;
 			@include box-shadow(-2px 1px 9px 0 #eee);
-			padding: .2em 0;
+			overflow: hidden;
+			padding:  0.2em;
+
+			.avatar {
+				width: 40%;
+			}
 
 			.user-link {
+				display: block;
 				@include responsive-font(16);
+				float: left;
+			}
+
+			time {
+				padding: 0 $pad-sml;
+			}
+
+			button {
+				padding: 0 $pad-xsml;
+			}
+
+			button:before {
+				@include font-size(20);
 			}
 		}
 
