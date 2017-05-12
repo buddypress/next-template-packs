@@ -103,7 +103,7 @@ class BP_Nouveau_Friends {
 		);
 
 		foreach ( $buttons as $button ) {
-			add_filter( 'bp_button_' . $button, 'bp_nouveau_ajax_button', 10, 4 );
+			add_filter( 'bp_button_' . $button, 'bp_nouveau_ajax_button', 10, 5 );
 		}
 	}
 

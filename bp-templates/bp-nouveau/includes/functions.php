@@ -10,12 +10,13 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $after = '' ) {
+function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $after = '', $r = array() ) {
 	if ( empty( $button->component ) ) {
 		return $output;
 	}
 
-	$data_attribute = $button->id;
+	// Custom data attribute.
+	$r['button_attr']['data-bp-btn-action'] = $button->id;
 
 	$reset_ids = array(
 		'member_friendship' => true,
@@ -23,8 +24,7 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 	);
 
 	if ( ! empty( $reset_ids[ $button->id ] ) )  {
-		$parse_class = array_map( 'sanitize_html_class', explode( ' ', $button->link_class ) );
-
+		$parse_class = array_map( 'sanitize_html_class', explode( ' ', $r['button_attr']['class'] ) );
 		if ( false === $parse_class ) {
 			return $output;
 		}
@@ -45,17 +45,25 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 		}
 
 		$data_attribute = reset( $find_id );
-
 		if ( 'pending_friend' === $data_attribute ) {
 			$data_attribute = str_replace( '_friend', '', $data_attribute );
-
 		} elseif ( 'group_membership' === $button->id ) {
 			$data_attribute = str_replace( '-', '_', $data_attribute );
 		}
+
+		$r['button_attr']['data-bp-btn-action'] = $data_attribute;
 	}
 
+	// Re-render the button with our custom data attribute.
+	$output = new BP_Core_HTML_Element( array(
+		'element'    => $r['button_element'],
+		'attr'       => $r['button_attr'],
+		'inner_html' => ! empty( $r['link_text'] ) ? $r['link_text'] : ''
+	) );
+	$output = $output->contents();
+
 	// Add span bp-screen-reader-text class
-	return $before . '<a'. $button->link_href . $button->link_title . $button->link_id . $button->link_rel . $button->link_class . ' data-bp-btn-action="' . $data_attribute . '">' . $button->link_text . '</a>' . $after;
+	return $before . $output . $after;
 }
 
 /**
