@@ -1170,10 +1170,13 @@ function bp_nouveau_nav_count() {
 		 * imho BuddyPress shouldn't add html tags inside Nav attributes...
 		 */
 		} elseif ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->primary ) ) {
-			preg_match( '/\<span.*\>(.?)\<\/span\>/', $nav_item->name, $match );
+			$span = strpos( $nav_item->name, '<span' );
 
-			if ( ! empty( $match[1] ) ) {
-				$count = number_format( $match[1] );
+			// Grab count out of the <span> element.
+			if ( false !== $span ) {
+				$count_start = strpos( $nav_item->name, '>', $span ) + 1;
+				$count_end   = strpos( $nav_item->name, '<', $count_start );
+				$count       = (int) substr( $nav_item->name, $count_start, $count_end - $count_start );
 			}
 		}
 
