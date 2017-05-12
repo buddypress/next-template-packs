@@ -689,18 +689,17 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			$icons = ' icons';
 		}
 
+		// If we pass through parent classes add them to $button array
+		$parent_class = '';
+		if( ! empty( $args['parent_attr']['class'] ) ) {
+			$parent_class = esc_html( $args['parent_attr']['class'] );
+		}
 
 		// Invite buttons on member's invites screen
 		if ( 'invite' === $type ) {
 			// Don't show button if not logged in or previously banned
 			if ( ! is_user_logged_in() || bp_group_is_user_banned( $group ) || empty( $group->status ) ) {
 				return $buttons;
-			}
-
-			// If we pass through parent classes add them to $button array
-			$parent_class = '';
-			if( ! empty( $args['parent_attr']['class'] ) ) {
-				$parent_class = esc_html( $args['parent_attr']['class'] );
 			}
 
 			// Setup Accept button attributes
@@ -796,11 +795,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		// Manage group members for the group's manage screen
 		} elseif ( 'manage_members' === $type && isset( $GLOBALS['members_template']->member->user_id ) ) {
 			$user_id = $GLOBALS['members_template']->member->user_id;
-
-			// If we pass through parent classes add them
-			if( ! empty( $args['parent_attr']['class'] ) ) {
-				$parent_class = $args['parent_attr']['class'];
-			}
 
 			$buttons = array( 'unban_member' => array(
 					'id'                => 'unban_member',
@@ -918,8 +912,8 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				$button_args = bp_nouveau()->groups->button_args;
 
 				// If we pass through parent classes merge those into the existing ones
-				if( ! empty( $args['parent_attr']['class'] ) ) {
-					$parent_class = $args['parent_attr']['class'] . ' ' . $button_args['wrapper_class'];
+				if( ! empty( $parent_class ) ) {
+					$parent_class .= ' ' . $button_args['wrapper_class'];
 				}
 
 				$buttons['group_membership'] = array(
@@ -936,9 +930,9 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'button_element'    => $button_element,
 					'button_attr'       => array(
 						'href'             => $button_args['link_href'],
-						'id'               => $button_args['link_id'],
+						'id'               => ! empty( $button_args['link_id'] ) ? $button_args['link_id'] : '',
 						'class'            => $button_args['link_class'] . ' button',
-						'rel'              => $button_args['link_rel'],
+						'rel'              => ! empty( $button_args['link_rel'] ) ? $button_args['link_rel'] : '',
 						'title'            => '',
 					),
 					'link_text'         => $button_args['link_text'],
