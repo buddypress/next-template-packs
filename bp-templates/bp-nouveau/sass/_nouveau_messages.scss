@@ -39,11 +39,13 @@
 }
 
 .preview-content {
- .actions {
- 	a {
- 		text-decoration: none;
- 	}
- }
+
+	.actions {
+
+		a {
+			text-decoration: none;
+		}
+	}
 }
 
 // Compose Icon
@@ -76,6 +78,7 @@ li#compose-personal-li {
 	margin: $marg-med 0;
 
 	.avatar {
+
 		@include box-shadow-none();
 	}
 
@@ -86,9 +89,15 @@ li#compose-personal-li {
 			margin-left: 0;
 		}
 	}
+
+	time {
+		color: $meta-text;
+
+		@include font-size(12);
+	}
 }
 
-// The actual messages listed
+// The actual messages list
 #message-threads {
 	border-top: 1px solid $light-grey;
 	clear: both;
@@ -100,86 +109,89 @@ li#compose-personal-li {
 	padding: 0;
 	width: 100%;
 
+	// The primary list elements
 	li {
 		border-bottom: 1px solid $light-grey;
+
+		@include flex-box-dir();
 		margin: 0;
 		overflow: hidden;
 		padding: $pad-sml 0;
 
+		// the child items
+		.thread-cb {
+
+			@include box-item-size(1, 2, 5%);
+
+			label {
+				float: left;
+				margin-left: $marg-xsml;
+				text-align: center;
+				width: 5%;
+			}
+		}
+
+		.thread-from {
+
+			@include box-item-size(1, 2, 20%);
+
+			img.avatar {
+				float: left;
+				margin: 0 $marg-sml 0 0;
+			}
+		}
+
+		.thread-content {
+
+			@include box-item-size(1, 2, 60%);
+		}
+
+		.thread-date {
+
+			@include box-item-size(1, 2, 15%);
+		}
+
 		// the selected parent li elements & message details
 		&.selected {
-			background-color: $light-grey;
+			background-color: $off-white;
 
 			.thread-subject {
+
 				.subject {
 					color: $blue;
-				}
-			}
-
-			.thread-content {
-				time {
-					color: $meta-text-dark;
 				}
 			}
 		}
 
 		.thread-content {
-			float: left;
-			width: 95%;
 
-			.thread-from,
-			.thread-subject,
-			.thread-date {
-				float: left;
-				height: 32px;
-				overflow: hidden;
-			}
+			.excerpt {
+				color: $meta-text;
 
-			span.excerpt,
-			time {
-					color: $meta-text;
-					@include font-size(12);
+				@include font-size(12);
+				margin: 0;
 			}
 
 			.thread-from,
 			.thread-subject {
-					@include responsive-font(16);
-			}
 
-			.thread-from {
-				width: 35%;
-
-				img.avatar {
-					float: left;
-					margin: 0 $marg-sml 0 0;
-				}
+				@include responsive-font(16);
 			}
 
 			.thread-subject {
-				width: 48%;
-
-			//	.thread-count {
-
-			//	}
-
-			//	.subject {
-
-			//	}
+				vertical-align: top;
 
 				.excerpt {
-					font-weight: normal;
+					font-weight: 400;
 				}
 
 			}
-
-			.thread-selected
-			.thread-date {
-				padding-right: 5px;
-				text-align: right;
-				width: 17%;
-			}
-
 		} // close thread-content
+
+		.thread-date {
+			padding-right: 5px;
+			text-align: right;
+		}
 
 		&:not(.selected) .thread-content {
 			cursor: s-resize;
@@ -187,15 +199,10 @@ li#compose-personal-li {
 
 	} // close li
 
-	.thread-cb {
-		float: left;
-		text-align: center;
-		width: 5%;
-	}
-
 } // close message-threads
 
 .bp-messages-content {
+
 	.actions {
 		float: right;
 		max-width: 30%;
@@ -206,6 +213,7 @@ li#compose-personal-li {
 			padding: $pad-xsml $pad-sml;
 
 			&:before {
+
 				@include font-size(26);
 			}
 		}
@@ -214,20 +222,15 @@ li#compose-personal-li {
 	// preview pane on main inbox view all message entries
 	#thread-preview {
 		border: 1px solid $light-grey;
-		margin-top: 0.5em;
+		margin-top: $marg-lrg;
 		overflow: hidden;
-
-//		.preview-pane-header {
-//			border-bottom: 1px solid $light-grey;
-//			overflow: hidden;
-//		}
 
 		.preview-message {
 			clear: both;
 		}
 
 		.preview-content {
-				margin: 0.5em;
+			margin: 0.5em;
 
 			.preview-message {
 				background: $off-white;
@@ -240,7 +243,7 @@ li#compose-personal-li {
 	} // close .thread-preview
 
 	// The single view of messages in a conversation thread
-	#bp-message-thread-list  {
+	#bp-message-thread-list {
 		border-top: 1px solid $light-grey;
 		clear: both;
 		list-style: none;
@@ -251,26 +254,34 @@ li#compose-personal-li {
 		}
 
 		li:nth-child(2n) {
-			background: $off-white;
+
+			.message-content {
+				background: $off-white;
+			}
 		}
 
 		.message-metadata {
 			border-bottom: 1px solid $bp-border-dark;
+
 			@include box-shadow(-2px 1px 9px 0 #eee);
 			overflow: hidden;
-			padding:  0.2em;
+			padding: 0.2em;
 
 			.avatar {
-				width: 40%;
+				width: 30px;
 			}
 
 			.user-link {
 				display: block;
+
 				@include responsive-font(16);
 				float: left;
 			}
 
 			time {
+				color: $meta-text;
+
+				@include font-size(12);
 				padding: 0 $pad-sml;
 			}
 
@@ -279,18 +290,20 @@ li#compose-personal-li {
 			}
 
 			button:before {
+
 				@include font-size(20);
 			}
 		}
 
 		.message-content {
+			clear: both;
 			margin: 1em auto 0;
-			width: 80%;
+			width: 90%;
 		}
 
 		img.avatar {
 			float: left;
-			margin: 0 10px 0 0;
+			margin: 0 $marg-sml 0 0;
 		}
 
 		.actions {
@@ -299,15 +312,10 @@ li#compose-personal-li {
 				font-size: 18px;
 			}
 		}
-
-		time {
-			color: $meta-text;
-			@include font-size(12)
-		}
-
 	} // close #bp-message-thread-list
 
 	form.send-reply {
+
 		.avatar-box {
 			padding: $pad-sml 0;
 		}
@@ -324,7 +332,8 @@ li#compose-personal-li {
 
 	.preview-thread-title,
 	.single-thread-title {
-		@include font-size(20);
+
+		@include font-size(16);
 
 		.messages-title {
 			color: $blue;
@@ -333,7 +342,7 @@ li#compose-personal-li {
 
 	.thread-participants {
 		float: left;
-		margin: 5px 0;
+		margin: $marg-xsml 0;
 		width: 70%;
 
 		dd,
@@ -350,10 +359,15 @@ li#compose-personal-li {
 			float: left;
 			margin-left: 5px;
 		}
+
+		img {
+			width: 30px;
+		}
 	}
 
 	#thread-preview .preview-message,
 	#bp-message-thread-list li .message-content {
+
 		ul,
 		ol,
 		blockquote {
@@ -383,6 +397,7 @@ li#compose-personal-li {
 
 	// The general form elements for composing messages
 	.standard-form {
+
 		#subject {
 			border-bottom: 0;
 		}

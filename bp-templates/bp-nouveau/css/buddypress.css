@@ -2348,7 +2348,6 @@ body.no-js .single-item-header .js-self-profile-button {
 	}
 }
 
-/* End nuoveau invites */
 /*
 *-----------------------------------------
 * @subsection 5.2.1.4 - Group Activity
@@ -2622,6 +2621,11 @@ li#compose-personal-li a#compose:hover {
 	margin-left: 0;
 }
 
+.bp-messages-content time {
+	color: #777;
+	font-size: 12px;
+}
+
 #message-threads {
 	border-top: 1px solid #eaeaea;
 	clear: both;
@@ -2636,40 +2640,77 @@ li#compose-personal-li a#compose:hover {
 
 #message-threads li {
 	border-bottom: 1px solid #eaeaea;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-flow: row nowrap;
+	-moz-flex-flow: row nowrap;
+	-ms-flex-flow: row nowrap;
+	-o-flex-flow: row nowrap;
+	flex-flow: row nowrap;
 	margin: 0;
 	overflow: hidden;
 	padding: 0.5em 0;
 }
 
+#message-threads li .thread-cb {
+	-webkit-flex: 1 2 5%;
+	-moz-flex: 1 2 5%;
+	-ms-flex: 1 2 5%;
+	-o-flex: 1 2 5%;
+	flex: 1 2 5%;
+}
+
+#message-threads li .thread-cb label {
+	float: left;
+	margin-left: 5px;
+	text-align: center;
+	width: 5%;
+}
+
+#message-threads li .thread-from {
+	-webkit-flex: 1 2 20%;
+	-moz-flex: 1 2 20%;
+	-ms-flex: 1 2 20%;
+	-o-flex: 1 2 20%;
+	flex: 1 2 20%;
+}
+
+#message-threads li .thread-from img.avatar {
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+#message-threads li .thread-content {
+	-webkit-flex: 1 2 60%;
+	-moz-flex: 1 2 60%;
+	-ms-flex: 1 2 60%;
+	-o-flex: 1 2 60%;
+	flex: 1 2 60%;
+}
+
+#message-threads li .thread-date {
+	-webkit-flex: 1 2 15%;
+	-moz-flex: 1 2 15%;
+	-ms-flex: 1 2 15%;
+	-o-flex: 1 2 15%;
+	flex: 1 2 15%;
+}
+
 #message-threads li.selected {
-	background-color: #eaeaea;
+	background-color: #fafafa;
 }
 
 #message-threads li.selected .thread-subject .subject {
 	color: #5087e5;
 }
 
-#message-threads li.selected .thread-content time {
-	color: #555;
-}
-
-#message-threads li .thread-content {
-	float: left;
-	width: 95%;
-}
-
-#message-threads li .thread-content .thread-from,
-#message-threads li .thread-content .thread-subject,
-#message-threads li .thread-content .thread-date {
-	float: left;
-	height: 32px;
-	overflow: hidden;
-}
-
-#message-threads li .thread-content span.excerpt,
-#message-threads li .thread-content time {
+#message-threads li .thread-content .excerpt {
 	color: #777;
 	font-size: 12px;
+	margin: 0;
 }
 
 #message-threads li .thread-content .thread-from,
@@ -2684,38 +2725,21 @@ li#compose-personal-li a#compose:hover {
 	}
 }
 
-#message-threads li .thread-content .thread-from {
-	width: 35%;
-}
-
-#message-threads li .thread-content .thread-from img.avatar {
-	float: left;
-	margin: 0 10px 0 0;
-}
-
 #message-threads li .thread-content .thread-subject {
-	width: 48%;
+	vertical-align: top;
 }
 
 #message-threads li .thread-content .thread-subject .excerpt {
-	font-weight: normal;
+	font-weight: 400;
 }
 
-#message-threads li .thread-content .thread-selected
-.thread-date {
+#message-threads li .thread-date {
 	padding-right: 5px;
 	text-align: right;
-	width: 17%;
 }
 
 #message-threads li:not(.selected) .thread-content {
 	cursor: s-resize;
-}
-
-#message-threads .thread-cb {
-	float: left;
-	text-align: center;
-	width: 5%;
 }
 
 .bp-messages-content .actions {
@@ -2735,7 +2759,7 @@ li#compose-personal-li a#compose:hover {
 
 .bp-messages-content #thread-preview {
 	border: 1px solid #eaeaea;
-	margin-top: 0.5em;
+	margin-top: 20px;
 	overflow: hidden;
 }
 
@@ -2764,7 +2788,7 @@ li#compose-personal-li a#compose:hover {
 	padding: 0.5em;
 }
 
-.bp-messages-content #bp-message-thread-list li:nth-child(2n) {
+.bp-messages-content #bp-message-thread-list li:nth-child(2n) .message-content {
 	background: #fafafa;
 }
 
@@ -2778,7 +2802,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content #bp-message-thread-list .message-metadata .avatar {
-	width: 40%;
+	width: 30px;
 }
 
 .bp-messages-content #bp-message-thread-list .message-metadata .user-link {
@@ -2794,6 +2818,8 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content #bp-message-thread-list .message-metadata time {
+	color: #777;
+	font-size: 12px;
 	padding: 0 0.5em;
 }
 
@@ -2806,8 +2832,9 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content #bp-message-thread-list .message-content {
+	clear: both;
 	margin: 1em auto 0;
-	width: 80%;
+	width: 90%;
 }
 
 .bp-messages-content #bp-message-thread-list img.avatar {
@@ -2817,11 +2844,6 @@ li#compose-personal-li a#compose:hover {
 
 .bp-messages-content #bp-message-thread-list .actions a:before {
 	font-size: 18px;
-}
-
-.bp-messages-content #bp-message-thread-list time {
-	color: #777;
-	font-size: 12px;
 }
 
 .bp-messages-content form.send-reply .avatar-box {
@@ -2836,7 +2858,7 @@ li#compose-personal-li a#compose:hover {
 
 .bp-messages-content .preview-thread-title,
 .bp-messages-content .single-thread-title {
-	font-size: 20px;
+	font-size: 16px;
 }
 
 .bp-messages-content .preview-thread-title .messages-title,
@@ -2863,6 +2885,10 @@ li#compose-personal-li a#compose:hover {
 .bp-messages-content .thread-participants li {
 	float: left;
 	margin-left: 5px;
+}
+
+.bp-messages-content .thread-participants img {
+	width: 30px;
 }
 
 .bp-messages-content #thread-preview .preview-message ul,
@@ -3706,6 +3732,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap button.bp-icons {
+	background: none;
 	border: 0;
 }
 
