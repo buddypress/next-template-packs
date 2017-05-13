@@ -114,15 +114,15 @@
 <script type="text/html" id="tmpl-bp-messages-thread">
 	<div class="thread-cb">
 		<label for="bp-message-thread-{{data.id}}">
-			<input type="checkbox" name="message_ids[]" id="bp-message-thread-{{data.id}}" class="message-check" value="{{data.id}}">
+			<input class="message-check" type="checkbox" name="message_ids[]" id="bp-message-thread-{{data.id}}" value="{{data.id}}">
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Select this message', 'bp-nouveau' ); ?></span>
 		</label>
 	</div>
 
 	<div class="thread-content" data-thread-id="{{data.id}}">
 		<div class="thread-from">
-			<a href="{{data.sender_link}}" title="{{data.sender_name}}" class="user-link">
-				<img src="{{data.sender_avatar}}" width="32px" height="32px" class="avatar">
+			<a class="user-link" href="{{data.sender_link}}" title="{{data.sender_name}}" >
+				<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
 				{{data.sender_name}}
 			</a>
 		</div>
