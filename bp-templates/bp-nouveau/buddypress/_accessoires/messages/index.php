@@ -118,22 +118,21 @@
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Select this message', 'bp-nouveau' ); ?></span>
 		</label>
 	</div>
-
+	<div class="thread-from">
+		<a class="user-link" href="{{data.sender_link}}" title="{{data.sender_name}}" >
+			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
+			{{data.sender_name}}
+		</a>
+	</div>
 	<div class="thread-content" data-thread-id="{{data.id}}">
-		<div class="thread-from">
-			<a class="user-link" href="{{data.sender_link}}" title="{{data.sender_name}}" >
-				<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
-				{{data.sender_name}}
-			</a>
-		</div>
 		<div class="thread-subject">
 			<span class="thread-count">({{data.count}})</span>
 			<span class="subject"><# print( data.subject ); #></span>
-			<span class="excerpt"><# print( data.excerpt ); #></span>
 		</div>
-		<div class="thread-date">
-			<time datetime="{{data.date.toISOString()}}">{{data.display_date}}</time>
-		</div>
+		<p class="excerpt"><# print( data.excerpt ); #></p>
+	</div>
+	<div class="thread-date">
+		<time datetime="{{data.date.toISOString()}}">{{data.display_date}}</time>
 	</div>
 </script>
 
