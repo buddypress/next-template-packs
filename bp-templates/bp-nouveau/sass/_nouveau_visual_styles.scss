@@ -1,8 +1,9 @@
 // ======= Visual Style Module =======
 // Theme: Nouveau
 
-// This file provides just visual styles  backgrounds, colors etc specific
-// to the current theme & are not critical to the primary layout & element styling.
+// This file provides just visual styles  backgrounds,
+// colors etc specific to the current theme & are not
+// critical to the primary layout & element styling.
 
 .buddypress-wrap {
 
@@ -24,6 +25,7 @@
 		.activity-item {
 			background: $white;
 			border: 1px solid #b7b7b7;
+
 			@include box-shadow(0 0 6px #d2d2d2);
 			margin: $marg-lrg 0;
 		}
