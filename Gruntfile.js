@@ -99,7 +99,7 @@ module.exports = function(grunt) {
 				expand: true,
 				cwd: WORKING_DIR,
 				src: [
-					'bp-nouveau/sass/buddypress.scss',
+					'bp-nouveau/sass/*.scss',
 					'bp-nouveau/common-styles/*.scss',
 					'!bp-nouveau/common-styles/_bp-mixins.scss',
 					'!bp-nouveau/common-styles/_bp-variables.scss'
