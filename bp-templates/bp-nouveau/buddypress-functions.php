@@ -361,10 +361,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Maybe enqueue Password Verify
 		if ( bp_is_register_page() || ( function_exists( 'bp_is_user_settings_general' ) && bp_is_user_settings_general() ) ) {
 			wp_enqueue_script( 'bp-nouveau-password-verify' );
-
-			if ( bp_get_blog_signup_allowed() && bp_is_register_page() ) {
-				wp_add_inline_script( 'bp-nouveau', bp_nouveau_get_blog_signup_inline_script() );
-			}
 		}
 
 		// Maybe enqueue comment reply JS.

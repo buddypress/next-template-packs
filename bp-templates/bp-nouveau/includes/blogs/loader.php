@@ -69,6 +69,12 @@ class BP_Nouveau_Blogs {
 			// Avoid Notices for BuddyPress Legacy Backcompat
 			remove_action( 'bp_blogs_directory_blog_types', 'bp_blog_backcompat_create_nav_item', 1000 );
 		}
+
+		add_action( 'bp_nouveau_enqueue_scripts', function() {
+			if ( bp_get_blog_signup_allowed() && bp_is_register_page() ) {
+				wp_add_inline_script( 'bp-nouveau', bp_nouveau_get_blog_signup_inline_script() );
+			}
+		} );
 	}
 
 	/**
