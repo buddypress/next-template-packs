@@ -10,6 +10,22 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Registers messages AJAX actions.
+ */
+bp_nouveau_register_ajax_actions( array(
+	array( 'messages_send_message'             => array( 'function' => 'bp_nouveau_ajax_messages_send_message',      'nopriv' => false ) ),
+	array( 'messages_send_reply'               => array( 'function' => 'bp_nouveau_ajax_messages_send_reply',        'nopriv' => false ) ),
+	array( 'messages_get_user_message_threads' => array( 'function' => 'bp_nouveau_ajax_get_user_message_threads',   'nopriv' => false ) ),
+	array( 'messages_thread_read'              => array( 'function' => 'bp_nouveau_ajax_messages_thread_read',       'nopriv' => false ) ),
+	array( 'messages_get_thread_messages'      => array( 'function' => 'bp_nouveau_ajax_get_thread_messages',        'nopriv' => false ) ),
+	array( 'messages_delete'                   => array( 'function' => 'bp_nouveau_ajax_delete_thread_messages',     'nopriv' => false ) ),
+	array( 'messages_unstar'                   => array( 'function' => 'bp_nouveau_ajax_star_thread_messages',       'nopriv' => false ) ),
+	array( 'messages_star'                     => array( 'function' => 'bp_nouveau_ajax_star_thread_messages',       'nopriv' => false ) ),
+	array( 'messages_unread'                   => array( 'function' => 'bp_nouveau_ajax_readunread_thread_messages', 'nopriv' => false ) ),
+	array( 'messages_read'                     => array( 'function' => 'bp_nouveau_ajax_readunread_thread_messages', 'nopriv' => false ) ),
+) );
+
 function bp_nouveau_ajax_messages_send_message() {
 	$response = array(
 		'feedback' => __( 'Your message could not be sent, please try again.', 'bp-nouveau' ),

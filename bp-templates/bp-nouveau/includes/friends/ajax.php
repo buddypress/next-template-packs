@@ -11,6 +11,17 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Registers friends AJAX actions.
+ */
+bp_nouveau_register_ajax_actions( array(
+	array( 'friends_remove_friend'       => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
+	array( 'friends_add_friend'          => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
+	array( 'friends_withdraw_friendship' => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
+	array( 'friends_accept_friendship'   => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
+	array( 'friends_reject_friendship'   => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
+) );
+
+/**
  * Friend/un-friend a user via a POST request.
  *
  * @since 1.0.0

@@ -82,29 +82,6 @@ class BP_Nouveau_Activity {
 		// Register the Activity Notifications filters
 		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_activity_notification_filters' );
 
-		$ajax_actions = array(
-			array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
-			array( 'get_single_activity_content'     => array( 'function' => 'bp_nouveau_ajax_get_single_activity_content', 'nopriv' => true ) ),
-			array( 'activity_mark_fav'               => array( 'function' => 'bp_nouveau_ajax_mark_activity_favorite',      'nopriv' => false ) ),
-			array( 'activity_mark_unfav'             => array( 'function' => 'bp_nouveau_ajax_unmark_activity_favorite',    'nopriv' => false ) ),
-			array( 'activity_clear_new_mentions'     => array( 'function' => 'bp_nouveau_ajax_clear_new_mentions',          'nopriv' => false ) ),
-			array( 'delete_activity'                 => array( 'function' => 'bp_nouveau_ajax_delete_activity',             'nopriv' => false ) ),
-			array( 'new_activity_comment'            => array( 'function' => 'bp_nouveau_ajax_new_activity_comment',        'nopriv' => false ) ),
-			array( 'bp_nouveau_get_activity_objects' => array( 'function' => 'bp_nouveau_ajax_get_activity_objects',        'nopriv' => false ) ),
-			array( 'post_update'                     => array( 'function' => 'bp_nouveau_ajax_post_update',                 'nopriv' => false ) ),
-			array( 'bp_spam_activity'                => array( 'function' => 'bp_nouveau_ajax_spam_activity',               'nopriv' => false ) ),
-		);
-
-		foreach ( $ajax_actions as $ajax_action ) {
-			$action = key( $ajax_action );
-
-			add_action( 'wp_ajax_' . $action, $ajax_action[ $action ]['function'] );
-
-			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
-				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
-			}
-		}
-
 		/**
 		 * Avoid BuddyPress to trigger a forsaken action notice.
 		 * We'll generate the button inside our bp_nouveau_get_activity_entry_buttons()

@@ -81,29 +81,6 @@ class BP_Nouveau_Messages {
 
 		// Register the Messages Notifications filters
 		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_messages_notification_filters' );
-
-		$ajax_actions = array(
-			array( 'messages_send_message'             => array( 'function' => 'bp_nouveau_ajax_messages_send_message',      'nopriv' => false ) ),
-			array( 'messages_send_reply'               => array( 'function' => 'bp_nouveau_ajax_messages_send_reply',        'nopriv' => false ) ),
-			array( 'messages_get_user_message_threads' => array( 'function' => 'bp_nouveau_ajax_get_user_message_threads',   'nopriv' => false ) ),
-			array( 'messages_thread_read'              => array( 'function' => 'bp_nouveau_ajax_messages_thread_read',       'nopriv' => false ) ),
-			array( 'messages_get_thread_messages'      => array( 'function' => 'bp_nouveau_ajax_get_thread_messages',        'nopriv' => false ) ),
-			array( 'messages_delete'                   => array( 'function' => 'bp_nouveau_ajax_delete_thread_messages',     'nopriv' => false ) ),
-			array( 'messages_unstar'                   => array( 'function' => 'bp_nouveau_ajax_star_thread_messages',       'nopriv' => false ) ),
-			array( 'messages_star'                     => array( 'function' => 'bp_nouveau_ajax_star_thread_messages',       'nopriv' => false ) ),
-			array( 'messages_unread'                   => array( 'function' => 'bp_nouveau_ajax_readunread_thread_messages', 'nopriv' => false ) ),
-			array( 'messages_read'                     => array( 'function' => 'bp_nouveau_ajax_readunread_thread_messages', 'nopriv' => false ) ),
-		);
-
-		foreach ( $ajax_actions as $ajax_action ) {
-			$action = key( $ajax_action );
-
-			add_action( 'wp_ajax_' . $action, $ajax_action[ $action ]['function'] );
-
-			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
-				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
-			}
-		}
 	}
 
 	/**

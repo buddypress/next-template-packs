@@ -11,6 +11,21 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Registers groups AJAX actions.
+ */
+bp_nouveau_register_ajax_actions( array(
+	array( 'groups_filter'                      => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true  ) ),
+	array( 'groups_join_group'                  => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+	array( 'groups_leave_group'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+	array( 'groups_accept_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+	array( 'groups_reject_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+	array( 'groups_request_membership'          => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
+	array( 'groups_get_group_potential_invites' => array( 'function' => 'bp_nouveau_ajax_get_users_to_invite',    'nopriv' => false ) ),
+	array( 'groups_send_group_invites'          => array( 'function' => 'bp_nouveau_ajax_send_group_invites',     'nopriv' => false ) ),
+	array( 'groups_delete_group_invite'         => array( 'function' => 'bp_nouveau_ajax_remove_group_invite',    'nopriv' => false ) ),
+) );
+
+/**
  * Join or leave a group when clicking the "join/leave" button via a POST request.
  *
  * @since 1.0.0

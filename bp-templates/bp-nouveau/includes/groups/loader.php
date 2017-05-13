@@ -80,28 +80,6 @@ class BP_Nouveau_Groups {
 		// Register the Groups Notifications filters
 		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_groups_notification_filters' );
 
-		$ajax_actions = array(
-			array( 'groups_filter'                      => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true  ) ),
-			array( 'groups_join_group'                  => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'groups_leave_group'                 => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'groups_accept_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'groups_reject_invite'               => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'groups_request_membership'          => array( 'function' => 'bp_nouveau_ajax_joinleave_group',        'nopriv' => false ) ),
-			array( 'groups_get_group_potential_invites' => array( 'function' => 'bp_nouveau_ajax_get_users_to_invite',    'nopriv' => false ) ),
-			array( 'groups_send_group_invites'          => array( 'function' => 'bp_nouveau_ajax_send_group_invites',     'nopriv' => false ) ),
-			array( 'groups_delete_group_invite'         => array( 'function' => 'bp_nouveau_ajax_remove_group_invite',    'nopriv' => false ) ),
-		);
-
-		foreach ( $ajax_actions as $ajax_action ) {
-			$action = key( $ajax_action );
-
-			add_action( 'wp_ajax_' . $action, $ajax_action[ $action ]['function'] );
-
-			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
-				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
-			}
-		}
-
 		// Actions to check wether we are in the Group's default front page sidebar
 		add_action( 'dynamic_sidebar_before', array( $this, 'group_home_sidebar_set'   ), 10, 1 );
 		add_action( 'dynamic_sidebar_after',  array( $this, 'group_home_sidebar_unset' ), 10, 1 );

@@ -11,6 +11,22 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Registers activity AJAX actions.
+ */
+bp_nouveau_register_ajax_actions( array(
+	array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
+	array( 'get_single_activity_content'     => array( 'function' => 'bp_nouveau_ajax_get_single_activity_content', 'nopriv' => true ) ),
+	array( 'activity_mark_fav'               => array( 'function' => 'bp_nouveau_ajax_mark_activity_favorite',      'nopriv' => false ) ),
+	array( 'activity_mark_unfav'             => array( 'function' => 'bp_nouveau_ajax_unmark_activity_favorite',    'nopriv' => false ) ),
+	array( 'activity_clear_new_mentions'     => array( 'function' => 'bp_nouveau_ajax_clear_new_mentions',          'nopriv' => false ) ),
+	array( 'delete_activity'                 => array( 'function' => 'bp_nouveau_ajax_delete_activity',             'nopriv' => false ) ),
+	array( 'new_activity_comment'            => array( 'function' => 'bp_nouveau_ajax_new_activity_comment',        'nopriv' => false ) ),
+	array( 'bp_nouveau_get_activity_objects' => array( 'function' => 'bp_nouveau_ajax_get_activity_objects',        'nopriv' => false ) ),
+	array( 'post_update'                     => array( 'function' => 'bp_nouveau_ajax_post_update',                 'nopriv' => false ) ),
+	array( 'bp_spam_activity'                => array( 'function' => 'bp_nouveau_ajax_spam_activity',               'nopriv' => false ) ),
+) );
+
+/**
  * Mark an activity as a favourite via a POST request.
  *
  * @since 1.0.0

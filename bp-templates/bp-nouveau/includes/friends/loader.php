@@ -67,24 +67,6 @@ class BP_Nouveau_Friends {
 
 		// Register the friends Notifications filters
 		add_action( 'bp_nouveau_notifications_init_filters', array( $this, 'notification_filters' ) );
-
-		$ajax_actions = array(
-			array( 'friends_remove_friend'       => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
-			array( 'friends_add_friend'          => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
-			array( 'friends_withdraw_friendship' => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
-			array( 'friends_accept_friendship'   => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
-			array( 'friends_reject_friendship'   => array( 'function' => 'bp_nouveau_ajax_addremove_friend', 'nopriv' => false ) ),
-		);
-
-		foreach ( $ajax_actions as $ajax_action ) {
-			$action = key( $ajax_action );
-
-			add_action( 'wp_ajax_' . $action, $ajax_action[ $action ]['function'] );
-
-			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
-				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
-			}
-		}
 	}
 
 	/**
