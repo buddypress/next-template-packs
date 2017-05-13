@@ -509,18 +509,15 @@ function bp_nouveau_loop_classes() {
 			$component  = sanitize_key( bp_current_component() );
 		endif;
 
-			// if this is friends loop we still need the general members-list class
-			$members_loop_class = '';
-			if( bp_is_user() && 'my-friends' === bp_current_action() ) {
-				$member_loop_class = 'members-list';
-			}
-
 		$classes = array(
 			'item-list',
-			$member_loop_class,
 			sprintf( '%s-list', str_replace('_', '-', $component ) ),
 			'bp-list',
 		);
+
+		if( bp_is_user() && 'my-friends' === bp_current_action() ) {
+			$classes[] = 'members-list';
+		}
 
 		$available_components = array(
 			'members' => true,
