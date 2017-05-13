@@ -50,6 +50,13 @@ class BP_Nouveau_Blogs {
 	private function includes() {
 		require( trailingslashit( $this->dir ) . 'functions.php'     );
 		require( trailingslashit( $this->dir ) . 'template-tags.php' );
+
+		// Load AJAX code only on AJAX requests.
+		add_action( 'admin_init', function() {
+			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'blogs_' ) ) {
+				require( trailingslashit( $this->dir ) . 'ajax.php' );
+			}
+		} );
 	}
 
 	/**
@@ -61,20 +68,6 @@ class BP_Nouveau_Blogs {
 		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			// Avoid Notices for BuddyPress Legacy Backcompat
 			remove_action( 'bp_blogs_directory_blog_types', 'bp_blog_backcompat_create_nav_item', 1000 );
-		}
-
-		$ajax_actions = array(
-			array( 'blogs_filter' => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true ) ),
-		);
-
-		foreach ( $ajax_actions as $ajax_action ) {
-			$action = key( $ajax_action );
-
-			add_action( 'wp_ajax_' . $action, $ajax_action[ $action ]['function'] );
-
-			if ( ! empty( $ajax_action[ $action ]['nopriv'] ) ) {
-				add_action( 'wp_ajax_nopriv_' . $action, $ajax_action[ $action ]['function'] );
-			}
 		}
 	}
 
