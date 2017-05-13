@@ -797,17 +797,24 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
-		'avatar_style'     => 0,
-		'user_front_page'  => 1,
-		'user_front_bio'   => 0,
-		'user_nav_display' => 0,       // O is default (horizontally). 1 is vertically.
-		'user_nav_tabs'    => 0,
-		'user_nav_order'   => array(),
-		'members_layout'   => 1,
+		'avatar_style'       => 0,
+		'user_front_page'    => 1,
+		'user_front_bio'     => 0,
+		'user_nav_display'   => 0,       // O is default (horizontally). 1 is vertically.
+		'user_nav_tabs'      => 0,
+		'user_nav_order'     => array(),
+		'members_layout'     => 1,
+		'members_dir_tabs'   => 0,
+		'members_dir_layout' => 0,
 	);
 
 	if ( bp_is_active( 'friends' ) ) {
 		$default_args['members_friends_layout'] = 1;
+	}
+
+	if ( bp_is_active( 'activity' ) ) {
+		$default_args['activity_dir_layout'] = 0;
+		$default_args['activity_dir_tabs']   = 0; // default = no tabs
 	}
 
 	if ( bp_is_active( 'groups' ) ) {
@@ -820,16 +827,15 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_nav_tabs'          => 0,
 			'groups_layout'           => 1,
 			'members_group_layout'    => 1,
-			'activity_dir_tabs'       => 0,   // default = no tabs
-			'blogs_dir_tabs'          => 0,
+			'groups_dir_layout'       => 0,
 			'groups_dir_tabs'         => 0,
-			'members_dir_tabs'        => 0,
 		) );
 	}
 
 	if ( is_multisite() && bp_is_active( 'blogs' ) ) {
 		$default_args = array_merge( $default_args, array(
-			'blogs_layout' => 1,
+			'sites_dir_layout' => 0,
+			'sites_dir_tabs'   => 0,
 		) );
 	}
 
@@ -1064,7 +1070,7 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	foreach ( $settings as $id_setting => $setting_args ) {
 		$args = array();
 
-		if ( empty( $setting_args['index'] ) ) {
+		if ( empty( $setting_args['index'] ) || ! isset( $bp_nouveau_options[ $setting_args['index'] ] ) ) {
 			continue;
 		}
 
