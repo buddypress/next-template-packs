@@ -8,8 +8,6 @@
  */
 ?>
 
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
 	<?php bp_nouveau_before_blogs_directory_content() ;?>
 
 	<?php if ( ! bp_nouveau_is_object_nav_in_sidebar() ) : ?>
@@ -29,4 +27,3 @@
 		<?php bp_nouveau_after_blogs_directory_content() ;?>
 	</div><!-- // .screen-content -->
 
-</div><!-- //.buddypress -->

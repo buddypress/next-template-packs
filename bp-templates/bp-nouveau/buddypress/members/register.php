@@ -9,8 +9,6 @@
 
 ?>
 
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
 	<?php bp_nouveau_signup_hook( 'before', 'page' ); ?>
 
 	<div id="register-page"class="page register-page">
@@ -123,5 +121,3 @@
 	</div>
 
 	<?php bp_nouveau_signup_hook( 'after', 'page' ); ?>
-
-</div><!-- #buddypress -->

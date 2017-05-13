@@ -8,8 +8,6 @@
 
 bp_nouveau_groups_create_hook( 'before', 'page' ); ?>
 
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
 	<h2 class="bp-subhead"><?php _e('Create A New Group','bp-nouveau'); ?></h2>
 
 	<?php bp_nouveau_groups_create_hook( 'before', 'content_template' ); ?>
@@ -39,7 +37,5 @@ bp_nouveau_groups_create_hook( 'before', 'page' ); ?>
 	</form>
 
 	<?php bp_nouveau_groups_create_hook( 'after', 'content_template' ); ?>
-
-</div>
 
 <?php bp_nouveau_groups_create_hook( 'after', 'page' );

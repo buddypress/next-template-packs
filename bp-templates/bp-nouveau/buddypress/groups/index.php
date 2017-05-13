@@ -8,8 +8,6 @@
  */
 ?>
 
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
 	<?php bp_nouveau_before_groups_directory_content(); ?>
 
 	<?php bp_nouveau_template_notices(); ?>
@@ -31,4 +29,3 @@
 	<?php bp_nouveau_after_groups_directory_content(); ?>
 	</div><!-- // .screen-content -->
 
-</div><!-- //.buddypress -->

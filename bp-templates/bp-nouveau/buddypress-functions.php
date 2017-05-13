@@ -172,6 +172,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Filter BuddyPress template hierarchy and look for page templates.
 		add_filter( 'bp_get_buddypress_template', array( $this, 'theme_compat_page_templates' ), 10, 1 );
 
+		// Add our "buddypress" div wrapper to theme compat template parts.
+		add_filter( 'bp_replace_the_content', array( $this, 'theme_compat_wrapper' ), 999 );
+
 		// We need to neutralize the BuddyPress core "bp_core_render_message()" once it has been added.
 		add_action( 'bp_actions', array( $this, 'neutralize_core_template_notices' ), 6 );
 
@@ -567,6 +570,26 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		return $templates;
+	}
+
+	/**
+	 * Add our special 'buddypress' div wrapper to the theme compat template part.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @see bp_buffer_template_part()
+	 *
+	 * @param  string $retval Current template part contents.
+	 * @return string
+	 */
+	public function theme_compat_wrapper( $retval ) {
+		// We already have a 'buddypress' wrapper, so bail.
+		if ( false !== strpos( $retval, '<div id="buddypress"' ) ) {
+			return $retval;
+		}
+
+		// Add our 'buddypress' div wrapper.
+		return sprintf( '<div id="buddypress" class="%1$s">%2$s</div><!-- #buddypress -->%3$s', bp_nouveau_get_buddypress_classes(), $retval, "\n" );
 	}
 
 	/**

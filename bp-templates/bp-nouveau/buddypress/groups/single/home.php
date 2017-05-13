@@ -8,7 +8,6 @@
  */
 
 ?>
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
 	<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
@@ -39,5 +38,3 @@
 		<?php bp_nouveau_group_hook( 'after', 'home_content' ); ?>
 
 	<?php endwhile; endif; ?>
-
-</div><!-- #buddypress -->
