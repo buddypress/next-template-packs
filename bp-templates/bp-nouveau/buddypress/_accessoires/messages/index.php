@@ -150,7 +150,7 @@
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img src="{{data.recipients[i].avatar}}" width="28px" class="avatar mini"></a></li>
+									<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -199,7 +199,7 @@
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img src="{{data.recipients[i].avatar}}" width="28px" class="avatar mini"></a></li>
+							<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
 						<# } #>
 					</ul>
 				</dd>
@@ -222,7 +222,7 @@
 		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
 		<a href="{{data.sender_link}}" title="{{data.sender_name}}" class="user-link">
-			<img src="{{data.sender_avatar}}" width="32px" height="32px" class="avatar">
+			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
 
@@ -238,7 +238,7 @@
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Message', 'bp-nouveau' );?></span>
 					</button>
 				<# } else { #>
-					<button  class="message-action-star bp-icons"data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
+					<button  class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Message', 'bp-nouveau' );?></span>
 					</button>
 				<# } #>
