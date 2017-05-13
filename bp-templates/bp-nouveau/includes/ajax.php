@@ -1,6 +1,6 @@
 <?php
 /**
- * Common Ajax functions
+ * Common functions only loaded on AJAX requests.
  *
  * @since 1.0.0
  *
