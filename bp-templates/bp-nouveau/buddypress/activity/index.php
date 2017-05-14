@@ -9,8 +9,6 @@
  */
 ?>
 
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
 	<?php bp_nouveau_before_activity_directory_content(); ?>
 
 	<?php if ( is_user_logged_in() ) : ?>
@@ -46,4 +44,3 @@
 		<?php bp_nouveau_after_activity_directory_content() ;?>
 	</div><!-- // .screen-content -->
 
-</div>

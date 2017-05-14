@@ -9,8 +9,6 @@
 
 ?>
 
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
-
 	<?php bp_nouveau_member_hook( 'before', 'home_content' ); ?>
 
 	<div id="item-header" role="complementary" data-bp-item-id="<?php echo bp_displayed_user_id(); ?>" data-bp-item-component="members" class="users-header single-headers">
@@ -34,5 +32,3 @@
 	</div><!-- // .bp-wrap -->
 
 	<?php bp_nouveau_member_hook( 'after', 'home_content' ); ?>
-
-</div><!-- #buddypress -->

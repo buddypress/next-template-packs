@@ -7,7 +7,6 @@
  */
 
 ?>
-<div id="buddypress" class="<?php bp_nouveau_buddypress_classes(); ?>">
 
 	<?php bp_nouveau_template_notices(); ?>
 
@@ -20,4 +19,3 @@
 		</ul>
 
 	</div>
-</div>
