@@ -2683,6 +2683,11 @@ li#compose-personal-li a#compose:hover {
 	margin: 0 10px 0 0;
 }
 
+#message-threads li .thread-from .user-name {
+	display: inline-block;
+	line-height: 1.1;
+}
+
 #message-threads li .thread-content {
 	-webkit-flex: 1 2 60%;
 	-moz-flex: 1 2 60%;

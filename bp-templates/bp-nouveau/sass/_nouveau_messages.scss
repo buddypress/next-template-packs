@@ -139,6 +139,11 @@ li#compose-personal-li {
 				float: left;
 				margin: 0 $marg-sml 0 0;
 			}
+
+			.user-name {
+				display: inline-block;
+				line-height: 1.1;
+			}
 		}
 
 		.thread-content {

@@ -121,7 +121,7 @@
 	<div class="thread-from">
 		<a class="user-link" href="{{data.sender_link}}" title="{{data.sender_name}}" >
 			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
-			{{data.sender_name}}
+			<span class="user-name">{{data.sender_name}}</span>
 		</a>
 	</div>
 	<div class="thread-content" data-thread-id="{{data.id}}">
