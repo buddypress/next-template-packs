@@ -3852,7 +3852,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	color: #fff;
 }
 
-.buddypress-wrap .bp-feedback {
+.buddypress-wrap .bp-feedback:not(.custom-homepage-info) {
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
@@ -3867,6 +3867,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-align-items: stretch;
 	-webkit-box-align: stretch;
 	align-items: stretch;
+}
+
+.buddypress-wrap .bp-feedback {
 	background: #fff;
 	color: gray;
 	-webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);

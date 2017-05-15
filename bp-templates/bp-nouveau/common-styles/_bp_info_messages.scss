@@ -85,11 +85,14 @@
 	// '$border: none' ensures border turned off in favour off
 	// box shadow.
 
-	.bp-feedback {
+	.bp-feedback:not(.custom-homepage-info) {
 
 		@include flex-box-dir();
 
 		@include flex-align();
+	}
+
+	.bp-feedback {
 
 		@include message-box( $border: none);
 

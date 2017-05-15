@@ -11,7 +11,7 @@
 <div class="group-front-page">
 	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
 
-		<div class="bp-feedback info">
+		<div class="bp-feedback custom-homepage-info info">
 			<strong><?php esc_html_e( 'Manage the Groups default front page', 'bp-nouveau' ) ;?></strong> <a href="#" title="close" data-bp-close="remove"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span></a><br/>
 			<?php printf(
 				esc_html__( 'You can set your preferences about the %s or add %s to it.', 'bp-nouveau' ),
