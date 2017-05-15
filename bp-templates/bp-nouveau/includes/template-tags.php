@@ -1368,9 +1368,6 @@ function bp_nouveau_buddypress_classes() {
 
 			if ( ! empty( $layout_prefs ) && (int) $layout_prefs === 1 && ( bp_is_user() || bp_is_group() ) ) {
 				$classes[] = 'bp-vertical-nav';
-
-				// Set the global for a later use.
-				$bp_nouveau->{$component}->single_primary_nav_layout = $layout_prefs;
 			}
 
 			if ( ! empty( $layout_prefs ) && bp_is_directory() ) {
@@ -1428,7 +1425,15 @@ function bp_nouveau_single_item_nav_classes() {
 			$menu_type = 'groups-nav';
 		}
 
-		if ( ! empty( $bp_nouveau->{$component}->single_primary_nav_layout ) && (int) $bp_nouveau->{$component}->single_primary_nav_layout === 1 ) {
+		$customizer_option = ( bp_is_user() )? 'user_nav_display' : 'group_nav_display';
+
+		$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+
+		// Set the global for a later use - this is moved from the `bp_nouveau_get_buddypress_classes()
+		// But was set as a check for this array class addition.
+		$bp_nouveau->{$component}->single_primary_nav_layout = $layout_prefs;
+
+		if ( 1 === $layout_prefs ) {
 			$classes[] = 'vertical';
 		}
 
