@@ -1,5 +1,7 @@
 sudo: false
+
 language: php
+
 php:
   - 7.1
   - 7.0
@@ -7,22 +9,51 @@ php:
   - 5.5
   - 5.4
   - 5.3
+
+# Specify versions of WordPress to test against
+# WP_VERSION = WordPress version number (use "master" for SVN trunk)
+# BP_VERSION = Branch version of BuddyPress to test (use "master" for trunk
+# or version number to one decimal point - eg. 2.8)
 env:
-  - BP_NTP_TRAVISCI=travis:phpunit
-matrix:
-  include:
-    - php: 7.1
-      env: BP_NTP_TRAVISCI=travis:grunt
+  - WP_VERSION=master BP_VERSION=master
+  - WP_VERSION=4.7 BP_VERSION=2.8
+  - WP_VERSION=4.6 BP_VERSION=2.8
+  - WP_VERSION=4.5 BP_VERSION=2.8
+  - WP_VERSION=4.4 BP_VERSION=2.8
+
+install:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." ]]; then
+      composer global require "phpunit/phpunit=5.7.*"
+    elif [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]]; then
+      composer global require "phpunit/phpunit=4.8.*"
+    fi
+
 before_script:
-  - mysql --version
-  - php --version
-  - phpenv versions
-  - phpunit --version
-  - node --version
-  - nvm install 6
-  - node --version
-  - npm --version
-  - npm install -g grunt-cli
-  - grunt --version
-  - npm install
-script: grunt $BP_NTP_TRAVISCI
+  # set up WP install
+  - export WP_DEVELOP_DIR=/tmp/wordpress/
+  - mkdir -p $WP_DEVELOP_DIR
+  - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
+  - plugin_slug=$(basename $(pwd))
+  - plugin_dir=$WP_DEVELOP_DIR/src/wp-content/plugins/$plugin_slug
+  - cd ..
+  - mv $plugin_slug $plugin_dir
+  # set up BuddyPress
+  - buddypress_dir=$WP_DEVELOP_DIR/src/wp-content/plugins/buddypress
+  - mkdir -p $buddypress_dir
+  - git clone --depth=1 --branch="$BP_VERSION" git://buddypress.git.wordpress.org/ $buddypress_dir
+  # set up testing suite
+  - cd $WP_DEVELOP_DIR
+  - cp wp-tests-config-sample.php wp-tests-config.php
+  - sed -i "s:dirname( __FILE__ ) . '/wordpress/':'$WP_CORE_DIR':" wp-tests-config.php
+  - sed -i "s/yourdbnamehere/wordpress_test/" wp-tests-config.php
+  - sed -i "s/yourusernamehere/root/" wp-tests-config.php
+  - sed -i "s/yourpasswordhere//" wp-tests-config.php
+  # set up database
+  - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
+  # prepare for running the tests
+  - cd $plugin_dir
+  - pwd
+
+script: phpunit
