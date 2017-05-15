@@ -58,7 +58,7 @@
 				width: auto;
 
 				img.avatar,
-				img.FB_profile_pic {
+				img.FB_profile_pic { /* stylelint-disable-line selector-class-pattern */
 					max-width: 15%;
 				}
 			}
@@ -71,7 +71,7 @@
 					width: 10%;
 
 					img.avatar,
-					img.FB_profile_pic {
+					img.FB_profile_pic { /* stylelint-disable-line selector-class-pattern */
 						max-width: 60%;
 					}
 				}
@@ -356,7 +356,7 @@ body.activity-permalink {
 			&.mini {
 
 				img.avatar,
-				img.FB_profile_pic {
+				img.FB_profile_pic { /* stylelint-disable-line selector-class-pattern */
 					height: auto;
 					margin-left: 0;
 					width: auto;
