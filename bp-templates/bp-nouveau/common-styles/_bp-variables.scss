@@ -9,71 +9,71 @@
 // Spacing values - used primarilly for main elements to allow us
 // to adjust values in a grouped manner.
 
-$pad-xsml: 0.3em;
-$pad-sml:  0.5em;
-$pad-med:  1em;
-$pad-lrg:  2em;
-$pad-xlrg: 4em;
+$pad-xsml: 0.3em !default;
+$pad-sml:  0.5em !default;
+$pad-med:  1em !default;
+$pad-lrg:  2em !default;
+$pad-xlrg: 4em !default;
 
-$marg-xsml: 5px;
-$marg-sml:  10px;
-$marg-med:  15px;
-$marg-lrg:  20px;
-$marg-xlrg: 30px;
+$marg-xsml: 5px !default;
+$marg-sml:  10px !default;
+$marg-med:  15px !default;
+$marg-lrg:  20px !default;
+$marg-xlrg: 30px !default;
 
 // Colours
 
-$dark-grey:            #555;
-$light-text:           #777;
-$primary-grey:         #ccc;
-$light-grey:           #eaeaea;
-$med-light-grey:       #d6d6d6;
-$blue:                 #5087e5;
-$black:                #333;
-$grey:                 $primary-grey;
-$golden:               #edbb34;
+$dark-grey:            #555 !default;
+$light-text:           #777 !default;
+$primary-grey:         #ccc !default;
+$light-grey:           #eaeaea !default;
+$med-light-grey:       #d6d6d6 !default;
+$blue:                 #5087e5 !default;
+$black:                #333 !default;
+$grey:                 $primary-grey !default;
+$golden:               #edbb34 !default;
 
-$highlight:            $blue; // for various elements such as span qnt indications
-$text-link-hover:      #5087e5;
-$text-link-visited:    $med-light-grey;
-$bp-border-color:      #eee;
-$bp-border-dark:       $primary-grey;
-$buttons-background:   #ededed;
-$off-white:            #fafafa;
-$white:                #fff;
-$form-border-color:    $med-light-grey;
-$bp-text:              $dark-grey;
-$form-text:            $light-text;
-$primary-headings:     $light-text;
-$textarea-bck:         $white;
-$meta-text:            $light-text;
-$meta-text-dark:       $dark-grey;
-$focussed-border-clr:  rgba(31, 179, 221, 0.9); // textareas? e.g whats-new
+$highlight:            $blue !default; // for various elements such as span qnt indications
+$text-link-hover:      #5087e5 !default;
+$text-link-visited:    $med-light-grey !default;
+$bp-border-color:      #eee !default;
+$bp-border-dark:       $primary-grey !default;
+$buttons-background:   #ededed !default;
+$off-white:            #fafafa !default;
+$white:                #fff !default;
+$form-border-color:    $med-light-grey !default;
+$bp-text:              $dark-grey !default;
+$form-text:            $light-text !default;
+$primary-headings:     $light-text !default;
+$textarea-bck:         $white !default;
+$meta-text:            $light-text !default;
+$meta-text-dark:       $dark-grey !default;
+$focussed-border-clr:  rgba(31, 179, 221, 0.9) !default; // textareas? e.g whats-new
 
 // Message colors
 
 // used on text == red
-$warn:           #b71717;
+$warn:           #b71717 !default;
 
 // The colors for boxes
-$warnings:       #d33;
-$informational:  #38a;
-$loading:        #ffd087;
-$update-success: #8a2;
+$warnings:       #d33 !default;
+$informational:  #38a !default;
+$loading:        #ffd087 !default;
+$update-success: #8a2 !default;
 
 // password warn colors & border-short
 // These may be overidden on the @include mixin call
-$pwd-background:    #eee;
-$background-short:  #ffa0a0;
-$border-short:      #f04040;
-$background-good:   #66d66e;
-$border-good:       #438c48;
-$background-bad:    #ffb78c;
-$border-bad:        #ff853c;
+$pwd-background:    #eee !default;
+$background-short:  #ffa0a0 !default;
+$border-short:      #f04040 !default;
+$background-good:   #66d66e !default;
+$border-good:       #438c48 !default;
+$background-bad:    #ffb78c !default;
+$border-bad:        #ff853c !default;
 
 // Animation loader-pulsate border / shadow colors
 
-$border-color-from:        #aaa;
-$border-color-to:          #ccc;
-$shadow-color-from:        #ccc;
-$shadow-color-to:          #f8f8f8;
+$border-color-from:        #aaa !default;
+$border-color-to:          #ccc !default;
+$shadow-color-from:        #ccc !default;
+$shadow-color-to:          #f8f8f8 !default;
