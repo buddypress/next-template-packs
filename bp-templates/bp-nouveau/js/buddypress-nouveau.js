@@ -1,4 +1,6 @@
-/* global wp, bp, BP_Nouveau */
+/* global wp, bp, BP_Nouveau, JSON */
+/* jshint devel: true */
+/* jshint browser: true */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
@@ -44,7 +46,7 @@ window.bp = window.bp || {};
 			this.ajax_request           = null;
 
 			// Object Globals
-			this.objects                = $.map( BP_Nouveau.objects, function( value, key ) { return value; } );
+			this.objects                = $.map( BP_Nouveau.objects, function( value ) { return value; } );
 			this.objectNavParent        = BP_Nouveau.object_nav_parent;
 			this.time_since             = BP_Nouveau.time_since;
 
@@ -137,6 +139,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		getLinkParams: function( url, param ) {
+			var qs;
 			if ( url ) {
 				qs = ( -1 !== url.indexOf( '?' ) ) ? '?' + url.split( '?' )[1] : '';
 			} else {
@@ -706,7 +709,7 @@ window.bp = window.bp || {};
 			// Stop event propagation
 			event.preventDefault();
 
-			if ( ( undefined !== BP_Nouveau[ action + '_confirm'] && false === confirm( BP_Nouveau[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
+			if ( ( undefined !== BP_Nouveau[ action + '_confirm'] && false === window.confirm( BP_Nouveau[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
 				return false;
 			}
 
@@ -805,7 +808,7 @@ window.bp = window.bp || {};
 
 		paginateAction: function( event ) {
 			var self  = event.data, navLink = $( event.currentTarget ), pagArg,
-			    scope = null, object, filter = null, search_terms = null, extras = null;
+			    scope = null, object, objectData, filter = null, search_terms = null, extras = null;
 
 			pagArg = navLink.closest( '[data-bp-pagination]' ).data( 'bp-pagination' ) || null;
 

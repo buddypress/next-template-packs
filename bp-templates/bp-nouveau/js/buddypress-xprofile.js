@@ -42,7 +42,7 @@ window.bp = window.bp || {};
 			shouldconfirm = false;
 		} );
 
-		window.onbeforeunload = function( e ) {
+		window.onbeforeunload = function() {
 			if ( shouldconfirm ) {
 				return BP_Nouveau.unsaved_changes;
 			}

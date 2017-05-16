@@ -403,9 +403,8 @@ window.bp = window.bp || {};
 		},
 
 		toggleView: function( event ) {
+			var target = $( event.target );
 			event.preventDefault();
-
-			target = $( event.target );
 
 			if ( ! target.data( 'nav' ) && 'SPAN' === event.target.tagName ) {
 				target = $( event.target ).parent();
@@ -510,7 +509,7 @@ window.bp = window.bp || {};
 			this.views.add( new bp.Views.Pagination( { model: new Backbone.Model( collection.options ) } ) );
 		},
 
-		filterUsers: function( filter ) {
+		filterUsers: function() {
 			bp.Nouveau.GroupInvites.displayFeedback( BP_Nouveau.group_invites.loading, 'loading' );
 
 			this.options.users.reset();
@@ -522,7 +521,7 @@ window.bp = window.bp || {};
 			} );
 		},
 
-		usersFiltered: function( collection, response ) {
+		usersFiltered: function() {
 			bp.Nouveau.GroupInvites.removeFeedback();
 		},
 
@@ -611,7 +610,7 @@ window.bp = window.bp || {};
 			bp.Nouveau.GroupInvites.displayFeedback( response.feedback, type );
 		},
 
-		cleanContent: function( collection ) {
+		cleanContent: function() {
 			_.each( this.views._views[''], function( view ) {
 				view.remove();
 			} );

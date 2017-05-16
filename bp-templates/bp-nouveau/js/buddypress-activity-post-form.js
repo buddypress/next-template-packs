@@ -314,7 +314,7 @@ window.bp = window.bp || {};
 				data: {
 					type   : this.options.type,
 					search : search,
-					nonce  : BP_Nouveau.nonces['activity']
+					nonce  : BP_Nouveau.nonces.activity
 				},
 				success : _.bind( this.itemFetched, this ),
 				error   : _.bind( this.itemFetched, this )
@@ -328,7 +328,7 @@ window.bp = window.bp || {};
 		},
 
 		cleanView: function() {
-			_.each( this.views._views[""], function( view ) {
+			_.each( this.views._views[''], function( view ) {
 					view.remove();
 			} );
 		}
@@ -390,7 +390,7 @@ window.bp = window.bp || {};
 			}
 
 			// Clean up views
-			_.each( this.views._views[""], function( view ) {
+			_.each( this.views._views[''], function( view ) {
 				if ( ! _.isUndefined( view.collection ) ) {
 					view.remove();
 				}
@@ -463,7 +463,7 @@ window.bp = window.bp || {};
 
 		isActive: function( button ) {
 			// Clean up views
-			_.each( this.views._views[""], function( view, index ) {
+			_.each( this.views._views[''], function( view, index ) {
 				if ( 0 !== index ) {
 					view.remove();
 				}
@@ -599,7 +599,7 @@ window.bp = window.bp || {};
 			// Remove feedback.
 			this.cleanFeedback();
 
-			if ( 2 !== this.views._views[""].length ) {
+			if ( 2 !== this.views._views[''].length ) {
 				return;
 			}
 
@@ -629,7 +629,7 @@ window.bp = window.bp || {};
 		},
 
 		resetForm: function() {
-			_.each( this.views._views[""], function( view, index ) {
+			_.each( this.views._views[''], function( view, index ) {
 				if ( index > 1 ) {
 					view.remove();
 				}
@@ -646,7 +646,7 @@ window.bp = window.bp || {};
 		},
 
 		cleanFeedback: function() {
-			_.each( this.views._views[""], function( view, index ) {
+			_.each( this.views._views[''], function( view ) {
 				if ( 'message' === view.$el.prop( 'id' ) ) {
 					view.remove();
 				}
@@ -700,7 +700,7 @@ window.bp = window.bp || {};
 
 			// Add the Akismet nonce if it exists.
 			if ( $('#_bp_as_nonce').val() ) {
-				data['_bp_as_nonce'] = $('#_bp_as_nonce').val();
+				data._bp_as_nonce = $('#_bp_as_nonce').val();
 			}
 
 			bp.ajax.post( 'post_update', _.extend( data, this.model.attributes ) ).done( function( response ) {
