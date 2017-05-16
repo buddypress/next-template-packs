@@ -1,4 +1,5 @@
 /* global wp, bp, BP_Nouveau, _, Backbone, tinymce, tinyMCE */
+/* jshint devel: true */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
@@ -685,7 +686,7 @@ window.bp = window.bp || {};
 			} );
 		},
 
-		threadsFetched: function( collection, response ) {
+		threadsFetched: function() {
 			bp.Nouveau.Messages.removeFeedback();
 		},
 
@@ -710,7 +711,7 @@ window.bp = window.bp || {};
 		},
 
 		changePreview: function( event ) {
-			target = $( event.currentTarget );
+			var target = $( event.currentTarget );
 
 			if ( ! target.hasClass( 'thread-content' ) || $( event.target ).hasClass( 'user-link' ) ) {
 				return event;
@@ -734,7 +735,7 @@ window.bp = window.bp || {};
 		},
 
 		loadSingleView: function( event ) {
-			target = $( event.currentTarget );
+			var target = $( event.currentTarget );
 
 			if ( ! target.hasClass( 'thread-content' ) || $( event.target ).hasClass( 'user-link' ) ) {
 				return event;
@@ -979,7 +980,7 @@ window.bp = window.bp || {};
 			}
 
 			// Message id to Thread id
-			var m_tid = _.object( _.map( threads, function (model, key) {
+			var m_tid = _.object( _.map( threads, function (model) {
 			    return [model.get( attr ), model.get( 'id' )];
 			} ) );
 
@@ -1026,7 +1027,7 @@ window.bp = window.bp || {};
 		},
 
 		addPaginatation: function( collection ) {
-			_.each( this.views._views, function( view, v ) {
+			_.each( this.views._views, function( view ) {
 				if ( ! _.isUndefined( view ) ) {
 					_.first( view ).remove();
 				}
@@ -1040,7 +1041,7 @@ window.bp = window.bp || {};
 			} ) );
 		},
 
-		filterThreads: function( filter ) {
+		filterThreads: function() {
 			bp.Nouveau.Messages.displayFeedback( BP_Nouveau.messages.loading, 'loading' );
 
 			this.options.threads.reset();
