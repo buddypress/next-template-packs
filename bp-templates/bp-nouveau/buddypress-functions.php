@@ -92,7 +92,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		// Includes dir
-		$this->includes_dir = trailingslashit( $this->dir ) . 'includes';
+		$this->includes_dir = trailingslashit( $this->dir ) . 'includes/';
 
 		// i18n
 		$this->lang_dir = trailingslashit( $this->dir ) . 'languages';
@@ -108,14 +108,14 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require( trailingslashit( $this->includes_dir ) . 'functions.php'     );
-		require( trailingslashit( $this->includes_dir ) . 'classes.php'       );
-		require( trailingslashit( $this->includes_dir ) . 'template-tags.php' );
+		require $this->includes_dir . 'functions.php';
+		require $this->includes_dir . 'classes.php';
+		require $this->includes_dir . 'template-tags.php';
 
 		// Load AJAX code only on AJAX requests.
 		add_action( 'admin_init', function() {
 			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX ) {
-				require( trailingslashit( $this->includes_dir ) . 'ajax.php' );
+				require $this->includes_dir . 'ajax.php';
 			}
 		}, 0 );
 

@@ -39,7 +39,7 @@ class BP_Nouveau_Friends {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->dir = dirname( __FILE__ );
+		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class BP_Nouveau_Friends {
 		// Load AJAX code only on AJAX requests.
 		add_action( 'admin_init', function() {
 			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'friends_' ) ) {
-				require( trailingslashit( $this->dir ) . 'ajax.php' );
+				require $this->dir . 'ajax.php';
 			}
 		} );
 	}

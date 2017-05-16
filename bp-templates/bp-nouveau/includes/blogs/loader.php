@@ -39,7 +39,7 @@ class BP_Nouveau_Blogs {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->dir = dirname( __FILE__ );
+		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
 	/**
@@ -48,13 +48,13 @@ class BP_Nouveau_Blogs {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require( trailingslashit( $this->dir ) . 'functions.php'     );
-		require( trailingslashit( $this->dir ) . 'template-tags.php' );
+		require $this->dir . 'functions.php';
+		require $this->dir . 'template-tags.php';
 
 		// Load AJAX code only on AJAX requests.
 		add_action( 'admin_init', function() {
 			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'blogs_' ) ) {
-				require( trailingslashit( $this->dir ) . 'ajax.php' );
+				require $this->dir . 'ajax.php';
 			}
 		} );
 	}

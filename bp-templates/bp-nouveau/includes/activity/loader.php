@@ -39,7 +39,7 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->dir = dirname( __FILE__ );
+		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
 	/**
@@ -48,11 +48,9 @@ class BP_Nouveau_Activity {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		$dir = trailingslashit( $this->dir );
-
-		require "{$dir}functions.php";
-		require "{$dir}template-tags.php";
-		require "{$dir}widgets.php";
+		require $this->dir . 'functions.php';
+		require $this->dir . 'template-tags.php';
+		require $this->dir . 'widgets.php';
 
 		// Load AJAX code only on AJAX requests.
 		add_action( 'admin_init', function() {
@@ -61,7 +59,7 @@ class BP_Nouveau_Activity {
 				// Check to see if action is activity-specific.
 				( false !== strpos( $_REQUEST['action'], 'activity' ) || ( 'post_update' === $_REQUEST['action'] ) )
 			) {
-				require "{$dir}ajax.php";
+				require $this->dir . 'ajax.php';
 			}
 		} );
 	}
