@@ -313,21 +313,23 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				$fav_args = array(
 					'parent_element'  => $parent_element,
 					'parent_attr'     => $parent_attr,
-					'button_element'  => $button_element,
-					'link_href'       => bp_get_activity_favorite_link(),
+					'button_element'  => 'button', // force to use button element
+					'link_href'       => '',
 					'link_class'      => 'button fav bp-secondary-action',
 					'link_title'      => __( 'Mark as Favorite', 'bp-nouveau' ),
 					'link_text'       => __( 'Favorite', 'bp-nouveau' ),
+					'data_attr'       => bp_get_activity_favorite_link(),
 				);
 			} else {
 				$fav_args = array(
 					'parent_element'  => $parent_element,
 					'parent_attr'     => $parent_attr,
-					'button_element'  => $button_element,
-					'link_href'       => bp_get_activity_unfavorite_link(),
+					'button_element'  => 'button',
+					'link_href'       => '',
 					'link_class'      => 'button unfav bp-secondary-action',
 					'link_title'      => __( 'Remove Favorite', 'bp-nouveau' ),
-					'link_text'   => __( 'Remove Favorite', 'bp-nouveau' ),
+					'link_text'       => __( 'Remove Favorite', 'bp-nouveau' ),
+					'data_attr'       => bp_get_activity_unfavorite_link(),
 				);
 			}
 
@@ -338,11 +340,12 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'parent_element'    => $parent_element,
 				'parent_attr'       => $parent_attr,
 				'must_be_logged_in' => true,
-				'button_element'    => $button_element,
+				'button_element'    => $fav_args['button_element'],
 				'button_attr'       => array(
 					'href'    => esc_url( $fav_args['link_href'] ),
 					'class'   => $fav_args['link_class'],
 					'title'   => esc_attr( $fav_args['link_title'] ),
+					'data-fav-item' => esc_url( $fav_args['data_attr'] ),
 					),
 				'link_text'   => sprintf( '<span class="bp-screen-reader-text">%1$s</span>', esc_html( $fav_args['link_text'] ) ),
 			);
@@ -387,6 +390,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		if ( empty( $delete_args['link_href'] ) ) {
 			$delete_args[] = bp_get_activity_delete_url();
 			$class = 'delete-activity';
+			$button_element = 'button'; // we'll force this delete item to be a button for the moment.
 
 			$delete_args = array(
 				'button_element'    => $button_element,
@@ -409,9 +413,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			'button_element'    => $button_element,
 			'button_attr'       => array(
 				'id'       => esc_attr( $delete_args['link_id'] ),
-				'href'     => esc_url( $delete_args['link_href'] ),
+				'href'     => '', // emptied href in favour of 'data-attr'
 				'class'    => $delete_args['link_class'],
 				'title'    => esc_attr( $delete_args['link_title'] ),
+				'data-act-delete' => esc_url( $delete_args['link_href'] ),
 				),
 			'link_text'  => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
 		);
