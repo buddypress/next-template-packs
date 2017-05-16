@@ -56,6 +56,7 @@ before_script:
   - cd $plugin_dir
   - pwd
   # run npm to install dependencies
+  - nvm install 6
   - npm install
 
 # run tests
