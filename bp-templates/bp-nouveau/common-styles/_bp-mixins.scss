@@ -15,14 +15,13 @@
 // be termed responsive font sizing.
 
 
-
 // Font size decs are used with caution BP doesn't manage
 // layout sizes & must take care to work with existing layout sizes.
 
 @mixin font-size($font-size: 16) {
 	$rem-font-value: ($font-size / 10);
 	font-size: ($font-size * 1px);
-//	font-size: $rem-font-value + rem;
+	//	font-size: $rem-font-value + rem;
 }
 
 
@@ -37,7 +36,7 @@
 
 	$the-sizes: $res-size;
 
-	$small: round( ($the-sizes / 1.2) );
+	$small: round(($the-sizes / 1.2));
 	$larger: $the-sizes;
 
 	$the-sizes: (
@@ -46,10 +45,11 @@
 	);
 
 	@each $font-breakpoint, $resonsive-font-size in $the-sizes {
+
 		@if $font-breakpoint == null {
 			font-size: $resonsive-font-size + px;
-		}
-		@else {
+		} @else {
+
 			@media screen and (min-width: $font-breakpoint) {
 				font-size: $resonsive-font-size + px;
 			}
@@ -66,44 +66,57 @@
 // }
 
 @mixin small-up {
+
 	@media screen and (min-width: 24em) {
+
 		@content;
 	}
 }
 
 @mixin medium-small-up {
+
 	@media screen and (min-width: 32em) {
+
 		@content;
 	}
 }
 
 @mixin medium-max {
+
 	@media screen and (max-width: 46.8em) {
+
 		@content;
 	}
 }
 
 @mixin medium-up {
+
 	@media screen and (min-width: 46.8em) {
+
 		@content;
 	}
 }
 
 @mixin medium-lrg-up {
+
 	@media screen and (min-width: 55em) {
+
 		@content;
 	}
 }
 
 @mixin large-up {
+
 	@media screen and (min-width: 75em) {
+
 		@content;
 	}
 }
 
 // 'clearfix-element' allows us to pass an element, class or id to the mixin.
-// Use where we need to have float containment and where getting to the physical element
-// to add a class of 'clearfix' is problematic.
+// Use where we need to have float containment and where getting to
+// the physical element to add a class of 'clearfix' is problematic.
+
 @mixin clearfix-element($item) {
 
 	#{$item}:before,
@@ -111,8 +124,9 @@
 		content: " ";
 		display: table;
 	}
+
 	#{$item}:after {
-		clear:both;
+		clear: both;
 	}
 
 }
@@ -122,6 +136,7 @@
 // rulesets to use hardoced to template markup.
 
 // Convenience helper to add hide properties to rulesets
+
 @mixin hide() {
 	height: 0;
 	left: -999em;
@@ -132,6 +147,7 @@
 
 // companion mixins properties for showing the element for :focus/:hover
 // or via JS added hooks.
+
 @mixin show() {
 	height: auto;
 	left: 0;
@@ -140,17 +156,10 @@
 	top: 0;
 }
 
-// To allow mixins to pass VendorPrefix scss-lint tests we disable lint-test
-// for specific blocks / rulesets
-// until such time as exemption lists can be built for the scss-lint.yml?
-// Any vendor prefix properties / mixins need to be in this block
-
-// scss-lint:disable VendorPrefix
-
-
 // Box model - defaults to value 'border-box'
 // Vendor prefixes are  pretty much redundent for this property,
 // consider removing
+
 @mixin box-model($box-type: null) {
 
 	@if $box-type {
@@ -166,6 +175,7 @@
 }
 
 // Border radius
+
 @mixin border-radius($radius) {
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
@@ -208,6 +218,7 @@
 
 // very basic box-shadow mixin  - this needs to be
 // updated & improved
+
 @mixin box-shadow($values...) {
 	-webkit-box-shadow: $values;
 	-moz-box-shadow: $values;
@@ -216,13 +227,15 @@
 
 // There can be a need to override the themes global styles
 // Provide a box-shadow: none;
+
 @mixin box-shadow-none() {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
-	}
+}
 
 // Calc e.g (100% - 10px)
+
 @mixin calc($property, $expression) {
 	#{$property}: -webkit-calc(#{$expression});
 	#{$property}: -moz-calc(#{$expression});
@@ -233,7 +246,8 @@
 
 // Set display to box flex & set the direcction and wrapping behavour
 // shorthand for flex-direction & flex wrap - default ( row wrap )
-@mixin flex-box-dir($flex-dir: 'row', $flex-wrap: 'nowrap') {
+
+@mixin flex-box-dir($flex-dir: "row", $flex-wrap: "nowrap") {
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
@@ -248,6 +262,7 @@
 
 // align child items
 // flex-start | flex-end | center | baseline | stretch (default)
+
 @mixin flex-align($align: stretch) {
 	-ms-flex-align: $align; //older?
 	-webkit-align-items: $align;
@@ -256,6 +271,7 @@
 }
 
 // Box-order  - shuffle item order for columns
+
 @mixin box-order($box-order-number: 1) {
 	-webkit-box-order: $box-order-number;
 	-moz-order: $box-order-number;
@@ -266,6 +282,7 @@
 
 // shorthand: flex-grow, flex-shrink, flex-basis for child items
 // defaults 0 | 1 | auto
+
 @mixin box-item-size($grow: 0, $shrink: 1, $basis: auto) {
 	-webkit-flex: $grow $shrink $basis;
 	-moz-flex: $grow $shrink $basis;
@@ -274,32 +291,30 @@
 	flex: $grow $shrink $basis;
 }
 
-// Vertical centering - an all in one, this is a fixed mixin for one result/requirement
+// Vertical centering - all in one, this is a
+// fixed mixin for one result/requirement.
 // This class allows us to center child elements
-// using flexbox this is a progressive enhancement,
+// using flexbox. This is a progressive enhancement,
 // it won't work in all browsers, older browser will simply
 // fall back to non centered or using older techniques.
 // N.B It would be prefereable to remove the older property syntax
+
 @mixin center-vert() {
-		display: -webkit-box; // older
-		display: -ms-flexbox; // older
-		display: -webkit-flex; // current prefix
-		display: flex; // current specs
-		-ms-flex-align: center; //older?
-		-webkit-align-items: center;
-		-webkit-box-align: center; // old
-		align-items: center; // current specs
+	display: -webkit-box; // older
+	display: -ms-flexbox; // older
+	display: -webkit-flex; // current prefix
+	display: flex; // current specs
+	-ms-flex-align: center; //older?
+	-webkit-align-items: center;
+	-webkit-box-align: center; // old
+	align-items: center; // current specs
 }
-
-
-
-// Re-enable the VendorPrefix lint test
-// scss-lint:enable VendorPrefix
 
 // BP message boxes
 // Creates a message box with border, background color
 // If  no text-color passed in then the background used for
 // text is darkened by 50%.
+
 @mixin message-box($background, $text-color: null) {
 
 	@if $text-color {
@@ -314,8 +329,9 @@
 	color: $text-color;
 }
 
-// Links as a tabbed effect
-// renders links in a horizontal layout as a tab effect on the current selected links
+// Links as a tabbed effect.
+// Renders links in a horizontal layout as a
+// tab effect on the current selected links.
 
 @mixin tabbed-links() {
 
@@ -370,7 +386,7 @@
 
 // Provides the properties to style vert navs in a visual tab style.
 // This allows rulesets to be applied without having to re-write.
-// e.g dir-navs use this in _bp_layouts.scss applied if the navs tabs class is set.
+// e.g dir-navs use this in _bp_layouts.scss if the navs tabs class set.
 
 @mixin primary-navs-vert-tabs() {
 
@@ -404,6 +420,7 @@
 }
 
 // BP message boxes
+
 @mixin message-box($background: #fff, $text-color: null, $border: null) {
 
 	@if $text-color {
@@ -416,6 +433,7 @@
 	background: $background;
 
 	@if $border != none {
+
 		@if $border {
 			border: $border;
 		} @else {
@@ -426,6 +444,7 @@
 }
 
 // Password warn colors
+
 @mixin pwd-bad-colors($background: null, $border: null) {
 
 	@if $background {
@@ -450,7 +469,7 @@
 	@if $background {
 		$background: $background;
 	} @else {
-		$background: $background-short ;
+		$background: $background-short;
 	}
 
 	background-color: $background;
