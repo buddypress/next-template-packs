@@ -15,11 +15,16 @@ php:
 # BP_VERSION = Branch version of BuddyPress to test (use "master" for trunk
 # or version number to one decimal point - eg. 2.8)
 env:
-  - WP_VERSION=master BP_VERSION=master
-  - WP_VERSION=4.7 BP_VERSION=2.8
-  - WP_VERSION=4.6 BP_VERSION=2.8
-  - WP_VERSION=4.5 BP_VERSION=2.8
-  - WP_VERSION=4.4 BP_VERSION=2.8
+  - WP_VERSION=master BP_VERSION=master BP_NTP_TRAVISCI=travis:phpunit
+  - WP_VERSION=4.7 BP_VERSION=2.8 BP_NTP_TRAVISCI=travis:phpunit
+  - WP_VERSION=4.6 BP_VERSION=2.8 BP_NTP_TRAVISCI=travis:phpunit
+  - WP_VERSION=4.5 BP_VERSION=2.8 BP_NTP_TRAVISCI=travis:phpunit
+  - WP_VERSION=4.4 BP_VERSION=2.8 BP_NTP_TRAVISCI=travis:phpunit
+
+-matrix:
+  include:
+    - php: 7.1
+      env: BP_NTP_TRAVISCI=travis:grunt
 
 install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -31,6 +36,17 @@ install:
     fi
 
 before_script:
+  - mysql --version
+  - php --version
+  - phpenv versions
+  - phpunit --version
+  - node --version
+  - nvm install 6
+  - node --version
+  - npm --version
+  - npm install -g grunt-cli
+  - grunt --version
+  - npm install
   # set up WP install
   - export WP_DEVELOP_DIR=/tmp/wordpress/
   - mkdir -p $WP_DEVELOP_DIR
@@ -56,4 +72,4 @@ before_script:
   - cd $plugin_dir
   - pwd
 
-script: phpunit
+script: grunt $BP_NTP_TRAVISCI
