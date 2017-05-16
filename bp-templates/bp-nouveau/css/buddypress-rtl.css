@@ -1121,6 +1121,7 @@ dt.section-title {
 
 .activity-list .activity-item.mini .activity-avatar img.avatar,
 .activity-list .activity-item.mini .activity-avatar img.FB_profile_pic {
+	/* stylelint-disable-line selector-class-pattern */
 	max-width: 15%;
 }
 
@@ -1128,10 +1129,11 @@ dt.section-title {
 	.activity-list .activity-item.mini .activity-avatar {
 		margin-right: 15px;
 		text-align: right;
-		width: 10%;
+		width: 15%;
 	}
 	.activity-list .activity-item.mini .activity-avatar img.avatar,
 	.activity-list .activity-item.mini .activity-avatar img.FB_profile_pic {
+		/* stylelint-disable-line selector-class-pattern */
 		max-width: 60%;
 	}
 }
@@ -1179,15 +1181,18 @@ dt.section-title {
 .activity-list .activity-item .activity-header .avatar {
 	display: inline-block;
 	margin: 0 5px;
+	vertical-align: bottom;
 }
 
-.activity-list .activity-item .activity-header a.activity-time-since {
+.activity-list .activity-item .activity-header .time-since {
+	font-size: 14px;
 	color: #aaa;
 	text-decoration: none;
 }
 
-.activity-list .activity-item .activity-header a.activity-time-since:hover {
+.activity-list .activity-item .activity-header .time-since:hover {
 	color: #777;
+	cursor: pointer;
 	text-decoration: underline;
 }
 
@@ -1356,13 +1361,6 @@ body.activity-permalink .activity-list li.has-comments {
 	padding-bottom: 0;
 }
 
-body.activity-permalink .activity-list li.mini img.avatar,
-body.activity-permalink .activity-list li.mini img.FB_profile_pic {
-	height: auto;
-	margin-right: 0;
-	width: auto;
-}
-
 body.activity-permalink .activity-list .activity-avatar {
 	width: auto;
 }
@@ -1378,7 +1376,7 @@ body.activity-permalink .activity-list .activity-avatar img {
 body.activity-permalink .activity-list .activity-content {
 	border: 0;
 	font-size: 100%;
-	line-height: 150%;
+	line-height: 1.5;
 	padding: 0;
 }
 
@@ -1898,7 +1896,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .single-headers h2 {
-	line-height: 120%;
+	line-height: 1.2;
 	margin: 0 0 5px;
 }
 
@@ -1911,7 +1909,7 @@ form.ac-form .ac-reply-content input {
 	display: inline-block;
 	font-size: 60%;
 	font-weight: 400;
-	line-height: 170%;
+	line-height: 1.7;
 	vertical-align: middle;
 }
 
@@ -1965,7 +1963,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .single-headers div#message.info {
-	line-height: 80%;
+	line-height: 0.8;
 }
 
 body.no-js .single-item-header .js-self-profile-button {

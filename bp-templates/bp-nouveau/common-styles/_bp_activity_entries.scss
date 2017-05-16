@@ -68,7 +68,7 @@
 				.activity-avatar {
 					margin-left: $marg-med;
 					text-align: left;
-					width: 10%;
+					width: 15%;
 
 					img.avatar,
 					img.FB_profile_pic { /* stylelint-disable-line selector-class-pattern */
@@ -132,14 +132,18 @@
 			.avatar {
 				display: inline-block;
 				margin: 0 $marg-xsml;
+				vertical-align: bottom;
 			}
 
-			a.activity-time-since {
+			.time-since {
+
+				@include font-size(14);
 				color: #aaa;
 				text-decoration: none;
 
 				&:hover {
 					color: $light-text;
+					cursor: pointer;
 					text-decoration: underline;
 				}
 			}
@@ -351,16 +355,6 @@ body.activity-permalink {
 
 			&.has-comments {
 				padding-bottom: 0;
-			}
-
-			&.mini {
-
-				img.avatar,
-				img.FB_profile_pic { /* stylelint-disable-line selector-class-pattern */
-					height: auto;
-					margin-left: 0;
-					width: auto;
-				}
 			}
 
 		} // close li
