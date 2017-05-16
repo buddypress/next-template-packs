@@ -130,7 +130,7 @@ module.exports = function(grunt) {
 				cmd: 'phpunit',
 				args: ['-c', 'tests/phpunit/multisite.xml']
 			}
-		},
+		}
 	});
 
 	// Lint CSS & JavaScript
