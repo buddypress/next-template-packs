@@ -42,7 +42,7 @@
 
 	// @mention user name
 	h2 {
-		line-height: 120%;
+		line-height: 1.2;
 		margin: 0 0 $marg-xsml;
 
 		a {
@@ -54,7 +54,7 @@
 			display: inline-block;
 			font-size: 60%;
 			font-weight: 400;
-			line-height: 170%;
+			line-height: 1.7;
 			vertical-align: middle;
 
 
@@ -117,7 +117,7 @@
 	}
 
 	div#message.info {
-		line-height: 80%;
+		line-height: 0.8;
 	}
 
 } // close .single-headers
