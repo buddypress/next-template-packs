@@ -120,7 +120,17 @@ module.exports = function(grunt) {
 					],
 				tasks: 'sass'
 			}
-		}
+		},
+		phpunit: {
+			'default': {
+				cmd: 'phpunit',
+				args: ['-c', 'phpunit.xml.dist']
+			},
+			'multisite': {
+				cmd: 'phpunit',
+				args: ['-c', 'tests/phpunit/multisite.xml']
+			}
+		},
 	});
 
 	// Lint CSS & JavaScript
@@ -132,7 +142,16 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask( 'default', 'Runs the default Grunt tasks', [ 'checkDependencies', 'lint', 'build' ] );
 
+	// Testing tasks.
+	grunt.registerMultiTask( 'phpunit', 'Runs PHPUnit tests, including the ajax and multisite tests.', function() {
+		grunt.util.spawn( {
+			args: this.data.args,
+			cmd:  this.data.cmd,
+			opts: { stdio: 'inherit' }
+		}, this.async() );
+	});
+
 	// Travis CI Tasks.
 	grunt.registerTask( 'travis:grunt', 'Runs the Grunt build tasks.', [ 'lint', 'build' ] );
-	grunt.registerTask( 'travis:phpunit', 'Runs the PHPUnit tasks.',[ 'build', 'phpunit' ] );
+	grunt.registerTask( 'travis:phpunit', 'Runs the PHPUnit tasks.',[ 'default', 'phpunit:default', 'phpunit:multisite' ] );
 };

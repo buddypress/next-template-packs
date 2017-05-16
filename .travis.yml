@@ -55,5 +55,8 @@ before_script:
   # prepare for running the tests
   - cd $plugin_dir
   - pwd
+  # run npm to install dependencies
+  - npm install
 
-script: phpunit
+# run tests
+script: grunt travis:phpunit
