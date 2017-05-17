@@ -4304,6 +4304,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: 100%;
 }
 
+.buddypress-wrap .grid.bp-list > li .action .generic-button a,
+.buddypress-wrap .grid.bp-list > li .action .generic-button button {
+	width: 100%;
+}
+
 .buddypress-wrap .grid.bp-list > li .item-avatar,
 .buddypress-wrap .grid.bp-list > li .avatar,
 .buddypress-wrap .grid.bp-list > li .item {
