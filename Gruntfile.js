@@ -100,9 +100,7 @@ module.exports = function(grunt) {
 				cwd: WORKING_DIR,
 				src: [
 					'bp-nouveau/sass/*.scss',
-					'bp-nouveau/common-styles/*.scss',
-					'!bp-nouveau/common-styles/_bp-mixins.scss',
-					'!bp-nouveau/common-styles/_bp-variables.scss'
+					'bp-nouveau/common-styles/*.scss'
 
 				]
 			}
