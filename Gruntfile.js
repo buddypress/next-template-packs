@@ -130,7 +130,7 @@ module.exports = function(grunt) {
 			},
 			'ajax': {
 				cmd: 'phpunit',
-				args: ['--group ajax']
+				args: ['-c', 'phpunit.xml.dist', '--group', 'ajax']
 			}
 		}
 	});
