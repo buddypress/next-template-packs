@@ -52,16 +52,22 @@ class BP_Nouveau_Activity {
 		require $this->dir . 'template-tags.php';
 		require $this->dir . 'widgets.php';
 
+		// Test suite requires the AJAX functions early.
+		if ( function_exists( 'tests_add_filter' ) ) {
+			require $this->dir . 'ajax.php';
+
 		// Load AJAX code only on AJAX requests.
-		add_action( 'admin_init', function() {
-			// AJAX condtion.
-			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX &&
-				// Check to see if action is activity-specific.
-				( false !== strpos( $_REQUEST['action'], 'activity' ) || ( 'post_update' === $_REQUEST['action'] ) )
-			) {
-				require $this->dir . 'ajax.php';
-			}
-		} );
+		} else {
+			add_action( 'admin_init', function() {
+				// AJAX condtion.
+				if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX &&
+					// Check to see if action is activity-specific.
+					( false !== strpos( $_REQUEST['action'], 'activity' ) || ( 'post_update' === $_REQUEST['action'] ) )
+				) {
+					require $this->dir . 'ajax.php';
+				}
+			} );
+		}
 	}
 
 	/**
