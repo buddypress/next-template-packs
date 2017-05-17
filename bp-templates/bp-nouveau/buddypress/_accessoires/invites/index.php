@@ -83,7 +83,7 @@
 <script type="text/html" id="tmpl-bp-invites-form">
 	<div class="bp-send-invites-form bp-label-placeholder">
 		<label for="send-invites-control"><?php esc_html_e( 'Optional: add a message to your invite.', 'bp-nouveau' ); ?></label>
-		<textarea id="send-invites-control"></textarea>
+		<textarea id="send-invites-control"  class="bp-label-in-here"></textarea>
 	</div>
 	<div class="action">
 		<button type="button" id="bp-invites-reset" class="button bp-secondary-action"><?php _ex( 'Cancel', 'Cancel invitation', 'bp-nouveau' ); ?></button>

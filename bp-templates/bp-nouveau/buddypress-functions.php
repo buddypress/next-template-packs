@@ -112,12 +112,18 @@ class BP_Nouveau extends BP_Theme_Compat {
 		require $this->includes_dir . 'classes.php';
 		require $this->includes_dir . 'template-tags.php';
 
+		// Test suite requires the AJAX functions early.
+		if ( function_exists( 'tests_add_filter' ) ) {
+			require $this->includes_dir . 'ajax.php';
+
 		// Load AJAX code only on AJAX requests.
-		add_action( 'admin_init', function() {
-			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX ) {
-				require $this->includes_dir . 'ajax.php';
-			}
-		}, 0 );
+		} else {
+			add_action( 'admin_init', function() {
+				if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX ) {
+					require $this->includes_dir . 'ajax.php';
+				}
+			}, 0 );
+		}
 
 		foreach ( bp_core_get_packaged_component_ids() as $component ) {
 			$component_loader = trailingslashit( $this->includes_dir ) . $component . '/loader.php';

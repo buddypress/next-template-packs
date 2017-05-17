@@ -53,12 +53,18 @@ class BP_Nouveau_Groups {
 		require $this->dir . 'classes.php';
 		require $this->dir . 'template-tags.php';
 
+		// Test suite requires the AJAX functions early.
+		if ( function_exists( 'tests_add_filter' ) ) {
+			require $this->dir . 'ajax.php';
+
 		// Load AJAX code only on AJAX requests.
-		add_action( 'admin_init', function() {
-			if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'groups_' ) ) {
-				require $this->dir . 'ajax.php';
-			}
-		} );
+		} else {
+			add_action( 'admin_init', function() {
+				if ( defined( 'DOING_AJAX' ) && true === DOING_AJAX && 0 === strpos( $_REQUEST['action'], 'groups_' ) ) {
+					require $this->dir . 'ajax.php';
+				}
+			} );
+		}
 	}
 
 	/**

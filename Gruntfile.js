@@ -127,6 +127,10 @@ module.exports = function(grunt) {
 			'multisite': {
 				cmd: 'phpunit',
 				args: ['-c', 'tests/phpunit/multisite.xml']
+			},
+			'ajax': {
+				cmd: 'phpunit',
+				args: ['-c', 'phpunit.xml.dist', '--group', 'ajax']
 			}
 		}
 	});
@@ -151,5 +155,5 @@ module.exports = function(grunt) {
 
 	// Travis CI Tasks.
 	grunt.registerTask( 'travis:grunt', 'Runs the Grunt build tasks.', [ 'lint', 'build' ] );
-	grunt.registerTask( 'travis:phpunit', 'Runs the PHPUnit tasks.',[ 'default', 'phpunit:default', 'phpunit:multisite' ] );
+	grunt.registerTask( 'travis:phpunit', 'Runs the PHPUnit tasks.',[ 'default', 'phpunit:default', 'phpunit:multisite', 'phpunit:ajax' ] );
 };
