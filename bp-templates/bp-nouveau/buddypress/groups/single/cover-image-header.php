@@ -44,7 +44,7 @@
 			<?php bp_nouveau_group_header_buttons(); ?>
 
 		</div><!-- #item-header-content -->
-<?php endif; ?><!--if front page description option is set and the meta is not loaded -->
+<?php endif; ?>
 
 		<?php bp_get_template_part('groups/single/parts/header-item-actions'); ?>
 
