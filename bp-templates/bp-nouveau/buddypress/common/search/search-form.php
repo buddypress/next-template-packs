@@ -11,16 +11,14 @@
 <div class="<?php bp_nouveau_search_container_class(); ?> bp-search">
 	<form action="" method="get" class="bp-dir-search-form" id="<?php bp_nouveau_search_selector_id( 'search-form' ) ;?>" role="search" data-bp-search="groups">
 
-		<div class="bp-label-placeholder">
-			<label for="<?php bp_nouveau_search_selector_id( 'search' ) ;?>"><?php bp_nouveau_search_default_text(); ?></label>
+			<label for="<?php bp_nouveau_search_selector_id( 'search' ) ;?>" class="bp-screen-reader-text"><?php bp_nouveau_search_default_text( '', false ); ?></label>
 
-			<input id="<?php bp_nouveau_search_selector_id( 'search' ); ?>" name="<?php bp_nouveau_search_selector_name() ;?>" type="search" class="bp-label-in-here" />
+			<input id="<?php bp_nouveau_search_selector_id( 'search' ); ?>" name="<?php bp_nouveau_search_selector_name() ;?>" type="search"  placeholder="<?php bp_nouveau_search_default_text(); ?>" />
 
 			<button type="submit" id="<?php bp_nouveau_search_selector_id( 'search-submit' ) ;?>" class="nouveau-search-submit" name="<?php bp_nouveau_search_selector_name( 'search_submit' ); ?>">
 				<span class="dashicons dashicons-search" aria-hidden="true"></span>
 				<span id="button-text" class="bp-screen-reader-text"><?php _e( 'Search', 'bp-nouveau' ); ?></span>
 			</button>
-		</div>
 
 	</form>
 </div>
