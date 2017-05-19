@@ -659,10 +659,10 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-		/**
+		/*
 		 * If the 'container' is set to 'ul'
-		 * set a var $parent_element to li
-		 * otherwise simply pass any value found in args
+		 * set $parent_element to li otherwise
+		 * simply pass any value found in $args
 		 * or set var false.
 		 */
 		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
@@ -673,7 +673,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			$parent_element = false;
 		}
 
-		/**
+		/*
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
 		 * otherwise default to 'a' (anchor)
@@ -703,6 +703,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			}
 
 			// Setup Accept button attributes
+
 			$buttons['accept_invite'] =  array(
 				'id'                => 'accept_invite',
 				'position'          => 5,
@@ -715,7 +716,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'             => esc_url( bp_get_group_accept_invite_link() ),
 					'id'               => '',
 					'class'            => 'button accept group-button accept-invite',
 					'rel'              => '',
@@ -723,6 +723,13 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				 ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
+
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['accept_invite']['button_attr']['data-bp-accept-invite-nonce'] = esc_url( bp_get_group_accept_invite_link() );
+			} else {
+				$buttons['accept_invite']['button_attr']['href'] = esc_url( bp_get_group_accept_invite_link() );
+			}
 
 			// Setup Reject button attributes
 			$buttons['reject_invite'] = array(
@@ -737,7 +744,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'             => esc_url( bp_get_group_reject_invite_link() ),
 					'id'               => '',
 					'class'            => 'button reject group-button reject-invite',
 					'rel'              => '',
@@ -746,9 +752,17 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
 			);
 
+			// If button element set add nonce link to formaction attr
+			if ( 'button' === $button_element ) {
+				$buttons['reject_invite']['button_attr']['data-bp-reject-invite-none'] = esc_url( bp_get_group_reject_invite_link() );
+			} else {
+				$buttons['reject_invite']['button_attr']['href'] = esc_url( bp_get_group_reject_invite_link() );
+			}
+
 		// Request button for the group's manage screen
 		} elseif ( 'request' === $type ) {
 			// Setup Accept button attributes
+
 			$buttons['group_membership_accept'] =  array(
 				'id'                => 'group_membership_accept',
 				'position'          => 5,
@@ -761,7 +775,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				 ),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'             => esc_url( bp_get_group_request_accept_link() ),
 					'id'               => '',
 					'class'            => 'button',
 					'rel'              => '',
@@ -770,7 +783,13 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
 
-			// Setup Reject button attributes
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['group_membership_accept']['button_attr']['data-bp-membership-accept-nonce'] = esc_url( bp_get_group_request_accept_link() );
+			} else {
+				$buttons['group_membership_accept']['button_attr']['href'] = esc_url( bp_get_group_request_accept_link() );
+			}
+
 			$buttons['group_membership_reject'] = array(
 				'id'                => 'group_membership_reject',
 				'position'          => 15,
@@ -780,60 +799,69 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				'parent_attr'       => array(
 					'id'               => '',
 					'class'            => $parent_class . ' ' . 'reject',
-				 ),
+					),
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'             => esc_url( bp_get_group_request_reject_link() ),
 					'id'               => '',
 					'class'            => 'button',
 					'rel'              => '',
 					'title'            => '',
-				 ),
+					),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
 			);
 
-		// Manage group members for the group's manage screen
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['group_membership_reject']['button_attr']['bp-membership-reject-nonce'] = esc_url( bp_get_group_request_reject_link() );
+			} else {
+				$buttons['group_membership_reject']['button_attr']['href'] = esc_url( bp_get_group_request_reject_link() );
+			}
+
+		/*
+		Manage group members for the group's manage screen
+		The 'button_attr' keys 'href' & 'formaction' are set at the end of this array block
+		*/
 		} elseif ( 'manage_members' === $type && isset( $GLOBALS['members_template']->member->user_id ) ) {
 			$user_id = $GLOBALS['members_template']->member->user_id;
 
 			$buttons = array( 'unban_member' => array(
-					'id'                => 'unban_member',
-					'position'          => 5,
-					'component'         => 'groups',
-					'must_be_logged_in' => true,
-					'parent_element'    => $parent_element,
-					'parent_attr'       => array(
-						'id'               => '',
-						'class'            => $parent_class,
-					 ),
-					'button_element'    => $button_element,
-					'button_attr'       => array(
-						'href'             => esc_url( bp_get_group_member_unban_link( $user_id ) ),
-						'id'               => '',
-						'class'            => 'button confirm member-unban',
-						'rel'              => '',
-						'title'            => '',
-					 ),
+				'id'                => 'unban_member',
+				'position'          => 5,
+				'component'         => 'groups',
+				'must_be_logged_in' => true,
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'               => '',
+					'class'            => $parent_class,
+					),
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'id'               => '',
+					'class'            => 'button confirm member-unban',
+					'rel'              => '',
+					'title'            => '',
+					),
 					'link_text'         => __( 'Remove Ban', 'bp-nouveau' ),
+
 				), 'ban_member' => array(
-					'id'                => 'ban_member',
-					'position'          => 15,
-					'component'         => 'groups',
-					'must_be_logged_in' => true,
-					'parent_element'    => $parent_element,
-					'parent_attr'       => array(
-						'id'               => '',
-						'class'            => $parent_class,
+				'id'                => 'ban_member',
+				'position'          => 15,
+				'component'         => 'groups',
+				'must_be_logged_in' => true,
+				'parent_element'    => $parent_element,
+				'parent_attr'       => array(
+					'id'               => '',
+					'class'            => $parent_class,
 					),
-					'button_element'    => $button_element,
-					'button_attr'       => array(
-						'href'             => esc_url( bp_get_group_member_ban_link( $user_id ) ),
-						'id'               => '',
-						'class'            => 'button confirm member-ban',
-						'rel'              => '',
-						'title'            => '',
+				'button_element'    => $button_element,
+				'button_attr'       => array(
+					'id'               => '',
+					'class'            => 'button confirm member-ban',
+					'rel'              => '',
+					'title'            => '',
 					),
-					'link_text'         => __( 'Kick &amp; Ban', 'bp-nouveau' ),
+				'link_text'         => __( 'Kick &amp; Ban', 'bp-nouveau' ),
+
 				), 'promote_mod' => array(
 					'id'                => 'promote_mod',
 					'position'          => 25,
@@ -846,13 +874,13 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					),
 					'button_element'    => $button_element,
 					'button_attr'       => array(
-						'href'             => esc_url( bp_get_group_member_promote_mod_link() ),
 						'id'               => '',
 						'class'            => 'button confirm member-promote-to-mod',
 						'rel'              => '',
 						'title'            => '',
 					),
 					'link_text'         => __( 'Promote to Mod', 'bp-nouveau' ),
+
 				), 'promote_admin' => array(
 					'id'                => 'promote_admin',
 					'position'          => 35,
@@ -872,6 +900,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 						'title'            => '',
 					),
 					'link_text'         => __( 'Promote to Admin', 'bp-nouveau' ),
+
 				), 'remove_member' => array(
 					'id'                => 'remove_member',
 					'position'          => 45,
@@ -884,7 +913,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					),
 					'button_element'    => $button_element,
 					'button_attr'       => array(
-						'href'             => esc_url( bp_get_group_member_remove_link( $user_id ) ),
 						'id'               => '',
 						'class'            => 'button confirm',
 						'rel'              => '',
@@ -893,6 +921,21 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'link_text'         => __( 'Remove from group', 'bp-nouveau' ),
 				),
 			);
+			// If 'button' element is set add the nonce link to data-attr attr
+			// else add it to the href.
+			if ( 'button' === $button_element ) {
+				$buttons['unban_member']['button_attr']['data-bp-unban-nonce'] = esc_url( bp_get_group_member_unban_link( $user_id ) );
+				$buttons['ban_member']['button_attr']['data-bp-ban-nonce'] = esc_url( bp_get_group_member_ban_link( $user_id ) );
+				$buttons['promote_mod']['button_attr']['data-bp-pronote-mod-nonce'] = esc_url( bp_get_group_member_promote_mod_link() );
+				$buttons['promote_admin']['button_attr']['data-bp-promote-admin-nonce'] = esc_url( bp_get_group_member_promote_admin_link() );
+				$buttons['remove_member']['button_attr']['data-bp-remove-member-nonce'] = esc_url( bp_get_group_member_remove_link( $user_id ) );
+			} else {
+				$buttons['unban_member']['button_attr']['href'] = esc_url( bp_get_group_member_unban_link( $user_id ) );
+				$buttons['ban_member']['button_attr']['href'] = esc_url( bp_get_group_member_ban_link( $user_id ) );
+				$buttons['promote_mod']['button_attr']['href'] = esc_url( bp_get_group_member_promote_mod_link() );
+				$buttons['promote_admin']['button_attr']['href'] = esc_url( bp_get_group_member_promote_admin_link() );
+				$buttons['remove_member']['button_attr']['href'] = esc_url( bp_get_group_member_remove_link( $user_id ) );
+			}
 
 		// Membership button on groups loop or single group's header
 		} else {
@@ -935,8 +978,17 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 						'rel'              => ! empty( $button_args['link_rel'] ) ? $button_args['link_rel'] : '',
 						'title'            => '',
 					),
+
 					'link_text'         => $button_args['link_text'],
 				);
+
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['group_membership']['button_attr']['data-bp-join-group-nonce'] = $button_args['link_href'];
+			} else {
+				$buttons['group_membership']['button_attr']['href'] = $button_args['link_href'];
+			}
+
 				unset( bp_nouveau()->groups->button_args );
 			}
 		}
