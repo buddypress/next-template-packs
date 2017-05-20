@@ -770,7 +770,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 					'class'  => 'acomment-reply bp-primary-action' . $icons . '',
 					'id'     => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
 				),
-				'link_text'         => esc_html__( 'reply', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
 			),
 			'activity_comment_delete' => array(
 				'id'                => 'activity_comment_delete',
