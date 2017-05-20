@@ -226,8 +226,7 @@
 				background: none;
 			}
 
-			// Uncomment .acomment-reply class for icon use
-			//.acomment-reply,
+			// Uncomment .acomment-reply class for icon us
 			.button:before,
 			.icons:before {
 				font-family: dashicons;
@@ -235,9 +234,8 @@
 				vertical-align: middle;
 			}
 
-
 			// remove 'a' selector for icon rendering on button elements
-			a.acomment-reply:before {
+			a.acomment-reply.button:before {
 				content: "\f101";
 			}
 
