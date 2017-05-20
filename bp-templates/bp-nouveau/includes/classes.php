@@ -55,7 +55,6 @@ class BP_Buttons_Group {
 				'id'                => '',
 				'position'          => 99,
 				'component'         => '',
-//				'li_item'           => false,
 				'must_be_logged_in' => true,
 				'block_self'        => false,
 				'parent_element'    => false,
@@ -64,7 +63,7 @@ class BP_Buttons_Group {
 				'button_attr'       => array(),
 				'link_text'         => '',
 			) );
-//var_dump($r);
+
 			// Just don't set the button if a param is missing
 			if ( empty( $r['id'] ) || empty( $r['component'] )  || empty( $r['link_text'] ) ) {
 				continue;
