@@ -257,10 +257,8 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 
 		if( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
-			$icons = ' icons';
 		} else {
 			$button_element = 'a';
-			$icons = '';
 		}
 
 		/**
@@ -281,7 +279,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'must_be_logged_in' => false,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'class'        => 'button view bp-secondary-action' . $icons,
+					'class'        => 'button view bp-secondary-action',
 					),
 				'link_text'  => sprintf('<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
 			);
@@ -309,7 +307,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'button_element'    => $button_element,
 				'button_attr'       => array(
 					'id'           => 'acomment-comment-' . $activity_id,
-					'class'        => 'button acomment-reply bp-primary-action' . $icons,
+					'class'        => 'button acomment-reply bp-primary-action',
 					'title'        => esc_attr__( 'Comment', 'bp-nouveau' ),
 					),
 				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
@@ -753,14 +751,11 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
 		 * otherwise default to 'a' (anchor).
-		 * Icons sets a class for icon display if not using the button element
 		 */
-		$icons = '';
 		if( !empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
-			$icons = ' icons';
 		}
 
 		$buttons = array( 'activity_comment_reply' => array(
@@ -786,7 +781,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'parent_attr'       => $parent_attr,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'class'  => 'delete acomment-delete confirm bp-secondary-action' . $icons . '',
+					'class'  => 'delete acomment-delete confirm bp-secondary-action',
 					'rel'    => 'nofollow',
 					),
 				'link_text'         => esc_html__( 'Delete', 'bp-nouveau' ),
@@ -814,7 +809,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'button_element'    => $button_element,
 				'button_attr'       =>  array(
 					'id'     => 'activity_make_spam_' . $activity_comment_id,
-					'class'  => 'bp-secondary-action spam-activity-comment confirm' . $icon . '' ,
+					'class'  => 'bp-secondary-action spam-activity-comment confirm',
 					'rel'    => 'nofollow',
 				),
 				'link_text'          => esc_html__( 'Spam', 'bp-nouveau' ),
