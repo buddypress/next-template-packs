@@ -1265,7 +1265,7 @@ dt.section-title {
 	vertical-align: middle;
 }
 
-.activity-list .activity-item .activity-meta.action a.acomment-reply:before {
+.activity-list .activity-item .activity-meta.action a.acomment-reply.button:before {
 	content: "\f101";
 }
 
@@ -3559,7 +3559,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	font-size: inherit;
 	font-weight: 400;
 	outline: none;
-	padding: 4px 10px;
+	padding: 0.3em 0.5em;
 	text-align: center;
 	text-decoration: none;
 	width: auto;
@@ -3745,18 +3745,19 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress-wrap .filter label:before,
 .buddypress-wrap .feed a:before,
-.buddypress-wrap .bp-invites-filters li a.invite-button:before,
-.buddypress-wrap .bp-messages-filters li a.messages-button:before {
+.buddypress-wrap .bp-invites-filters .invite-button:before,
+.buddypress-wrap .bp-messages-filters li a.messages-button:before,
+.buddypress-wrap .bp-invites-content li .invite-button:before {
 	font-family: dashicons;
 	font-size: 18px;
 }
 
-.buddypress-wrap .bp-invites-content .item-list li a.invite-button:before {
+.buddypress-wrap .bp-invites-content .item-list li .invite-button:before {
 	font-size: 27px;
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress-wrap .bp-invites-content .item-list li a.invite-button:before {
+	.buddypress-wrap .bp-invites-content .item-list li .invite-button:before {
 		font-size: 32px;
 	}
 }
@@ -3773,26 +3774,26 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	content: "\f303";
 }
 
-.buddypress-wrap ul.item-list li a.invite-button:not(.group-remove-invite-button):before {
+.buddypress-wrap ul.item-list li .invite-button:not(.group-remove-invite-button):before {
 	content: "\f502";
 }
 
-.buddypress-wrap ul.item-list li.selected a.invite-button:before,
-.buddypress-wrap ul.item-list li a.group-remove-invite-button:before {
+.buddypress-wrap ul.item-list li.selected .invite-button:before,
+.buddypress-wrap ul.item-list li .group-remove-invite-button:before {
 	content: "\f153";
 }
 
-.buddypress-wrap .bp-invites-filters ul li a#bp-invites-next-page:before,
-.buddypress-wrap .bp-messages-filters ul li a#bp-messages-next-page:before {
+.buddypress-wrap .bp-invites-filters ul li #bp-invites-next-page:before,
+.buddypress-wrap .bp-messages-filters ul li #bp-messages-next-page:before {
 	content: "\f345";
 }
 
-.buddypress-wrap .bp-invites-filters ul li a#bp-invites-prev-page:before,
-.buddypress-wrap .bp-messages-filters ul li a#bp-messages-prev-page:before {
+.buddypress-wrap .bp-invites-filters ul li #bp-invites-prev-page:before,
+.buddypress-wrap .bp-messages-filters ul li #bp-messages-prev-page:before {
 	content: "\f341";
 }
 
-.buddypress-wrap .bp-messages-filters ul li a.messages-button.bulk-apply:before {
+.buddypress-wrap .bp-messages-filters ul li .messages-button.bulk-apply:before {
 	content: "\f147";
 	font-size: 18px;
 }

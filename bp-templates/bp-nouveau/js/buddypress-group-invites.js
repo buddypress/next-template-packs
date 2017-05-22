@@ -484,7 +484,7 @@ window.bp = window.bp || {};
 	} );
 
 	bp.Views.inviteFilters = bp.Nouveau.GroupInvites.View.extend( {
-		tagName: 'ul',
+		tagName: 'div',
 		template:  bp.template( 'bp-invites-filters' ),
 
 		events : {
@@ -532,7 +532,7 @@ window.bp = window.bp || {};
 		displaySrcBtn: function( event ) {
 			event.preventDefault();
 
-			$( event.target ).closest( 'form' ).find( '[type=submit]' ).show();
+			$( event.target ).closest( 'form' ).find( '[type=submit]' ).addClass("bp-show");
 		},
 
 		hideSrcBtn: function( event ) {
@@ -542,7 +542,7 @@ window.bp = window.bp || {};
 				return;
 			}
 
-			$( event.target ).closest( 'form' ).find( '[type=submit]' ).hide();
+			$( event.target ).closest( 'form' ).find( '[type=submit]' ).addClass("bp-hide").removeClass("bp-show");
 		},
 
 		resetSearchTerms: function( event ) {
@@ -551,7 +551,7 @@ window.bp = window.bp || {};
 			if ( ! $( event.target ).val() ) {
 				$( event.target ).closest( 'form' ).submit();
 			} else {
-				$( event.target ).closest( 'form' ).find( '[type=submit]' ).show();
+				$( event.target ).closest( 'form' ).find( '[type=submit]' ).addClass("bp-show");
 			}
 		},
 

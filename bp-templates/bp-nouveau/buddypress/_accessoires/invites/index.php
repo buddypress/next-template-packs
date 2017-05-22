@@ -60,15 +60,15 @@
 
 	<div class="action">
 		<# if ( undefined === data.is_sent || ( false === data.is_sent && true === data.can_edit ) ) { #>
-			<a href="#" class="button invite-button group-add-remove-invite-button" title="<?php esc_attr_e( 'Invite / Uninvite', 'bp-nouveau' );?>">
+			<button class="button invite-button group-add-remove-invite-button bp-icons" title="<?php esc_attr_e( 'Invite / Uninvite', 'bp-nouveau' );?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Invite/Uninvite', 'bp-nouveau' );?></span>
-			</a>
+			</button>
 		<# } #>
 
 		<# if ( undefined !== data.can_edit && true === data.can_edit ) { #>
-			<a href="#" class="button invite-button group-remove-invite-button" title="<?php esc_attr_e( 'Remove', 'bp-nouveau' );?>">
+			<button href="#" class="button invite-button group-remove-invite-button bp-icons" title="<?php esc_attr_e( 'Remove', 'bp-nouveau' );?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove', 'bp-nouveau' );?></span>
-			</a>
+			</button>
 		<# } #>
 	</div>
 
@@ -89,17 +89,19 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-filters">
-	<li class="group-invites-search" role="search" data-bp-search="{{data.scope}}">
-		<form action="" method="get" id="group_invites_search_form">
-			<label for="group_invites_search">
-				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
-			</label>
-			<button type="submit" id="group_invites_search_submit">
-				<span class="dashicons dashicons-search" aria-hidden="true"></span>
-				<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
-			</button>
-		</form>
-	</li>
+	<div class="group-invites-search subnav-search clearfix" role="search" >
+		<div class="bp-search">
+			<form action="" method="get" id="group_invites_search_form" class="bp-dir-search-form" data-bp-search="{{data.scope}}">
+				<label for="group_invites_search">
+					<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
+				</label>
+				<button type="submit" id="group_invites_search_submit" class="nouveau-search-submit">
+					<span class="dashicons dashicons-search" aria-hidden="true"></span>
+					<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
+				</button>
+			</form>
+			</div>
+	</div>
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-paginate">

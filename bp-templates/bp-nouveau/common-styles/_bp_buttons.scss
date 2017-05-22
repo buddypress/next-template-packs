@@ -272,13 +272,14 @@
 
 	.filter label:before,
 	.feed a:before,
-	.bp-invites-filters  li a.invite-button:before,
-	.bp-messages-filters li a.messages-button:before {
+	.bp-invites-filters  .invite-button:before,
+	.bp-messages-filters li a.messages-button:before,
+	.bp-invites-content li .invite-button:before {
 		font-family: dashicons;
 		font-size: 18px;
 	}
 
-	.bp-invites-content .item-list li a.invite-button:before {
+	.bp-invites-content .item-list li .invite-button:before {
 
 		@include responsive-font(32);
 	}
@@ -311,27 +312,27 @@
 
 	ul.item-list {
 
-		li a.invite-button:not(.group-remove-invite-button):before {
+		li .invite-button:not(.group-remove-invite-button):before {
 			content: "\f502";
 		}
 
-		li.selected a.invite-button:before,
-		li a.group-remove-invite-button:before {
+		li.selected .invite-button:before,
+		li .group-remove-invite-button:before {
 			content: "\f153";
 		}
 	} // close ul.item-list
 
-	.bp-invites-filters ul li a#bp-invites-next-page:before,
-	.bp-messages-filters ul li a#bp-messages-next-page:before {
+	.bp-invites-filters ul li #bp-invites-next-page:before,
+	.bp-messages-filters ul li #bp-messages-next-page:before {
 		content: "\f345";
 	}
 
-	.bp-invites-filters ul li a#bp-invites-prev-page:before,
-	.bp-messages-filters ul li a#bp-messages-prev-page:before {
+	.bp-invites-filters ul li #bp-invites-prev-page:before,
+	.bp-messages-filters ul li #bp-messages-prev-page:before {
 		content: "\f341";
 	}
 
-	.bp-messages-filters ul li a.messages-button.bulk-apply:before {
+	.bp-messages-filters ul li .messages-button.bulk-apply:before {
 		content: "\f147";
 		font-size: 18px;
 	}
