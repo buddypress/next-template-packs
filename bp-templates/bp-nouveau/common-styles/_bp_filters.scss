@@ -67,9 +67,16 @@
 		}
 
 		.last.filter {
+			position: relative;
 
 			label {
 				display: inline;
+			}
+
+			span.select-arrow {
+				position: absolute;
+				top: 5px;
+				right: 3px;
 			}
 
 		}
@@ -144,12 +151,14 @@
 			.last,
 			.component-filters {
 				margin-top: 0;
+				position: relative;
 				text-align: right;
 				width: auto;
 
 				select {
 					max-width: 250px;
 				}
+
 			}
 
 			.user-messages-search {

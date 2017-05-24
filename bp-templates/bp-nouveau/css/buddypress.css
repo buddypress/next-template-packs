@@ -647,8 +647,18 @@ dt.section-title {
 	margin-right: 15px;
 }
 
+.buddypress-wrap .subnav-filters .last.filter {
+	position: relative;
+}
+
 .buddypress-wrap .subnav-filters .last.filter label {
 	display: inline;
+}
+
+.buddypress-wrap .subnav-filters .last.filter span.select-arrow {
+	position: absolute;
+	top: 5px;
+	right: 3px;
 }
 
 .buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions-wrap:before,
@@ -718,6 +728,7 @@ dt.section-title {
 	.buddypress-wrap .subnav-filters .last,
 	.buddypress-wrap .subnav-filters .component-filters {
 		margin-top: 0;
+		position: relative;
 		text-align: right;
 		width: auto;
 	}

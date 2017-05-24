@@ -641,6 +641,7 @@ dt.section-title {
 
 .buddypress-wrap .subnav-filters .component-filters {
 	margin-top: 10px;
+	position: relative;
 }
 
 .buddypress-wrap .subnav-filters .feed {
@@ -718,12 +719,19 @@ dt.section-title {
 	.buddypress-wrap .subnav-filters .last,
 	.buddypress-wrap .subnav-filters .component-filters {
 		margin-top: 0;
+		position: relative;
 		text-align: left;
 		width: auto;
 	}
 	.buddypress-wrap .subnav-filters .last select,
 	.buddypress-wrap .subnav-filters .component-filters select {
 		max-width: 250px;
+	}
+	.buddypress-wrap .subnav-filters .last span.select-arrow,
+	.buddypress-wrap .subnav-filters .component-filters span.select-arrow {
+		position: absolute;
+		top: 5px;
+		left: 3px;
 	}
 	.buddypress-wrap .subnav-filters .user-messages-search {
 		float: left;
