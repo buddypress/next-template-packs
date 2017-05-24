@@ -717,8 +717,8 @@ dt.section-title {
 	}
 	.buddypress-wrap .subnav-filters .last,
 	.buddypress-wrap .subnav-filters .component-filters {
-		float: right;
 		margin-top: 0;
+		text-align: right;
 		width: auto;
 	}
 	.buddypress-wrap .subnav-filters .last select,
