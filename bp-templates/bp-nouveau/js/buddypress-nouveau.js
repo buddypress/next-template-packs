@@ -698,7 +698,7 @@ window.bp = window.bp || {};
 		 */
 		buttonAction: function( event ) {
 			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ),
-				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ),
+				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ), item_inner = target.closest('.list-wrap'),
 				object = item.data( 'bp-item-component' );
 
 			// Simply let the event fire if we don't have needed values
@@ -737,7 +737,7 @@ window.bp = window.bp || {};
 				_wpnonce : self.getLinkParams( target.prop( 'href' ), '_wpnonce' )
 			}, object ).done( function( response ) {
 				if ( false === response.success ) {
-					item.prepend( response.data.feedback );
+					item_inner.prepend( response.data.feedback );
 					target.removeClass( 'pending loading' );
 					item.find( '.bp-feedback' ).fadeOut( 2500 );
 				} else {
