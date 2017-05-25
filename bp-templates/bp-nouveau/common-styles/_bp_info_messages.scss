@@ -237,4 +237,26 @@
 		margin-left: $marg-sml;
 	}
 
+	// .bp-feedback messages  - Ajax specific (.bp-ajax-message)
+
+	// Members action button errors in grid layouts
+
+	.members-list.grid { // this probably ought to serve the group loop too
+
+		.bp-ajax-message {
+			background: rgba($white, 0.9);
+			border: 1px solid $bp-border-color;
+
+			@include font-size(14);
+			left: 2%;
+
+			// postion absolute to prevent the element from expanding
+			// content height & breaking grid box heights.
+			position: absolute;
+			padding: $pad-sml $pad-med;
+			right: 2%;
+			top: 30px;
+		}
+	}
+
 } // close .buddypress-wrap
