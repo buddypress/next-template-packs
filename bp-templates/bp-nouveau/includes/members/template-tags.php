@@ -296,7 +296,6 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
-							'href'             => esc_url( bp_get_friend_accept_request_link() ),
 							'class'            => 'button accept',
 							'rel'              => '',
 							'title'            => __( 'Accept', 'bp-nouveau' ),
@@ -314,14 +313,22 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
-							'href'             => esc_url( bp_get_friend_reject_request_link() ),
 							'class'            => 'button reject',
-							//'rel'              => '',
+							'rel'              => '',
 							'title'            => __( 'Reject', 'bp-nouveau' ),
 							),
 						'link_text'         => __( 'Reject', 'bp-nouveau' ),
 					),
 				);
+
+				// If button element set add nonce link to data attr
+				if ( 'button' === $button_element ) {
+					$buttons['accept_friendship']['button_attr']['data-bp-nonce']  = esc_url( bp_get_friend_accept_request_link() );
+					$buttons['reject_friendship']['button_attr']['data-bp-nonce']  = esc_url( bp_get_friend_reject_request_link() );
+				} else {
+					$buttons['accept_request']['button_attr']['href']     = esc_url( bp_get_friend_accept_request_link() );
+					$buttons['reject_friendship']['button_attr']['href']  = esc_url( bp_get_friend_reject_request_link() );
+				}
 
 			// It's any other members screen
 			} else {
@@ -353,7 +360,6 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array(
-							'href'             => $button_args['link_href'],
 							'id'               => $button_args['link_id'],
 							'class'            => $button_args['link_class'],
 							'rel'              => $button_args['link_rel'],
@@ -361,6 +367,13 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'link_text'         => $button_args['link_text'],
 					);
+
+					// If button element set add nonce link to data attr
+					if ( 'button' === $button_element ) {
+						$buttons['member_friendship']['button_attr']['data-bp-nonce'] = $button_args['link_href'];
+					} else {
+						$buttons['member_friendship']['button_attr']['href'] = $button_args['link_href'];
+					}
 
 					unset( bp_nouveau()->members->button_args );
 				}
@@ -386,6 +399,8 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
 					$button_args = bp_nouveau()->members->button_args;
 
+					// This button should remain as an anchor link
+					// Hardcode the use of anchor elements if button arg passed in for other elements
 					$buttons['public_message'] = array(
 						'id'                => $button_args['id'],
 						'position'          => 15,
@@ -397,7 +412,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 								'id'              => $button_args['wrapper_id'],
 								'class'           => $parent_class,
 							),
-						'button_element'    => $button_element,
+						'button_element'    => 'a',
 						'button_attr'       => array(
 							'href'             => $button_args['link_href'],
 							'id'               => '',
@@ -407,7 +422,6 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'link_text'         => $button_args['link_text'],
 					);
-
 					unset( bp_nouveau()->members->button_args );
 				}
 			}
@@ -428,6 +442,8 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
 					$button_args = bp_nouveau()->members->button_args;
 
+					// This button should remain as an anchor link
+					// Hardcode the use of anchor elements if button arg passed in for other elements
 					$buttons['private_message'] = array(
 						'id'                => $button_args['id'],
 						'position'          => 25,
@@ -439,13 +455,13 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 								'id'              => $button_args['wrapper_id'],
 								'class'           => $parent_class,
 							),
-						'button_element'    => $button_element,
+						'button_element'    => 'a',
 						'button_attr'       => array(
 							'href'             => esc_url( trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ) ),
 							'id'               => false,
 							'class'            => $button_args['link_class'],
-							//'rel'              => '',
-							//'title'            => __('', 'buddypress'),
+							'rel'              => '',
+							'title'            => __('', 'buddypress'),
 							),
 						'link_text'         => $button_args['link_text'],
 					);
