@@ -3992,6 +3992,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	margin-left: 10px;
 }
 
+.buddypress-wrap .members-list.grid .bp-ajax-message {
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid #eee;
+	font-size: 14px;
+	left: 2%;
+	position: absolute;
+	padding: 0.5em 1em;
+	right: 2%;
+	top: 30px;
+}
+
 #buddypress-wrap * {
 	transition: opacity 0.1s ease-in-out 0.1s;
 }
