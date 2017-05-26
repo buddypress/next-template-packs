@@ -3182,6 +3182,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	appearance: none;
 	border: 0;
 	cursor: pointer;
+	margin-right: -25px;
 	padding: 6px 25px 6px 10px;
 	position: relative;
 	text-indent: -2px;
@@ -3198,7 +3199,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .select-wrap span.select-arrow {
 	display: inline-block;
 	position: relative;
-	margin-left: -25px;
 	z-index: 0;
 }
 
