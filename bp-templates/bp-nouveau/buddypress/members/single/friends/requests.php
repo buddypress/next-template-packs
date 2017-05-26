@@ -28,7 +28,7 @@ bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>
 					<?php bp_nouveau_friend_hook( 'requests_item' ); ?>
 				</div>
 
-				<?php bp_nouveau_members_loop_buttons(); ?>
+				<?php bp_nouveau_members_loop_buttons( array( 'button_element' => 'button' ) ); ?>
 			</li>
 
 		<?php endwhile; ?>

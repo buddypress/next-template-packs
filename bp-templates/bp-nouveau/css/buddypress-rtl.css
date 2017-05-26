@@ -647,18 +647,8 @@ dt.section-title {
 	margin-left: 15px;
 }
 
-.buddypress-wrap .subnav-filters .last.filter {
-	position: relative;
-}
-
 .buddypress-wrap .subnav-filters .last.filter label {
 	display: inline;
-}
-
-.buddypress-wrap .subnav-filters .last.filter span.select-arrow {
-	position: absolute;
-	top: 5px;
-	left: 3px;
 }
 
 .buddypress-wrap .subnav-filters .user-messages-bulk-actions .bulk-actions-wrap:before,
@@ -727,9 +717,8 @@ dt.section-title {
 	}
 	.buddypress-wrap .subnav-filters .last,
 	.buddypress-wrap .subnav-filters .component-filters {
+		float: left;
 		margin-top: 0;
-		position: relative;
-		text-align: left;
 		width: auto;
 	}
 	.buddypress-wrap .subnav-filters .last select,
@@ -4001,17 +3990,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .reject {
 	float: right;
 	margin-right: 10px;
-}
-
-.buddypress-wrap .members-list.grid .bp-ajax-message {
-	background: rgba(255, 255, 255, 0.9);
-	border: 1px solid #eee;
-	font-size: 14px;
-	right: 2%;
-	position: absolute;
-	padding: 0.5em 1em;
-	left: 2%;
-	top: 30px;
 }
 
 #buddypress-wrap * {
