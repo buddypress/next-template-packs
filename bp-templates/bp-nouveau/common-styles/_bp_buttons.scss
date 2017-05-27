@@ -34,6 +34,17 @@
 			width: auto;
 		}
 
+		button.ac-reply-cancel {
+			border-color: transparent;
+			border-style: none;
+			border-width: 0;
+
+			&:hover {
+				background-color: transparent;
+				text-decoration: underline;
+			}
+		}
+
 		// Reduce padding for messages screens compose button
 		// to prevent border clipping in tab visual layout
 		li.last a#compose {

@@ -3565,6 +3565,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: auto;
 }
 
+.buddypress .buddypress-wrap button.ac-reply-cancel {
+	border-color: transparent;
+	border-style: none;
+	border-width: 0;
+}
+
+.buddypress .buddypress-wrap button.ac-reply-cancel:hover {
+	background-color: transparent;
+	text-decoration: underline;
+}
+
 .buddypress .buddypress-wrap li.last a#compose {
 	padding: 2px 8px;
 }
