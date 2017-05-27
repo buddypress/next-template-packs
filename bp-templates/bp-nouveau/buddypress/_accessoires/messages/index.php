@@ -158,18 +158,18 @@
 
 				<div class="actions">
 
-					<button class="message-action-delete bp-icons" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
+					<button type="button" class="message-action-delete bp-icons" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
 					</button>
 
 					<# if ( undefined !== data.star_link ) { #>
 
 						<# if ( false !== data.is_starred ) { #>
-							<button  class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
+							<button type="button" class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-nouveau' );?></span>
 							</button>
 						<# } else { #>
-							<button  class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
+							<button type="button" class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-nouveau' );?></span>
 							</button>
 						<# } #>
@@ -207,7 +207,7 @@
 
 		<div class="actions">
 
-			<button class="message-action-delete bp-icons" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
+			<button type="button" class="message-action-delete bp-icons" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
 			</button>
 
@@ -233,11 +233,11 @@
 				<?php $test = 1; ?>
 
 				<# if ( false !== data.is_starred ) { #>
-					<button  class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Message', 'bp-nouveau' );?>">
+					<button type="button" class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Message', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Message', 'bp-nouveau' );?></span>
 					</button>
 				<# } else { #>
-					<button  class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
+					<button type="button" class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Message', 'bp-nouveau' );?></span>
 					</button>
 				<# } #>
