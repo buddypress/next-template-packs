@@ -123,15 +123,22 @@
 		//		margin-left: 30px;
 	}
 
-	a[data-bp-close] span:before {
+	a[data-bp-close] span:before,
+	button[data-bp-close] span:before {
 		font-size: 32px;
 	}
 
-	a[data-bp-close] {
+	a[data-bp-close],
+	button[data-bp-close] {
+		border: 0;
 		position: absolute;
 		top: 10px;
 		right: 10px;
 		width: 32px;
+	}
+
+	button[data-bp-close]:hover {
+		background-color: transparent;
 	}
 
 	.bp-feedback.info,
