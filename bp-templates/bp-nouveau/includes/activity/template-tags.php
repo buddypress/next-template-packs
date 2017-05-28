@@ -333,6 +333,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'link_class'       => 'button fav bp-secondary-action',
 					'link_title'       => __( 'Mark as Favorite', 'bp-nouveau' ),
 					'link_text'        => __( 'Favorite', 'bp-nouveau' ),
+					'aria-pressed'     => 'false'
 				);
 
 				// If button element set add nonce link to data-attr attr
@@ -352,6 +353,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'link_class'       => 'button unfav bp-secondary-action',
 					'link_title'       => __( 'Remove Favorite', 'bp-nouveau' ),
 					'link_text'        => __( 'Remove Favorite', 'bp-nouveau' ),
+					'aria-pressed'     => 'true',
 				);
 
 				// If button element set add nonce link to data-attr attr
@@ -373,10 +375,11 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'must_be_logged_in' => true,
 				'button_element'    => $fav_args['button_element'],
 				'button_attr'       => array(
-					'href'        => $fav_args['link_href'],
-					'class'       => $fav_args['link_class'],
-					'title'       => esc_attr( $fav_args['link_title'] ),
-					$key          => $fav_args['data_attr'],
+					'href'         => $fav_args['link_href'],
+					'class'        => $fav_args['link_class'],
+					'title'        => esc_attr( $fav_args['link_title'] ),
+					'aria-pressed' => $fav_args['aria-pressed'],
+					$key           => $fav_args['data_attr'],
 					),
 				'link_text'   => sprintf( '<span class="bp-screen-reader-text">%1$s</span>', esc_html( $fav_args['link_text'] ) ),
 			);
