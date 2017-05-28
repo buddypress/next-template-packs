@@ -3908,15 +3908,22 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	line-height: inherit;
 }
 
-.buddypress-wrap a[data-bp-close] span:before {
+.buddypress-wrap a[data-bp-close] span:before,
+.buddypress-wrap button[data-bp-close] span:before {
 	font-size: 32px;
 }
 
-.buddypress-wrap a[data-bp-close] {
+.buddypress-wrap a[data-bp-close],
+.buddypress-wrap button[data-bp-close] {
+	border: 0;
 	position: absolute;
 	top: 10px;
 	right: 10px;
 	width: 32px;
+}
+
+.buddypress-wrap button[data-bp-close]:hover {
+	background-color: transparent;
 }
 
 .buddypress-wrap .bp-feedback.info .bp-icon,
