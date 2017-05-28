@@ -96,7 +96,10 @@
 		<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Select All Messages', 'bp-nouveau' ) ); ?></span>
 	</label>
 <div class="bulk-actions-wrap bp-hide">
-		<div class="bulk-actions select-wrap ">
+		<div class="bulk-actions select-wrap">
+			<label for="user-messages-bulk-actions" class="bp-screen-reader-text">
+				<?php esc_html_e( 'Select bulk action', 'bp-nouveau' )  ?>
+			</label>
 			<select id="user-messages-bulk-actions">
 				<# for ( i in data ) { #>
 					<option value="{{data[i].value}}">{{data[i].label}}</option>
