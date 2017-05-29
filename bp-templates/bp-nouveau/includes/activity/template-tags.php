@@ -286,7 +286,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['activity_conversation']['button_attr']['data-bp-act-conversation-nonce'] = esc_url( bp_get_activity_thread_permalink() );
+				$buttons['activity_conversation']['button_attr']['data-bp-nonce'] = esc_url( bp_get_activity_thread_permalink() );
 			} else {
 				$buttons['activity_conversation']['button_attr']['href'] = esc_url( bp_get_activity_thread_permalink() );
 			}
@@ -308,14 +308,14 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'button_attr'       => array(
 					'id'           => 'acomment-comment-' . $activity_id,
 					'class'        => 'button acomment-reply bp-primary-action',
-					'title'        => esc_attr__( 'Comment', 'bp-nouveau' ),
+					'title'        => ''
 					),
 				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
 			);
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['activity_conversation']['button_attr']['data-bp-act-conversation-nonce'] = esc_url( bp_get_activity_comment_link() );
+				$buttons['activity_conversation']['button_attr']['data-bp-nonce'] = esc_url( bp_get_activity_comment_link() );
 			} else {
 				$buttons['activity_conversation']['button_attr']['href'] = esc_url( bp_get_activity_comment_link() );
 			}
@@ -339,7 +339,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				// If button element set add nonce link to data-attr attr
 				if ( 'button' === $button_element ) {
 					$fav_args['data_attr'] = esc_url( bp_get_activity_favorite_link() );
-					$key = 'data-bp-act-fav-nonce';
+					$key = 'data-bp-nonce';
 				} else {
 					$fav_args['link_href'] = esc_url( bp_get_activity_favorite_link() );
 				}
@@ -353,13 +353,13 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'link_class'       => 'button unfav bp-secondary-action',
 					'link_title'       => __( 'Remove Favorite', 'bp-nouveau' ),
 					'link_text'        => __( 'Remove Favorite', 'bp-nouveau' ),
-					'aria-pressed'     => 'true',
+					'aria-pressed'     => 'true'
 				);
 
-				// If button element set add nonce link to data-attr attr
+				// If button element set add nonce link nonce to data-attr
 				if ( 'button' === $button_element ) {
 					$fav_args['data_attr'] = esc_url(bp_get_activity_unfavorite_link() );
-					$key = 'data-bp-act-unfav-act-nonce';
+					$key = 'data-bp-nonce';
 				} else {
 					$fav_args['link_href'] = esc_url( bp_get_activity_unfavorite_link() );
 				}
@@ -457,7 +457,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'href'       => $delete_args['link_href'],
 				'class'      => $delete_args['link_class'],
 				'title'      => esc_attr( $delete_args['link_title'] ),
-				'data-bp-delete-act-nonce' => $delete_args['data-attr'] ,
+				'data-bp-nonce' => $delete_args['data-attr'] ,
 				),
 			'link_text'  => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
 		);
@@ -486,7 +486,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['activity_spam']['button_attr']['data-bp-spam-nonce'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id );
+				$buttons['activity_spam']['button_attr']['data-bp-nonce'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id );
 			} else {
 				$buttons['activity_spam']['button_attr']['href'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id );
 			}
