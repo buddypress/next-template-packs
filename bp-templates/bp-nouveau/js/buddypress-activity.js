@@ -460,6 +460,13 @@ window.bp = window.bp || {};
 								$( this ).html( response.data.content );
 							}
 							$( this ).prop( 'title', response.data.content );
+
+							if ('false' === $(this).attr('aria-pressed') ) {
+								$( this ).attr('aria-pressed', 'true');
+							} else {
+								$( this ).attr('aria-pressed', 'false');
+							}
+
 							$( this ).fadeIn( 200 );
 						} );
 					}
