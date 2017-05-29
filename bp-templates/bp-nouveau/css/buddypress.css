@@ -3565,17 +3565,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: auto;
 }
 
-.buddypress .buddypress-wrap button.ac-reply-cancel {
-	border-color: transparent;
-	border-style: none;
-	border-width: 0;
-}
-
-.buddypress .buddypress-wrap button.ac-reply-cancel:hover {
-	background-color: transparent;
-	text-decoration: underline;
-}
-
 .buddypress .buddypress-wrap li.last a#compose {
 	padding: 2px 8px;
 }
@@ -3745,13 +3734,18 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
-.buddypress-wrap button.bp-icons {
+.buddypress-wrap button.bp-icons, .buddypress-wrap button.ac-reply-cancel {
 	background: none;
 	border: 0;
 }
 
 .buddypress-wrap button.bp-icons:focus, .buddypress-wrap button.bp-icons:hover {
 	background: none;
+}
+
+.buddypress-wrap button.ac-reply-cancel:focus, .buddypress-wrap button.ac-reply-cancel:hover {
+	background: none;
+	text-decoration: underline;
 }
 
 .buddypress-wrap .filter label:before,

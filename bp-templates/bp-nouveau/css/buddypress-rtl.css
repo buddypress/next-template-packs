@@ -3565,12 +3565,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	width: auto;
 }
 
-.buddypress .buddypress-wrap button.ac-reply-cancel {
-	border-color: transparent;
-	border-style: none;
-	border-width: 0;
-}
-
 .buddypress .buddypress-wrap li.last a#compose {
 	padding: 2px 8px;
 }
@@ -3740,12 +3734,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
-.buddypress-wrap button.bp-icons {
+.buddypress-wrap button.bp-icons, .buddypress-wrap button.ac-reply-cancel {
 	background: none;
 	border: 0;
 }
 
-.buddypress-wrap button.bp-icons:focus, .buddypress-wrap button.bp-icons:hover {
+.buddypress-wrap button.bp-icons:focus, .buddypress-wrap button.bp-icons:hover, .buddypress-wrap button.ac-reply-cancel:focus, .buddypress-wrap button.ac-reply-cancel:hover {
 	background: none;
 }
 
@@ -3903,15 +3897,22 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	line-height: inherit;
 }
 
-.buddypress-wrap a[data-bp-close] span:before {
+.buddypress-wrap a[data-bp-close] span:before,
+.buddypress-wrap button[data-bp-close] span:before {
 	font-size: 32px;
 }
 
-.buddypress-wrap a[data-bp-close] {
+.buddypress-wrap a[data-bp-close],
+.buddypress-wrap button[data-bp-close] {
+	border: 0;
 	position: absolute;
 	top: 10px;
 	left: 10px;
 	width: 32px;
+}
+
+.buddypress-wrap button[data-bp-close]:hover {
+	background-color: transparent;
 }
 
 .buddypress-wrap .bp-feedback.info .bp-icon,
