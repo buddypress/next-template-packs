@@ -284,11 +284,12 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'link_text'  => sprintf('<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
 			);
 
-			// If button element set add nonce link to data-attr attr
+			// If button element set add url link to data-attr
 			if ( 'button' === $button_element ) {
-				$buttons['activity_conversation']['button_attr']['data-bp-nonce'] = esc_url( bp_get_activity_thread_permalink() );
+				$buttons['activity_conversation']['button_attr']['data-bp-url'] = esc_url( bp_get_activity_thread_permalink() );
 			} else {
 				$buttons['activity_conversation']['button_attr']['href'] = esc_url( bp_get_activity_thread_permalink() );
+				$buttons['activity_conversation']['button_attr']['role'] = 'button';
 			}
 
 		/**
@@ -313,11 +314,12 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
 			);
 
-			// If button element set add nonce link to data-attr attr
+			// If button element set add href link to data-attr
 			if ( 'button' === $button_element ) {
-				$buttons['activity_conversation']['button_attr']['data-bp-nonce'] = esc_url( bp_get_activity_comment_link() );
+				$buttons['activity_conversation']['button_attr']['data-bp-url'] = esc_url( bp_get_activity_comment_link() );
 			} else {
 				$buttons['activity_conversation']['button_attr']['href'] = esc_url( bp_get_activity_comment_link() );
+				$buttons['activity_conversation']['button_attr']['role'] = 'button';
 			}
 
 		}
