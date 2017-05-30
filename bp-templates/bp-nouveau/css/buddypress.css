@@ -1265,7 +1265,7 @@ dt.section-title {
 	vertical-align: middle;
 }
 
-.activity-list .activity-item .activity-meta.action a.acomment-reply.button:before {
+.activity-list .activity-item .activity-meta.action .acomment-reply.button:before {
 	content: "\f101";
 }
 

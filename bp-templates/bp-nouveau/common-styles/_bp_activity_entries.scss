@@ -234,8 +234,7 @@
 				vertical-align: middle;
 			}
 
-			// remove 'a' selector for icon rendering on button elements
-			a.acomment-reply.button:before {
+			.acomment-reply.button:before {
 				content: "\f101";
 			}
 

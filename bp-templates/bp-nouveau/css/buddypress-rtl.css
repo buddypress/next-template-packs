@@ -1265,7 +1265,7 @@ dt.section-title {
 	vertical-align: middle;
 }
 
-.activity-list .activity-item .activity-meta.action a.acomment-reply.button:before {
+.activity-list .activity-item .activity-meta.action .acomment-reply.button:before {
 	content: "\f101";
 }
 
@@ -3739,8 +3739,13 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border: 0;
 }
 
-.buddypress-wrap button.bp-icons:focus, .buddypress-wrap button.bp-icons:hover, .buddypress-wrap button.ac-reply-cancel:focus, .buddypress-wrap button.ac-reply-cancel:hover {
+.buddypress-wrap button.bp-icons:focus, .buddypress-wrap button.bp-icons:hover {
 	background: none;
+}
+
+.buddypress-wrap button.ac-reply-cancel:focus, .buddypress-wrap button.ac-reply-cancel:hover {
+	background: none;
+	text-decoration: underline;
 }
 
 .buddypress-wrap .filter label:before,
