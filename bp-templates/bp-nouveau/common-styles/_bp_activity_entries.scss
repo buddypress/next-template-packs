@@ -392,6 +392,10 @@ body.activity-permalink {
 			margin: $marg-sml 0 $marg-sml;
 		}
 
+		.activity-comments {
+			margin-bottom: $marg-sml;
+		}
+
 		@include medium-up() {
 
 			.activity-avatar {

@@ -1397,6 +1397,10 @@ body.activity-permalink .activity-list .activity-meta {
 	margin: 10px 0 10px;
 }
 
+body.activity-permalink .activity-list .activity-comments {
+	margin-bottom: 10px;
+}
+
 @media screen and (min-width: 46.8em) {
 	body.activity-permalink .activity-list .activity-avatar {
 		left: -20px;
