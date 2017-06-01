@@ -4470,7 +4470,18 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.user-nav-tabs ul li:not(.selected) a:hover,
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.user-nav-tabs ul li:not(.selected) a:focus,
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li:not(.selected) a:hover,
-	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li:not(.selected) a:focus {
+	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li:not(.selected) a:focus, .buddypress-wrap.bp-vertical-nav .dir-navs.activity-nav-tabs ul li:not(.selected) a:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.activity-nav-tabs ul li:not(.selected) a:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.sites-nav-tabs ul li:not(.selected) a:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.sites-nav-tabs ul li:not(.selected) a:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.groups-nav-tabs ul li:not(.selected) a:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.groups-nav-tabs ul li:not(.selected) a:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.members-nav-tabs ul li:not(.selected) a:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.members-nav-tabs ul li:not(.selected) a:focus,
+	.buddypress-wrap.bp-vertical-nav .main-navs.user-nav-tabs ul li:not(.selected) a:hover,
+	.buddypress-wrap.bp-vertical-nav .main-navs.user-nav-tabs ul li:not(.selected) a:focus,
+	.buddypress-wrap.bp-vertical-nav .main-navs.group-nav-tabs ul li:not(.selected) a:hover,
+	.buddypress-wrap.bp-vertical-nav .main-navs.group-nav-tabs ul li:not(.selected) a:focus {
 		background: none;
 	}
 	.buddypress-wrap.bp-dir-vert-nav .dir-navs.activity-nav-tabs ul li.selected,
@@ -4478,7 +4489,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress-wrap.bp-dir-vert-nav .dir-navs.groups-nav-tabs ul li.selected,
 	.buddypress-wrap.bp-dir-vert-nav .dir-navs.members-nav-tabs ul li.selected,
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.user-nav-tabs ul li.selected,
-	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected {
+	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected, .buddypress-wrap.bp-vertical-nav .dir-navs.activity-nav-tabs ul li.selected,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.sites-nav-tabs ul li.selected,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.groups-nav-tabs ul li.selected,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.members-nav-tabs ul li.selected,
+	.buddypress-wrap.bp-vertical-nav .main-navs.user-nav-tabs ul li.selected,
+	.buddypress-wrap.bp-vertical-nav .main-navs.group-nav-tabs ul li.selected {
 		background: none;
 		border: 1px solid #d6d6d6;
 		border-right-color: #fff;
@@ -4488,7 +4504,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress-wrap.bp-dir-vert-nav .dir-navs.groups-nav-tabs ul li.selected a,
 	.buddypress-wrap.bp-dir-vert-nav .dir-navs.members-nav-tabs ul li.selected a,
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.user-nav-tabs ul li.selected a,
-	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected a {
+	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected a, .buddypress-wrap.bp-vertical-nav .dir-navs.activity-nav-tabs ul li.selected a,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.sites-nav-tabs ul li.selected a,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.groups-nav-tabs ul li.selected a,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.members-nav-tabs ul li.selected a,
+	.buddypress-wrap.bp-vertical-nav .main-navs.user-nav-tabs ul li.selected a,
+	.buddypress-wrap.bp-vertical-nav .main-navs.group-nav-tabs ul li.selected a {
 		background: none;
 		color: #333;
 	}
@@ -4503,7 +4524,18 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.user-nav-tabs ul li.selected a span:focus,
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.user-nav-tabs ul li.selected a span:hover,
 	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected a span:focus,
-	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected a span:hover {
+	.buddypress-wrap.bp-dir-vert-nav .main-navs.group-nav-tabs ul li.selected a span:hover, .buddypress-wrap.bp-vertical-nav .dir-navs.activity-nav-tabs ul li.selected a span:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.activity-nav-tabs ul li.selected a span:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.sites-nav-tabs ul li.selected a span:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.sites-nav-tabs ul li.selected a span:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.groups-nav-tabs ul li.selected a span:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.groups-nav-tabs ul li.selected a span:hover,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.members-nav-tabs ul li.selected a span:focus,
+	.buddypress-wrap.bp-vertical-nav .dir-navs.members-nav-tabs ul li.selected a span:hover,
+	.buddypress-wrap.bp-vertical-nav .main-navs.user-nav-tabs ul li.selected a span:focus,
+	.buddypress-wrap.bp-vertical-nav .main-navs.user-nav-tabs ul li.selected a span:hover,
+	.buddypress-wrap.bp-vertical-nav .main-navs.group-nav-tabs ul li.selected a span:focus,
+	.buddypress-wrap.bp-vertical-nav .main-navs.group-nav-tabs ul li.selected a span:hover {
 		border: 1px solid #333;
 	}
 }

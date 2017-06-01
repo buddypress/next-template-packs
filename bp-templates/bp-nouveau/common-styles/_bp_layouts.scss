@@ -532,16 +532,20 @@
 	// N.B This is in addition to the  standalone visual tab style classes
 	// provided so any elements may be styled.
 
-	.buddypress-wrap.bp-dir-vert-nav {
+	.buddypress-wrap {
 
-		.dir-navs.activity-nav-tabs,
-		.dir-navs.sites-nav-tabs,
-		.dir-navs.groups-nav-tabs,
-		.dir-navs.members-nav-tabs,
-		.main-navs.user-nav-tabs,
-		.main-navs.group-nav-tabs {
+		&.bp-dir-vert-nav,
+		&.bp-vertical-nav {
 
-			@include primary-navs-vert-tabs();
+			.dir-navs.activity-nav-tabs,
+			.dir-navs.sites-nav-tabs,
+			.dir-navs.groups-nav-tabs,
+			.dir-navs.members-nav-tabs,
+			.main-navs.user-nav-tabs,
+			.main-navs.group-nav-tabs {
+
+				@include primary-navs-vert-tabs();
+			}
 		}
 	}
 
