@@ -265,11 +265,14 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		 * otherwise default to 'a' (anchor)
 		 * Or override & hardcode the 'element' string on $buttons array.
 		 *
+		 * Icons sets a class for icon display if not using the button element
 		 */
+		$icons = '';
 		if( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
+			$icons = ' icons';
 		}
 
 		// If we pass through parent classes add them to $button array
@@ -323,7 +326,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 					$buttons['accept_friendship']['button_attr']['data-bp-nonce']  = esc_url( bp_get_friend_accept_request_link() );
 					$buttons['reject_friendship']['button_attr']['data-bp-nonce']  = esc_url( bp_get_friend_reject_request_link() );
 				} else {
-					$buttons['accept_request']['button_attr']['href']     = esc_url( bp_get_friend_accept_request_link() );
+					$buttons['accept_friendship']['button_attr']['href']     = esc_url( bp_get_friend_accept_request_link() );
 					$buttons['reject_friendship']['button_attr']['href']  = esc_url( bp_get_friend_reject_request_link() );
 				}
 
