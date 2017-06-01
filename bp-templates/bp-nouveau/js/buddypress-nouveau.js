@@ -697,7 +697,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		buttonAction: function( event ) {
-			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ),
+			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ), nonceUrl = target.data( 'bp-nonce' )
 				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ), item_inner = target.closest('.list-wrap'),
 				object = item.data( 'bp-item-component' );
 
@@ -711,6 +711,17 @@ window.bp = window.bp || {};
 
 			if ( ( undefined !== BP_Nouveau[ action + '_confirm'] && false === window.confirm( BP_Nouveau[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
 				return false;
+			}
+
+			// Find the required wpnonce string.
+			// if  button element set we'll have our nonce set on a data attr
+			// Check the value & if exists split the string to obtain the nonce string
+			// if no value, i.e false, null then the href attr is used.
+			if ( nonceUrl ) {
+				nonce = nonceUrl.split('?_wpnonce=');
+				nonce = nonce[1];
+			} else {
+				nonce = self.getLinkParams( target.prop( 'href' ), '_wpnonce' );
 			}
 
 			// Unforunately unlike groups
@@ -734,7 +745,7 @@ window.bp = window.bp || {};
 			self.ajax( {
 				action   : object + '_' + action,
 				item_id  : item_id,
-				_wpnonce : self.getLinkParams( target.prop( 'href' ), '_wpnonce' )
+				_wpnonce : nonce
 			}, object ).done( function( response ) {
 				if ( false === response.success ) {
 					item_inner.prepend( response.data.feedback );
