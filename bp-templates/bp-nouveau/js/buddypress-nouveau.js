@@ -699,7 +699,7 @@ window.bp = window.bp || {};
 		buttonAction: function( event ) {
 			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ), nonceUrl = target.data( 'bp-nonce' ),
 				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ), item_inner = target.closest('.list-wrap'),
-				object = item.data( 'bp-item-component' );
+				object = item.data( 'bp-item-component' ), nonce = '';
 
 			// Simply let the event fire if we don't have needed values
 			if ( ! action || ! item_id || ! object ) {
