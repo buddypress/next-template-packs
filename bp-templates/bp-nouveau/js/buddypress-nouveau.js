@@ -697,7 +697,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		buttonAction: function( event ) {
-			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ), nonceUrl = target.data( 'bp-nonce' )
+			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ), nonceUrl = target.data( 'bp-nonce' ),
 				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ), item_inner = target.closest('.list-wrap'),
 				object = item.data( 'bp-item-component' );
 
