@@ -13,7 +13,7 @@
     "grunt-contrib-cssmin": "~1.0.1",
     "grunt-rtlcss": "~2.0.1",
     "grunt-contrib-watch": "~1.0.0",
-    "grunt-sass": "~1.2.1",
+    "grunt-sass": "~2.0.0",
     "grunt-stylelint": "^0.7.0",
     "matchdep": "~1.0.1",
     "postcss-scss": "0.4.1",
