@@ -14,7 +14,7 @@
     "grunt-rtlcss": "~2.0.1",
     "grunt-contrib-watch": "~1.0.0",
     "grunt-sass": "~2.0.0",
-    "grunt-stylelint": "^0.7.0",
+    "grunt-stylelint": "~0.8.0",
     "matchdep": "~1.0.1",
     "postcss-scss": "~1.0.0",
     "stylelint": "~7.10.1",
