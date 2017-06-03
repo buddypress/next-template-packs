@@ -16,7 +16,7 @@
     "grunt-sass": "~2.0.0",
     "grunt-stylelint": "^0.7.0",
     "matchdep": "~1.0.1",
-    "postcss-scss": "0.4.1",
+    "postcss-scss": "~1.0.0",
     "stylelint": "~7.10.1",
     "stylelint-config-wordpress": "~11.0.0"
   },
