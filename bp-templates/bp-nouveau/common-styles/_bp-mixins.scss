@@ -310,25 +310,6 @@
 	align-items: center; // current specs
 }
 
-// BP message boxes
-// Creates a message box with border, background color
-// If  no text-color passed in then the background used for
-// text is darkened by 50%.
-
-@mixin message-box($background, $text-color: null) {
-
-	@if $text-color {
-		// if a param was passed through
-		$text-color: $text-color;
-	} @else {
-		$text-color: darken($background, 50%);
-	}
-
-	background: lighten($background, 10%);
-	border: 1px solid darken($background, 10%);
-	color: $text-color;
-}
-
 // Links as a tabbed effect.
 // Renders links in a horizontal layout as a
 // tab effect on the current selected links.
@@ -421,6 +402,10 @@
 
 // BP message boxes
 
+// BP message boxes
+// Creates a message box with border, background color
+// If  no text-color passed in then the background used for
+// text is darkened by 50%.
 @mixin message-box($background: #fff, $text-color: null, $border: null) {
 
 	@if $text-color {
@@ -440,6 +425,7 @@
 			border: 1px solid darken($background, 10%);
 		}
 	}
+
 	color: $text-color;
 }
 
