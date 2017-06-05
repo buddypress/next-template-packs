@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation">
+<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Groups menu', 'buddypress' ); ?>">
 	<ul class="subnav">
 
 		<?php if ( bp_is_my_profile() ) : ?>

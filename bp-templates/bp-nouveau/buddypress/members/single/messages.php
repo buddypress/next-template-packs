@@ -8,7 +8,7 @@
 
 ?>
 
-<div class="bp-navs bp-subnavs user-subnav tabbed-links" id="subnav" role="navigation">
+<div class="bp-navs bp-subnavs user-subnav tabbed-links" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Messages menu', 'buddypress' ); ?>">
 	<ul class="button-tabs subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>

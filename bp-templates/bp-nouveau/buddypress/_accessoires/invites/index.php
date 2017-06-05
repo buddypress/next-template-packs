@@ -10,7 +10,7 @@
  * @package BP Nouveau
  */
 ?>
-<div class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav"></div>
+<div class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group invitations menu', 'buddypress' ); ?>"></div>
 
 <h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
 	<?php _e( 'Invite Members', 'bp-nouveau' ); ?>
