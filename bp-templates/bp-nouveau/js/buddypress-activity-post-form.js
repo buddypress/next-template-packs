@@ -163,7 +163,6 @@ window.bp = window.bp || {};
 		id        : 'whats-new',
 
 		attributes: {
-			role         : 'textbox',
 			name         : 'whats-new',
 			cols         : '50',
 			rows         : '4',
