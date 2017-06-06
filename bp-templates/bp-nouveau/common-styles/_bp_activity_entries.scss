@@ -138,7 +138,7 @@
 			.time-since {
 
 				@include font-size(14);
-				color: #aaa;
+				color: $light-text;
 				text-decoration: none;
 
 				&:hover {
@@ -154,7 +154,7 @@
 
 			.activity-header,
 			.comment-header {
-				color: #888;
+				color: $light-text;
 				margin-bottom: $marg-sml;
 			}
 

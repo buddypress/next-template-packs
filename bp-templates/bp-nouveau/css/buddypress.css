@@ -142,7 +142,7 @@ body.buddypress article.page > .entry-header {
 body.buddypress article.page > .entry-header .entry-title {
 	font-size: 28px;
 	font-weight: inherit;
-	color: #777;
+	color: #767676;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -470,7 +470,7 @@ dt.section-title {
 
 .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a,
 .buddypress-wrap .bp-navs.group-create-links ul li:not(.current) a {
-	color: #777;
+	color: #767676;
 }
 
 .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a:focus, .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a:hover,
@@ -483,7 +483,7 @@ dt.section-title {
 .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a[disabled]:focus, .buddypress_object_nav .bp-navs.group-create-links ul li:not(.current) a[disabled]:hover,
 .buddypress-wrap .bp-navs.group-create-links ul li:not(.current) a[disabled]:focus,
 .buddypress-wrap .bp-navs.group-create-links ul li:not(.current) a[disabled]:hover {
-	color: #777;
+	color: #767676;
 }
 
 .buddypress_object_nav .bp-navs.group-create-links ul li.current a,
@@ -738,7 +738,7 @@ dt.section-title {
 .buddypress-wrap .bp-pagination {
 	background: transparent;
 	border: 0;
-	color: #777;
+	color: #767676;
 	float: left;
 	font-size: small;
 	margin: 0;
@@ -759,7 +759,6 @@ dt.section-title {
 .buddypress-wrap .bp-pagination .bp-pagination-links span,
 .buddypress-wrap .bp-pagination .bp-pagination-links a {
 	font-size: small;
-	opacity: 0.9;
 	padding: 0 5px;
 }
 
@@ -842,7 +841,7 @@ dt.section-title {
 
 .bp-list li .meta,
 .bp-list li .item-meta {
-	color: #888;
+	color: #737373;
 	font-size: 12px;
 	margin-top: 10px;
 }
@@ -1149,7 +1148,7 @@ dt.section-title {
 }
 
 .activity-list .activity-item .activity-inreplyto {
-	color: #777;
+	color: #767676;
 	font-size: 13px;
 }
 
@@ -1186,19 +1185,19 @@ dt.section-title {
 
 .activity-list .activity-item .activity-header .time-since {
 	font-size: 14px;
-	color: #aaa;
+	color: #767676;
 	text-decoration: none;
 }
 
 .activity-list .activity-item .activity-header .time-since:hover {
-	color: #777;
+	color: #767676;
 	cursor: pointer;
 	text-decoration: underline;
 }
 
 .activity-list .activity-item .activity-content .activity-header,
 .activity-list .activity-item .activity-content .comment-header {
-	color: #888;
+	color: #767676;
 	margin-bottom: 10px;
 }
 
@@ -1493,7 +1492,7 @@ body.activity-permalink .activity-list .activity-comments {
 }
 
 .buddypress-wrap .activity-comments .acomment-options a {
-	color: #777;
+	color: #767676;
 	font-size: 14px;
 }
 
@@ -1550,7 +1549,7 @@ form.ac-form .ac-reply-avatar img {
 }
 
 form.ac-form .ac-reply-content {
-	color: #777;
+	color: #767676;
 	padding-left: 1em;
 }
 
@@ -1638,7 +1637,7 @@ form.ac-form .ac-reply-content input {
 	border-radius: 10px;
 	background-clip: padding-box;
 	font-size: 13px;
-	color: #777;
+	color: #737373;
 	font-style: italic;
 	margin: 10px auto 0;
 	padding: 1em;
@@ -1711,7 +1710,7 @@ form.ac-form .ac-reply-content input {
 	-ms-border-radius: 10px;
 	border-radius: 10px;
 	background-clip: padding-box;
-	color: #777;
+	color: #737373;
 	font-size: 13px;
 	margin: 15px auto;
 	padding: 1em;
@@ -1880,7 +1879,6 @@ form.ac-form .ac-reply-content input {
 .single-headers .activity {
 	display: inline-block;
 	font-size: 12px;
-	opacity: 0.8;
 	padding: 0;
 }
 
@@ -1937,7 +1935,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .single-headers .item-meta {
-	color: #777;
+	color: #767676;
 	font-size: 14px;
 	margin: 15px 0 5px;
 	padding-bottom: 0.5em;
@@ -2201,7 +2199,7 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 .groups-manage-members-list ul .action.text-links-list a.button {
-	color: #777;
+	color: #767676;
 	display: inline-block;
 }
 
@@ -2272,7 +2270,7 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .buddypress .bp-invites-content .item-list .item-meta span,
 .buddypress .bp-invites-content .group-inviters li {
-	color: #777;
+	color: #767676;
 }
 
 .buddypress .bp-invites-content li ul.group-inviters {
@@ -2453,7 +2451,7 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress-wrap .field-visibility-settings,
 .buddypress-wrap .field-visibility-settings-header {
-	color: #777;
+	color: #737373;
 }
 
 .buddypress-wrap .field-visibility-settings fieldset {
@@ -2624,7 +2622,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content time {
-	color: #777;
+	color: #737373;
 	font-size: 12px;
 }
 
@@ -2715,7 +2713,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 #message-threads li .thread-content .excerpt {
-	color: #777;
+	color: #737373;
 	font-size: 12px;
 	margin: 0;
 }
@@ -2825,7 +2823,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content #bp-message-thread-list .message-metadata time {
-	color: #777;
+	color: #737373;
 	font-size: 12px;
 	padding: 0 0.5em;
 }
@@ -3091,13 +3089,13 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 }
 
 .buddypress-wrap .standard-form p.description {
-	color: #777;
+	color: #737373;
 	margin: 5px 0;
 }
 
 .buddypress-wrap .standard-form div.checkbox label:nth-child(n+2),
 .buddypress-wrap .standard-form div.radio div label {
-	color: #777;
+	color: #737373;
 	font-size: 100%;
 	font-weight: 400;
 	margin: 5px 0 0;
@@ -3471,7 +3469,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap table#message-threads .thread-info p.thread-excerpt {
-	color: #777;
+	color: #737373;
 	font-size: 12px;
 	margin-top: 3px;
 }
@@ -3612,7 +3610,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress-wrap div.pending a,
 .buddypress .buddypress-wrap a.disabled {
 	border-color: #eee;
-	color: #777;
+	color: #767676;
 	cursor: default;
 }
 
@@ -3627,7 +3625,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress .buddypress-wrap div.pending a:hover,
 .buddypress .buddypress-wrap a.disabled:hover {
 	border-color: #eee;
-	color: #777;
+	color: #767676;
 }
 
 .buddypress .buddypress-wrap button.text-button {
@@ -3883,6 +3881,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+	color: #737373;
 	margin: 10px 0;
 	position: relative;
 }
@@ -4122,7 +4121,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid > li .list-wrap .update {
-	color: #777;
+	color: #737373;
 	padding: 0.5em 2em;
 }
 

@@ -24,7 +24,8 @@ $marg-xlrg: 30px !default;
 // Colours
 
 $dark-grey:            #555 !default;
-$light-text:           #777 !default;
+$light-text:           #767676 !default; // lightest gray on #fff with 4.5:1 contrast ratio
+$light-text-plus:      #737373 !default; // $light-text on #fafafa background
 $primary-grey:         #ccc !default;
 $light-grey:           #eaeaea !default;
 $med-light-grey:       #d6d6d6 !default;
@@ -43,10 +44,10 @@ $off-white:            #fafafa !default;
 $white:                #fff !default;
 $form-border-color:    $med-light-grey !default;
 $bp-text:              $dark-grey !default;
-$form-text:            $light-text !default;
+$form-text:            $light-text-plus !default;
 $primary-headings:     $light-text !default;
 $textarea-bck:         $white !default;
-$meta-text:            $light-text !default;
+$meta-text:            $light-text-plus !default;
 $meta-text-dark:       $dark-grey !default;
 $focussed-border-clr:  rgba(31, 179, 221, 0.9) !default; // textareas? e.g whats-new
 
