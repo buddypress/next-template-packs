@@ -232,9 +232,9 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		}
 
 		/**
-		* If the wrapper is set to 'ul'
-		* use to pass through a boolean to set:
-		* $li_item  => true / false
+		* If the container is set to 'ul'
+		* force the $parent_element to 'li', else use
+		* parent_element args if set.
 		* Will render li elements around anchors/buttons.
 		*/
 		if( 'ul' == $args['container']  ) {
@@ -307,9 +307,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'must_be_logged_in' => true,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'id'           => 'acomment-comment-' . $activity_id,
-					'class'        => 'button acomment-reply bp-primary-action',
-					'title'        => ''
+					'id'            => 'acomment-comment-' . $activity_id,
+					'class'         => 'button acomment-reply bp-primary-action',
+					'title'         => '',
+					'aria-expanded' => 'false'
 					),
 				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
 			);
