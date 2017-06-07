@@ -759,7 +759,6 @@ dt.section-title {
 .buddypress-wrap .bp-pagination .bp-pagination-links span,
 .buddypress-wrap .bp-pagination .bp-pagination-links a {
 	font-size: small;
-	opacity: 0.9;
 	padding: 0 5px;
 }
 
@@ -842,7 +841,7 @@ dt.section-title {
 
 .bp-list li .meta,
 .bp-list li .item-meta {
-	color: #888;
+	color: #737373;
 	font-size: 12px;
 	margin-top: 10px;
 }
@@ -1186,7 +1185,7 @@ dt.section-title {
 
 .activity-list .activity-item .activity-header .time-since {
 	font-size: 14px;
-	color: #aaa;
+	color: #767676;
 	text-decoration: none;
 }
 
@@ -1198,7 +1197,7 @@ dt.section-title {
 
 .activity-list .activity-item .activity-content .activity-header,
 .activity-list .activity-item .activity-content .comment-header {
-	color: #888;
+	color: #767676;
 	margin-bottom: 10px;
 }
 
@@ -1638,7 +1637,7 @@ form.ac-form .ac-reply-content input {
 	border-radius: 10px;
 	background-clip: padding-box;
 	font-size: 13px;
-	color: #767676;
+	color: #737373;
 	font-style: italic;
 	margin: 10px auto 0;
 	padding: 1em;
@@ -1711,7 +1710,7 @@ form.ac-form .ac-reply-content input {
 	-ms-border-radius: 10px;
 	border-radius: 10px;
 	background-clip: padding-box;
-	color: #767676;
+	color: #737373;
 	font-size: 13px;
 	margin: 15px auto;
 	padding: 1em;
@@ -1880,7 +1879,6 @@ form.ac-form .ac-reply-content input {
 .single-headers .activity {
 	display: inline-block;
 	font-size: 12px;
-	opacity: 0.8;
 	padding: 0;
 }
 
@@ -2432,17 +2430,16 @@ body.no-js .single-item-header .js-self-profile-button {
 	order: 3;
 }
 
-body.no-js .buddypress .field-visibility-settings-toggle,
-body.no-js .buddypress .field-visibility-settings-close {
+body.no-js .buddypress-wrap .field-visibility-settings-toggle,
+body.no-js .buddypress-wrap .field-visibility-settings-close {
 	display: none;
 }
 
-body.no-js .buddypress .field-visibility-settings {
+body.no-js .buddypress-wrap .field-visibility-settings {
 	display: block;
 }
 
 .buddypress-wrap .field-visibility-settings {
-	display: none;
 	margin: 10px 0;
 }
 
@@ -2453,7 +2450,7 @@ body.no-js .buddypress .field-visibility-settings {
 
 .buddypress-wrap .field-visibility-settings,
 .buddypress-wrap .field-visibility-settings-header {
-	color: #767676;
+	color: #737373;
 }
 
 .buddypress-wrap .field-visibility-settings fieldset {
@@ -2624,7 +2621,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content time {
-	color: #767676;
+	color: #737373;
 	font-size: 12px;
 }
 
@@ -2715,7 +2712,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 #message-threads li .thread-content .excerpt {
-	color: #767676;
+	color: #737373;
 	font-size: 12px;
 	margin: 0;
 }
@@ -2825,7 +2822,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content #bp-message-thread-list .message-metadata time {
-	color: #767676;
+	color: #737373;
 	font-size: 12px;
 	padding: 0 0.5em;
 }
@@ -3091,13 +3088,13 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 }
 
 .buddypress-wrap .standard-form p.description {
-	color: #767676;
+	color: #737373;
 	margin: 5px 0;
 }
 
 .buddypress-wrap .standard-form div.checkbox label:nth-child(n+2),
 .buddypress-wrap .standard-form div.radio div label {
-	color: #767676;
+	color: #737373;
 	font-size: 100%;
 	font-weight: 400;
 	margin: 5px 0 0;
@@ -3471,7 +3468,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap table#message-threads .thread-info p.thread-excerpt {
-	color: #767676;
+	color: #737373;
 	font-size: 12px;
 	margin-top: 3px;
 }
@@ -3883,6 +3880,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+	color: #737373;
 	margin: 10px 0;
 	position: relative;
 }
@@ -4122,7 +4120,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .grid > li .list-wrap .update {
-	color: #767676;
+	color: #737373;
 	padding: 0.5em 2em;
 }
 

@@ -2430,17 +2430,16 @@ body.no-js .single-item-header .js-self-profile-button {
 	order: 3;
 }
 
-body.no-js .buddypress .field-visibility-settings-toggle,
-body.no-js .buddypress .field-visibility-settings-close {
+body.no-js .buddypress-wrap .field-visibility-settings-toggle,
+body.no-js .buddypress-wrap .field-visibility-settings-close {
 	display: none;
 }
 
-body.no-js .buddypress .field-visibility-settings {
+body.no-js .buddypress-wrap .field-visibility-settings {
 	display: block;
 }
 
 .buddypress-wrap .field-visibility-settings {
-	display: none;
 	margin: 10px 0;
 }
 
