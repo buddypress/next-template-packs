@@ -121,6 +121,7 @@ li#compose-personal-li {
 		// the child items
 		.thread-cb {
 
+			@include center-vert();
 			@include box-item-size(1, 2, 5%);
 
 			label {

@@ -226,6 +226,15 @@
 
 		} // close @media
 
+		// In tables elements like checkboxes best aligned to middle
+		// remove margins in these cases.
+		.bp-tables-user {
+
+			label {
+				margin: 0;
+			}
+		}
+
 	} // close .standard-form
 
 	// Register page

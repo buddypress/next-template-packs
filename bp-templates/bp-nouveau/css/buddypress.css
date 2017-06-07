@@ -2655,6 +2655,14 @@ li#compose-personal-li a#compose:hover {
 }
 
 #message-threads li .thread-cb {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
 	-webkit-flex: 1 2 5%;
 	-moz-flex: 1 2 5%;
 	-ms-flex: 1 2 5%;
@@ -3141,6 +3149,10 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 	}
 }
 
+.buddypress-wrap .standard-form .bp-tables-user label {
+	margin: 0;
+}
+
 .buddypress-wrap .signup-form label,
 .buddypress-wrap .signup-form legend {
 	font-weight: 400;
@@ -3408,6 +3420,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap table.notifications .bulk-select-all,
 .buddypress-wrap table.notifications .bulk-select-check {
 	width: 7%;
+}
+
+.buddypress-wrap table.notifications .bulk-select-check {
+	vertical-align: middle;
 }
 
 .buddypress-wrap table.notifications .title,
