@@ -3417,6 +3417,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	border-bottom: none;
 }
 
+.buddypress-wrap table.notifications td {
+	padding: 1em 0.5em;
+}
+
 .buddypress-wrap table.notifications .bulk-select-all,
 .buddypress-wrap table.notifications .bulk-select-check {
 	width: 7%;
@@ -3430,12 +3434,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap table.notifications .notification-description,
 .buddypress-wrap table.notifications .date,
 .buddypress-wrap table.notifications .notification-since {
-	width: 35%;
+	width: 39%;
 }
 
 .buddypress-wrap table.notifications .actions,
 .buddypress-wrap table.notifications .notification-actions {
-	width: 23%;
+	width: 15%;
 }
 
 .buddypress-wrap table.notification-settings th.title,

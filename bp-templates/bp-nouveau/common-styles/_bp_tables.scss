@@ -82,6 +82,13 @@
 	// Set various tables th/td cell sizes
 	table.notifications {
 
+		// Increase the cell padding to give better seperation of lines
+		// when some text lines wrap
+
+		td {
+			padding: $pad-med $pad-sml;
+		}
+
 		.bulk-select-all,
 		.bulk-select-check {
 			width: 7%;
@@ -95,12 +102,12 @@
 		.notification-description,
 		.date,
 		.notification-since {
-			width: 35%;
+			width: 39%;
 		}
 
 		.actions,
 		.notification-actions {
-			width: 23%;
+			width: 15%;
 		}
 	}
 
