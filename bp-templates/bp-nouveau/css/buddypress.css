@@ -1711,6 +1711,7 @@ form.ac-form .ac-reply-content input {
 	border-radius: 10px;
 	background-clip: padding-box;
 	color: #737373;
+	font-style: italic;
 	font-size: 13px;
 	margin: 15px auto;
 	padding: 1em;
@@ -1725,6 +1726,7 @@ form.ac-form .ac-reply-content input {
 .buddypress-wrap .members-list li .user-update .activity-read-more {
 	display: block;
 	font-size: 12px;
+	font-style: normal;
 	margin-top: 10px;
 	padding-left: 2px;
 }
