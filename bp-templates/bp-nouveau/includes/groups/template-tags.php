@@ -726,7 +726,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['accept_invite']['button_attr']['data-bp-accept-invite-nonce'] = esc_url( bp_get_group_accept_invite_link() );
+				$buttons['accept_invite']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_accept_invite_link() );
 			} else {
 				$buttons['accept_invite']['button_attr']['href'] = esc_url( bp_get_group_accept_invite_link() );
 			}
@@ -754,7 +754,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 			// If button element set add nonce link to formaction attr
 			if ( 'button' === $button_element ) {
-				$buttons['reject_invite']['button_attr']['data-bp-reject-invite-none'] = esc_url( bp_get_group_reject_invite_link() );
+				$buttons['reject_invite']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_reject_invite_link() );
 			} else {
 				$buttons['reject_invite']['button_attr']['href'] = esc_url( bp_get_group_reject_invite_link() );
 			}
@@ -785,7 +785,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['group_membership_accept']['button_attr']['data-bp-membership-accept-nonce'] = esc_url( bp_get_group_request_accept_link() );
+				$buttons['group_membership_accept']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_request_accept_link() );
 			} else {
 				$buttons['group_membership_accept']['button_attr']['href'] = esc_url( bp_get_group_request_accept_link() );
 			}
@@ -812,7 +812,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['group_membership_reject']['button_attr']['bp-membership-reject-nonce'] = esc_url( bp_get_group_request_reject_link() );
+				$buttons['group_membership_reject']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_request_reject_link() );
 			} else {
 				$buttons['group_membership_reject']['button_attr']['href'] = esc_url( bp_get_group_request_reject_link() );
 			}
@@ -924,11 +924,11 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			// If 'button' element is set add the nonce link to data-attr attr
 			// else add it to the href.
 			if ( 'button' === $button_element ) {
-				$buttons['unban_member']['button_attr']['data-bp-unban-nonce'] = esc_url( bp_get_group_member_unban_link( $user_id ) );
-				$buttons['ban_member']['button_attr']['data-bp-ban-nonce'] = esc_url( bp_get_group_member_ban_link( $user_id ) );
-				$buttons['promote_mod']['button_attr']['data-bp-pronote-mod-nonce'] = esc_url( bp_get_group_member_promote_mod_link() );
-				$buttons['promote_admin']['button_attr']['data-bp-promote-admin-nonce'] = esc_url( bp_get_group_member_promote_admin_link() );
-				$buttons['remove_member']['button_attr']['data-bp-remove-member-nonce'] = esc_url( bp_get_group_member_remove_link( $user_id ) );
+				$buttons['unban_member']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_member_unban_link( $user_id ) );
+				$buttons['ban_member']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_member_ban_link( $user_id ) );
+				$buttons['promote_mod']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_member_promote_mod_link() );
+				$buttons['promote_admin']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_member_promote_admin_link() );
+				$buttons['remove_member']['button_attr']['data-bp-nonce'] = esc_url( bp_get_group_member_remove_link( $user_id ) );
 			} else {
 				$buttons['unban_member']['button_attr']['href'] = esc_url( bp_get_group_member_unban_link( $user_id ) );
 				$buttons['ban_member']['button_attr']['href'] = esc_url( bp_get_group_member_ban_link( $user_id ) );
@@ -984,7 +984,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 			// If button element set add nonce link to data-attr attr
 			if ( 'button' === $button_element ) {
-				$buttons['group_membership']['button_attr']['data-bp-join-group-nonce'] = $button_args['link_href'];
+				$buttons['group_membership']['button_attr']['data-bp-nonce'] = $button_args['link_href'];
 			} else {
 				$buttons['group_membership']['button_attr']['href'] = $button_args['link_href'];
 			}
