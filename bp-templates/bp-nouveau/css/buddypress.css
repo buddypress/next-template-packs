@@ -2091,6 +2091,14 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin-bottom: 5px;
 }
 
+.bp-user .member-header-actions {
+	overflow: hidden;
+}
+
+.bp-user .member-header-actions * > * {
+	display: block;
+}
+
 /**
 *-----------------------------------------------------------
 * @subsection 5.2 - Item Body: Global
