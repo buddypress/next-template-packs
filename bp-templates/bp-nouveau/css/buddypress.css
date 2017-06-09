@@ -3256,12 +3256,14 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap form.bp-dir-search-form,
-.buddypress-wrap form.bp-messages-search-form {
+.buddypress-wrap form.bp-messages-search-form,
+.buddypress-wrap form.bp-invites-search-form {
 	border: 1px solid #eee;
 }
 
 .buddypress-wrap form.bp-dir-search-form label,
-.buddypress-wrap form.bp-messages-search-form label {
+.buddypress-wrap form.bp-messages-search-form label,
+.buddypress-wrap form.bp-invites-search-form label {
 	margin: 0;
 }
 
@@ -3270,7 +3272,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap form.bp-dir-search-form button[type="submit"],
 .buddypress-wrap form.bp-messages-search-form input[type="search"],
 .buddypress-wrap form.bp-messages-search-form input[type="text"],
-.buddypress-wrap form.bp-messages-search-form button[type="submit"] {
+.buddypress-wrap form.bp-messages-search-form button[type="submit"],
+.buddypress-wrap form.bp-invites-search-form input[type="search"],
+.buddypress-wrap form.bp-invites-search-form input[type="text"],
+.buddypress-wrap form.bp-invites-search-form button[type="submit"] {
+	background: none;
 	border: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -3282,14 +3288,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap form.bp-dir-search-form input[type="search"],
 .buddypress-wrap form.bp-dir-search-form input[type="text"],
 .buddypress-wrap form.bp-messages-search-form input[type="search"],
-.buddypress-wrap form.bp-messages-search-form input[type="text"] {
+.buddypress-wrap form.bp-messages-search-form input[type="text"],
+.buddypress-wrap form.bp-invites-search-form input[type="search"],
+.buddypress-wrap form.bp-invites-search-form input[type="text"] {
 	float: left;
 	padding: 3px 10px;
 	width: 80%;
 }
 
 .buddypress-wrap form.bp-dir-search-form button[type="submit"],
-.buddypress-wrap form.bp-messages-search-form button[type="submit"] {
+.buddypress-wrap form.bp-messages-search-form button[type="submit"],
+.buddypress-wrap form.bp-invites-search-form button[type="submit"] {
 	float: right;
 	font-size: inherit;
 	font-weight: 400;
@@ -3301,14 +3310,16 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap form.bp-dir-search-form button[type="submit"] span,
-.buddypress-wrap form.bp-messages-search-form button[type="submit"] span {
+.buddypress-wrap form.bp-messages-search-form button[type="submit"] span,
+.buddypress-wrap form.bp-invites-search-form button[type="submit"] span {
 	font-family: dashicons;
 	font-size: 18px;
 	line-height: 1.6;
 }
 
 .buddypress-wrap form.bp-dir-search-form button[type="submit"],
-.buddypress-wrap form.bp-messages-search-form button[type="submit"] {
+.buddypress-wrap form.bp-messages-search-form button[type="submit"],
+.buddypress-wrap form.bp-invites-search-form button[type="submit"] {
 	height: 0;
 	left: -999em;
 	overflow: hidden;
@@ -3317,7 +3328,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap form.bp-dir-search-form button[type="submit"].bp-show,
-.buddypress-wrap form.bp-messages-search-form button[type="submit"].bp-show {
+.buddypress-wrap form.bp-messages-search-form button[type="submit"].bp-show,
+.buddypress-wrap form.bp-invites-search-form button[type="submit"].bp-show {
 	height: auto;
 	left: 0;
 	overflow: visible;
@@ -3326,14 +3338,17 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-cancel-button,
-.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-cancel-button {
+.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-cancel-button,
+.buddypress-wrap form.bp-invites-search-form input[type="search"]::-webkit-search-cancel-button {
 	-webkit-appearance: searchfield-cancel-button;
 }
 
 .buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-results-button,
 .buddypress-wrap form.bp-dir-search-form input[type="search"]::-webkit-search-results-decoration,
 .buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-results-button,
-.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-results-decoration {
+.buddypress-wrap form.bp-messages-search-form input[type="search"]::-webkit-search-results-decoration,
+.buddypress-wrap form.bp-invites-search-form input[type="search"]::-webkit-search-results-button,
+.buddypress-wrap form.bp-invites-search-form input[type="search"]::-webkit-search-results-decoration {
 	display: none;
 }
 
@@ -3909,6 +3924,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	position: relative;
 }
 
+.buddypress-wrap .bp-feedback p {
+	margin: 10px 0 0;
+}
+
 .buddypress-wrap .bp-feedback span.bp-icon {
 	color: #fff;
 	display: block;
@@ -3922,6 +3941,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .bp-feedback span.text {
 	margin: 0;
 	padding: 0 0 0 1em;
+}
+
+.buddypress-wrap .bp-feedback.no-icon {
+	padding: 0.5em;
 }
 
 .buddypress-wrap .bp-feedback.small:before {
@@ -3940,6 +3963,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	top: 10px;
 	right: 10px;
 	width: 32px;
+}
+
+.buddypress-wrap .bp-feedback.no-icon a[data-bp-close],
+.buddypress-wrap .bp-feedback.no-icon button[data-bp-close] {
+	top: -6px;
+	right: 6px;
 }
 
 .buddypress-wrap button[data-bp-close]:hover {

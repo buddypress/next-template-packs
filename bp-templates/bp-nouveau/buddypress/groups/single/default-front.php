@@ -11,13 +11,20 @@
 <div class="group-front-page">
 	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
 
-		<div class="bp-feedback custom-homepage-info info">
-			<strong><?php esc_html_e( 'Manage the Groups default front page', 'bp-nouveau' ) ;?></strong> <button type="button" title="close" data-bp-close="remove"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span></button><br/>
+		<div class="bp-feedback custom-homepage-info info no-icon">
+			<strong><?php esc_html_e( 'Manage the Groups default front page', 'bp-nouveau' ) ;?></strong>
+
+			<p>
 			<?php printf(
 				esc_html__( 'You can set your preferences about the %s or add %s to it.', 'bp-nouveau' ),
 				bp_nouveau_groups_get_customizer_option_link(),
 				bp_nouveau_groups_get_customizer_widgets_link()
 			); ?>
+			</p>
+
+			<button type="button" title="close" data-bp-close="remove">
+				<span class="dashicons dashicons-dismiss" aria-hidden="true"></span>
+			</button>
 		</div>
 
 	<?php endif; ?>
