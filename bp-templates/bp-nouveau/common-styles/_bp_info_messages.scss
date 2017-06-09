@@ -129,11 +129,6 @@
 		line-height: inherit;
 	}
 
-	.bp-feedback.small span.text {
-		//		display: inline-block;
-		//		margin-left: 30px;
-	}
-
 	a[data-bp-close] span:before,
 	button[data-bp-close] span:before {
 		font-size: 32px;
@@ -150,7 +145,7 @@
 
 	.bp-feedback.no-icon {
 
-	a[data-bp-close],
+		a[data-bp-close],
 		button[data-bp-close] {
 			top: -6px;
 			right: 6px;
