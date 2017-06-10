@@ -10,7 +10,7 @@
  * @package BP Nouveau
  */
 ?>
-<div class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group invitations menu', 'buddypress' ); ?>"></div>
+<nav class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group invitations menu', 'buddypress' ); ?>"></nav>
 
 <h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
 	<?php _e( 'Invite Members', 'bp-nouveau' ); ?>
@@ -91,7 +91,7 @@
 <script type="text/html" id="tmpl-bp-invites-filters">
 	<div class="group-invites-search subnav-search clearfix" role="search" >
 		<div class="bp-search">
-			<form action="" method="get" id="group_invites_search_form" class="bp-dir-search-form" data-bp-search="{{data.scope}}">
+			<form action="" method="get" id="group_invites_search_form" class="bp-invites-search-form" data-bp-search="{{data.scope}}">
 				<label for="group_invites_search">
 					<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
 				</label>
