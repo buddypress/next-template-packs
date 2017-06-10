@@ -9,7 +9,7 @@
 
 ?>
 
-<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Groups menu', 'buddypress' ); ?>">
+<nav class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Groups menu', 'buddypress' ); ?>">
 	<ul class="subnav">
 
 		<?php if ( bp_is_my_profile() ) : ?>
@@ -19,7 +19,7 @@
 		<?php endif ; ?>
 
 	</ul>
-</div><!-- .bp-navs -->
+</nav><!-- .bp-navs -->
 
 <?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 

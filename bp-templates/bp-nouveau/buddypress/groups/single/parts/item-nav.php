@@ -8,7 +8,7 @@
  */
 ?>
 
-	<div class="<?php bp_nouveau_single_item_nav_classes(); ?>" id="object-nav" role="navigation" aria-label="<?php esc_attr_e( 'Group menu', 'buddypress' ); ?>">
+	<nav class="<?php bp_nouveau_single_item_nav_classes(); ?>" id="object-nav" role="navigation" aria-label="<?php esc_attr_e( 'Group menu', 'buddypress' ); ?>">
 
 		<?php if ( bp_nouveau_has_nav( array( 'object' => 'groups' ) ) ) : ?>
 
@@ -34,4 +34,4 @@
 
 		<?php endif ; ?>
 
-	</div>
+	</nav>

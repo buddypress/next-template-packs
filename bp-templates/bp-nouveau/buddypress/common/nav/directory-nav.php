@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="<?php bp_nouveau_directory_type_navs_class(); ?>" role="navigation" aria-label="<?php esc_attr_e( 'Directory menu', 'buddypress' ); ?>">
+<nav class="<?php bp_nouveau_directory_type_navs_class(); ?>" role="navigation" aria-label="<?php esc_attr_e( 'Directory menu', 'buddypress' ); ?>">
 
 	<?php if ( bp_nouveau_has_nav( array( 'object' => 'directory' ) ) ) : ?>
 
@@ -32,4 +32,4 @@
 
 	<?php endif ; ?>
 
-</div><!-- .bp-navs -->
+</nav><!-- .bp-navs -->

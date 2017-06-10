@@ -9,13 +9,13 @@
 
 ?>
 
-<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Activity menu', 'buddypress' ); ?>">
+<nav class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Activity menu', 'buddypress' ); ?>">
 	<ul class="subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 	</ul>
-</div><!-- .item-list-tabs#subnav -->
+</nav><!-- .item-list-tabs#subnav -->
 
 <?php bp_nouveau_activity_member_post_form() ;?>
 
