@@ -168,13 +168,13 @@
 					<# if ( undefined !== data.star_link ) { #>
 
 						<# if ( false !== data.is_starred ) { #>
-							<button type="button" class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
+							<a role="button" class="message-action-unstar bp-icons" href="{{data.star_link}}" data-bp-action="unstar" aria-pressed="true" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-nouveau' );?></span>
-							</button>
+							</a>
 						<# } else { #>
-							<button type="button" class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
+							<a role="button" class="message-action-star bp-icons" href="{{data.star_link}}" data-bp-action="star" aria-pressed="false" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-nouveau' );?></span>
-							</button>
+							</a>
 						<# } #>
 
 					<# } #>
