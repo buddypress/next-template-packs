@@ -19,12 +19,12 @@ window.bp = window.bp || {};
 	// Initially hide the 'field-visibility-settings' block
 	$( '.field-visibility-settings' ).addClass( 'bp-hide' );
 	// Add initial aria state to button
-	$( '.visibility-toggle-link' ).attr( 'aria-pressed', 'false' );
+	$( '.visibility-toggle-link' ).attr( 'aria-expanded', 'false' );
 
 	$( '.visibility-toggle-link' ).on( 'click', function( event ) {
 		event.preventDefault();
 
-		$( this ).attr('aria-pressed', 'true');
+		$( this ).attr('aria-expanded', 'true');
 
 		$( this ).parent().addClass( 'field-visibility-settings-hide bp-hide' )
 
@@ -41,7 +41,7 @@ window.bp = window.bp || {};
 			.siblings( '.field-visibility-settings-toggle' )
 				.children( '.current-visibility-level' ).text( vis_setting_text ).end()
 				.addClass( 'bp-show' ).removeClass( 'field-visibility-settings-hide bp-hide' );
-				$( '.visibility-toggle-link').attr( 'aria-pressed', 'false' );
+				$( '.visibility-toggle-link').attr( 'aria-expanded', 'false' );
 	} );
 
 	$( '#profile-edit-form input:not(:submit), #profile-edit-form textarea, #profile-edit-form select, #signup_form input:not(:submit), #signup_form textarea, #signup_form select' ).change( function() {
