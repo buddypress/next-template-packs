@@ -22,7 +22,7 @@
 			); ?>
 			</p>
 
-			<button type="button" title="close" data-bp-close="remove">
+			<button type="button" class="bp-tooltips" data-bp-tooltips="<?php esc_attr_e( 'Close', 'bp-nouveau' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'bp-nouveau' ); ?>" data-bp-close="remove">
 				<span class="dashicons dashicons-dismiss" aria-hidden="true"></span>
 			</button>
 		</div>
