@@ -173,20 +173,21 @@ function bp_nouveau_notifications_sort( $filters = array() ) {
  *
  * @since  1.0.0
  *
- * @param  string $link     The action link.
- * @param  string $title    The title attribute of the link.
- * @param  string $dashicon The dashicon class.
- * @return string           Link Output.
+ * @param  string $link        The action link.
+ * @param  string $bp_tooltip  The data-bp-attribute of the link.
+ * @param  string $aria_label  The aria-label attribute of the link.
+ * @param  string $dashicon    The dashicon class.
+ * @return string              Link Output.
  */
-function bp_nouveau_notifications_dashiconified_link( $link = '', $title = '', $dashicon = '' ) {
+function bp_nouveau_notifications_dashiconified_link( $link = '', $bp_tooltip = '', $dashicon = '' ) {
 	preg_match( '/<a\s[^>]*>(.*)<\/a>/siU', $link, $match );
 
-	if ( ! empty( $match[0] ) && ! empty( $match[1] ) && ! empty( $dashicon ) && ! empty( $title ) ) {
+	if ( ! empty( $match[0] ) && ! empty( $match[1] ) && ! empty( $dashicon ) && ! empty( $bp_tooltip ) ) {
 		$link = str_replace(
 			'>' . $match[1] . '<',
 			sprintf(
-				' title="%1$s"><span class="dashicons %2$s" aria-hidden="true"></span><span class="bp-screen-reader-text">%3$s</span><',
-				esc_attr( $title ),
+				' class="bp-tooltip" data-bp-tooltip="%1$s"><span class="dashicons %2$s" aria-hidden="true"></span><span class="bp-screen-reader-text">%3$s</span><',
+				esc_attr( $bp_tooltip ),
 				sanitize_html_class( $dashicon ),
 				$match[1]
 			),
