@@ -815,7 +815,7 @@ window.bp = window.bp || {};
 			// Dismissing site-wide notices.
 			if ( closeBtn.closest( '.bp-feedback' ).hasClass( 'bp-sitewide-notice' ) ) {
 				bp.Nouveau.ajax( {
-					action : "messages_dismiss_sitewide_notice",
+					action : 'messages_dismiss_sitewide_notice'
 				}, 'messages' );
 			}
 
