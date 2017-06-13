@@ -24,6 +24,7 @@ bp_nouveau_register_ajax_actions( array(
 	array( 'messages_star'                     => array( 'function' => 'bp_nouveau_ajax_star_thread_messages',       'nopriv' => false ) ),
 	array( 'messages_unread'                   => array( 'function' => 'bp_nouveau_ajax_readunread_thread_messages', 'nopriv' => false ) ),
 	array( 'messages_read'                     => array( 'function' => 'bp_nouveau_ajax_readunread_thread_messages', 'nopriv' => false ) ),
+	array( 'messages_dismiss_sitewide_notice'  => array( 'function' => 'bp_nouveau_ajax_dismiss_sitewide_notice',    'nopriv' => false ) ),
 ) );
 
 function bp_nouveau_ajax_messages_send_message() {
@@ -568,4 +569,50 @@ function bp_nouveau_ajax_readunread_thread_messages() {
 	$response['type'] = 'success';
 
 	wp_send_json_success( $response );
+}
+
+function bp_nouveau_ajax_dismiss_sitewide_notice() {
+	if ( empty( $_POST['action'] ) ) {
+		wp_send_json_error();
+	}
+
+	$response = array(
+		'feedback' => __( 'There was a problem dismissing the notice. Please try again.', 'bp-nouveau' ),
+		'type'     => 'error',
+	);
+
+	if ( false === bp_is_active( 'messages' ) ) {
+		wp_send_json_error( $response );
+	}
+
+	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
+		wp_send_json_error( $response );
+	}
+
+	// Check capability.
+	if ( ! is_user_logged_in() || ! bp_core_can_edit_settings() ) {
+		wp_send_json_error( $response );
+	}
+
+	// Mark the active notice as closed.
+	$notice = BP_Messages_Notice::get_active();
+
+	if ( ! empty( $notice->id ) ) {
+		$user_id = bp_loggedin_user_id();
+
+		$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
+
+		if ( empty( $closed_notices ) ) {
+			$closed_notices = array();
+		}
+
+		// Add the notice to the array of the user's closed notices.
+		$closed_notices[] = (int) $notice->id;
+		bp_update_user_meta( $user_id, 'closed_notices', array_map( 'absint', array_unique( $closed_notices ) ) );
+
+		wp_send_json_success( array(
+			'feedback' => __( 'Sitewide notice dismissed', 'bp-nouveau' ),
+			'type'     => 'success',
+		) );
+	}
 }

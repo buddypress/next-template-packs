@@ -73,8 +73,8 @@ class BP_Nouveau_Messages {
 	 */
 	private function setup_actions() {
 		// Notices
-		add_action( 'widgets_init',     'bp_nouveau_unregister_notices_widget'       );
-		add_action( 'template_notices', 'bp_nouveau_sitewide_notices',          9999 );
+		add_action( 'widgets_init', 'bp_nouveau_unregister_notices_widget' );
+		add_action( 'bp_init',      'bp_nouveau_push_sitewide_notices', 99 );
 
 		// Messages
 		add_action( 'bp_messages_setup_nav', 'bp_nouveau_messages_adjust_nav' );
