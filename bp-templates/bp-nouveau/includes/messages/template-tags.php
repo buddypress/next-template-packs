@@ -45,49 +45,6 @@ function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
 }
 
 /**
- * Output the sitewide notices into the member's header
- *
- * @since  1.0.0
- *
- * @return string HTML Output
- */
-function bp_nouveau_sitewide_notices() {
-	// Do not show notices if user is not logged in.
-	if ( ! is_user_logged_in() || ! bp_is_my_profile() ) {
-		return;
-	}
-
-	$notice = BP_Messages_Notice::get_active();
-
-	if ( empty( $notice ) ) {
-		return false;
-	}
-
-	$user_id = bp_loggedin_user_id();
-
-	$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
-
-	if ( empty( $closed_notices ) ) {
-		$closed_notices = array();
-	}
-
-	if ( is_array( $closed_notices ) ) {
-		if ( ! in_array( $notice->id, $closed_notices ) && $notice->id ) {
-			?>
-			<aside class="bp-sitewide-notice info" rel="n-<?php echo esc_attr( $notice->id ); ?>">
-				<strong class="subject"><?php echo stripslashes( wp_filter_kses( $notice->subject ) ) ?></strong>
-				<?php echo stripslashes( wpautop( wp_filter_kses( $notice->message ) ) ) ?>
-			</aside>
-			<?php
-
-			// Add the notice to closed ones
-			$closed_notices[] = (int) $notice->id;
-			bp_update_user_meta( $user_id, 'closed_notices', $closed_notices );
-		}
-	}
-}
-
-/**
  * Load the new Messages User Interface
  *
  * @since  1.0.0
