@@ -286,8 +286,8 @@ function bp_nouveau_push_sitewide_notices() {
 		if ( empty( $bp->template_message ) ) {
 			$message = sprintf( '<strong class="subject">%s</strong>
 				%s',
-				stripslashes( wp_filter_kses( $notice->subject ) ),
-				stripslashes( wpautop( wp_filter_kses( $notice->message ) ) )
+				stripslashes( $notice->subject ),
+				stripslashes( $notice->message )
 			);
 			$bp->template_message = $message;
 			$bp->template_message_type = 'bp-sitewide-notice';
