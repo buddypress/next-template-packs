@@ -906,6 +906,12 @@ window.bp = window.bp || {};
 					self.collection.fetch( {
 						data : _.pick( self.collection.options, ['box', 'search_terms', 'page'] )
 					} );
+				} else if ( 'unstar' === action || 'star' === action ) {
+					// Update the model attributes--updates the star icon.
+					_.each( response.messages, function( updated ) {
+						model.set( updated );
+					} );
+					model.set( _.first( response.messages ) );
 				} else if ( response.messages ) {
 					model.set( _.first( response.messages ) );
 				}
