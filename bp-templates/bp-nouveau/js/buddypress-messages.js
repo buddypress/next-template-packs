@@ -827,7 +827,8 @@ window.bp = window.bp || {};
 		template  : bp.template( 'bp-messages-preview' ),
 
 		events: {
-			'click .actions button' : 'doAction'
+			'click .actions button' : 'doAction',
+			'click .actions a'      : 'doAction'
 		},
 
 		initialize: function() {
