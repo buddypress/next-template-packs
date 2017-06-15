@@ -3844,11 +3844,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	content: "\f341";
 }
 
-.buddypress-wrap .bp-messages-filters ul li .messages-button.bulk-apply:before {
-	content: "\f147";
-	font-size: 18px;
-}
-
 .buddypress-wrap .warn {
 	color: #b71717;
 }
