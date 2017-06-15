@@ -724,7 +724,7 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'type'       => 'checkbox',
 		),
 		'group_nav_tabs' => array(
-		'label'      => __( 'Set primary nav to tab style:', 'bp-nouveau' ),
+		'label'      => __( 'Set primary nav to tab style.', 'bp-nouveau' ),
 		'section'    => 'bp_nouveau_group_primary_nav',
 		'settings'   => 'bp_nouveau_appearance[group_nav_tabs]',
 		'type'       => 'checkbox',
