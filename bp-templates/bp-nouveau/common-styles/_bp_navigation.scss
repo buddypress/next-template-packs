@@ -131,8 +131,8 @@
 			li.current {
 
 				a {
-					background: $dark-grey;
-					color: $white;
+					background: $white;
+					color: $black;
 					text-decoration: underline;
 				}
 			}
@@ -159,8 +159,8 @@
 		li.current {
 
 			a {
-				background-color: lighten($dark-grey, 10%);
-				color: $off-white;
+				background: $white;
+				color: $black;
 			}
 		}
 	}
@@ -219,6 +219,12 @@
 				a {
 
 					@include font-size(14);
+				}
+
+				&.selected a,
+				&.current a {
+					background: $dark-grey;
+					color: $white;
 				}
 			}
 		}
@@ -304,7 +310,7 @@
 					color: $white;
 				}
 			}
-		} // li
+		}
 
 		li {
 
@@ -395,10 +401,6 @@
 .buddypress_object_nav {
 
 	.bp-navs {
-
-		ul {
-			// yes it's empty, I know that!
-		}
 
 		li {
 

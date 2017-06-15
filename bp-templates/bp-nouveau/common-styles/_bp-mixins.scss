@@ -389,10 +389,12 @@
 			a {
 				background: none;
 				color: $black;
+				font-weight: 600;
 
-				span:focus,
-				span:hover {
-					border: 1px solid $black;
+				span {
+					background: $dark-grey;
+					border: 1px solid $med-light-grey;
+					color: $white;
 				}
 			}
 		}
