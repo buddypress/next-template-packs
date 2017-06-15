@@ -73,7 +73,7 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-filters">
-	<li class="user-messages-bulk-actions"></div>
+	<li class="user-messages-bulk-actions"></li>
 	<li class="user-messages-search" role="search" data-bp-search="{{data.box}}">
 		<div class="bp-search messages-search">
 			<form action="" method="get" id="user_messages_search_form" class="bp-messages-search-form" data-bp-search="messages">
