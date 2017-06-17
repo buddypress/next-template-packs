@@ -223,7 +223,7 @@
 	<div class="message-metadata">
 		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
-		<a href="{{data.sender_link}}" title="{{data.sender_name}}" class="user-link">
+		<a href="{{data.sender_link}}" class="user-link">
 			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
