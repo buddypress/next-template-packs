@@ -719,7 +719,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'id'               => '',
 					'class'            => 'button accept group-button accept-invite',
 					'rel'              => '',
-					'title'            => '',
 				 ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
@@ -747,7 +746,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'id'               => '',
 					'class'            => 'button reject group-button reject-invite',
 					'rel'              => '',
-					'title'            => '',
 				 ),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
 			);
@@ -778,7 +776,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'id'               => '',
 					'class'            => 'button',
 					'rel'              => '',
-					'title'            => '',
 				 ),
 				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
 			);
@@ -805,7 +802,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'id'               => '',
 					'class'            => 'button',
 					'rel'              => '',
-					'title'            => '',
 					),
 				'link_text'         => __( 'Reject', 'bp-nouveau' ),
 			);
