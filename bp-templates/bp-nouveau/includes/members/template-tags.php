@@ -296,9 +296,9 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
-							'class'            => 'button accept',
+							'class'            => 'button accept bp-tooltip',
 							'rel'              => '',
-							'title'            => __( 'Accept', 'bp-nouveau' ),
+							'data-bp-tooltip'  => __( 'Accept', 'bp-nouveau' ),
 							),
 						'link_text'         => __( 'Accept', 'bp-nouveau' ),
 					), 'reject_friendship' => array(
@@ -313,9 +313,9 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
-							'class'            => 'button reject',
+							'class'            => 'button reject bp-tooltip',
 							'rel'              => '',
-							'title'            => __( 'Reject', 'bp-nouveau' ),
+							'data-bp-tooltip'  => __( 'Reject', 'bp-nouveau' ),
 							),
 						'link_text'         => __( 'Reject', 'bp-nouveau' ),
 					),
