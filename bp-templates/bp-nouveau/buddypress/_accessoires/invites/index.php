@@ -60,13 +60,13 @@
 
 	<div class="action">
 		<# if ( undefined === data.is_sent || ( false === data.is_sent && true === data.can_edit ) ) { #>
-			<button type="button" class="button invite-button group-add-remove-invite-button bp-icons" title="<?php esc_attr_e( 'Invite / Uninvite', 'bp-nouveau' );?>">
+			<button type="button" class="button invite-button group-add-remove-invite-button bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'Invite / Uninvite', 'bp-nouveau' );?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Invite/Uninvite', 'bp-nouveau' );?></span>
 			</button>
 		<# } #>
 
 		<# if ( undefined !== data.can_edit && true === data.can_edit ) { #>
-			<button type="button" class="button invite-button group-remove-invite-button bp-icons" title="<?php esc_attr_e( 'Remove', 'bp-nouveau' );?>">
+			<button type="button" class="button invite-button group-remove-invite-button bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'Remove', 'bp-nouveau' );?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove', 'bp-nouveau' );?></span>
 			</button>
 		<# } #>
