@@ -41,7 +41,7 @@
 					<ul class="group-inviters">
 						<li><?php esc_html_e( 'Invited by:', 'bp-nouveau' ); ?></li>
 						<# for ( i in data.invited_by ) { #>
-							<li><a href="{{data.invited_by[i].user_link}}" title="{{data.invited_by[i].user_name}}"><img src="{{data.invited_by[i].avatar}}" width="30px" class="avatar mini"></a></li>
+							<li><a href="{{data.invited_by[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.invited_by[i].user_name}}"><img src="{{data.invited_by[i].avatar}}" width="30px" class="avatar mini"></a></li>
 						<# } #>
 					</ul>
 				<# } #>
