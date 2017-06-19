@@ -1367,11 +1367,13 @@ function bp_nouveau_buddypress_classes() {
 			$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 
 			if ( ! empty( $layout_prefs ) && (int) $layout_prefs === 1 && ( bp_is_user() || bp_is_group() ) ) {
-				$classes[] = 'bp-vertical-nav';
+				$classes[] = 'bp-single-vert-nav';
+				$classes[] = 'bp-vertical-navs';
 			}
 
 			if ( ! empty( $layout_prefs ) && bp_is_directory() ) {
 				$classes[] = 'bp-dir-vert-nav';
+				$classes[] = 'bp-vertical-navs';
 				$bp_nouveau->{$component}->directory_vertical_layout = $layout_prefs;
 			}
 		}
