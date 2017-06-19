@@ -358,7 +358,7 @@
 
 @include medium-up() {
 
-	.bp-vertical-nav { // described for the #buddypress element
+	.bp-single-vert-nav { // described for the #buddypress element
 
 		.vertical {
 			overflow: visible;
@@ -534,8 +534,7 @@
 
 	.buddypress-wrap {
 
-		&.bp-dir-vert-nav,
-		&.bp-vertical-nav {
+		&.bp-vertical-navs {
 
 			.dir-navs.activity-nav-tabs,
 			.dir-navs.sites-nav-tabs,

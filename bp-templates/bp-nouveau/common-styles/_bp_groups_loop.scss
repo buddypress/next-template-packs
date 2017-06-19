@@ -103,8 +103,7 @@
 
 	.buddypress { // body class
 
-		.bp-dir-vert-nav,
-		.bp-vertical-nav {
+		.bp-vertical-navs {
 
 			.groups-list {
 
@@ -113,6 +112,6 @@
 					width: 15%;
 				}
 			}
-		} // close bp-dir-vert-nav / .bp-vertical-nav
-	} // close .buddypress
+		}
+	}
 }

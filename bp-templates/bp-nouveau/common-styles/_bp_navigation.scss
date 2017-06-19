@@ -169,7 +169,7 @@
 
 // visual styling of default single navs - adds background/padding to
 // the parent elements if vertical nav not selected
-.buddypress-wrap:not(.bp-vertical-nav) {
+.buddypress-wrap:not(.bp-single-vert-nav) {
 
 	@include medium-max {
 
@@ -199,8 +199,7 @@
 
 // massage link padding
 
-.buddypress-wrap:not(.bp-vertical-nav),
-.buddypress-wrap:not(.bp-dir-vert-nav) {
+.buddypress-wrap:not(.bp-vertical-navs) {
 
 	.main-navs {
 
