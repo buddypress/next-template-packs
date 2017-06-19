@@ -4541,7 +4541,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		border-left: 1px solid #d6d6d6;
 		margin-left: 20%;
 		overflow: hidden;
-		padding-left: 1em;
+		padding: 0 0 2em 1em;
 	}
 	.bp-dir-vert-nav .screen-content .subnav-filters {
 		margin-top: 0;

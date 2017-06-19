@@ -518,7 +518,7 @@
 			border-left: 1px solid $med-light-grey;
 			margin-left: 20%;
 			overflow: hidden;
-			padding-left: $pad-med;
+			padding: 0 0 $pad-lrg $pad-med;
 
 			.subnav-filters {
 				margin-top: 0;
