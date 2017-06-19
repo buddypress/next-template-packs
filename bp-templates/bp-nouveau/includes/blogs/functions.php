@@ -18,7 +18,6 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
 		'li_class'  => array( 'selected' ),
 		'link'      => bp_get_root_domain() . '/' . bp_get_blogs_root_slug(),
-		'title'     => __( 'The public sites of this network.', 'bp-nouveau' ),
 		'text'      => __( 'All Sites', 'bp-nouveau' ),
 		'count'     => bp_get_total_blog_count(),
 		'position'  => 5,
@@ -35,7 +34,6 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array(),
 				'link'      => bp_loggedin_user_domain() . bp_get_blogs_slug(),
-				'title'     => __( 'The sites I\'m a contributor of.', 'bp-nouveau' ),
 				'text'      => __( 'My Sites', 'bp-nouveau' ),
 				'count'     => $my_blogs_count,
 				'position'  => 15,
@@ -49,7 +47,6 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 				'slug'      => 'create', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'no-ajax', 'site-create', 'create-button' ),
 				'link'      => trailingslashit( bp_get_blogs_directory_permalink() . 'create' ),
-				'title'     => __( 'Create a Site', 'bp-nouveau' ),
 				'text'      => __( 'Create a Site', 'bp-nouveau' ),
 				'count'     => false,
 				'position'  => 999,
