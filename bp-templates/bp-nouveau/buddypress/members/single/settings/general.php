@@ -22,7 +22,7 @@ bp_nouveau_member_hook( 'before', 'settings_template' ); ?>
 	<?php if ( !is_super_admin() ) : ?>
 
 		<label for="pwd"><?php _e( 'Current Password <span>(required to update email or change current password)</span>', 'bp-nouveau' ); ?></label>
-		<input type="password" name="pwd" id="pwd" size="16" value="" class="settings-input small" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<a href="<?php echo wp_lostpassword_url(); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'bp-nouveau' ); ?>"><?php _e( 'Lost your password?', 'bp-nouveau' ); ?></a>
+		<input type="password" name="pwd" id="pwd" size="16" value="" class="settings-input small" <?php bp_form_field_attributes( 'password' ); ?>/> &nbsp;<a href="<?php echo wp_lostpassword_url(); ?>"><?php _e( 'Lost your password?', 'bp-nouveau' ); ?></a>
 
 	<?php endif; ?>
 
