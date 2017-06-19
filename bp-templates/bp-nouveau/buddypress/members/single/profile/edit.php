@@ -30,12 +30,14 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 
 			<div<?php bp_field_css_class( 'editfield' ); ?>>
 
-				<?php if( bp_get_the_profile_field_description() ) : ?>
-					<p class="description bp-feedback info small">
-						<span class="bp-icon" aria-hidden="true"></span>
-						<span class="text"><?php bp_the_profile_field_description(); ?></span>
+			<?php if( bp_get_the_profile_field_description() ) : ?>
+				<div class="bp-feedback bp-mesages info description">
+					<span class="bp-icon" aria-hidden="true"></span>
+					<p class="text">
+						<?php bp_the_profile_field_description(); ?>
 					</p>
-				<?php endif; ?>
+				</div>
+			<?php endif; ?>
 
 				<?php
 				$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );

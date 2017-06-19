@@ -8,7 +8,7 @@
  */
 ?>
 <div class="<?php bp_nouveau_template_message_classes(); ?>">
-
+	<span class="bp-icon" aria-hidden="true"></span>
 	<?php bp_nouveau_template_message(); ?>
 
 	<?php if ( bp_nouveau_has_dismiss_button() ) : ?>

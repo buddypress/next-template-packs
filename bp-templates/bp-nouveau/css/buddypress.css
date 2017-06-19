@@ -2516,7 +2516,6 @@ body.no-js .buddypress-wrap .field-visibility-settings {
 .buddypress-wrap .standard-form .description {
 	background: #fafafa;
 	font-size: inherit;
-	padding: 0.5em;
 }
 
 .buddypress-wrap .standard-form .field-visibility-settings legend,
@@ -3870,18 +3869,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	color: #b71717;
 }
 
-.buddypress-wrap .bp-help-text {
-	background: #fafafa;
-	font-style: italic;
-	margin: 10px 0;
-	padding: 0.5em;
-}
-
 .buddypress-wrap .bp-messages {
 	margin: 0 0 15px;
 }
 
-.buddypress-wrap .bp-messages p,
 .buddypress-wrap .bp-messages .sitewide-notices {
 	display: block;
 	margin: 5px;
@@ -3948,7 +3939,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap .bp-feedback p {
-	margin: 10px 0 0;
+	margin: 0;
 }
 
 .buddypress-wrap .bp-feedback span.bp-icon {
@@ -3956,14 +3947,19 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: block;
 	font-family: dashicons;
 	left: 0;
+	margin-right: 10px;
 	position: relative;
 	padding: 0  0.5em;
 }
 
-.buddypress-wrap .bp-feedback span.bp-help-text,
-.buddypress-wrap .bp-feedback span.text {
+.buddypress-wrap .bp-feedback .bp-help-text {
+	font-style: italic;
+}
+
+.buddypress-wrap .bp-feedback .text {
+	font-size: 14px;
 	margin: 0;
-	padding: 0 0 0 1em;
+	padding: 0.5em 0;
 }
 
 .buddypress-wrap .bp-feedback.no-icon {
@@ -3998,9 +3994,26 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background-color: transparent;
 }
 
+.buddypress-wrap .bp-feedback p {
+	margin: 0;
+}
+
+.buddypress-wrap .bp-feedback .bp-icon {
+	font-size: 20px;
+	padding: 0 2px;
+}
+
 .buddypress-wrap .bp-feedback.info .bp-icon,
 .buddypress-wrap .bp-feedback.help .bp-icon {
 	background-color: #38a;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
 }
 
 .buddypress-wrap .bp-feedback.info .bp-icon:before,
