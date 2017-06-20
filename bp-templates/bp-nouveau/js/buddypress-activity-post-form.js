@@ -529,7 +529,7 @@ window.bp = window.bp || {};
 			var reset = new bp.Views.ActivityInput( {
 				type  : 'reset',
 				id    : 'aw-whats-new-reset',
-				className : 'button',
+				className : 'text-button small',
 				value : 'Cancel'
 			} );
 
