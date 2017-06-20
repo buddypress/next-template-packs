@@ -77,6 +77,7 @@ function bp_nouveau_sitewide_notices() {
 			<aside class="bp-sitewide-notice info" rel="n-<?php echo esc_attr( $notice->id ); ?>">
 				<strong class="subject"><?php echo stripslashes( wp_filter_kses( $notice->subject ) ) ?></strong>
 				<?php echo stripslashes( wpautop( wp_filter_kses( $notice->message ) ) ) ?>
+				 <button type="button" class="close-notice bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Dismiss this notice', 'buddypress' ) ?>"><span class="bp-screen-reader-text"><?php _e( 'Dismiss this notice', 'buddypress' ) ?>"></span> <span aria-hidden="true">&Chi;</span></button>
 			</aside>
 			<?php
 
