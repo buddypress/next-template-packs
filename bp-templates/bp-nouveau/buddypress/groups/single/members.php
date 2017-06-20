@@ -11,9 +11,7 @@
 
 	<div class="subnav-filters filters clearfix">
 
-		<ul>
 			<?php bp_nouveau_search_form(); ?>
-		</ul>
 
 		<?php bp_get_template_part('common/filters/groups-screens-filters'); ?>
 

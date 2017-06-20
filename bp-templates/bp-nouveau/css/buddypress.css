@@ -639,8 +639,13 @@ dt.section-title {
 	margin: 0;
 }
 
-.buddypress-wrap .subnav-filters.bp-messages-filters ul {
+.buddypress-wrap .subnav-filters > ul {
+	float: left;
 	list-style: none;
+}
+
+.buddypress-wrap .subnav-filters.bp-messages-filters ul {
+	width: 100%;
 }
 
 @media screen and (max-width: 46.8em) {
