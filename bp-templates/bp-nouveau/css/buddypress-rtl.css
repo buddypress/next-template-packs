@@ -308,7 +308,7 @@ dt.section-title {
 	border-radius: 50%;
 	color: #555;
 	display: inline;
-	font-size: 70%;
+	font-size: 12px;
 	margin-right: 2px;
 	padding: 3px 6px;
 	text-align: center;
@@ -548,7 +548,6 @@ dt.section-title {
 	}
 	.bp-dir-vert-nav .bp-navs.dir-navs a span {
 		float: left;
-		padding: 3px 8px;
 	}
 }
 
@@ -4541,7 +4540,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		border-right: 1px solid #d6d6d6;
 		margin-right: 20%;
 		overflow: hidden;
-		padding-right: 1em;
+		padding: 0 1em 2em 0;
 	}
 	.bp-dir-vert-nav .screen-content .subnav-filters {
 		margin-top: 0;

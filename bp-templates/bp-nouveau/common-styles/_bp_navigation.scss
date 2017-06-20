@@ -38,7 +38,8 @@
 				border-radius: 50%;
 				color: $meta-text-dark;
 				display: inline;
-				font-size: 70%;
+
+				@include font-size(12);
 				margin-left: 2px;
 				padding: 3px 6px;
 				text-align: center;
@@ -478,7 +479,7 @@
 
 				span {
 					float: right;
-					padding: 3px 8px;
+
 				}
 			}
 		}

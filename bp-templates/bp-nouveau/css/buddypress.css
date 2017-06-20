@@ -308,7 +308,7 @@ dt.section-title {
 	border-radius: 50%;
 	color: #555;
 	display: inline;
-	font-size: 70%;
+	font-size: 12px;
 	margin-left: 2px;
 	padding: 3px 6px;
 	text-align: center;
@@ -548,7 +548,6 @@ dt.section-title {
 	}
 	.bp-dir-vert-nav .bp-navs.dir-navs a span {
 		float: right;
-		padding: 3px 8px;
 	}
 }
 
