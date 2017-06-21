@@ -6,6 +6,8 @@
 	}
 
 	.bp-messages {
+		border: 1px solid $bp-border-dark;
+
 		margin: 0 0 $marg-med;
 
 		.sitewide-notices {
@@ -41,19 +43,6 @@
 		//		}
 
 	} // close .bp-messages
-
-	.bp-sitewide-notice {
-		border: 1px solid $bp-border-dark;
-
-		@include box-shadow( 0 0 2px 0 $med-light-grey);
-		margin: $marg-med 0;
-		padding: $pad-sml;
-
-		p {
-			margin: $pad-sml 0;
-		}
-	}
-
 
 	// This is an anomaly, this screen message is locked away in
 	// core avatar styles and ought to be pulled out, markup & styles to nouveau

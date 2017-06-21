@@ -7,7 +7,7 @@
  * @package BP Nouveau
  */
 ?>
-<div class="<?php bp_nouveau_template_message_classes(); ?>">
+<aside class="<?php bp_nouveau_template_message_classes(); ?>">
 	<span class="bp-icon" aria-hidden="true"></span>
 	<?php bp_nouveau_template_message(); ?>
 
@@ -16,4 +16,4 @@
 		<button type="button" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Close', 'bp-nouveau'); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'bp-nouveau'); ?>" data-bp-close="<?php bp_nouveau_dismiss_button_type(); ?>"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span></button>
 
 	<?php endif ; ?>
-</div>
+</aside>

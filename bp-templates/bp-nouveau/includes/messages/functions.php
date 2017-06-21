@@ -251,6 +251,50 @@ function bp_nouveau_unregister_notices_widget() {
 	unregister_widget( 'BP_Messages_Sitewide_Notices_Widget' );
 }
 
+/**
+ * Add active sitewide notices to the BP template_message global.
+ *
+ * @since  1.0.0
+ */
+function bp_nouveau_push_sitewide_notices() {
+	// Do not show notices if user is not logged in.
+	if ( ! is_user_logged_in() || ! bp_is_my_profile() ) {
+		return;
+	}
+
+	$notice = BP_Messages_Notice::get_active();
+
+	if ( empty( $notice ) ) {
+		return false;
+	}
+
+	$user_id = bp_loggedin_user_id();
+
+	$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
+
+	if ( empty( $closed_notices ) ) {
+		$closed_notices = array();
+	}
+
+	if ( $notice->id && is_array( $closed_notices ) && ! in_array( $notice->id, $closed_notices ) ) {
+		/*
+		 * Inject the notice into the template_message if no other message
+		 * has priority.
+		 */
+		$bp = buddypress();
+
+		if ( empty( $bp->template_message ) ) {
+			$message = sprintf( '<strong class="subject">%s</strong>
+				%s',
+				stripslashes( $notice->subject ),
+				stripslashes( $notice->message )
+			);
+			$bp->template_message = $message;
+			$bp->template_message_type = 'bp-sitewide-notice';
+		}
+	}
+}
+
 function bp_nouveau_mce_buttons( $buttons = array() ) {
 	$remove_buttons = array(
 		'wp_more',

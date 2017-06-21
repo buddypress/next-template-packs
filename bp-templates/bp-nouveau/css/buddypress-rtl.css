@@ -3888,6 +3888,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap .bp-messages {
+	border: 1px solid #ccc;
 	margin: 0 0 15px;
 }
 
@@ -3904,19 +3905,6 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .bp-messages.updated {
 	clear: both;
 	display: block;
-}
-
-.buddypress-wrap .bp-sitewide-notice {
-	border: 1px solid #ccc;
-	-webkit-box-shadow: 0 0 2px 0 #d6d6d6;
-	-moz-box-shadow: 0 0 2px 0 #d6d6d6;
-	box-shadow: 0 0 2px 0 #d6d6d6;
-	margin: 15px 0;
-	padding: 0.5em;
-}
-
-.buddypress-wrap .bp-sitewide-notice p {
-	margin: 0.5em 0;
 }
 
 .buddypress-wrap #group-create-body .bp-cover-image-status p.warning {
