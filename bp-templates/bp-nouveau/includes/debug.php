@@ -248,7 +248,8 @@ function bp_nouveau_get_forsaken_hooks() {
  *
  * @since 1.0.0
  *
- * @return string HTML Output
+ * @param  array $retval Current JS properties.
+ * @return array
  */
 add_filter( 'bp_core_get_js_strings', function( $retval ) {
 	// Get The forsaken hooks.
