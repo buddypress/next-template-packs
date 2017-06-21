@@ -7,7 +7,7 @@
  * @package BP Nouveau
  */
 ?>
-<div class="<?php bp_nouveau_template_message_classes(); ?>">
+<aside class="<?php bp_nouveau_template_message_classes(); ?>">
 
 	<?php bp_nouveau_template_message(); ?>
 
@@ -16,4 +16,4 @@
 		<button type="button" title="close" data-bp-close="<?php bp_nouveau_dismiss_button_type(); ?>"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span></button>
 
 	<?php endif ; ?>
-</div>
+</aside>
