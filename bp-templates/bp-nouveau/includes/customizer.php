@@ -15,8 +15,12 @@
  * @param WP_Customize_Manager $wp_customize WordPress customizer.
  */
 function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
+	if ( ! bp_is_root_blog() ) {
+		return;
+	}
+
 	// include the Customizer control.
-	require_once( bp_nouveau()->includes_dir . 'customizer-controls.php' );
+	require_once( trailingslashit( bp_nouveau()->includes_dir ) . 'customizer-controls.php' );
 
 	// Add it to control types
 	$wp_customize->register_control_type( 'BP_Nouveau_Nav_Customize_Control' );
@@ -262,37 +266,37 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),
 		'act_dir_layout' => array(
-			'label'      => __( 'Set Activity dir nav to column:', 'bp-nouveau' ),
+			'label'      => __( 'Set Activity dir nav to column.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[activity_dir_layout]',
 			'type'       => 'checkbox',
 		),
 		'act_dir_tabs' => array(
-			'label'      => __( 'Set Activity nav to tab style:', 'bp-nouveau' ),
+			'label'      => __( 'Set Activity nav to tab style.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[activity_dir_tabs]',
 			'type'       => 'checkbox',
 		),
 		'members_dir_layout' => array(
-			'label'      => __( 'Set Members dir nav to column:', 'bp-nouveau' ),
+			'label'      => __( 'Set Members dir nav to column.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[members_dir_layout]',
 			'type'       => 'checkbox',
 		),
 		'members_dir_tabs' => array(
-			'label'      => __( 'Set Members nav to tab style:', 'bp-nouveau' ),
+			'label'      => __( 'Set Members nav to tab style.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[members_dir_tabs]',
 			'type'       => 'checkbox',
 		),
 		'group_dir_layout' => array(
-			'label'      => __( 'Set Groups dir nav to column:', 'bp-nouveau' ),
+			'label'      => __( 'Set Groups dir nav to column.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[groups_dir_layout]',
 			'type'       => 'checkbox',
 		),
 		'group_dir_tabs' => array(
-			'label'      => __( 'Set Groups nav to tab style:', 'bp-nouveau' ),
+			'label'      => __( 'Set Groups nav to tab style.', 'bp-nouveau' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[groups_dir_tabs]',
 			'type'       => 'checkbox',
