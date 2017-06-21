@@ -38,7 +38,8 @@
 				border-radius: 50%;
 				color: $meta-text-dark;
 				display: inline;
-				font-size: 70%;
+
+				@include font-size(12);
 				margin-left: 2px;
 				padding: 3px 6px;
 				text-align: center;
@@ -131,9 +132,9 @@
 			li.current {
 
 				a {
-					background: $dark-grey;
-					color: $white;
-					text-decoration: underline;
+					background: $white;
+					color: $black;
+					font-weight: 600;
 				}
 			}
 		}
@@ -159,8 +160,9 @@
 		li.current {
 
 			a {
-				background-color: lighten($dark-grey, 10%);
-				color: $off-white;
+				background: $white;
+				color: $black;
+				font-weight: 600;
 			}
 		}
 	}
@@ -168,7 +170,7 @@
 
 // visual styling of default single navs - adds background/padding to
 // the parent elements if vertical nav not selected
-.buddypress-wrap:not(.bp-vertical-nav) {
+.buddypress-wrap:not(.bp-single-vert-nav) {
 
 	@include medium-max {
 
@@ -182,8 +184,11 @@
 
 	.main-navs {
 
-		> ul > li > a {
-			padding: $pad-sml calc(0.5em + 2px);
+		> ul > li {
+
+			> a {
+				padding: $pad-sml calc(0.5em + 2px);
+			}
 		}
 	}
 
@@ -193,32 +198,18 @@
 	}
 }
 
-// Single screens object navs
-// Adjusts visual styling for small screens only
+// massage link padding
 
-@include medium-max {
+.buddypress-wrap:not(.bp-vertical-navs) {
 
-	.buddypress-wrap {
+	.main-navs {
 
-		.single-screen-navs {
-			border: 1px solid #eee;
+		@include medium-up {
 
-			li {
-				border-bottom: 1px solid #eee;
-
-				&:last-child {
-					border-bottom: none;
-				}
-			}
-		}
-
-		.bp-subnavs {
-
-			li {
+			> ul > li:first-child {
 
 				a {
-
-					@include font-size(14);
+					padding-left: 0;
 				}
 			}
 		}
@@ -242,6 +233,27 @@
 
 			li {
 				margin-top: 0;
+
+				&.selected,
+				&.current {
+
+					:focus,
+					:hover {
+						background: none;
+						color: $black;
+					}
+				}
+
+			}
+
+			@include medium-up {
+
+				li:first-child {
+
+					a {
+						padding-left: 0;
+					}
+				}
 			}
 		}
 	}
@@ -263,6 +275,49 @@
 	}
 
 } // close .buddypress-wrap
+
+// Single screens object navs
+// Adjusts visual styling for small screens only
+
+@include medium-max {
+
+	.buddypress-wrap {
+
+		.single-screen-navs {
+			border: 1px solid $bp-border-color;
+
+			li {
+				border-bottom: 1px solid $bp-border-color;
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+
+		.bp-subnavs {
+
+			li {
+
+				a {
+
+					@include font-size(14);
+				}
+
+				&.selected,
+				&.current {
+
+					a,
+					a:focus,
+					a:hover {
+						background: $dark-grey;
+						color: $white;
+					}
+				}
+			}
+		}
+	}
+}
 
 .buddypress_object_nav,
 .buddypress-wrap {
@@ -304,7 +359,7 @@
 					color: $white;
 				}
 			}
-		} // li
+		}
 
 		li {
 
@@ -396,10 +451,6 @@
 
 	.bp-navs {
 
-		ul {
-			// yes it's empty, I know that!
-		}
-
 		li {
 
 			a {
@@ -428,7 +479,7 @@
 
 				span {
 					float: right;
-					padding: 3px 8px;
+
 				}
 			}
 		}

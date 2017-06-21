@@ -22,6 +22,7 @@
 			</div><!-- #item-header-avatar -->
 		<?php endif; ?>
 
+<?php	if ( ! bp_nouveau_groups_front_page_description() ) : ?>
 		<div id="item-header-content">
 
 
@@ -43,6 +44,7 @@
 			<?php bp_nouveau_group_header_buttons(); ?>
 
 		</div><!-- #item-header-content -->
+<?php endif; ?>
 
 		<?php bp_get_template_part('groups/single/parts/header-item-actions'); ?>
 
@@ -51,6 +53,7 @@
 
 </div><!-- #cover-image-container -->
 
+<?php	if ( ! bp_nouveau_groups_front_page_description() ) : ?>
 <?php if( bp_nouveau_group_meta()->description ) { ?>
 	<div class="desc-wrap">
 		<div class="group-description">
@@ -58,3 +61,4 @@
 	</div><!-- //.group_description -->
 </div>
 <?php	} ?>
+<?php endif; ?>

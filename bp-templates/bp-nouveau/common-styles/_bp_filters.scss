@@ -26,10 +26,15 @@
 			margin: 0;
 		}
 
+		> ul {
+			float: left;
+			list-style: none;
+		}
+
 		&.bp-messages-filters {
 
 			ul {
-				list-style: none;
+				width: 100%;
 			}
 
 			@include medium-max {

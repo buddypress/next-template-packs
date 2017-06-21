@@ -18,7 +18,8 @@
 		ul.button-nav:not(.button-tabs) li a,
 		.generic-button a,
 		.comment-reply-link,
-		a.bp-title-button {
+		a.bp-title-button,
+		.activity-read-more a {
 			background: $white; /* Old browsers */
 			border-color: $bp-border-dark;
 			border-style: solid;
@@ -28,7 +29,7 @@
 			font-size: inherit;
 			font-weight: 400;
 			outline: none;
-			padding: 4px 10px;
+			padding: $pad-xsml $pad-sml;
 			text-align: center;
 			text-decoration: none;
 			width: auto;
@@ -62,7 +63,9 @@
 		.generic-button a:focus,
 		.generic-button a:hover,
 		.comment-reply-link:focus,
-		.comment-reply-link:hover {
+		.comment-reply-link:hover,
+		.activity-read-more a:focus,
+		.activity-read-more a:hover {
 			background: $buttons-background;
 			border-color: darken($bp-border-dark, 20%);
 			color: $black;
@@ -99,12 +102,25 @@
 			color: $light-text;
 		}
 
-		// provide a class to style button elements as text only non button.
-		button.text-button {
+		// provide a class to style elements as text only non button.
+		button.text-button,
+		input.text-button {
 			background: none;
 			border: 0;
 
 			@include box-shadow-none();
+			color: $light-text;
+
+			&.small {
+
+				@include font-size(13);
+			}
+
+			&:focus,
+			&:hover {
+				background: none;
+				text-decoration: underline;
+			}
 		}
 
 		.activity-list {
@@ -218,7 +234,6 @@
 				border: 1px solid $bp-border-dark;
 
 				@include border-radius(5px);
-
 				@include box-shadow(inset 0 0 6px 0 $light-grey);
 				margin: 0.2em 0;
 				width: auto;
@@ -261,25 +276,43 @@
 	// buttons that are visually rendering as icons only won't
 	// want the general button styles.
 	// We'll use a class hook to identify those elements.
-	button.bp-icons {
-		background: none;
-		border: 0;
+	button {
 
-		&:focus,
-		&:hover {
+		&.bp-icons,
+		&.ac-reply-cancel {
+
 			background: none;
+			border: 0;
+		}
+
+		&.bp-icons {
+
+			&:focus,
+			&:hover {
+				background: none;
+			}
+		}
+
+		&.ac-reply-cancel {
+
+			&:focus,
+			&:hover {
+				background: none;
+				text-decoration: underline;
+			}
 		}
 	}
 
 	.filter label:before,
 	.feed a:before,
-	.bp-invites-filters  li a.invite-button:before,
-	.bp-messages-filters li a.messages-button:before {
+	.bp-invites-filters  .invite-button:before,
+	.bp-messages-filters li a.messages-button:before,
+	.bp-invites-content li .invite-button:before {
 		font-family: dashicons;
 		font-size: 18px;
 	}
 
-	.bp-invites-content .item-list li a.invite-button:before {
+	.bp-invites-content .item-list li .invite-button:before {
 
 		@include responsive-font(32);
 	}
@@ -312,28 +345,23 @@
 
 	ul.item-list {
 
-		li a.invite-button:not(.group-remove-invite-button):before {
+		li .invite-button:not(.group-remove-invite-button):before {
 			content: "\f502";
 		}
 
-		li.selected a.invite-button:before,
-		li a.group-remove-invite-button:before {
+		li.selected .invite-button:before,
+		li .group-remove-invite-button:before {
 			content: "\f153";
 		}
 	} // close ul.item-list
 
-	.bp-invites-filters ul li a#bp-invites-next-page:before,
-	.bp-messages-filters ul li a#bp-messages-next-page:before {
+	.bp-invites-filters ul li #bp-invites-next-page:before,
+	.bp-messages-filters ul li #bp-messages-next-page:before {
 		content: "\f345";
 	}
 
-	.bp-invites-filters ul li a#bp-invites-prev-page:before,
-	.bp-messages-filters ul li a#bp-messages-prev-page:before {
+	.bp-invites-filters ul li #bp-invites-prev-page:before,
+	.bp-messages-filters ul li #bp-messages-prev-page:before {
 		content: "\f341";
-	}
-
-	.bp-messages-filters ul li a.messages-button.bulk-apply:before {
-		content: "\f147";
-		font-size: 18px;
 	}
 } // close .buddypress-wrap

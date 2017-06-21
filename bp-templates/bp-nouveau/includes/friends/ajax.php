@@ -31,7 +31,7 @@ bp_nouveau_register_ajax_actions( array(
 function bp_nouveau_ajax_addremove_friend() {
 	$response = array(
 		'feedback' => sprintf(
-			'<div class="feedback error bp-ajax-message"><p>%s</p></div>',
+			'<div class="bp-feedback error bp-ajax-message"><p>%s</p></div>',
 			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-nouveau' )
 		)
 	);

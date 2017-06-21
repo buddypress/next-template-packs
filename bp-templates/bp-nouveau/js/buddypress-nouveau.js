@@ -1,4 +1,6 @@
-/* global wp, bp, BP_Nouveau */
+/* global wp, bp, BP_Nouveau, JSON */
+/* jshint devel: true */
+/* jshint browser: true */
 window.wp = window.wp || {};
 window.bp = window.bp || {};
 
@@ -44,7 +46,7 @@ window.bp = window.bp || {};
 			this.ajax_request           = null;
 
 			// Object Globals
-			this.objects                = $.map( BP_Nouveau.objects, function( value, key ) { return value; } );
+			this.objects                = $.map( BP_Nouveau.objects, function( value ) { return value; } );
 			this.objectNavParent        = BP_Nouveau.object_nav_parent;
 			this.time_since             = BP_Nouveau.time_since;
 
@@ -137,6 +139,7 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		getLinkParams: function( url, param ) {
+			var qs;
 			if ( url ) {
 				qs = ( -1 !== url.indexOf( '?' ) ) ? '?' + url.split( '?' )[1] : '';
 			} else {
@@ -694,9 +697,9 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		buttonAction: function( event ) {
-			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ),
-				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ),
-				object = item.data( 'bp-item-component' );
+			var self = event.data, target = $( event.currentTarget ), action = target.data( 'bp-btn-action' ), nonceUrl = target.data( 'bp-nonce' ),
+				item = target.closest( '[data-bp-item-id]' ), item_id = item.data( 'bp-item-id' ), item_inner = target.closest('.list-wrap'),
+				object = item.data( 'bp-item-component' ), nonce = '';
 
 			// Simply let the event fire if we don't have needed values
 			if ( ! action || ! item_id || ! object ) {
@@ -706,8 +709,19 @@ window.bp = window.bp || {};
 			// Stop event propagation
 			event.preventDefault();
 
-			if ( ( undefined !== BP_Nouveau[ action + '_confirm'] && false === confirm( BP_Nouveau[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
+			if ( ( undefined !== BP_Nouveau[ action + '_confirm'] && false === window.confirm( BP_Nouveau[ action + '_confirm'] ) ) || target.hasClass( 'pending' ) ) {
 				return false;
+			}
+
+			// Find the required wpnonce string.
+			// if  button element set we'll have our nonce set on a data attr
+			// Check the value & if exists split the string to obtain the nonce string
+			// if no value, i.e false, null then the href attr is used.
+			if ( nonceUrl ) {
+				nonce = nonceUrl.split('?_wpnonce=');
+				nonce = nonce[1];
+			} else {
+				nonce = self.getLinkParams( target.prop( 'href' ), '_wpnonce' );
 			}
 
 			// Unforunately unlike groups
@@ -731,12 +745,12 @@ window.bp = window.bp || {};
 			self.ajax( {
 				action   : object + '_' + action,
 				item_id  : item_id,
-				_wpnonce : self.getLinkParams( target.prop( 'href' ), '_wpnonce' )
+				_wpnonce : nonce
 			}, object ).done( function( response ) {
 				if ( false === response.success ) {
-					item.prepend( response.data.feedback );
+					item_inner.prepend( response.data.feedback );
 					target.removeClass( 'pending loading' );
-					item.find( '.bp-feedback' ).fadeOut( 2500 );
+					item.find( '.bp-feedback' ).fadeOut( 6000 );
 				} else {
 					// Specific cases for groups
 					if ( 'groups' === object ) {
@@ -805,7 +819,7 @@ window.bp = window.bp || {};
 
 		paginateAction: function( event ) {
 			var self  = event.data, navLink = $( event.currentTarget ), pagArg,
-			    scope = null, object, filter = null, search_terms = null, extras = null;
+			    scope = null, object, objectData, filter = null, search_terms = null, extras = null;
 
 			pagArg = navLink.closest( '[data-bp-pagination]' ).data( 'bp-pagination' ) || null;
 

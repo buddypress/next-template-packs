@@ -10,13 +10,13 @@
 
 <?php if ( bp_core_can_edit_settings() ) : ?>
 
-	<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation">
+	<nav class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Settings menu', 'buddypress' ); ?>">
 		<ul class="subnav">
 
 			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 		</ul>
-	</div>
+	</nav>
 
 <?php endif;
 

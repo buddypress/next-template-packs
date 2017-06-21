@@ -1,11 +1,12 @@
 // BP Directory Search elements
 
-.buddypress-wrap {
+.buddypress-wrap { // the ID is required to add weight to rules
 
 	@include clearfix-element(".bp-dir-search-form, .bp-messages-search-form");
 
 	form.bp-dir-search-form,
-	form.bp-messages-search-form {
+	form.bp-messages-search-form,
+	form.bp-invites-search-form {
 		border: 1px solid $bp-border-color;
 
 		label {
@@ -15,6 +16,7 @@
 		input[type="search"],
 		input[type="text"],
 		button[type="submit"] {
+			background: none;
 			border: 0;
 
 			@include border-radius(0);

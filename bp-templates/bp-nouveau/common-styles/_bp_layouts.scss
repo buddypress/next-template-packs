@@ -316,6 +316,11 @@
 					margin: $marg-xsml 0 0;
 					text-align: center;
 					width: 100%;
+
+					a,
+					button {
+						width: 100%;
+					}
 				}
 			}
 
@@ -353,7 +358,7 @@
 
 @include medium-up() {
 
-	.bp-vertical-nav { // described for the #buddypress element
+	.bp-single-vert-nav { // described for the #buddypress element
 
 		.vertical {
 			overflow: visible;
@@ -513,7 +518,7 @@
 			border-left: 1px solid $med-light-grey;
 			margin-left: 20%;
 			overflow: hidden;
-			padding-left: $pad-med;
+			padding: 0 0 $pad-lrg $pad-med;
 
 			.subnav-filters {
 				margin-top: 0;
@@ -527,16 +532,19 @@
 	// N.B This is in addition to the  standalone visual tab style classes
 	// provided so any elements may be styled.
 
-	.buddypress-wrap.bp-dir-vert-nav {
+	.buddypress-wrap {
 
-		.dir-navs.activity-nav-tabs,
-		.dir-navs.sites-nav-tabs,
-		.dir-navs.groups-nav-tabs,
-		.dir-navs.members-nav-tabs,
-		.main-navs.user-nav-tabs,
-		.main-navs.group-nav-tabs {
+		&.bp-vertical-navs {
 
-			@include primary-navs-vert-tabs();
+			.dir-navs.activity-nav-tabs,
+			.dir-navs.sites-nav-tabs,
+			.dir-navs.groups-nav-tabs,
+			.dir-navs.members-nav-tabs,
+			.main-navs.user-nav-tabs,
+			.main-navs.group-nav-tabs {
+
+				@include primary-navs-vert-tabs();
+			}
 		}
 	}
 

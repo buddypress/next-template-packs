@@ -86,12 +86,12 @@
 
 body.no-js {
 
-	.buddypress .field-visibility-settings-toggle,
-	.buddypress .field-visibility-settings-close {
+	.buddypress-wrap .field-visibility-settings-toggle,
+	.buddypress-wrap .field-visibility-settings-close {
 		display: none;
 	}
 
-	.buddypress .field-visibility-settings {
+	.buddypress-wrap .field-visibility-settings {
 		display: block;
 	}
 }
@@ -99,7 +99,6 @@ body.no-js {
 .buddypress-wrap {
 
 	.field-visibility-settings {
-		display: none;
 		margin: $marg-sml 0;
 	}
 
@@ -110,7 +109,7 @@ body.no-js {
 
 	.field-visibility-settings,
 	.field-visibility-settings-header {
-		color: $light-text;
+		color: $light-text-plus;
 	}
 
 	.field-visibility-settings {
@@ -160,7 +159,6 @@ body.no-js {
 		.description {
 			background: $off-white;
 			font-size: inherit;
-			padding: $pad-sml;
 		}
 
 		.field-visibility-settings legend,

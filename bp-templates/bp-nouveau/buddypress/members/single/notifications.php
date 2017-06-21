@@ -9,13 +9,13 @@
 
 ?>
 
-<div class="bp-navs bp-subnavs user-subnav tabbed-links no-ajax" id="subnav" role="navigation">
+<nav class="bp-navs bp-subnavs user-subnav tabbed-links no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Notifcations menu', 'buddypress' ); ?>">
 	<ul class="button-tabs subnav">
 
 		<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
 
 	</ul>
-</div>
+</nav>
 
 <?php
 switch ( bp_current_action() ) :

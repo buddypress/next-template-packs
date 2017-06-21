@@ -17,7 +17,7 @@ if ( ! bp_nouveau_current_user_can( 'comment_activity' ) || ! bp_activity_can_co
 			<label for="ac-input-<?php bp_activity_id(); ?>" class="bp-screen-reader-text"><?php _e( 'Comment', 'bp-nouveau' ); ?></label>
 			<textarea id="ac-input-<?php bp_activity_id(); ?>" class="ac-input bp-suggestions" name="ac_input_<?php bp_activity_id(); ?>"></textarea>
 		</div>
-		<input type="submit" name="ac_form_submit" value="<?php esc_attr_e( 'Post', 'bp-nouveau' ); ?>" /> &nbsp; <a href="#" class="ac-reply-cancel"><?php _e( 'Cancel', 'bp-nouveau' ); ?></a>
+		<input type="submit" name="ac_form_submit" value="<?php esc_attr_e( 'Post', 'bp-nouveau' ); ?>" /> &nbsp; <button type="button" class="ac-reply-cancel"><?php _e( 'Cancel', 'bp-nouveau' ); ?></button>
 		<input type="hidden" name="comment_form_id" value="<?php bp_activity_id(); ?>" />
 	</div>
 

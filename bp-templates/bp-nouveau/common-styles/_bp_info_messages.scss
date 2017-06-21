@@ -5,17 +5,9 @@
 		color: $warn;
 	}
 
-	.bp-help-text {
-		background: $off-white;
-		font-style: italic;
-		margin: $marg-sml 0;
-		padding: $pad-sml;
-	}
-
 	.bp-messages {
 		margin: 0 0 $marg-med;
 
-		p,
 		.sitewide-notices {
 			display: block;
 			margin: $marg-xsml;
@@ -81,59 +73,98 @@
 
 
 	// message-box() may be have params passed through:
-	// ($background: #fff, $text-color: #000, $border: #eee)
-	// '$border: none' ensures border turned off in favour off
-	// box shadow.
+	// ($background: #fff, $text-color: #000, $border: 1px solid #faf0f0)
+	// '$border: none' ensures border turned off in favour of
+	// box shadow, default is 1px solid.
+	// text-color default value is background color 50% darker.
+	// Border color default is background 10% darker.
 
 	.bp-feedback:not(.custom-homepage-info) {
 
 		@include flex-box-dir();
-
 		@include flex-align();
 	}
 
 	.bp-feedback {
 
-		@include message-box( $border: none);
-
+		@include message-box($border: none);
 		@include box-shadow( 0 1px 1px 1px rgba(0, 0, 0, 0.1) );
+		color: $light-text-plus;
+
 		margin: 10px 0;
 		position: relative;
+
+		p {
+			margin: 0;
+		}
 
 		span.bp-icon {
 			color: $white;
 			display: block;
 			font-family: dashicons;
 			left: 0;
+			margin-right: $marg-sml;
 			position: relative;
 			padding: 0  0.5em;
 		}
 
-		span.bp-help-text,
-		span.text {
-			margin: 0;
-			padding: 0 0 0 1em;
+		.bp-help-text {
+			font-style: italic;
 		}
+
+		.text {
+
+			@include font-size(14);
+			margin: 0;
+			padding: $pad-sml 0;
+		}
+	}
+
+	.bp-feedback.no-icon {
+		padding: $pad-sml;
 	}
 
 	.bp-feedback.small:before {
 		line-height: inherit;
 	}
 
-	.bp-feedback.small span.text {
-		//		display: inline-block;
-		//		margin-left: 30px;
-	}
-
-	a[data-bp-close] span:before {
+	a[data-bp-close] span:before,
+	button[data-bp-close] span:before {
 		font-size: 32px;
 	}
 
-	a[data-bp-close] {
+	a[data-bp-close],
+	button[data-bp-close] {
+		border: 0;
 		position: absolute;
 		top: 10px;
 		right: 10px;
 		width: 32px;
+	}
+
+	.bp-feedback.no-icon {
+
+		a[data-bp-close],
+		button[data-bp-close] {
+			top: -6px;
+			right: 6px;
+		}
+	}
+
+	button[data-bp-close]:hover {
+		background-color: transparent;
+	}
+
+	.bp-feedback {
+
+		p {
+			margin: 0;
+		}
+
+		.bp-icon {
+			font-size: 20px;
+			padding: 0 2px;
+		}
 	}
 
 	.bp-feedback.info,
@@ -141,6 +172,8 @@
 
 		.bp-icon {
 			background-color: $informational;
+
+			@include center-vert();
 
 			&:before {
 				content: "\f348";
@@ -237,6 +270,28 @@
 	.reject {
 		float: left;
 		margin-left: $marg-sml;
+	}
+
+	// .bp-feedback messages  - Ajax specific (.bp-ajax-message)
+
+	// Members action button errors in grid layouts
+
+	.members-list.grid { // this probably ought to serve the group loop too
+
+		.bp-ajax-message {
+			background: rgba($white, 0.9);
+			border: 1px solid $bp-border-color;
+
+			@include font-size(14);
+			left: 2%;
+
+			// postion absolute to prevent the element from expanding
+			// content height & breaking grid box heights.
+			position: absolute;
+			padding: $pad-sml $pad-med;
+			right: 2%;
+			top: 30px;
+		}
 	}
 
 } // close .buddypress-wrap

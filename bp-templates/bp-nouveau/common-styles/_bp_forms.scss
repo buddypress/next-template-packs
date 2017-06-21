@@ -226,6 +226,15 @@
 
 		} // close @media
 
+		// In tables elements like checkboxes best aligned to middle
+		// remove margins in these cases.
+		.bp-tables-user {
+
+			label {
+				margin: 0;
+			}
+		}
+
 	} // close .standard-form
 
 	// Register page
@@ -294,6 +303,7 @@ body.no-js {
 			appearance: none;
 			border: 0;
 			cursor: pointer;
+			margin-right: -25px;
 			padding: 6px 25px 6px $marg-sml;
 			position: relative;
 			text-indent: -2px;
@@ -310,7 +320,6 @@ body.no-js {
 		span.select-arrow {
 			display: inline-block;
 			position: relative;
-			margin-left: -25px;
 			z-index: 0;
 
 			&:before {

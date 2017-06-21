@@ -36,7 +36,7 @@ bp_nouveau_before_loop(); ?>
 
 					<div class="item-block">
 
-						<h2 class="list-title groups-title"><a href="<?php bp_group_permalink(); ?>"><?php bp_group_name(); ?></a></h2>
+						<h2 class="list-title groups-title"><?php bp_group_link(); ?></h2>
 
 						<?php if ( bp_nouveau_group_has_meta() ) : ?>
 

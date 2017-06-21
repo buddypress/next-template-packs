@@ -44,7 +44,7 @@ bp_nouveau_before_loop(); ?>
 							</p><!-- #item-meta -->
 						<?php endif ; ?>
 
-						<?php bp_nouveau_members_loop_buttons( array('container' => 'ul' ) ); ?>
+						<?php bp_nouveau_members_loop_buttons( array( 'container' => 'ul', 'data-blah' => 'yep') ); ?>
 
 					</div>
 

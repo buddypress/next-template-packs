@@ -232,9 +232,9 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		}
 
 		/**
-		* If the wrapper is set to 'ul'
-		* use to pass through a boolean to set:
-		* $li_item  => true / false
+		* If the container is set to 'ul'
+		* force the $parent_element to 'li', else use
+		* parent_element args if set.
 		* Will render li elements around anchors/buttons.
 		*/
 		if( 'ul' == $args['container']  ) {
@@ -247,14 +247,15 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 
 		$parent_attr = ( ! empty( $args['parent_attr'] ) )? $args['parent_attr']  : '';
 
-		/**
+		/*
 		 * If we have a arg value for $button_element passed through
-		 * use it to default all the $buttons['element'] values
-		 * otherwise pass through as empyty string and class BP_button() will use it's default
-		 * 'anchor' or override & hardcode the 'element' string on $buttons array.
+		 * use it to default all the $buttons['button_element'] values
+		 * otherwise default to 'a' (anchor)
+		 * Or override & hardcode the 'element' string on $buttons array.
 		 *
 		 */
-		if( !empty( $args['button_element'] ) ) {
+
+		if( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
@@ -278,11 +279,19 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'must_be_logged_in' => false,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'         => esc_url( bp_get_activity_thread_permalink() ),
-					'class'        => 'button view bp-secondary-action',
+					'class'           => 'button view bp-secondary-action bp-tooltip',
+					'data-bp-tooltip' => __( 'View Conversation', 'bp-nouveau' ),
 					),
 				'link_text'  => sprintf('<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
 			);
+
+			// If button element set add url link to data-attr
+			if ( 'button' === $button_element ) {
+				$buttons['activity_conversation']['button_attr']['data-bp-url'] = esc_url( bp_get_activity_thread_permalink() );
+			} else {
+				$buttons['activity_conversation']['button_attr']['href'] = esc_url( bp_get_activity_thread_permalink() );
+				$buttons['activity_conversation']['button_attr']['role'] = 'button';
+			}
 
 		/**
 		 * We always create the Button to make sure
@@ -291,58 +300,90 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		 */
 		} else {
 			$buttons['activity_conversation'] =  array(
-				'id'                => 'activity_conversation',
-				'position'          => 5,
-				'component'         => 'activity',
-				'parent_element'    => $parent_element,
-				'parent_attr'       => $parent_attr,
-				'must_be_logged_in' => true,
-				'button_element'    => $button_element,
-				'button_attr'       => array(
-					'id'           => 'acomment-comment-' . $activity_id,
-					'href'         => esc_url( bp_get_activity_comment_link() ),
-					'class'        => 'button acomment-reply bp-primary-action',
-					'title'        => esc_attr__( 'Comment', 'bp-nouveau' ),
+				'id'                  => 'activity_conversation',
+				'position'            => 5,
+				'component'           => 'activity',
+				'parent_element'      => $parent_element,
+				'parent_attr'         => $parent_attr,
+				'must_be_logged_in'   => true,
+				'button_element'      => $button_element,
+				'button_attr'         => array(
+					'id'              => 'acomment-comment-' . $activity_id,
+					'class'           => 'button acomment-reply bp-primary-action bp-tooltip',
+					'data-bp-tooltip' => __( 'Comment', 'bp-nouveau' ),
+					'aria-expanded'   => 'false'
 					),
 				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
 			);
+
+			// If button element set add href link to data-attr
+			if ( 'button' === $button_element ) {
+				$buttons['activity_conversation']['button_attr']['data-bp-url'] = esc_url( bp_get_activity_comment_link() );
+			} else {
+				$buttons['activity_conversation']['button_attr']['href'] = esc_url( bp_get_activity_comment_link() );
+				$buttons['activity_conversation']['button_attr']['role'] = 'button';
+			}
+
 		}
 
 		if ( bp_activity_can_favorite() ) {
+
 			if ( ! bp_get_activity_is_favorite() ) {
+
 				$fav_args = array(
-					'parent_element'  => $parent_element,
-					'parent_attr'     => $parent_attr,
-					'button_element'  => $button_element,
-					'link_href'       => bp_get_activity_favorite_link(),
-					'link_class'      => 'button fav bp-secondary-action',
-					'link_title'      => __( 'Mark as Favorite', 'bp-nouveau' ),
-					'link_text'       => __( 'Favorite', 'bp-nouveau' ),
+					'parent_element'   => $parent_element,
+					'parent_attr'      => $parent_attr,
+					'button_element'   => $button_element,
+					'link_class'       => 'button fav bp-secondary-action bp-tooltip',
+					'data_bp_tooltip'  => esc_attr__( 'Mark as Favorite', 'bp-nouveau' ),
+					'link_text'        => __( 'Favorite', 'bp-nouveau' ),
+					'aria-pressed'     => 'false'
 				);
+
+				// If button element set add nonce link to data-attr attr
+				if ( 'button' === $button_element ) {
+					$fav_args['data_attr'] = esc_url( bp_get_activity_favorite_link() );
+					$key = 'data-bp-nonce';
+				} else {
+					$fav_args['link_href'] = esc_url( bp_get_activity_favorite_link() );
+				}
+
 			} else {
+
 				$fav_args = array(
-					'parent_element'  => $parent_element,
-					'parent_attr'     => $parent_attr,
-					'button_element'  => $button_element,
-					'link_href'       => bp_get_activity_unfavorite_link(),
-					'link_class'      => 'button unfav bp-secondary-action',
-					'link_title'      => __( 'Remove Favorite', 'bp-nouveau' ),
-					'link_text'   => __( 'Remove Favorite', 'bp-nouveau' ),
+					'parent_element'   => $parent_element,
+					'parent_attr'      => $parent_attr,
+					'button_element'   => $button_element,
+					'link_class'       => 'button unfav bp-secondary-action bp-tooltip',
+					'data_bp_tooltip'  => esc_attr__( 'Remove Favorite', 'bp-nouveau' ),
+					'link_text'        => __( 'Remove Favorite', 'bp-nouveau' ),
+					'aria-pressed'     => 'true'
 				);
+
+				// If button element set add nonce link nonce to data-attr
+				if ( 'button' === $button_element ) {
+					$fav_args['data_attr'] = esc_url(bp_get_activity_unfavorite_link() );
+					$key = 'data-bp-nonce';
+				} else {
+					$fav_args['link_href'] = esc_url( bp_get_activity_unfavorite_link() );
+				}
+
 			}
 
 			$buttons['activity_favorite'] =  array(
-				'id'                => 'activity_favorite',
-				'position'          => 15,
-				'component'         => 'activity',
-				'parent_element'    => $parent_element,
-				'parent_attr'       => $parent_attr,
-				'must_be_logged_in' => true,
-				'button_element'    => $button_element,
-				'button_attr'       => array(
-					'href'    => esc_url( $fav_args['link_href'] ),
-					'class'   => $fav_args['link_class'],
-					'title'   => esc_attr( $fav_args['link_title'] ),
+				'id'                  => 'activity_favorite',
+				'position'            => 15,
+				'component'           => 'activity',
+				'parent_element'      => $parent_element,
+				'parent_attr'         => $parent_attr,
+				'must_be_logged_in'   => true,
+				'button_element'      => $fav_args['button_element'],
+				'button_attr'         => array(
+					'href'            => $fav_args['link_href'],
+					'class'           => $fav_args['link_class'],
+					'data-bp-tooltip' => esc_attr( $fav_args['data_bp_tooltip'] ),
+					'aria-pressed'    => $fav_args['aria-pressed'],
+					$key              => $fav_args['data_attr'],
 					),
 				'link_text'   => sprintf( '<span class="bp-screen-reader-text">%1$s</span>', esc_html( $fav_args['link_text'] ) ),
 			);
@@ -373,12 +414,12 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			}
 
 			$delete_args = wp_parse_args( $delete_args, array(
-				'button_attr'  => array(
-					'link_id'    => '',
-					'link_href'  => '',
-					'link_class' => '',
-					'link_rel'   => 'nofollow',
-					'link_title' => '',
+				'button_attr'         => array(
+					'link_id'         => '',
+					'link_href'       => '',
+					'link_class'      => '',
+					'link_rel'        => 'nofollow',
+					'data_bp_tooltip' => '',
 					),
 				'link_text'  => '',
 			) );
@@ -391,12 +432,20 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			$delete_args = array(
 				'button_element'    => $button_element,
 				'link_id'           => '',
-				'link_href'         => bp_get_activity_delete_url(),
-				'link_class'        => 'button item-button bp-secondary-action ' . $class . ' confirm',
+				'link_class'        => 'button item-button bp-secondary-action bp-tooltip ' . $class . ' confirm',
 				'link_rel'          => 'nofollow',
-				'link_title'   => __( 'Delete', 'bp-nouveau' ),
-				'link_text'  => __( 'Delete', 'bp-nouveau' ),
+				'data_bp_tooltip'        => esc_attr__( 'Delete', 'bp-nouveau' ),
+				'link_text'         => __( 'Delete', 'bp-nouveau' ),
 			);
+
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$delete_args['data-attr'] = esc_url( bp_get_activity_delete_url() );
+				$delete_args['link_href'] = '';
+			} else {
+				$delete_args['link_href'] = esc_url( bp_get_activity_delete_url() );
+				$delete_args['data-attr'] = '';
+			}
 		}
 
 		$buttons['activity_delete'] = array(
@@ -408,12 +457,13 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			'must_be_logged_in' => true,
 			'button_element'    => $button_element,
 			'button_attr'       => array(
-				'id'       => esc_attr( $delete_args['link_id'] ),
-				'href'     => esc_url( $delete_args['link_href'] ),
-				'class'    => $delete_args['link_class'],
-				'title'    => esc_attr( $delete_args['link_title'] ),
+				'id'              => esc_attr( $delete_args['link_id'] ),
+				'href'            => $delete_args['link_href'],
+				'class'           => $delete_args['link_class'],
+				'data-bp-tooltip' => esc_attr( $delete_args['data_bp_tooltip'] ),
+				'data-bp-nonce'   => $delete_args['data-attr'] ,
 				),
-			'link_text'  => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['link_text'] ) ),
+			'link_text'  => sprintf( '<span class="bp-screen-reader-text">%s</span>', esc_html( $delete_args['data_bp_tooltip'] ) ),
 		);
 
 		// Add the Spam Button if supported
@@ -427,10 +477,9 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'must_be_logged_in' => true,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'href'    =>  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id ),
-					'class'   => 'bp-secondary-action spam-activity confirm button item-button',
-					'id'      =>  'activity_make_spam_' . $activity_id,
-					'title'   =>  esc_attr__( 'Spam', 'bp-nouveau' ),
+					'class'           => 'bp-secondary-action spam-activity confirm button item-button bp-tooltip',
+					'id'              =>  'activity_make_spam_' . $activity_id,
+					'data-bp-tooltip' =>  esc_attr__( 'Spam', 'bp-nouveau' ),
 					),
 				'link_text'  => sprintf(
 					/** @todo: use a specific css rule for this *************************************************************/
@@ -438,6 +487,13 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					esc_html__( 'Spam', 'bp-nouveau' )
 				),
 			);
+
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['activity_spam']['button_attr']['data-bp-nonce'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id );
+			} else {
+				$buttons['activity_spam']['button_attr']['href'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_id . '/', 'bp_activity_akismet_spam_' . $activity_id );
+			}
 		}
 
 		/**
@@ -701,29 +757,12 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		/**
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
-		 * otherwise default to 'a' (anchor)
-		 * Or override & hardcode the 'element' string on $buttons array.
-		 *
-		 * Icons sets a class for icon display if not using the button element
+		 * otherwise default to 'a' (anchor).
 		 */
-		$icons = '';
 		if( !empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
-
-				// If this is a true button element then we need to move the href values
-				// around onto button value & empty the href attr.
-				if( 'button' === $args['button_element'] ) {
-					$data_attr_delete = esc_url( bp_get_activity_comment_delete_link() );
-					$data_attr_reply  = sprintf( '#acomment-%s', $activity_comment_id );
-					$href_reply = $href_delete = '';
-				}
 		} else {
-			$button_element   = 'a';
-			$data_attr_reply  = '';
-			$data_attr_delete = '';
-			$href_reply  = sprintf( '#acomment-%s', $activity_comment_id );
-			$href_delete = esc_url( bp_get_activity_comment_delete_link() );
-			$icons = ' icons';
+			$button_element = 'a';
 		}
 
 		$buttons = array( 'activity_comment_reply' => array(
@@ -735,12 +774,10 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'parent_attr'       => $parent_attr,
 				'button_element'    => $button_element,
 				'button_attr'       =>  array(
-					'data-do-comment'  => $data_attr_reply,
-					'href'   => $href_reply,
 					'class'  => 'acomment-reply bp-primary-action' . $icons . '',
 					'id'     => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
 				),
-				'link_text'         => esc_html__( 'reply', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
 			),
 			'activity_comment_delete' => array(
 				'id'                => 'activity_comment_delete',
@@ -751,14 +788,21 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'parent_attr'       => $parent_attr,
 				'button_element'    => $button_element,
 				'button_attr'       => array(
-					'data-do-delete'   => $data_attr_delete,
-					'href'   => $href_delete,
-					'class'  => 'delete acomment-delete confirm bp-secondary-action' . $icons . '',
+					'class'  => 'delete acomment-delete confirm bp-secondary-action',
 					'rel'    => 'nofollow',
 					),
 				'link_text'         => esc_html__( 'Delete', 'bp-nouveau' ),
 			),
 		);
+
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['activity_comment_reply']['button_attr']['data-bp-act-reply-nonce'] = sprintf( '#acomment-%s', $activity_comment_id );
+				$buttons['activity_comment_delete']['button_attr']['data-bp-act-reply-delete-nonce'] = esc_url( bp_get_activity_comment_delete_link() );
+			} else {
+				$buttons['activity_comment_reply']['button_attr']['href'] = sprintf( '#acomment-%s', $activity_comment_id );
+				$buttons['activity_comment_delete']['button_attr']['href'] = esc_url( bp_get_activity_comment_delete_link() );
+			}
 
 		// Add the Spam Button if supported
 		if ( bp_is_akismet_active() && isset( buddypress()->activity->akismet ) && bp_activity_user_can_mark_spam() ) {
@@ -772,12 +816,18 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 				'button_element'    => $button_element,
 				'button_attr'       =>  array(
 					'id'     => 'activity_make_spam_' . $activity_comment_id,
-					'href'   => wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id ),
-					'class'  => 'bp-secondary-action spam-activity-comment confirm' . $icon . '' ,
+					'class'  => 'bp-secondary-action spam-activity-comment confirm',
 					'rel'    => 'nofollow',
 				),
 				'link_text'          => esc_html__( 'Spam', 'bp-nouveau' ),
 			);
+
+			// If button element set add nonce link to data-attr attr
+			if ( 'button' === $button_element ) {
+				$buttons['activity_comment_spam']['button_attr']['data-bp-act-spam-nonce'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id );
+			} else {
+				$buttons['activity_comment_spam']['button_attr']['href'] =  wp_nonce_url( bp_get_root_domain() . '/' . bp_get_activity_slug() . '/spam/' . $activity_comment_id . '/?cid=' . $activity_comment_id, 'bp_activity_akismet_spam_' . $activity_comment_id );
+			}
 		}
 
 		/**

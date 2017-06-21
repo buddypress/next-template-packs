@@ -31,7 +31,7 @@
 	<# } #>
 
 	<# if ( data.avatar_url ) { #>
-		<img src="{{data.avatar_url}}" class="avatar {{data.object_type}}-{{data.id}}-avatar photo" />
+		<img src="{{data.avatar_url}}" class="avatar {{data.object_type}}-{{data.id}}-avatar photo" alt="" />
 	<# } #>
 
 	<span class="bp-item-name">{{data.name}}</span>

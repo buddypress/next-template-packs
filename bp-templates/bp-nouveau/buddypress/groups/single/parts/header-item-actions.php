@@ -22,7 +22,7 @@
 			bp_nouveau_group_hook( 'before', 'menu_mods' ); ?>
 
 	<dl class="moderators-lists">
-		<dt class="moderators-title"><?php _e( 'Group Mods' , 'bp-nouveau' ); ?></dd>
+		<dt class="moderators-title"><?php _e( 'Group Mods' , 'bp-nouveau' ); ?></dt>
 		<dd class="user-list moderators">
 				<?php bp_group_list_mods();
 				bp_nouveau_group_hook( 'after', 'menu_mods' ); ?>

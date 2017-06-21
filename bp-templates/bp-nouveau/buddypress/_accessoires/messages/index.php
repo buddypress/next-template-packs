@@ -28,8 +28,8 @@
 	<?php bp_nouveau_messages_hook( 'after', 'compose_content' ); ?>
 
 	<div class="submit">
-		<input type="button" id="bp-messages-reset" class="button bp-secondary-action" value="<?php esc_attr_e( 'Reset', 'bp-nouveau' ); ?>"/>
 		<input type="button" id="bp-messages-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-nouveau' ); ?>"/>
+		<input type="button" id="bp-messages-reset" class="text-button small bp-secondary-action" value="<?php esc_attr_e( 'Reset', 'bp-nouveau' ); ?>"/>
 	</div>
 </script>
 
@@ -73,7 +73,7 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-messages-filters">
-	<li class="user-messages-bulk-actions"></div>
+	<li class="user-messages-bulk-actions"></li>
 	<li class="user-messages-search" role="search" data-bp-search="{{data.box}}">
 		<div class="bp-search messages-search">
 			<form action="" method="get" id="user_messages_search_form" class="bp-messages-search-form" data-bp-search="messages">
@@ -96,7 +96,10 @@
 		<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Select All Messages', 'bp-nouveau' ) ); ?></span>
 	</label>
 <div class="bulk-actions-wrap bp-hide">
-		<div class="bulk-actions select-wrap ">
+		<div class="bulk-actions select-wrap">
+			<label for="user-messages-bulk-actions" class="bp-screen-reader-text">
+				<?php esc_html_e( 'Select bulk action', 'bp-nouveau' )  ?>
+			</label>
 			<select id="user-messages-bulk-actions">
 				<# for ( i in data ) { #>
 					<option value="{{data[i].value}}">{{data[i].label}}</option>
@@ -119,7 +122,7 @@
 		</label>
 	</div>
 	<div class="thread-from">
-		<a class="user-link" href="{{data.sender_link}}" title="{{data.sender_name}}" >
+		<a class="user-link" href="{{data.sender_link}}">
 			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
 			<span class="user-name">{{data.sender_name}}</span>
 		</a>
@@ -149,7 +152,7 @@
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
+									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -158,25 +161,25 @@
 
 				<div class="actions">
 
-					<button class="message-action-delete bp-icons" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
+					<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
 					</button>
 
 					<# if ( undefined !== data.star_link ) { #>
 
 						<# if ( false !== data.is_starred ) { #>
-							<button  class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
+							<a role="button" class="message-action-unstar bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="unstar" aria-pressed="true" data-bp-tooltip="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-nouveau' );?></span>
-							</button>
+							</a>
 						<# } else { #>
-							<button  class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
+							<a role="button" class="message-action-star bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="star" aria-pressed="false" data-bp-tooltip="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-nouveau' );?></span>
-							</button>
+							</a>
 						<# } #>
 
 					<# } #>
 
-					<a href="#view/{{data.id}}" class="message-action-view bp-icons" title="<?php esc_attr_e( 'View Full Conversation.', 'bp-nouveau' );?>">
+					<a href="#view/{{data.id}}" class="message-action-view bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'View Full Conversation.', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'bp-nouveau' );?></span>
 					</a>
 				</div>
@@ -198,7 +201,7 @@
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" title="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
+							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
 						<# } #>
 					</ul>
 				</dd>
@@ -207,7 +210,7 @@
 
 		<div class="actions">
 
-			<button class="message-action-delete bp-icons" data-bp-action="delete" title="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
+			<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
 			</button>
 
@@ -220,7 +223,7 @@
 	<div class="message-metadata">
 		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
-		<a href="{{data.sender_link}}" title="{{data.sender_name}}" class="user-link">
+		<a href="{{data.sender_link}}" class="user-link">
 			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
@@ -233,11 +236,11 @@
 				<?php $test = 1; ?>
 
 				<# if ( false !== data.is_starred ) { #>
-					<button  class="message-action-unstar bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" title="<?php esc_attr_e( 'Unstar Message', 'bp-nouveau' );?>">
+					<button type="button" class="message-action-unstar bp-tooltip bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" data-bp-tooltip="<?php esc_attr_e( 'Unstar Message', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Message', 'bp-nouveau' );?></span>
 					</button>
 				<# } else { #>
-					<button  class="message-action-star bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" title="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
+					<button type="button" class="message-action-star bp-tooltip bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" data-bp-tooltip="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Message', 'bp-nouveau' );?></span>
 					</button>
 				<# } #>

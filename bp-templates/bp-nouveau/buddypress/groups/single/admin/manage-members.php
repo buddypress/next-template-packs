@@ -62,7 +62,7 @@
 					</p>
 
 					<p class="action text-links-list">
-						<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin" title="<?php esc_attr_e( 'Promote to Admin', 'bp-nouveau' ); ?>"><?php _e( 'Promote to Admin', 'bp-nouveau' ); ?></a>
+						<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin"><?php _e( 'Promote to Admin', 'bp-nouveau' ); ?></a>
 						<a class="button confirm mod-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-nouveau' ); ?></a>
 					</p>
 

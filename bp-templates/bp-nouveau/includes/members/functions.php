@@ -45,7 +45,6 @@ function bp_nouveau_get_members_directory_nav_items() {
 		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
 		'li_class'  => array(),
 		'link'      => bp_get_members_directory_permalink(),
-		'title'     => __( 'The members of your community.', 'bp-nouveau' ),
 		'text'      => __( 'All Members', 'bp-nouveau' ),
 		'count'     => bp_get_total_member_count(),
 		'position'  => 5,
@@ -60,7 +59,6 @@ function bp_nouveau_get_members_directory_nav_items() {
 				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array(),
 				'link'      => bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/',
-				'title'     => __( 'The members I\'m friend with.', 'bp-nouveau' ),
 				'text'      => __( 'My Friends', 'bp-nouveau' ),
 				'count'     => bp_get_total_friend_count( bp_loggedin_user_id() ),
 				'position'  => 15,

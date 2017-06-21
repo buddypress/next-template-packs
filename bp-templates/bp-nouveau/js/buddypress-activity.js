@@ -1,3 +1,4 @@
+/* jshint browser: true */
 /* global bp, BP_Nouveau */
 window.bp = window.bp || {};
 
@@ -140,7 +141,7 @@ window.bp = window.bp || {};
 			if ( 'all' === scope ) {
 
 				$.each( newest_activities, function( a, activity ) {
-					var activity = $( activity );
+					activity = $( activity );
 
 					$.each( objects, function( o, object ) {
 						if ( -1 !== $.inArray( 'bp-my-' + object, activity.get( 0 ).classList ) ) {
@@ -195,7 +196,7 @@ window.bp = window.bp || {};
 
 			// Update the Load Newest li if it already exists.
 			if ( $( '#buddypress [data-bp-list="activity"] li' ).first().hasClass( 'load-newest' ) ) {
-				newest_link = $( '#buddypress [data-bp-list="activity"] .load-newest a' ).html();
+				var newest_link = $( '#buddypress [data-bp-list="activity"] .load-newest a' ).html();
 				$( '#buddypress [data-bp-list="activity"] .load-newest a' ).html( newest_link.replace( /([0-9]+)/, newest_activities_count ) );
 
 			// Otherwise add it
@@ -429,7 +430,8 @@ window.bp = window.bp || {};
 		 */
 		activityActions: function( event ) {
 			var parent = event.data, target = $( event.target ), activity_item = $( event.currentTarget ),
-				activity_id = activity_item.data( 'bp-activity-id' ), stream = $( event.delegateTarget );
+				activity_id = activity_item.data( 'bp-activity-id' ), stream = $( event.delegateTarget ),
+				item_id, form;
 
 			// In case the target is set to a span inside the link.
 			if ( $( target ).is( 'span' ) ) {
@@ -458,6 +460,13 @@ window.bp = window.bp || {};
 								$( this ).html( response.data.content );
 							}
 							$( this ).prop( 'title', response.data.content );
+
+							if ('false' === $(this).attr('aria-pressed') ) {
+								$( this ).attr('aria-pressed', 'true');
+							} else {
+								$( this ).attr('aria-pressed', 'false');
+							}
+
 							$( this ).fadeIn( 200 );
 						} );
 					}
@@ -498,9 +507,7 @@ window.bp = window.bp || {};
 			}
 
 			// Deleting or spamming
-			if ( target.hasClass( 'delete-activity' ) || target.hasClass( 'acomment-delete' )
-				|| target.hasClass( 'spam-activity' ) || target.hasClass( 'spam-activity-comment' )
-			) {
+			if ( target.hasClass( 'delete-activity' ) || target.hasClass( 'acomment-delete' ) || target.hasClass( 'spam-activity' ) || target.hasClass( 'spam-activity-comment' ) ) {
 				var activity_comment_li = target.closest( '[data-bp-activity-comment-id]' ),
 				    activity_comment_id = activity_comment_li.data( 'bp-activity-comment-id' ),
 				    li_parent, comment_count_span, comment_count, show_all_a, deleted_comments_count = 0;
@@ -508,7 +515,7 @@ window.bp = window.bp || {};
 				// Stop event propagation
 				event.preventDefault();
 
-				if ( undefined !== BP_Nouveau.confirm && false === confirm( BP_Nouveau.confirm ) ) {
+				if ( undefined !== BP_Nouveau.confirm && false === window.confirm( BP_Nouveau.confirm ) ) {
 					return false;
 				}
 
@@ -560,7 +567,7 @@ window.bp = window.bp || {};
 							activity_item.append( activity_comment_li.find( 'form' ) );
 
 							// Count child comments if there are some
-							$.each( activity_comment_li.find( 'li' ), function( i ) {
+							$.each( activity_comment_li.find( 'li' ), function() {
 								deleted_comments_count += 1;
 							} );
 
@@ -597,7 +604,9 @@ window.bp = window.bp || {};
 
 			// Reading more
 			if ( target.closest( 'span' ).hasClass( 'activity-read-more' ) ) {
-				var content = target.closest( 'div' ), readMore = target.closest( 'span' ), item_id;
+				var content = target.closest( 'div' ), readMore = target.closest( 'span' );
+
+				item_id = null;
 
 				if ( $( content ).hasClass( 'activity-inner' ) ) {
 					item_id = activity_id;
@@ -635,7 +644,10 @@ window.bp = window.bp || {};
 
 			// Displaying the comment form
 			if ( target.hasClass( 'acomment-reply' ) || target.parent().hasClass( 'acomment-reply' ) ) {
-				var comment_link = target, item_id = activity_id, form = $( '#ac-form-' + activity_id );
+				var comment_link = target;
+
+				form = $( '#ac-form-' + activity_id );
+				item_id = activity_id;
 
 				// Stop event propagation
 				event.preventDefault();
@@ -673,6 +685,9 @@ window.bp = window.bp || {};
 
 				form.slideDown( 200 );
 
+				// change the aria state from false to true
+				target.attr( 'aria-expanded', 'true' );
+
 				$.scrollTo( form, 500, {
 					offset:-100,
 					easing:'swing'
@@ -683,7 +698,11 @@ window.bp = window.bp || {};
 
 			// Removing the form
 			if ( target.hasClass( 'ac-reply-cancel' ) ) {
+
 				$( target ).closest( '.ac-form' ).slideUp( 200 );
+
+				// Change the aria state back to false on comment cancel
+				$( '.acomment-reply').attr( 'aria-expanded', 'false' );
 
 				// Stop event propagation
 				event.preventDefault();
@@ -691,8 +710,10 @@ window.bp = window.bp || {};
 
 			// Submitting comments and replies
 			if ( 'ac_form_submit' === target.prop( 'name' ) ) {
-				var form = target.closest( 'form' ), item_id = activity_id, comment_content,
-					comment_data, comment_count;
+				var comment_content, comment_data;
+
+				form = target.closest( 'form' );
+				item_id = activity_id;
 
 				// Stop event propagation
 				event.preventDefault();
@@ -722,6 +743,7 @@ window.bp = window.bp || {};
 				parent.ajax( comment_data, 'activity' ).done( function( response ) {
 					target.removeClass( 'loading' );
 					comment_content.removeClass( 'loading' );
+					$( '.acomment-reply' ).attr( 'aria-expanded', 'false' );
 
 					if ( false === response.success ) {
 						form.append( $( response.data.feedback ).hide().fadeIn( 200 ) );
@@ -772,7 +794,9 @@ window.bp = window.bp || {};
 		 * @return {[type]}       [description]
 		 */
 		commentFormAction: function( event ) {
-			var event = event || window.event, element, keyCode;
+			var element, keyCode;
+
+			event = event || window.event;
 
 			if ( event.target ) {
 				element = event.target;

@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="bp-navs bp-subnavs group-subnav no-ajax" id="subnav" role="navigation">
+<nav class="bp-navs bp-subnavs group-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group administration menu', 'buddypress' ); ?>">
 
 	<?php if ( bp_nouveau_has_nav( array( 'object' => 'group_manage' ) ) ) : ?>
 
@@ -32,4 +32,4 @@
 
 	<?php endif ; ?>
 
-</div><!-- #isubnav -->
+</nav><!-- #isubnav -->

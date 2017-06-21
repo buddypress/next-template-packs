@@ -9,7 +9,8 @@
 			@include medium-up() {
 
 				.item-block {
-					width: 66%;
+					float: none;
+					width: auto;
 				}
 
 				.item-meta {

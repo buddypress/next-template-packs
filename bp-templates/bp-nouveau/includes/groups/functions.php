@@ -431,7 +431,6 @@ function bp_nouveau_get_groups_directory_nav_items() {
 		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
 		'li_class'  => array( 'selected' ),
 		'link'      => bp_get_groups_directory_permalink(),
-		'title'     => __( 'The public and private groups of this site.', 'bp-nouveau' ),
 		'text'      => __( 'All Groups', 'bp-nouveau' ),
 		'count'     => bp_get_total_group_count(),
 		'position'  => 5,
@@ -448,7 +447,6 @@ function bp_nouveau_get_groups_directory_nav_items() {
 				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array(),
 				'link'      => bp_loggedin_user_domain() . bp_get_groups_slug() . '/my-groups/',
-				'title'     => __( 'The groups I\'m a member of.', 'bp-nouveau' ),
 				'text'      => __( 'My Groups', 'bp-nouveau' ),
 				'count'     => $my_groups_count,
 				'position'  => 15,
@@ -462,7 +460,6 @@ function bp_nouveau_get_groups_directory_nav_items() {
 				'slug'      => 'create', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'no-ajax', 'group-create', 'create-button' ),
 				'link'      => trailingslashit( bp_get_groups_directory_permalink() . 'create' ),
-				'title'     => __( 'Create a Group', 'bp-nouveau' ),
 				'text'      => __( 'Create a Group', 'bp-nouveau' ),
 				'count'     => false,
 				'position'  => 999,
@@ -724,7 +721,7 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'type'       => 'checkbox',
 		),
 		'group_nav_tabs' => array(
-		'label'      => __( 'Set primary nav to tab style:', 'bp-nouveau' ),
+		'label'      => __( 'Set primary nav to tab style.', 'bp-nouveau' ),
 		'section'    => 'bp_nouveau_group_primary_nav',
 		'settings'   => 'bp_nouveau_appearance[group_nav_tabs]',
 		'type'       => 'checkbox',

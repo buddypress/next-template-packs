@@ -65,7 +65,7 @@
 
 		.meta,
 		.item-meta {
-			color: #888;
+			color: $light-text-plus;
 
 			@include font-size(12);
 			margin-top: $marg-sml;
