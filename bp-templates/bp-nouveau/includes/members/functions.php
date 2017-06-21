@@ -76,7 +76,7 @@ function bp_nouveau_get_members_directory_nav_items() {
 	/**
 	 * Use this filter to introduce your custom nav items for the members directory.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $nav_items The list of the members directory nav items.
 	 */
@@ -158,7 +158,7 @@ function bp_nouveau_members_catch_button_args( $button = array() ) {
  * Catch the content hooked to the do_action hooks in single member header
  * and in the members loop
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string|bool HTML Output if hooked. False otherwise.
  */
@@ -198,7 +198,7 @@ function bp_nouveau_get_hooked_member_meta() {
 /**
  * Add the default user front template to the front template hierarchy
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $templates The list of templates for the front.php template part.
  * @return array  The same list with the default front template if needed.
@@ -221,7 +221,7 @@ function bp_nouveau_member_reset_front_template( $templates = array() ) {
 /**
  * Only locate global user's front templates
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $templates The User's front template hierarchy.
  * @return array             Only the global front templates.
@@ -236,7 +236,7 @@ function bp_nouveau_member_restrict_user_front_templates( $templates = array() )
 /**
  * Locate a single member template into a specific hierarchy.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $template The template part to get (eg: activity, groups...).
  * @return string The located template.
@@ -256,7 +256,7 @@ function bp_nouveau_member_locate_template_part( $template = '' ) {
 			'members/single/%s-nicename-' . sanitize_file_name( $displayed_user->userdata->user_nicename ) . '.php',
 		);
 
-		/**
+		/*
 		 * Check for member types and add it to the hierarchy
 		 *
 		 * Make sure to register your member
@@ -275,7 +275,6 @@ function bp_nouveau_member_locate_template_part( $template = '' ) {
 		$bp_nouveau->members->displayed_user_hierarchy[] = 'members/single/%s.php';
 	}
 
-	// Init the templates
 	$templates = array();
 
 	// Loop in the hierarchy to fill it for the requested template part
@@ -289,7 +288,7 @@ function bp_nouveau_member_locate_template_part( $template = '' ) {
 /**
  * Load a single member template part
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $template The template part to get (eg: activity, groups...).
  * @return string HTML output.
@@ -318,7 +317,7 @@ function bp_nouveau_member_get_template_part( $template = '' ) {
 /**
  * Display the User's WordPress bio info into the default front page?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True to display. False otherwise.
  */
@@ -331,7 +330,7 @@ function bp_nouveau_members_wp_bio_info() {
 /**
  * Are we inside the Current user's default front page sidebar?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if in the group's home sidebar. False otherwise.
  */
@@ -342,7 +341,7 @@ function bp_nouveau_member_is_home_widgets() {
 /**
  * Filter the Latest activities Widget to only keep the one of displayed user
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The Activities Template arguments.
  * @return array        The Activities Template arguments.
@@ -356,7 +355,7 @@ function bp_nouveau_member_activity_widget_overrides( $args = array() ) {
 /**
  * Filter the Groups widget to only keep the groups the displayed user is a member of.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The Groups Template arguments.
  * @return array        The Groups Template arguments.
@@ -370,7 +369,7 @@ function bp_nouveau_member_groups_widget_overrides( $args = array() ) {
 /**
  * Filter the Members widgets to only keep members of the displayed group.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The Members Template arguments.
  * @return array        The Members Template arguments.
@@ -389,7 +388,7 @@ function bp_nouveau_member_members_widget_overrides( $args = array() ) {
 /**
  * Init the Member's default front page filters as we're in the sidebar
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_members_add_home_widget_filters() {
 	add_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_member_activity_widget_overrides', 10, 1 );
@@ -402,7 +401,7 @@ function bp_nouveau_members_add_home_widget_filters() {
 /**
  * Remove the Member's default front page filters as we're no more in the sidebar
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_members_remove_home_widget_filters() {
 	remove_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_member_activity_widget_overrides', 10, 1 );
@@ -415,7 +414,7 @@ function bp_nouveau_members_remove_home_widget_filters() {
 /**
  * Get the WP Profile fields for all or a specific user
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  WP_User $user The user object. Optional.
  * @return array         The list of WP Profile fields
@@ -436,7 +435,7 @@ function bp_nouveau_get_wp_profile_fields( $user = null ) {
 /**
  * Build the Member's nav for the our customizer control.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return array The Members single item primary nav ordered.
  */

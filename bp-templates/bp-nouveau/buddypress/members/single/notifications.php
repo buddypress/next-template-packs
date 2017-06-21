@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Users Notifications
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -24,11 +24,11 @@ switch ( bp_current_action() ) :
 	case 'read'   : ?>
 
 
-	<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
+	<?php bp_get_template_part( 'common/search-and-filters-bar' ); ?>
 
 
 		<div id="notifications-user-list" class="notifications dir-list" data-bp-list="notifications">
-			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-notifications-loading' ) ;?></div>
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-notifications-loading' ); ?></div>
 		</div><!-- #groups-dir-list -->
 
 		<?php

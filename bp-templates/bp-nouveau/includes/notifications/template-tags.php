@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Display the notifications filter options.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML output.
  */
@@ -24,7 +24,7 @@ function bp_nouveau_notifications_filters() {
 	/**
 	 * Get the notifications filter options.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string HTML output.
 	 */
@@ -60,7 +60,7 @@ function bp_nouveau_notifications_filters() {
 		/**
 		 * Filter here to edit the options output.
 		 *
-		 * @since  1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param  string $output  The options output.
 		 * @param  array  $filters The sorted notifications filters.
@@ -71,7 +71,7 @@ function bp_nouveau_notifications_filters() {
 /**
  * Outputs the order action links.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML output.
  */
@@ -87,8 +87,8 @@ function bp_nouveau_notifications_sort_order_links() {
 	?>
 
 	<span class="notifications-order-actions">
-		<a href="<?php echo esc_url( $desc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Newest First', 'bp-nouveau'); ?>" aria-label="<?php esc_attr_e( 'Newest First', 'bp-nouveau'); ?>" data-bp-notifications-order="DESC"><span class="dashicons dashicons-arrow-down"></span></a>
-		<a href="<?php echo esc_url( $asc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Older First', 'bp-nouveau'); ?>" aria-label="<?php esc_attr_e( 'Older First', 'bp-nouveau'); ?>" data-bp-notifications-order="ASC"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span></a>
+		<a href="<?php echo esc_url( $desc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Newest First', 'bp-nouveau' ); ?>" aria-label="<?php esc_attr_e( 'Newest First', 'bp-nouveau' ); ?>" data-bp-notifications-order="DESC"><span class="dashicons dashicons-arrow-down"></span></a>
+		<a href="<?php echo esc_url( $asc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Older First', 'bp-nouveau' ); ?>" aria-label="<?php esc_attr_e( 'Older First', 'bp-nouveau' ); ?>" data-bp-notifications-order="ASC"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span></a>
 	</span>
 
 	<?php
@@ -102,7 +102,7 @@ function bp_nouveau_notifications_sort_order_links() {
  * @return string HTML output.
  */
 function bp_nouveau_notifications_bulk_management_dropdown() {
-	?>
+?>
 
 	<div class="select-wrap">
 
@@ -124,7 +124,7 @@ function bp_nouveau_notifications_bulk_management_dropdown() {
 
 		<span class="select-arrow"></span>
 
-</div><!-- // .select-wrap -->
+	</div><!-- // .select-wrap -->
 
 	<input type="submit" id="notification-bulk-manage" class="button action" value="<?php esc_attr_e( 'Apply', 'buddypress' ); ?>">
 	<?php

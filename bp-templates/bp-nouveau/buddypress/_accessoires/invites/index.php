@@ -12,7 +12,7 @@
 ?>
 <nav class="bp-navs bp-subnavs group-subnav bp-invites-nav" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group invitations menu', 'buddypress' ); ?>"></nav>
 
-<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+<h2 class="bp-screen-title <?php if ( bp_is_group_create() ) { echo esc_attr( 'creation-step-name' ); } ?>">
 	<?php _e( 'Invite Members', 'bp-nouveau' ); ?>
 </h2>
 

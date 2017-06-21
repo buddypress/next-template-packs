@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Groups Cover Image Header.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -46,7 +46,7 @@
 		</div><!-- #item-header-content -->
 <?php endif; ?>
 
-		<?php bp_get_template_part('groups/single/parts/header-item-actions'); ?>
+		<?php bp_get_template_part( 'groups/single/parts/header-item-actions' ); ?>
 
 	</div><!-- #item-header-cover-image -->
 
@@ -54,7 +54,7 @@
 </div><!-- #cover-image-container -->
 
 <?php	if ( ! bp_nouveau_groups_front_page_description() ) : ?>
-<?php if( bp_nouveau_group_meta()->description ) { ?>
+<?php if ( bp_nouveau_group_meta()->description ) { ?>
 	<div class="desc-wrap">
 		<div class="group-description">
 		<?php echo bp_nouveau_group_meta()->description; ?>

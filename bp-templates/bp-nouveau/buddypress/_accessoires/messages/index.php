@@ -78,7 +78,7 @@
 		<div class="bp-search messages-search">
 			<form action="" method="get" id="user_messages_search_form" class="bp-messages-search-form" data-bp-search="messages">
 				<label for="user_messages_search" class="bp-screen-reader-text">
-					<?php _e('Search Messages', 'bp-nouveau'); ?>
+					<?php _e( 'Search Messages', 'bp-nouveau' ); ?>
 				</label>
 				<input type="search" id="user_messages_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
 				<button type="submit" id="user_messages_search_submit">
@@ -123,7 +123,7 @@
 	</div>
 	<div class="thread-from">
 		<a class="user-link" href="{{data.sender_link}}">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
+			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" />
 			<span class="user-name">{{data.sender_name}}</span>
 		</a>
 	</div>
@@ -152,7 +152,7 @@
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
+									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -201,7 +201,7 @@
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" /></a></li>
+							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" /></a></li>
 						<# } #>
 					</ul>
 				</dd>
@@ -224,7 +224,7 @@
 		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
 		<a href="{{data.sender_link}}" class="user-link">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e(' profile picture', 'bp-nouveau'); ?>" />
+			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
 

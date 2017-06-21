@@ -21,7 +21,7 @@
 
 			<div class="layout-wrap">
 
-			<?php if ( 'request-details' == bp_get_current_signup_step() ) : ?>
+			<?php if ( 'request-details' === bp_get_current_signup_step() ) : ?>
 
 				<?php bp_nouveau_signup_hook( 'before', 'account_details' ); ?>
 
@@ -61,7 +61,7 @@
 									bp_nouveau_xprofile_edit_visibilty();
 									?>
 
-									<?php if( bp_get_the_profile_field_description() ) : ?>
+									<?php if ( bp_get_the_profile_field_description() ) : ?>
 									<p class="description bp-feedback info small">
 										<span class="bp-icon" aria-hidden="true"></span>
 										<span class="text"><?php bp_the_profile_field_description(); ?></span>
@@ -94,7 +94,7 @@
 
 						<h2><?php _e( 'Blog Details', 'bp-nouveau' ); ?></h2>
 
-						<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes, I\'d like to create a new site', 'bp-nouveau' ); ?></label></p>
+						<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1" <?php checked( (int) bp_get_signup_with_blog_value(), 1 ); ?>/> <?php _e( "Yes, I'd like to create a new site", 'bp-nouveau' ); ?></label></p>
 
 						<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
 

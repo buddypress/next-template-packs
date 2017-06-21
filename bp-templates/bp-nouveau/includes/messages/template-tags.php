@@ -41,13 +41,13 @@ function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
 	 *                           'content', 'thread_content', 'thread_list', 'reply_box' suffixes
 	 * @since 1.1.0 (BuddyPress) for the 'compose_content' (before), 'thread_reply' suffixes
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
  * Load the new Messages User Interface
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */

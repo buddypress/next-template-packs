@@ -25,11 +25,7 @@ class BP_Nouveau_Members {
 	public function __construct() {
 		$this->setup_globals();
 		$this->includes();
-
-		// Setup list of add_action() hooks
 		$this->setup_actions();
-
-		// Setup list of add_filter() hooks
 		$this->setup_filters();
 	}
 
@@ -73,10 +69,9 @@ class BP_Nouveau_Members {
 			}
 		}
 
-		// Maybe enqueue some additional styles or scripts
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_members_enqueue_scripts' );
 
-		// Actions to check wether we are in the member's default front page sidebar
+		// Actions to check whether we are in the member's default front page sidebar
 		add_action( 'dynamic_sidebar_before', array( $this, 'user_home_sidebar_set'   ), 10, 1 );
 		add_action( 'dynamic_sidebar_after',  array( $this, 'user_home_sidebar_unset' ), 10, 1 );
 	}
@@ -95,9 +90,9 @@ class BP_Nouveau_Members {
 	 * Add filters to be sure the (BuddyPress) widgets display will be consistent
 	 * with the displayed user's default front page.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param  string $sidebar_index The Sidebar identifier.
+	 * @param string $sidebar_index The Sidebar identifier.
 	 */
 	public function user_home_sidebar_set( $sidebar_index = '' ) {
 		if ( 'sidebar-buddypress-members' !== $sidebar_index ) {
@@ -114,7 +109,7 @@ class BP_Nouveau_Members {
 	 * Remove filters to be sure the (BuddyPress) widgets display will no more take
 	 * the displayed user in account.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $sidebar_index The Sidebar identifier.
 	 */

@@ -107,7 +107,7 @@ function bp_nouveau_ajax_unmark_activity_favorite() {
 /**
  * Clear mentions if the directory tab is clicked
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string JSON reply
  */

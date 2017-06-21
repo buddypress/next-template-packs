@@ -32,7 +32,7 @@
 								</a>
 							</cite>
 
-							<?php echo bp_insert_activity_meta() ;?>
+							<?php echo bp_insert_activity_meta(); ?>
 
 						</footer>
 
@@ -51,7 +51,7 @@
 <?php else : ?>
 
 	<div class="widget-error">
-		<?php bp_nouveau_user_feedback( 'activity-loop-none' ) ;?>
+		<?php bp_nouveau_user_feedback( 'activity-loop-none' ); ?>
 	</div>
 
 <?php endif; ?>

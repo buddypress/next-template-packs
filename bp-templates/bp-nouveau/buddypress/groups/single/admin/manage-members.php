@@ -8,11 +8,11 @@
  */
 ?>
 
-<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+<h2 class="bp-screen-title <?php if ( bp_is_group_create() ) { echo esc_attr( 'creation-step-name' ); } ?>">
 	<?php _e( 'Manage Group Members', 'bp-nouveau' ); ?>
 </h2>
 
-	<p class="bp-help-text"><?php _e('Manage your group members; promote to moderators, admins or demote or ban.', 'bp-nouveau'); ?></p>
+	<p class="bp-help-text"><?php _e( 'Manage your group members; promote to moderators, admins or demote or ban.', 'bp-nouveau' ); ?></p>
 
 	<dl class="groups-manage-members-list">
 
@@ -99,7 +99,7 @@
 							<span class="banned warn"><?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?></span>
 						</p>
 
-						<?php bp_nouveau_groups_manage_members_buttons( array('container' => 'p', 'container_classes' => array('group-manage-buttons', 'text-links-list'), 'parent_element' => '  ' ) ) ; ?>
+						<?php bp_nouveau_groups_manage_members_buttons( array( 'container' => 'p', 'container_classes' => array( 'group-manage-buttons', 'text-links-list' ), 'parent_element' => '  ' ) ) ; ?>
 
 					</li>
 

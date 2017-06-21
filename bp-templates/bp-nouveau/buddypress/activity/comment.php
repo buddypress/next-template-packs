@@ -20,13 +20,13 @@
 
 	<div class="acomment-meta">
 
-		<?php bp_nouveau_activity_comment_action() ;?>
+		<?php bp_nouveau_activity_comment_action(); ?>
 
 	</div>
 
 	<div class="acomment-content"><?php bp_activity_comment_content(); ?></div>
 
-	<?php bp_nouveau_activity_comment_buttons( array('container' => 'div') );?>
+	<?php bp_nouveau_activity_comment_buttons( array( 'container' => 'div' ) );?>
 
 	<?php bp_nouveau_activity_recurse_comments( bp_activity_current_comment() ); ?>
 </li>

@@ -6,26 +6,25 @@
  *
  * @package BP Nouveau
  */
-
 ?>
 
 <h2 class="screen-heading"><?php _e( 'Change Profile Photo', 'bp-nouveau' ); ?></h2>
 
 <?php bp_nouveau_xprofile_hook( 'before', 'avatar_upload_content' ); ?>
 
-<?php if ( !(int)bp_get_option( 'bp-disable-avatar-uploads' ) ) : ?>
+<?php if ( ! (int) bp_get_option( 'bp-disable-avatar-uploads' ) ) : ?>
 
 	<p class="bp-feedback info">
 		<span class="bp-icon" aria-hidden="true"></span>
-		<span class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. If there is a <a href="http://gravatar.com">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer.', 'bp-nouveau' ); ?></span>
+		<span class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. If there is a <a href="https://gravatar.com">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer.', 'bp-nouveau' ); ?></span>
 	</p>
 
 	<form action="" method="post" id="avatar-upload-form" class="standard-form" enctype="multipart/form-data">
 
-		<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
+		<?php if ( 'upload-image' === bp_get_avatar_admin_step() ) : ?>
 
 			<?php wp_nonce_field( 'bp_avatar_upload' ); ?>
-			<p class="bp-help-text"><?php _e( 'Click below to select a JPG, GIF or PNG format photo from your computer and then click \'Upload Image\' to proceed.', 'bp-nouveau' ); ?></p>
+			<p class="bp-help-text"><?php _e( "Click below to select a JPG, GIF or PNG format photo from your computer and then click 'Upload Image' to proceed.", 'bp-nouveau' ); ?></p>
 
 			<p id="avatar-upload">
 				<label for="file" class="bp-screen-reader-text"><?php _e( 'Select an image', 'bp-nouveau' ); ?></label>
@@ -41,7 +40,7 @@
 
 		<?php endif; ?>
 
-		<?php if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
+		<?php if ( 'crop-image' === bp_get_avatar_admin_step() ) : ?>
 
 			<p class="bp-help-text screen-header"><?php _e( 'Crop Your New Profile Photo', 'bp-nouveau' ); ?></p>
 
@@ -69,13 +68,13 @@
 	/**
 	 * Load the Avatar UI templates
 	 *
-	 * @since  2.3.0
+	 * @since 2.3.0
 	 */
 	bp_avatar_get_templates(); ?>
 
 <?php else : ?>
 
-	<p class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href="http://gravatar.com">Gravatar</a> using the same email address as you used to register with this site.', 'bp-nouveau' ); ?></p>
+	<p class="bp-help-text"><?php _e( 'Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href="https://gravatar.com">Gravatar</a> using the same email address as you used to register with this site.', 'bp-nouveau' ); ?></p>
 
 <?php endif; ?>
 

@@ -27,27 +27,27 @@ class BP_Buttons_Group {
 
 	/**
 	 * Constructor
-		*
+	 *
 	 * @since 1.0.0
 	 *
-		* @param array $args An array of array having the following parameters {
-		*     @type string $id                A string to use as the unique ID for the button. Required.
-		*     @type int    $position          Where to insert the Button. Defaults to 99.
-		*     @type string $component         The Component's the button is build for (eg: Activity, Groups..). Required.
-		*     @type bool   $must_be_logged_in Whether the button should only be displayed to logged in users. Defaults to True.
-		*     @type bool   $block_self        Optional. True if the button should be hidden when a user is viewing his own profile.
-		*                                     Defaults to False.
-		*     @type string $parent_element    Whether to use a wrapper. Defaults to false.
-		*     @type string $parent_attr       set an array of attributes for the parent element.
-		*     @type string $button_element    Set this to 'button', 'img', or 'a', defaults to anchor.
-		*     @type string $button_attr       Any attributes required for the button_element
-		*     @type string $link_text         The text of the link. Required.
-		* }
+	 * @param array $args Optional array having the following parameters {
+	 *     @type string $id                A string to use as the unique ID for the button. Required.
+	 *     @type int    $position          Where to insert the Button. Defaults to 99.
+	 *     @type string $component         The Component's the button is build for (eg: Activity, Groups..). Required.
+	 *     @type bool   $must_be_logged_in Whether the button should only be displayed to logged in users. Defaults to True.
+	 *     @type bool   $block_self        Optional. True if the button should be hidden when a user is viewing his own profile.
+	 *                                     Defaults to False.
+	 *     @type string $parent_element    Whether to use a wrapper. Defaults to false.
+	 *     @type string $parent_attr       set an array of attributes for the parent element.
+	 *     @type string $button_element    Set this to 'button', 'img', or 'a', defaults to anchor.
+	 *     @type string $button_attr       Any attributes required for the button_element
+	 *     @type string $link_text         The text of the link. Required.
+	 * }
 	 */
 	public function __construct( $args = array() ) {
 		if ( empty( $args ) || ! is_array( $args ) ) {
 			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'bp-nouveau' ) );
-			return false;
+			return;
 		}
 
 		foreach ( $args as $arg ) {
@@ -136,15 +136,15 @@ class BP_Buttons_Group {
 	 * @return array An array of HTML links.
 	 */
 	public function get( $sort = true ) {
+		$buttons = array();
+
 		if ( empty( $this->group ) ) {
-			return;
+			return $buttons;
 		}
 
 		if ( true === $sort ) {
 			$this->group = $this->sort( $this->group );
 		}
-
-		$buttons = array();
 
 		foreach ( $this->group as $key_button => $button ) {
 			// Reindex with ids.
@@ -155,7 +155,8 @@ class BP_Buttons_Group {
 
 			$buttons[ $button['id'] ] = bp_get_button( $button);
 		}
-	return $buttons;
+
+		return $buttons;
 	}
 
 	/**
@@ -186,7 +187,7 @@ if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
  *
  * Adds a widget to move avatar/item nav into the sidebar
  *
- * @since  1.0
+ * @since 1.0
  *
  * @uses   WP_Widget
  */
@@ -195,9 +196,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	/**
 	 * Constructor
 	 *
-	 * @since  1.0
-	 *
-	 * @uses   WP_Widget::__construct() to init the widget
+	 * @since 1.0
 	 */
 	public function __construct() {
 
@@ -216,7 +215,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	/**
 	 * Register the widget
 	 *
-	 * @since  1.0
+	 * @since 1.0
 	 *
 	 * @uses   register_widget() to register the widget
 	 */
@@ -227,10 +226,9 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	/**
 	 * Displays the output, the button to post new support topics
 	 *
-	 * @since  1.0
+	 * @since 1.0
 	 *
 	 * @param  mixed $args Arguments
-	 * @return string html output
 	 */
 	public function widget( $args, $instance ) {
 		if ( ! is_buddypress() || bp_is_group_create() ) {
@@ -277,7 +275,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	/**
 	 * Update the new support topic widget options (title)
 	 *
-	 * @since  1.0
+	 * @since 1.0
 	 *
 	 * @param  array $new_instance The new instance options
 	 * @param  array $old_instance The old instance options
@@ -294,7 +292,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	/**
 	 * Output the new support topic widget options form
 	 *
-	 * @since  1.0
+	 * @since 1.0
 	 *
 	 * @param  $instance Instance
 	 * @return string HTML Output

@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Members Single Profile Edit
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -30,7 +30,7 @@ if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) )
 
 			<div<?php bp_field_css_class( 'editfield' ); ?>>
 
-			<?php if( bp_get_the_profile_field_description() ) : ?>
+			<?php if ( bp_get_the_profile_field_description() ) : ?>
 				<div class="bp-feedback bp-mesages info description">
 					<span class="bp-icon" aria-hidden="true"></span>
 					<p class="text">

@@ -25,11 +25,7 @@ class BP_Nouveau_Groups {
 	public function __construct() {
 		$this->setup_globals();
 		$this->includes();
-
-		// Setup list of add_action() hooks
 		$this->setup_actions();
-
-		// Setup list of add_filter() hooks
 		$this->setup_filters();
 	}
 
@@ -77,7 +73,6 @@ class BP_Nouveau_Groups {
 			add_action( 'groups_setup_nav', 'bp_nouveau_group_setup_nav' );
 		}
 
-		// Enqueue the scripts
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_groups_enqueue_scripts' );
 
 		// Avoid Notices for BuddyPress Legacy Backcompat
@@ -86,7 +81,7 @@ class BP_Nouveau_Groups {
 		// Register the Groups Notifications filters
 		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_groups_notification_filters' );
 
-		// Actions to check wether we are in the Group's default front page sidebar
+		// Actions to check whether we are in the Group's default front page sidebar
 		add_action( 'dynamic_sidebar_before', array( $this, 'group_home_sidebar_set'   ), 10, 1 );
 		add_action( 'dynamic_sidebar_after',  array( $this, 'group_home_sidebar_unset' ), 10, 1 );
 
@@ -102,12 +97,8 @@ class BP_Nouveau_Groups {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
-		// Register groups scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_groups_register_scripts', 10, 1 );
-
-		// Localize Scripts
 		add_filter( 'bp_core_get_js_strings', 'bp_nouveau_groups_localize_scripts', 10, 1 );
-
 		add_filter( 'groups_create_group_steps', 'bp_nouveau_group_invites_create_steps', 10, 1 );
 
 		$buttons = array(
@@ -146,9 +137,9 @@ class BP_Nouveau_Groups {
 	 * Add filters to be sure the (BuddyPress) widgets display will be consistent
 	 * with the current group's default front page.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param  string $sidebar_index The Sidebar identifier.
+	 * @param string $sidebar_index The Sidebar identifier.
 	 */
 	public function group_home_sidebar_set( $sidebar_index = '' ) {
 		if ( 'sidebar-buddypress-groups' !== $sidebar_index ) {
@@ -165,7 +156,7 @@ class BP_Nouveau_Groups {
 	 * Remove filters to be sure the (BuddyPress) widgets display will no more take
 	 * the current group displayed in account.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $sidebar_index The Sidebar identifier.
 	 */

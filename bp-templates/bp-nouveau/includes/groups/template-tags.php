@@ -102,7 +102,7 @@ function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
 	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
 	 * @since 1.7.0 (BuddyPress) for the 'page' suffix
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
@@ -134,7 +134,7 @@ function bp_nouveau_group_hook( $when = '', $suffix = '' ) {
 	 * @since 1.2.0 (BuddyPress) for the 'activity_content', 'header_meta', 'home_content',
 	 *                           'plugin_template', 'friend_requests_content' suffixes.
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
@@ -154,7 +154,7 @@ function bp_nouveau_groups_loop_item() {
 /**
  * Display the current group activity post form if needed
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Outpur
  */
@@ -181,7 +181,7 @@ function bp_nouveau_groups_activity_post_form() {
 /**
  * Load the Group Invites UI.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
@@ -206,7 +206,7 @@ function bp_nouveau_group_invites_interface() {
 /**
  * Gets the displayed user group invites preferences
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return int 1 if user chose to restrict to friends. O otherwise.
  */
@@ -238,7 +238,7 @@ function bp_nouveau_group_creation_tabs() {
 	foreach ( (array) $bp->groups->group_creation_steps as $slug => $step ) {
 		$is_enabled = bp_are_previous_group_creation_steps_complete( $slug ); ?>
 
-		<li<?php if ( bp_get_groups_current_create_step() == $slug ) : ?> class="current"<?php endif; ?>>
+		<li<?php if ( bp_get_groups_current_create_step() === $slug ) : ?> class="current"<?php endif; ?>>
 			<?php if ( $is_enabled ) : ?>
 				<a href="<?php bp_groups_directory_permalink(); ?>create/step/<?php echo $slug ?>/">
 					<?php echo $counter ?> <?php echo $step['name'] ?>
@@ -265,7 +265,7 @@ function bp_nouveau_group_creation_tabs() {
 /**
  * Load the requested Create Screen for the new group.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
@@ -276,7 +276,7 @@ function bp_nouveau_group_creation_screen() {
 /**
  * Load the requested Manage Screen for the current group.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
@@ -391,7 +391,7 @@ function bp_nouveau_group_manage_screen() {
 		 */
 		do_action( 'bp_before_group_creation_step_buttons' );
 
-		if ( 'crop-image' != bp_get_avatar_admin_step() ) {
+		if ( 'crop-image' !== bp_get_avatar_admin_step() ) {
 			$creation_step_buttons = '';
 
 			if ( ! bp_is_first_group_creation_step() ) {
@@ -640,7 +640,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 	 */
 	function bp_nouveau_get_groups_buttons( $args ) {
 
-		$type = ( ! empty( $args['type'] ) ) ?  $args['type'] : 'group';
+		$type = ( ! empty( $args['type'] ) ) ? $args['type'] : 'group';
 
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'group' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
@@ -649,7 +649,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 		$buttons = array();
 
-		if ( ( 'loop' === $type || 'invite' ===  $type ) && isset( $GLOBALS['groups_template']->group ) ) {
+		if ( ( 'loop' === $type || 'invite' === $type ) && isset( $GLOBALS['groups_template']->group ) ) {
 			$group = $GLOBALS['groups_template']->group;
 		} else {
 			$group = groups_get_current_group();
@@ -665,9 +665,9 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		 * simply pass any value found in $args
 		 * or set var false.
 		 */
-		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
+		if ( ! empty( $args['container'] ) && 'ul' === $args['container']  ) {
 			$parent_element = 'li';
-		} elseif( ! empty( $args['parent_element'] ) ) {
+		} elseif ( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
 		} else {
 			$parent_element = false;
@@ -682,7 +682,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		 * Icons sets a class for icon display if not using the button element
 		 */
 		$icons = '';
-		if( ! empty( $args['button_element'] ) ) {
+		if ( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
@@ -691,7 +691,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 
 		// If we pass through parent classes add them to $button array
 		$parent_class = '';
-		if( ! empty( $args['parent_attr']['class'] ) ) {
+		if ( ! empty( $args['parent_attr']['class'] ) ) {
 			$parent_class = esc_html( $args['parent_attr']['class'] );
 		}
 
@@ -951,7 +951,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 				$button_args = bp_nouveau()->groups->button_args;
 
 				// If we pass through parent classes merge those into the existing ones
-				if( ! empty( $parent_class ) ) {
+				if ( ! empty( $parent_class ) ) {
 					$parent_class .= ' ' . $button_args['wrapper_class'];
 				}
 
@@ -1047,7 +1047,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 /**
  * Does the group has meta.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if the group has meta. False otherwise.
  */
@@ -1058,7 +1058,7 @@ function bp_nouveau_group_has_meta() {
 /**
  * Does the group have extra meta?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if the group has meta. False otherwise.
  */
@@ -1069,7 +1069,7 @@ function bp_nouveau_group_has_meta_extra() {
 /**
  * Display the group meta.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
@@ -1092,7 +1092,7 @@ function bp_nouveau_group_meta() {
 	/**
 	 * Get the group meta.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return array The group meta.
 	 */
@@ -1148,7 +1148,7 @@ function bp_nouveau_group_meta() {
 			/**
 			 * Filter here to add/remove Group meta.
 			 *
-			 * @since  1.0.0
+			 * @since 1.0.0
 			 *
 			 * @param array  $meta     The list of meta to output.
 			 * @param object $group    The current Group of the loop object.
@@ -1163,7 +1163,7 @@ function bp_nouveau_group_meta() {
 /**
  * Load the appropriate content for the single group pages
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
@@ -1241,7 +1241,7 @@ function bp_nouveau_group_template_part() {
 /**
  * Use the appropriate Group header and enjoy a template hierarchy
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -1276,7 +1276,7 @@ function bp_nouveau_group_header_template_part() {
  * Get a link to set the Group's default front page and directly
  * reach the Customizer section where it's possible to do it.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -1292,7 +1292,7 @@ function bp_nouveau_groups_get_customizer_option_link() {
  * Get a link to set the Group's front page widgets and directly
  * reach the Customizer section where it's possible to do it.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -1345,8 +1345,8 @@ function bp_nouveau_get_group_description_excerpt( $group =false, $length = fals
 	// If this is a grid layout but no length is passed in set shorter
 	// default value otherwise use the passed in value.
 	// If not a grid then the BP core default is used or passed in value.
-	if( bp_nouveau_loop_is_grid() && 'groups' == bp_current_component() ) {
-		if ( false == $length ) {
+	if ( bp_nouveau_loop_is_grid() && 'groups' === bp_current_component() ) {
+		if ( false === $length ) {
 			$length = 100;
 		} elseif ( $length ) {
 			$length = $length;

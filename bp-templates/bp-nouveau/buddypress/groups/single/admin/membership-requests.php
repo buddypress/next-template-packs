@@ -10,6 +10,6 @@
 
 <div class="requests" data-bp-list="group_requests">
 
-	<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'group-requests-loading' ) ;?></div>
+	<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'group-requests-loading' ); ?></div>
 
 </div><!-- .requests -->

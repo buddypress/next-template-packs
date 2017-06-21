@@ -14,7 +14,7 @@
 
 		<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
-			<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'single-activity-loading' ) ;?></li>
+			<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'single-activity-loading' ); ?></li>
 
 		</ul>
 

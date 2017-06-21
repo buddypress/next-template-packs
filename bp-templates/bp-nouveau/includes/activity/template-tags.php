@@ -95,7 +95,7 @@ function bp_nouveau_after_activity_post_form() {
 /**
  * Display the displayed user activity post form if needed
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Outpur
  */
@@ -145,7 +145,7 @@ function bp_nouveau_activity_hook( $when = '', $suffix = '' ) {
 	/**
 	 * @since 1.2.0 (BuddyPress)
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
@@ -237,9 +237,9 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		* parent_element args if set.
 		* Will render li elements around anchors/buttons.
 		*/
-		if( 'ul' == $args['container']  ) {
+		if ( 'ul' === $args['container']  ) {
 			$parent_element = 'li';
-		} elseif( ! empty( $args['parent_element'] ) ) {
+		} elseif ( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
 		} else {
 			$parent_element = false;
@@ -255,7 +255,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		 *
 		 */
 
-		if( ! empty( $args['button_element'] ) ) {
+		if ( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
@@ -282,7 +282,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'class'           => 'button view bp-secondary-action bp-tooltip',
 					'data-bp-tooltip' => __( 'View Conversation', 'bp-nouveau' ),
 					),
-				'link_text'  => sprintf('<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
+				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
 			);
 
 			// If button element set add url link to data-attr
@@ -628,7 +628,7 @@ function bp_nouveau_activity_recurse_comments( $comment ) {
 	/**
 	 * Filters the closing tag for the template that list activity comments.
 	 *
-	 * @since  1.6.0 (BuddyPress)
+	 * @since 1.6.0 (BuddyPress)
 	 *
 	 * @param string $value Closing tag for the HTML markup to use.
 	 */
@@ -744,22 +744,22 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 		 * otherwise simply pass any value found in args
 		 * or set var false.
 		 */
-		if( 'ul' == $args['container']  ) {
+		if ( 'ul' === $args['container']  ) {
 			$parent_element = 'li';
-		} elseif( ! empty( $args['parent_element'] ) ) {
+		} elseif ( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
 		} else {
 			$parent_element = false;
 		}
 
-		$parent_attr = ( ! empty( $args['parent_attr'] ) )? $args['parent_attr']  : '';
+		$parent_attr = ( ! empty( $args['parent_attr'] ) ) ? $args['parent_attr']  : '';
 
 		/**
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
 		 * otherwise default to 'a' (anchor).
 		 */
-		if( !empty( $args['button_element'] ) ) {
+		if ( !empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';

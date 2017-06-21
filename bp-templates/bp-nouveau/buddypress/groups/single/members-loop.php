@@ -2,7 +2,7 @@
 /**
  * Group Members Loop template
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -20,7 +20,7 @@
 
 		<?php while ( bp_group_members() ) : bp_group_the_member(); ?>
 
-			<li <?php bp_member_class( array('item-entry') ); ?> data-bp-item-id="<?php echo esc_attr( bp_get_group_member_id() ); ?>" data-bp-item-component="members">
+			<li <?php bp_member_class( array( 'item-entry' ) ); ?> data-bp-item-id="<?php echo esc_attr( bp_get_group_member_id() ); ?>" data-bp-item-component="members">
 
 				<div class="list-wrap">
 					<div class="item-avatar">

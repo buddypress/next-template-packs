@@ -14,7 +14,7 @@ if ( ! class_exists( 'BP_Latest_Activities' ) ) :
 /**
  * A widget to display the latest activities of your community!
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 class BP_Latest_Activities extends WP_Widget {
 	/**
@@ -44,11 +44,10 @@ class BP_Latest_Activities extends WP_Widget {
 	/**
 	 * Display the widget content.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $args     Widget arguments.
 	 * @param  array $instance Widget settings, as saved by the user.
-	 * @return string          HTML Output.
 	 */
 	public function widget( $args, $instance ) {
 		// Default values
@@ -116,7 +115,7 @@ class BP_Latest_Activities extends WP_Widget {
 	/**
 	 * Update the widget settings.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $new_instance The new instance settings.
 	 * @param  array $old_instance The old instance settings.
@@ -142,13 +141,12 @@ class BP_Latest_Activities extends WP_Widget {
 	/**
 	 * Display the form to set the widget settings.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array  $instance Settings for this widget.
 	 * @return string           HTML output.
 	 */
 	public function form( $instance ) {
-		//Defaults
 		$instance = wp_parse_args( (array) $instance, array(
 			'title' => __( 'Latest updates', 'bp-nouveau' ),
 			'max'   => 5,

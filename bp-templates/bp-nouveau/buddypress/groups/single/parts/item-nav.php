@@ -28,7 +28,7 @@
 
 				<?php endwhile; ?>
 
-				<?php bp_nouveau_group_hook( '', 'options_nav' ) ;?>
+				<?php bp_nouveau_group_hook( '', 'options_nav' ); ?>
 
 			</ul>
 

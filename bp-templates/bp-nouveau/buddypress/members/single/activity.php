@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Users Activity
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -17,10 +17,10 @@
 	</ul>
 </nav><!-- .item-list-tabs#subnav -->
 
-<?php bp_nouveau_activity_member_post_form() ;?>
+<?php bp_nouveau_activity_member_post_form(); ?>
 
 
-<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
+<?php bp_get_template_part( 'common/search-and-filters-bar' ); ?>
 
 <?php bp_nouveau_member_hook( 'before', 'activity_content' ); ?>
 
@@ -28,7 +28,7 @@
 
 	<ul id="activity-stream" class="<?php bp_nouveau_loop_classes(); ?>" data-bp-list="activity">
 
-		<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-activity-loading' ) ;?></li>
+		<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-activity-loading' ); ?></li>
 
 	</ul>
 
