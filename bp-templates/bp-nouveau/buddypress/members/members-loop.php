@@ -4,7 +4,7 @@
  *
  * Querystring is set via AJAX in _inc/ajax.php - bp_legacy_theme_object_filter()
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -23,7 +23,7 @@ bp_nouveau_before_loop(); ?>
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
 
-		<li <?php bp_member_class( array('item-entry') ); ?> data-bp-item-id="<?php bp_member_user_id(); ?>" data-bp-item-component="members">
+		<li <?php bp_member_class( array( 'item-entry' ) ); ?> data-bp-item-id="<?php bp_member_user_id(); ?>" data-bp-item-component="members">
 			<div class="list-wrap">
 
 				<div class="item-avatar">
@@ -44,7 +44,7 @@ bp_nouveau_before_loop(); ?>
 							</p><!-- #item-meta -->
 						<?php endif ; ?>
 
-						<?php bp_nouveau_members_loop_buttons( array('container' => 'ul', 'button_element' => 'button' ) ); ?>
+						<?php bp_nouveau_members_loop_buttons( array( 'container' => 'ul', 'button_element' => 'button' ) ); ?>
 
 					</div>
 

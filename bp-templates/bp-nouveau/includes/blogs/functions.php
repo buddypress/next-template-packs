@@ -64,7 +64,7 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 	/**
 	 * Use this filter to introduce your custom nav items for the blogs directory.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $nav_items The list of the blogs directory nav items.
 	 */
@@ -175,7 +175,7 @@ function bp_nouveau_blogs_customizer_controls( $controls = array() ) {
 /**
  * Inline script to toggle the signup blog form
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string Javascript output
  */
@@ -212,10 +212,9 @@ function bp_nouveau_get_blog_signup_inline_script() {
 	 */
 function bp_nouveau_blog_loop_item_has_lastest_post( $classes) {
 	if ( bp_get_blog_latest_post_title() ) {
-	$classes[] = 'has-latest-post';
-	return $classes;
-	} else {
-		return $classes;
+		$classes[] = 'has-latest-post';
 	}
+
+	return $classes;
 }
 add_filter( 'bp_get_blog_class', 'bp_nouveau_blog_loop_item_has_lastest_post' );

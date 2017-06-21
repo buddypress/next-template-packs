@@ -108,7 +108,7 @@ function bp_nouveau_blogs_create_hook( $when = '', $suffix = '' ) {
 	 * @since 1.1.0 (BuddyPress) for the 'content' suffix
 	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
@@ -130,12 +130,12 @@ function bp_nouveau_blogs_loop_item() {
  *
  * @since 1.0.0
  *
- * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
+ * @param array $args @see bp_nouveau_wrapper() for the description of parameters.
  * @return string HTML Output
  */
 function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['blogs_template'] ) ) {
-		return;
+		return '';
 	}
 
 	$args['type'] = 'loop';
@@ -152,7 +152,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	$output .= ob_get_clean();
 
 	if ( empty( $output ) ) {
-		return;
+		return '';
 	}
 
 	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
@@ -163,14 +163,15 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $type Type of Group of buttons to get.
+	 * @param string $type Type of Group of buttons to get.
+	 * @return array
 	 */
 	function bp_nouveau_get_blogs_buttons( $args ) {
-		$type = ( ! empty( $args['type'] ) ) ?  $args['type'] : 'loop';
+		$type = ( ! empty( $args['type'] ) ) ? $args['type'] : 'loop';
 
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'loop' !== $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			return;
+			return array();
 		}
 
 		$buttons = array();
@@ -183,22 +184,22 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-		/**
+		/*
 		 * If the 'container' is set to 'ul'
 		 * set a var $parent_element to li
 		 * otherwise simply pass any value found in args
 		 * or set var false.
 		 */
-		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
+		if ( ! empty( $args['container'] ) && 'ul' === $args['container']  ) {
 			$parent_element = 'li';
-		} elseif( ! empty( $args['parent_element'] ) ) {
+		} elseif ( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
 		} else {
 			$parent_element = false;
 		}
 
 
-		/**
+		/*
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
 		 * otherwise default to 'a' (anchor)
@@ -207,18 +208,19 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		 * Icons sets a class for icon display if not using the button element
 		 */
 		$icons = '';
-		if( ! empty( $args['button_element'] ) ) {
+		if ( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'a';
 			$icons = ' icons';
 		}
 
-		/**
+		/*
 		 * This filter workaround is waiting for a core adaptation
 		 * so that we can directly get the groups button arguments
 		 * instead of the button.
-		 * @see https://buddypress.trac.wordpress.org/ticket/7126
+		 *
+		 * See https://buddypress.trac.wordpress.org/ticket/7126
 		 */
 		add_filter( 'bp_get_blogs_visit_blog_button', 'bp_nouveau_blogs_catch_button_args', 100, 1 );
 
@@ -231,7 +233,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 
 		// If we pass through parent classes add them to $button array
 		$parent_class = '';
-		if( ! empty( $args['parent_attr']['class'] ) ) {
+		if ( ! empty( $args['parent_attr']['class'] ) ) {
 			$parent_class = esc_html( $args['parent_attr']['class'] );
 		}
 
@@ -309,7 +311,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 /**
  * Check if the Sites has a latest post
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if the sites has a latest post. False otherwise.
  */

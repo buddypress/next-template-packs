@@ -100,7 +100,7 @@ function bp_nouveau_ajax_addremove_friend() {
 		}
 
 	// Trying to cancel friendship.
-	} elseif ( 'is_friend' == BP_Friends_Friendship::check_is_friend( bp_loggedin_user_id(), $friend_id ) ) {
+	} elseif ( 'is_friend' === BP_Friends_Friendship::check_is_friend( bp_loggedin_user_id(), $friend_id ) ) {
 		if ( ! friends_remove_friend( bp_loggedin_user_id(), $friend_id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="bp-feedback error">%s</div>',
@@ -128,7 +128,7 @@ function bp_nouveau_ajax_addremove_friend() {
 		}
 
 	// Trying to request friendship.
-	} elseif ( 'not_friends' == BP_Friends_Friendship::check_is_friend( bp_loggedin_user_id(), $friend_id ) ) {
+	} elseif ( 'not_friends' === BP_Friends_Friendship::check_is_friend( bp_loggedin_user_id(), $friend_id ) ) {
 		if ( ! friends_add_friend( bp_loggedin_user_id(), $friend_id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="bp-feedback error">%s</div>',
@@ -141,7 +141,7 @@ function bp_nouveau_ajax_addremove_friend() {
 		}
 
 	// Trying to cancel pending request.
-	} elseif ( 'pending' == BP_Friends_Friendship::check_is_friend( bp_loggedin_user_id(), $friend_id ) ) {
+	} elseif ( 'pending' === BP_Friends_Friendship::check_is_friend( bp_loggedin_user_id(), $friend_id ) ) {
 		if ( friends_withdraw_friendship( bp_loggedin_user_id(), $friend_id ) ) {
 			wp_send_json_success( array( 'contents' => bp_get_add_friend_button( $friend_id ) ) );
 		} else {

@@ -210,7 +210,7 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
 /**
  * Output HTML content into a wrapper.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args {
  *     Array of arguments.
@@ -235,7 +235,7 @@ function bp_nouveau_wrapper( $args = array() ) {
 // 'activity-meta'
 	$current_component_class = bp_current_component() . '-meta';
 
-	if ( 'groups' == bp_current_component() && 'activity' == bp_current_action() ) :
+	if ( 'groups' === bp_current_component() && 'activity' === bp_current_action() ) :
 		$generic_class = ' activity-meta ';
 	else:
 		$generic_class = '';
@@ -258,7 +258,7 @@ function bp_nouveau_wrapper( $args = array() ) {
 
 	// Actually merge some classes defaults and $args
 	// @todo This is temp, we need certain classes but maybe improve this approach.
-	$default_classes = array('action');
+	$default_classes = array( 'action' );
 	$r['container_classes'] = array_merge( $r['container_classes'], $default_classes );
 
 	if ( empty( $r['container'] ) || ! isset( $valid_containers[ $r['container'] ] ) || empty( $r['output'] ) ) {
@@ -285,7 +285,7 @@ function bp_nouveau_wrapper( $args = array() ) {
 /**
  * Register the 2 sidebars for the Group & User default front page
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_register_sidebars() {
 	$default_fronts      = bp_nouveau_get_appearance_settings();
@@ -358,7 +358,7 @@ function bp_nouveau_current_user_can( $capability = '' ) {
 /**
  * BP Nouveau will not use this hooks anymore
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return array the list of disused legacy hooks
  */
@@ -591,7 +591,7 @@ function bp_nouveau_get_forsaken_hooks() {
 /**
  * Parse an html output to a list of component's directory nav item.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string  $hook      The hook to fire.
  * @param  string  $component The component nav belongs to.
@@ -771,7 +771,7 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
 			if ( 0 !== strpos( $key, 'bp_nouveau_appearance' ) ) {
 				continue;
 			}
-			$k = str_replace( array( '[', ']'), array( '_', '' ), $key );
+			$k = str_replace( array( '[', ']' ), array( '_', '' ), $key );
 			$retval[ $k ] = $setting;
 		}
 
@@ -860,7 +860,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
  * Returns the choices for the Layout option of the customizer
  * or the list of corresponding css classes.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $type 'option' to get the labels, 'classes' to get the classes
  * @return array  the list of labels or classes preserving keys.
@@ -883,7 +883,7 @@ function bp_nouveau_customizer_grid_choices( $type = 'option' ) {
 /**
  * Sanitize a list of slugs to save it as an array
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $option A comma separated list of nav items slugs.
  * @return array          An array of nav items slugs.
@@ -896,7 +896,7 @@ function bp_nouveau_sanitize_nav_order( $option = '' ) {
 /**
  * BP Nouveau's callback for the cover image feature.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array $params the current component's feature parameters.
  * @return array          an array to inform about the css handle to attach the css rules to
@@ -913,7 +913,7 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
 	$top_offset  = bp_core_avatar_full_height() - 10;
 	$left_offset = bp_core_avatar_full_width() + 20;
 
-	$cover_image = isset( $params['cover_image'] ) ? 'background-image: url(' . $params['cover_image'] . ');' : '';
+	$cover_image = isset( $params['cover_image'] ) ? 'background-image: url( ' . $params['cover_image'] . ' );' : '';
 
 	$hide_avatar_style = '';
 
@@ -1558,7 +1558,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 /**
  * Reorder a BuddyPress item nav according to a given list of nav item slugs
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  object $nav         The BuddyPress Item Nav object to reorder
  * @param  array  $order       A list of slugs ordered (eg: array( 'profile', 'activity', etc..) )

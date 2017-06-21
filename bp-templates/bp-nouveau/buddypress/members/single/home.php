@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Members Home
  *
- * @since    1.0.0
+ * @since   1.0.0
  *
  * @package BP Nouveau
  */
@@ -11,9 +11,9 @@
 
 	<?php bp_nouveau_member_hook( 'before', 'home_content' ); ?>
 
-	<div id="item-header" role="complementary" data-bp-item-id="<?php echo bp_displayed_user_id(); ?>" data-bp-item-component="members" class="users-header single-headers">
+	<div id="item-header" role="complementary" data-bp-item-id="<?php echo esc_attr( bp_displayed_user_id() ); ?>" data-bp-item-component="members" class="users-header single-headers">
 
-		<?php bp_nouveau_member_header_template_part() ;?>
+		<?php bp_nouveau_member_header_template_part(); ?>
 
 	</div><!-- #item-header -->
 

@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Groups Activity
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -20,7 +20,7 @@
 			<li class="group-act-search"><?php bp_nouveau_search_form(); ?></li>
 		</ul>
 
-		<?php bp_get_template_part('common/filters/groups-screens-filters'); ?>
+		<?php bp_get_template_part( 'common/filters/groups-screens-filters' ); ?>
 	</div><!-- // .subnav-filters -->
 
 
@@ -30,7 +30,7 @@
 
 	<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
-		<li id="bp-activity-ajax-loader"><?php bp_nouveau_user_feedback( 'group-activity-loading' ) ;?></li>
+		<li id="bp-activity-ajax-loader"><?php bp_nouveau_user_feedback( 'group-activity-loading' ); ?></li>
 
 	</ul>
 

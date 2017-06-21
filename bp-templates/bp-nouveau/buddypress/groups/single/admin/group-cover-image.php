@@ -10,7 +10,7 @@
 
 <?php if ( bp_is_group_create() ) : ?>
 
-	<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+	<h2 class="bp-screen-title <?php if ( bp_is_group_create() ) { echo esc_attr( 'creation-step-name' ); } ?>">
 		<?php _e( 'Upload a Cover Image', 'bp-nouveau' ); ?>
 	</h2>
 

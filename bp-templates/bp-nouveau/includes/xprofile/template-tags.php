@@ -38,7 +38,7 @@ function bp_nouveau_xprofile_hook( $when = '', $suffix = '' ) {
 	 * @since 1.2.0 (BuddyPress) for the 'loop_content' suffix.
 	 * @since 2.4.0 (BuddyPress) for the 'edit_cover_image' suffix.
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 
@@ -46,7 +46,7 @@ function bp_nouveau_xprofile_hook( $when = '', $suffix = '' ) {
  * Template tag to output the field visibility markup in
  * edit and signup screens.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -90,16 +90,16 @@ function nouveau_the_profile_group_name( $base_name = null ) {
 function nouveau_get_the_profile_group_name( $base_name ) {
 	global $group;
 
-	if( empty( $base_name ) )
+	if ( empty( $base_name ) )
 		$base_name = 'Primary Account';
 
-	if('Base' == $group->name ) {
+	if ( 'Base' === $group->name ) {
 		$group->name = $base_name;
 	}
 
-	$base_name = apply_filters('nouveau_get_the_profile_group_name', $group->name );
+	$base_name = apply_filters( 'nouveau_get_the_profile_group_name', $group->name );
 
 	return $base_name;
 }
-add_filter('bp_get_the_profile_group_name', 'nouveau_get_the_profile_group_name');
+add_filter( 'bp_get_the_profile_group_name', 'nouveau_get_the_profile_group_name' );
 */

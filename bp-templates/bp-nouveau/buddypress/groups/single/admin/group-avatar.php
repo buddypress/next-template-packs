@@ -8,12 +8,12 @@
  */
 
 ?>
-<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+<h2 class="bp-screen-title <?php if ( bp_is_group_create() ) { echo esc_attr( 'creation-step-name' ); } ?>">
 	<?php _e( 'Group Avatar', 'bp-nouveau' ); ?>
 </h2>
 
-<?php if ( !bp_is_group_create() ) : ?>
-	<?php if( !bp_get_group_has_avatar() ): ?>
+<?php if ( ! bp_is_group_create() ) : ?>
+	<?php if ( ! bp_get_group_has_avatar() ): ?>
 		<p class="bp-help-text"><?php _e("Add an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results.", 'bp-nouveau' ); ?></p>
 	<?php else: ?>
 		<p class="bp-help-text"><?php _e("Edit or update your avatar image for this group.", 'bp-nouveau' ); ?></p>
@@ -21,7 +21,7 @@
 <?php endif; ?>
 
 
-<?php if ( 'upload-image' == bp_get_avatar_admin_step() ) : ?>
+<?php if ( 'upload-image' === bp_get_avatar_admin_step() ) : ?>
 	<?php if ( bp_is_group_create() ) : ?>
 
 
@@ -59,7 +59,7 @@
 	/**
 	 * Load the Avatar UI templates
 	 *
-	 * @since  2.3.0
+	 * @since 2.3.0
 	 */
 	bp_avatar_get_templates(); ?>
 
@@ -67,7 +67,7 @@
 
 <?php endif;
 
-if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
+if ( 'crop-image' === bp_get_avatar_admin_step() ) : ?>
 
 	<h4><?php _e( 'Crop Group Profile Photo', 'bp-nouveau' ); ?></h4>
 
@@ -85,6 +85,10 @@ if ( 'crop-image' == bp_get_avatar_admin_step() ) : ?>
 	<input type="hidden" id="w" name="w" />
 	<input type="hidden" id="h" name="h" />
 
-	<?php if ( ! bp_is_group_create() ) wp_nonce_field( 'bp_avatar_cropstore' ); ?>
+	<?php
+	if ( ! bp_is_group_create() ) {
+		wp_nonce_field( 'bp_avatar_cropstore' );
+	}
+	?>
 
 <?php endif;

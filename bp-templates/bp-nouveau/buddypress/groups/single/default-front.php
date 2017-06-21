@@ -12,7 +12,7 @@
 	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
 
 		<div class="bp-feedback custom-homepage-info info no-icon">
-			<strong><?php esc_html_e( 'Manage the Groups default front page', 'bp-nouveau' ) ;?></strong>
+			<strong><?php esc_html_e( 'Manage the Groups default front page', 'bp-nouveau' ); ?></strong>
 
 			<p>
 			<?php printf(

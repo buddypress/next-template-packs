@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Users Groups
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -24,7 +24,7 @@
 <?php if ( ! bp_is_current_action( 'invites' ) ) : ?>
 
 
-	<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
+	<?php bp_get_template_part( 'common/search-and-filters-bar' ); ?>
 
 <?php endif; ?>
 
@@ -39,7 +39,7 @@ switch ( bp_current_action() ) :
 
 		<div class="groups mygroups" data-bp-list="groups">
 
-			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-groups-loading' ) ;?></div>
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-groups-loading' ); ?></div>
 
 		</div>
 

@@ -27,7 +27,7 @@
 
 	<div class="screen-content">
 
-		<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
+		<?php bp_get_template_part( 'common/search-and-filters-bar' ); ?>
 
 		<?php bp_nouveau_activity_hook( 'before_directory', 'list' ); ?>
 
@@ -35,12 +35,12 @@
 
 			<ul id="activity-stream" class="activity-list item-list bp-list" data-bp-list="activity">
 
-			 	<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-activity-loading' ) ;?></li>
+			 	<li id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'directory-activity-loading' ); ?></li>
 
 			</ul>
 
 		</div><!-- .activity -->
 
-		<?php bp_nouveau_after_activity_directory_content() ;?>
+		<?php bp_nouveau_after_activity_directory_content(); ?>
 	</div><!-- // .screen-content -->
 

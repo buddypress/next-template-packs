@@ -8,7 +8,7 @@
  */
 ?>
 
-<h2 class="bp-screen-title <?php if(bp_is_group_create()) echo 'creation-step-name'; ?>">
+<h2 class="bp-screen-title <?php if ( bp_is_group_create() ) : ?>creation-step-name<?php endif; ?>">
 	<?php _e( 'Group Settings', 'bp-nouveau' ); ?>
 </h2>
 
@@ -21,7 +21,7 @@
 			<legend><?php _e( 'Public Group Option', 'bp-nouveau' ); ?></legend>
 
 			<dl class="group-conditions">
-				<dt><?php _e('Public Groups Conditions', 'bp-nouveau'); ?> </dt>
+				<dt><?php _e( 'Public Groups Conditions', 'bp-nouveau' ); ?> </dt>
 				<dd>
 					<ul id="public-group-description">
 						<li><?php _e( 'Any site member can join this group.', 'bp-nouveau' ); ?></li>
@@ -32,7 +32,7 @@
 			</dl>
 
 			<label for="group-status-public">
-				<input type="radio" name="group-status" id="group-status-public" value="public"<?php if ( 'public' == bp_get_new_group_status() || !bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="public-group-description" /> <?php _e( 'This is a public group', 'bp-nouveau' ); ?>
+				<input type="radio" name="group-status" id="group-status-public" value="public"<?php if ( 'public' === bp_get_new_group_status() || ! bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="public-group-description" /> <?php _e( 'This is a public group', 'bp-nouveau' ); ?>
 			</label>
 
 		</fieldset>
@@ -41,7 +41,7 @@
 			<legend><?php _e( 'Private Group Option', 'bp-nouveau' ); ?></legend>
 
 			<dl class="group-conditions">
-				<dt><?php _e('Private Groups Conditions', 'bp-nouveau'); ?> </dt>
+				<dt><?php _e( 'Private Groups Conditions', 'bp-nouveau' ); ?> </dt>
 				<dd>
 					<ul id="private-group-description">
 						<li><?php _e( 'Only users who request membership and are accepted can join the group.', 'bp-nouveau' ); ?></li>
@@ -52,7 +52,7 @@
 			</dl>
 
 			<label for="group-status-private">
-				<input type="radio" name="group-status" id="group-status-private" value="private"<?php if ( 'private' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="private-group-description" /> <?php _e( 'This is a private group', 'bp-nouveau' ); ?>
+				<input type="radio" name="group-status" id="group-status-private" value="private"<?php if ( 'private' === bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="private-group-description" /> <?php _e( 'This is a private group', 'bp-nouveau' ); ?>
 			</label>
 
 		</fieldset>
@@ -61,7 +61,7 @@
 			<legend><?php _e( 'Hidden Group Option', 'bp-nouveau' ); ?></legend>
 
 			<dl class="group-conditions">
-				<dt><?php _e('Hidden Groups Conditions', 'bp-nouveau'); ?> </dt>
+				<dt><?php _e( 'Hidden Groups Conditions', 'bp-nouveau' ); ?> </dt>
 				<dd>
 					<ul id="hidden-group-description">
 						<li><?php _e( 'Only users who are invited can join the group.', 'bp-nouveau' ); ?></li>
@@ -72,7 +72,7 @@
 			</dl>
 
 			<label for="group-status-hidden">
-				<input type="radio" name="group-status" id="group-status-hidden" value="hidden"<?php if ( 'hidden' == bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="hidden-group-description" /> <?php _e('This is a hidden group', 'bp-nouveau' ); ?>
+				<input type="radio" name="group-status" id="group-status-hidden" value="hidden"<?php if ( 'hidden' === bp_get_new_group_status() ) { ?> checked="checked"<?php } ?> aria-describedby="hidden-group-description" /> <?php _e( 'This is a hidden group', 'bp-nouveau' ); ?>
 			</label>
 
 		</fieldset>

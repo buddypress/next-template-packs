@@ -53,7 +53,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	public static function get_instance() {
 
 		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self;
 		}
 
@@ -638,7 +638,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * warnings inside the Browser console to avoid
 	 * messing with the page display.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string HTML Output
 	 */
@@ -684,7 +684,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	/**
 	 * Set the BP Uri for the customizer in case of Ajax requests.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  string $path the BP Uri.
 	 * @return string       the BP Uri.
@@ -712,7 +712,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	/**
 	 * Loads the translation files
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	public function load_textdomain() {
 		// Traditional WordPress plugin locale filter
@@ -735,7 +735,7 @@ endif;
 /**
  * Get a unique instance of BP Nouveau
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return BP_Nouveau the main instance of the class
  */

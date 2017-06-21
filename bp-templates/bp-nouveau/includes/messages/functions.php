@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Enqueue Styles for the Messages UI (mentions)
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $styles  The array of styles to enqueue
  * @return array  The same array with the specific messages styles.
@@ -36,7 +36,7 @@ function bp_nouveau_messages_enqueue_styles( $styles = array() ) {
 /**
  * Register Scripts for the Messages component
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $scripts  The array of scripts to register
  * @return array  The same array with the specific messages scripts.
@@ -82,7 +82,7 @@ function bp_nouveau_messages_enqueue_scripts() {
 /**
  * Localize the strings needed for the messages UI
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $params Associative array containing the JS Strings needed by scripts
  * @return array          The same array with specific strings for the messages UI if needed.
@@ -134,7 +134,7 @@ function bp_nouveau_message_search_form() {
 
 	$search_form_html = '<form action="" method="get" id="search-messages-form">
 		<label for="messages_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="messages_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . __( 'Search', 'bp-nouveau' ) . '" />
+		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . esc_attr_e( 'Search', 'bp-nouveau' ) . '" />
 	</form>';
 
 	/**
@@ -254,7 +254,7 @@ function bp_nouveau_unregister_notices_widget() {
 /**
  * Add active sitewide notices to the BP template_message global.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_push_sitewide_notices() {
 	// Do not show notices if user is not logged in.

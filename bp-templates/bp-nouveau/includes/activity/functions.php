@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register Scripts for the Activity component
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $scripts  The array of scripts to register
  * @return array  The same array with the specific activity scripts.
@@ -55,7 +55,7 @@ function bp_nouveau_activity_enqueue_scripts() {
 /**
  * Localize the strings needed for the Activity Post form UI
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $params Associative array containing the JS Strings needed by scripts
  * @return array          The same array with specific strings for the Activity Post form UI if needed.
@@ -94,7 +94,7 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	/**
 	 * Filter here to include specific Action buttons.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param array $value The array containing the button params. Must look like:
 	 * array( 'buttonid' => array(
@@ -278,7 +278,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 	/**
 	 * Use this filter to introduce your custom nav items for the activity directory.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $nav_items The list of the activity directory nav items.
 	 */
@@ -451,7 +451,7 @@ function bp_nouveau_activity_allowed_tags( $activity_allowedtags = array() ) {
 /**
  * Get the activity query args for the widget.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return array The activity arguments.
  */
@@ -466,7 +466,7 @@ function bp_nouveau_activity_widget_query() {
 	/**
 	 * Filter here to edit the activity widget arguments
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $args The activity arguments.
 	 */

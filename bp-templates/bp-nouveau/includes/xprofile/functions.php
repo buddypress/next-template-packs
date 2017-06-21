@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register Scripts for the xProfile component
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $scripts  The array of scripts to register
  * @return array  The same array with the specific groups scripts.

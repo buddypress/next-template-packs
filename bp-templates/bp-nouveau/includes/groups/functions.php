@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Register Scripts for the Groups component
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $scripts  The array of scripts to register
  * @return array  The same array with the specific groups scripts.
@@ -59,7 +59,7 @@ function bp_nouveau_groups_enqueue_scripts() {
 /**
  * Can all members be invited to join any group?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  bool $default False to allow. True to disallow.
  * @return bool
@@ -68,7 +68,7 @@ function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
 	/**
 	 * Filter here to remove the All members nav, returning true
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  bool $default True to disable the nav. False otherwise.
 	 */
@@ -78,7 +78,7 @@ function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
 /**
  * Localize the strings needed for the Group's Invite UI
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $params Associative array containing the JS Strings needed by scripts
  * @return array          The same array with specific strings for the Group's Invite UI if needed.
@@ -332,7 +332,7 @@ function bp_nouveau_prepare_group_for_js( $item ) {
 /**
  * Group invites restriction settings navigation.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_groups_invites_restriction_nav() {
 	$slug        = bp_get_settings_slug();
@@ -357,7 +357,7 @@ function bp_nouveau_groups_invites_restriction_nav() {
 /**
  * Group invites restriction settings Admin Bar navigation.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param   array $wp_admin_nav The list of settings admin subnav items.
  * @return  array The list of settings admin subnav items.
@@ -381,7 +381,7 @@ function bp_nouveau_groups_invites_restriction_admin_nav( $wp_admin_nav ) {
 /**
  * Group invites restriction screen.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_groups_screen_invites_restriction() {
 
@@ -477,7 +477,7 @@ function bp_nouveau_get_groups_directory_nav_items() {
 	/**
 	 * Use this filter to introduce your custom nav items for the groups directory.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array $nav_items The list of the groups directory nav items.
 	 */
@@ -550,7 +550,7 @@ function bp_nouveau_groups_catch_button_args( $button = array() ) {
 /**
  * Catch the content hooked to the 'bp_group_header_meta' action
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string|bool HTML Output if hooked. False otherwise.
  */
@@ -576,7 +576,7 @@ function bp_nouveau_get_hooked_group_meta() {
 /**
  * Display the Widgets of Group extensions into the default front page?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True to display. False otherwise.
  */
@@ -589,7 +589,7 @@ function bp_nouveau_groups_do_group_boxes() {
 /**
  * Display description of the Group into the default front page?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True to display. False otherwise.
  */
@@ -746,7 +746,7 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 /**
  * Add the default group front template to the front template hierarchy.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array           $templates The list of templates for the front.php template part.
  * @param  BP_Groups_Group The group object.
@@ -774,7 +774,7 @@ function bp_nouveau_group_reset_front_template( $templates = array(), $group = n
 /**
  * Locate a single group template into a specific hierarchy.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $template The template part to get (eg: activity, members...).
  * @return string The located template.
@@ -826,7 +826,7 @@ function bp_nouveau_group_locate_template_part( $template = '' ) {
 /**
  * Load a single group template part
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $template The template part to get (eg: activity, members...).
  * @return string HTML output.
@@ -855,7 +855,7 @@ function bp_nouveau_group_get_template_part( $template = '' ) {
 /**
  * Are we inside the Current group's default front page sidebar?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if in the group's home sidebar. False otherwise.
  */
@@ -866,7 +866,7 @@ function bp_nouveau_group_is_home_widgets() {
 /**
  * Filter the Latest activities Widget to only keep the one of the group displayed
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The Activities Template arguments.
  * @return array        The Activities Template arguments.
@@ -881,7 +881,7 @@ function bp_nouveau_group_activity_widget_overrides( $args = array() ) {
 /**
  * Filter the Groups widget to only keep the displayed group.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The Groups Template arguments.
  * @return array        The Groups Template arguments.
@@ -895,7 +895,7 @@ function bp_nouveau_group_groups_widget_overrides( $args = array() ) {
 /**
  * Filter the Members widgets to only keep members of the displayed group.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The Members Template arguments.
  * @return array        The Members Template arguments.
@@ -915,7 +915,7 @@ function bp_nouveau_group_members_widget_overrides( $args = array() ) {
 /**
  * Init the Group's default front page filters as we're in the sidebar
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_groups_add_home_widget_filters() {
 	add_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_group_activity_widget_overrides', 10, 1 );
@@ -928,7 +928,7 @@ function bp_nouveau_groups_add_home_widget_filters() {
 /**
  * Remove the Group's default front page filters as we're no more in the sidebar
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_groups_remove_home_widget_filters() {
 	remove_filter( 'bp_nouveau_activity_widget_query', 'bp_nouveau_group_activity_widget_overrides', 10, 1 );
@@ -941,7 +941,7 @@ function bp_nouveau_groups_remove_home_widget_filters() {
 /**
  * Get the hook, nonce, and eventually a specific template for Core Group's create screens.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $id  The screen id
  * @return mixed       An array containing the hook dynamic part, the nonce, and eventually a specific template.
@@ -969,7 +969,7 @@ function bp_nouveau_group_get_core_create_screens( $id = '' ) {
 /**
  * Get the hook and nonce for Core Group's manage screens.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  string $id  The screen id
  * @return mixed       An array containing the hook dynamic part and the nonce. False if it's not a core manage screen.
@@ -981,7 +981,7 @@ function bp_nouveau_group_get_core_manage_screens( $id = '' ) {
 	$screens = array(
 		'edit-details'        => array( 'hook' => 'group_details_admin',             'nonce' => 'groups_edit_group_details'  ),
 		'group-settings'      => array( 'hook' => 'group_settings_admin',            'nonce' => 'groups_edit_group_settings' ),
-		'group-avatar'        => array(                                                                                      ),
+		'group-avatar'        => array(),
 		'group-cover-image'   => array( 'hook' => 'group_settings_cover_image',      'nonce' => ''                           ),
 		'manage-members'      => array( 'hook' => 'group_manage_members_admin',      'nonce' => ''                           ),
 		'membership-requests' => array( 'hook' => 'group_membership_requests_admin', 'nonce' => ''                           ),

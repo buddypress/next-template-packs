@@ -49,7 +49,7 @@ function bp_nouveau_plugin_hook( $suffix = '' ) {
 	 *
 	 * @since 1.0.0 (BuddyPress)
 	 */
-	return bp_nouveau_hook( array(
+	bp_nouveau_hook( array(
 		'bp',
 		'template',
 		$suffix,
@@ -74,7 +74,7 @@ function bp_nouveau_friend_hook( $suffix = '' ) {
 	/**
 	 * @since 1.1.0 (BuddyPress)
 	 */
-	return bp_nouveau_hook( array(
+	bp_nouveau_hook( array(
 		'bp',
 		'friend',
 		$suffix,
@@ -84,7 +84,7 @@ function bp_nouveau_friend_hook( $suffix = '' ) {
 /**
  * Add classes to style the template notice/feedback message
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string Css class Output
  */
@@ -174,7 +174,7 @@ function bp_nouveau_dismiss_button_type() {
 /**
  * Displays a template notice/feedback message.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
@@ -185,7 +185,7 @@ function bp_nouveau_template_message() {
 	/**
 	 * Get the template notice/feedback message and make sure core filter is applied.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string HTML Output.
 	 */
@@ -302,7 +302,7 @@ function bp_nouveau_user_feedback( $feedback_id = '' ) {
 /**
  * Template tag to wrap the before component loop
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_before_loop() {
 	$component = bp_current_component();
@@ -322,7 +322,7 @@ function bp_nouveau_before_loop() {
 /**
  * Template tag to wrap the after component loop
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_after_loop() {
 	$component = bp_current_component();
@@ -478,7 +478,7 @@ function bp_nouveau_pagination( $position = null ) {
 /**
  * Display the component's loop classes
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string CSS classes
  */
@@ -489,7 +489,7 @@ function bp_nouveau_loop_classes() {
 	/**
 	 * Get the component's loop classes
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string space separated value of classes.
 	 */
@@ -501,9 +501,9 @@ function bp_nouveau_loop_classes() {
 		*/
 
 		// The $component is faked if it's the single group member loop
-		if( !bp_is_directory() && ( bp_is_group() && 'members' === bp_current_action() ) ) :
+		if ( !bp_is_directory() && ( bp_is_group() && 'members' === bp_current_action() ) ) :
 			$component  = 'members_group';
-		elseif( ! bp_is_directory() && ( bp_is_user() && 'my-friends' === bp_current_action() ) ):
+		elseif ( ! bp_is_directory() && ( bp_is_user() && 'my-friends' === bp_current_action() ) ):
 			$component  = 'members_friends';
 		else :
 			$component  = sanitize_key( bp_current_component() );
@@ -511,11 +511,11 @@ function bp_nouveau_loop_classes() {
 
 		$classes = array(
 			'item-list',
-			sprintf( '%s-list', str_replace('_', '-', $component ) ),
+			sprintf( '%s-list', str_replace( '_', '-', $component ) ),
 			'bp-list',
 		);
 
-		if( bp_is_user() && 'my-friends' === bp_current_action() ) {
+		if ( bp_is_user() && 'my-friends' === bp_current_action() ) {
 			$classes[] = 'members-list';
 		}
 
@@ -568,7 +568,7 @@ function bp_nouveau_loop_classes() {
 /**
  * Checks if the layout preferences is set to grid (2 or more columns).
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if loop is displayed in grid mod. False otherwise.
  */
@@ -618,7 +618,7 @@ function bp_dir_is_vert_layout() {
 /**
  * Get the full size avatar args.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return array The avatar arguments.
  */
@@ -642,7 +642,7 @@ function bp_nouveau_avatar_args() {
 /**
  * Init the Navigation Loop and checks it has items.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args {
  *     Array of arguments.
@@ -754,7 +754,7 @@ function bp_nouveau_has_nav( $args = array() ) {
 /**
  * Checks there are still nav items to display.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if there are still items to display.
  *              False otherwise.
@@ -776,7 +776,7 @@ function bp_nouveau_nav_items() {
  * Sets the current nav item and prepare the navigation loop
  * to iterate to next one.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_nav_item() {
 	$bp_nouveau = bp_nouveau();
@@ -797,7 +797,7 @@ function bp_nouveau_nav_id() {
 	/**
 	 * Retrieve the ID attribute of the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string the ID attribute.
 	 */
@@ -837,7 +837,7 @@ function bp_nouveau_nav_classes() {
 	/**
 	 * Retrieve a space separated list of classes for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string the list of classes.
 	 */
@@ -908,7 +908,7 @@ function bp_nouveau_nav_scope() {
 	/**
 	 * Retrieve the specific scope for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string the specific scope of the nav.
 	 */
@@ -953,7 +953,7 @@ function bp_nouveau_nav_link() {
 	/**
 	 * Retrieve the link for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string The link for the nav item.
 	 */
@@ -998,7 +998,7 @@ function bp_nouveau_nav_link_id() {
 	/**
 	 * Retrieve the id attribute of the link for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string The link id for the nav item.
 	 */
@@ -1041,7 +1041,7 @@ function bp_nouveau_nav_link_title() {
 	/**
 	 * Retrieve the title attribute of the link for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string The link title for the nav item.
 	 */
@@ -1080,7 +1080,7 @@ function bp_nouveau_nav_link_text() {
 	/**
 	 * Retrieve the html text of the link for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string The html text for the nav item.
 	 */
@@ -1149,7 +1149,7 @@ function bp_nouveau_nav_count() {
 	/**
 	 * Retrieve the count attribute for the current nav item.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string The count attribute for the nav item.
 	 */
@@ -1215,7 +1215,7 @@ function bp_nouveau_directory_type_navs_class() {
 			$nav_style  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 			$tab_style = '';
 
-			if( 1 === $nav_style ) {
+			if ( 1 === $nav_style ) {
 				$tab_style = bp_current_component() . '-nav-tabs';
 			}
 
@@ -1290,7 +1290,7 @@ function bp_nouveau_directory_nav_object() {
 /**
  * Output main BuddyPress container classes
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string CSS classes
  */
@@ -1301,7 +1301,7 @@ function bp_nouveau_buddypress_classes() {
 	/**
 	 * Returns the main BuddyPress container classes
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string CSS classes
 	 */
@@ -1346,12 +1346,12 @@ function bp_nouveau_buddypress_classes() {
 			$customizer_option = apply_filters( 'bp_nouveau_single_item_display_settings_id', '' );
 		}
 
-		if( $member_type_class ) {
+		if ( $member_type_class ) {
 			$classes[] = $member_type_class;
 		}
 
 		// Provide a class token to acknowledge additional extended profile fields added to default account reg screen
-		if( 'register' === bp_current_component() && bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile() ){
+		if ( 'register' === bp_current_component() && bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile() ){
 			$classes[] = 'extended-default-reg';
 		}
 
@@ -1386,7 +1386,7 @@ function bp_nouveau_buddypress_classes() {
 /**
  * Output single item nav container classes
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string CSS classes
  */
@@ -1397,7 +1397,7 @@ function bp_nouveau_single_item_nav_classes() {
 	/**
 	 * Returns the single item nav container classes
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string CSS classes
 	 */
@@ -1410,13 +1410,13 @@ function bp_nouveau_single_item_nav_classes() {
 		// this is a temp workaround but differs from earlier dir approach- bad!
 		if ( bp_is_group() ) {
 			$nav_tabs = bp_nouveau_get_temporary_setting( 'group_nav_tabs', bp_nouveau_get_appearance_settings( 'group_nav_tabs' ) );
-		} elseif( bp_is_user() ) {
+		} elseif ( bp_is_user() ) {
 			$nav_tabs = bp_nouveau_get_temporary_setting( 'user_nav_tabs', bp_nouveau_get_appearance_settings( 'user_nav_tabs' ) );
 		}
 
-		if(  bp_is_group() && 1 === $nav_tabs) {
+		if ( bp_is_group() && 1 === $nav_tabs) {
 			$classes[] = 'group-nav-tabs';
-		} elseif( bp_is_user() && 1 === $nav_tabs ) {
+		} elseif ( bp_is_user() && 1 === $nav_tabs ) {
 			$classes[] = 'user-nav-tabs';
 		}
 
@@ -1766,7 +1766,7 @@ function bp_nouveau_filter_options() {
 
 	function bp_nouveau_get_filter_options() {
 
-	if('notifications' === bp_current_component() ) :
+	if ( 'notifications' === bp_current_component() ) :
 			bp_nouveau_notifications_filters();
 		return;
 
@@ -1794,7 +1794,7 @@ function bp_nouveau_filter_options() {
 /**
  * Get a link to reach a specific section into the customizer
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @param  array  $args The argument to customize the Customizer link
  * @return string HTML Output
@@ -1880,7 +1880,7 @@ function bp_nouveau_signup_hook( $when = '', $prefix = '' ) {
 	 * @since 1.2.4 (BuddyPress) Adds the 'bp_before_signup_profile_fields' action hook
 	 * @since 1.9.0 (BuddyPress) Adds the 'bp_signup_profile_fields' action hook
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
@@ -1911,7 +1911,7 @@ function bp_nouveau_activation_hook( $when = '', $suffix = '' ) {
 	/**
 	 * @since 1.1.0 (BuddyPress)
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**

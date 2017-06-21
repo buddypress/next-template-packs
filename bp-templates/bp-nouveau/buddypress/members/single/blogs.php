@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Users Blogs
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -17,7 +17,7 @@
 	</ul>
 </nav><!-- .bp-navs -->
 
-<?php bp_get_template_part( 'common/search-&-filters-bar' ); ?>
+<?php bp_get_template_part( 'common/search-and-filters-bar' ); ?>
 
 <?php
 switch ( bp_current_action() ) :
@@ -29,7 +29,7 @@ switch ( bp_current_action() ) :
 
 		<div class="blogs myblogs" data-bp-list="blogs">
 
-			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-blogs-loading' ) ;?></div>
+			<div id="bp-ajax-loader"><?php bp_nouveau_user_feedback( 'member-blogs-loading' ); ?></div>
 
 		</div><!-- .blogs.myblogs -->
 

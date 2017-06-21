@@ -2,7 +2,7 @@
 /**
  * BuddyPress - Members Notifications Loop
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
@@ -20,7 +20,7 @@ if ( bp_has_notifications( bp_ajax_querystring( 'notifications' ) ) ) :
 					<th class="title"><?php _e( 'Notification', 'bp-nouveau' ); ?></th>
 					<th class="date">
 						<?php _e( 'Date Received', 'bp-nouveau' ); ?>
-						<?php bp_nouveau_notifications_sort_order_links() ;?>
+						<?php bp_nouveau_notifications_sort_order_links(); ?>
 					</th>
 					<th class="actions"><?php _e( 'Actions', 'bp-nouveau' ); ?></th>
 				</tr>

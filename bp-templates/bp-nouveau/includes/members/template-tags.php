@@ -110,7 +110,7 @@ function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
 	 *                           'friend_requests_content' suffixes.
 	 * @since 1.5.0 (BuddyPress) for the 'settings_template' suffix.
 	 */
-	return bp_nouveau_hook( $hook );
+	bp_nouveau_hook( $hook );
 }
 
 /**
@@ -138,7 +138,7 @@ function bp_nouveau_member_email_notice_settings() {
 function bp_nouveau_member_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
 
-	if( bp_is_user() ) {
+	if ( bp_is_user() ) {
 		$args['type'] = 'profile';
 	} else {
 		$args['type'] = 'header';// we have no real need for this 'type' on header actions
@@ -164,7 +164,7 @@ function bp_nouveau_member_header_buttons( $args = array() ) {
 	$output .= ob_get_clean();
 
 	if ( empty( $output ) ) {
-		return;
+		return '';
 	}
 
 	if ( empty( $args ) ) {
@@ -184,13 +184,13 @@ function bp_nouveau_member_header_buttons( $args = array() ) {
  */
 function bp_nouveau_members_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['members_template'] ) ) {
-		return;
+		return '';
 	}
 
 	$args['type'] = 'loop';
 	$action = 'bp_directory_members_actions';
 
-	// specific case for group members
+	// Specific case for group members.
 	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
 		$args['type']   = 'group_member';
 		$action = 'bp_group_members_list_item_action';
@@ -211,7 +211,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 	$output .= ob_get_clean();
 
 	if ( empty( $output ) ) {
-		return;
+		return '';
 	}
 
 	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
@@ -221,17 +221,17 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 	 * Get the action buttons for the displayed user profile
 	 *
 	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	function bp_nouveau_get_members_buttons( $args ) {
-
-		$type = ( ! empty( $args['type'] ) ) ?  $args['type'] : '';
+		$buttons = array();
+		$type = ( ! empty( $args['type'] ) ) ? $args['type'] : '';
 
 		// Not really sure why BP Legacy needed to do this...
 		if ( 'profile' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			return;
+			return $buttons;
 		}
-
-		$buttons = array();
 
 		if ( 'loop' === $type || 'friendship_request' === $type ) {
 			$user_id = bp_get_member_user_id();
@@ -245,21 +245,21 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-		/**
+		/*
 		 * If the 'container' is set to 'ul'
 		 * set a var $parent_element to li
 		 * otherwise simply pass any value found in args
 		 * or set var false.
 		 */
-		if( ! empty( $args['container'] ) && 'ul' == $args['container']  ) {
+		if ( ! empty( $args['container'] ) && 'ul' === $args['container']  ) {
 			$parent_element = 'li';
-		} elseif( ! empty( $args['parent_element'] ) ) {
+		} elseif ( ! empty( $args['parent_element'] ) ) {
 			$parent_element = esc_html( $args['parent_element'] );
 		} else {
 			$parent_element = false;
 		}
 
-		/**
+		/*
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
 		 * otherwise default to 'a' (anchor)
@@ -268,7 +268,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		 * Icons sets a class for icon display if not using the button element
 		 */
 		$icons = '';
-		if( ! empty( $args['button_element'] ) ) {
+		if ( ! empty( $args['button_element'] ) ) {
 			$button_element = $args['button_element'] ;
 		} else {
 			$button_element = 'button';
@@ -277,13 +277,13 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 
 		// If we pass through parent classes add them to $button array
 		$parent_class = '';
-		if( ! empty( $args['parent_attr']['class'] ) ) {
+		if ( ! empty( $args['parent_attr']['class'] ) ) {
 			$parent_class = esc_html( $args['parent_attr']['class'] );
 		}
 
 		if ( bp_is_active( 'friends' ) ) {
 			// It's the member's friendship requests screen
-			if (  'friendship_request' === $type ) {
+			if ( 'friendship_request' === $type ) {
 				$buttons = array( 'accept_friendship' => array(
 						'id'                => 'accept_friendship',
 						'position'          => 5,
@@ -323,20 +323,21 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 
 				// If button element set add nonce link to data attr
 				if ( 'button' === $button_element ) {
-					$buttons['accept_friendship']['button_attr']['data-bp-nonce']  = esc_url( bp_get_friend_accept_request_link() );
-					$buttons['reject_friendship']['button_attr']['data-bp-nonce']  = esc_url( bp_get_friend_reject_request_link() );
+					$buttons['accept_friendship']['button_attr']['data-bp-nonce'] = esc_url( bp_get_friend_accept_request_link() );
+					$buttons['reject_friendship']['button_attr']['data-bp-nonce'] = esc_url( bp_get_friend_reject_request_link() );
 				} else {
-					$buttons['accept_friendship']['button_attr']['href']     = esc_url( bp_get_friend_accept_request_link() );
-					$buttons['reject_friendship']['button_attr']['href']  = esc_url( bp_get_friend_reject_request_link() );
+					$buttons['accept_friendship']['button_attr']['href'] = esc_url( bp_get_friend_accept_request_link() );
+					$buttons['reject_friendship']['button_attr']['href'] = esc_url( bp_get_friend_reject_request_link() );
 				}
 
 			// It's any other members screen
 			} else {
-				/**
+				/*
 				 * This filter workaround is waiting for a core adaptation
 				 * so that we can directly get the friends button arguments
 				 * instead of the button.
-				 * @see https://buddypress.trac.wordpress.org/ticket/7126
+				 *
+				 * See https://buddypress.trac.wordpress.org/ticket/7126
 				 */
 				add_filter( 'bp_get_add_friend_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
@@ -378,17 +379,17 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 					unset( bp_nouveau()->members->button_args );
 				}
 			}
-
 		}
 
 		// Only add The public and private messages when not in a loop
 		if ( 'profile' === $type ) {
 			if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) {
-				/**
+				/*
 				 * This filter workaround is waiting for a core adaptation
 				 * so that we can directly get the public message button arguments
 				 * instead of the button.
-				 * @see https://buddypress.trac.wordpress.org/ticket/7126
+				 *
+				 * See https://buddypress.trac.wordpress.org/ticket/7126
 				 */
 				add_filter( 'bp_get_send_public_message_button', 'bp_nouveau_members_catch_button_args', 100, 1 );
 
@@ -399,8 +400,10 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
 					$button_args = bp_nouveau()->members->button_args;
 
-					// This button should remain as an anchor link
-					// Hardcode the use of anchor elements if button arg passed in for other elements
+					/*
+					 * This button should remain as an anchor link.
+					 * Hardcode the use of anchor elements if button arg passed in for other elements.
+					 */
 					$buttons['public_message'] = array(
 						'id'                => $button_args['id'],
 						'position'          => 15,
@@ -442,8 +445,10 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 				if ( ! empty( bp_nouveau()->members->button_args ) ) {
 					$button_args = bp_nouveau()->members->button_args;
 
-					// This button should remain as an anchor link
-					// Hardcode the use of anchor elements if button arg passed in for other elements
+					/*
+					 * This button should remain as an anchor link.
+					 * Hardcode the use of anchor elements if button arg passed in for other elements.
+					 */
 					$buttons['private_message'] = array(
 						'id'                => $button_args['id'],
 						'position'          => 25,
@@ -461,7 +466,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 							'id'               => false,
 							'class'            => $button_args['link_class'],
 							'rel'              => '',
-							'title'            => __('', 'buddypress'),
+							'title'            => __( '', 'buddypress' ),
 							),
 						'link_text'         => $button_args['link_text'],
 					);
@@ -520,7 +525,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 /**
  * Does the member has meta.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if the member has meta. False otherwise.
  */
@@ -531,20 +536,18 @@ function bp_nouveau_member_has_meta() {
 /**
  * Display the member meta.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output.
  */
 function bp_nouveau_member_meta() {
-	$meta = bp_nouveau_get_member_meta();
-
-	echo join( "\n", $meta );
+	echo join( "\n", bp_nouveau_get_member_meta() );
 }
 
 	/**
 	 * Get the member meta.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return array The member meta.
 	 */
@@ -585,7 +588,7 @@ function bp_nouveau_member_meta() {
 			/**
 			 * Filter here to add/remove Member meta.
 			 *
-			 * @since  1.0.0
+			 * @since 1.0.0
 			 *
 			 * @param array  $meta     The list of meta to output.
 			 * @param object $member   The member object
@@ -600,9 +603,7 @@ function bp_nouveau_member_meta() {
 /**
  * Load the appropriate content for the single member pages
  *
- * @since  1.0.0
- *
- * @return string HTML Output.
+ * @since 1.0.0
  */
 function bp_nouveau_member_template_part() {
 	/**
@@ -649,7 +650,7 @@ function bp_nouveau_member_template_part() {
 /**
  * Use the appropriate Member header and enjoy a template hierarchy
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -677,7 +678,6 @@ function bp_nouveau_member_header_template_part() {
 	 */
 	do_action( 'bp_after_member_header' );
 
-	// Display template notices if any
 	bp_nouveau_template_notices();
 }
 
@@ -685,7 +685,7 @@ function bp_nouveau_member_header_template_part() {
  * Get a link to set the Member's default front page and directly
  * reach the Customizer section where it's possible to do it.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -701,7 +701,7 @@ function bp_nouveau_members_get_customizer_option_link() {
  * Get a link to set the Member's front page widgets and directly
  * reach the Customizer section where it's possible to do it.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -716,7 +716,7 @@ function bp_nouveau_members_get_customizer_widgets_link() {
 /**
  * Display the Member description making sure linefeeds are taking in account
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -750,7 +750,7 @@ function bp_nouveau_member_description( $user_id = 0 ) {
  * Display the Edit profile link (temporary)
  * @todo  replace with Ajax feature
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return string HTML Output
  */
@@ -762,12 +762,11 @@ function bp_nouveau_member_description_edit_link() {
 	 * Get the Edit profile link (temporary)
 	 * @todo  replace with Ajax featur
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string HTML Output
 	 */
 	function bp_nouveau_member_get_description_edit_link() {
-		// Disable the filter
 		remove_filter( 'edit_profile_url', 'bp_members_edit_profile_url', 10, 3 );
 
 		if ( is_multisite() && ! current_user_can( 'read' ) ) {
@@ -776,9 +775,7 @@ function bp_nouveau_member_description_edit_link() {
 			$link = get_edit_profile_url( bp_displayed_user_id() );
 		}
 
-		// Restore the filter
 		add_filter( 'edit_profile_url', 'bp_members_edit_profile_url', 10, 3 );
-
 		$link .= '#description';
 
 		return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html__( 'Edit your bio', 'bp-nouveau' ) );
@@ -834,7 +831,7 @@ function bp_nouveau_wp_profile_hooks( $type = 'before' ) {
 /**
  * Does the displayed user has WP profile fields?
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if user has profile fields. False otherwise.
  */
@@ -877,7 +874,7 @@ function bp_nouveau_has_wp_profile_fields() {
 /**
  * Check if there are still profile fields to output.
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @return bool True if the profile field exists. False otherwise.
  */
@@ -897,7 +894,7 @@ function bp_nouveau_wp_profile_fields() {
 /**
  * Set the current profile field and iterate into the loop.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field() {
 	$bp_nouveau = bp_nouveau();
@@ -909,7 +906,7 @@ function bp_nouveau_wp_profile_field() {
 /**
  * Output the WP profile field ID.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field_id() {
 	echo bp_nouveau_get_wp_profile_field_id();
@@ -917,9 +914,9 @@ function bp_nouveau_wp_profile_field_id() {
 	/**
 	 * Get the WP profile field ID.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
-	 * @return string the profile field ID.
+	 * @return int the profile field ID.
 	 */
 	function bp_nouveau_get_wp_profile_field_id() {
 		$field = bp_nouveau()->members->wp_profile_current;
@@ -930,7 +927,7 @@ function bp_nouveau_wp_profile_field_id() {
 /**
  * Output the WP profile field label.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field_label() {
 	echo bp_nouveau_get_wp_profile_field_label();
@@ -939,7 +936,7 @@ function bp_nouveau_wp_profile_field_label() {
 	/**
 	 * Get the WP profile label.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string the profile field label.
 	 */
@@ -952,7 +949,7 @@ function bp_nouveau_wp_profile_field_label() {
 /**
  * Output the WP profile field data.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field_data() {
 	echo bp_nouveau_get_wp_profile_field_data();
@@ -961,7 +958,7 @@ function bp_nouveau_wp_profile_field_data() {
 	/**
 	 * Get the WP profile field data.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string the profile field data.
 	 */

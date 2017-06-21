@@ -146,7 +146,7 @@ endif;
  * A specific Group Nav class to make it possible to
  * set new positions for the buddypress()->groups->nav.
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 
@@ -227,7 +227,7 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	/**
 	 * Setup a temporary nav with only the needed parameters.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	private function setup_nav() {
 		$nav_items = array(
@@ -317,7 +317,7 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	/**
 	 * Front template: do not look into group's template hierarchy.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param  array  $templates The list of possible group front templates.
 	 * @return array             The list of "global" group front templates.
@@ -332,7 +332,7 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	/**
 	 * Get the original order for the group navigation.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return array a list of nav items slugs ordered.
 	 */
@@ -344,7 +344,7 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	/**
 	 * Get the list of nav items ordered according to the Site owner preferences.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return array the nav items ordered.
 	 */

@@ -2,13 +2,13 @@
 /**
  * BuddyPress - Groups Header
  *
- * @since  1.0.0
+ * @since 1.0.0
  *
  * @package BP Nouveau
  */
 ?>
 
-<?php bp_get_template_part('groups/single/parts/header-item-actions'); ?>
+<?php bp_get_template_part( 'groups/single/parts/header-item-actions' ); ?>
 
 <?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
 	<div id="item-header-avatar">
@@ -34,7 +34,7 @@
 		</div><!-- .item-meta -->
 	<?php endif; ?>
 
-	<?php if( bp_nouveau_group_meta()->description ) { ?>
+	<?php if ( bp_nouveau_group_meta()->description ) { ?>
 		<div class="group-description">
 			<?php echo bp_nouveau_group_meta()->description; ?>
 		</div><!-- //.group_description -->
