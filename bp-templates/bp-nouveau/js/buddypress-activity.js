@@ -346,7 +346,7 @@ window.bp = window.bp || {};
 				// Keep latest 5 comments
 				comment_items.each( function( i, item ) {
 					if ( i < comment_items.length - 5 ) {
-						$( item ).addClass( 'hidden' ).toggle();
+						$( item ).hide();
 
 						// Prepend a link to display all
 						if ( ! i ) {
