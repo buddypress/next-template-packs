@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Group_Button' ) ) :
 /**
  * Builds a group of BP_Button
  *
@@ -179,9 +178,6 @@ class BP_Buttons_Group {
 	}
 }
 
-endif;
-
-if ( ! class_exists( 'BP_Nouveau_Object_Nav_Widget' ) ) :
 /**
  * BP Sidebar Item Nav_Widget
  *
@@ -315,5 +311,3 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 		<?php
 	}
 }
-
-endif;

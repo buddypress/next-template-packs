@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Notifications' ) ) :
 /**
  * Notifications Loader class
  *
@@ -97,8 +96,6 @@ class BP_Nouveau_Notifications {
 		add_filter( 'bp_get_the_notification_delete_link',      'bp_nouveau_notifications_delete_link'     , 10, 1 );
 	}
 }
-
-endif;
 
 /**
  * Launch the Notifications loader class.

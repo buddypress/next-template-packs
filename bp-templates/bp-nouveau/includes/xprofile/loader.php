@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_xProfile' ) ) :
 /**
  * xProfile Loader class
  *
@@ -72,8 +71,6 @@ class BP_Nouveau_xProfile {
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_xprofile_register_scripts', 10, 1 );
 	}
 }
-
-endif;
 
 /**
  * Launch the xProfile loader class.

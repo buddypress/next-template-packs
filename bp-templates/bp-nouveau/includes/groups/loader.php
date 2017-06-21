@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Groups' ) ) :
 /**
  * Groups Loader class
  *
@@ -171,8 +170,6 @@ class BP_Nouveau_Groups {
 		bp_nouveau_groups_remove_home_widget_filters();
 	}
 }
-
-endif;
 
 /**
  * Launch the Groups loader class.

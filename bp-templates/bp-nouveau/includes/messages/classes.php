@@ -10,8 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( class_exists( 'WP_List_Table' ) ) :
-
 class BP_Nouveau_Notices_List_Table extends WP_List_Table {
 	public function __construct( $args = array() ) {
 		parent::__construct( array(
@@ -91,8 +89,6 @@ class BP_Nouveau_Notices_List_Table extends WP_List_Table {
 		echo apply_filters( 'bp_get_message_notice_post_date', bp_format_time( strtotime( $item->date_sent ) ) );
 	}
 }
-
-endif;
 
 class BP_Nouveau_Admin_Notices {
 

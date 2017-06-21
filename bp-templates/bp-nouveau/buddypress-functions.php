@@ -26,8 +26,6 @@ defined( 'ABSPATH' ) || exit;
 
 /** Theme Setup ***************************************************************/
 
-if ( ! class_exists( 'BP_Nouveau' ) ) :
-
 /**
  * Loads BuddyPress Nouveau Template pack functionality.
  *
@@ -370,7 +368,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 		wp_enqueue_script( 'bp-nouveau' );
 
 		// Maybe enqueue Password Verify
-		if ( bp_is_register_page() || ( function_exists( 'bp_is_user_settings_general' ) && bp_is_user_settings_general() ) ) {
+		if ( bp_is_register_page() || bp_is_user_settings_general() ) {
 			wp_enqueue_script( 'bp-nouveau-password-verify' );
 		}
 
@@ -730,7 +728,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 	}
 }
-endif;
 
 /**
  * Get a unique instance of BP Nouveau

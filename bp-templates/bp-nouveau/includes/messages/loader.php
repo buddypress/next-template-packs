@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Messages' ) ) :
 /**
  * Messages Loader class
  *
@@ -128,8 +127,6 @@ class BP_Nouveau_Messages {
 		add_filter( 'bp_get_message_thread_content',        'wpautop'                );
 	}
 }
-
-endif;
 
 /**
  * Launch the Messages loader class.

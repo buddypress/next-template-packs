@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Latest_Activities' ) ) :
 /**
  * A widget to display the latest activities of your community!
  *
@@ -181,5 +180,3 @@ class BP_Latest_Activities extends WP_Widget {
 		<?php
 	}
 }
-
-endif;

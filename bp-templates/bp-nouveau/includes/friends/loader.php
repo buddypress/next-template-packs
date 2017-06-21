@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Friends' ) ) :
 /**
  * Friends Loader class
  *
@@ -119,8 +118,6 @@ class BP_Nouveau_Friends {
 		}
 	}
 }
-
-endif;
 
 /**
  * Launch the Friends loader class.

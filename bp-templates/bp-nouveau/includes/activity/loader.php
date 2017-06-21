@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Activity' ) ) :
 /**
  * Activity Loader class
  *
@@ -118,8 +117,6 @@ class BP_Nouveau_Activity {
 		add_filter( 'bp_activity_allowed_tags',        'bp_nouveau_activity_allowed_tags',       10, 1 );
 	}
 }
-
-endif;
 
 /**
  * Launch the Activity loader class.

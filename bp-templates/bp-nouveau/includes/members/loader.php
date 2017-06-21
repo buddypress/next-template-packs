@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Members' ) ) :
 /**
  * Members Loader class
  *
@@ -124,8 +123,6 @@ class BP_Nouveau_Members {
 		bp_nouveau_members_remove_home_widget_filters();
 	}
 }
-
-endif;
 
 /**
  * Launch the Members loader class.

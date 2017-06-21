@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Group_Invite_Query' ) ) :
 /**
  * Query to get members that are not already members of the group
  *
@@ -139,8 +138,6 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 		return $wpdb->get_col( $wpdb->prepare( "SELECT inviter_id FROM {$bp->groups->table_name_members} WHERE user_id = %d AND group_id = %d", $user_id, $group_id ) );
 	}
 }
-
-endif;
 
 /**
  * A specific Group Nav class to make it possible to

@@ -10,7 +10,6 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'BP_Nouveau_Blogs' ) ) :
 /**
  * Blogs Loader class
  *
@@ -98,8 +97,6 @@ class BP_Nouveau_Blogs {
 		}
 	}
 }
-
-endif;
 
 /**
  * Launch the Blogs loader class.
