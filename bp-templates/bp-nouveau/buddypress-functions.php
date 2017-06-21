@@ -125,6 +125,14 @@ class BP_Nouveau extends BP_Theme_Compat {
 			}, 0 );
 		}
 
+		// Customizer.
+		add_action( 'bp_customize_register', function() {
+			// @todo Cap check might need to change.
+			if ( bp_is_root_blog() && current_user_can( 'customize' ) ) {
+				require $this->includes_dir . 'customizer.php';
+			}
+		}, 0 );
+
 		foreach ( bp_core_get_packaged_component_ids() as $component ) {
 			$component_loader = trailingslashit( $this->includes_dir ) . $component . '/loader.php';
 
@@ -204,12 +212,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 
 		// Register directory nav items
 		add_action( 'bp_screens', array( $this, 'setup_directory_nav' ), 15 );
-
-		// BP Nouveau Customizer panel.
-		add_action( 'bp_customize_register', 'bp_nouveau_customize_register', 10, 1 );
-
-		// Enqueue scripts for the BP Nouveau customizer panel.
-		add_action( 'customize_controls_enqueue_scripts', 'bp_nouveau_customizer_enqueue_scripts' );
 
 		// Register the Default front pages Dynamic Sidebars
 		add_action( 'widgets_init', 'bp_nouveau_register_sidebars', 11 );
