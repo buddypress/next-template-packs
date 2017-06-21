@@ -53,7 +53,7 @@ function bp_nouveau_notifications_filters() {
 			$output = sprintf( '<option value="%1$s"%2$s>%3$s</option>',
 				0,
 				selected( $selected, 0, false ),
-				esc_html__( '&mdash; Everything &mdash;', 'bp-nouveau' )
+				esc_html__( '&mdash; Everything &mdash;', 'buddypress' )
 			) . "\n" . $output;
 		}
 
@@ -87,8 +87,8 @@ function bp_nouveau_notifications_sort_order_links() {
 	?>
 
 	<span class="notifications-order-actions">
-		<a href="<?php echo esc_url( $desc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Newest First', 'bp-nouveau' ); ?>" aria-label="<?php esc_attr_e( 'Newest First', 'bp-nouveau' ); ?>" data-bp-notifications-order="DESC"><span class="dashicons dashicons-arrow-down"></span></a>
-		<a href="<?php echo esc_url( $asc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Older First', 'bp-nouveau' ); ?>" aria-label="<?php esc_attr_e( 'Older First', 'bp-nouveau' ); ?>" data-bp-notifications-order="ASC"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span></a>
+		<a href="<?php echo esc_url( $desc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Newest First', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Newest First', 'buddypress' ); ?>" data-bp-notifications-order="DESC"><span class="dashicons dashicons-arrow-down"></span></a>
+		<a href="<?php echo esc_url( $asc ); ?>" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Older First', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Older First', 'buddypress' ); ?>" data-bp-notifications-order="ASC"><span class="dashicons dashicons-arrow-up" aria-hidden="true"></span></a>
 	</span>
 
 	<?php

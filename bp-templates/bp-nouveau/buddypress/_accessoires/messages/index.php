@@ -17,10 +17,10 @@
 <script type="text/html" id="tmpl-bp-messages-form">
 	<?php bp_nouveau_messages_hook( 'before', 'compose_content' ); ?>
 
-	<label for="send-to-input"><?php esc_html_e( 'Send @Username', 'bp-nouveau' ); ?></label>
+	<label for="send-to-input"><?php esc_html_e( 'Send @Username', 'buddypress' ); ?></label>
 	<input type="text" name="send_to" class="send-to-input" id="send-to-input" />
 
-	<label for="subject"><?php _e( 'Subject', 'bp-nouveau' ); ?></label>
+	<label for="subject"><?php _e( 'Subject', 'buddypress' ); ?></label>
 	<input type="text" name="subject" id="subject"/>
 
 	<div id="bp-message-content"></div>
@@ -28,8 +28,8 @@
 	<?php bp_nouveau_messages_hook( 'after', 'compose_content' ); ?>
 
 	<div class="submit">
-		<input type="button" id="bp-messages-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'bp-nouveau' ); ?>"/>
-		<input type="button" id="bp-messages-reset" class="text-button small bp-secondary-action" value="<?php esc_attr_e( 'Reset', 'bp-nouveau' ); ?>"/>
+		<input type="button" id="bp-messages-send" class="button bp-primary-action" value="<?php esc_attr_e( 'Send', 'buddypress' ); ?>"/>
+		<input type="button" id="bp-messages-reset" class="text-button small bp-secondary-action" value="<?php esc_attr_e( 'Reset', 'buddypress' ); ?>"/>
 	</div>
 </script>
 
@@ -60,14 +60,14 @@
 	<# if ( 1 !== data.page ) { #>
 		<button id="bp-messages-prev-page"class="button messages-button">
 			<span class="dashicons dashicons-arrow-left"></span>
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'bp-nouveau' );?></span>
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'buddypress' );?></span>
 		</button>
 	<# } #>
 
 	<# if ( data.total_page !== data.page ) { #>
 		<button id="bp-messages-next-page"class="button messages-button">
 			<span class="dashicons dashicons-arrow-right"></span>
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'bp-nouveau' );?></span>
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'buddypress' );?></span>
 		</button>
 	<# } #>
 </script>
@@ -78,12 +78,12 @@
 		<div class="bp-search messages-search">
 			<form action="" method="get" id="user_messages_search_form" class="bp-messages-search-form" data-bp-search="messages">
 				<label for="user_messages_search" class="bp-screen-reader-text">
-					<?php _e( 'Search Messages', 'bp-nouveau' ); ?>
+					<?php _e( 'Search Messages', 'buddypress' ); ?>
 				</label>
-				<input type="search" id="user_messages_search" placeholder="<?php esc_attr_e( __( 'Search', 'bp-nouveau' ) ); ?>"/>
+				<input type="search" id="user_messages_search" placeholder="<?php esc_attr_e( __( 'Search', 'buddypress' ) ); ?>"/>
 				<button type="submit" id="user_messages_search_submit">
 					<span class="dashicons dashicons-search" aria-hidden="true"></span>
-					<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'bp-nouveau' ); ?></span>
+					<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'buddypress' ); ?></span>
 				</button>
 			</form>
 		</div>
@@ -93,12 +93,12 @@
 <script type="text/html" id="tmpl-bp-bulk-actions">
 	<label for="user_messages_select_all">
 		<input type="checkbox" id="user_messages_select_all" value="1"/>
-		<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Select All Messages', 'bp-nouveau' ) ); ?></span>
+		<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Select All Messages', 'buddypress' ) ); ?></span>
 	</label>
 <div class="bulk-actions-wrap bp-hide">
 		<div class="bulk-actions select-wrap">
 			<label for="user-messages-bulk-actions" class="bp-screen-reader-text">
-				<?php esc_html_e( 'Select bulk action', 'bp-nouveau' )  ?>
+				<?php esc_html_e( 'Select bulk action', 'buddypress' )  ?>
 			</label>
 			<select id="user-messages-bulk-actions">
 				<# for ( i in data ) { #>
@@ -109,7 +109,7 @@
 		</div>
 		<button class="messages-button bulk-apply" type="submit">
 			<span class="dashicons dashicons-yes" aria-hidden="true"></span>
-			<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Apply', 'bp-nouveau' ) ); ?></span>
+			<span class="bp-screen-reader-text"><?php esc_html_e( __( 'Apply', 'buddypress' ) ); ?></span>
 		</button>
 	</div>
 </script>
@@ -118,12 +118,12 @@
 	<div class="thread-cb">
 		<label for="bp-message-thread-{{data.id}}">
 			<input class="message-check" type="checkbox" name="message_ids[]" id="bp-message-thread-{{data.id}}" value="{{data.id}}">
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Select this message', 'bp-nouveau' ); ?></span>
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Select this message', 'buddypress' ); ?></span>
 		</label>
 	</div>
 	<div class="thread-from">
 		<a class="user-link" href="{{data.sender_link}}">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" />
+			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" />
 			<span class="user-name">{{data.sender_name}}</span>
 		</a>
 	</div>
@@ -142,17 +142,17 @@
 <script type="text/html" id="tmpl-bp-messages-preview">
 	<# if ( undefined !== data.content ) { #>
 
-		<h4 class=" message-title preview-thread-title"><?php esc_html_e( 'Active conversation:', 'bp-nouveau' ); ?><span class="messages-title"> <# print( data.subject ); #></span></h4>
+		<h4 class=" message-title preview-thread-title"><?php esc_html_e( 'Active conversation:', 'buddypress' ); ?><span class="messages-title"> <# print( data.subject ); #></span></h4>
 		<div class="preview-content">
 			<header class="preview-pane-header">
 
 				<# if ( undefined !== data.recipients ) { #>
 					<dl class="thread-participants">
-						<dt><?php esc_html_e( 'Participants:', 'bp-nouveau' ); ?></dt>
+						<dt><?php esc_html_e( 'Participants:', 'buddypress' ); ?></dt>
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" /></a></li>
+									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -161,26 +161,26 @@
 
 				<div class="actions">
 
-					<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
-						<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
+					<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'buddypress' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'buddypress' );?></span>
 					</button>
 
 					<# if ( undefined !== data.star_link ) { #>
 
 						<# if ( false !== data.is_starred ) { #>
-							<a role="button" class="message-action-unstar bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="unstar" aria-pressed="true" data-bp-tooltip="<?php esc_attr_e( 'Unstar Conversation', 'bp-nouveau' );?>">
-								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'bp-nouveau' );?></span>
+							<a role="button" class="message-action-unstar bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="unstar" aria-pressed="true" data-bp-tooltip="<?php esc_attr_e( 'Unstar Conversation', 'buddypress' );?>">
+								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'buddypress' );?></span>
 							</a>
 						<# } else { #>
-							<a role="button" class="message-action-star bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="star" aria-pressed="false" data-bp-tooltip="<?php esc_attr_e( 'Star Conversation', 'bp-nouveau' );?>">
-								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'bp-nouveau' );?></span>
+							<a role="button" class="message-action-star bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="star" aria-pressed="false" data-bp-tooltip="<?php esc_attr_e( 'Star Conversation', 'buddypress' );?>">
+								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'buddypress' );?></span>
 							</a>
 						<# } #>
 
 					<# } #>
 
-					<a href="#view/{{data.id}}" class="message-action-view bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'View Full Conversation.', 'bp-nouveau' );?>">
-						<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'bp-nouveau' );?></span>
+					<a href="#view/{{data.id}}" class="message-action-view bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'View Full Conversation.', 'buddypress' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'buddypress' );?></span>
 					</a>
 				</div>
 			</header>
@@ -197,11 +197,11 @@
 	<header class="single-message-thread-header">
 		<# if ( undefined !== data.recipients ) { #>
 			<dl class="thread-participants">
-				<dt><?php esc_html_e( 'Participants:', 'bp-nouveau' ); ?></dt>
+				<dt><?php esc_html_e( 'Participants:', 'buddypress' ); ?></dt>
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" /></a></li>
+							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
 						<# } #>
 					</ul>
 				</dd>
@@ -210,8 +210,8 @@
 
 		<div class="actions">
 
-			<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'bp-nouveau' );?>">
-				<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'bp-nouveau' );?></span>
+			<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'buddypress' );?>">
+				<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'buddypress' );?></span>
 			</button>
 
 			<?php bp_nouveau_messages_hook( 'after', 'thread_header_actions' ); ?>
@@ -224,7 +224,7 @@
 		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
 		<a href="{{data.sender_link}}" class="user-link">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'bp-nouveau' ); ?>" />
+			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
 
@@ -236,12 +236,12 @@
 				<?php $test = 1; ?>
 
 				<# if ( false !== data.is_starred ) { #>
-					<button type="button" class="message-action-unstar bp-tooltip bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" data-bp-tooltip="<?php esc_attr_e( 'Unstar Message', 'bp-nouveau' );?>">
-						<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Message', 'bp-nouveau' );?></span>
+					<button type="button" class="message-action-unstar bp-tooltip bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="unstar" data-bp-tooltip="<?php esc_attr_e( 'Unstar Message', 'buddypress' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Message', 'buddypress' );?></span>
 					</button>
 				<# } else { #>
-					<button type="button" class="message-action-star bp-tooltip bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" data-bp-tooltip="<?php esc_attr_e( 'Star Message', 'bp-nouveau' );?>">
-						<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Message', 'bp-nouveau' );?></span>
+					<button type="button" class="message-action-star bp-tooltip bp-icons" data-bp-star-link="{{data.star_link}}" data-bp-action="star" data-bp-tooltip="<?php esc_attr_e( 'Star Message', 'buddypress' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Message', 'buddypress' );?></span>
 					</button>
 				<# } #>
 
@@ -282,7 +282,7 @@
 				<div class="avatar-box">
 					<?php bp_loggedin_user_avatar( 'type=thumb&height=30&width=30' ); ?>
 
-					<strong><?php _e( 'Send a Reply', 'bp-nouveau' ); ?></strong>
+					<strong><?php _e( 'Send a Reply', 'buddypress' ); ?></strong>
 				</div>
 
 				<?php bp_nouveau_messages_hook( 'after', 'meta' ); ?>
@@ -293,13 +293,13 @@
 
 				<?php bp_nouveau_messages_hook( 'before', 'reply_box' ); ?>
 
-				<label for="message_content" class="bp-screen-reader-text"><?php _e( 'Reply to Message', 'bp-nouveau' ); ?></label>
+				<label for="message_content" class="bp-screen-reader-text"><?php _e( 'Reply to Message', 'buddypress' ); ?></label>
 				<div id="bp-message-content"></div>
 
 				<?php bp_nouveau_messages_hook( 'after', 'reply_box' ); ?>
 
 				<div class="submit">
-					<input type="submit" name="send" value="<?php esc_attr_e( 'Send Reply', 'bp-nouveau' ); ?>" id="send_reply_button"/>
+					<input type="submit" name="send" value="<?php esc_attr_e( 'Send Reply', 'buddypress' ); ?>" id="send_reply_button"/>
 				</div>
 
 			</div><!-- .message-content -->

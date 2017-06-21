@@ -43,9 +43,9 @@ class BP_Nouveau_Notices_List_Table extends WP_List_Table {
 
 	public function get_columns() {
 		return apply_filters( 'bp_nouveau_notices_list_table_get_columns', array(
-			'subject'   => _x( 'Subject', 'Admin Notices column header', 'bp-nouveau' ),
-			'message'   => _x( 'Content', 'Admin Notices column header', 'bp-nouveau' ),
-			'date_sent' => _x( 'Created', 'Admin Notices column header', 'bp-nouveau' ),
+			'subject'   => _x( 'Subject', 'Admin Notices column header', 'buddypress' ),
+			'message'   => _x( 'Content', 'Admin Notices column header', 'buddypress' ),
+			'date_sent' => _x( 'Created', 'Admin Notices column header', 'buddypress' ),
 		) );
 	}
 
@@ -66,18 +66,18 @@ class BP_Nouveau_Notices_List_Table extends WP_List_Table {
 			'activate_deactivate' => '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
 				'page' => 'bp-notices',
 				'activate' => $item->id
-			), bp_get_admin_url( 'users.php' ) ) ), 'messages_activate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="activate">' . esc_html__( 'Activate Notice', 'bp-nouveau' ) . '</a>',
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_activate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="activate">' . esc_html__( 'Activate Notice', 'buddypress' ) . '</a>',
 			'delete' => '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
 				'page' => 'bp-notices',
 				'delete' => $item->id
-			), bp_get_admin_url( 'users.php' ) ) ), 'messages_delete_thread' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="delete">' . esc_html__( 'Delete Notice', 'bp-nouveau' ) . '</a>',
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_delete_thread' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="delete">' . esc_html__( 'Delete Notice', 'buddypress' ) . '</a>',
 		);
 
 		if ( ! empty( $item->is_active ) ) {
 			$actions['activate_deactivate'] = '<a href="' . esc_url( wp_nonce_url( add_query_arg( array(
 				'page' => 'bp-notices',
 				'deactivate' => $item->id
-			), bp_get_admin_url( 'users.php' ) ) ), 'messages_deactivate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="deactivate">' . esc_html__( 'Deactivate Notice', 'bp-nouveau' ) . '</a>';
+			), bp_get_admin_url( 'users.php' ) ) ), 'messages_deactivate_notice' ) . '" data-bp-notice-id="' . $item->id . '" data-bp-action="deactivate">' . esc_html__( 'Deactivate Notice', 'buddypress' ) . '</a>';
 		}
 
 		echo '<strong>' . apply_filters( 'bp_get_message_notice_subject', $item->subject ) . '</strong> ' . $this->row_actions( $actions );
@@ -136,8 +136,8 @@ class BP_Nouveau_Admin_Notices {
 		}
 
 		$this->screen_id = add_users_page(
-			_x( 'All Member Notices', 'Notices admin page title', 'bp-nouveau' ),
-			_x( 'All Member Notices', 'Admin Users menu', 'bp-nouveau' ),
+			_x( 'All Member Notices', 'Notices admin page title', 'buddypress' ),
+			_x( 'All Member Notices', 'Admin Users menu', 'buddypress' ),
 			'manage_options',
 			'bp-notices',
 			array( $this, 'admin_index' )
@@ -174,25 +174,25 @@ class BP_Nouveau_Admin_Notices {
 		<div class="wrap">
 
 			<h1>
-				<?php echo esc_html_x( 'All Member Notices', 'Notices admin page title', 'bp-nouveau' ); ?>
-				<a id="add_notice" class="add-new-h2" href="#"><?php esc_html_e( 'Add New Notice', 'bp-nouveau' ); ?></a>
+				<?php echo esc_html_x( 'All Member Notices', 'Notices admin page title', 'buddypress' ); ?>
+				<a id="add_notice" class="add-new-h2" href="#"><?php esc_html_e( 'Add New Notice', 'buddypress' ); ?></a>
 			</h1>
 
 			<form action=<?php echo esc_url( $this->url ); ?> method="post">
 				<table class="widefat">
 					<tr>
-						<td><label for="bp_notice_subject"><?php esc_html_e( 'Subject', 'bp-nouveau' ); ?></label></td>
+						<td><label for="bp_notice_subject"><?php esc_html_e( 'Subject', 'buddypress' ); ?></label></td>
 						<td><input type="text" class="widefat" id="bp_notice_subject" name="bp_notice[subject]"/></td>
 					</tr>
 					<tr>
-						<td><label for="bp_notice_content"><?php esc_html_e( 'Content', 'bp-nouveau' ); ?></label></td>
+						<td><label for="bp_notice_content"><?php esc_html_e( 'Content', 'buddypress' ); ?></label></td>
 						<td><textarea class="widefat" id="bp_notice_content" name="bp_notice[content]"></textarea></td>
 					</tr>
 					<tr class="submit">
 						<td>&nbsp;</td>
 						<td style="float:right">
-							<input type="reset" value="<?php esc_attr_e( 'Cancel Notice', 'bp-nouveau' ); ?>" class="button-secondary">
-							<input type="submit" value="<?php esc_attr_e( 'Save Notice', 'bp-nouveau' ); ?>" name="bp_notice[send]" class="button-primary">
+							<input type="reset" value="<?php esc_attr_e( 'Cancel Notice', 'buddypress' ); ?>" class="button-secondary">
+							<input type="submit" value="<?php esc_attr_e( 'Save Notice', 'buddypress' ); ?>" name="bp_notice[send]" class="button-primary">
 						</td>
 					</tr>
 				</table>
@@ -204,9 +204,9 @@ class BP_Nouveau_Admin_Notices {
 
 					<p>
 						<?php if ( isset( $_GET['error'] ) ) :
-							esc_html_e( 'Notice was not created. Please try again.', 'bp-nouveau' );
+							esc_html_e( 'Notice was not created. Please try again.', 'buddypress' );
 						else:
-							esc_html_e( 'Notice successfully created.', 'bp-nouveau' );
+							esc_html_e( 'Notice successfully created.', 'buddypress' );
 						endif; ?>
 					</p>
 

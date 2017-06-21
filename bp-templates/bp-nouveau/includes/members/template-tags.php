@@ -298,9 +298,9 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'button_attr'       => array (
 							'class'            => 'button accept bp-tooltip',
 							'rel'              => '',
-							'data-bp-tooltip'  => __( 'Accept', 'bp-nouveau' ),
+							'data-bp-tooltip'  => __( 'Accept', 'buddypress' ),
 							),
-						'link_text'         => __( 'Accept', 'bp-nouveau' ),
+						'link_text'         => __( 'Accept', 'buddypress' ),
 					), 'reject_friendship' => array(
 						'id'                => 'reject_friendship',
 						'position'          => 15,
@@ -315,9 +315,9 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'button_attr'       => array (
 							'class'            => 'button reject bp-tooltip',
 							'rel'              => '',
-							'data-bp-tooltip'  => __( 'Reject', 'bp-nouveau' ),
+							'data-bp-tooltip'  => __( 'Reject', 'buddypress' ),
 							),
-						'link_text'         => __( 'Reject', 'bp-nouveau' ),
+						'link_text'         => __( 'Reject', 'buddypress' ),
 					),
 				);
 
@@ -693,7 +693,7 @@ function bp_nouveau_members_get_customizer_option_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'user',
 		'autofocus' => 'bp_nouveau_user_front_page',
-		'text'      => esc_html__( 'Members default front page', 'bp-nouveau' ),
+		'text'      => esc_html__( 'Members default front page', 'buddypress' ),
 	) );
 }
 
@@ -709,7 +709,7 @@ function bp_nouveau_members_get_customizer_widgets_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'user',
 		'autofocus' => 'sidebar-widgets-sidebar-buddypress-members',
-		'text'      => esc_html__( '(BuddyPress) Widgets', 'bp-nouveau' ),
+		'text'      => esc_html__( '(BuddyPress) Widgets', 'buddypress' ),
 	) );
 }
 
@@ -778,7 +778,7 @@ function bp_nouveau_member_description_edit_link() {
 		add_filter( 'edit_profile_url', 'bp_members_edit_profile_url', 10, 3 );
 		$link .= '#description';
 
-		return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html__( 'Edit your bio', 'bp-nouveau' ) );
+		return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html__( 'Edit your bio', 'buddypress' ) );
 	}
 
 /** WP Profile tags **********************************************************/

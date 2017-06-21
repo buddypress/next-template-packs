@@ -44,7 +44,7 @@ bp_nouveau_before_loop(); ?>
 
 						<?php endif; ?>
 
-						<p class="last-activity item-meta"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></p>
+						<p class="last-activity item-meta"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></p>
 				<?php bp_nouveau_groups_loop_buttons( ); ?>
 
 					</div>

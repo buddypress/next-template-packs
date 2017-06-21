@@ -86,7 +86,7 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 			) ),
 			'avatar_width'  => $width,
 			'avatar_height' => $height,
-			'avatar_alt'    => sprintf( __( 'Profile photo of %s', 'bp-nouveau' ), $user_displayname ),
+			'avatar_alt'    => sprintf( __( 'Profile photo of %s', 'buddypress' ), $user_displayname ),
 			'user_domain'   => bp_loggedin_user_domain()
 		) );
 	}
@@ -137,7 +137,7 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	if ( ! bp_is_single_item() && ! bp_is_user() ) {
 		$activity_objects = array(
 			'profile' => array(
-				'text'                     => __( 'Post in: Profile', 'bp-nouveau' ),
+				'text'                     => __( 'Post in: Profile', 'buddypress' ),
 				'autocomplete_placeholder' => '',
 				'priority'                 => 5,
 			),
@@ -146,8 +146,8 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 		// the groups component is active & the current user is at least a member of 1 group
 		if ( bp_is_active( 'groups' ) && bp_has_groups( array( 'user_id' => bp_loggedin_user_id(), 'max' => 1 ) ) ) {
 			$activity_objects['group'] = array(
-				'text'                     => __( 'Post in: Group', 'bp-nouveau' ),
-				'autocomplete_placeholder' => __( 'Start typing the group name...', 'bp-nouveau' ),
+				'text'                     => __( 'Post in: Group', 'buddypress' ),
+				'autocomplete_placeholder' => __( 'Start typing the group name...', 'buddypress' ),
 				'priority'                 => 10,
 			);
 		}
@@ -156,9 +156,9 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	}
 
 	$activity_strings = array(
-		'whatsnewPlaceholder' => sprintf( __( "What's new, %s?", 'bp-nouveau' ), bp_get_user_firstname( $user_displayname ) ),
-		'whatsnewLabel'       => __( 'Post what\'s new', 'bp-nouveau' ),
-		'whatsnewpostinLabel' => __( 'Post in', 'bp-nouveau' ),
+		'whatsnewPlaceholder' => sprintf( __( "What's new, %s?", 'buddypress' ), bp_get_user_firstname( $user_displayname ) ),
+		'whatsnewLabel'       => __( 'Post what\'s new', 'buddypress' ),
+		'whatsnewpostinLabel' => __( 'Post in', 'buddypress' ),
 	);
 
 	if ( bp_is_group() ) {
@@ -183,7 +183,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
 		'li_class'  => array( 'dynamic' ),
 		'link'      => bp_get_activity_directory_permalink(),
-		'text'      => __( 'All Members', 'bp-nouveau' ),
+		'text'      => __( 'All Members', 'buddypress' ),
 		'count'     => '',
 		'position'  => 5,
 	);
@@ -211,7 +211,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'favorites', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array(),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/favorites/',
-				'text'      => __( 'My Favorites', 'bp-nouveau' ),
+				'text'      => __( 'My Favorites', 'buddypress' ),
 				'count'     => false,
 				'position'  => 35,
 			);
@@ -224,7 +224,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'friends', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'dynamic' ),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_friends_slug() . '/',
-				'text'      => __( 'My Friends', 'bp-nouveau' ),
+				'text'      => __( 'My Friends', 'buddypress' ),
 				'count'     => '',
 				'position'  => 15,
 			);
@@ -237,7 +237,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'groups', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'dynamic' ),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/' . bp_get_groups_slug() . '/',
-				'text'      => __( 'My Groups', 'bp-nouveau' ),
+				'text'      => __( 'My Groups', 'buddypress' ),
 				'count'     => '',
 				'position'  => 25,
 			);
@@ -257,7 +257,7 @@ function bp_nouveau_get_activity_directory_nav_items() {
 				'slug'      => 'mentions', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array( 'dynamic' ),
 				'link'      => bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/',
-				'text'      => __( 'Mentions', 'bp-nouveau' ),
+				'text'      => __( 'Mentions', 'buddypress' ),
 				'count'     => $count,
 				'position'  => 45,
 			);
@@ -482,17 +482,17 @@ function bp_nouveau_activity_notification_filters() {
 	$notifications = array(
 		array(
 			'id'       => 'new_at_mention',
-			'label'    => __( 'New mentions', 'bp-nouveau' ),
+			'label'    => __( 'New mentions', 'buddypress' ),
 			'position' => 5,
 		),
 		array(
 			'id'       => 'update_reply',
-			'label'    => __( 'New update replies', 'bp-nouveau' ),
+			'label'    => __( 'New update replies', 'buddypress' ),
 			'position' => 15,
 		),
 		array(
 			'id'       => 'comment_reply',
-			'label'    => __( 'New update comment replies', 'bp-nouveau' ),
+			'label'    => __( 'New update comment replies', 'buddypress' ),
 			'position' => 25,
 		),
 	);

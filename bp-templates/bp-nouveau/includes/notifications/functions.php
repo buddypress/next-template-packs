@@ -207,7 +207,7 @@ function bp_nouveau_notifications_dashiconified_link( $link = '', $bp_tooltip = 
  * @return string       Link Output.
  */
 function bp_nouveau_notifications_mark_unread_link( $link = '' ) {
-	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Mark Unread', 'bp-nouveau' ), 'dashicons-hidden' );
+	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Mark Unread', 'buddypress' ), 'dashicons-hidden' );
 }
 
 /**
@@ -219,7 +219,7 @@ function bp_nouveau_notifications_mark_unread_link( $link = '' ) {
  * @return string       Link Output.
  */
 function bp_nouveau_notifications_mark_read_link( $link = '' ) {
-	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Mark Read', 'bp-nouveau' ), 'dashicons-visibility' );
+	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Mark Read', 'buddypress' ), 'dashicons-visibility' );
 }
 
 /**
@@ -231,5 +231,5 @@ function bp_nouveau_notifications_mark_read_link( $link = '' ) {
  * @return string       Link Output.
  */
 function bp_nouveau_notifications_delete_link( $link = '' ) {
-	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Delete', 'bp-nouveau' ), 'dashicons-dismiss' );
+	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Delete', 'buddypress' ), 'dashicons-dismiss' );
 }

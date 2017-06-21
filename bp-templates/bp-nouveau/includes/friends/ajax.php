@@ -32,7 +32,7 @@ function bp_nouveau_ajax_addremove_friend() {
 	$response = array(
 		'feedback' => sprintf(
 			'<div class="bp-feedback error bp-ajax-message"><p>%s</p></div>',
-			esc_html__( 'There was a problem performing this action. Please try again.', 'bp-nouveau' )
+			esc_html__( 'There was a problem performing this action. Please try again.', 'buddypress' )
 		)
 	);
 
@@ -68,13 +68,13 @@ function bp_nouveau_ajax_addremove_friend() {
 		if ( ! friends_accept_friendship( $friend_id ) ) {
 			wp_send_json_error( array( 'feedback' => sprintf(
 				'<div class="bp-feedback error">%s</div>',
-				esc_html__( 'There was a problem accepting that request. Please try again.', 'bp-nouveau' )
+				esc_html__( 'There was a problem accepting that request. Please try again.', 'buddypress' )
 			) ) );
 		} else {
 			wp_send_json_success( array(
 				'feedback' => sprintf(
 					'<div class="bp-feedback success">%s</div>',
-					esc_html__( 'Friendship accepted.', 'bp-nouveau' )
+					esc_html__( 'Friendship accepted.', 'buddypress' )
 				),
 				'type'     => 'success',
 				'is_user'  => true,
@@ -86,13 +86,13 @@ function bp_nouveau_ajax_addremove_friend() {
 		if ( ! friends_reject_friendship( $friend_id ) ) {
 			wp_send_json_error( array( 'feedback' => sprintf(
 				'<div class="bp-feedback error">%s</div>',
-				esc_html__( 'There was a problem rejecting that request. Please try again.', 'bp-nouveau' )
+				esc_html__( 'There was a problem rejecting that request. Please try again.', 'buddypress' )
 			) ) );
 		} else {
 			wp_send_json_success( array(
 				'feedback' => sprintf(
 					'<div class="bp-feedback success">%s</div>',
-					esc_html__( 'Friendship rejected.', 'bp-nouveau' )
+					esc_html__( 'Friendship rejected.', 'buddypress' )
 				),
 				'type'     => 'success',
 				'is_user'  => true,
@@ -104,7 +104,7 @@ function bp_nouveau_ajax_addremove_friend() {
 		if ( ! friends_remove_friend( bp_loggedin_user_id(), $friend_id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="bp-feedback error">%s</div>',
-				esc_html__( 'Friendship could not be cancelled.', 'bp-nouveau' )
+				esc_html__( 'Friendship could not be cancelled.', 'buddypress' )
 			);
 
 			wp_send_json_error( $response );
@@ -117,7 +117,7 @@ function bp_nouveau_ajax_addremove_friend() {
 				$response = array(
 					'feedback' => sprintf(
 						'<div class="bp-feedback success">%s</div>',
-						esc_html__( 'Friendship cancelled.', 'bp-nouveau' )
+						esc_html__( 'Friendship cancelled.', 'buddypress' )
 					),
 					'type'     => 'success',
 					'is_user'  => $is_user,
@@ -132,7 +132,7 @@ function bp_nouveau_ajax_addremove_friend() {
 		if ( ! friends_add_friend( bp_loggedin_user_id(), $friend_id ) ) {
 			$response['feedback'] = sprintf(
 				'<div class="bp-feedback error">%s</div>',
-				esc_html__( 'Friendship could not be requested.', 'bp-nouveau' )
+				esc_html__( 'Friendship could not be requested.', 'buddypress' )
 			);
 
 			wp_send_json_error( $response );
@@ -147,7 +147,7 @@ function bp_nouveau_ajax_addremove_friend() {
 		} else {
 			$response['feedback'] = sprintf(
 				'<div class="bp-feedback error">%s</div>',
-				esc_html__( 'Friendship request could not be cancelled.', 'bp-nouveau' )
+				esc_html__( 'Friendship request could not be cancelled.', 'buddypress' )
 			);
 
 			wp_send_json_error( $response );
@@ -157,7 +157,7 @@ function bp_nouveau_ajax_addremove_friend() {
 	} else {
 		$response['feedback'] = sprintf(
 			'<div class="bp-feedback error">%s</div>',
-			esc_html__( 'Request Pending', 'bp-nouveau' )
+			esc_html__( 'Request Pending', 'buddypress' )
 		);
 
 		wp_send_json_error( $response );

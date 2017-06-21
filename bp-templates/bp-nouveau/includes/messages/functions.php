@@ -95,14 +95,14 @@ function bp_nouveau_messages_localize_scripts( $params = array() ) {
 
 	$params['messages'] = array(
 		'errors' => array(
-			'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'bp-nouveau' ),
-			'subject'         => __( 'Please add a subject to your message.', 'bp-nouveau' ),
-			'message_content' => __( 'Please add some content to your message.', 'bp-nouveau' ),
+			'send_to'         => __( 'Please add at least a user to send the message to, using their @username.', 'buddypress' ),
+			'subject'         => __( 'Please add a subject to your message.', 'buddypress' ),
+			'message_content' => __( 'Please add some content to your message.', 'buddypress' ),
 		),
 		'nonces' => array(
 			'send' => wp_create_nonce( 'messages_send_message' ),
 		),
-		'loading' => __( 'Loading messages, please wait.', 'bp-nouveau' ),
+		'loading' => __( 'Loading messages, please wait.', 'buddypress' ),
 		'bulk_actions' => bp_nouveau_messages_get_bulk_actions(),
 	);
 
@@ -110,12 +110,12 @@ function bp_nouveau_messages_localize_scripts( $params = array() ) {
 	if ( bp_is_active( 'messages', 'star' ) ) {
 		$params['messages'] = array_merge( $params['messages'], array(
 			'strings' => array(
-				'text_unstar'  => __( 'Unstar', 'bp-nouveau' ),
-				'text_star'    => __( 'Star', 'bp-nouveau' ),
-				'title_unstar' => __( 'Starred', 'bp-nouveau' ),
-				'title_star'   => __( 'Not starred', 'bp-nouveau' ),
-				'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'bp-nouveau' ),
-				'title_star_thread'   => __( 'Star the first message in this thread', 'bp-nouveau' ),
+				'text_unstar'  => __( 'Unstar', 'buddypress' ),
+				'text_star'    => __( 'Star', 'buddypress' ),
+				'title_unstar' => __( 'Starred', 'buddypress' ),
+				'title_star'   => __( 'Not starred', 'buddypress' ),
+				'title_unstar_thread' => __( 'Remove all starred messages in this thread', 'buddypress' ),
+				'title_star_thread'   => __( 'Star the first message in this thread', 'buddypress' ),
 			),
 			'is_single_thread' => (int) bp_is_messages_conversation(),
 			'star_counter'     => 0,
@@ -134,7 +134,7 @@ function bp_nouveau_message_search_form() {
 
 	$search_form_html = '<form action="" method="get" id="search-messages-form">
 		<label for="messages_search"><input type="text" name="' . esc_attr( $query_arg ) . '" id="messages_search" placeholder="'. esc_attr( $placeholder ) .'" /></label>
-		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . esc_attr_e( 'Search', 'bp-nouveau' ) . '" />
+		<input type="submit" id="messages_search_submit" name="messages_search_submit" value="' . esc_attr_e( 'Search', 'buddypress' ) . '" />
 	</form>';
 
 	/**
@@ -242,7 +242,7 @@ function bp_nouveau_format_notice_notification_for_user( $array ) {
 	}
 
 	return array(
-		'text' => esc_html__( 'New site wide notice', 'bp-nouveau' ),
+		'text' => esc_html__( 'New site wide notice', 'buddypress' ),
 		'link' => bp_loggedin_user_domain(),
 	);
 }
@@ -387,7 +387,7 @@ function bp_nouveau_messages_get_bulk_actions() {
 function bp_nouveau_messages_notification_filters() {
 	bp_nouveau_notifications_register_filter( array(
 		'id'       => 'new_message',
-		'label'    => __( 'New private messages', 'bp-nouveau' ),
+		'label'    => __( 'New private messages', 'buddypress' ),
 		'position' => 115,
 	) );
 }

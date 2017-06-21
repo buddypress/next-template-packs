@@ -280,9 +280,9 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'button_element'    => $button_element,
 				'button_attr'       => array(
 					'class'           => 'button view bp-secondary-action bp-tooltip',
-					'data-bp-tooltip' => __( 'View Conversation', 'bp-nouveau' ),
+					'data-bp-tooltip' => __( 'View Conversation', 'buddypress' ),
 					),
-				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'bp-nouveau' ) ),
+				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span>',esc_html__( 'View Conversation', 'buddypress' ) ),
 			);
 
 			// If button element set add url link to data-attr
@@ -310,10 +310,10 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'button_attr'         => array(
 					'id'              => 'acomment-comment-' . $activity_id,
 					'class'           => 'button acomment-reply bp-primary-action bp-tooltip',
-					'data-bp-tooltip' => __( 'Comment', 'bp-nouveau' ),
+					'data-bp-tooltip' => __( 'Comment', 'buddypress' ),
 					'aria-expanded'   => 'false'
 					),
-				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'bp-nouveau' ), bp_activity_get_comment_count() ),
+				'link_text'  => sprintf( '<span class="bp-screen-reader-text">%1$s</span> <span class="comment-count">%2$s</span>', esc_html__( 'Comment', 'buddypress' ), bp_activity_get_comment_count() ),
 			);
 
 			// If button element set add href link to data-attr
@@ -335,8 +335,8 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'parent_attr'      => $parent_attr,
 					'button_element'   => $button_element,
 					'link_class'       => 'button fav bp-secondary-action bp-tooltip',
-					'data_bp_tooltip'  => esc_attr__( 'Mark as Favorite', 'bp-nouveau' ),
-					'link_text'        => __( 'Favorite', 'bp-nouveau' ),
+					'data_bp_tooltip'  => esc_attr__( 'Mark as Favorite', 'buddypress' ),
+					'link_text'        => __( 'Favorite', 'buddypress' ),
 					'aria-pressed'     => 'false'
 				);
 
@@ -355,8 +355,8 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 					'parent_attr'      => $parent_attr,
 					'button_element'   => $button_element,
 					'link_class'       => 'button unfav bp-secondary-action bp-tooltip',
-					'data_bp_tooltip'  => esc_attr__( 'Remove Favorite', 'bp-nouveau' ),
-					'link_text'        => __( 'Remove Favorite', 'bp-nouveau' ),
+					'data_bp_tooltip'  => esc_attr__( 'Remove Favorite', 'buddypress' ),
+					'link_text'        => __( 'Remove Favorite', 'buddypress' ),
 					'aria-pressed'     => 'true'
 				);
 
@@ -434,8 +434,8 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'link_id'           => '',
 				'link_class'        => 'button item-button bp-secondary-action bp-tooltip ' . $class . ' confirm',
 				'link_rel'          => 'nofollow',
-				'data_bp_tooltip'        => esc_attr__( 'Delete', 'bp-nouveau' ),
-				'link_text'         => __( 'Delete', 'bp-nouveau' ),
+				'data_bp_tooltip'        => esc_attr__( 'Delete', 'buddypress' ),
+				'link_text'         => __( 'Delete', 'buddypress' ),
 			);
 
 			// If button element set add nonce link to data-attr attr
@@ -479,12 +479,12 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 				'button_attr'       => array(
 					'class'           => 'bp-secondary-action spam-activity confirm button item-button bp-tooltip',
 					'id'              =>  'activity_make_spam_' . $activity_id,
-					'data-bp-tooltip' =>  esc_attr__( 'Spam', 'bp-nouveau' ),
+					'data-bp-tooltip' =>  esc_attr__( 'Spam', 'buddypress' ),
 					),
 				'link_text'  => sprintf(
 					/** @todo: use a specific css rule for this *************************************************************/
 					'<span class="dashicons dashicons-flag" style="color:#a00;vertical-align:baseline;width:18px;height:18px" aria-hidden="true"></span><span class="bp-screen-reader-text">%s</span>',
-					esc_html__( 'Spam', 'bp-nouveau' )
+					esc_html__( 'Spam', 'buddypress' )
 				),
 			);
 
@@ -660,7 +660,7 @@ function bp_nouveau_activity_comment_action() {
 		 */
 		return apply_filters( 'bp_nouveau_get_activity_comment_action',
 			/* translators: 1: user profile link, 2: user name, 3: activity permalink, 4: activity recorded date, 5: activity timestamp, 6: activity human time since */
-			sprintf( __( '<a href="%1$s">%2$s</a> replied <a href="%3$s" class="activity-time-since"><time class="time-since" datetime="%4$s" data-bp-timestamp="%5$d">%6$s</time></a>', 'bp-nouveau' ),
+			sprintf( __( '<a href="%1$s">%2$s</a> replied <a href="%3$s" class="activity-time-since"><time class="time-since" datetime="%4$s" data-bp-timestamp="%5$d">%6$s</time></a>', 'buddypress' ),
 				esc_url( bp_get_activity_comment_user_link() ),
 				esc_html( bp_get_activity_comment_name() ),
 				esc_url( bp_get_activity_comment_permalink() ),
@@ -777,7 +777,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 					'class'  => 'acomment-reply bp-primary-action' . $icons . '',
 					'id'     => sprintf( 'acomment-reply-%1$s-from-%2$s', $activity_id, $activity_comment_id ),
 				),
-				'link_text'         => esc_html__( 'Reply', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Reply', 'buddypress' ),
 			),
 			'activity_comment_delete' => array(
 				'id'                => 'activity_comment_delete',
@@ -791,7 +791,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 					'class'  => 'delete acomment-delete confirm bp-secondary-action',
 					'rel'    => 'nofollow',
 					),
-				'link_text'         => esc_html__( 'Delete', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Delete', 'buddypress' ),
 			),
 		);
 
@@ -819,7 +819,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 					'class'  => 'bp-secondary-action spam-activity-comment confirm',
 					'rel'    => 'nofollow',
 				),
-				'link_text'          => esc_html__( 'Spam', 'bp-nouveau' ),
+				'link_text'          => esc_html__( 'Spam', 'buddypress' ),
 			);
 
 			// If button element set add nonce link to data-attr attr

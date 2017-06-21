@@ -28,7 +28,7 @@
 
 
 			<p class="highlight group-status"><strong><?php echo esc_html( bp_nouveau_group_meta()->status ); ?></strong></p>
-			<p class="activity" data-livestamp="<?php bp_core_iso8601_date( bp_get_group_last_active( 0, array( 'relative' => false ) ) ); ?>"><?php printf( __( 'active %s', 'bp-nouveau' ), bp_get_group_last_active() ); ?></p>
+			<p class="activity" data-livestamp="<?php bp_core_iso8601_date( bp_get_group_last_active( 0, array( 'relative' => false ) ) ); ?>"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></p>
 			<?php echo bp_nouveau_group_meta()->group_type_list; ?>
 
 			<?php bp_nouveau_group_hook( 'before', 'header_meta' ); ?>

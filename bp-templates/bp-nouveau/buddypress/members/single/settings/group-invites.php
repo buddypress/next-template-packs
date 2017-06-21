@@ -9,7 +9,7 @@
 ?>
 
 <h2 class="screen-heading group-invites-screen">
-	<?php _e( 'Group Invites', 'bp-nouveau' ); ?>
+	<?php _e( 'Group Invites', 'buddypress' ); ?>
 </h2>
 
 <?php bp_nouveau_user_feedback( 'member-group-invites' ); ?>
@@ -18,7 +18,7 @@
 
 	<label for="account-group-invites-preferences">
 		<input type="checkbox" name="account-group-invites-preferences" id="account-group-invites-preferences" value="1" <?php checked( 1, bp_nouveau_groups_get_group_invites_setting() ); ?>/>
-		 <?php esc_html_e( 'I want to restrict Group invites to my friends only.', 'bp-nouveau' ); ?>
+		 <?php esc_html_e( 'I want to restrict Group invites to my friends only.', 'buddypress' ); ?>
 	</label>
 
 	<?php bp_nouveau_submit_button( 'member-group-invites' ); ?>

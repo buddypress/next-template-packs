@@ -38,7 +38,7 @@
 
 	<# if ( data.selected ) { #>
 		<a href="#" class="bp-remove-item dashicons dashicons-no" data-item_id="{{data.id}}">
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove item', 'bp-nouveau' ); ?></span>
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Remove item', 'buddypress' ); ?></span>
 		</a>
 	<# } #>
 </script>

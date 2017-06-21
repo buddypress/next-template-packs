@@ -12,17 +12,17 @@
 	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
 
 		<div class="bp-feedback custom-homepage-info info no-icon">
-			<strong><?php esc_html_e( 'Manage the Groups default front page', 'bp-nouveau' ); ?></strong>
+			<strong><?php esc_html_e( 'Manage the Groups default front page', 'buddypress' ); ?></strong>
 
 			<p>
 			<?php printf(
-				esc_html__( 'You can set your preferences about the %s or add %s to it.', 'bp-nouveau' ),
+				esc_html__( 'You can set your preferences about the %s or add %s to it.', 'buddypress' ),
 				bp_nouveau_groups_get_customizer_option_link(),
 				bp_nouveau_groups_get_customizer_widgets_link()
 			); ?>
 			</p>
 
-			<button type="button" class="bp-tooltips" data-bp-tooltips="<?php esc_attr_e( 'Close', 'bp-nouveau' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'bp-nouveau' ); ?>" data-bp-close="remove">
+			<button type="button" class="bp-tooltips" data-bp-tooltips="<?php esc_attr_e( 'Close', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'buddypress' ); ?>" data-bp-close="remove">
 				<span class="dashicons dashicons-dismiss" aria-hidden="true"></span>
 			</button>
 		</div>

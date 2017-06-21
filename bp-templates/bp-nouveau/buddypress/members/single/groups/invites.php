@@ -28,7 +28,7 @@ bp_nouveau_group_hook( 'before', 'invites_content' ); ?>
 					<div class="item">
 						<h2 class="list-title groups-title"><?php bp_group_link(); ?></h2>
 						<p class="meta group-details">
-							<span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'bp-nouveau' ), bp_get_group_total_members( false ) ); ?></span>
+							<span class="small"> - <?php printf( _nx( '%d member', '%d members', bp_get_group_total_members( false ),'Group member count', 'buddypress' ), bp_get_group_total_members( false ) ); ?></span>
 						</p>
 
 						<p class="desc">

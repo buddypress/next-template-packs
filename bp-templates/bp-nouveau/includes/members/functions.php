@@ -45,7 +45,7 @@ function bp_nouveau_get_members_directory_nav_items() {
 		'slug'      => 'all', // slug is used because BP_Core_Nav requires it, but it's the scope
 		'li_class'  => array(),
 		'link'      => bp_get_members_directory_permalink(),
-		'text'      => __( 'All Members', 'bp-nouveau' ),
+		'text'      => __( 'All Members', 'buddypress' ),
 		'count'     => bp_get_total_member_count(),
 		'position'  => 5,
 	);
@@ -59,7 +59,7 @@ function bp_nouveau_get_members_directory_nav_items() {
 				'slug'      => 'personal', // slug is used because BP_Core_Nav requires it, but it's the scope
 				'li_class'  => array(),
 				'link'      => bp_loggedin_user_domain() . bp_get_friends_slug() . '/my-friends/',
-				'text'      => __( 'My Friends', 'bp-nouveau' ),
+				'text'      => __( 'My Friends', 'buddypress' ),
 				'count'     => bp_get_total_friend_count( bp_loggedin_user_id() ),
 				'position'  => 15,
 			);
@@ -94,12 +94,12 @@ function bp_nouveau_get_members_directory_nav_items() {
 function bp_nouveau_get_members_filters( $context = '' ) {
 	if ( 'group' !== $context ) {
 		$filters = array(
-			'active' => __( 'Last Active', 'bp-nouveau' ),
-			'newest' => __( 'Newest Registered', 'bp-nouveau' ),
+			'active' => __( 'Last Active', 'buddypress' ),
+			'newest' => __( 'Newest Registered', 'buddypress' ),
 		);
 
 		if ( bp_is_active( 'xprofile' ) ) {
-			$filters['alphabetical'] = __( 'Alphabetical', 'bp-nouveau' );
+			$filters['alphabetical'] = __( 'Alphabetical', 'buddypress' );
 		}
 
 		$action = 'bp_members_directory_order_options';
@@ -110,15 +110,15 @@ function bp_nouveau_get_members_filters( $context = '' ) {
 
 	} else {
 		$filters = array(
-			'last_joined' => __( 'Newest', 'bp-nouveau' ),
-			'first_joined' => __( 'Oldest','bp-nouveau' ),
+			'last_joined' => __( 'Newest', 'buddypress' ),
+			'first_joined' => __( 'Oldest','buddypress' ),
 		);
 
 		if ( bp_is_active( 'activity' ) ) {
-			$filters['group_activity'] = __( 'Group Activity', 'bp-nouveau' );
+			$filters['group_activity'] = __( 'Group Activity', 'buddypress' );
 		}
 
-		$filters['alphabetical'] = __( 'Alphabetical', 'bp-nouveau' );
+		$filters['alphabetical'] = __( 'Alphabetical', 'buddypress' );
 		$action = 'bp_groups_members_order_options';
 	}
 
@@ -424,9 +424,9 @@ function bp_nouveau_get_wp_profile_fields( $user = null ) {
 	$contact_methods = (array) apply_filters( 'bp_nouveau_get_wp_profile_field', wp_get_user_contact_methods( $user ), $user );
 
 	$wp_fields = array(
-		'display_name'     => __( 'Name', 'bp-nouveau' ),
-		'user_description' => __( 'About Me', 'bp-nouveau' ),
-		'user_url'         => __( 'Website', 'bp-nouveau' ),
+		'display_name'     => __( 'Name', 'buddypress' ),
+		'user_description' => __( 'About Me', 'buddypress' ),
+		'user_url'         => __( 'Website', 'buddypress' ),
 	);
 
 	return array_merge( $wp_fields, $contact_methods );
@@ -444,7 +444,7 @@ function bp_nouveau_member_customizer_nav() {
 
 	if ( bp_displayed_user_get_front_template( buddypress()->loggedin_user ) ) {
 		buddypress()->members->nav->add_nav( array(
-			'name'                => _x( 'Home', 'Member Home page', 'bp-nouveau' ),
+			'name'                => _x( 'Home', 'Member Home page', 'buddypress' ),
 			'slug'                => 'front',
 			'position'            => 5,
 		) );

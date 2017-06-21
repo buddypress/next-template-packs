@@ -367,14 +367,14 @@ function bp_nouveau_group_manage_screen() {
 		if ( ! empty( $core_screen['nonce'] ) ) {
 
 			if ( ! $is_group_create ) {
-				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'bp-nouveau' ) );
+				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'buddypress' ) );
 
 				// Specific case for the delete group screen
 				if ( 'delete-group' === $screen_id ) {
 					$output = sprintf( '<div class="submit">
 							<input type="submit" disabled="disabled" value="%s" id="delete-group-button" name="delete-group-button" />
 						</div>',
-						esc_attr__( 'Delete Group', 'bp-nouveau' )
+						esc_attr__( 'Delete Group', 'buddypress' )
 					);
 				}
 			}
@@ -396,26 +396,26 @@ function bp_nouveau_group_manage_screen() {
 
 			if ( ! bp_is_first_group_creation_step() ) {
 				$creation_step_buttons .= sprintf( '<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
-					esc_attr__( 'Back to Previous Step', 'bp-nouveau' ),
+					esc_attr__( 'Back to Previous Step', 'buddypress' ),
 					"location.href='" . esc_url( bp_get_group_creation_previous_link() ) . "'"
 				);
 			}
 
 			if ( ! bp_is_last_group_creation_step() && ! bp_is_first_group_creation_step() ) {
 				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-next" name="save" />',
-					esc_attr__( 'Next Step', 'bp-nouveau' )
+					esc_attr__( 'Next Step', 'buddypress' )
 				);
 			}
 
 			if ( bp_is_first_group_creation_step() ) {
 				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-create" name="save" />',
-					esc_attr__( 'Create Group and Continue', 'bp-nouveau' )
+					esc_attr__( 'Create Group and Continue', 'buddypress' )
 				);
 			}
 
 			if ( bp_is_last_group_creation_step() ) {
 				$creation_step_buttons .= sprintf( '<input type="submit" value="%s" id="group-creation-finish" name="save" />',
-					esc_attr__( 'Finish', 'bp-nouveau' )
+					esc_attr__( 'Finish', 'buddypress' )
 				);
 			}
 
@@ -720,7 +720,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'class'            => 'button accept group-button accept-invite',
 					'rel'              => '',
 				 ),
-				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Accept', 'buddypress' ),
 			);
 
 			// If button element set add nonce link to data-attr attr
@@ -747,7 +747,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'class'            => 'button reject group-button reject-invite',
 					'rel'              => '',
 				 ),
-				'link_text'         => __( 'Reject', 'bp-nouveau' ),
+				'link_text'         => __( 'Reject', 'buddypress' ),
 			);
 
 			// If button element set add nonce link to formaction attr
@@ -777,7 +777,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'class'            => 'button',
 					'rel'              => '',
 				 ),
-				'link_text'         => esc_html__( 'Accept', 'bp-nouveau' ),
+				'link_text'         => esc_html__( 'Accept', 'buddypress' ),
 			);
 
 			// If button element set add nonce link to data-attr attr
@@ -803,7 +803,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'class'            => 'button',
 					'rel'              => '',
 					),
-				'link_text'         => __( 'Reject', 'bp-nouveau' ),
+				'link_text'         => __( 'Reject', 'buddypress' ),
 			);
 
 			// If button element set add nonce link to data-attr attr
@@ -837,7 +837,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'rel'              => '',
 					'title'            => '',
 					),
-					'link_text'         => __( 'Remove Ban', 'bp-nouveau' ),
+					'link_text'         => __( 'Remove Ban', 'buddypress' ),
 
 				), 'ban_member' => array(
 				'id'                => 'ban_member',
@@ -856,7 +856,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					'rel'              => '',
 					'title'            => '',
 					),
-				'link_text'         => __( 'Kick &amp; Ban', 'bp-nouveau' ),
+				'link_text'         => __( 'Kick &amp; Ban', 'buddypress' ),
 
 				), 'promote_mod' => array(
 					'id'                => 'promote_mod',
@@ -875,7 +875,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 						'rel'              => '',
 						'title'            => '',
 					),
-					'link_text'         => __( 'Promote to Mod', 'bp-nouveau' ),
+					'link_text'         => __( 'Promote to Mod', 'buddypress' ),
 
 				), 'promote_admin' => array(
 					'id'                => 'promote_admin',
@@ -895,7 +895,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 						'rel'              => '',
 						'title'            => '',
 					),
-					'link_text'         => __( 'Promote to Admin', 'bp-nouveau' ),
+					'link_text'         => __( 'Promote to Admin', 'buddypress' ),
 
 				), 'remove_member' => array(
 					'id'                => 'remove_member',
@@ -914,7 +914,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 						'rel'              => '',
 						'title'            => '',
 					),
-					'link_text'         => __( 'Remove from group', 'bp-nouveau' ),
+					'link_text'         => __( 'Remove from group', 'buddypress' ),
 				),
 			);
 			// If 'button' element is set add the nonce link to data-attr attr
@@ -1284,7 +1284,7 @@ function bp_nouveau_groups_get_customizer_option_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'group',
 		'autofocus' => 'bp_nouveau_group_front_page',
-		'text'      => esc_html__( 'Groups default front page', 'bp-nouveau' ),
+		'text'      => esc_html__( 'Groups default front page', 'buddypress' ),
 	) );
 }
 
@@ -1300,7 +1300,7 @@ function bp_nouveau_groups_get_customizer_widgets_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'group',
 		'autofocus' => 'sidebar-widgets-sidebar-buddypress-groups',
-		'text'      => esc_html__( '(BuddyPress) Widgets', 'bp-nouveau' ),
+		'text'      => esc_html__( '(BuddyPress) Widgets', 'buddypress' ),
 	) );
 }
 

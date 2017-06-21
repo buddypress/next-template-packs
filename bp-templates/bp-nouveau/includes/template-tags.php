@@ -1746,10 +1746,10 @@ function bp_nouveau_filter_label() {
 
 		$component = bp_nouveau_current_object();
 
-		$label = __( 'Order By:', 'bp-nouveau' );
+		$label = __( 'Order By:', 'buddypress' );
 
 		if ( 'activity' === $component['object'] || 'friends' === $component['object'] ) {
-			$label = __( 'Show:', 'bp-nouveau' );
+			$label = __( 'Show:', 'buddypress' );
 		}
 
 		return esc_html( apply_filters( 'bp_nouveau_get_filter_label', $label ) );
@@ -1934,7 +1934,7 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 		list( $label, $required, $value, $attribute_type, $type, $class ) = array_values( $attributes );
 
 		if ( $required ) {
-			$required = ' ' . _x( '(required)', 'signup required field', 'bp-nouveau' );
+			$required = ' ' . _x( '(required)', 'signup required field', 'buddypress' );
 		}
 
 		// Text fields are using strings, radios are using their inputs
@@ -1953,7 +1953,7 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 		} elseif ( 'signup_blog_privacy_private' !== $name ) {
 			?>
 				<span class="label">
-					<?php esc_html_e( 'I would like my site to appear in search engines, and in public listings around this network.', 'bp-nouveau' ); ?>
+					<?php esc_html_e( 'I would like my site to appear in search engines, and in public listings around this network.', 'buddypress' ); ?>
 				</span>
 			<?php
 		}

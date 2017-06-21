@@ -9,13 +9,13 @@
 
 ?>
 
-<h2 class="screen-heading"><?php _e( 'Change Cover Image', 'bp-nouveau' ); ?></h2>
+<h2 class="screen-heading"><?php _e( 'Change Cover Image', 'buddypress' ); ?></h2>
 
 <?php bp_nouveau_xprofile_hook( 'before', 'edit_cover_image' ); ?>
 
 <p class="info bp-feedback">
 	<span class="bp-icon" aria-hidden="true"></span>
-	<span class="bp-help-text"><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'bp-nouveau' ); ?></span>
+	<span class="bp-help-text"><?php _e( 'Your Cover Image will be used to customize the header of your profile.', 'buddypress' ); ?></span>
 </p>
 
 <?php

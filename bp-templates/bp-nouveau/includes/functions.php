@@ -315,9 +315,9 @@ function bp_nouveau_register_sidebars() {
 	$sidebars = array();
 	if ( $default_user_front ) {
 		$sidebars[] = array(
-			'name'          => __( 'BuddyPress User\'s Home', 'bp-nouveau' ),
+			'name'          => __( 'BuddyPress User\'s Home', 'buddypress' ),
 			'id'            => 'sidebar-buddypress-members',
-			'description'   => __( 'Add widgets here to appear in the front page of each member of your community.', 'bp-nouveau' ),
+			'description'   => __( 'Add widgets here to appear in the front page of each member of your community.', 'buddypress' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -327,9 +327,9 @@ function bp_nouveau_register_sidebars() {
 
 	if ( $default_group_front ) {
 		$sidebars[] = array(
-			'name'          => __( 'BuddyPress Group\'s Home', 'bp-nouveau' ),
+			'name'          => __( 'BuddyPress Group\'s Home', 'buddypress' ),
 			'id'            => 'sidebar-buddypress-groups',
-			'description'   => __( 'Add widgets here to appear in the front page of each group of your community.', 'bp-nouveau' ),
+			'description'   => __( 'Add widgets here to appear in the front page of each group of your community.', 'buddypress' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -367,177 +367,177 @@ function bp_nouveau_get_forsaken_hooks() {
 		'bp_members_directory_member_types' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_members_directory_member_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_members_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_members_directory_member_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_members_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_before_activity_type_tab_all' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_before_activity_type_tab_all\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_before_activity_type_tab_all\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_before_activity_type_tab_friends' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_before_activity_type_tab_friends\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_before_activity_type_tab_friends\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_before_activity_type_tab_groups' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_before_activity_type_tab_groups\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_before_activity_type_tab_groups\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_before_activity_type_tab_favorites' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_before_activity_type_tab_favorites\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_before_activity_type_tab_favorites\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_before_activity_type_tab_mentions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_before_activity_type_tab_mentions\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_before_activity_type_tab_mentions\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_activity_type_tabs' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_activity_type_tabs\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_activity_type_tabs\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_groups_directory_group_filter' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_groups_directory_group_filter\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_groups_directory_group_filter\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_blogs_directory_blog_types' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'the \'bp_blogs_directory_blog_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'the \'bp_blogs_directory_blog_types\' action will soon be deprecated in the BP Nouveau template pack, use the \'bp_nouveau_get_activity_directory_nav_items\' filter instead', 'buddypress' ),
 		),
 		'bp_members_directory_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_members_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_members_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_groups_members_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_groups_members_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_groups_members_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_member_friends_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_member_friends_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_friends_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'Instead of using the \'bp_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'bp-nouveau' ),
+			'message'      => __( 'Instead of using the \'bp_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'buddypress' ),
 		),
 		'bp_member_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'Instead of using the \'bp_member_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'bp-nouveau' ),
+			'message'      => __( 'Instead of using the \'bp_member_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'buddypress' ),
 		),
 		'bp_group_activity_filter_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'Instead of using the \'bp_group_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'bp-nouveau' ),
+			'message'      => __( 'Instead of using the \'bp_group_activity_filter_options\' action you should register your activity types using the function \'bp_activity_set_action\'', 'buddypress' ),
 		),
 		'bp_groups_directory_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_groups_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_groups_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_member_group_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_member_group_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_group_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_member_blog_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_member_blog_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_blog_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_blogs_directory_order_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_blogs_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_filters\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_blogs_directory_order_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_filters\' filter instead', 'buddypress' ),
 		),
 		'bp_activity_entry_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_activity_entry_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_entry_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_activity_entry_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_entry_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_member_header_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_member_header_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_member_header_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_directory_members_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_directory_members_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_directory_members_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_group_members_list_item_action' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_group_members_list_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_members_list_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_friend_requests_item_action' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_friend_requests_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_friend_requests_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_members_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_group_header_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_group_header_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_group_meta\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_header_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_group_meta\' filter instead', 'buddypress' ),
 		),
 		'bp_directory_members_item' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_directory_members_item\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_member_meta\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_directory_members_item\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_member_meta\' filter instead', 'buddypress' ),
 		),
 		'bp_profile_header_meta' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_profile_header_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_member_meta\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_profile_header_meta\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_member_meta\' filter instead', 'buddypress' ),
 		),
 		'bp_group_header_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_group_header_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_header_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_directory_groups_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_directory_groups_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_directory_groups_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_group_invites_item_action' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_group_invites_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_invites_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_group_membership_requests_admin_item_action' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_group_membership_requests_admin_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_membership_requests_admin_item_action\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_group_manage_members_admin_item' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_group_manage_members_admin_item\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_group_manage_members_admin_item\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_groups_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_directory_blogs_actions' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_directory_blogs_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_directory_blogs_actions\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_blogs_buttons\' filter instead', 'buddypress' ),
 		),
 		'bp_activity_comment_options' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'warning',
-			'message'      => __( 'The \'bp_activity_comment_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_comment_buttons\' filter instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'bp_activity_comment_options\' action will soon be deprecated in the BP Nouveau template pack, we recommend you now use the \'bp_nouveau_get_activity_comment_buttons\' filter instead', 'buddypress' ),
 		),
 		'groups_custom_group_fields_editable' => array(
 			'hook_type'    => 'action',
 			'message_type' => 'error',
-			'message'      => __( 'The \'groups_custom_group_fields_editable\' action is deprecated in the BP Nouveau template pack, please use \'bp_after_group_details_creation_step\' or \'bp_after_group_details_admin\' instead', 'bp-nouveau' ),
+			'message'      => __( 'The \'groups_custom_group_fields_editable\' action is deprecated in the BP Nouveau template pack, please use \'bp_after_group_details_creation_step\' or \'bp_after_group_details_admin\' instead', 'buddypress' ),
 		),
 	);
 
@@ -561,7 +561,7 @@ function bp_nouveau_get_forsaken_hooks() {
 		);
 
 		// And the warning message
-		$message = __( 'The \'%s\' filter is not used in the BP Nouveau template pack, please use one of the filters of the BP Nouveau Navigation Loop instead', 'bp-nouveau' );
+		$message = __( 'The \'%s\' filter is not used in the BP Nouveau template pack, please use one of the filters of the BP Nouveau Navigation Loop instead', 'buddypress' );
 
 		foreach ( $nav_items as $nav_item ) {
 			if ( ! isset( $nav_item->children ) ) {
@@ -736,7 +736,7 @@ function bp_nouveau_get_component_filters( $context = '', $component = '' ) {
 		$filters = bp_nouveau_get_activity_filters();
 
 		// Specific case for the activity dropdown
-		$filters = array_merge( array( '-1' => __( '&mdash; Everything &mdash;', 'bp-nouveau' ) ), $filters );
+		$filters = array_merge( array( '-1' => __( '&mdash; Everything &mdash;', 'buddypress' ) ), $filters );
 	} elseif ( 'groups' === $component ) {
 		$filters = bp_nouveau_get_groups_filters( $context );
 	} elseif ( 'blogs' === $component ) {
@@ -867,10 +867,10 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
  */
 function bp_nouveau_customizer_grid_choices( $type = 'option' ) {
 	$columns = array(
-		array( 'key' => '1', 'label' => __( 'One column', 'bp-nouveau'    ), 'class' => ''      ),
-		array( 'key' => '2', 'label' => __( 'Two columns', 'bp-nouveau'   ), 'class' => 'two'   ),
-		array( 'key' => '3', 'label' => __( 'Three columns', 'bp-nouveau' ), 'class' => 'three' ),
-		array( 'key' => '4', 'label' => __( 'Four columns', 'bp-nouveau'  ), 'class' => 'four'  ),
+		array( 'key' => '1', 'label' => __( 'One column', 'buddypress'    ), 'class' => ''      ),
+		array( 'key' => '2', 'label' => __( 'Two columns', 'buddypress'   ), 'class' => 'two'   ),
+		array( 'key' => '3', 'label' => __( 'Three columns', 'buddypress' ), 'class' => 'three' ),
+		array( 'key' => '4', 'label' => __( 'Four columns', 'buddypress'  ), 'class' => 'four'  ),
 	);
 
 	if ( 'option' === $type ) {
@@ -1090,141 +1090,141 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 	$feedback_messages = apply_filters( 'bp_nouveau_feedback_messages', array(
 		'registration-disabled' => array(
 			'type'    => 'info',
-			'message' => __( 'User registration is currently not allowed.', 'bp-nouveau' ),
+			'message' => __( 'User registration is currently not allowed.', 'buddypress' ),
 			'before'  => 'bp_before_registration_disabled',
 			'after'   => 'bp_after_registration_disabled'
 		),
 		'request-details' => array(
 			'type'    => 'info',
-			'message' => __( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'bp-nouveau' ),
+			'message' => __( 'Registering for this site is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'buddypress' ),
 			'before'  => false,
 			'after'   => false,
 		),
 		'completed-confirmation' => array(
 			'type'    => 'info',
-			'message' => __( 'You have successfully created your account! Please log in using the username and password you have just created.', 'bp-nouveau' ),
+			'message' => __( 'You have successfully created your account! Please log in using the username and password you have just created.', 'buddypress' ),
 			'before'  => 'bp_before_registration_confirmed',
 			'after'   => 'bp_after_registration_confirmed',
 		),
 		'directory-activity-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the community updates, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the community updates, please wait.', 'buddypress' ),
 		),
 		'single-activity-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the update, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the update, please wait.', 'buddypress' ),
 		),
 		'activity-loop-none' => array(
 			'type'    => 'info',
-			'message' => __( 'Sorry, there was no activity found. Please try a different filter.', 'bp-nouveau' ),
+			'message' => __( 'Sorry, there was no activity found. Please try a different filter.', 'buddypress' ),
 		),
 		'blogs-loop-none' => array(
 			'type'    => 'info',
-			'message' => __( 'Sorry, there were no sites found.', 'bp-nouveau' ),
+			'message' => __( 'Sorry, there were no sites found.', 'buddypress' ),
 		),
 		'blogs-no-signup' => array(
 			'type'    => 'info',
-			'message' => __( 'Site registration is currently disabled.', 'bp-nouveau' ),
+			'message' => __( 'Site registration is currently disabled.', 'buddypress' ),
 		),
 		'directory-blogs-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the sites of the network, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the sites of the network, please wait.', 'buddypress' ),
 		),
 		'directory-groups-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the groups of the community, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the groups of the community, please wait.', 'buddypress' ),
 		),
 		'groups-loop-none' => array(
 			'type'    => 'info',
-			'message' => __( 'Sorry, there were no groups found.', 'bp-nouveau' ),
+			'message' => __( 'Sorry, there were no groups found.', 'buddypress' ),
 		),
 		'group-activity-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the group updates, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the group updates, please wait.', 'buddypress' ),
 		),
 		'group-members-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Requesting the group members, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Requesting the group members, please wait.', 'buddypress' ),
 		),
 		'group-members-none' => array(
 			'type'    => 'info',
-			'message' => __( 'Sorry, there were no group members found.', 'bp-nouveau' ),
+			'message' => __( 'Sorry, there were no group members found.', 'buddypress' ),
 		),
 		'group-members-search-none' => array(
 			'type'    => 'info',
-			'message' => __( 'Sorry, there was no member of that name found in this group.', 'bp-nouveau' ),
+			'message' => __( 'Sorry, there was no member of that name found in this group.', 'buddypress' ),
 		),
 		'group-manage-members-none' => array(
 			'type'    => 'info',
-			'message' => __( 'This group has no members.', 'bp-nouveau' ),
+			'message' => __( 'This group has no members.', 'buddypress' ),
 		),
 		'group-requests-none' => array(
 			'type'    => 'info',
-			'message' => __( 'There are no pending membership requests.', 'bp-nouveau' ),
+			'message' => __( 'There are no pending membership requests.', 'buddypress' ),
 		),
 		'group-requests-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the members who requested to join the group, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the members who requested to join the group, please wait.', 'buddypress' ),
 		),
 		'group-delete-warning' => array(
 			'type'    => 'warning',
-			'message' => __( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'bp-nouveau' ),
+			'message' => __( 'WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option.', 'buddypress' ),
 		),
 		'group-avatar-delete-info' => array(
 			'type'    => 'info',
-			'message' => __( 'If you\'d like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.', 'bp-nouveau' ),
+			'message' => __( 'If you\'d like to remove the existing group profile photo but not upload a new one, please use the delete group profile photo button.', 'buddypress' ),
 		),
 		'directory-members-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the members of your community, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the members of your community, please wait.', 'buddypress' ),
 		),
 		'members-loop-none' => array(
 			'type'    => 'info',
-			'message' => __( 'Sorry, no members were found.', 'bp-nouveau' ),
+			'message' => __( 'Sorry, no members were found.', 'buddypress' ),
 		),
 		'member-requests-none' => array(
 			'type'    => 'info',
-			'message' => __( 'You have no pending friendship requests.', 'bp-nouveau' ),
+			'message' => __( 'You have no pending friendship requests.', 'buddypress' ),
 		),
 		'member-invites-none' => array(
 			'type'    => 'info',
-			'message' => __( 'You have no outstanding group invites.', 'bp-nouveau' ),
+			'message' => __( 'You have no outstanding group invites.', 'buddypress' ),
 		),
 		'member-notifications-none' => array(
 			'type'    => 'info',
-			'message' => __( 'This member has no notifications.', 'bp-nouveau' ),
+			'message' => __( 'This member has no notifications.', 'buddypress' ),
 		),
 		'member-wp-profile-none' => array(
 			'type'    => 'info',
-			'message' => __( '%s did not save any profile informations yet.', 'bp-nouveau' ),
+			'message' => __( '%s did not save any profile informations yet.', 'buddypress' ),
 		),
 		'member-delete-account' => array(
 			'type'    => 'warning',
-			'message' => __( 'Deleting this account will delete all of the content it has created. It will be completely unrecoverable.', 'bp-nouveau' ),
+			'message' => __( 'Deleting this account will delete all of the content it has created. It will be completely unrecoverable.', 'buddypress' ),
 		),
 		'member-activity-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the user\'s updates, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the user\'s updates, please wait.', 'buddypress' ),
 		),
 		'member-blogs-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the blogs the user is a contributor of, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the blogs the user is a contributor of, please wait.', 'buddypress' ),
 		),
 		'member-friends-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the members the user is friend with, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the members the user is friend with, please wait.', 'buddypress' ),
 		),
 		'member-groups-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading the groups the user is a member of, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading the groups the user is a member of, please wait.', 'buddypress' ),
 		),
 		'member-notifications-loading' => array(
 			'type'    => 'loading',
-			'message' => __( 'Loading notifications, please wait.', 'bp-nouveau' ),
+			'message' => __( 'Loading notifications, please wait.', 'buddypress' ),
 		),
 		'member-group-invites' => array(
 			'type'    => 'info',
-			'message' => __( 'Currently every member of the community can invite you to join their groups. If you are not comfortable with it, you can always restrict group invites to your friends only.', 'bp-nouveau' ),
+			'message' => __( 'Currently every member of the community can invite you to join their groups. If you are not comfortable with it, you can always restrict group invites to your friends only.', 'buddypress' ),
 		),
 	) );
 
@@ -1233,31 +1233,31 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 		 * Adjust some messages to the context.
 		 */
 		if ( 'completed-confirmation' === $feedback_id && bp_registration_needs_activation() ) {
-			$feedback_messages['completed-confirmation']['message'] = __( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'bp-nouveau' );
+			$feedback_messages['completed-confirmation']['message'] = __( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'buddypress' );
 		} elseif ( 'member-notifications-none' === $feedback_id ) {
 			$is_myprofile = bp_is_my_profile();
 
 			if ( bp_is_current_action( 'unread' ) ) {
-				$feedback_messages['member-notifications-none']['message'] = __( 'This member has no unread notifications.', 'bp-nouveau' );
+				$feedback_messages['member-notifications-none']['message'] = __( 'This member has no unread notifications.', 'buddypress' );
 
 				if ( $is_myprofile ) {
-					$feedback_messages['member-notifications-none']['message'] = __( 'You have no unread notifications.', 'bp-nouveau' );
+					$feedback_messages['member-notifications-none']['message'] = __( 'You have no unread notifications.', 'buddypress' );
 				}
 			} elseif ( $is_myprofile ) {
-				$feedback_messages['member-notifications-none']['message'] = __( 'You have no notifications.', 'bp-nouveau' );
+				$feedback_messages['member-notifications-none']['message'] = __( 'You have no notifications.', 'buddypress' );
 			}
 		} elseif ( 'member-wp-profile-none' === $feedback_id && bp_is_user_profile() ) {
 			$feedback_messages['member-wp-profile-none']['message'] = sprintf( $feedback_messages['member-wp-profile-none']['message'], bp_get_displayed_user_fullname() );
 		} elseif ( 'member-delete-account' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-delete-account']['message'] = __( 'Deleting your account will delete all of the content you have created. It will be completely irrecoverable.', 'bp-nouveau' );
+			$feedback_messages['member-delete-account']['message'] = __( 'Deleting your account will delete all of the content you have created. It will be completely irrecoverable.', 'buddypress' );
 		} elseif ( 'member-activity-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-activity-loading']['message'] = __( 'Loading your updates, please wait.', 'bp-nouveau' );
+			$feedback_messages['member-activity-loading']['message'] = __( 'Loading your updates, please wait.', 'buddypress' );
 		} elseif ( 'member-blogs-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-blogs-loading']['message'] = __( 'Loading the blogs you are a contributor of, please wait.', 'bp-nouveau' );
+			$feedback_messages['member-blogs-loading']['message'] = __( 'Loading the blogs you are a contributor of, please wait.', 'buddypress' );
 		} elseif ( 'member-friends-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-friends-loading']['message'] = __( 'Loading your friends, please wait.', 'bp-nouveau' );
+			$feedback_messages['member-friends-loading']['message'] = __( 'Loading your friends, please wait.', 'buddypress' );
 		}  elseif ( 'member-groups-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-groups-loading']['message'] = __( 'Loading the groups you are a member of, please wait.', 'bp-nouveau' );
+			$feedback_messages['member-groups-loading']['message'] = __( 'Loading the groups you are a member of, please wait.', 'buddypress' );
 		}
 
 		/**
@@ -1300,7 +1300,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 	$fields = apply_filters( 'bp_nouveau_get_signup_fields', array(
 		'account_details' => array(
 			'signup_username' => array(
-				'label'          => _x( 'Username%s', 'signup field label', 'bp-nouveau' ),
+				'label'          => _x( 'Username%s', 'signup field label', 'buddypress' ),
 				'required'       => true,
 				'value'          => 'bp_get_signup_username_value',
 				'attribute_type' => 'username',
@@ -1308,7 +1308,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 				'class'          => '',
 			),
 			'signup_email' => array(
-				'label'          => _x( 'Email Address%s', 'signup field label', 'bp-nouveau' ),
+				'label'          => _x( 'Email Address%s', 'signup field label', 'buddypress' ),
 				'required'       => true,
 				'value'          => 'bp_get_signup_email_value',
 				'attribute_type' => 'email',
@@ -1316,7 +1316,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 				'class'          => '',
 			),
 			'signup_password' => array(
-				'label'          => _x( 'Choose a Password%s', 'signup field label', 'bp-nouveau' ),
+				'label'          => _x( 'Choose a Password%s', 'signup field label', 'buddypress' ),
 				'required'       => true,
 				'value'          => '',
 				'attribute_type' => 'password',
@@ -1324,7 +1324,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 				'class'          => 'password-entry',
 			),
 			'signup_password_confirm' => array(
-				'label'          => _x( 'Confirm Password%s', 'signup field label', 'bp-nouveau' ),
+				'label'          => _x( 'Confirm Password%s', 'signup field label', 'buddypress' ),
 				'required'       => true,
 				'value'          => '',
 				'attribute_type' => 'password',
@@ -1334,7 +1334,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 		),
 		'blog_details' => array(
 			'signup_blog_url' => array(
-				'label'          => _x( 'Site URL%s', 'signup field label', 'bp-nouveau' ),
+				'label'          => _x( 'Site URL%s', 'signup field label', 'buddypress' ),
 				'required'       => true,
 				'value'          => 'bp_get_signup_blog_url_value',
 				'attribute_type' => 'slug',
@@ -1342,7 +1342,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 				'class'          => '',
 			),
 			'signup_blog_title' => array(
-				'label'          => _x( 'Site Title%s', 'signup field label', 'bp-nouveau' ),
+				'label'          => _x( 'Site Title%s', 'signup field label', 'buddypress' ),
 				'required'       => true,
 				'value'          => 'bp_get_signup_blog_title_value',
 				'attribute_type' => 'title',
@@ -1350,7 +1350,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 				'class'          => '',
 			),
 			'signup_blog_privacy_public' => array(
-				'label'          => __( 'Yes', 'bp-nouveau' ),
+				'label'          => __( 'Yes', 'buddypress' ),
 				'required'       => false,
 				'value'          => 'public',
 				'attribute_type' => '',
@@ -1358,7 +1358,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 				'class'          => '',
 			),
 			'signup_blog_privacy_private' => array(
-				'label'          => __( 'No', 'bp-nouveau' ),
+				'label'          => __( 'No', 'buddypress' ),
 				'required'       => false,
 				'value'          => 'private',
 				'attribute_type' => '',
@@ -1420,7 +1420,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'signup_submit',
 				'id'    => 'signup_submit',
-				'value' => __( 'Complete Sign Up', 'bp-nouveau' ),
+				'value' => __( 'Complete Sign Up', 'buddypress' ),
 			),
 		),
 		'member-profile-edit' => array(
@@ -1430,7 +1430,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'profile-group-edit-submit',
 				'id'    => 'profile-group-edit-submit',
-				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'value' => __( 'Save Changes', 'buddypress' ),
 			),
 		),
 		'member-capabilities' => array(
@@ -1450,7 +1450,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'capabilities-submit',
 				'id'    => 'capabilities-submit',
-				'value' => __( 'Save', 'bp-nouveau' ),
+				'value' => __( 'Save', 'buddypress' ),
 			),
 		),
 		'member-delete-account' => array(
@@ -1471,7 +1471,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 				'disabled' => 'disabled',
 				'name'     => 'delete-account-button',
 				'id'       => 'delete-account-button',
-				'value'    => __( 'Delete Account', 'bp-nouveau' ),
+				'value'    => __( 'Delete Account', 'buddypress' ),
 			),
 		),
 		'members-general-settings' => array(
@@ -1491,7 +1491,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'submit',
 				'id'    => 'submit',
-				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'value' => __( 'Save Changes', 'buddypress' ),
 				'class' => 'auto',
 			),
 		),
@@ -1512,7 +1512,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'submit',
 				'id'    => 'submit',
-				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'value' => __( 'Save Changes', 'buddypress' ),
 				'class' => 'auto',
 			),
 		),
@@ -1533,7 +1533,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'xprofile-settings-submit',
 				'id'    => 'submit',
-				'value' => __( 'Save Changes', 'bp-nouveau' ),
+				'value' => __( 'Save Changes', 'buddypress' ),
 				'class' => 'auto',
 			),
 		),
@@ -1542,7 +1542,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			'attributes' => array(
 				'name'  => 'member-group-invites-submit',
 				'id'    => 'submit',
-				'value' => __( 'Save', 'bp-nouveau' ),
+				'value' => __( 'Save', 'buddypress' ),
 				'class' => 'auto',
 			),
 		),

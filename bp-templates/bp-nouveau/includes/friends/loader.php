@@ -104,12 +104,12 @@ class BP_Nouveau_Friends {
 		$notifications = array(
 			array(
 				'id'       => 'friendship_accepted',
-				'label'    => __( 'Accepted friendship requests', 'bp-nouveau' ),
+				'label'    => __( 'Accepted friendship requests', 'buddypress' ),
 				'position' => 35,
 			),
 			array(
 				'id'       => 'friendship_request',
-				'label'    => __( 'Pending friendship requests', 'bp-nouveau' ),
+				'label'    => __( 'Pending friendship requests', 'buddypress' ),
 				'position' => 45,
 			),
 		);

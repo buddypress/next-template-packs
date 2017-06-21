@@ -29,7 +29,7 @@ bp_nouveau_register_ajax_actions( array(
 
 function bp_nouveau_ajax_messages_send_message() {
 	$response = array(
-		'feedback' => __( 'Your message could not be sent, please try again.', 'bp-nouveau' ),
+		'feedback' => __( 'Your message could not be sent, please try again.', 'buddypress' ),
 		'type'     => 'error',
 	);
 
@@ -41,9 +41,9 @@ function bp_nouveau_ajax_messages_send_message() {
 	// Validate subject and message content
 	if ( empty( $_POST['subject'] ) || empty( $_POST['message_content'] ) ) {
 		if ( empty( $_POST['subject'] ) ) {
-			$response['feedback'] = __( 'Your message was not sent. Please enter a subject line.', 'bp-nouveau' );
+			$response['feedback'] = __( 'Your message was not sent. Please enter a subject line.', 'buddypress' );
 		} else {
-			$response['feedback'] = __( 'Your message was not sent. Please enter some content.', 'bp-nouveau' );
+			$response['feedback'] = __( 'Your message was not sent. Please enter some content.', 'buddypress' );
 		}
 
 		wp_send_json_error( $response );
@@ -51,7 +51,7 @@ function bp_nouveau_ajax_messages_send_message() {
 
 	// Validate recipients
 	if ( empty( $_POST['send_to'] ) || ! is_array( $_POST['send_to'] ) ) {
-		$response['feedback'] = __( 'Your message was not sent. Please enter at least one @username.', 'bp-nouveau' );
+		$response['feedback'] = __( 'Your message was not sent. Please enter at least one @username.', 'buddypress' );
 
 		wp_send_json_error( $response );
 	}
@@ -70,7 +70,7 @@ function bp_nouveau_ajax_messages_send_message() {
 	// Send the message.
 	if ( true === is_int( $send ) ) {
 		wp_send_json_success( array(
-			'feedback' => __( 'Message successfully sent.', 'bp-nouveau' ),
+			'feedback' => __( 'Message successfully sent.', 'buddypress' ),
 			'type'     => 'success',
 		) );
 
@@ -84,7 +84,7 @@ function bp_nouveau_ajax_messages_send_message() {
 
 function bp_nouveau_ajax_messages_send_reply() {
 	$response = array(
-		'feedback' => __( 'There was a problem sending your reply. Please try again.', 'bp-nouveau' ),
+		'feedback' => __( 'There was a problem sending your reply. Please try again.', 'buddypress' ),
 		'type'     => 'error',
 	);
 
@@ -94,7 +94,7 @@ function bp_nouveau_ajax_messages_send_reply() {
 	}
 
 	if ( empty( $_POST['content'] ) || empty( $_POST['thread_id'] ) ) {
-		$response['feedback'] = __( 'Your reply was not sent. Please enter some content.', 'bp-nouveau' );
+		$response['feedback'] = __( 'Your reply was not sent. Please enter some content.', 'buddypress' );
 
 		wp_send_json_error( $response );
 	}
@@ -163,7 +163,7 @@ function bp_nouveau_ajax_messages_send_reply() {
 
 	wp_send_json_success( array(
 		'messages' => array( $reply ),
-		'feedback' => __( 'Your reply was sent successfully', 'bp-nouveau' ),
+		'feedback' => __( 'Your reply was sent successfully', 'buddypress' ),
 		'type'     => 'success',
 	) );
 }
@@ -173,7 +173,7 @@ function bp_nouveau_ajax_get_user_message_threads() {
 
 	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Unauthorized request.', 'bp-nouveau' ),
+			'feedback' => __( 'Unauthorized request.', 'buddypress' ),
 			'type'     => 'error'
 		) );
 	}
@@ -188,7 +188,7 @@ function bp_nouveau_ajax_get_user_message_threads() {
 	// Simulate the loop.
 	if ( ! bp_has_message_threads( bp_ajax_querystring( 'messages' ) ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Sorry, no messages were found.', 'bp-nouveau' ),
+			'feedback' => __( 'Sorry, no messages were found.', 'buddypress' ),
 			'type'     => 'info'
 		) );
 	}
@@ -309,13 +309,13 @@ function bp_nouveau_ajax_get_thread_messages() {
 
 	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Unauthorized request.', 'bp-nouveau' ),
+			'feedback' => __( 'Unauthorized request.', 'buddypress' ),
 			'type'     => 'error'
 		) );
 	}
 
 	$response = array(
-		'feedback' => __( 'Sorry, no messages were found.', 'bp-nouveau' ),
+		'feedback' => __( 'Sorry, no messages were found.', 'buddypress' ),
 		'type'     => 'info'
 	);
 
@@ -399,7 +399,7 @@ function bp_nouveau_ajax_get_thread_messages() {
 
 function bp_nouveau_ajax_delete_thread_messages() {
 	$response = array(
-		'feedback' => __( 'There was a problem deleting your message(s). Please try again.', 'bp-nouveau' ),
+		'feedback' => __( 'There was a problem deleting your message(s). Please try again.', 'buddypress' ),
 		'type'     => 'error',
 	);
 
@@ -422,7 +422,7 @@ function bp_nouveau_ajax_delete_thread_messages() {
 	}
 
 	wp_send_json_success( array(
-		'feedback' => __( 'Message(s) deleted', 'bp-nouveau' ),
+		'feedback' => __( 'Message(s) deleted', 'buddypress' ),
 		'type'     => 'success',
 	) );
 }
@@ -435,7 +435,7 @@ function bp_nouveau_ajax_star_thread_messages() {
 	$action = str_replace( 'messages_', '', $_POST['action'] );
 
 	$response = array(
-		'feedback' => sprintf( __( 'There was a problem marking your message(s) as %s. Please try again.', 'bp-nouveau' ), $action ),
+		'feedback' => sprintf( __( 'There was a problem marking your message(s) as %s. Please try again.', 'buddypress' ), $action ),
 		'type'     => 'error',
 	);
 
@@ -505,7 +505,7 @@ function bp_nouveau_ajax_star_thread_messages() {
 	}
 
 	wp_send_json_success( array(
-		'feedback' => sprintf( __( 'Message(s) mark as %s', 'bp-nouveau' ), $action ),
+		'feedback' => sprintf( __( 'Message(s) mark as %s', 'buddypress' ), $action ),
 		'type'     => 'success',
 		'messages' => $messages,
 	) );
@@ -519,13 +519,13 @@ function bp_nouveau_ajax_readunread_thread_messages() {
 	$action = str_replace( 'messages_', '', $_POST['action'] );
 
 	$response = array(
-		'feedback' => __( 'There was a problem marking your message(s) as read. Please try again.', 'bp-nouveau' ),
+		'feedback' => __( 'There was a problem marking your message(s) as read. Please try again.', 'buddypress' ),
 		'type'     => 'error',
 	);
 
 	if ( 'unread' === $action ) {
 		$response = array(
-			'feedback' => __( 'There was a problem marking your message(s) as unread. Please try again.', 'bp-nouveau' ),
+			'feedback' => __( 'There was a problem marking your message(s) as unread. Please try again.', 'buddypress' ),
 			'type'     => 'error',
 		);
 	}
@@ -543,9 +543,9 @@ function bp_nouveau_ajax_readunread_thread_messages() {
 	$response['messages'] = array();
 
 	if ( 'unread' === $action ) {
-		$response['feedback'] = __( 'Message(s) marked as unread.', 'bp-nouveau' );
+		$response['feedback'] = __( 'Message(s) marked as unread.', 'buddypress' );
 	} else {
-		$response['feedback'] = __( 'Message(s) marked as read.', 'bp-nouveau' );
+		$response['feedback'] = __( 'Message(s) marked as read.', 'buddypress' );
 	}
 
 	foreach ( $thread_ids as $thread_id ) {
@@ -577,7 +577,7 @@ function bp_nouveau_ajax_dismiss_sitewide_notice() {
 	}
 
 	$response = array(
-		'feedback' => __( 'There was a problem dismissing the notice. Please try again.', 'bp-nouveau' ),
+		'feedback' => __( 'There was a problem dismissing the notice. Please try again.', 'buddypress' ),
 		'type'     => 'error',
 	);
 
@@ -611,7 +611,7 @@ function bp_nouveau_ajax_dismiss_sitewide_notice() {
 		bp_update_user_meta( $user_id, 'closed_notices', array_map( 'absint', array_unique( $closed_notices ) ) );
 
 		wp_send_json_success( array(
-			'feedback' => __( 'Sitewide notice dismissed', 'bp-nouveau' ),
+			'feedback' => __( 'Sitewide notice dismissed', 'buddypress' ),
 			'type'     => 'success',
 		) );
 	}

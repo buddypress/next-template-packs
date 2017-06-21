@@ -9,14 +9,14 @@
 ?>
 
 <h2 class="bp-screen-title <?php if ( bp_is_group_create() ) { echo esc_attr( 'creation-step-name' ); } ?>">
-	<?php _e( 'Manage Group Members', 'bp-nouveau' ); ?>
+	<?php _e( 'Manage Group Members', 'buddypress' ); ?>
 </h2>
 
-	<p class="bp-help-text"><?php _e( 'Manage your group members; promote to moderators, admins or demote or ban.', 'bp-nouveau' ); ?></p>
+	<p class="bp-help-text"><?php _e( 'Manage your group members; promote to moderators, admins or demote or ban.', 'buddypress' ); ?></p>
 
 	<dl class="groups-manage-members-list">
 
-	<dt class="admin-section section-title"><?php _e( 'Administrators', 'bp-nouveau' ); ?></dt>
+	<dt class="admin-section section-title"><?php _e( 'Administrators', 'buddypress' ); ?></dt>
 
 	<?php if ( bp_has_members( '&include='. bp_group_admin_ids() ) ) : ?>
 		<dd class="admin-listing">
@@ -25,7 +25,7 @@
 				<?php while ( bp_members() ) : bp_the_member(); ?>
 				<li class="member-entry clearfix">
 
-					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
+					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'buddypress' ), bp_get_member_name() ) ) ); ?>
 					<p class="list-title member-name">
 						<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 					</p>
@@ -33,7 +33,7 @@
 					<?php if ( count( bp_group_admin_ids( false, 'array' ) ) > 1 ) : ?>
 
 						<p class="action text-links-list">
-							<a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-nouveau' ); ?></a>
+							<a class="button confirm admin-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'buddypress' ); ?></a>
 						</p>
 
 						<?php endif; ?>
@@ -47,7 +47,7 @@
 
 	<?php if ( bp_group_has_moderators() ) : ?>
 
-		<dt class="moderator-section section-title"><?php _e( 'Moderators', 'bp-nouveau' ); ?></dt>
+		<dt class="moderator-section section-title"><?php _e( 'Moderators', 'buddypress' ); ?></dt>
 
 		<dd class="moderator-listing">
 		<?php if ( bp_has_members( '&include=' . bp_group_mod_ids() ) ) : ?>
@@ -56,14 +56,14 @@
 				<?php while ( bp_members() ) : bp_the_member(); ?>
 				<li class="members-entry clearfix">
 
-					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'bp-nouveau' ), bp_get_member_name() ) ) ); ?>
+					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => sprintf( __( 'Profile picture of %s', 'buddypress' ), bp_get_member_name() ) ) ); ?>
 					<p class="list-title member-name">
 						<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 					</p>
 
 					<p class="action text-links-list">
-						<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin"><?php _e( 'Promote to Admin', 'bp-nouveau' ); ?></a>
-						<a class="button confirm mod-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'bp-nouveau' ); ?></a>
+						<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin"><?php _e( 'Promote to Admin', 'buddypress' ); ?></a>
+						<a class="button confirm mod-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'buddypress' ); ?></a>
 					</p>
 
 				</li>
@@ -77,7 +77,7 @@
 <?php endif ?>
 
 
-	<dt class="gen-members-section section-title"><?php esc_html_e( 'Members', 'bp-nouveau' ); ?></dt>
+	<dt class="gen-members-section section-title"><?php esc_html_e( 'Members', 'buddypress' ); ?></dt>
 
 	<dd class="general-members-listing">
 		<?php if ( bp_group_has_members( 'per_page=15&exclude_banned=0' ) ) : ?>
@@ -96,7 +96,7 @@
 
 						<p class="list-title member-name">
 							<?php bp_group_member_link(); ?>
-							<span class="banned warn"><?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'bp-nouveau' ); ?></span>
+							<span class="banned warn"><?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'buddypress' ); ?></span>
 						</p>
 
 						<?php bp_nouveau_groups_manage_members_buttons( array( 'container' => 'p', 'container_classes' => array( 'group-manage-buttons', 'text-links-list' ), 'parent_element' => '  ' ) ) ; ?>

@@ -46,7 +46,7 @@ class BP_Buttons_Group {
 	 */
 	public function __construct( $args = array() ) {
 		if ( empty( $args ) || ! is_array( $args ) ) {
-			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'bp-nouveau' ) );
+			_doing_it_wrong( __( 'You need to use an array containing arrays of parameters.', 'buddypress' ) );
 			return;
 		}
 
@@ -201,13 +201,13 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	public function __construct() {
 
 		$widget_ops = array(
-			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'bp-nouveau' ),
+			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'buddypress' ),
 			'classname'   => 'widget_nav_menu buddypress_object_nav'
 		);
 
 		parent::__construct(
 			'bp_nouveau_sidebar_object_nav_widget',
-			__( '(BuddyPress) Primary nav', 'bp-nouveau' ),
+			__( '(BuddyPress) Primary nav', 'buddypress' ),
 			$widget_ops
 		);
 	}
@@ -309,7 +309,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $bp_nouveau_widget_title, true ) ?> id="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>" name="<?php echo $this->get_field_name( 'bp_nouveau_widget_title' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'bp-nouveau' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'bp_nouveau_widget_title' ); ?>"><?php esc_html_e( 'Include navigation title', 'buddypress' ); ?></label>
 		</p>
 
 		<?php
