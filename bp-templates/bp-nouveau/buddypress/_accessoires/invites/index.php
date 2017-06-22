@@ -41,7 +41,7 @@
 					<ul class="group-inviters">
 						<li><?php esc_html_e( 'Invited by:', 'buddypress' ); ?></li>
 						<# for ( i in data.invited_by ) { #>
-							<li><a href="{{data.invited_by[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.invited_by[i].user_name}}"><img src="{{data.invited_by[i].avatar}}" width="30px" class="avatar mini" alt="{{data.invited_by[i].user_name}}"></a></li>
+							<li><a href="{{data.invited_by[i].user_link}}"><img src="{{data.invited_by[i].avatar}}" width="30px" class="avatar mini" alt="{{data.invited_by[i].user_name}}"></a></li>
 						<# } #>
 					</ul>
 				<# } #>
@@ -75,7 +75,7 @@
 </script>
 
 <script type="text/html" id="tmpl-bp-invites-selection">
-	<a href="#" title="{{data.name}}">
+	<a href="#"">
 		<img src="{{data.avatar}}" class="avatar" alt="{{data.name}}" />
 	</a>
 </script>
@@ -106,13 +106,13 @@
 
 <script type="text/html" id="tmpl-bp-invites-paginate">
 	<# if ( 1 !== data.page ) { #>
-		<a href="#" id="bp-invites-prev-page" title="<?php esc_attr_e( 'Prev', 'buddypress' );?>" class="button invite-button">
+		<a href="#" id="bp-invites-prev-page" class="button invite-button">
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'buddypress' );?></span>
 		</a>
 	<# } #>
 
 	<# if ( data.total_page !== data.page ) { #>
-		<a href="#" id="bp-invites-next-page" title="<?php esc_attr_e( 'Next', 'buddypress' );?>" class="button invite-button">
+		<a href="#" id="bp-invites-next-page" class="button invite-button">
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'buddypress' );?></span>
 		</a>
 	<# } #>

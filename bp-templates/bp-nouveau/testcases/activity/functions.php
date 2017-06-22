@@ -12,8 +12,8 @@ class BP_Nouveau_Activity_Functions extends Next_Template_Packs_TestCase {
 		$this->set_current_user( $this->user_id );
 
 		$this->hooked_nav = array(
-			'all_one' => sprintf( '<li id="activity-%1$s"><a href="%2$s" title="%3$s">%4$s</a></li>', 'foo', 'http://example.org/activity/foo', 'Foo', 'Foo' ),
-			'all_two' => sprintf( '<li id="activity-%1$s"><a href="%2$s" title="%3$s">%4$s <span>%5$s</span></a></li>', 'bar', 'http://example.org/activity/bar', 'Bar', 'Bar', 5 ),
+			'all_one' => sprintf( '<li id="activity-%1$s"><a href="%2$s">%3$s</a></li>', 'foo', 'http://example.org/activity/foo', 'Foo' ),
+			'all_two' => sprintf( '<li id="activity-%1$s"><a href="%2$s">%3$s <span>%4$s</span></a></li>', 'bar', 'http://example.org/activity/bar', 'Bar', 5 ),
 		);
 	}
 

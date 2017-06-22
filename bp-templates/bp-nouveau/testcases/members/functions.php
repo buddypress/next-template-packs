@@ -22,7 +22,7 @@ class BP_Nouveau_Members_Functions extends Next_Template_Packs_TestCase {
 	}
 
 	public function do_dir_nav() {
-		printf( '<li id="members-%1$s"><a href="%2$s" title="%3$s">%4$s</a></li>', 'foo', 'http://example.org/members/foo', 'Foo', 'Foo' );
+		printf( '<li id="members-%1$s"><a href="%2$s">%3$s</a></li>', 'foo', 'http://example.org/members/foo', 'Foo' );
 	}
 
 	public function filter_dir_nav( $nav_items ) {
