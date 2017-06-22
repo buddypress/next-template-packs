@@ -156,6 +156,24 @@
 
 } // close .bp-list
 
+.activity-list.bp-list {
+
+	background: $off-white;
+	border: 1px solid $bp-border-color;
+
+	.activity-item {
+		background: $white;
+		border: 1px solid #b7b7b7;
+
+		@include box-shadow(0 0 6px #d2d2d2);
+		margin: $marg-lrg 0;
+	}
+
+	li:first-child {
+		margin-top: 0;
+	}
+}
+
 // If logged out we don't display action buttons
 // so lets remove the margin right creating the white-space
 // for the buttons - max out the item element width.
