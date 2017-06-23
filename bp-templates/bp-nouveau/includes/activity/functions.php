@@ -92,7 +92,7 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	}
 
 	/**
-	 * Filter here to include specific Action buttons.
+	 * Filter to include specific Action buttons.
 	 *
 	 * @since 1.0.0
 	 *
@@ -464,7 +464,7 @@ function bp_nouveau_activity_widget_query() {
 	}
 
 	/**
-	 * Filter here to edit the activity widget arguments
+	 * Filter to edit the activity widget arguments
 	 *
 	 * @since 1.0.0
 	 *

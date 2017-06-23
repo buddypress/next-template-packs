@@ -1,4 +1,4 @@
-<?php
+djpaultodo<?php
 /**
  * Groups Template tags
  *
@@ -990,7 +990,7 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		}
 
 		/**
-		 * Filter here to add your buttons, use the position argument to choose where to insert it.
+		 * Filter to add your buttons, use the position argument to choose where to insert it.
 		 *
 		 * @since 1.0.0
 		 *
@@ -1146,7 +1146,7 @@ function bp_nouveau_group_meta() {
 			}
 
 			/**
-			 * Filter here to add/remove Group meta.
+			 * Filter to add/remove Group meta.
 			 *
 			 * @since 1.0.0
 			 *
@@ -1284,7 +1284,7 @@ function bp_nouveau_groups_get_customizer_option_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'group',
 		'autofocus' => 'bp_nouveau_group_front_page',
-		'text'      => esc_html__( 'Groups default front page', 'buddypress' ),
+		'text'      => __( 'Groups default front page', 'buddypress' ),
 	) );
 }
 
@@ -1300,7 +1300,7 @@ function bp_nouveau_groups_get_customizer_widgets_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'group',
 		'autofocus' => 'sidebar-widgets-sidebar-buddypress-groups',
-		'text'      => esc_html__( '(BuddyPress) Widgets', 'buddypress' ),
+		'text'      => __( '(BuddyPress) Widgets', 'buddypress' ),
 	) );
 }
 

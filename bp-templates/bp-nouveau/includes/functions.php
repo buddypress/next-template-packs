@@ -1083,7 +1083,7 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
  */
 function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 	/**
-	 * Filter here to add your custom feedback messages
+	 * Filter to add your custom feedback messages
 	 *
 	 * @param array $value The list of feedback messages.
 	 */
@@ -1287,7 +1287,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 	}
 
 	/**
-	 * Filter here to add your specific 'text' or 'password' inputs
+	 * Filter to add your specific 'text' or 'password' inputs
 	 *
 	 * If you need to use other types of field, please use the
 	 * do_action( 'bp_account_details_fields' ) or do_action( 'blog_details' )

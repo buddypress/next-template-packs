@@ -66,7 +66,7 @@ function bp_nouveau_groups_enqueue_scripts() {
  */
 function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
 	/**
-	 * Filter here to remove the All members nav, returning true
+	 * Filter to remove the All members nav, returning true
 	 *
 	 * @since 1.0.0
 	 *

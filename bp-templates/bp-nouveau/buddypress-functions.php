@@ -589,13 +589,17 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @return string
 	 */
 	public function theme_compat_wrapper( $retval ) {
-		// We already have a 'buddypress' wrapper, so bail.
 		if ( false !== strpos( $retval, '<div id="buddypress"' ) ) {
 			return $retval;
 		}
 
 		// Add our 'buddypress' div wrapper.
-		return sprintf( '<div id="buddypress" class="%1$s">%2$s</div><!-- #buddypress -->%3$s', bp_nouveau_get_buddypress_classes(), $retval, "\n" );
+		return sprintf(
+			'<div id="buddypress" class="%1$s">%2$s</div><!-- #buddypress -->%3$s',
+			esc_attr( bp_nouveau_get_container_classes() ),
+			$retval,  // Constructed HTML.
+			"\n"
+		);
 	}
 
 	/**
