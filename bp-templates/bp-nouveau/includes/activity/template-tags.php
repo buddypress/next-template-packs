@@ -519,7 +519,7 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 		}
 
 		// It's the first entry of the loop, so build the Group and sort it
-		if ( ! isset( bp_nouveau()->activity->entry_buttons ) || false === is_a( bp_nouveau()->activity->entry_buttons, 'BP_Buttons_Group' ) ) {
+		if ( ! isset( bp_nouveau()->activity->entry_buttons ) || ! is_a( bp_nouveau()->activity->entry_buttons, 'BP_Buttons_Group' ) ) {
 			$sort = true;
 			bp_nouveau()->activity->entry_buttons = new BP_Buttons_Group( $buttons_group );
 

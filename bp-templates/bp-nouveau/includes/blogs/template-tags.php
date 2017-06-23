@@ -230,7 +230,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 			// If we pass through parent classes add them to $button array
 			$parent_class = '';
 			if ( ! empty( $args['parent_attr']['class'] ) ) {
-				$parent_class = esc_html( $args['parent_attr']['class'] );
+				$parent_class = $args['parent_attr']['class'];
 			}
 
 			$buttons['visit_blog'] = array(
@@ -274,7 +274,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		}
 
 		// It's the first entry of the loop, so build the Group and sort it
-		if ( ! isset( bp_nouveau()->blogs->group_buttons ) || false === is_a( bp_nouveau()->blogs->group_buttons, 'BP_Buttons_Group' ) ) {
+		if ( ! isset( bp_nouveau()->blogs->group_buttons ) || ! is_a( bp_nouveau()->blogs->group_buttons, 'BP_Buttons_Group' ) ) {
 			$sort = true;
 			bp_nouveau()->blogs->group_buttons = new BP_Buttons_Group( $buttons_group );
 
