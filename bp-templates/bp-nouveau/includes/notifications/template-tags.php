@@ -14,8 +14,6 @@ defined( 'ABSPATH' ) || exit;
  * Display the notifications filter options.
  *
  * @since 1.0.0
- *
- * @return string HTML output.
  */
 function bp_nouveau_notifications_filters() {
 	echo bp_nouveau_get_notifications_filters();
@@ -42,15 +40,15 @@ function bp_nouveau_notifications_filters() {
 				continue;
 			}
 
-			$output .= sprintf( '<option value="%1$s"%2$s>%3$s</option>',
-				sanitize_key( $filter['id'] ),
+			$output .= sprintf( '<option value="%1$s" %2$s>%3$s</option>',
+				esc_attr( sanitize_key( $filter['id'] ) ),
 				selected( $selected, $filter['id'], false ),
 				esc_html( $filter['label'] )
 			) . "\n";
 		}
 
-		if ( ! empty( $output ) ) {
-			$output = sprintf( '<option value="%1$s"%2$s>%3$s</option>',
+		if ( $output ) {
+			$output = sprintf( '<option value="%1$s" %2$s>%3$s</option>',
 				0,
 				selected( $selected, 0, false ),
 				esc_html__( '&mdash; Everything &mdash;', 'buddypress' )
@@ -58,12 +56,12 @@ function bp_nouveau_notifications_filters() {
 		}
 
 		/**
-		 * Filter here to edit the options output.
+		 * Filter to edit the options output.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param  string $output  The options output.
-		 * @param  array  $filters The sorted notifications filters.
+		 * @param string $output  The options output.
+		 * @param array  $filters The sorted notifications filters.
 		 */
 		return apply_filters( 'bp_nouveau_get_notifications_filters', $output, $filters );
 	}
@@ -72,8 +70,6 @@ function bp_nouveau_notifications_filters() {
  * Outputs the order action links.
  *
  * @since 1.0.0
- *
- * @return string HTML output.
  */
 function bp_nouveau_notifications_sort_order_links() {
 	if ( 'unread' === bp_current_action() ) {
@@ -98,8 +94,6 @@ function bp_nouveau_notifications_sort_order_links() {
  * Output the dropdown for bulk management of notifications.
  *
  * @since 1.0.0
- *
- * @return string HTML output.
  */
 function bp_nouveau_notifications_bulk_management_dropdown() {
 ?>
