@@ -223,23 +223,21 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  *
  *     @type string      $output             The HTML to output. Required.
  * }
- * @return string       HTML Output
  */
 function bp_nouveau_wrapper( $args = array() ) {
 
-/*
+ /**
 	* Classes need to be determined & set by component to a certain degree
 	*
 	* Check the component to find a default container_class to add
 	*/
-// 'activity-meta'
 	$current_component_class = bp_current_component() . '-meta';
 
-	if ( 'groups' === bp_current_component() && 'activity' === bp_current_action() ) :
+	if ( 'groups' === bp_current_component() && 'activity' === bp_current_action() ) {
 		$generic_class = ' activity-meta ';
-	else:
+	} else {
 		$generic_class = '';
-	endif;
+	}
 
 	$r = wp_parse_args( $args, array(
 		'container'         => 'div',
