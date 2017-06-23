@@ -86,28 +86,26 @@ function bp_nouveau_after_blogs_directory_content() {
  * Fire specific hooks into the blogs create template
  *
  * @since 1.0.0
+ * @since 1.1.0 (BuddyPress) for the 'content' suffix
+ * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
  *
- * @param string $when    'before' or 'after'
- * @param string $suffix  Use it to add terms at the end of the hook name
+ * @param string $when   Either 'before' or 'after'.
+ * @param string $suffix Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_blogs_create_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
 
-	if ( ! empty( $when ) ) {
+	if ( $when ) {
 		$hook[] = $when;
 	}
 
 	// It's a create a blog hook
 	$hook[] = 'create_blog';
 
-	if ( ! empty( $suffix ) ) {
+	if ( $suffix ) {
 		$hook[] = $suffix;
 	}
 
-	/**
-	 * @since 1.1.0 (BuddyPress) for the 'content' suffix
-	 * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
-	 */
 	bp_nouveau_hook( $hook );
 }
 
@@ -130,12 +128,11 @@ function bp_nouveau_blogs_loop_item() {
  *
  * @since 1.0.0
  *
- * @param array $args @see bp_nouveau_wrapper() for the description of parameters.
- * @return string HTML Output
+ * @param array $args See bp_nouveau_wrapper() for the description of parameters.
  */
 function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['blogs_template'] ) ) {
-		return '';
+		return;
 	}
 
 	$args['type'] = 'loop';
@@ -151,11 +148,11 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	do_action( 'bp_directory_blogs_actions' );
 	$output .= ob_get_clean();
 
-	if ( empty( $output ) ) {
-		return '';
+	if ( ! $output ) {
+		return;
 	}
 
-	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
+	bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**
@@ -169,7 +166,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	function bp_nouveau_get_blogs_buttons( $args ) {
 		$type = ( ! empty( $args['type'] ) ) ? $args['type'] : 'loop';
 
-		// Not really sure why BP Legacy needed to do this...
+		// @todo Not really sure why BP Legacy needed to do this...
 		if ( 'loop' !== $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return array();
 		}
@@ -190,14 +187,13 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		 * otherwise simply pass any value found in args
 		 * or set var false.
 		 */
-		if ( ! empty( $args['container'] ) && 'ul' === $args['container']  ) {
+		if ( ! empty( $args['container'] ) && 'ul' === $args['container'] ) {
 			$parent_element = 'li';
 		} elseif ( ! empty( $args['parent_element'] ) ) {
-			$parent_element = esc_html( $args['parent_element'] );
+			$parent_element = $args['parent_element'];
 		} else {
 			$parent_element = false;
 		}
-
 
 		/*
 		 * If we have a arg value for $button_element passed through
@@ -231,11 +227,11 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		if ( ! empty( bp_nouveau()->blogs->button_args ) ) {
 			$button_args = bp_nouveau()->blogs->button_args ;
 
-		// If we pass through parent classes add them to $button array
-		$parent_class = '';
-		if ( ! empty( $args['parent_attr']['class'] ) ) {
-			$parent_class = esc_html( $args['parent_attr']['class'] );
-		}
+			// If we pass through parent classes add them to $button array
+			$parent_class = '';
+			if ( ! empty( $args['parent_attr']['class'] ) ) {
+				$parent_class = esc_html( $args['parent_attr']['class'] );
+			}
 
 			$buttons['visit_blog'] = array(
 				'id'                => 'visit_blog',
@@ -244,11 +240,12 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 				'must_be_logged_in' => $button_args['must_be_logged_in'],
 				'block_self'        => $button_args['block_self'],
 				'parent_element'    => $parent_element,
+				'button_element'    => $button_element,
+				'link_text'         => $button_args['link_text'],
 				'parent_attr'       => array(
 					'id'              => $button_args['wrapper_id'],
 					'class'           => $parent_class,
 				),
-				'button_element'    => $button_element,
 				'button_attr'       => array(
 					'href'             => $button_args['link_href'],
 					'id'               => $button_args['link_id'],
@@ -256,14 +253,13 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 					'rel'              => $button_args['link_rel'],
 					'title'            => '',
 				),
-				'link_text'         => $button_args['link_text'],
 			);
 
 			unset( bp_nouveau()->blogs->button_args );
 		}
 
 		/**
-		 * Filter here to add your buttons, use the position argument to choose where to insert it.
+		 * Filter to add your buttons, use the position argument to choose where to insert it.
 		 *
 		 * @since 1.0.0
 		 *
@@ -273,7 +269,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		 */
 		$buttons_group = apply_filters( 'bp_nouveau_get_blogs_buttons', $buttons, $blog, $type );
 
-		if ( empty( $buttons_group ) ) {
+		if ( ! $buttons_group ) {
 			return $buttons;
 		}
 
