@@ -11,24 +11,27 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Fire specific hooks into the private messages template
+ * Fire specific hooks into the private messages template.
  *
  * @since 1.0.0
+ * @since 1.0.0 (BuddyPress) for the 'composent_content' (after), 'thread_header_actions', 'meta',
+ *                           'content', 'thread_content', 'thread_list', 'reply_box' suffixes
+ * @since 1.1.0 (BuddyPress) for the 'compose_content' (before), 'thread_reply' suffixes
  *
- * @param string $when    'before' or 'after'
- * @param string $suffix  Use it to add terms at the end of the hook name
+ * @param string $when   Either 'before' or 'after'.
+ * @param string $suffix Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
 
-	if ( ! empty( $when ) ) {
+	if ( $when ) {
 		$hook[] = $when;
 	}
 
 	// It's a message hook
 	$hook[] = 'message';
 
-	if ( ! empty( $suffix ) ) {
+	if ( $suffix ) {
 		if ( 'compose_content' === $suffix ) {
 			$hook[2] = 'messages';
 		}
@@ -36,11 +39,6 @@ function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
 		$hook[] = $suffix;
 	}
 
-	/**
-	 * @since 1.0.0 (BuddyPress) for the 'composent_content' (after), 'thread_header_actions', 'meta',
-	 *                           'content', 'thread_content', 'thread_list', 'reply_box' suffixes
-	 * @since 1.1.0 (BuddyPress) for the 'compose_content' (before), 'thread_reply' suffixes
-	 */
 	bp_nouveau_hook( $hook );
 }
 
@@ -48,8 +46,6 @@ function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
  * Load the new Messages User Interface
  *
  * @since 1.0.0
- *
- * @return string HTML Output
  */
 function bp_nouveau_messages_member_interface() {
 	/**
