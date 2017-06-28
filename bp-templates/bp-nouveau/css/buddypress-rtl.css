@@ -2193,17 +2193,6 @@ body.no-js .single-item-header .js-self-profile-button {
 * @subsection 5.2.1.1 - Management Settings Screens
 *-----------------------------------------
 */
-.group-status-type {
-	font-size: 12px;
-	width: 80%;
-}
-
-@media screen and (min-width: 46.8em) {
-	.group-status-type {
-		font-size: 14px;
-	}
-}
-
 .group-status-type ul {
 	margin: 0 20px 20px 0;
 }

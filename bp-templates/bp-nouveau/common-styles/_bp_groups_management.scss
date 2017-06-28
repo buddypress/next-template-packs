@@ -3,9 +3,6 @@
 // Groups settings screen
 .group-status-type {
 
-	@include responsive-font(14);
-	width: 80%;
-
 	ul {
 		margin: 0 0 $marg-lrg $marg-lrg;
 	}
