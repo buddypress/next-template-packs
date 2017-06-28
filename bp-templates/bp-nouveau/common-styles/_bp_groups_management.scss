@@ -2,21 +2,12 @@
 
 // Groups settings screen
 .group-status-type {
-	border: 0;
-	padding: 0;
 
-	.group-conditions { // the dl
+	@include responsive-font(14);
+	width: 80%;
 
-		@include responsive-font(14);
-		width: 80%;
-
-		dd {
-			font-style: italic;
-
-			ul {
-				margin: 0 0 $marg-lrg $marg-med;
-			}
-		}
+	ul {
+		margin: 0 0 $marg-lrg $marg-lrg;
 	}
 }
 

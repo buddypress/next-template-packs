@@ -2194,27 +2194,18 @@ body.no-js .single-item-header .js-self-profile-button {
 *-----------------------------------------
 */
 .group-status-type {
-	border: 0;
-	padding: 0;
-}
-
-.group-status-type .group-conditions {
 	font-size: 12px;
 	width: 80%;
 }
 
 @media screen and (min-width: 46.8em) {
-	.group-status-type .group-conditions {
+	.group-status-type {
 		font-size: 14px;
 	}
 }
 
-.group-status-type .group-conditions dd {
-	font-style: italic;
-}
-
-.group-status-type .group-conditions dd ul {
-	margin: 0 15px 20px 0;
+.group-status-type ul {
+	margin: 0 20px 20px 0;
 }
 
 .groups-manage-members-list {
