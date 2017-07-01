@@ -223,23 +223,21 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  *
  *     @type string      $output             The HTML to output. Required.
  * }
- * @return string       HTML Output
  */
 function bp_nouveau_wrapper( $args = array() ) {
 
-/*
+ /**
 	* Classes need to be determined & set by component to a certain degree
 	*
 	* Check the component to find a default container_class to add
 	*/
-// 'activity-meta'
 	$current_component_class = bp_current_component() . '-meta';
 
-	if ( 'groups' === bp_current_component() && 'activity' === bp_current_action() ) :
+	if ( 'groups' === bp_current_component() && 'activity' === bp_current_action() ) {
 		$generic_class = ' activity-meta ';
-	else:
+	} else {
 		$generic_class = '';
-	endif;
+	}
 
 	$r = wp_parse_args( $args, array(
 		'container'         => 'div',
@@ -1083,7 +1081,7 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
  */
 function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 	/**
-	 * Filter here to add your custom feedback messages
+	 * Filter to add your custom feedback messages
 	 *
 	 * @param array $value The list of feedback messages.
 	 */
@@ -1287,7 +1285,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 	}
 
 	/**
-	 * Filter here to add your specific 'text' or 'password' inputs
+	 * Filter to add your specific 'text' or 'password' inputs
 	 *
 	 * If you need to use other types of field, please use the
 	 * do_action( 'bp_account_details_fields' ) or do_action( 'blog_details' )

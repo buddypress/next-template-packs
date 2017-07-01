@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @param array $pieces The list of terms of the hook to join.
  */
 function bp_nouveau_hook( $pieces = array() ) {
-	if ( empty( $pieces ) ) {
+	if ( ! $pieces ) {
 		return;
 	}
 
@@ -40,15 +40,10 @@ function bp_nouveau_hook( $pieces = array() ) {
  * @param string The suffix of the hook.
  */
 function bp_nouveau_plugin_hook( $suffix = '' ) {
-	if ( empty( $suffix ) ) {
+	if ( ! $suffix ) {
 		return;
 	}
 
-	/**
-	 * Fires and displays content/title for plugins using the BP_Group_Extension.
-	 *
-	 * @since 1.0.0 (BuddyPress)
-	 */
 	bp_nouveau_hook( array(
 		'bp',
 		'template',
@@ -67,13 +62,10 @@ function bp_nouveau_plugin_hook( $suffix = '' ) {
  * @param string The suffix of the hook.
  */
 function bp_nouveau_friend_hook( $suffix = '' ) {
-	if ( empty( $suffix ) ) {
+	if ( ! $suffix ) {
 		return;
 	}
 
-	/**
-	 * @since 1.1.0 (BuddyPress)
-	 */
 	bp_nouveau_hook( array(
 		'bp',
 		'friend',
@@ -157,8 +149,6 @@ function bp_nouveau_has_dismiss_button() {
  * Ouptut the dismiss type.
  *
  * @since 1.0.0
- *
- * @return string The dismiss type.
  */
 function bp_nouveau_dismiss_button_type() {
 	$bp_nouveau = bp_nouveau();
@@ -194,11 +184,14 @@ function bp_nouveau_template_message() {
 
 		if ( ! empty( $bp_nouveau->user_feedback['message'] ) ) {
 			$user_feedback = $bp_nouveau->user_feedback['message'];
+
+			// @TODO: why is this treated differently?
 			foreach ( array( 'wp_kses_data', 'wp_unslash', 'wptexturize', 'convert_smilies', 'convert_chars' ) as $filter ) {
 				$user_feedback = call_user_func( $filter, $user_feedback );
 			}
 
 			return '<p>' . $user_feedback . '</p>';
+
 		} elseif ( ! empty( $bp_nouveau->template_message['message'] ) ) {
 			/**
 			 * Filters the 'template_notices' feedback message content.
@@ -261,8 +254,9 @@ function bp_nouveau_template_notices() {
  *
  * @since 1.0.0
  *
- * @param  string  $feedback_id The ID of the message to display
- * @return string  HTML Output.
+ * @param  string $feedback_id The ID of the message to display
+ *
+ * @return string HTML Output.
  */
 function bp_nouveau_user_feedback( $feedback_id = '' ) {
 	if ( ! isset( $feedback_id ) ) {
@@ -282,14 +276,16 @@ function bp_nouveau_user_feedback( $feedback_id = '' ) {
 
 	$bp_nouveau->user_feedback = $feedback;
 
-	/**
-	 * Filter here if you wish to use a different templates than the notice one.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string path to your template part.
-	 */
-	bp_get_template_part( apply_filters( 'bp_nouveau_user_feedback_template', 'common/notices/template-notices' ) );
+	bp_get_template_part(
+		/**
+		 * Filter here if you wish to use a different templates than the notice one.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string path to your template part.
+		 */
+		apply_filters( 'bp_nouveau_user_feedback_template', 'common/notices/template-notices' )
+	);
 
 	if ( ! empty( $feedback['after'] ) ) {
 		do_action( $feedback['after'] );
@@ -342,11 +338,14 @@ function bp_nouveau_after_loop() {
 /**
  * Pagination for loops
  *
+ * @param string $position
+ *
  * @since 1.0.0
  */
-function bp_nouveau_pagination( $position = null ) {
+function bp_nouveau_pagination( $position ) {
 	$component = bp_current_component();
 
+	// @TODO: How is this ever going to occur?
 	if ( ! bp_is_active( $component ) ) {
 		return;
 	}
@@ -356,6 +355,7 @@ function bp_nouveau_pagination( $position = null ) {
 
 	if ( bp_is_user() ) {
 		$screen = 'user';
+
 	} elseif ( bp_is_group() ) {
 		$screen          = 'group';
 		$pagination_type = bp_current_action();
@@ -366,23 +366,19 @@ function bp_nouveau_pagination( $position = null ) {
 	}
 
 	switch( $pagination_type ) {
-
 		case 'blogs' :
-
 			$pag_count   = bp_get_blogs_pagination_count();
 			$pag_links   = bp_get_blogs_pagination_links();
 			$top_hook    = 'bp_before_directory_blogs_list';
 			$bottom_hook = 'bp_after_directory_blogs_list';
 			$page_arg    = $GLOBALS['blogs_template']->pag_arg;
-
 		break;
 
 		case 'members'        :
 		case 'friends'        :
 		case 'manage-members' :
-
-			$pag_count   = bp_get_members_pagination_count();
-			$pag_links   = bp_get_members_pagination_links();
+			$pag_count = bp_get_members_pagination_count();
+			$pag_links = bp_get_members_pagination_links();
 
 			// Groups single items are not using these hooks
 			if ( ! bp_is_group() ) {
@@ -390,38 +386,31 @@ function bp_nouveau_pagination( $position = null ) {
 				$bottom_hook = 'bp_after_directory_members_list';
 			}
 
-			$page_arg    = $GLOBALS['members_template']->pag_arg;
-
+			$page_arg = $GLOBALS['members_template']->pag_arg;
 		break;
 
 		case 'groups' :
-
 			$pag_count   = bp_get_groups_pagination_count();
 			$pag_links   = bp_get_groups_pagination_links();
 			$top_hook    = 'bp_before_directory_groups_list';
 			$bottom_hook = 'bp_after_directory_groups_list';
 			$page_arg    = $GLOBALS['groups_template']->pag_arg;
-
 		break;
 
 		case 'notifications' :
-
 			$pag_count   = bp_get_notifications_pagination_count();
 			$pag_links   = bp_get_notifications_pagination_links();
 			$top_hook    = '';
 			$bottom_hook = '';
 			$page_arg    = buddypress()->notifications->query_loop->pag_arg;
-
 		break;
 
 		case 'membership-requests' :
-
 			$pag_count   = bp_get_group_requests_pagination_count();
 			$pag_links   = bp_get_group_requests_pagination_links();
 			$top_hook    = '';
 			$bottom_hook = '';
 			$page_arg    = $GLOBALS['requests_template']->pag_arg;
-
 		break;
 	}
 
@@ -436,25 +425,26 @@ function bp_nouveau_pagination( $position = null ) {
 		 * @since 1.1.0
 		 */
 		do_action( $bottom_hook );
-	};?>
+	};
+	?>
 
-	<div class="bp-pagination <?php echo sanitize_html_class( $position ); ?>" data-bp-pagination="<?php echo esc_attr( $page_arg ); ?>">
+	<div class="<?php echo esc_attr( 'bp-pagination ' . sanitize_html_class( $position ) ); ?>" data-bp-pagination="<?php echo esc_attr( $page_arg ); ?>">
 
 		<?php if ( $pag_count ) : ?>
-			<div class="pag-count <?php echo sanitize_html_class( $count_class ); ?>">
+			<div class="<?php echo esc_attr( 'pag-count ' . sanitize_html_class( $position ) ); ?>">
 
 				<p class="pag-data">
-					<?php echo $pag_count; ?>
+					<?php echo esc_html( $pag_count ); ?>
 				</p>
 
 			</div>
 		<?php endif; ?>
 
 		<?php if ( $pag_links ) : ?>
-			<div class="bp-pagination-links <?php echo sanitize_html_class( $links_class ); ?>">
+			<div class="<?php echo esc_attr( 'bp-pagination-links ' . sanitize_html_class( $position ) ); ?>">
 
 				<p class="pag-data">
-					<?php echo $pag_links; ?>
+					<?php echo wp_kses_post( $pag_links ); ?>
 				</p>
 
 			</div>
@@ -469,10 +459,7 @@ function bp_nouveau_pagination( $position = null ) {
 		 * @since 1.1.0 (BuddyPress)
 		 */
 		do_action( $top_hook );
-	};?>
-
-	<?php
-	return;
+	};
 }
 
 /**
@@ -480,10 +467,10 @@ function bp_nouveau_pagination( $position = null ) {
  *
  * @since 1.0.0
  *
- * @return string CSS classes
+ * @return string CSS class attributes (escaped).
  */
 function bp_nouveau_loop_classes() {
-	echo bp_nouveau_get_loop_classes();
+	echo esc_attr( bp_nouveau_get_loop_classes() );
 }
 
 	/**
@@ -496,17 +483,15 @@ function bp_nouveau_loop_classes() {
 	function bp_nouveau_get_loop_classes() {
 		$bp_nouveau = bp_nouveau();
 
-		/**
-		* @todo: this function could do with passing args so we can pass simple strings in  or array of strings
-		*/
+		// @todo: this function could do with passing args so we can pass simple strings in  or array of strings
 
 		// The $component is faked if it's the single group member loop
-		if ( !bp_is_directory() && ( bp_is_group() && 'members' === bp_current_action() ) ) :
-			$component  = 'members_group';
+		if ( ! bp_is_directory() && ( bp_is_group() && 'members' === bp_current_action() ) ) :
+			$component = 'members_group';
 		elseif ( ! bp_is_directory() && ( bp_is_user() && 'my-friends' === bp_current_action() ) ):
-			$component  = 'members_friends';
+			$component = 'members_friends';
 		else :
-			$component  = sanitize_key( bp_current_component() );
+			$component = sanitize_key( bp_current_component() );
 		endif;
 
 		$classes = array(
@@ -523,18 +508,23 @@ function bp_nouveau_loop_classes() {
 			'members' => true,
 			'groups'  => true,
 			'blogs'   => true,
-			// technically not a component but allows us to check
-			// the single group members loop as a seperate loop.
-			'members_group' => true,
+
+			/*
+			 * Technically not a component but allows us to check the single group members loop as a seperate loop.
+			 */
+			'members_group'   => true,
 			'members_friends' => true,
 		);
 
 		// Only the available components supports custom layouts.
 		if ( ! empty( $available_components[ $component ] ) && ( bp_is_directory() || bp_is_group() || bp_is_user() ) ) {
 			$customizer_option = sprintf( '%s_layout', $component );
-			$layout_prefs      = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+			$layout_prefs      = bp_nouveau_get_temporary_setting(
+				$customizer_option,
+				bp_nouveau_get_appearance_settings( $customizer_option )
+			);
 
-			if ( ! empty( $layout_prefs ) && (int) $layout_prefs > 1 ) {
+			if ( $layout_prefs && (int) $layout_prefs > 1 ) {
 				$grid_classes = bp_nouveau_customizer_grid_choices( 'classes' );
 
 				if ( isset( $grid_classes[ $layout_prefs ] ) ) {
@@ -550,7 +540,7 @@ function bp_nouveau_loop_classes() {
 		}
 
 		/**
-		 * Filter here to edit/add classes.
+		 * Filter to edit/add classes.
 		 *
 		 * NB: you can also directly add classes into the template parts.
 		 *
@@ -596,7 +586,14 @@ function bp_nouveau_loop_get_grid_columns() {
 		$columns = (int) $bp_nouveau->{$component}->loop_layout;
 	}
 
-	return apply_filters( 'bp_nouveau_loop_get_grid_columns', $columns );
+	/**
+	 * Filter number of columns for this grid.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $columns The number of columns.
+	 */
+	return (int) apply_filters( 'bp_nouveau_loop_get_grid_columns', $columns );
 }
 
 /**
@@ -623,6 +620,11 @@ function bp_dir_is_vert_layout() {
  * @return array The avatar arguments.
  */
 function bp_nouveau_avatar_args() {
+	/**
+	 * Filter arguments for full-size avatars.
+	 *
+	 * @param array $args
+	 */
 	return apply_filters( 'bp_nouveau_avatar_args',  array(
 		'type'   => 'full',
 		'width'  => bp_core_avatar_full_width(),
@@ -630,9 +632,10 @@ function bp_nouveau_avatar_args() {
 	) );
 }
 
+
 /** Template Tags for BuddyPress navigations **********************************/
 
-/**
+/*
  * This is the BP Nouveau Navigation Loop.
  *
  * It can be used by any object using the
@@ -640,7 +643,7 @@ function bp_nouveau_avatar_args() {
  */
 
 /**
- * Init the Navigation Loop and checks it has items.
+ * Init the Navigation Loop and check it has items.
  *
  * @since 1.0.0
  *
@@ -654,7 +657,8 @@ function bp_nouveau_avatar_args() {
  *     @type bool   $user_has_access         Used by the secondary member's & group's nav. Default true. Optional.
  *     @type bool   $show_for_displayed_user Used by the primary member's nav. Default true. Optional.
  * }
- * @return bool         True if the Nav contains items. False otherwise.
+ *
+ * @return bool True if the Nav contains items. False otherwise.
  */
 function bp_nouveau_has_nav( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
@@ -710,6 +714,7 @@ function bp_nouveau_has_nav( $args = array() ) {
 				'parent_slug'     => bp_current_component(),
 				'user_has_access' => (bool) $n['user_has_access'],
 			) );
+
 		} else {
 			$args = array();
 
@@ -791,7 +796,7 @@ function bp_nouveau_nav_item() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_id() {
-	echo bp_nouveau_get_nav_id();
+	echo esc_attr( bp_nouveau_get_nav_id() );
 }
 
 	/**
@@ -814,7 +819,7 @@ function bp_nouveau_nav_id() {
 		}
 
 		/**
-		 * Filter here to edit the ID attribute of the nav.
+		 * Filter to edit the ID attribute of the nav.
 		 *
 		 * @since 1.0.0
 		 *
@@ -822,7 +827,7 @@ function bp_nouveau_nav_id() {
 		 * @param object $nav_item The current nav item object.
 		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 		 */
-		return esc_attr( apply_filters( 'bp_nouveau_get_nav_id', $id, $nav_item, $bp_nouveau->displayed_nav ) );
+		return apply_filters( 'bp_nouveau_get_nav_id', $id, $nav_item, $bp_nouveau->displayed_nav );
 	}
 
 /**
@@ -831,7 +836,7 @@ function bp_nouveau_nav_id() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_classes() {
-	echo bp_nouveau_get_nav_classes();
+	echo esc_attr( bp_nouveau_get_nav_classes() );
 }
 
 	/**
@@ -839,7 +844,7 @@ function bp_nouveau_nav_classes() {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string the list of classes.
+	 * @return string List of classes.
 	 */
 	function bp_nouveau_get_nav_classes() {
 		$bp_nouveau = bp_nouveau();
@@ -876,7 +881,7 @@ function bp_nouveau_nav_classes() {
 		}
 
 		/**
-		 * Filter here to edit/add classes.
+		 * Filter to edit/add classes.
 		 *
 		 * NB: you can also directly add classes into the template parts.
 		 *
@@ -889,11 +894,11 @@ function bp_nouveau_nav_classes() {
 		 */
 		$classes_list = apply_filters( 'bp_nouveau_get_classes', join( ' ', $classes ), $classes, $nav_item, $bp_nouveau->displayed_nav );
 
-		if ( empty( $classes_list ) ) {
-			return;
+		if ( ! $classes_list ) {
+			return '';
 		}
 
-		return esc_attr( $classes_list );
+		return $classes_list;
 	}
 
 /**
@@ -902,7 +907,7 @@ function bp_nouveau_nav_classes() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_scope() {
-	echo bp_nouveau_get_nav_scope();
+	echo bp_nouveau_get_nav_scope();  // Escaped by bp_get_form_field_attributes().
 }
 
 	/**
@@ -915,26 +920,28 @@ function bp_nouveau_nav_scope() {
 	function bp_nouveau_get_nav_scope() {
 		$bp_nouveau = bp_nouveau();
 		$nav_item   = $bp_nouveau->current_nav_item;
+		$scope      = array();
 
-		$scope = array();
 		if ( 'directory' === $bp_nouveau->displayed_nav ) {
 			$scope = array( 'data-bp-scope' => $nav_item->slug );
+
 		} elseif ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->secondary ) ) {
 			$scope = array( 'data-bp-user-scope' => $nav_item->slug );
+
 		} else {
 			/**
-			 * Filter here to add your own scope.
+			 * Filter to add your own scope.
 			 *
 			 * @since 1.0.0
 			 *
-			 * @param string $scope    An array containing the key and the value for your scope.
+			 * @param array $scope     Contains the key and the value for your scope.
 			 * @param object $nav_item The current nav item object.
 			 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 			 */
 			$scope = apply_filters( 'bp_nouveau_set_nav_scope', $scope, $nav_item, $bp_nouveau->displayed_nav );
 		}
 
-		if ( empty( $scope ) ) {
+		if ( ! $scope ) {
 			return;
 		}
 
@@ -942,20 +949,20 @@ function bp_nouveau_nav_scope() {
 	}
 
 /**
- * Displays the nav item link.
+ * Displays the nav item URL.
  *
  * @since 1.0.0
  */
 function bp_nouveau_nav_link() {
-	echo bp_nouveau_get_nav_link();
+	echo esc_url( bp_nouveau_get_nav_link() );
 }
 
 	/**
-	 * Retrieve the link for the current nav item.
+	 * Retrieve the URL for the current nav item.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string The link for the nav item.
+	 * @return string The URL for the nav item.
 	 */
 	function bp_nouveau_get_nav_link() {
 		$bp_nouveau = bp_nouveau();
@@ -975,15 +982,15 @@ function bp_nouveau_nav_link() {
 		}
 
 		/**
-		 * Filter here to edit the link of the nav.
+		 * Filter to edit the URL of the nav item.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $link     The link for the nav item.
+		 * @param string $link     The URL for the nav item.
 		 * @param object $nav_item The current nav item object.
 		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 		 */
-		return esc_url( apply_filters( 'bp_nouveau_get_nav_link', $link, $nav_item, $bp_nouveau->displayed_nav ) );
+		return apply_filters( 'bp_nouveau_get_nav_link', $link, $nav_item, $bp_nouveau->displayed_nav );
 	}
 
 /**
@@ -992,7 +999,7 @@ function bp_nouveau_nav_link() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_link_id() {
-	echo bp_nouveau_get_nav_link_id();
+	echo esc_attr( bp_nouveau_get_nav_link_id() );
 }
 
 	/**
@@ -1018,7 +1025,7 @@ function bp_nouveau_nav_link_id() {
 		}
 
 		/**
-		 * Filter here to edit the link id attribute of the nav.
+		 * Filter to edit the link id attribute of the nav.
 		 *
 		 * @since 1.0.0
 		 *
@@ -1026,7 +1033,7 @@ function bp_nouveau_nav_link_id() {
 		 * @param object $nav_item The current nav item object.
 		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 		 */
-		return esc_attr( apply_filters( 'bp_nouveau_get_nav_link_id', $link_id, $nav_item, $bp_nouveau->displayed_nav ) );
+		return apply_filters( 'bp_nouveau_get_nav_link_id', $link_id, $nav_item, $bp_nouveau->displayed_nav );
 	}
 
 /**
@@ -1035,7 +1042,7 @@ function bp_nouveau_nav_link_id() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_link_title() {
-	echo bp_nouveau_get_nav_link_title();
+	echo esc_attr( bp_nouveau_get_nav_link_title() );
 }
 
 	/**
@@ -1048,16 +1055,21 @@ function bp_nouveau_nav_link_title() {
 	function bp_nouveau_get_nav_link_title() {
 		$bp_nouveau = bp_nouveau();
 		$nav_item   = $bp_nouveau->current_nav_item;
+		$title      = '';
 
-		$title = '';
 		if ( 'directory' === $bp_nouveau->displayed_nav && ! empty( $nav_item->title ) ) {
 			$title = $nav_item->title;
-		} elseif ( ( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav ) && ! empty( $nav_item->name ) ) {
+
+		} elseif (
+			( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav )
+			&&
+			! empty( $nav_item->name )
+		) {
 			$title = $nav_item->name;
 		}
 
 		/**
-		 * Filter here to edit the link title attribute of the nav.
+		 * Filter to edit the link title attribute of the nav.
 		 *
 		 * @since 1.0.0
 		 *
@@ -1065,7 +1077,7 @@ function bp_nouveau_nav_link_title() {
 		 * @param object $nav_item The current nav item object.
 		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 		 */
-		return esc_attr( apply_filters( 'bp_nouveau_get_nav_link_title', $title, $nav_item, $bp_nouveau->displayed_nav ) );
+		return apply_filters( 'bp_nouveau_get_nav_link_title', $title, $nav_item, $bp_nouveau->displayed_nav );
 	}
 
 /**
@@ -1074,7 +1086,7 @@ function bp_nouveau_nav_link_title() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_link_text() {
-	echo bp_nouveau_get_nav_link_text();
+	echo esc_html( bp_nouveau_get_nav_link_text() );
 }
 
 	/**
@@ -1087,16 +1099,21 @@ function bp_nouveau_nav_link_text() {
 	function bp_nouveau_get_nav_link_text() {
 		$bp_nouveau = bp_nouveau();
 		$nav_item   = $bp_nouveau->current_nav_item;
+		$link_text  = '';
 
-		$link_text = '';
 		if ( 'directory' === $bp_nouveau->displayed_nav && ! empty( $nav_item->text ) ) {
 			$link_text = $nav_item->text;
-		} elseif ( ( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav ) && ! empty( $nav_item->name ) ) {
+
+		} elseif (
+			( 'groups' === $bp_nouveau->displayed_nav || 'personal' === $bp_nouveau->displayed_nav )
+			&&
+			! empty( $nav_item->name )
+		) {
 			$link_text = _bp_strip_spans_from_title( $nav_item->name );
 		}
 
 		/**
-		 * Filter here to edit the html text of the nav.
+		 * Filter to edit the html text of the nav.
 		 *
 		 * @since 1.0.0
 		 *
@@ -1104,13 +1121,15 @@ function bp_nouveau_nav_link_text() {
 		 * @param object $nav_item  The current nav item object.
 		 * @param string $value     The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 		 */
-		return esc_html( apply_filters( 'bp_nouveau_get_nav_link_text', $link_text, $nav_item, $bp_nouveau->displayed_nav ) );
+		return apply_filters( 'bp_nouveau_get_nav_link_text', $link_text, $nav_item, $bp_nouveau->displayed_nav );
 	}
 
 /**
  * Checks if the nav item has a count attribute.
  *
  * @since 1.0.0
+ *
+ * @return bool
  */
 function bp_nouveau_nav_has_count() {
 	$bp_nouveau = bp_nouveau();
@@ -1126,7 +1145,7 @@ function bp_nouveau_nav_has_count() {
 	}
 
 	/**
-	 * Filter here to edit whether the nav has a count attribute.
+	 * Filter to edit whether the nav has a count attribute.
 	 *
 	 * @since 1.0.0
 	 *
@@ -1134,7 +1153,7 @@ function bp_nouveau_nav_has_count() {
 	 * @param object $nav_item  The current nav item object.
 	 * @param string $value     The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 	 */
-	return apply_filters( 'bp_nouveau_nav_has_count', false !== $count, $nav_item, $bp_nouveau->displayed_nav );
+	return (bool) apply_filters( 'bp_nouveau_nav_has_count', false !== $count, $nav_item, $bp_nouveau->displayed_nav );
 }
 
 /**
@@ -1143,7 +1162,7 @@ function bp_nouveau_nav_has_count() {
  * @since 1.0.0
  */
 function bp_nouveau_nav_count() {
-	echo bp_nouveau_get_nav_count();
+	echo esc_html( number_format_i18n( bp_nouveau_get_nav_count() ) );
 }
 
 	/**
@@ -1151,21 +1170,20 @@ function bp_nouveau_nav_count() {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string The count attribute for the nav item.
+	 * @return int The count attribute for the nav item.
 	 */
 	function bp_nouveau_get_nav_count() {
 		$bp_nouveau = bp_nouveau();
 		$nav_item   = $bp_nouveau->current_nav_item;
+		$count      = 0;
 
-		$count = 0;
 		if ( 'directory' === $bp_nouveau->displayed_nav ) {
-			$count = $nav_item->count;
-		} elseif ( 'groups' === $bp_nouveau->displayed_nav && 'members' === $nav_item->slug ) {
-			$count = number_format( groups_get_current_group()->total_member_count );
+			$count = (int) $nav_item->count;
 
-		/**
-		 * imho BuddyPress shouldn't add html tags inside Nav attributes...
-		 */
+		} elseif ( 'groups' === $bp_nouveau->displayed_nav && 'members' === $nav_item->slug ) {
+			$count = groups_get_current_group()->total_member_count;
+
+		// @todo imho BuddyPress shouldn't add html tags inside Nav attributes...
 		} elseif ( 'personal' === $bp_nouveau->displayed_nav && ! empty( $nav_item->primary ) ) {
 			$span = strpos( $nav_item->name, '<span' );
 
@@ -1178,15 +1196,15 @@ function bp_nouveau_nav_count() {
 		}
 
 		/**
-		 * Filter here to edit the count attribute for the nav item.
+		 * Filter to edit the count attribute for the nav item.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $count    The count attribute for the nav item.
+		 * @param int $count    The count attribute for the nav item.
 		 * @param object $nav_item The current nav item object.
 		 * @param string $value    The current nav in use (eg: 'directory', 'groups', 'personal', etc..).
 		 */
-		return esc_attr( apply_filters( 'bp_nouveau_get_nav_count', $count, $nav_item, $bp_nouveau->displayed_nav ) );
+		return (int) apply_filters( 'bp_nouveau_get_nav_count', $count, $nav_item, $bp_nouveau->displayed_nav );
 	}
 
 /** Template tags specific to the Directory navs ******************************/
@@ -1197,27 +1215,28 @@ function bp_nouveau_nav_count() {
  * @since 1.0.0
  */
 function bp_nouveau_directory_type_navs_class() {
-	echo bp_nouveau_get_directory_type_navs_class();
+	echo esc_attr( bp_nouveau_get_directory_type_navs_class() );
 }
 
 	/**
 	 * Provides default nav wrapper classes.
+	 *
 	 * Gets the directory component nav class.
-	 * gets user selection Customizer options
+	 * Gets user selection Customizer options.
 	 *
 	 * @since 1.0.0
-	 * @return string classes
+	 *
+	 * @return string
 	 */
 	function bp_nouveau_get_directory_type_navs_class() {
+		$component  = sanitize_key( bp_current_component() );
+		$customizer_option = sprintf( '%s_dir_tabs', $component );
+		$nav_style  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+		$tab_style = '';
 
-			$component  = sanitize_key( bp_current_component() );
-			$customizer_option = sprintf( '%s_dir_tabs', $component );
-			$nav_style  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
-			$tab_style = '';
-
-			if ( 1 === $nav_style ) {
-				$tab_style = bp_current_component() . '-nav-tabs';
-			}
+		if ( 1 === $nav_style ) {
+			$tab_style = bp_current_component() . '-nav-tabs';
+		}
 
 		$nav_wrapper_classes = array(
 			sprintf( '%s-type-navs', bp_current_component() ),
@@ -1228,13 +1247,13 @@ function bp_nouveau_directory_type_navs_class() {
 		);
 
 		/**
-		 * Filter here to edit/add classes.
+		 * Filter to edit/add classes.
 		 *
 		 * NB: you can also directly add classes to the class attr.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param array  $nav_wrapper_classes  The list of classes.
+		 * @param array $nav_wrapper_classes The list of classes.
 		 */
 		$nav_wrapper_classes = (array) apply_filters( 'bp_nouveau_get_directory_type_navs_class', $nav_wrapper_classes );
 
@@ -1247,7 +1266,7 @@ function bp_nouveau_directory_type_navs_class() {
  * @since 1.0.0
  */
 function bp_nouveau_directory_list_class() {
-	echo bp_nouveau_get_directory_list_class();
+	echo esc_attr( bp_nouveau_get_directory_list_class() );
 }
 
 	/**
@@ -1256,9 +1275,7 @@ function bp_nouveau_directory_list_class() {
 	 * @since 1.0.0
 	 */
 	function bp_nouveau_get_directory_list_class() {
-		$class = sprintf( '%s-nav', bp_current_component() );
-
-		return sanitize_html_class( $class );
+		return sanitize_html_class( sprintf( '%s-nav', bp_current_component() ) );
 	}
 
 /**
@@ -1267,72 +1284,80 @@ function bp_nouveau_directory_list_class() {
  * @since 1.0.0
  */
 function bp_nouveau_directory_nav_object() {
-	echo bp_nouveau_get_directory_nav_object();
+	$obj = bp_nouveau_get_directory_nav_object();
+
+	if ( ! is_null( $obj ) ) {
+		echo esc_attr( $obj );
+	}
 }
 
 	/**
 	 * Gets the directory nav item object.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @return unknown @todo what is this?
 	 */
 	function bp_nouveau_get_directory_nav_object() {
 		$nav_item = bp_nouveau()->current_nav_item;
 
 		if ( ! $nav_item->component ) {
-			return;
+			return null;
 		}
 
-		return esc_attr( $nav_item->component );
+		return $nav_item->component;
 	}
+
 
 /** Template tags for the single item navs ***********************************/
 
 /**
- * Output main BuddyPress container classes
+ * Output main BuddyPress container classes.
  *
  * @since 1.0.0
  *
  * @return string CSS classes
  */
-function bp_nouveau_buddypress_classes() {
-	echo bp_nouveau_get_buddypress_classes();
+function bp_nouveau_container_classes() {
+	echo esc_attr( bp_nouveau_get_container_classes() );
 }
 
 	/**
-	 * Returns the main BuddyPress container classes
+	 * Returns the main BuddyPress container classes.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string CSS classes
 	 */
-	function bp_nouveau_get_buddypress_classes() {
-		$classes    = array( 'buddypress-wrap' );
-		$component  = bp_current_component();
-		$bp_nouveau = bp_nouveau();
+	function bp_nouveau_get_container_classes() {
+		$classes           = array( 'buddypress-wrap' );
+		$component         = bp_current_component();
+		$bp_nouveau        = bp_nouveau();
 		$member_type_class = '';
 
 		if ( bp_is_user() ) {
 			$customizer_option = 'user_nav_display';
 			$component         = 'members';
-			$user_type = bp_get_member_type( bp_displayed_user_id() );
+			$user_type         = bp_get_member_type( bp_displayed_user_id() );
 			$member_type_class = ( $user_type )? $user_type : '';
-
 
 		} elseif ( bp_is_group() ) {
 			$customizer_option = 'group_nav_display';
 
 		} elseif ( bp_is_directory() ) {
-
 			switch ( $component ) {
 				case 'activity':
 					$customizer_option = 'activity_dir_layout';
 					break;
+
 				case 'members':
 					$customizer_option = 'members_dir_layout';
 					break;
+
 				case 'groups':
 					$customizer_option = 'groups_dir_layout';
 					break;
+
 				case 'blogs':
 					$customizer_option = 'sites_dir_layout';
 					break;
@@ -1351,27 +1376,28 @@ function bp_nouveau_buddypress_classes() {
 		}
 
 		// Provide a class token to acknowledge additional extended profile fields added to default account reg screen
-		if ( 'register' === bp_current_component() && bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile() ){
+		if ( 'register' === bp_current_component() && bp_is_active( 'xprofile' ) && bp_nouveau_base_account_has_xprofile()) {
 			$classes[] = 'extended-default-reg';
 		}
 
-		// Add classes according to site owners preferences. these are options set via Customizer
+		// Add classes according to site owners preferences. These are options set via Customizer.
 
 		// These are general site wide Cust options falling outside component checks
-		if ( $general_settings = bp_nouveau_get_temporary_setting( 'avatar_style', bp_nouveau_get_appearance_settings( 'avatar_style' ) ) ) {
+		$general_settings = bp_nouveau_get_temporary_setting( 'avatar_style', bp_nouveau_get_appearance_settings( 'avatar_style' ) );
+		if ( $general_settings ) {
 			$classes[] = 'round-avatars';
 		}
 
 		// Set via earlier switch for component check to provide correct option key.
-		if ( ! empty( $customizer_option ) ) {
+		if ( $customizer_option ) {
 			$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 
-			if ( ! empty( $layout_prefs ) && (int) $layout_prefs === 1 && ( bp_is_user() || bp_is_group() ) ) {
+			if ( $layout_prefs && (int) $layout_prefs === 1 && ( bp_is_user() || bp_is_group() ) ) {
 				$classes[] = 'bp-single-vert-nav';
 				$classes[] = 'bp-vertical-navs';
 			}
 
-			if ( ! empty( $layout_prefs ) && bp_is_directory() ) {
+			if ( $layout_prefs && bp_is_directory() ) {
 				$classes[] = 'bp-dir-vert-nav';
 				$classes[] = 'bp-vertical-navs';
 				$bp_nouveau->{$component}->directory_vertical_layout = $layout_prefs;
@@ -1380,7 +1406,7 @@ function bp_nouveau_buddypress_classes() {
 
 		$class = array_map( 'sanitize_html_class', $classes );
 
-		return apply_filters( 'bp_nouveau_get_buddypress_classes', join( ' ', $class ), $classes );
+		return apply_filters( 'bp_nouveau_get_container_classes', join( ' ', $class ), $classes );
 	}
 
 /**
@@ -1391,7 +1417,7 @@ function bp_nouveau_buddypress_classes() {
  * @return string CSS classes
  */
 function bp_nouveau_single_item_nav_classes() {
-	echo bp_nouveau_get_single_item_nav_classes();
+	echo esc_attr( bp_nouveau_get_single_item_nav_classes() );
 }
 
 	/**
@@ -1410,6 +1436,7 @@ function bp_nouveau_single_item_nav_classes() {
 		// this is a temp workaround but differs from earlier dir approach- bad!
 		if ( bp_is_group() ) {
 			$nav_tabs = bp_nouveau_get_temporary_setting( 'group_nav_tabs', bp_nouveau_get_appearance_settings( 'group_nav_tabs' ) );
+
 		} elseif ( bp_is_user() ) {
 			$nav_tabs = bp_nouveau_get_temporary_setting( 'user_nav_tabs', bp_nouveau_get_appearance_settings( 'user_nav_tabs' ) );
 		}
@@ -1429,9 +1456,9 @@ function bp_nouveau_single_item_nav_classes() {
 
 		$customizer_option = ( bp_is_user() )? 'user_nav_display' : 'group_nav_display';
 
-		$layout_prefs  = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+		$layout_prefs = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
 
-		// Set the global for a later use - this is moved from the `bp_nouveau_get_buddypress_classes()
+		// Set the global for a later use - this is moved from the `bp_nouveau_get_container_classes()
 		// But was set as a check for this array class addition.
 		$bp_nouveau->{$component}->single_primary_nav_layout = $layout_prefs;
 
@@ -1440,7 +1467,6 @@ function bp_nouveau_single_item_nav_classes() {
 		}
 
 		$classes[] = $menu_type;
-
 		$class = array_map( 'sanitize_html_class', $classes );
 
 		return apply_filters( 'bp_nouveau_get_single_item_nav_classes', join( ' ', $class ), $classes );
@@ -1472,11 +1498,12 @@ function bp_nouveau_get_search_primary_object( $object = '' ) {
 }
 
 /**
- * Get The list of search objects (Primary + secondary)
+ * Get The list of search objects (primary + secondary).
  *
  * @since 1.0.0
  *
- * @param  array $objects The list of objects. Optionnal.
+ * @param  array $objects The list of objects. Optional.
+ *
  * @return array The list of objects.
  */
 function bp_nouveau_get_search_objects( $objects = array() ) {
@@ -1505,37 +1532,12 @@ function bp_nouveau_get_search_objects( $objects = array() ) {
  * Output the search form container classes.
  *
  * @since 1.0.0
- *
- * @return string CSS classes.
  */
 function bp_nouveau_search_container_class() {
 	$objects = bp_nouveau_get_search_objects();
+	$class   = join( '-search ', array_map( 'sanitize_html_class', $objects ) ) . '-search';
 
-	echo join( '-search ', array_map( 'sanitize_html_class', $objects ) ) . '-search';
-}
-
-/**
- * Output the search form data-bp attribute.
- *
- * @since 1.0.0
- *
- * @param  string $attr The data-bp attribute.
- * @return string The data-bp attribute.
- */
-function bp_nouveau_search_object_data_attr( $attr = '' ) {
-	$objects = bp_nouveau_get_search_objects();
-
-	if ( ! isset( $objects['secondary'] ) ) {
-		return $attr;
-	}
-
-	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
-		$attr = join( '_', $objects );
-	} else {
-		$attr = $objects['secondary'];
-	}
-
-	echo esc_attr( $attr );
+	echo esc_attr( $class );
 }
 
 /**
@@ -1543,8 +1545,9 @@ function bp_nouveau_search_object_data_attr( $attr = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string $suffix A string to append at the end of the ID.
- * @param  string $sep    The separator to use between each token.
+ * @param string $suffix A string to append at the end of the ID.
+ * @param string $sep    The separator to use between each token.
+ *
  * @return string The selector ID.
  */
 function bp_nouveau_search_selector_id( $suffix = '', $sep = '-' ) {
@@ -1565,7 +1568,7 @@ function bp_nouveau_search_selector_id( $suffix = '', $sep = '-' ) {
 function bp_nouveau_search_selector_name( $suffix = '', $sep = '_' ) {
 	$objects = bp_nouveau_get_search_objects();
 
-	if ( isset( $objects['secondary'] ) && empty( $suffix ) ) {
+	if ( isset( $objects['secondary'] ) && ! $suffix ) {
 		$name = bp_core_get_component_search_query_arg( $objects['secondary'] );
 	} else {
 		$name = join( $sep, array_merge( $objects, (array) $suffix ) );
@@ -1601,20 +1604,16 @@ function bp_nouveau_search_default_text( $text = '', $is_attr = true ) {
  * Get the search form template part and fire some do_actions if needed.
  *
  * @since 1.0.0
- *
- * @return string HTML Output
  */
 function bp_nouveau_search_form() {
 	bp_get_template_part( 'common/search/search-form' );
 
 	$objects = bp_nouveau_get_search_objects();
-
 	if ( empty( $objects['primary'] ) || empty( $objects['secondary'] ) ) {
 		return;
 	}
 
 	if ( 'dir' === $objects['primary'] ) {
-
 		if ( 'activity' === $objects['secondary'] ) {
 			/**
 			 * Fires before the display of the activity syndication options.
@@ -1658,46 +1657,53 @@ function bp_nouveau_search_form() {
 	}
 }
 
+
 /** Template tags for the directory & user/group screen filters **********************************/
 
 /**
- * Get the current component or action
+ * Get the current component or action.
+ *
  * If on single group screens we need to switch from component
  * to bp_current_action() to add the correct id's/labels
  * for group/activity & similar screens.
- *
  */
+function bp_nouveau_current_object() {
+	/*
+	 * If we're looking at groups single screens we need to factor in current action
+	 * to avoid the component check adding the wrong id for the main dir e.g 'groups' instead of 'activity'.
+	 * We also need to check for group screens to adjust the id's for prefixes.
+	 */
+	$component = array();
 
-	function bp_nouveau_current_object() {
-		// If we're looking at groups single screens we need to factor in current action
-		// to avoid the component check adding the wrong id for the main dir e.g 'groups' instead of
-		// 'activity'.
-		// We also need to check for group screens to adjust the id's for prefixes.
+	if ( bp_is_group() ) {
+		$component['members_select']   = 'groups_members-order-select';
+		$component['members_order_by'] = 'groups_members-order-by';
+		$component['object']           = bp_current_action();
+		$component['data_filter']      = 'group_' . bp_current_action();
 
-		$component = array();
-
-		if ( bp_is_group() ) :
-			$component['members_select']   = 'groups_members-order-select';
-			$component['members_order_by'] = 'groups_members-order-by';
-			$component['object']        = bp_current_action();
-			$component['data_filter']   = 'group_' . bp_current_action();
-
-		else:
-			$component['members_select']   = 'members-order-select';
-			$component['members_order_by'] = 'members-order-by';
-			$component['object']       = bp_current_component();
-			$component['data_filter']  = bp_current_component();
-		endif;
-
-		return $component;
+	} else {
+		$component['members_select']   = 'members-order-select';
+		$component['members_order_by'] = 'members-order-by';
+		$component['object']           = bp_current_component();
+		$component['data_filter']      = bp_current_component();
 	}
 
-function bp_nouveau_filter_container_id() {
-	echo bp_nouveau_get_filter_container_id();
+	return $component;
 }
 
-	function bp_nouveau_get_filter_container_id() {
+/**
+ * Output data filter container's ID attribute value.
+ */
+function bp_nouveau_filter_container_id() {
+	echo esc_attr( bp_nouveau_get_filter_container_id() );
+}
 
+	/**
+	 * Get data filter container's ID attribute value.
+	 *
+	 * @param string
+	 */
+	function bp_nouveau_get_filter_container_id() {
 		$component = bp_nouveau_current_object();
 
 		$ids = array(
@@ -1710,16 +1716,25 @@ function bp_nouveau_filter_container_id() {
 		);
 
 		if ( isset( $ids[ $component['object'] ] ) ) {
-			return esc_attr( apply_filters( 'bp_nouveau_get_filter_container_id', $ids[ $component['object'] ] ) );
+			return apply_filters( 'bp_nouveau_get_filter_container_id', $ids[ $component['object'] ] );
 		}
+
+		return '';
 	}
 
+/**
+ * Output data filter's ID attribute value.
+ */
 function bp_nouveau_filter_id() {
-	echo bp_nouveau_get_filter_id();
+	echo esc_attr( bp_nouveau_get_filter_id() );
 }
 
+	/**
+	 * Get data filter's ID attribute value.
+	 *
+	 * @param string
+	 */
 	function bp_nouveau_get_filter_id() {
-
 		$component = bp_nouveau_current_object();
 
 		$ids = array(
@@ -1731,73 +1746,88 @@ function bp_nouveau_filter_id() {
 			'blogs'         => 'blogs-order-by',
 		);
 
-
-
 		if ( isset( $ids[ $component['object'] ] ) ) {
-			return esc_attr( apply_filters( 'bp_nouveau_get_filter_id', $ids[ $component['object'] ] ) );
+			return apply_filters( 'bp_nouveau_get_filter_id', $ids[ $component['object'] ] );
 		}
+
+		return '';
 	}
 
+/**
+ * Output data filter's label.
+ */
 function bp_nouveau_filter_label() {
-	echo bp_nouveau_get_filter_label();
+	echo esc_html( bp_nouveau_get_filter_label() );
 }
 
+	/**
+	 * Get data filter's label.
+	 *
+	 * @param string
+	 */
 	function bp_nouveau_get_filter_label() {
-
 		$component = bp_nouveau_current_object();
-
-		$label = __( 'Order By:', 'buddypress' );
+		$label     = __( 'Order By:', 'buddypress' );
 
 		if ( 'activity' === $component['object'] || 'friends' === $component['object'] ) {
 			$label = __( 'Show:', 'buddypress' );
 		}
 
-		return esc_html( apply_filters( 'bp_nouveau_get_filter_label', $label ) );
+		return apply_filters( 'bp_nouveau_get_filter_label', $label );
 	}
 
+/**
+ * Output data filter's data-bp-filter attribute value.
+ */
 function bp_nouveau_filter_component() {
 	$component = bp_nouveau_current_object();
 	echo esc_attr( $component['data_filter'] );
 }
 
+/**
+ * Output the <option> of the data filter's <select> element.
+ */
 function bp_nouveau_filter_options() {
-	echo bp_nouveau_get_filter_options();
+	echo bp_nouveau_get_filter_options();  // Escaped in inner functions.
 }
 
+	/**
+	 * Get the <option> of the data filter's <select> element.
+	 *
+	 * @return string
+	 */
 	function bp_nouveau_get_filter_options() {
-
-	if ( 'notifications' === bp_current_component() ) :
-			bp_nouveau_notifications_filters();
-		return;
-
-	else:
-		$filters = bp_nouveau_get_component_filters();
-
 		$output = '';
 
-		foreach ( $filters as $key => $value ) {
-			$output .= sprintf( '<option value="%1$s">%2$s</option>%3$s',
-				esc_attr( $key ),
-				esc_html( $value ),
-				"\n"
-			);
+		if ( 'notifications' === bp_current_component() ) {
+			$output = bp_nouveau_get_notifications_filters();
 
+		} else {
+			$filters = bp_nouveau_get_component_filters();
+
+			foreach ( $filters as $key => $value ) {
+				$output .= sprintf( '<option value="%1$s">%2$s</option>%3$s',
+					esc_attr( $key ),
+					esc_html( $value ),
+					"\n"
+				);
+			}
 		}
 
 		return $output;
-
-	endif;
 	}
 
-/** Template tags for the customizer ******************************************/
+
+/** Template tags for the Customizer ******************************************/
 
 /**
  * Get a link to reach a specific section into the customizer
  *
  * @since 1.0.0
  *
- * @param  array  $args The argument to customize the Customizer link
- * @return string HTML Output
+ * @param array $args Optional. The argument to customize the Customizer link.
+ *
+ * @return string HTML.
  */
 function bp_nouveau_get_customizer_link( $args = array() ) {
 	$r = bp_parse_args( $args, array(
@@ -1816,13 +1846,18 @@ function bp_nouveau_get_customizer_link( $args = array() ) {
 		return '';
 	}
 
+	$url = '';
+
 	if ( bp_is_user() ) {
 		$url = rawurlencode( bp_displayed_user_domain() );
+
 	} elseif ( bp_is_group() ) {
 		$url = rawurlencode( bp_get_group_permalink( groups_get_current_group() ) );
+
 	} elseif ( ! empty( $r['object'] ) && ! empty( $r['item_id'] ) ) {
 		if ( 'user' === $r['object'] ) {
 			$url = rawurlencode( bp_core_get_user_domain( $r['item_id'] ) );
+
 		} elseif ( 'group' === $r['object'] ) {
 			$group = groups_get_group( array( 'group_id' => $r['item_id'] ) );
 
@@ -1832,7 +1867,7 @@ function bp_nouveau_get_customizer_link( $args = array() ) {
 		}
 	}
 
-	if ( empty( $url ) ) {
+	if ( ! $url ) {
 		return '';
 	}
 
@@ -1841,7 +1876,7 @@ function bp_nouveau_get_customizer_link( $args = array() ) {
 		'url'                => $url,
 	), admin_url( 'customize.php' ) );
 
-	return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $customizer_link ), $r['text'] );
+	return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $customizer_link ), esc_html( $r['text'] ) );
 }
 
 /** Template tags for signup forms *******************************************/
@@ -1850,21 +1885,23 @@ function bp_nouveau_get_customizer_link( $args = array() ) {
  * Fire specific hooks into the register template
  *
  * @since 1.0.0
+ * @since 1.2.4 Adds the 'bp_before_signup_profile_fields' action hook
+ * @since 1.9.0 Adds the 'bp_signup_profile_fields' action hook
  *
- * @param string $when    'before' or 'after'
- * @param string $prefix  Use it to add terms before the hook name
+ * @param string $when   'before' or 'after'
+ * @param string $prefix Use it to add terms before the hook name
  */
 function bp_nouveau_signup_hook( $when = '', $prefix = '' ) {
 	$hook = array( 'bp' );
 
-	if ( ! empty( $when ) ) {
+	if ( ! $when ) {
 		$hook[] = $when;
 	}
 
-	if ( ! empty( $prefix ) ) {
+	if ( ! $prefix ) {
 		if ( 'page' === $prefix ) {
 			$hook[] = 'register';
-		} elseif ( 'steps' === $prefix  ) {
+		} elseif ( 'steps' === $prefix ) {
 			$hook[] = 'signup';
 		}
 
@@ -1875,11 +1912,6 @@ function bp_nouveau_signup_hook( $when = '', $prefix = '' ) {
 		$hook[] = 'fields';
 	}
 
-	/**
-	 * @since 1.1.0 (BuddyPress)
-	 * @since 1.2.4 (BuddyPress) Adds the 'bp_before_signup_profile_fields' action hook
-	 * @since 1.9.0 (BuddyPress) Adds the 'bp_signup_profile_fields' action hook
-	 */
 	bp_nouveau_hook( $hook );
 }
 
@@ -1888,19 +1920,19 @@ function bp_nouveau_signup_hook( $when = '', $prefix = '' ) {
  *
  * @since 1.0.0
  *
- * @param string $when    'before' or 'after'
- * @param string $prefix  Use it to add terms before the hook name
+ * @param string $when   'before' or 'after'
+ * @param string $prefix Use it to add terms before the hook name
  */
 function bp_nouveau_activation_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
 
-	if ( ! empty( $when ) ) {
+	if ( ! $when ) {
 		$hook[] = $when;
 	}
 
 	$hook[] = 'activate';
 
-	if ( ! empty( $suffix ) ) {
+	if ( ! $suffix ) {
 		$hook[] = $suffix;
 	}
 
@@ -1908,9 +1940,6 @@ function bp_nouveau_activation_hook( $when = '', $suffix = '' ) {
 		$hook[2] = 'activation';
 	}
 
-	/**
-	 * @since 1.1.0 (BuddyPress)
-	 */
 	bp_nouveau_hook( $hook );
 }
 
@@ -1919,13 +1948,11 @@ function bp_nouveau_activation_hook( $when = '', $suffix = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string     $section The section of fields to get 'account_details' or 'blog_details'. Required.
- *                             Default: 'account_details'.
- * @return string              HTML Output.
+ * @param string section The section of fields to get 'account_details' or 'blog_details'. Required.
+ *                 v     Default: 'account_details'.
  */
 function bp_nouveau_signup_form( $section = 'account_details' ) {
 	$fields = bp_nouveau_get_signup_fields( $section );
-
 	if ( ! $fields ) {
 		return;
 	}
@@ -1992,7 +2019,7 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 		if ( ! empty( $class ) ) {
 			// In case people are adding classes..
 			$classes = explode( ' ', $class );
-			$class = ' class="' . join( ' ', array_map( 'sanitize_html_class', $classes ) ) . '"';
+			$class = ' class="' . esc_attr( join( ' ', array_map( 'sanitize_html_class', $classes ) ) ) . '"';
 		}
 
 		// Do not fire the do_action to display errors for the private radio.
@@ -2006,22 +2033,23 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 		}
 
 		// Set the input.
-		$field_output = sprintf( '<input type="%1$s" name="%2$s" id="%3$s"%4$s value="%5$s"%6$s/>',
+		$field_output = sprintf( '<input type="%1$s" name="%2$s" id="%3$s" %4$s value="%5$s" %6$s />',
 			esc_attr( $type ),
 			esc_attr( $name ),
 			esc_attr( $id ),
-			$class,
+			$class,  // Constructed safely above.
 			esc_attr( $value ),
-			$attribute_type
+			$attribute_type // Constructed safely above.
 		);
 
 		// Not a radio, let's output the field
 		if ( 'radio' !== $type ) {
 			if ( 'signup_blog_url' !== $name ) {
-				print( $field_output );
+				print( $field_output );  // Constructed safely above.
 
 			// If it's the signup blog url, it's specific to Multisite config.
 			} elseif ( is_subdomain_install() ) {
+				// Constructed safely above.
 				printf( '%1$s %2$s . %3$s',
 					is_ssl() ? 'https://' : 'http://',
 					$field_output,
@@ -2032,12 +2060,13 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
 			} else {
 				printf( '%1$s %2$s',
 					home_url( '/' ),
-					$field_output
+					$field_output  // Constructed safely above.
 				);
 			}
 
 		// It's a radio, let's output the field inside the label
 		} else {
+			// $label_output and $field_output are constructed safely above.
 			printf( $label_output, esc_attr( $name ), $field_output . ' ' . esc_html( $label ) );
 		}
 
@@ -2060,12 +2089,10 @@ function bp_nouveau_signup_form( $section = 'account_details' ) {
  *
  * @since 1.0.0
  *
- * @param  string $action The action to get the submit button for. Required.
- * @return string         HTML Output.
+ * @param string $action The action to get the submit button for. Required.
  */
-function bp_nouveau_submit_button( $action = '' ) {
+function bp_nouveau_submit_button( $action ) {
 	$submit_data = bp_nouveau_get_submit_button( $action );
-
 	if ( empty( $submit_data['attributes'] ) || empty( $submit_data['nonce'] ) ) {
 		return;
 	}
@@ -2077,12 +2104,11 @@ function bp_nouveau_submit_button( $action = '' ) {
 	// Output the submit button.
 	printf( '
 		<div class="submit">
-			<input type="submit"%s/>
+			<input type="submit" %s/>
 		</div>',
-		bp_get_form_field_attributes( 'submit', $submit_data['attributes'] )
+		bp_get_form_field_attributes( 'submit', $submit_data['attributes'] )  // Safe.
 	);
 
-	// Output the nonce field
 	wp_nonce_field( $submit_data['nonce'] );
 
 	if ( ! empty( $submit_data['after'] ) ) {

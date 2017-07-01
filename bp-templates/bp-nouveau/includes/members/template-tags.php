@@ -86,6 +86,10 @@ function bp_nouveau_after_members_directory_content() {
  * Fire specific hooks into the single members templates
  *
  * @since 1.0.0
+ * @since 1.2.0 (BuddyPress) for the 'activity_content', 'blogs_content', 'header_meta',
+ *                           'friends_content', 'groups_content', 'home_content', 'plugin_template'
+ *                           'friend_requests_content' suffixes.
+ * @since 1.5.0 (BuddyPress) for the 'settings_template' suffix.
  *
  * @param string $when    'before' or 'after'
  * @param string $suffix  Use it to add terms at the end of the hook name
@@ -93,23 +97,17 @@ function bp_nouveau_after_members_directory_content() {
 function bp_nouveau_member_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
 
-	if ( ! empty( $when ) ) {
+	if ( $when ) {
 		$hook[] = $when;
 	}
 
 	// It's a member hook
 	$hook[] = 'member';
 
-	if ( ! empty( $suffix ) ) {
+	if ( $suffix ) {
 		$hook[] = $suffix;
 	}
 
-	/**
-	 * @since 1.2.0 (BuddyPress) for the 'activity_content', 'blogs_content', 'header_meta',
-	 *                           'friends_content', 'groups_content', 'home_content', 'plugin_template'
-	 *                           'friend_requests_content' suffixes.
-	 * @since 1.5.0 (BuddyPress) for the 'settings_template' suffix.
-	 */
 	bp_nouveau_hook( $hook );
 }
 
@@ -132,8 +130,7 @@ function bp_nouveau_member_email_notice_settings() {
  *
  * @since 1.0.0
  *
- * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
- * @return string HTML Output
+ * @param array $args See bp_nouveau_wrapper() for the description of parameters.
  */
 function bp_nouveau_member_header_buttons( $args = array() ) {
 	$bp_nouveau = bp_nouveau();
@@ -163,15 +160,15 @@ function bp_nouveau_member_header_buttons( $args = array() ) {
 	do_action( 'bp_member_header_actions' );
 	$output .= ob_get_clean();
 
-	if ( empty( $output ) ) {
-		return '';
+	if ( ! $output ) {
+		return;
 	}
 
-	if ( empty( $args ) ) {
+	if ( ! $args ) {
 		$args = array( 'id' => 'item-buttons', 'classes' => false );
 	}
 
-	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
+	bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 /**
@@ -179,12 +176,11 @@ function bp_nouveau_member_header_buttons( $args = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array $args @see bp_nouveau_wrapper() for the description of parameters.
- * @return string HTML Output
+ * @param array $args See bp_nouveau_wrapper() for the description of parameters.
  */
 function bp_nouveau_members_loop_buttons( $args = array() ) {
 	if ( empty( $GLOBALS['members_template'] ) ) {
-		return '';
+		return;
 	}
 
 	$args['type'] = 'loop';
@@ -192,10 +188,11 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 
 	// Specific case for group members.
 	if ( bp_is_active( 'groups' ) && bp_is_group_members() ) {
-		$args['type']   = 'group_member';
+		$args['type'] = 'group_member';
 		$action = 'bp_group_members_list_item_action';
+
 	} elseif ( bp_is_active( 'friends' ) && bp_is_user_friend_requests() ) {
-		$args['type']   = 'friendship_request';
+		$args['type'] = 'friendship_request';
 		$action = 'bp_friend_requests_item_action';
 	}
 
@@ -210,11 +207,11 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 	do_action( $action );
 	$output .= ob_get_clean();
 
-	if ( empty( $output ) ) {
-		return '';
+	if ( ! $output ) {
+		return;
 	}
 
-	return bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
+	bp_nouveau_wrapper( array_merge( $args, array( 'output' => $output ) ) );
 }
 
 	/**
@@ -228,17 +225,17 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		$buttons = array();
 		$type = ( ! empty( $args['type'] ) ) ? $args['type'] : '';
 
-		// Not really sure why BP Legacy needed to do this...
+		// @todo Not really sure why BP Legacy needed to do this...
 		if ( 'profile' === $type && is_admin() && ! ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			return $buttons;
 		}
+
+		$user_id = bp_displayed_user_id();
 
 		if ( 'loop' === $type || 'friendship_request' === $type ) {
 			$user_id = bp_get_member_user_id();
 		} elseif ( 'group_member' === $type ) {
 			$user_id = bp_get_group_member_id();
-		} else {
-			$user_id = bp_displayed_user_id();
 		}
 
 		if ( ! $user_id ) {
@@ -251,12 +248,12 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		 * otherwise simply pass any value found in args
 		 * or set var false.
 		 */
+		$parent_element = false;
+
 		if ( ! empty( $args['container'] ) && 'ul' === $args['container']  ) {
 			$parent_element = 'li';
 		} elseif ( ! empty( $args['parent_element'] ) ) {
-			$parent_element = esc_html( $args['parent_element'] );
-		} else {
-			$parent_element = false;
+			$parent_element = $args['parent_element'];
 		}
 
 		/*
@@ -278,56 +275,57 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		// If we pass through parent classes add them to $button array
 		$parent_class = '';
 		if ( ! empty( $args['parent_attr']['class'] ) ) {
-			$parent_class = esc_html( $args['parent_attr']['class'] );
+			$parent_class = $args['parent_attr']['class'];
 		}
 
 		if ( bp_is_active( 'friends' ) ) {
 			// It's the member's friendship requests screen
 			if ( 'friendship_request' === $type ) {
-				$buttons = array( 'accept_friendship' => array(
+				$buttons = array(
+					'accept_friendship' => array(
 						'id'                => 'accept_friendship',
 						'position'          => 5,
 						'component'         => 'friends',
 						'must_be_logged_in' => true,
 						'parent_element'    => $parent_element,
-						'parent_attr'       => array(
-							'id'               => '',
-							'class'            => $parent_class ,
-							),
-						'button_element'    => $button_element,
-						'button_attr'       => array (
-							'class'            => 'button accept bp-tooltip',
-							'rel'              => '',
-							'data-bp-tooltip'  => __( 'Accept', 'buddypress' ),
-							),
 						'link_text'         => __( 'Accept', 'buddypress' ),
+						'parent_attr'       => array(
+							'id'    => '',
+							'class' => $parent_class ,
+						),
+						'button_element'    => $button_element,
+						'button_attr'       => array(
+							'class'           => 'button accept bp-tooltip',
+							'rel'             => '',
+							'data-bp-tooltip' => __( 'Accept', 'buddypress' ),
+						),
 					), 'reject_friendship' => array(
 						'id'                => 'reject_friendship',
 						'position'          => 15,
 						'component'         => 'friends',
 						'must_be_logged_in' => true,
 						'parent_element'    => $parent_element,
+						'link_text'         => __( 'Reject', 'buddypress' ),
 						'parent_attr'       => array(
-							'id'               => '',
-							'class'            => $parent_class,
-							),
+							'id'    => '',
+							'class' => $parent_class,
+						),
 						'button_element'    => $button_element,
 						'button_attr'       => array (
-							'class'            => 'button reject bp-tooltip',
-							'rel'              => '',
-							'data-bp-tooltip'  => __( 'Reject', 'buddypress' ),
-							),
-						'link_text'         => __( 'Reject', 'buddypress' ),
+							'class'           => 'button reject bp-tooltip',
+							'rel'             => '',
+							'data-bp-tooltip' => __( 'Reject', 'buddypress' ),
+						),
 					),
 				);
 
 				// If button element set add nonce link to data attr
 				if ( 'button' === $button_element ) {
-					$buttons['accept_friendship']['button_attr']['data-bp-nonce'] = esc_url( bp_get_friend_accept_request_link() );
-					$buttons['reject_friendship']['button_attr']['data-bp-nonce'] = esc_url( bp_get_friend_reject_request_link() );
+					$buttons['accept_friendship']['button_attr']['data-bp-nonce'] = bp_get_friend_accept_request_link();
+					$buttons['reject_friendship']['button_attr']['data-bp-nonce'] = bp_get_friend_reject_request_link();
 				} else {
-					$buttons['accept_friendship']['button_attr']['href'] = esc_url( bp_get_friend_accept_request_link() );
-					$buttons['reject_friendship']['button_attr']['href'] = esc_url( bp_get_friend_reject_request_link() );
+					$buttons['accept_friendship']['button_attr']['href'] = bp_get_friend_accept_request_link();
+					$buttons['reject_friendship']['button_attr']['href'] = bp_get_friend_reject_request_link();
 				}
 
 			// It's any other members screen
@@ -355,18 +353,18 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'must_be_logged_in' => $button_args['must_be_logged_in'],
 						'block_self'        => $button_args['block_self'],
 						'parent_element'    => $parent_element,
+						'link_text'         => $button_args['link_text'],
 						'parent_attr'       => array(
-								'id'              => $button_args['wrapper_id'],
-								'class'           => $parent_class . ' ' . $button_args['wrapper_class'],
-							),
+							'id'    => $button_args['wrapper_id'],
+							'class' => $parent_class . ' ' . $button_args['wrapper_class'],
+						),
 						'button_element'    => $button_element,
 						'button_attr'       => array(
-							'id'               => $button_args['link_id'],
-							'class'            => $button_args['link_class'],
-							'rel'              => $button_args['link_rel'],
-							'title'            => '',
-							),
-						'link_text'         => $button_args['link_text'],
+							'id'    => $button_args['link_id'],
+							'class' => $button_args['link_class'],
+							'rel'   => $button_args['link_rel'],
+							'title' => '',
+						),
 					);
 
 					// If button element set add nonce link to data attr
@@ -411,19 +409,17 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'must_be_logged_in' => $button_args['must_be_logged_in'],
 						'block_self'        => $button_args['block_self'],
 						'parent_element'    => $parent_element,
-						'parent_attr'       => array(
-								'id'              => $button_args['wrapper_id'],
-								'class'           => $parent_class,
-							),
 						'button_element'    => 'a',
+						'link_text'         => $button_args['link_text'],
+						'parent_attr'       => array(
+							'id'    => $button_args['wrapper_id'],
+							'class' => $parent_class,
+						),
 						'button_attr'       => array(
 							'href'             => $button_args['link_href'],
 							'id'               => '',
 							'class'            => $button_args['link_class'],
-							//'rel'              => '',
-							//'title'            => '',
-							),
-						'link_text'         => $button_args['link_text'],
+						),
 					);
 					unset( bp_nouveau()->members->button_args );
 				}
@@ -456,19 +452,19 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 						'must_be_logged_in' => $button_args['must_be_logged_in'],
 						'block_self'        => $button_args['block_self'],
 						'parent_element'    => $parent_element,
-						'parent_attr'       => array(
-								'id'              => $button_args['wrapper_id'],
-								'class'           => $parent_class,
-							),
 						'button_element'    => 'a',
-						'button_attr'       => array(
-							'href'             => esc_url( trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ) ),
-							'id'               => false,
-							'class'            => $button_args['link_class'],
-							'rel'              => '',
-							'title'            => __( '', 'buddypress' ),
-							),
 						'link_text'         => $button_args['link_text'],
+						'parent_attr'       => array(
+							'id'    => $button_args['wrapper_id'],
+							'class' => $parent_class,
+						),
+						'button_attr'       => array(
+							'href'  => trailingslashit( bp_loggedin_user_domain() . bp_get_messages_slug() ) . '#compose?r=' . bp_core_get_username( $user_id ),
+							'id'    => false,
+							'class' => $button_args['link_class'],
+							'rel'   => '',
+							'title' => '',
+							),
 					);
 
 					unset( bp_nouveau()->members->button_args );
@@ -477,7 +473,7 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		}
 
 		/**
-		 * Filter here to add your buttons, use the position argument to choose where to insert it.
+		 * Filter to add your buttons, use the position argument to choose where to insert it.
 		 *
 		 * @since 1.0.0
 		 *
@@ -486,13 +482,12 @@ function bp_nouveau_members_loop_buttons( $args = array() ) {
 		 * @param string $type    Whether we're displaying a members loop or a user's page
 		 */
 		$buttons_group = apply_filters( 'bp_nouveau_get_members_buttons', $buttons, $user_id, $type );
-
-		if ( empty( $buttons_group ) ) {
+		if ( ! $buttons_group ) {
 			return $buttons;
 		}
 
 		// It's the first entry of the loop, so build the Group and sort it
-		if ( ! isset( bp_nouveau()->members->member_buttons ) || false === is_a( bp_nouveau()->members->member_buttons, 'BP_Buttons_Group' ) ) {
+		if ( ! isset( bp_nouveau()->members->member_buttons ) || ! is_a( bp_nouveau()->members->member_buttons, 'BP_Buttons_Group' ) ) {
 			$sort = true;
 			bp_nouveau()->members->member_buttons = new BP_Buttons_Group( $buttons_group );
 
@@ -552,11 +547,11 @@ function bp_nouveau_member_meta() {
 	 * @return array The member meta.
 	 */
 	function bp_nouveau_get_member_meta() {
-		$meta     = array();
-		$is_loop  = false;
+		$meta    = array();
+		$is_loop = false;
 
 		if ( ! empty( $GLOBALS['members_template']->member ) ) {
-			$member = $GLOBALS['members_template']->member;
+			$member  = $GLOBALS['members_template']->member;
 			$is_loop = true;
 		} else {
 			$member = bp_get_displayed_user();
@@ -569,7 +564,10 @@ function bp_nouveau_member_meta() {
 		if ( empty( $member->template_meta ) ) {
 			// It's a single user's header
 			if ( ! $is_loop ) {
-				$meta['last_activity'] = sprintf( '<span class="activity">%s</span>', bp_get_last_activity( bp_displayed_user_id() ) );
+				$meta['last_activity'] = sprintf(
+					'<span class="activity">%s</span>',
+					esc_html( bp_get_last_activity( bp_displayed_user_id() ) )
+				);
 
 			// We're in the members loop
 			} else {
@@ -586,7 +584,7 @@ function bp_nouveau_member_meta() {
 			}
 
 			/**
-			 * Filter here to add/remove Member meta.
+			 * Filter to add/remove Member meta.
 			 *
 			 * @since 1.0.0
 			 *
@@ -615,6 +613,7 @@ function bp_nouveau_member_template_part() {
 
 	if ( bp_is_user_front() ) {
 		bp_displayed_user_front_template_part();
+
 	} else {
 		$template = 'plugins';
 
@@ -693,7 +692,7 @@ function bp_nouveau_members_get_customizer_option_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'user',
 		'autofocus' => 'bp_nouveau_user_front_page',
-		'text'      => esc_html__( 'Members default front page', 'buddypress' ),
+		'text'      => __( 'Members default front page', 'buddypress' ),
 	) );
 }
 
@@ -709,7 +708,7 @@ function bp_nouveau_members_get_customizer_widgets_link() {
 	return bp_nouveau_get_customizer_link( array(
 		'object'    => 'user',
 		'autofocus' => 'sidebar-widgets-sidebar-buddypress-members',
-		'text'      => esc_html__( '(BuddyPress) Widgets', 'buddypress' ),
+		'text'      => __( '(BuddyPress) Widgets', 'buddypress' ),
 	) );
 }
 
@@ -718,10 +717,12 @@ function bp_nouveau_members_get_customizer_widgets_link() {
  *
  * @since 1.0.0
  *
- * @return string HTML Output
+ * @param int $user_id Optional.
+ *
+ * @return string HTML output.
  */
 function bp_nouveau_member_description( $user_id = 0 ) {
-	if ( empty( $user_id ) ) {
+	if ( ! $user_id ) {
 		$user_id = bp_loggedin_user_id();
 
 		if ( bp_displayed_user_id() ) {
@@ -729,6 +730,7 @@ function bp_nouveau_member_description( $user_id = 0 ) {
 		}
 	}
 
+	// @todo This hack is too brittle.
 	add_filter( 'the_author_description', 'make_clickable', 9 );
 	add_filter( 'the_author_description', 'wpautop'           );
 	add_filter( 'the_author_description', 'wptexturize'       );
@@ -747,10 +749,11 @@ function bp_nouveau_member_description( $user_id = 0 ) {
 }
 
 /**
- * Display the Edit profile link (temporary)
- * @todo  replace with Ajax feature
+ * Display the Edit profile link (temporary).
  *
  * @since 1.0.0
+ *
+ * @todo replace with Ajax feature
  *
  * @return string HTML Output
  */
@@ -780,6 +783,7 @@ function bp_nouveau_member_description_edit_link() {
 
 		return sprintf( '<a href="%1$s">%2$s</a>', esc_url( $link ), esc_html__( 'Edit your bio', 'buddypress' ) );
 	}
+
 
 /** WP Profile tags **********************************************************/
 
@@ -837,13 +841,11 @@ function bp_nouveau_wp_profile_hooks( $type = 'before' ) {
  */
 function bp_nouveau_has_wp_profile_fields() {
 	$user_id = bp_displayed_user_id();
-
-	if ( empty( $user_id ) ) {
+	if ( ! $user_id ) {
 		return false;
 	}
 
 	$user = get_userdata( $user_id );
-
 	if ( ! $user ) {
 		return false;
 	}
@@ -859,7 +861,7 @@ function bp_nouveau_has_wp_profile_fields() {
 		$user_profile_fields[] = (object) array( 'id' => 'wp_' . $key, 'label' => $field, 'data' => $user->{$key} );
 	}
 
-	if ( empty( $user_profile_fields ) ) {
+	if ( ! $user_profile_fields ) {
 		return false;
 	}
 
@@ -909,7 +911,7 @@ function bp_nouveau_wp_profile_field() {
  * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field_id() {
-	echo bp_nouveau_get_wp_profile_field_id();
+	echo esc_attr( bp_nouveau_get_wp_profile_field_id() );
 }
 	/**
 	 * Get the WP profile field ID.
@@ -920,8 +922,7 @@ function bp_nouveau_wp_profile_field_id() {
 	 */
 	function bp_nouveau_get_wp_profile_field_id() {
 		$field = bp_nouveau()->members->wp_profile_current;
-
-		return esc_attr( apply_filters( 'bp_nouveau_get_wp_profile_field_id', $field->id ) );
+		return apply_filters( 'bp_nouveau_get_wp_profile_field_id', $field->id );
 	}
 
 /**
@@ -930,7 +931,7 @@ function bp_nouveau_wp_profile_field_id() {
  * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field_label() {
-	echo bp_nouveau_get_wp_profile_field_label();
+	echo esc_html( bp_nouveau_get_wp_profile_field_label() );
 }
 
 	/**
@@ -942,8 +943,7 @@ function bp_nouveau_wp_profile_field_label() {
 	 */
 	function bp_nouveau_get_wp_profile_field_label() {
 		$field = bp_nouveau()->members->wp_profile_current;
-
-		return esc_html( apply_filters( 'bp_nouveau_get_wp_profile_field_label', $field->label ) );
+		return apply_filters( 'bp_nouveau_get_wp_profile_field_label', $field->label );
 	}
 
 /**
@@ -952,7 +952,18 @@ function bp_nouveau_wp_profile_field_label() {
  * @since 1.0.0
  */
 function bp_nouveau_wp_profile_field_data() {
-	echo bp_nouveau_get_wp_profile_field_data();
+	$data = bp_nouveau_get_wp_profile_field_data();
+	$data = make_clickable( $data );
+
+	return wp_kses(
+		/**
+		 * Filters a WP profile field value.
+		 *
+		 * @param string $data The profile field value.
+		 */
+		apply_filters( 'bp_nouveau_get_wp_profile_field_data', $data ),
+		array( 'a' => array( 'href' => true, 'rel' => true ) )
+	);
 }
 
 	/**
@@ -964,8 +975,5 @@ function bp_nouveau_wp_profile_field_data() {
 	 */
 	function bp_nouveau_get_wp_profile_field_data() {
 		$field = bp_nouveau()->members->wp_profile_current;
-
-		$data = make_clickable( $field->data );
-
-		return wp_kses( apply_filters( 'bp_nouveau_get_wp_profile_field_data', $data ), array( 'a' => array( 'href' => true, 'rel' => true ) ) );
+		return $field->data;
 	}
