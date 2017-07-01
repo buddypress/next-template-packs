@@ -1303,7 +1303,7 @@ function bp_nouveau_groups_get_customizer_widgets_link() {
  * @return string Excerpt.
  *
  */
-function bp_nouveau_group_description_excerpt( $group = null, $length = 100 ) {
+function bp_nouveau_group_description_excerpt( $group = null, $length = null ) {
 	echo bp_nouveau_get_group_description_excerpt( $group, $length );
 }
 
@@ -1318,14 +1318,27 @@ function bp_nouveau_group_description_excerpt( $group = null, $length = 100 ) {
  *                       Defaults to the group currently being
  *                       iterated on in the groups loop.
  * @param int $length    Optional. Length of returned string, including ellipsis.
- *                       Default: 100.
+ *                       Default: 250.
  * @return string Excerpt.
  */
-function bp_nouveau_get_group_description_excerpt( $group = null, $length = 100 ) {
+function bp_nouveau_get_group_description_excerpt( $group = null, $length = null ) {
 	global $groups_template;
 
 	if ( ! $group ) {
 		$group =& $groups_template->group;
+	}
+
+	/**
+	* If this is a grid layout but no length is passed in set a shorter
+	* default value otherwise use the passed in value.
+	* If not a grid then the BP core default is used or passed in value.
+	*/
+	if ( bp_nouveau_loop_is_grid() && 'groups' === bp_current_component() ) {
+		if ( ! $length ) {
+			$length = 100;
+		} else {
+			$length = $length;
+		}
 	}
 
 	/**

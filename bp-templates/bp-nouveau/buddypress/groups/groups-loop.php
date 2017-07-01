@@ -45,13 +45,14 @@ bp_nouveau_before_loop(); ?>
 						<?php endif; ?>
 
 						<p class="last-activity item-meta"><?php printf( __( 'active %s', 'buddypress' ), bp_get_group_last_active() ); ?></p>
-				<?php bp_nouveau_groups_loop_buttons( ); ?>
 
 					</div>
 
-					<div class="group-desc"><?php bp_nouveau_group_description_excerpt(); ?></div>
+					<div class="group-desc"><p><?php bp_nouveau_group_description_excerpt(); ?></p></div>
 
 					<?php bp_nouveau_groups_loop_item(); ?>
+
+					<?php bp_nouveau_groups_loop_buttons( ); ?>
 
 				</div>
 
