@@ -53,6 +53,7 @@
 							<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
 
 								<div<?php bp_field_css_class( 'editfield' ); ?>>
+									<fieldset>
 
 									<?php
 									$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
@@ -61,13 +62,7 @@
 									bp_nouveau_xprofile_edit_visibilty();
 									?>
 
-									<?php if ( bp_get_the_profile_field_description() ) : ?>
-									<p class="description bp-feedback info small">
-										<span class="bp-icon" aria-hidden="true"></span>
-										<span class="text"><?php bp_the_profile_field_description(); ?></span>
-									</p>
-									<?php endif; ?>
-
+									</fieldset>
 								</div>
 
 							<?php endwhile; ?>
