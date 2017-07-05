@@ -7,7 +7,7 @@
  * @package BP Nouveau
  */
 ?>
-<?php var_dump( bp_nouveau_groups_front_page_description() ); ?>
+
 <?php bp_get_template_part( 'groups/single/parts/header-item-actions' ); ?>
 
 <?php if ( ! bp_disable_group_avatar_uploads() ) : ?>
