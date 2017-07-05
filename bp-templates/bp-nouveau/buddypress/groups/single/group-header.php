@@ -45,6 +45,6 @@
 			<?php	} ?>
 		<?php } ?>
 
-
-	<?php bp_nouveau_group_header_buttons(); ?>
 </div><!-- #item-header-content -->
+
+<?php bp_nouveau_group_header_buttons(); ?>

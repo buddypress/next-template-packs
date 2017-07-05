@@ -1,6 +1,6 @@
 // BP Single Screens Item Header General Styles.
 
-@include clearfix-element(single-headers);
+@include clearfix-element(".single-headers");
 
 .single-headers {
 	margin-bottom: $marg-med;
@@ -39,8 +39,9 @@
 
 		div#item-header-content {
 			float: left;
-			margin-left: 0;
+			margin-left: 10%;
 			text-align: left;
+			width: 42%;
 		}
 	}
 
@@ -135,6 +136,10 @@
 		}
 	}
 
+	div.generic-button {
+		text-align: center;
+	}
+
 	li.generic-button {
 		display: inline-block;
 		text-align: center;
@@ -145,6 +150,7 @@
 		div.generic-button,
 		a.button,
 		li.generic-button {
+			clear: both;
 			float: left;
 		}
 	}

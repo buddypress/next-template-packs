@@ -1912,13 +1912,13 @@ form.ac-form .ac-reply-content input {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
-single-headers:before,
-single-headers:after {
+.single-headers:before,
+.single-headers:after {
 	content: " ";
 	display: table;
 }
 
-single-headers:after {
+.single-headers:after {
 	clear: both;
 }
 
@@ -1949,8 +1949,9 @@ single-headers:after {
 	}
 	.single-headers div#item-header-content {
 		float: left;
-		margin-left: 0;
+		margin-left: 10%;
 		text-align: left;
+		width: 42%;
 	}
 }
 
@@ -2034,6 +2035,10 @@ single-headers:after {
 	list-style: none;
 }
 
+.single-headers div.generic-button {
+	text-align: center;
+}
+
 .single-headers li.generic-button {
 	display: inline-block;
 	text-align: center;
@@ -2043,6 +2048,7 @@ single-headers:after {
 	.single-headers div.generic-button,
 	.single-headers a.button,
 	.single-headers li.generic-button {
+		clear: both;
 		float: left;
 	}
 }
