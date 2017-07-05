@@ -596,7 +596,11 @@ function bp_nouveau_groups_do_group_boxes() {
 function bp_nouveau_groups_front_page_description() {
 	$group_settings = bp_nouveau_get_appearance_settings();
 
-	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] );
+	// This check is a problem it needs to be used in templates but returns true even if not on the front page
+	// return false on this if we are not displaying the front page 'bp_is_group_home()'
+	// This may well be a bad approach to re-think ~hnla.
+
+	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] && bp_is_group_home() );
 }
 
 /**
