@@ -3292,6 +3292,15 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap form.bp-messages-search-form,
 .buddypress-wrap form.bp-invites-search-form {
 	border: 1px solid #eee;
+	width: 100%;
+}
+
+@media screen and (min-width: 32em) {
+	.buddypress-wrap form.bp-dir-search-form,
+	.buddypress-wrap form.bp-messages-search-form,
+	.buddypress-wrap form.bp-invites-search-form {
+		width: 12em;
+	}
 }
 
 .buddypress-wrap form.bp-dir-search-form label,
@@ -3325,6 +3334,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap form.bp-invites-search-form input[type="search"],
 .buddypress-wrap form.bp-invites-search-form input[type="text"] {
 	float: left;
+	line-height: 1.5;
 	padding: 3px 10px;
 	width: 80%;
 }
@@ -3335,8 +3345,8 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	float: right;
 	font-size: inherit;
 	font-weight: 400;
-	line-height: inherit;
-	padding: 3px 0.8em;
+	line-height: 1.5;
+	padding: 3px 0.7em;
 	text-align: center;
 	text-transform: none;
 	width: 20%;

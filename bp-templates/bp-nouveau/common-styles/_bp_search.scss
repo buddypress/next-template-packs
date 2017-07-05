@@ -9,6 +9,12 @@
 	form.bp-invites-search-form {
 		border: 1px solid $bp-border-color;
 
+		width: 100%;
+
+		@include medium-small-up() {
+			width: 12em;
+		}
+
 		label {
 			margin: 0;
 		}
@@ -25,6 +31,7 @@
 		input[type="search"],
 		input[type="text"] {
 			float: left;
+			line-height: 1.5;
 			padding: 3px 10px;
 			width: 80%;
 		}
@@ -33,8 +40,8 @@
 			float: right;
 			font-size: inherit;
 			font-weight: 400;
-			line-height: inherit;
-			padding: 3px 0.8em;
+			line-height: 1.5;
+			padding: 3px 0.7em;
 			text-align: center;
 			text-transform: none;
 			width: 20%;
