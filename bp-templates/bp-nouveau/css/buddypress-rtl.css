@@ -1912,6 +1912,34 @@ form.ac-form .ac-reply-content input {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
+.single-headers #item-header-avatar a {
+	display: block;
+	text-align: center;
+}
+
+.single-headers #item-header-avatar a img {
+	float: none;
+}
+
+.single-headers div#item-header-content {
+	float: none;
+	text-align: center;
+}
+
+@media screen and (min-width: 46.8em) {
+	.single-headers #item-header-avatar a {
+		text-align: right;
+	}
+	.single-headers #item-header-avatar a img {
+		float: right;
+	}
+	.single-headers div#item-header-content {
+		float: right;
+		margin-right: 0;
+		text-align: right;
+	}
+}
+
 .single-headers .group-status,
 .single-headers .activity {
 	display: inline;
@@ -1937,11 +1965,6 @@ form.ac-form .ac-reply-content input {
 	font-weight: 400;
 	margin-top: 3px;
 	text-decoration: none;
-}
-
-.single-headers div#item-header-content {
-	float: right;
-	margin-right: 0;
 }
 
 .single-headers h2 {

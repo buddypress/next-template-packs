@@ -2,6 +2,47 @@
 
 .single-headers {
 
+	// Breakpoint element positioning
+
+	#item-header-avatar { // todo: this ought to be a class!
+
+		a {
+			display: block;
+			text-align: center;
+
+			img {
+				float: none;
+			}
+		}
+	}
+
+	div#item-header-content {
+		float: none;
+		text-align: center;
+	}
+
+	@include medium-up() {
+
+		#item-header-avatar { // todo: this ought to be a class!
+
+			a {
+				text-align: left;
+
+				img {
+					float: left;
+				}
+			}
+		}
+
+		div#item-header-content {
+			float: left;
+			margin-left: 0;
+			text-align: left;
+		}
+	}
+
+	// End breakpoint positioning
+
 	.group-status,
 	.activity {
 		display: inline;
@@ -34,11 +75,6 @@
 		}
 	}
 
-	div#item-header-content {
-		float: left;
-		margin-left: 0;
-	}
-
 	// @mention user name
 	h2 {
 		line-height: 1.2;
@@ -56,10 +92,9 @@
 			line-height: 1.7;
 			vertical-align: middle;
 
-
 			span {
 				background: #a1dcfa;
-				color: #fff;
+				color: $white;
 				cursor: pointer;
 				font-size: 80%;
 				font-weight: 700;
@@ -80,13 +115,11 @@
 		margin: 0 15px 19px 0;
 	}
 
-
 	.item-meta {
 		color: $light-text;
 
 		@include font-size(14);
 		margin: $marg-med 0 $marg-xsml;
-		//overflow: hidden;
 		padding-bottom: $pad-sml;
 	}
 
