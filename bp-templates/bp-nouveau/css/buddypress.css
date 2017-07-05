@@ -1912,9 +1912,18 @@ form.ac-form .ac-reply-content input {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
+single-headers:before,
+single-headers:after {
+	content: " ";
+	display: table;
+}
+
+single-headers:after {
+	clear: both;
+}
+
 .single-headers {
 	margin-bottom: 15px;
-	overflow: hidden;
 }
 
 .single-headers #item-header-avatar a {

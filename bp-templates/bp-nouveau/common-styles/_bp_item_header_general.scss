@@ -1,8 +1,9 @@
 // BP Single Screens Item Header General Styles.
 
+@include clearfix-element(single-headers);
+
 .single-headers {
 	margin-bottom: $marg-med;
-	overflow: hidden;
 
 	// Breakpoint element positioning
 
@@ -132,7 +133,6 @@
 			float: right;
 			list-style: none;
 		}
-
 	}
 
 	li.generic-button {
