@@ -600,7 +600,7 @@ function bp_nouveau_groups_front_page_description() {
 	// return false on this if we are not displaying the front page 'bp_is_group_home()'
 	// This may well be a bad approach to re-think ~hnla.
 
-	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] && bp_is_group_home() );
+	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] ) && bp_is_group_home();
 }
 
 /**
