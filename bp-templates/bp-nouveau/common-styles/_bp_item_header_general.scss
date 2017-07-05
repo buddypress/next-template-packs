@@ -1,6 +1,8 @@
 // BP Single Screens Item Header General Styles.
 
 .single-headers {
+	margin-bottom: $marg-med;
+	overflow: hidden;
 
 	// Breakpoint element positioning
 
@@ -81,7 +83,7 @@
 		margin: 0 0 $marg-xsml;
 
 		a {
-			color: #777;
+			color: $light-text;
 			text-decoration: none;
 		}
 
@@ -133,10 +135,23 @@
 
 	}
 
+	li.generic-button {
+		display: inline-block;
+		text-align: center;
+	}
+
+	@include medium-up() {
+
+		div.generic-button,
+		a.button,
+		li.generic-button {
+			float: left;
+		}
+	}
+
 	div.generic-button,
 	a.button {
-		float: left;
-		margin: 10px 10px 0 0;
+		margin: $marg-sml $marg-sml 0 0;
 	}
 
 	// if these are list constructs

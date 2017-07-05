@@ -1912,6 +1912,11 @@ form.ac-form .ac-reply-content input {
 * @subsection 5.1 - Item Header Global
 *-----------------------------------------------------------
 */
+.single-headers {
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+
 .single-headers #item-header-avatar a {
 	display: block;
 	text-align: center;
@@ -1973,7 +1978,7 @@ form.ac-form .ac-reply-content input {
 }
 
 .single-headers h2 a {
-	color: #777;
+	color: #767676;
 	text-decoration: none;
 }
 
@@ -2020,9 +2025,21 @@ form.ac-form .ac-reply-content input {
 	list-style: none;
 }
 
+.single-headers li.generic-button {
+	display: inline-block;
+	text-align: center;
+}
+
+@media screen and (min-width: 46.8em) {
+	.single-headers div.generic-button,
+	.single-headers a.button,
+	.single-headers li.generic-button {
+		float: left;
+	}
+}
+
 .single-headers div.generic-button,
 .single-headers a.button {
-	float: left;
 	margin: 10px 10px 0 0;
 }
 
