@@ -28,8 +28,8 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 	$bp_nouveau_options = bp_nouveau_get_appearance_settings();
 
 	$wp_customize->add_panel( 'bp_nouveau_panel', array(
-		'description' => __( 'Customize the appearance of your BuddyPress Template pack.', 'buddypress' ),
-		'title'       => _x( 'BuddyPress Template Pack', 'Customizer Panel', 'buddypress' ),
+		'description' => __( 'Customize the appearance of BuddyPress Nouveau Template pack.', 'buddypress' ),
+		'title'       => _x( 'BuddyPress Nouveau', 'Customizer Panel', 'buddypress' ),
 		'priority'    => 200,
 	) );
 
