@@ -61,10 +61,10 @@
 						<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 					</p>
 
-					<p class="action text-links-list">
+					<div class="members-manage-buttons action text-links-list">
 						<a href="<?php bp_group_member_promote_admin_link( array( 'user_id' => bp_get_member_user_id() ) ); ?>" class="button confirm mod-promote-to-admin"><?php _e( 'Promote to Admin', 'buddypress' ); ?></a>
 						<a class="button confirm mod-demote-to-member" href="<?php bp_group_member_demote_link( bp_get_member_user_id() ); ?>"><?php _e( 'Demote to Member', 'buddypress' ); ?></a>
-					</p>
+					</div>
 
 				</li>
 
@@ -99,7 +99,7 @@
 							<span class="banned warn"><?php if ( bp_get_group_member_is_banned() ) _e( '(banned)', 'buddypress' ); ?></span>
 						</p>
 
-						<?php bp_nouveau_groups_manage_members_buttons( array( 'container' => 'p', 'container_classes' => array( 'group-manage-buttons', 'text-links-list' ), 'parent_element' => '  ' ) ) ; ?>
+						<?php bp_nouveau_groups_manage_members_buttons( array( 'container' => 'div', 'container_classes' => array( 'members-manage-buttons', 'text-links-list' ), 'parent_element' => '  ' ) ) ; ?>
 
 					</li>
 

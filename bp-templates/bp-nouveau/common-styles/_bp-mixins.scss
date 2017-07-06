@@ -65,9 +65,18 @@
 //  body {property: value;}
 // }
 
+
 @mixin small-up {
 
 	@media screen and (min-width: 24em) {
+
+		@content;
+	}
+}
+
+@mixin medium-small-max {
+
+	@media screen and (max-width: 32em) {
 
 		@content;
 	}

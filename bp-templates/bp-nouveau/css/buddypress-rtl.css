@@ -2273,7 +2273,7 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .groups-manage-members-list ul li {
 	border-bottom: 1px solid #eee;
-	padding: 0.3em;
+	padding: 0.5em 0.3em 0.3em;
 }
 
 .groups-manage-members-list ul li.banned-user {
@@ -2284,13 +2284,47 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin-bottom: 0;
 }
 
-.groups-manage-members-list ul .action.text-links-list {
+.groups-manage-members-list ul .members-manage-buttons:before,
+.groups-manage-members-list ul .members-manage-buttons:after {
+	content: " ";
+	display: table;
+}
+
+.groups-manage-members-list ul .members-manage-buttons:after {
+	clear: both;
+}
+
+.groups-manage-members-list ul .members-manage-buttons {
+	margin: 15px 0 5px;
+}
+
+.groups-manage-members-list ul .members-manage-buttons a.button {
+	color: #767676;
+	display: block;
+	font-size: 13px;
+}
+
+@media screen and (min-width: 32em) {
+	.groups-manage-members-list ul .members-manage-buttons a.button {
+		display: inline-block;
+	}
+}
+
+.groups-manage-members-list ul .members-manage-buttons.text-links-list {
 	margin-bottom: 0;
 }
 
-.groups-manage-members-list ul .action.text-links-list a.button {
-	color: #767676;
-	display: inline-block;
+@media screen and (max-width: 32em) {
+	.groups-manage-members-list ul .members-manage-buttons.text-links-list a.button {
+		background: #fafafa;
+		border: 1px solid #eee;
+		display: block;
+		margin-bottom: 10px;
+	}
+}
+
+.groups-manage-members-list ul .action:not(.text-links-list) a.button {
+	font-size: 12px;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -2303,6 +2337,7 @@ body.no-js .single-item-header .js-self-profile-button {
 	}
 	.groups-manage-members-list ul li .action {
 		clear: both;
+		float: right;
 	}
 }
 
@@ -3809,7 +3844,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	background: none;
 	border: none;
 	border-left: 1px solid #eee;
-	color: #d6d6d6;
+	color: #767676;
 	display: inline-block;
 	padding: 0.3em 1em;
 }
