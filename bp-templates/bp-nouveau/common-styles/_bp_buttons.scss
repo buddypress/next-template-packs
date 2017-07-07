@@ -157,6 +157,14 @@
 			display: none;
 		}
 
+		input:disabled {
+
+			&:hover,
+			&:focus {
+				background: none;
+			}
+		}
+
 		// Style action links as text links
 		// .text-links-list would be stated for anchors parent wrapping element
 		// Example usage on group members manage screen.

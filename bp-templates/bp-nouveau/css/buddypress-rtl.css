@@ -3850,6 +3850,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: none;
 }
 
+.buddypress .buddypress-wrap input:disabled:hover, .buddypress .buddypress-wrap input:disabled:focus {
+	background: none;
+}
+
 .buddypress .buddypress-wrap .text-links-list a.button {
 	background: none;
 	border: none;
