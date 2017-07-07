@@ -29,7 +29,17 @@
 
 		li {
 			border-bottom: 1px solid $bp-border-color;
+			margin-bottom: $marg-sml;
 			padding: $pad-sml $pad-xsml $pad-xsml;
+		}
+
+		li:only-child,
+		li:last-child {
+			border-bottom: 0;
+		}
+
+		li:nth-child(even) {
+			background: $off-white;
 		}
 
 		li.banned-user {

@@ -2273,7 +2273,17 @@ body.no-js .single-item-header .js-self-profile-button {
 
 .groups-manage-members-list ul li {
 	border-bottom: 1px solid #eee;
+	margin-bottom: 10px;
 	padding: 0.5em 0.3em 0.3em;
+}
+
+.groups-manage-members-list ul li:only-child,
+.groups-manage-members-list ul li:last-child {
+	border-bottom: 0;
+}
+
+.groups-manage-members-list ul li:nth-child(even) {
+	background: #fafafa;
 }
 
 .groups-manage-members-list ul li.banned-user {
