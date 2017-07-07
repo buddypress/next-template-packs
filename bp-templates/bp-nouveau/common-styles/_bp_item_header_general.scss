@@ -21,7 +21,6 @@
 
 	div#item-header-content {
 		float: none;
-		text-align: center;
 	}
 
 	@include medium-up() {
@@ -35,13 +34,6 @@
 					float: left;
 				}
 			}
-		}
-
-		div#item-header-content {
-			float: left;
-			margin-left: 10%;
-			text-align: left;
-			width: 42%;
 		}
 	}
 
@@ -150,7 +142,6 @@
 		div.generic-button,
 		a.button,
 		li.generic-button {
-			clear: both;
 			float: left;
 		}
 	}

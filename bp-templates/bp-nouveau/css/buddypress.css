@@ -1937,7 +1937,6 @@ form.ac-form .ac-reply-content input {
 
 .single-headers div#item-header-content {
 	float: none;
-	text-align: center;
 }
 
 @media screen and (min-width: 46.8em) {
@@ -1946,12 +1945,6 @@ form.ac-form .ac-reply-content input {
 	}
 	.single-headers #item-header-avatar a img {
 		float: left;
-	}
-	.single-headers div#item-header-content {
-		float: left;
-		margin-left: 10%;
-		text-align: left;
-		width: 42%;
 	}
 }
 
@@ -2048,7 +2041,6 @@ form.ac-form .ac-reply-content input {
 	.single-headers div.generic-button,
 	.single-headers a.button,
 	.single-headers li.generic-button {
-		clear: both;
 		float: left;
 	}
 }
@@ -2166,11 +2158,20 @@ body.no-js .single-item-header .js-self-profile-button {
 }
 
 @media screen and (min-width: 46.8em) {
+	.groups-header div#item-header-content {
+		float: left;
+		margin-left: 10%;
+		text-align: left;
+		width: 42%;
+	}
 	.groups-header .group-item-actions {
 		float: right;
 		margin: 0 0 15px 15px;
 		text-align: right;
 		width: 20%;
+	}
+	.groups-header .groups-meta {
+		clear: both;
 	}
 }
 

@@ -15,7 +15,6 @@
 		float: left;
 		margin: 0 0 15px 15px;
 		padding-top: 0;
-		//text-align: left;
 		width: 100%;
 	}
 
@@ -59,11 +58,22 @@
 
 	@include medium-up {
 
+		div#item-header-content {
+			float: left;
+			margin-left: 10%;
+			text-align: left;
+			width: 42%;
+		}
+
 		.group-item-actions {
 			float: right;
 			margin: 0 0 15px 15px;
 			text-align: right;
 			width: 20%;
+		}
+
+		.groups-meta {
+			clear: both;
 		}
 	}
 
@@ -81,6 +91,5 @@
 			min-width: 80%;
 		}
 	}
-
 } // close groups-header
 
