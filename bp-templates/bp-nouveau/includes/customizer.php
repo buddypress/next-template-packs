@@ -107,6 +107,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'transport'         => 'refresh',
 			'type'              => 'option',
 		),
+		'bp_nouveau_appearance[user_subnav_tabs]' => array(
+			'index'             => 'user_subnav_tabs',
+			'capability'        => 'bp_moderate',
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+			'type'              => 'option',
+		),
 		'bp_nouveau_appearance[user_nav_order]' => array(
 			'index'             => 'user_nav_order',
 			'capability'        => 'bp_moderate',
@@ -232,9 +239,15 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'type'       => 'checkbox',
 		),
 		'user_nav_tabs' => array(
-			'label'      => __( 'Set User nav to tab style:', 'buddypress' ),
+			'label'      => __( 'Set User nav to tab style.', 'buddypress' ),
 			'section'    => 'bp_nouveau_user_primary_nav',
 			'settings'   => 'bp_nouveau_appearance[user_nav_tabs]',
+			'type'       => 'checkbox',
+		),
+		'user_subnav_tabs' => array(
+			'label'      => __( 'Set User subnav to tab style.', 'buddypress' ),
+			'section'    => 'bp_nouveau_user_primary_nav',
+			'settings'   => 'bp_nouveau_appearance[user_subnav_tabs]',
 			'type'       => 'checkbox',
 		),
 		'user_nav_order' => array(
@@ -245,21 +258,21 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'type'       => 'user',
 		),
 		'members_layout' => array(
-			'label'      => __( 'Members loop:', 'buddypress' ),
+			'label'      => __( 'Members loop.', 'buddypress' ),
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[members_layout]',
 			'type'       => 'select',
 			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),
 		'members_group_layout' => array(
-			'label'      => __( 'Members loop - Single Groups:', 'buddypress' ),
+			'label'      => __( 'Members loop - Single Groups.', 'buddypress' ),
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[members_group_layout]',
 			'type'       => 'select',
 			'choices'    => bp_nouveau_customizer_grid_choices(),
 		),
 		'members_friends_layout' => array(
-			'label'      => __( 'Members Friends - User Account:', 'buddypress' ),
+			'label'      => __( 'Members Friends - User Account.', 'buddypress' ),
 			'section'    => 'bp_nouveau_loops_layout',
 			'settings'   => 'bp_nouveau_appearance[members_friends_layout]',
 			'type'       => 'select',
@@ -302,13 +315,13 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 			'type'       => 'checkbox',
 		),
 		'sites_dir_layout' => array(
-			'label'      => __( 'Set Sites dir nav to column:', 'buddypress' ),
+			'label'      => __( 'Set Sites dir nav to column.', 'buddypress' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[sites_dir_layout]',
 			'type'       => 'checkbox',
 		),
 		'sites_dir_tabs' => array(
-			'label'      => __( 'Set Sites nav to tab style:', 'buddypress' ),
+			'label'      => __( 'Set Sites nav to tab style.', 'buddypress' ),
 			'section'    => 'bp_nouveau_dir_layout',
 			'settings'   => 'bp_nouveau_appearance[sites_dir_tabs]',
 			'type'       => 'checkbox',
