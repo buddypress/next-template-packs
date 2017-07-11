@@ -9,7 +9,7 @@
 
 ?>
 
-<nav class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Friends menu', 'buddypress' ); ?>">
+<nav class="<?php bp_nouveau_single_item_subnav_classes(); ?>" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Friends menu', 'buddypress' ); ?>">
 	<ul class="subnav">
 		<?php if ( bp_is_my_profile() ) : ?>
 

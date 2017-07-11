@@ -14,7 +14,7 @@ bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 
 <?php if ( ! bp_is_current_component_core() ) : ?>
 
-	<div class="bp-navs bp-subnavs user-subnav no-ajax" id="subnav">
+	<nav class="<?php bp_nouveau_single_item_subnav_classes(); ?>" id="subnav">
 		<ul class="subnav">
 
 			<?php bp_get_template_part( 'members/single/parts/item-subnav' ); ?>
@@ -22,7 +22,7 @@ bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>
 			<?php bp_nouveau_member_hook( '', 'plugin_options_nav' ); ?>
 
 		</ul>
-	</div><!-- .item-list-tabs -->
+	</nav>
 
 <?php endif; ?>
 
