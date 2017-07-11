@@ -162,8 +162,13 @@
 			blockquote {
 				background: $off-white;
 				margin: $marg-med 0 $marg-sml;
-				overflow: hidden;
 				padding: $pad-med;
+
+				&:after {
+					clear: both;
+					content: "";
+					display: table;
+				}
 			}
 
 			p {
@@ -287,8 +292,13 @@
 
 			.activity-content {
 				margin: 0 5% 0 0;
-				overflow: hidden;
 				position: relative;
+
+				&:after {
+					clear: both;
+					content: "";
+					display: table;
+				}
 			}
 
 			.activity-header {
