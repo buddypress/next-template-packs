@@ -66,7 +66,7 @@
 
 7.0 - Tables -  General
 
-8.0 - Classes - Messages, Ajax, Widgets, Buttons
+8.0 - Classes - Messages, Ajax, Widgets, Buttons, Tooltips
 
 9.0 - Layout Classes.
 --------------------------------------------------------------*/
@@ -423,6 +423,10 @@
 // Import BP Animations & Transitions - fluffy effects :)
 
 @import "../common-styles/_bp_animations";
+
+// Import BP Tooltips
+
+@import "../common-styles/_bp_tooltips";
 
 /**
 *-------------------------------------------------------------------------------
