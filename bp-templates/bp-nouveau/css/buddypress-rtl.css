@@ -2135,8 +2135,10 @@ body.no-js .single-item-header .js-self-profile-button {
 	margin: 0 0 5px;
 }
 
-.groups-header .moderators-lists .user-list ul {
-	overflow: hidden;
+.groups-header .moderators-lists .user-list ul:after {
+	clear: both;
+	content: "";
+	display: table;
 }
 
 .groups-header .moderators-lists .user-list li {
@@ -3000,7 +3002,13 @@ li#compose-personal-li a#compose:hover {
 .bp-messages-content .preview-pane-header,
 .bp-messages-content .single-message-thread-header {
 	border-bottom: 1px solid #eaeaea;
-	overflow: hidden;
+}
+
+.bp-messages-content .preview-pane-header:after,
+.bp-messages-content .single-message-thread-header:after {
+	clear: both;
+	content: "";
+	display: table;
 }
 
 .bp-messages-content .preview-thread-title,
@@ -3026,7 +3034,12 @@ li#compose-personal-li a#compose:hover {
 
 .bp-messages-content .thread-participants ul {
 	list-style: none;
-	overflow: hidden;
+}
+
+.bp-messages-content .thread-participants ul:after {
+	clear: both;
+	content: "";
+	display: table;
 }
 
 .bp-messages-content .thread-participants li {
