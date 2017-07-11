@@ -401,7 +401,7 @@ dt.section-title {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress-wrap:not(.bp-vertical-navs) .main-navs > ul > li:first-child a {
+	.buddypress-wrap:not(.bp-vertical-navs) .main-navs.single-screen-navs > ul > li:first-child a {
 		padding-left: 0;
 	}
 }
