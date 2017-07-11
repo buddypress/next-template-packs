@@ -333,7 +333,12 @@ li#compose-personal-li {
 	.preview-pane-header,
 	.single-message-thread-header {
 		border-bottom: 1px solid $light-grey;
-		overflow: hidden;
+
+		&:after {
+			clear: both;
+			content: "";
+			display: table;
+		}
 	}
 
 	.preview-thread-title,
@@ -358,7 +363,13 @@ li#compose-personal-li {
 
 		ul {
 			list-style: none;
-			overflow: hidden;
+
+			&:after {
+
+				clear: both;
+				content: "";
+				display: table;
+			}
 		}
 
 		li {

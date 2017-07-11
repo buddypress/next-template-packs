@@ -943,9 +943,14 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
 	return '
 		/* Cover image */
 		#buddypress #item-header-cover-image {
-			overflow: hidden;
 			min-height: ' . $params["height"] . 'px;
 			margin-bottom: 1em;
+		}
+
+		#buddypress #item-header-cover-image:after {
+			clear: both;
+			content: "";
+			display: table;
 		}
 
 		#buddypress #header-cover-image {

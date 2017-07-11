@@ -33,8 +33,10 @@
 		.user-list {
 			margin: 0 0 $marg-xsml;
 
-			ul {
-				overflow: hidden;
+			ul:after {
+				clear: both;
+				content: "";
+				display: table;
 			}
 
 			li {
