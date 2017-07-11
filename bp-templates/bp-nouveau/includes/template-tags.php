@@ -1478,6 +1478,49 @@ function bp_nouveau_single_item_nav_classes() {
 		return apply_filters( 'bp_nouveau_get_single_item_nav_classes', join( ' ', $class ), $classes );
 	}
 
+/**
+ * Output single item subnav container classes.
+ *
+ * @since 1.0.0
+ *
+ * @return string CSS classes
+ */
+function bp_nouveau_single_item_subnav_classes() {
+	echo esc_attr( bp_nouveau_get_single_item_subnav_classes() );
+}
+
+	/**
+	 * Returns the single item subnav container classes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string CSS classes
+	 */
+	function bp_nouveau_get_single_item_subnav_classes() {
+		$classes  = array( 'bp-navs', 'bp-subnavs', 'no-ajax' );
+
+		// Set user or group class string
+		if ( bp_is_user() ) {
+			$classes[] = 'user-subnav';
+		}
+		if ( bp_is_group() ) {
+			$classes[] = 'group-subnav';
+		}
+
+		$customizer_option = ( bp_is_user() )? 'user_subnav_tabs' : 'group_subnav_tabs';
+		$nav_tabs = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
+
+		if ( bp_is_user() && 1 === $nav_tabs ) {
+			$classes[] = 'subnav-tabs';
+		}
+		if ( bp_is_group() && 1 === $nav_tabs ) {
+			$classes[] = 'subnav-tabs';
+		}
+
+		$class = array_map( 'sanitize_html_class', $classes );
+
+		return apply_filters( 'bp_nouveau_get_single_item_subnav_classes', join( ' ', $class ), $classes );
+	}
 
 /** Template tags for the object search **************************************/
 
