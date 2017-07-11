@@ -4394,6 +4394,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	}
 }
 
+.activity-meta-action .bp-tooltip:after,
 .notification-actions .bp-tooltip:after,
 .participants-list .bp-tooltip:after {
 	left: 0;
