@@ -1525,6 +1525,39 @@ function bp_nouveau_single_item_subnav_classes() {
 		return apply_filters( 'bp_nouveau_get_single_item_subnav_classes', join( ' ', $class ), $classes );
 	}
 
+/**
+ * Output the groups create steps classes.
+ *
+ * @since 1.0.0
+ *
+ * @return string CSS classes
+ */
+function bp_nouveau_groups_create_steps_classes() {
+	echo esc_attr( bp_nouveau_get_group_create_steps_classes() );
+}
+
+	/**
+	 * Returns the groups create steps customizer option choice class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string CSS classes
+	 */
+	function bp_nouveau_get_group_create_steps_classes() {
+
+		$classes = array( 'bp-navs', 'group-create-links', 'no-ajax' );
+
+		$nav_tabs = bp_nouveau_get_temporary_setting( 'groups_create_tabs', bp_nouveau_get_appearance_settings( 'groups_create_tabs' ) );
+
+		if ( 1 === $nav_tabs ) {
+		$classes[] = 'tabbed-links';
+		}
+
+		$class = array_map( 'sanitize_html_class', $classes );
+
+		return apply_filters( 'bp_nouveau_get_group_create_steps_classes', join( ' ', $class ), $classes );
+	}
+
 /** Template tags for the object search **************************************/
 
 /**
