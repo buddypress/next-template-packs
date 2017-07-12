@@ -552,30 +552,30 @@ dt.section-title {
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress-wrap .item-body ul {
+	.buddypress-wrap .item-body .tabbed-links ul {
 		border-bottom: 1px solid #ccc;
 		float: none;
 		margin: 20px 0 10px;
 	}
-	.buddypress-wrap .item-body ul:before, .buddypress-wrap .item-body ul:after {
+	.buddypress-wrap .item-body .tabbed-links ul:before, .buddypress-wrap .item-body .tabbed-links ul:after {
 		content: " ";
 		display: block;
 	}
-	.buddypress-wrap .item-body ul:after {
+	.buddypress-wrap .item-body .tabbed-links ul:after {
 		clear: both;
 	}
-	.buddypress-wrap .item-body ul li {
+	.buddypress-wrap .item-body .tabbed-links ul li {
 		float: left;
 		list-style: none;
 		margin: 0 15px 0 0;
 	}
-	.buddypress-wrap .item-body ul li a {
+	.buddypress-wrap .item-body .tabbed-links ul li a {
 		background: none;
 		border: none;
 		display: block;
 		padding: 4px 10px;
 	}
-	.buddypress-wrap .item-body ul li.current {
+	.buddypress-wrap .item-body .tabbed-links ul li.current {
 		border-color: #ccc #ccc #fff;
 		border-style: solid;
 		border-top-left-radius: 4px;
@@ -584,7 +584,7 @@ dt.section-title {
 		margin-bottom: -1px;
 		padding: 0 0.5em;
 	}
-	.buddypress-wrap .item-body ul li.current a {
+	.buddypress-wrap .item-body .tabbed-links ul li.current a {
 		color: #333;
 	}
 	.buddypress-wrap .item-body .bp-subnavs.tabbed-links > ul {
