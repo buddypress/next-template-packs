@@ -1259,14 +1259,8 @@ dt.section-title {
 .activity-list .activity-item .activity-content blockquote {
 	background: #fafafa;
 	margin: 15px 0 10px;
+	overflow: hidden;
 	padding: 1em;
-}
-
-.activity-list .activity-item .activity-content .activity-inner:after,
-.activity-list .activity-item .activity-content blockquote:after {
-	clear: both;
-	content: "";
-	display: table;
 }
 
 .activity-list .activity-item .activity-content p {

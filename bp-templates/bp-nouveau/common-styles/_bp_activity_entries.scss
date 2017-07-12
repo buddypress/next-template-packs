@@ -162,13 +162,8 @@
 			blockquote {
 				background: $off-white;
 				margin: $marg-med 0 $marg-sml;
+				overflow: hidden;
 				padding: $pad-med;
-
-				&:after {
-					clear: both;
-					content: "";
-					display: table;
-				}
 			}
 
 			p {
