@@ -325,7 +325,7 @@
 
 @mixin tabbed-links() {
 
-	.button-tabs {
+	ul {
 		border-bottom: 1px solid $bp-border-dark;
 		float: none;
 		margin: $marg-lrg 0 $marg-sml;
@@ -369,7 +369,7 @@
 	}
 
 	// we don't want top margin if tabs are on the top subnav position
-	.tabbed-links > .button-tabs {
+	.bp-subnavs.tabbed-links > ul {
 		margin-top: 0;
 	}
 }

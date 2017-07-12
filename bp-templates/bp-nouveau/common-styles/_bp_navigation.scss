@@ -510,44 +510,43 @@
 				li#compose-personal-li {
 					margin-top: 6px;
 				}
-			}
 
-			// For tabbed nav we remove any default button nav styles.
-			ul.button-tabs {
+				// For tabbed nav we remove any default button nav styles.
+				ul {
 
-				li {
+					li {
 
-					a {
-						border-right: 0;
-						font-size: inherit;
+						a {
+							border-right: 0;
+							font-size: inherit;
+						}
+					}
+
+					li.last {
+						float: right;
+						margin: 0;
+
+						a {
+							margin-top: -0.5em;
+						}
+					}
+
+					li,
+					li.current {
+
+						a,
+						a:focus,
+						a:hover {
+							background: none;
+							border: 0;
+						}
+
+						a:active {
+							outline: none;
+						}
 					}
 				}
-
-				li.last {
-					float: right;
-					margin: 0;
-
-					a {
-						margin-top: -0.5em;
-					}
-				}
-
-				li,
-				li.current {
-
-					a,
-					a:focus,
-					a:hover {
-						background: none;
-						border: 0;
-					}
-
-					a:active {
-						outline: none;
-					}
-				}
-			}
-
+			} // close .bp-navs.tabbed-links
 		} // @media
 	}
 }
