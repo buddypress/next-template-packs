@@ -1506,6 +1506,9 @@ function bp_nouveau_single_item_subnav_classes() {
 		if ( bp_is_group() ) {
 			$classes[] = 'group-subnav';
 		}
+		if ( bp_is_group() && 'send-invites' === bp_current_action() ) {
+			$classes[] = 'bp-invites-nav';
+		}
 
 		$customizer_option = ( bp_is_user() )? 'user_subnav_tabs' : 'group_subnav_tabs';
 		$nav_tabs = bp_nouveau_get_temporary_setting( $customizer_option, bp_nouveau_get_appearance_settings( $customizer_option ) );
