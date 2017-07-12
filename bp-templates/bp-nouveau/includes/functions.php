@@ -825,6 +825,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_nav_order'         => array(),
 			'group_nav_tabs'          => 0,
 			'group_subnav_tabs'       => 0,
+			'groups_create_tabs'      => 1,
 			'groups_layout'           => 1,
 			'members_group_layout'    => 1,
 			'groups_dir_layout'       => 0,
