@@ -14,7 +14,7 @@
 
 		<div class="bp-feedback custom-homepage-info info">
 			<strong><?php esc_html_e( 'Manage the members default front page', 'buddypress' ); ?></strong>
-			<button type="button" class="bp-tooltips" data-bp-tooltips="<?php esc_attr_e( 'Close', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'buddypress' ); ?>" data-bp-close="remove"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span></button><br/>
+			<button type="button" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Close', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'buddypress' ); ?>" data-bp-close="remove"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span></button><br/>
 			<?php printf(
 				esc_html__( 'You can set the preferences of the %s or add %s to it.', 'buddypress' ),
 				bp_nouveau_members_get_customizer_option_link(),

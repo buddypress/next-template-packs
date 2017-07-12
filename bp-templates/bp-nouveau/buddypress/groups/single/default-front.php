@@ -22,7 +22,7 @@
 			); ?>
 			</p>
 
-			<button type="button" class="bp-tooltips" data-bp-tooltips="<?php esc_attr_e( 'Close', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'buddypress' ); ?>" data-bp-close="remove">
+			<button type="button" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Close', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'buddypress' ); ?>" data-bp-close="remove">
 				<span class="dashicons dashicons-dismiss" aria-hidden="true"></span>
 			</button>
 		</div>

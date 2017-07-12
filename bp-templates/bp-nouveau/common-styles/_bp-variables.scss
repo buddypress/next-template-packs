@@ -81,8 +81,8 @@ $shadow-color-to:          #f8f8f8 !default;
 
 // BP Tooltips
 
-$tooltip-background: 		$white !default;
-$tooltip-border:			$light-text-plus !default;
+$tooltip-background:        $white !default;
+$tooltip-border:            $light-text-plus !default;
 $tooltip-border-radius:     1px !default;
 $tooltip-box-shadow:        4px 4px 8px rgba(0, 0, 0, 0.2) !default; // 1px 1px 0 1px rgba(132, 132, 132, 0.3) !default;
 $tooltip-font-family:       "Helvetica Neue", helvetica, arial, san-serif;
@@ -91,7 +91,7 @@ $tooltip-font-weight:       400 !default;
 $tooltip-max-width:         200px !default;
 $tooltip-padding-hor:       8px !default;
 $tooltip-padding-vert:      5px !default;
-$tooltip-text-color: 		$black !default;
-$tooltip-tip-area:			7px !default; // bp-tooltip arrow's height, width, & margin
-$tooltip-tip-background:	$white !default;
-$tooltip-z-index: 			100000 !default;
+$tooltip-text-color:        $black !default;
+$tooltip-tip-area:          7px !default; // bp-tooltip arrow's height, width, & margin
+$tooltip-tip-background:    $white !default;
+$tooltip-z-index:           100000 !default;
