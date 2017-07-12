@@ -8,7 +8,7 @@
  */
 ?>
 
-<nav class="bp-navs bp-subnavs group-subnav no-ajax" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group administration menu', 'buddypress' ); ?>">
+<nav class="<?php bp_nouveau_single_item_subnav_classes(); ?>" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group administration menu', 'buddypress' ); ?>">
 
 	<?php if ( bp_nouveau_has_nav( array( 'object' => 'group_manage' ) ) ) : ?>
 
