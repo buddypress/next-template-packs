@@ -152,7 +152,7 @@
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
+									<li><a href="{{data.recipients[i].user_link}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -168,18 +168,18 @@
 					<# if ( undefined !== data.star_link ) { #>
 
 						<# if ( false !== data.is_starred ) { #>
-							<a role="button" class="message-action-unstar bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="unstar" aria-pressed="true" data-bp-tooltip="<?php esc_attr_e( 'Unstar Conversation', 'buddypress' );?>">
+							<a role="button" class="message-action-unstar bp-icons" href="{{data.star_link}}" data-bp-action="unstar" aria-pressed="true">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Unstar Conversation', 'buddypress' );?></span>
 							</a>
 						<# } else { #>
-							<a role="button" class="message-action-star bp-tooltip bp-icons" href="{{data.star_link}}" data-bp-action="star" aria-pressed="false" data-bp-tooltip="<?php esc_attr_e( 'Star Conversation', 'buddypress' );?>">
+							<a role="button" class="message-action-star bp-icons" href="{{data.star_link}}" data-bp-action="star" aria-pressed="false">
 								<span class="bp-screen-reader-text"><?php esc_html_e( 'Star Conversation', 'buddypress' );?></span>
 							</a>
 						<# } #>
 
 					<# } #>
 
-					<a href="#view/{{data.id}}" class="message-action-view bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'View Full Conversation.', 'buddypress' );?>">
+					<a href="#view/{{data.id}}" class="message-action-view bp-icons">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'buddypress' );?></span>
 					</a>
 				</div>
@@ -201,7 +201,7 @@
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
+							<li><a href="{{data.recipients[i].user_link}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
 						<# } #>
 					</ul>
 				</dd>

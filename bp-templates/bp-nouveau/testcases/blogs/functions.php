@@ -13,8 +13,8 @@ class BP_Nouveau_Blogs_Functions extends Next_Template_Packs_TestCase {
 		$this->set_current_user( $this->user_id );
 
 		$this->hooked_nav = array(
-			'all_one' => sprintf( '<li id="blogs-%1$s"><a href="%2$s" title="%3$s">%4$s</a></li>', 'foo', 'http://example.org/blogs/foo', 'Foo', 'Foo' ),
-			'all_two' => sprintf( '<li id="blogs-%1$s"><a href="%2$s" title="%3$s">%4$s <span>%5$s</span></a></li>', 'bar', 'http://example.org/blogs/bar', 'Bar', 'Bar', 5 ),
+			'all_one' => sprintf( '<li id="blogs-%1$s"><a href="%2$s">%3$s</a></li>', 'foo', 'http://example.org/blogs/foo', 'Foo' ),
+			'all_two' => sprintf( '<li id="blogs-%1$s"><a href="%2$s">%3$s <span>%4$s</span></a></li>', 'bar', 'http://example.org/blogs/bar', 'Bar', 5 ),
 		);
 	}
 

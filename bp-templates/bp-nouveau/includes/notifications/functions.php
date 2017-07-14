@@ -174,20 +174,18 @@ function bp_nouveau_notifications_sort( $filters = array() ) {
  * @since 1.0.0
  *
  * @param  string $link        The action link.
- * @param  string $bp_tooltip  The data-bp-attribute of the link.
  * @param  string $aria_label  The aria-label attribute of the link.
  * @param  string $dashicon    The dashicon class.
  * @return string              Link Output.
  */
-function bp_nouveau_notifications_dashiconified_link( $link = '', $bp_tooltip = '', $dashicon = '' ) {
+function bp_nouveau_notifications_dashiconified_link( $link = '', $dashicon = '' ) {
 	preg_match( '/<a\s[^>]*>(.*)<\/a>/siU', $link, $match );
 
 	if ( ! empty( $match[0] ) && ! empty( $match[1] ) && ! empty( $dashicon ) && ! empty( $bp_tooltip ) ) {
 		$link = str_replace(
 			'>' . $match[1] . '<',
 			sprintf(
-				' class="bp-tooltip" data-bp-tooltip="%1$s"><span class="dashicons %2$s" aria-hidden="true"></span><span class="bp-screen-reader-text">%3$s</span><',
-				esc_attr( $bp_tooltip ),
+				'><span class="dashicons %1$s" aria-hidden="true"></span><span class="bp-screen-reader-text">%2$s</span><',
 				sanitize_html_class( $dashicon ),
 				$match[1]
 			),
@@ -207,7 +205,7 @@ function bp_nouveau_notifications_dashiconified_link( $link = '', $bp_tooltip = 
  * @return string       Link Output.
  */
 function bp_nouveau_notifications_mark_unread_link( $link = '' ) {
-	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Mark Unread', 'buddypress' ), 'dashicons-hidden' );
+	return bp_nouveau_notifications_dashiconified_link( $link, 'dashicons-hidden' );
 }
 
 /**
@@ -219,7 +217,7 @@ function bp_nouveau_notifications_mark_unread_link( $link = '' ) {
  * @return string       Link Output.
  */
 function bp_nouveau_notifications_mark_read_link( $link = '' ) {
-	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Mark Read', 'buddypress' ), 'dashicons-visibility' );
+	return bp_nouveau_notifications_dashiconified_link( $link, 'dashicons-visibility' );
 }
 
 /**
@@ -231,5 +229,5 @@ function bp_nouveau_notifications_mark_read_link( $link = '' ) {
  * @return string       Link Output.
  */
 function bp_nouveau_notifications_delete_link( $link = '' ) {
-	return bp_nouveau_notifications_dashiconified_link( $link, __( 'Delete', 'buddypress' ), 'dashicons-dismiss' );
+	return bp_nouveau_notifications_dashiconified_link( $link, 'dashicons-dismiss' );
 }

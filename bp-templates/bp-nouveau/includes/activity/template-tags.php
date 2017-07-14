@@ -504,6 +504,21 @@ function bp_nouveau_activity_entry_buttons( $args = array() ) {
 			);
 		}
 
+		// <a> elements should never have `title` attributes; see r11606.
+		foreach ( $buttons as &$button ) {
+			if ( 'a' !== $button['button_element'] ) {
+				continue;
+			}
+
+			if ( isset( $button['button_attr']['class'] ) ) {
+				$button['button_attr']['class'] = str_replace( 'bp-tooltip', '', $button['button_attr']['class'] );
+			}
+
+			if ( isset( $button['button_attr']['data-bp-tooltip'] ) ) {
+				unset( $button['button_attr']['data-bp-tooltip'] );
+			}
+		}
+
 		/**
 		 * Filter to add your buttons, use the position argument to choose where to insert it.
 		 *
