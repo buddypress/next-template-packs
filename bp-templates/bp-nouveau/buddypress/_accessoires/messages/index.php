@@ -123,7 +123,7 @@
 	</div>
 	<div class="thread-from">
 		<a class="user-link" href="{{data.sender_link}}">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" />
+			<img class="avatar" src="{{data.sender_avatar}}" alt="" />
 			<span class="user-name">{{data.sender_name}}</span>
 		</a>
 	</div>
@@ -152,7 +152,7 @@
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
+									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -201,7 +201,7 @@
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}"  alt="{{data.recipients[i].user_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" /></a></li>
+							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="" /></a></li>
 						<# } #>
 					</ul>
 				</dd>
@@ -224,7 +224,7 @@
 		<?php bp_nouveau_messages_hook( 'before', 'meta' ); ?>
 
 		<a href="{{data.sender_link}}" class="user-link">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="{{data.sender_name}}<?php esc_attr_e( ' profile picture', 'buddypress' ); ?>" />
+			<img class="avatar" src="{{data.sender_avatar}}" alt="" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
 
