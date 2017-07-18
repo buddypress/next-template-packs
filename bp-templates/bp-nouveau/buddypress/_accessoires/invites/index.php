@@ -106,13 +106,13 @@
 
 <script type="text/html" id="tmpl-bp-invites-paginate">
 	<# if ( 1 !== data.page ) { #>
-		<a href="#" id="bp-invites-prev-page" title="<?php esc_attr_e( 'Prev', 'buddypress' );?>" class="button invite-button">
+		<a href="#" id="bp-invites-prev-page" class="button invite-button">
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'buddypress' );?></span>
 		</a>
 	<# } #>
 
 	<# if ( data.total_page !== data.page ) { #>
-		<a href="#" id="bp-invites-next-page" title="<?php esc_attr_e( 'Next', 'buddypress' );?>" class="button invite-button">
+		<a href="#" id="bp-invites-next-page" class="button invite-button">
 			<span class="bp-screen-reader-text"><?php esc_html_e( 'Next', 'buddypress' );?></span>
 		</a>
 	<# } #>
