@@ -67,9 +67,10 @@
 		&.members-list {
 
 			.list-wrap {
-				min-height: 300px;
+				min-height: 340px;
 
 				.item-block {
+					margin: 0 auto;
 					min-height: 7rem;
 				}
 			}
@@ -108,6 +109,7 @@
 				min-height: 350px;
 
 				.item-block {
+					margin: 0 auto;
 					min-height: 7rem;
 				}
 			}
@@ -346,8 +348,41 @@
 			}
 		}
 	}
-
 } // close .buddypress-wrap
+
+// If we're logged out remove additional padding designed to help
+// provide spaces for action button elements & reduce min-heights.
+
+.buddypress:not(.logged-in) {
+
+	.grid.bp-list {
+
+		.list-wrap {
+			padding-bottom: $marg-xsml;
+		}
+	}
+
+	.grid.groups-list {
+
+		.list-wrap {
+			min-height: 430px;
+		}
+	}
+
+	.grid.members-list, {
+
+		.list-wrap {
+			min-height: 300px;
+		}
+	}
+
+	.grid.blogs-list, {
+
+		.list-wrap {
+			min-height: 320px;
+		}
+	}
+}
 
 // ==== Vertical Navigation Classes ====
 
@@ -529,8 +564,8 @@
 	// Style main navs as visual tabs effect
 	// if user selects options in the Customizer
 	// and classes are set.
-	// N.B This is in addition to the  standalone visual tab style classes
-	// provided so any elements may be styled.
+	// N.B This is in addition to the  standalone visual tab style classes/mixin
+	// provided so any elements may be styled to represent tabs.
 
 	.buddypress-wrap {
 

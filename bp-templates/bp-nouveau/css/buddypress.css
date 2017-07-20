@@ -486,7 +486,7 @@ dt.section-title {
 
 .buddypress_object_nav .bp-navs li.dynamic a:hover span,
 .buddypress-wrap .bp-navs li.dynamic a:hover span {
-	background-color: highlight;
+	background-color: #5087e5;
 	border: 0;
 	color: #fff;
 }
@@ -4460,9 +4460,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 @media screen and (min-width: 24em) {
 	.grid.members-list .list-wrap {
-		min-height: 300px;
+		min-height: 340px;
 	}
 	.grid.members-list .list-wrap .item-block {
+		margin: 0 auto;
 		min-height: 7rem;
 	}
 	.grid.groups-list .list-wrap {
@@ -4490,6 +4491,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		min-height: 350px;
 	}
 	.grid.blogs-list .list-wrap .item-block {
+		margin: 0 auto;
 		min-height: 7rem;
 	}
 }
@@ -4668,6 +4670,22 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 .buddypress-wrap .grid.three > li .group-desc,
 .buddypress-wrap .grid.four > li .group-desc {
 	min-height: 8em;
+}
+
+.buddypress:not(.logged-in) .grid.bp-list .list-wrap {
+	padding-bottom: 5px;
+}
+
+.buddypress:not(.logged-in) .grid.groups-list .list-wrap {
+	min-height: 430px;
+}
+
+.buddypress:not(.logged-in) .grid.members-list .list-wrap {
+	min-height: 300px;
+}
+
+.buddypress:not(.logged-in) .grid.blogs-list .list-wrap {
+	min-height: 320px;
 }
 
 @media screen and (min-width: 46.8em) {
