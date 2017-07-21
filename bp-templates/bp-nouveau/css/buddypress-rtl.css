@@ -4426,7 +4426,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .grid > li {
 	border-bottom: 0;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	padding-top: 0;
 }
 
@@ -4501,6 +4501,9 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.grid > li.item-entry {
 		float: right;
 		margin: 0;
+	}
+	.grid.two > li {
+		padding-bottom: 20px;
 	}
 	.grid.two > li, .grid.three > li {
 		width: 50%;

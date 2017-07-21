@@ -26,7 +26,7 @@
 
 	> li {
 		border-bottom: 0;
-		padding-bottom: 20px;
+		padding-bottom: 10px;
 		padding-top: 0;
 
 		.list-wrap {
@@ -128,6 +128,13 @@
 		> li.item-entry {
 			float: left;
 			margin: 0;
+		}
+
+		&.two {
+
+			> li {
+				padding-bottom: 20px;
+			}
 		}
 
 		&.two,
