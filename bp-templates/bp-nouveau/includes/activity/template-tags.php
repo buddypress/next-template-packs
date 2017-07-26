@@ -87,7 +87,7 @@ function bp_nouveau_before_activity_post_form() {
  */
 function bp_nouveau_after_activity_post_form() {
 	if ( bp_nouveau_current_user_can( 'publish_activity' ) ) {
-		bp_get_template_part( '_accessoires/activity/form' );
+		bp_get_template_part( 'common/js-templates/activity/form' );
 	}
 
 	/**

@@ -177,7 +177,7 @@ function bp_nouveau_group_invites_interface() {
 	 */
 	do_action( 'bp_before_group_send_invites_content' );
 
-	bp_get_template_part( '_accessoires/invites/index' );
+	bp_get_template_part( 'common/js-templates/invites/index' );
 
 	/**
 	 * Fires after the send invites content.

@@ -51,7 +51,7 @@ function bp_nouveau_messages_member_interface() {
 	do_action( 'bp_before_member_messages_content' );
 
 	// Load the Private messages UI
-	bp_get_template_part( '_accessoires/messages/index' );
+	bp_get_template_part( 'common/js-templates/messages/index' );
 
 	/**
 	 * Fires after the member messages content.

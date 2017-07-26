@@ -12,143 +12,143 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: buddypress/_accessoires/activity/form.php:41
+#: buddypress/common/js-templates/activity/form.php:41
 msgid "Remove item"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:36
+#: buddypress/common/js-templates/invites/index.php:36
 msgid "The invite has not been sent yet."
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:38
+#: buddypress/common/js-templates/invites/index.php:38
 msgid "The invite has been sent."
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:44
+#: buddypress/common/js-templates/invites/index.php:44
 msgid "Invited by:"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:56
+#: buddypress/common/js-templates/invites/index.php:56
 msgid "Invite / Uninvite"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:57
+#: buddypress/common/js-templates/invites/index.php:57
 msgid "Invite/Uninvite"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:62
-#: buddypress/_accessoires/invites/index.php:63
+#: buddypress/common/js-templates/invites/index.php:62
+#: buddypress/common/js-templates/invites/index.php:63
 msgid "Remove"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:77
+#: buddypress/common/js-templates/invites/index.php:77
 msgid "Optional: add a message to your invite."
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:80
+#: buddypress/common/js-templates/invites/index.php:80
 #: buddypress/activity/comment-form.php:20
 msgid "Cancel"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:81
-#: buddypress/_accessoires/messages/index.php:32
+#: buddypress/common/js-templates/invites/index.php:81
+#: buddypress/common/js-templates/messages/index.php:32
 msgid "Send"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:93
-#: buddypress/_accessoires/messages/index.php:82
+#: buddypress/common/js-templates/invites/index.php:93
+#: buddypress/common/js-templates/messages/index.php:82
 #: includes/messages/functions.php:137
 msgid "Search"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:101
-#: buddypress/_accessoires/invites/index.php:102
-#: buddypress/_accessoires/messages/index.php:61
-#: buddypress/_accessoires/messages/index.php:62
+#: buddypress/common/js-templates/invites/index.php:101
+#: buddypress/common/js-templates/invites/index.php:102
+#: buddypress/common/js-templates/messages/index.php:61
+#: buddypress/common/js-templates/messages/index.php:62
 msgid "Prev"
 msgstr ""
 
-#: buddypress/_accessoires/invites/index.php:107
-#: buddypress/_accessoires/invites/index.php:108
-#: buddypress/_accessoires/messages/index.php:67
-#: buddypress/_accessoires/messages/index.php:68
+#: buddypress/common/js-templates/invites/index.php:107
+#: buddypress/common/js-templates/invites/index.php:108
+#: buddypress/common/js-templates/messages/index.php:67
+#: buddypress/common/js-templates/messages/index.php:68
 msgid "Next"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:20
+#: buddypress/common/js-templates/messages/index.php:20
 msgid "Send @Username"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:23
+#: buddypress/common/js-templates/messages/index.php:23
 #: includes/messages/classes.php:184
 msgid "Subject"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:31
+#: buddypress/common/js-templates/messages/index.php:31
 msgid "Reset"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:99
+#: buddypress/common/js-templates/messages/index.php:99
 msgid "Apply"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:109
+#: buddypress/common/js-templates/messages/index.php:109
 msgid "Select this message"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:133
+#: buddypress/common/js-templates/messages/index.php:133
 msgid "Active conversation:"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:137
-#: buddypress/_accessoires/messages/index.php:181
+#: buddypress/common/js-templates/messages/index.php:137
+#: buddypress/common/js-templates/messages/index.php:181
 msgid "Participants:"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:146
-#: buddypress/_accessoires/messages/index.php:147
-#: buddypress/_accessoires/messages/index.php:190
-#: buddypress/_accessoires/messages/index.php:191
+#: buddypress/common/js-templates/messages/index.php:146
+#: buddypress/common/js-templates/messages/index.php:147
+#: buddypress/common/js-templates/messages/index.php:190
+#: buddypress/common/js-templates/messages/index.php:191
 msgid "Delete conversation."
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:153
-#: buddypress/_accessoires/messages/index.php:154
+#: buddypress/common/js-templates/messages/index.php:153
+#: buddypress/common/js-templates/messages/index.php:154
 msgid "Unstar Conversation"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:157
-#: buddypress/_accessoires/messages/index.php:158
+#: buddypress/common/js-templates/messages/index.php:157
+#: buddypress/common/js-templates/messages/index.php:158
 msgid "Star Conversation"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:164
+#: buddypress/common/js-templates/messages/index.php:164
 msgid "View Full Conversation."
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:165
+#: buddypress/common/js-templates/messages/index.php:165
 msgid "View Full conversation."
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:216
-#: buddypress/_accessoires/messages/index.php:217
+#: buddypress/common/js-templates/messages/index.php:216
+#: buddypress/common/js-templates/messages/index.php:217
 msgid "Unstar Message"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:220
-#: buddypress/_accessoires/messages/index.php:221
+#: buddypress/common/js-templates/messages/index.php:220
+#: buddypress/common/js-templates/messages/index.php:221
 msgid "Star Message"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:262
+#: buddypress/common/js-templates/messages/index.php:262
 msgid "Send a Reply"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:273
+#: buddypress/common/js-templates/messages/index.php:273
 msgid "Reply to Message"
 msgstr ""
 
-#: buddypress/_accessoires/messages/index.php:279
+#: buddypress/common/js-templates/messages/index.php:279
 msgid "Send Reply"
 msgstr ""
 
