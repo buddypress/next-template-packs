@@ -33,7 +33,7 @@ class BP_Nouveau_Messages {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
@@ -42,7 +42,7 @@ class BP_Nouveau_Messages {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->dir . 'classes.php';
 		require $this->dir . 'functions.php';
 		require $this->dir . 'template-tags.php';
@@ -66,7 +66,7 @@ class BP_Nouveau_Messages {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		// Notices
 		add_action( 'widgets_init', 'bp_nouveau_unregister_notices_widget' );
 		add_action( 'bp_init',      'bp_nouveau_push_sitewide_notices', 99 );
@@ -89,7 +89,7 @@ class BP_Nouveau_Messages {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 		// Enqueue specific styles
 		add_filter( 'bp_nouveau_enqueue_styles', 'bp_nouveau_messages_enqueue_styles', 10, 1 );
 

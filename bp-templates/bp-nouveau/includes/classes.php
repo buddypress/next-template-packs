@@ -22,7 +22,7 @@ class BP_Buttons_Group {
 	 *
 	 * @var array
 	 */
-	private $group = array();
+	protected $group = array();
 
 	/**
 	 * Constructor

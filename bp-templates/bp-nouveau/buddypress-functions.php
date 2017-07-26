@@ -96,7 +96,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->includes_dir . 'functions.php';
 		require $this->includes_dir . 'classes.php';
 		require $this->includes_dir . 'template-tags.php';
@@ -138,7 +138,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_support() {
+	protected function setup_support() {
 		$width         = 1300;
 		$top_offset    = 150;
 		$avatar_height = apply_filters( 'bp_core_avatar_full_height', $top_offset );

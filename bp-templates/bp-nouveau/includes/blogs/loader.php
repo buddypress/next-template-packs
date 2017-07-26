@@ -33,7 +33,7 @@ class BP_Nouveau_Blogs {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
@@ -42,7 +42,7 @@ class BP_Nouveau_Blogs {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->dir . 'functions.php';
 		require $this->dir . 'template-tags.php';
 
@@ -65,7 +65,7 @@ class BP_Nouveau_Blogs {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			// Avoid Notices for BuddyPress Legacy Backcompat
 			remove_action( 'bp_blogs_directory_blog_types', 'bp_blog_backcompat_create_nav_item', 1000 );
@@ -83,7 +83,7 @@ class BP_Nouveau_Blogs {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 		if ( is_multisite() ) {
 			// Add settings into the Blogs sections of the customizer.
 			add_filter( 'bp_nouveau_customizer_settings', 'bp_nouveau_blogs_customizer_settings', 11, 1 );

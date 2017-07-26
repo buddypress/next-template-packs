@@ -226,7 +226,7 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_nav() {
+	protected function setup_nav() {
 		$nav_items = array(
 			'root' => array(
 				'name'                => __( 'Memberships', 'buddypress' ),

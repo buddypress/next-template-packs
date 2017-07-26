@@ -33,7 +33,7 @@ class BP_Nouveau_xProfile {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = dirname( __FILE__ );
 	}
 
@@ -42,7 +42,7 @@ class BP_Nouveau_xProfile {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require( trailingslashit( $this->dir ) . 'functions.php'     );
 		require( trailingslashit( $this->dir ) . 'template-tags.php' );
 	}
@@ -52,7 +52,7 @@ class BP_Nouveau_xProfile {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		// Enqueue the scripts
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_xprofile_enqueue_scripts' );
 	}
@@ -62,7 +62,7 @@ class BP_Nouveau_xProfile {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 		// Register xprofile scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_xprofile_register_scripts', 10, 1 );
 	}

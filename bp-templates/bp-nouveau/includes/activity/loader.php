@@ -33,7 +33,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
@@ -42,7 +42,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->dir . 'functions.php';
 		require $this->dir . 'template-tags.php';
 		require $this->dir . 'widgets.php';
@@ -70,7 +70,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_activity_enqueue_scripts' );
 		add_action( 'bp_widgets_init', array( 'BP_Latest_Activities', 'register_widget' ) );
 		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_activity_notification_filters' );
@@ -93,7 +93,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 
 		// Register activity scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_activity_register_scripts', 10, 1 );

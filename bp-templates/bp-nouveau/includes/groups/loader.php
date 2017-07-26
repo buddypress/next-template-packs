@@ -33,7 +33,7 @@ class BP_Nouveau_Groups {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir                   = trailingslashit( dirname( __FILE__ ) );
 		$this->is_group_home_sidebar = false;
 	}
@@ -43,7 +43,7 @@ class BP_Nouveau_Groups {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->dir . 'functions.php';
 		require $this->dir . 'classes.php';
 		require $this->dir . 'template-tags.php';
@@ -67,7 +67,7 @@ class BP_Nouveau_Groups {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			add_action( 'groups_setup_nav', 'bp_nouveau_group_setup_nav' );
 		}
@@ -95,7 +95,7 @@ class BP_Nouveau_Groups {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_groups_register_scripts', 10, 1 );
 		add_filter( 'bp_core_get_js_strings', 'bp_nouveau_groups_localize_scripts', 10, 1 );
 		add_filter( 'groups_create_group_steps', 'bp_nouveau_group_invites_create_steps', 10, 1 );
