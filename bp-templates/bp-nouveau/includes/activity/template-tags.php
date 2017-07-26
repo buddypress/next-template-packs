@@ -16,7 +16,6 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 function bp_nouveau_before_activity_directory_content() {
-
 	/**
 	 * Fires at the begining of the templates BP injected content.
 	 *
@@ -38,7 +37,6 @@ function bp_nouveau_before_activity_directory_content() {
  * @since 1.0.0
  */
 function bp_nouveau_after_activity_directory_content() {
-
 	/**
 	 * Fires after the display of the activity list.
 	 *
@@ -135,8 +133,8 @@ function bp_nouveau_activity_member_post_form() {
  *
  * @since 1.0.0
  *
- * @param string $when    'before' or 'after'
- * @param string $suffix  Use it to add terms at the end of the hook name
+ * @param string $when   Optional. Either 'before' or 'after'.
+ * @param string $suffix Optional. Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_activity_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
@@ -584,8 +582,6 @@ function bp_nouveau_activity_comments() {
  *
  * @since 1.0.0
  *
- * @global object $activities_template {@link BP_Activity_Template}
- *
  * @param object $comment The activity object currently being recursed.
  */
 function bp_nouveau_activity_recurse_comments( $comment ) {
@@ -743,7 +739,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 			return $buttons;
 		}
 
-		/**
+		/*
 		 * If the 'container' is set to 'ul'
 		 * set a var $parent_element to li
 		 * otherwise simply pass any value found in args
@@ -759,7 +755,7 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 
 		$parent_attr = ( ! empty( $args['parent_attr'] ) ) ? $args['parent_attr']  : '';
 
-		/**
+		/*
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
 		 * otherwise default to 'a' (anchor).
@@ -801,14 +797,14 @@ function bp_nouveau_activity_comment_buttons( $args = array() ) {
 			),
 		);
 
-			// If button element set add nonce link to data-attr attr
-			if ( 'button' === $button_element ) {
-				$buttons['activity_comment_reply']['button_attr']['data-bp-act-reply-nonce'] = sprintf( '#acomment-%s', $activity_comment_id );
-				$buttons['activity_comment_delete']['button_attr']['data-bp-act-reply-delete-nonce'] = bp_get_activity_comment_delete_link();
-			} else {
-				$buttons['activity_comment_reply']['button_attr']['href'] = sprintf( '#acomment-%s', $activity_comment_id );
-				$buttons['activity_comment_delete']['button_attr']['href'] = bp_get_activity_comment_delete_link();
-			}
+		// If button element set add nonce link to data-attr attr
+		if ( 'button' === $button_element ) {
+			$buttons['activity_comment_reply']['button_attr']['data-bp-act-reply-nonce'] = sprintf( '#acomment-%s', $activity_comment_id );
+			$buttons['activity_comment_delete']['button_attr']['data-bp-act-reply-delete-nonce'] = bp_get_activity_comment_delete_link();
+		} else {
+			$buttons['activity_comment_reply']['button_attr']['href'] = sprintf( '#acomment-%s', $activity_comment_id );
+			$buttons['activity_comment_delete']['button_attr']['href'] = bp_get_activity_comment_delete_link();
+		}
 
 		// Add the Spam Button if supported
 		if ( bp_is_akismet_active() && isset( buddypress()->activity->akismet ) && bp_activity_user_can_mark_spam() ) {

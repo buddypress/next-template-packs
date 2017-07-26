@@ -10,6 +10,9 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_get_blogs_directory_nav_items() {
 	$nav_items = array();
 
@@ -24,7 +27,6 @@ function bp_nouveau_get_blogs_directory_nav_items() {
 	);
 
 	if ( is_user_logged_in() ) {
-
 		$my_blogs_count = bp_get_total_blog_count_for_user( bp_loggedin_user_id() );
 
 		// If the user has blogs create a nav item
@@ -77,6 +79,7 @@ function bp_nouveau_get_blogs_directory_nav_items() {
  * @since 1.0.0
  *
  * @param string $context 'directory' or 'user'
+ *
  * @return array the filters
  */
 function bp_nouveau_get_blogs_filters( $context = '' ) {
@@ -118,14 +121,12 @@ function bp_nouveau_get_blogs_filters( $context = '' ) {
  *
  * @since 1.0.0
  *
- * @param  array $buttons The arguments of the button that BuddyPress is about to create.
+ * @param array $buttons The arguments of the button that BuddyPress is about to create.
+ *
  * @return array An empty array to stop the button creation process.
  */
 function bp_nouveau_blogs_catch_button_args( $button = array() ) {
-	/**
-	 * Globalize the arguments so that we can use it
-	 * in bp_nouveau_get_blogs_buttons().
-	 */
+	// Globalize the arguments so that we can use it  in bp_nouveau_get_blogs_buttons().
 	bp_nouveau()->blogs->button_args = $button;
 
 	// return an empty array to stop the button creation process
@@ -137,8 +138,9 @@ function bp_nouveau_blogs_catch_button_args( $button = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array $settings the settings to add.
- * @return array           the settings to add.
+ * @param array $settings the settings to add.
+ *
+ * @return array the settings to add.
  */
 function bp_nouveau_blogs_customizer_settings( $settings = array() ) {
 	return array_merge( $settings, array(
@@ -157,8 +159,9 @@ function bp_nouveau_blogs_customizer_settings( $settings = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array $controls the controls to add.
- * @return array           the controls to add.
+ * @param array $controls the controls to add.
+ *
+ * @return array the controls to add.
  */
 function bp_nouveau_blogs_customizer_controls( $controls = array() ) {
 	return array_merge( $controls, array(
@@ -204,12 +207,12 @@ function bp_nouveau_get_blog_signup_inline_script() {
 	';
 }
 
-	/**
-	 * Filter bp_get_blog_class().
-	 * Adds a class if blog item has a latest post.
-	 *
-	 * @since 1.2.0
-	 */
+/**
+ * Filter bp_get_blog_class().
+ * Adds a class if blog item has a latest post.
+ *
+ * @since 1.2.0
+ */
 function bp_nouveau_blog_loop_item_has_lastest_post( $classes) {
 	if ( bp_get_blog_latest_post_title() ) {
 		$classes[] = 'has-latest-post';

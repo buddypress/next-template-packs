@@ -17,10 +17,12 @@ defined( 'ABSPATH' ) || exit;
  * NB: this is a first pass to improve by using Javascript templating as explained here:
  * https://developer.wordpress.org/themes/advanced-topics/customizer-api/#putting-the-pieces-together
  *
- *
  * @since 1.0.0
  */
 class BP_Nouveau_Nav_Customize_Control extends WP_Customize_Control {
+	/**
+	 * @var string
+	 */
 	public $type = '';
 
 	/**
@@ -64,7 +66,6 @@ class BP_Nouveau_Nav_Customize_Control extends WP_Customize_Control {
 		<?php endif ; ?>
 
 		<?php if ( ! empty( $item_nav ) ) : ?>
-
 			<ul id="<?php echo esc_attr( $id ); ?>" class="ui-sortable" style="margin-top: 0px; height: 500px;" data-bp-type="<?php echo esc_attr( $this->type ) ; ?>">
 
 				<?php
@@ -84,7 +85,6 @@ class BP_Nouveau_Nav_Customize_Control extends WP_Customize_Control {
 				<?php endforeach ; ?>
 
 			</ul>
-
 		<?php endif; ?>
 
 			<input id="<?php echo esc_attr( 'bp_item_' . $this->type ) ; ?>" type="hidden" value="" data-customize-setting-link="<?php echo esc_attr( $setting );?>" />

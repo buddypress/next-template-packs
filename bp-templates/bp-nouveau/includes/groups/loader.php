@@ -157,7 +157,7 @@ class BP_Nouveau_Groups {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $sidebar_index The Sidebar identifier.
+	 * @param string $sidebar_index The Sidebar identifier.
 	 */
 	public function group_home_sidebar_unset( $sidebar_index = '' ) {
 		if ( 'sidebar-buddypress-groups' !== $sidebar_index ) {

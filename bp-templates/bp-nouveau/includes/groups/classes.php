@@ -20,7 +20,6 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	 * Array of group member ids, cached to prevent redundant lookups
 	 *
 	 * @var null|array Null if not yet defined, otherwise an array of ints
-	 * @package BP Nouveau
 	 * @since 1.0
 	 */
 	protected $group_member_ids;
@@ -37,8 +36,7 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	}
 
 	/**
-	 * Exclude group members from the user query
-	 * as it's not needed to invite members to join the group
+	 * Exclude group members from the user query as it's not needed to invite members to join the group.
 	 *
 	 * @package BP Nouveau
 	 * @since 1.0
@@ -67,7 +65,6 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	/**
 	 * Get the members of the queried group
 	 *
-	 * @package BP Nouveau
 	 * @since 1.0
 	 *
 	 * @return array $ids User IDs of relevant group member ids
@@ -111,6 +108,9 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 		return $this->group_member_ids;
 	}
 
+	/**
+	 * @since 1.0.0
+	 */
 	public function build_meta_query( BP_User_Query $bp_user_query ) {
 		if ( isset( $this->query_vars['scope'] ) && 'members' === $this->query_vars['scope'] && isset( $this->query_vars['meta_query'] ) ) {
 
@@ -126,6 +126,9 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 		}
 	}
 
+	/**
+	 * @since 1.0.0
+	 */
 	public static function get_inviter_ids( $user_id = 0, $group_id = 0 ) {
 		global $wpdb;
 
@@ -140,17 +143,16 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 }
 
 /**
- * A specific Group Nav class to make it possible to
- * set new positions for the buddypress()->groups->nav.
+ * A specific Group Nav class to make it possible to set new positions for
+ * buddypress()->groups->nav.
  *
  * @since 1.0.0
  */
 class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
-
 	/**
 	 * Constructor
 	 *
-	 * @param int $object_id The random group ID used to generate the nav.
+	 * @param int $object_id Optional. The random group ID used to generate the nav.
 	 */
 	public function __construct( $object_id = 0 ) {
 		$error = new WP_Error( 'missing_parameter' );
@@ -160,7 +162,6 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 		}
 
 		$group = groups_get_group( array( 'group_id' => $object_id ) );
-
 		if ( empty( $group->id ) ) {
 			return $error;
 		}
@@ -168,19 +169,18 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 		$this->group = $group;
 
 		parent::__construct( $group->id );
-
 		$this->setup_nav();
 	}
 
 	/**
 	 * Checks whether a property is set.
 	 *
-	 * Overrides BP_Core_Nav::__isset() to avoid
-	 * looking into its nav property.
+	 * Overrides BP_Core_Nav::__isset() to avoid looking into its nav property.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $key The property.
+	 *
 	 * @return bool True if the property is set, false otherwise.
 	 */
 	public function __isset( $key ) {
@@ -190,12 +190,12 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	/**
 	 * Gets a property.
 	 *
-	 * Overrides BP_Core_Nav::__isset() to avoid
-	 * looking into its nav property.
+	 * Overrides BP_Core_Nav::__isset() to avoid looking into its nav property.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $key The property.
+	 *
 	 * @return mixed The value corresponding to the property.
 	 */
 	public function __get( $key ) {
@@ -209,13 +209,13 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	/**
 	 * Sets a property.
 	 *
-	 * Overrides BP_Core_Nav::__isset() to avoid
-	 * adding a value to its nav property.
+	 * Overrides BP_Core_Nav::__isset() to avoid adding a value to its nav property.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $key   The property.
-	 * @param mixed  $value The value of the property.
+	 * @param string $key The property.
+	 *
+	 * @param mixed $value The value of the property.
 	 */
 	public function __set( $key, $value ) {
 		$this->{$key} = $value;
@@ -316,8 +316,9 @@ class BP_Nouveau_Customizer_Group_Nav extends BP_Core_Nav {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $templates The list of possible group front templates.
-	 * @return array             The list of "global" group front templates.
+	 * @param array $templates The list of possible group front templates.
+	 *
+	 * @return array The list of "global" group front templates.
 	 */
 	public function all_groups_fronts( $templates = array() ) {
 		return array_intersect( array(

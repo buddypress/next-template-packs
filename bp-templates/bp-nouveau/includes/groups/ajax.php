@@ -237,6 +237,9 @@ function bp_nouveau_ajax_joinleave_group() {
 	wp_send_json_success( $response );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_get_users_to_invite() {
 	$bp = buddypress();
 
@@ -330,6 +333,9 @@ function bp_nouveau_ajax_get_users_to_invite() {
 	wp_send_json_success( $potential_invites );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_send_group_invites() {
 	$bp = buddypress();
 
@@ -399,6 +405,9 @@ function bp_nouveau_ajax_send_group_invites() {
 	) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_remove_group_invite() {
 	$user_id  = $_POST['user'];
 	$group_id = bp_get_current_group_id();

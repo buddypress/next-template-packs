@@ -24,11 +24,7 @@ class BP_Nouveau_Messages {
 	public function __construct() {
 		$this->setup_globals();
 		$this->includes();
-
-		// Setup list of add_action() hooks
 		$this->setup_actions();
-
-		// Setup list of add_filter() hooks
 		$this->setup_filters();
 	}
 
@@ -94,7 +90,6 @@ class BP_Nouveau_Messages {
 	 * @since 1.0.0
 	 */
 	private function setup_filters() {
-
 		// Enqueue specific styles
 		add_filter( 'bp_nouveau_enqueue_styles', 'bp_nouveau_messages_enqueue_styles', 10, 1 );
 

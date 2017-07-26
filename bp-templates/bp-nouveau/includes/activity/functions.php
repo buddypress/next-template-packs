@@ -15,11 +15,11 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  *
- * @param  array  $scripts  The array of scripts to register
- * @return array  The same array with the specific activity scripts.
+ * @param array $scripts  The array of scripts to register.
+ *
+ * @return array The same array with the specific activity scripts.
  */
 function bp_nouveau_activity_register_scripts( $scripts = array() ) {
-
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
@@ -44,7 +44,6 @@ function bp_nouveau_activity_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_activity_enqueue_scripts() {
-
 	if ( ! bp_is_activity_component() && ! bp_is_group_activity() ) {
 		return;
 	}
@@ -57,11 +56,11 @@ function bp_nouveau_activity_enqueue_scripts() {
  *
  * @since 1.0.0
  *
- * @param  array  $params Associative array containing the JS Strings needed by scripts
- * @return array          The same array with specific strings for the Activity Post form UI if needed.
+ * @param array $params Associative array containing the JS Strings needed by scripts.
+ *
+ * @return array The same array with specific strings for the Activity Post form UI if needed.
  */
 function bp_nouveau_activity_localize_scripts( $params = array() ) {
-
 	if ( ! bp_is_activity_component() && ! bp_is_group_activity() ) {
 		return $params;
 	}
@@ -108,8 +107,6 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	$activity_buttons = apply_filters( 'bp_nouveau_activity_buttons', array() );
 
 	if ( ! empty( $activity_buttons ) ) {
-
-		// Sort buttons
 		$activity_params['buttons'] = bp_sort_by_key( $activity_buttons, 'order', 'num' );
 
 		// Enqueue Buttons scripts and styles
@@ -118,17 +115,14 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 				continue;
 			}
 
-			// Enqueue the button style if registered
 			if ( wp_style_is( $buttons['handle'], 'registered' ) ) {
 				wp_enqueue_style( $buttons['handle'] );
 			}
 
-			// Enqueue the button script if registered
 			if ( wp_script_is( $buttons['handle'], 'registered' ) ) {
 				wp_enqueue_script( $buttons['handle'] );
 			}
 
-			// Finally remove the handle parameter
 			unset( $activity_params['buttons'][ $key_button ]['handle'] );
 		}
 	}
@@ -175,6 +169,9 @@ function bp_nouveau_activity_localize_scripts( $params = array() ) {
 	return $params;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_get_activity_directory_nav_items() {
 	$nav_items = array();
 
@@ -292,7 +289,9 @@ function bp_nouveau_get_activity_directory_nav_items() {
  * @since 1.0.0
  *
  * @param string $output string HTML output
- * @param  'directory' see comment below
+ * @param 'directory' see comment below
+ *
+ * @return array
  */
 function bp_nouveau_get_activity_filters_array( $output = '', $filters = array(), $context = '' ) {
 	return array( 'filters' => $filters, 'context' => $context );
@@ -330,6 +329,9 @@ function bp_nouveau_get_activity_filters() {
 	return $filters;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_activity_secondary_avatars( $action, $activity ) {
 	switch ( $activity->component ) {
 		case 'groups' :
@@ -346,22 +348,20 @@ function bp_nouveau_activity_secondary_avatars( $action, $activity ) {
 	return $action;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
-
 	if ( ! is_user_logged_in() ) {
 		return $classes;
 	}
 
-	// We'll use this several times
 	$user_id = bp_loggedin_user_id();
-
-	// New classes to add.
 	$my_classes = array();
 
-	/**
-	 * HeartBeat requests will transport the scope
-	 *
-	 * @see bp_nouveau_ajax_querystring()
+	/*
+	 * HeartBeat requests will transport the scope.
+	 * See bp_nouveau_ajax_querystring().
 	 */
 	$scope = '';
 
@@ -369,13 +369,11 @@ function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 		$scope = sanitize_key( $_POST['data']['bp_heartbeat']['scope'] );
 	}
 
-	/**
-	 * Add specific classes to perform specific actions on the client side
-	 */
+	// Add specific classes to perform specific actions on the client side.
 	if ( $scope && bp_is_activity_directory() ) {
 		$component  = bp_get_activity_object_name();
 
-		/**
+		/*
 		 * These classes will be used to count the number of newest activities for
 		 * the 'Mentions', 'My Groups' & 'My Friends' tabs
 		 */
@@ -404,7 +402,7 @@ function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 				}
 			}
 
-		/**
+		/*
 		 * This class will be used to highlight the newest activities when
 		 * viewing the 'Mentions', 'My Groups' or the 'My Friends' tabs
 		 */
@@ -412,9 +410,7 @@ function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 			$my_classes[] = 'newest_' . $scope . '_activity';
 		}
 
-		/**
-		 * Leave other components do their specific stuff if needed.
-		 */
+		// Leave other components do their specific stuff if needed.
 		$my_classes = (array) apply_filters( 'bp_nouveau_activity_scope_newest_class', $my_classes, $scope );
 
 		if ( ! empty( $my_classes ) ) {
@@ -425,8 +421,11 @@ function bp_nouveau_activity_scope_newest_class( $classes = '' ) {
 	return $classes;
 }
 
-function bp_nouveau_activity_time_since( $time_since, $activity = null ) {
+/**
+ * @since 1.0.0
+ */
 
+function bp_nouveau_activity_time_since( $time_since, $activity = null ) {
 	if ( ! isset ( $activity->date_recorded ) ) {
 		return $time_since;
 	}
@@ -439,6 +438,9 @@ function bp_nouveau_activity_time_since( $time_since, $activity = null ) {
 	) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_activity_allowed_tags( $activity_allowedtags = array() ) {
 	$activity_allowedtags['time'] = array();
 	$activity_allowedtags['time']['class'] = array();

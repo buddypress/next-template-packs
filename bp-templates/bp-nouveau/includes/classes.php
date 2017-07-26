@@ -75,11 +75,11 @@ class BP_Buttons_Group {
 				continue;
 			}
 
-			/**
-			 * if in bp_nouveau_get_*_buttons() we pass through a false value for
-			 * 'parent_element' but we have attributtes for it in the array lets default
-			 * to setting a div.
-			 * Otherwise the original false value will be passed through to bp buttons.
+			/*
+			 * If, in bp_nouveau_get_*_buttons(), we pass through a false value for 'parent_element'
+			 * but we have attributtes for it in the array, let's default to setting a div.
+			 *
+			 * Otherwise, the original false value will be passed through to BP buttons.
 			 * @todo: this needs review, probably trying to be too clever
 			 */
 			if ( ( ! empty( $r['parent_attr'] ) ) && false === $r['parent_element'] ) {
@@ -103,7 +103,6 @@ class BP_Buttons_Group {
 		$sorted = array();
 
 		foreach ( $buttons as $button ) {
-			// Default position
 			$position = 99;
 
 			if ( isset( $button['position'] ) ) {
@@ -163,7 +162,7 @@ class BP_Buttons_Group {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $agrs see the __constructor for a description of this argument.
+	 * @param array $args See the __constructor for a description of this argument.
 	 */
 	public function update( $args = array() ) {
 		if ( empty( $args ) ) {
@@ -188,14 +187,12 @@ class BP_Buttons_Group {
  * @uses   WP_Widget
  */
 class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
-
 	/**
 	 * Constructor
 	 *
 	 * @since 1.0
 	 */
 	public function __construct() {
-
 		$widget_ops = array(
 			'description' => __( 'Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once.', 'buddypress' ),
 			'classname'   => 'widget_nav_menu buddypress_object_nav'
@@ -212,8 +209,6 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	 * Register the widget
 	 *
 	 * @since 1.0
-	 *
-	 * @uses   register_widget() to register the widget
 	 */
 	public static function register_widget() {
 		register_widget( 'BP_Nouveau_Object_Nav_Widget' );
@@ -224,7 +219,7 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	 *
 	 * @since 1.0
 	 *
-	 * @param  mixed $args Arguments
+	 * @param mixed $args Arguments
 	 */
 	public function widget( $args, $instance ) {
 		if ( ! is_buddypress() || bp_is_group_create() ) {
@@ -273,13 +268,13 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	 *
 	 * @since 1.0
 	 *
-	 * @param  array $new_instance The new instance options
-	 * @param  array $old_instance The old instance options
+	 * @param array $new_instance The new instance options
+	 * @param array $old_instance The old instance options
+	 *
 	 * @return array the instance
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-
 		$instance['bp_nouveau_widget_title'] = (bool) $new_instance['bp_nouveau_widget_title'];
 
 		return $instance;
@@ -290,7 +285,8 @@ class BP_Nouveau_Object_Nav_Widget extends WP_Widget {
 	 *
 	 * @since 1.0
 	 *
-	 * @param  $instance Instance
+	 * @param $instance Instance
+	 *
 	 * @return string HTML Output
 	 */
 	public function form( $instance ) {
