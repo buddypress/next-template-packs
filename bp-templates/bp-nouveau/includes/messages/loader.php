@@ -3,8 +3,6 @@
  * BP Nouveau Messages
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.

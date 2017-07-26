@@ -3,8 +3,6 @@
  * BP Nouveau Group's manage members template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

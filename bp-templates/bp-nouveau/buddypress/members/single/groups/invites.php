@@ -3,8 +3,6 @@
  * BuddyPress - Members Single Group Invites
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_group_hook( 'before', 'invites_content' ); ?>

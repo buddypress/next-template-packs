@@ -1,9 +1,6 @@
 <?php
 /**
  * BuddyPress - Users Settings
- *
- * @package BuddyPress
- * @subpackage bp-nouveau
  */
 
 ?>

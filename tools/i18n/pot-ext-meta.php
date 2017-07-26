@@ -2,9 +2,6 @@
 /**
  * Console application, which adds metadata strings from
  * a BuddyPress Template Pack to a POT file
- *
- * @package next-template-packs
- * @subpackage tools
  */
 
 $pomo = getenv( 'WP_DEVELOP_DIR' ) . '/src/wp-includes/pomo';

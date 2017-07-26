@@ -5,9 +5,6 @@
  * This template is used to create the BuddyPress Uploader Backbone views.
  *
  * @since 2.3.0
- *
- * @package BuddyPress
- * @subpackage bp-attachments
  */
 
 ?>

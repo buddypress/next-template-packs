@@ -3,8 +3,6 @@
  * BuddyPress - Members Friends Requests
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_member_hook( 'before', 'friend_requests_content' ); ?>

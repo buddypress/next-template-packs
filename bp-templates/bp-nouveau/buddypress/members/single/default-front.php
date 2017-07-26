@@ -3,8 +3,6 @@
  * BP Nouveau Default user's front template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

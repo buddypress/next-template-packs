@@ -3,8 +3,6 @@
  * BuddyPress - Groups Cover Image Header.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

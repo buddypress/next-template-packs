@@ -3,7 +3,6 @@
  * Adds a BuddyPress Admin Tab to manage BuddyPress template packs
  *
  *
- * @package   Next Template Packs
  * @author    The BuddyPress Community
  * @license   GPL-2.0+
  * @link      https://buddypress.org

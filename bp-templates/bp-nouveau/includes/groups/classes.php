@@ -3,8 +3,6 @@
  * Groups classes
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -27,7 +25,6 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	/**
 	 * Set up action hooks
 	 *
-	 * @package BP Nouveau
 	 * @since 1.0
 	 */
 	public function setup_hooks() {
@@ -38,7 +35,6 @@ class BP_Nouveau_Group_Invite_Query extends BP_User_Query {
 	/**
 	 * Exclude group members from the user query as it's not needed to invite members to join the group.
 	 *
-	 * @package BP Nouveau
 	 * @since 1.0
 	 */
 	public function build_exclude_args() {

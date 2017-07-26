@@ -3,8 +3,6 @@
  * BuddyPress - Groups Header
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

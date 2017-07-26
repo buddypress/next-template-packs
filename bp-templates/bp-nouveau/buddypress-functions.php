@@ -4,8 +4,6 @@
  *
  * @since 1.0.0
  *
- * @package BP Nouveau
- *
  * @buddypress-template-pack {
  * Template Pack ID:       nouveau
  * Template Pack Name:     BP Nouveau
@@ -32,8 +30,6 @@ defined( 'ABSPATH' ) || exit;
  * See @link BP_Theme_Compat() for more.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 class BP_Nouveau extends BP_Theme_Compat {
 	/**

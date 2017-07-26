@@ -3,8 +3,6 @@
  * BP Nouveau - Groups Directory
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

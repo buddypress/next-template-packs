@@ -3,8 +3,6 @@
  * BuddyPress - Members Settings ( Group Invites )
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

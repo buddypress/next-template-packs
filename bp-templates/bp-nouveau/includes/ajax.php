@@ -3,8 +3,6 @@
  * Common functions only loaded on AJAX requests.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.

@@ -1,11 +1,9 @@
 <?php
 /**
-* BP Nouveau Groups screens filters
-*
-* @since 1.0.0
-*
-* @package BP Nouveau
-*/
+ * BP Nouveau Groups screens filters
+ *
+ * @since 1.0.0
+ */
 ?>
 <div id="comp-filters" class="component-filters clearfix">
 		<div id="<?php bp_nouveau_filter_container_id(); ?>" class="last filter">

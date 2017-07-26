@@ -5,9 +5,6 @@
  * This template is used to create the camera Backbone views.
  *
  * @since 2.3.0
- *
- * @package BuddyPress
- * @subpackage bp-attachments
  */
 
 ?>

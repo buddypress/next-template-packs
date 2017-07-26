@@ -6,8 +6,6 @@
  * dealing with invites.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 <nav class="<?php bp_nouveau_single_item_subnav_classes(); ?>" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Group invitations menu', 'buddypress' ); ?>"></nav>

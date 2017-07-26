@@ -3,8 +3,6 @@
  * Customizer controls
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.

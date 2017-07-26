@@ -3,8 +3,6 @@
  * BuddyPress Single Groups Admin Navigation
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

@@ -3,8 +3,6 @@
  * Code to hook into the WP Customizer
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 /**

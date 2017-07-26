@@ -4,9 +4,6 @@
  *
  * This template is used by bp_activity_comments() functions to show
  * each activity.
- *
- * @package BuddyPress
- * @subpackage bp-nouveau
  */
 
  ?>
