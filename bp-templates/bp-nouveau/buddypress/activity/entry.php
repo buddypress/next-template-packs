@@ -6,8 +6,6 @@
  * each activity.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_activity_hook( 'before', 'entry' ); ?>

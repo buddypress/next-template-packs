@@ -3,8 +3,6 @@
  * Common functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -23,10 +21,12 @@ defined( 'ABSPATH' ) || exit;
  * By using cookies we can also make sure that user settings are retained
  * across page loads.
  *
+ * @since 1.2.0
+ *
  * @param string $query_string Query string for the current request.
  * @param string $object       Object for cookie.
+ *
  * @return string Query string for the component loops
- * @since 1.2.0
  */
 function bp_nouveau_ajax_querystring( $query_string, $object ) {
 	if ( empty( $object ) ) {
@@ -151,6 +151,11 @@ function bp_nouveau_ajax_querystring( $query_string, $object ) {
 	return apply_filters( 'bp_nouveau_ajax_querystring', $query_string, $object, $filter, $scope, $page, $search_terms, $extras );
 }
 
+/**
+ * @since 1.0.0
+ *
+ * @return string
+ */
 function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $after = '', $r = array() ) {
 	if ( empty( $button->component ) ) {
 		return $output;
@@ -212,20 +217,17 @@ function bp_nouveau_ajax_button( $output ='', $button = null, $before ='', $afte
  *
  * @since 1.0.0
  *
- * @param  array  $args {
- *     Array of arguments.
+ * @param array $args {
+ *     Optional arguments.
  *
- *     @type string      $container          String HTML container type that should wrap
- *                                           the items as a group: 'div', 'ul', or 'p'. Required.
- *     @type string      $container_id       The group wrapping container element ID
- *
- *     @type string      $container_classes  The group wrapping container elements class
- *
- *     @type string      $output             The HTML to output. Required.
+ *     @type string $container         String HTML container type that should wrap
+ *                                     the items as a group: 'div', 'ul', or 'p'. Required.
+ *     @type string $container_id      The group wrapping container element ID
+ *     @type string $container_classes The group wrapping container elements class
+ *     @type string $output            The HTML to output. Required.
  * }
  */
 function bp_nouveau_wrapper( $args = array() ) {
-
  /**
 	* Classes need to be determined & set by component to a certain degree
 	*
@@ -345,10 +347,20 @@ function bp_nouveau_register_sidebars() {
 	}
 }
 
+/**
+ * @since 1.0.0
+ *
+ * @return bool
+ */
 function bp_nouveau_is_object_nav_in_sidebar() {
 	return is_active_widget( false, false, 'bp_nouveau_sidebar_object_nav_widget', true );
 }
 
+/**
+ * @since 1.0.0
+ *
+ * @return bool
+ */
 function bp_nouveau_current_user_can( $capability = '' ) {
 	return apply_filters( 'bp_nouveau_current_user_can', is_user_logged_in(), $capability, bp_loggedin_user_id() );
 }
@@ -539,7 +551,7 @@ function bp_nouveau_get_forsaken_hooks() {
 		),
 	);
 
-	/**
+	/*
 	 * Add warning messages for people using dynamic filters the BP Nouveau Nav Loop
 	 * won't take in account unlike bp_get_displayed_user_nav() & bp_get_options_nav().
 	 */
@@ -551,7 +563,6 @@ function bp_nouveau_get_forsaken_hooks() {
 	}
 
 	if ( $nav_items ) {
-
 		// Set the common parts
 		$common = array(
 			'hook_type'    => 'filter',
@@ -591,10 +602,11 @@ function bp_nouveau_get_forsaken_hooks() {
  *
  * @since 1.0.0
  *
- * @param  string  $hook      The hook to fire.
- * @param  string  $component The component nav belongs to.
- * @param  int     $position  The position of the nav item.
- * @return array              A list of component's dir nav items
+ * @param  string $hook      The hook to fire.
+ * @param  string $component The component nav belongs to.
+ * @param  int    $position  The position of the nav item.
+ *
+ * @return array A list of component's dir nav items
  */
 function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position = 99 ) {
 	$extra_nav_items = array();
@@ -608,44 +620,46 @@ function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position
 	do_action( $hook );
 	$output = ob_get_clean();
 
-	if ( ! empty( $output ) ) {
-		preg_match_all( "/<li\sid=\"{$component}\-(.*)\"[^>]*>/siU", $output, $lis );
+	if ( empty( $output ) ) {
+		return $extra_nav_items;
+	}
 
-		if ( ! empty( $lis[1] ) ) {
-			$extra_nav_items = array_fill_keys( $lis[1], array( 'component' => $component, 'position' => $position ) );
+	preg_match_all( "/<li\sid=\"{$component}\-(.*)\"[^>]*>/siU", $output, $lis );
+	if ( empty( $lis[1] ) ) {
+		return $extra_nav_items;
+	}
 
-			preg_match_all( '/<a\s[^>]*>(.*)<\/a>/siU', $output, $as );
+	$extra_nav_items = array_fill_keys( $lis[1], array( 'component' => $component, 'position' => $position ) );
+	preg_match_all( '/<a\s[^>]*>(.*)<\/a>/siU', $output, $as );
 
-			if ( ! empty( $as[0] ) ) {
-				foreach ( $as[0] as $ka => $a ) {
-					$extra_nav_items[ $lis[1][ $ka ] ]['slug'] = $lis[1][ $ka ];
-					$extra_nav_items[ $lis[1][ $ka ] ]['text'] = $as[1][ $ka ];
-					preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $a, $attrs );
+	if ( ! empty( $as[0] ) ) {
+		foreach ( $as[0] as $ka => $a ) {
+			$extra_nav_items[ $lis[1][ $ka ] ]['slug'] = $lis[1][ $ka ];
+			$extra_nav_items[ $lis[1][ $ka ] ]['text'] = $as[1][ $ka ];
+			preg_match_all( '/([\w\-]+)=([^"\'> ]+|([\'"]?)(?:[^\3]|\3+)+?\3)/', $a, $attrs );
 
-					if ( ! empty( $attrs[1] ) ) {
-						foreach ( $attrs[1] as $katt => $att ) {
-							if ( 'href' === $att ) {
-								$extra_nav_items[ $lis[1][ $ka ] ]['link'] = trim( $attrs[2][ $katt ], '"' );
-							} else {
-								$extra_nav_items[ $lis[1][ $ka ] ][ $att ] = trim( $attrs[2][ $katt ], '"' );
-							}
-						}
+			if ( ! empty( $attrs[1] ) ) {
+				foreach ( $attrs[1] as $katt => $att ) {
+					if ( 'href' === $att ) {
+						$extra_nav_items[ $lis[1][ $ka ] ]['link'] = trim( $attrs[2][ $katt ], '"' );
+					} else {
+						$extra_nav_items[ $lis[1][ $ka ] ][ $att ] = trim( $attrs[2][ $katt ], '"' );
 					}
 				}
 			}
+		}
+	}
 
-			if ( ! empty( $as[1] ) ) {
-				foreach ( $as[1] as $ks => $s ) {
-					preg_match_all( '/<span>(.*)<\/span>/siU', $s, $spans );
+	if ( ! empty( $as[1] ) ) {
+		foreach ( $as[1] as $ks => $s ) {
+			preg_match_all( '/<span>(.*)<\/span>/siU', $s, $spans );
 
-					if ( empty( $spans[0] ) ) {
-						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = false;
-					} elseif ( ! empty( $spans[1][0] ) ) {
-						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = (int) $spans[1][0];
-					} else {
-						$extra_nav_items[ $lis[1][ $ks ] ]['count'] = '';
-					}
-				}
+			if ( empty( $spans[0] ) ) {
+				$extra_nav_items[ $lis[1][ $ks ] ]['count'] = false;
+			} elseif ( ! empty( $spans[1][0] ) ) {
+				$extra_nav_items[ $lis[1][ $ks ] ]['count'] = (int) $spans[1][0];
+			} else {
+				$extra_nav_items[ $lis[1][ $ks ] ]['count'] = '';
 			}
 		}
 	}
@@ -658,9 +672,10 @@ function bp_nouveau_parse_hooked_dir_nav( $hook = '', $component = '', $position
  *
  * @since 1.0.0
  *
- * @param string $hook the do_action
- * @param array  $filters the array of options
- * @return array the filters
+ * @param string $hook
+ * @param array  $filters
+ *
+ * @return array
  */
 function bp_nouveau_parse_hooked_options( $hook = '', $filters = array() ) {
 	if ( empty( $hook ) ) {
@@ -692,6 +707,7 @@ function bp_nouveau_parse_hooked_options( $hook = '', $filters = array() ) {
  *
  * @param string $context   'directory', 'user' or 'group'
  * @param string $component The BuddyPress component ID
+ *
  * @return array the dropdown filters
  */
 function bp_nouveau_get_component_filters( $context = '', $component = '' ) {
@@ -769,6 +785,7 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
 			if ( 0 !== strpos( $key, 'bp_nouveau_appearance' ) ) {
 				continue;
 			}
+
 			$k = str_replace( array( '[', ']' ), array( '_', '' ), $key );
 			$retval[ $k ] = $setting;
 		}
@@ -792,13 +809,15 @@ function bp_nouveau_get_temporary_setting( $option = '', $retval = false ) {
  *
  * @param string $option Leave empty to get all settings, specify a value for a specific one.
  * @param mixed          An array of settings, the value of the requested setting.
+ *
+ * @return array|false|mixed
  */
 function bp_nouveau_get_appearance_settings( $option = '' ) {
 	$default_args = array(
 		'avatar_style'       => 0,
 		'user_front_page'    => 1,
 		'user_front_bio'     => 0,
-		'user_nav_display'   => 0,       // O is default (horizontally). 1 is vertically.
+		'user_nav_display'   => 0, // O is default (horizontally). 1 is vertically.
 		'user_nav_tabs'      => 0,
 		'user_subnav_tabs'   => 0,
 		'user_nav_order'     => array(),
@@ -821,7 +840,7 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
 			'group_front_page'        => 1,
 			'group_front_boxes'       => 1,
 			'group_front_description' => 0,
-			'group_nav_display'       => 0,   // O is default (horizontally). 1 is vertically.
+			'group_nav_display'       => 0,       // O is default (horizontally). 1 is vertically.
 			'group_nav_order'         => array(),
 			'group_nav_tabs'          => 0,
 			'group_subnav_tabs'       => 0,
@@ -863,8 +882,9 @@ function bp_nouveau_get_appearance_settings( $option = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string $type 'option' to get the labels, 'classes' to get the classes
- * @return array  the list of labels or classes preserving keys.
+ * @param string $type 'option' to get the labels, 'classes' to get the classes
+ *
+ * @return array The list of labels or classes preserving keys.
  */
 function bp_nouveau_customizer_grid_choices( $type = 'option' ) {
 	$columns = array(
@@ -887,7 +907,8 @@ function bp_nouveau_customizer_grid_choices( $type = 'option' ) {
  * @since 1.0.0
  *
  * @param  string $option A comma separated list of nav items slugs.
- * @return array          An array of nav items slugs.
+ *
+ * @return array An array of nav items slugs.
  */
 function bp_nouveau_sanitize_nav_order( $option = '' ) {
 	$option = explode( ',', $option );
@@ -899,12 +920,13 @@ function bp_nouveau_sanitize_nav_order( $option = '' ) {
  *
  * @since 1.0.0
  *
- * @param  array $params the current component's feature parameters.
- * @return array          an array to inform about the css handle to attach the css rules to
+ * @param array $params Optional. The current component's feature parameters.
+ *
+ * @return string
  */
 function bp_nouveau_theme_cover_image( $params = array() ) {
 	if ( empty( $params ) ) {
-		return;
+		return '';
 	}
 
 	// Avatar height - padding - 1/2 avatar height.
@@ -1084,8 +1106,9 @@ function bp_nouveau_theme_cover_image( $params = array() ) {
  *
  * @since 1.0.0
  *
- * @param  string $feedback_id The ID of the message.
- * @return array  The list of parameters for the message
+ * @param string $feedback_id The ID of the message.
+ *
+ * @return string|false The list of parameters for the message
  */
 function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 	/**
@@ -1234,49 +1257,49 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 		),
 	) );
 
-	if ( isset( $feedback_messages[ $feedback_id ] ) ) {
-		/**
-		 * Adjust some messages to the context.
-		 */
-		if ( 'completed-confirmation' === $feedback_id && bp_registration_needs_activation() ) {
-			$feedback_messages['completed-confirmation']['message'] = __( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'buddypress' );
-		} elseif ( 'member-notifications-none' === $feedback_id ) {
-			$is_myprofile = bp_is_my_profile();
-
-			if ( bp_is_current_action( 'unread' ) ) {
-				$feedback_messages['member-notifications-none']['message'] = __( 'This member has no unread notifications.', 'buddypress' );
-
-				if ( $is_myprofile ) {
-					$feedback_messages['member-notifications-none']['message'] = __( 'You have no unread notifications.', 'buddypress' );
-				}
-			} elseif ( $is_myprofile ) {
-				$feedback_messages['member-notifications-none']['message'] = __( 'You have no notifications.', 'buddypress' );
-			}
-		} elseif ( 'member-wp-profile-none' === $feedback_id && bp_is_user_profile() ) {
-			$feedback_messages['member-wp-profile-none']['message'] = sprintf( $feedback_messages['member-wp-profile-none']['message'], bp_get_displayed_user_fullname() );
-		} elseif ( 'member-delete-account' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-delete-account']['message'] = __( 'Deleting your account will delete all of the content you have created. It will be completely irrecoverable.', 'buddypress' );
-		} elseif ( 'member-activity-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-activity-loading']['message'] = __( 'Loading your updates, please wait.', 'buddypress' );
-		} elseif ( 'member-blogs-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-blogs-loading']['message'] = __( 'Loading the blogs you are a contributor of, please wait.', 'buddypress' );
-		} elseif ( 'member-friends-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-friends-loading']['message'] = __( 'Loading your friends, please wait.', 'buddypress' );
-		}  elseif ( 'member-groups-loading' === $feedback_id && bp_is_my_profile() ) {
-			$feedback_messages['member-groups-loading']['message'] = __( 'Loading the groups you are a member of, please wait.', 'buddypress' );
-		}
-
-		/**
-		 * Filter here if you wish to edit the message just before being displayed
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array $feedback_messages
-		 */
-		return apply_filters( 'bp_nouveau_get_user_feedback', $feedback_messages[ $feedback_id ] );
+	if ( ! isset( $feedback_messages[ $feedback_id ] ) ) {
+		return false;
 	}
 
-	return false;
+	/*
+	 * Adjust some messages to the context.
+	 */
+	if ( 'completed-confirmation' === $feedback_id && bp_registration_needs_activation() ) {
+		$feedback_messages['completed-confirmation']['message'] = __( 'You have successfully created your account! To begin using this site you will need to activate your account via the email we have just sent to your address.', 'buddypress' );
+	} elseif ( 'member-notifications-none' === $feedback_id ) {
+		$is_myprofile = bp_is_my_profile();
+
+		if ( bp_is_current_action( 'unread' ) ) {
+			$feedback_messages['member-notifications-none']['message'] = __( 'This member has no unread notifications.', 'buddypress' );
+
+			if ( $is_myprofile ) {
+				$feedback_messages['member-notifications-none']['message'] = __( 'You have no unread notifications.', 'buddypress' );
+			}
+		} elseif ( $is_myprofile ) {
+			$feedback_messages['member-notifications-none']['message'] = __( 'You have no notifications.', 'buddypress' );
+		}
+	} elseif ( 'member-wp-profile-none' === $feedback_id && bp_is_user_profile() ) {
+		$feedback_messages['member-wp-profile-none']['message'] = sprintf( $feedback_messages['member-wp-profile-none']['message'], bp_get_displayed_user_fullname() );
+	} elseif ( 'member-delete-account' === $feedback_id && bp_is_my_profile() ) {
+		$feedback_messages['member-delete-account']['message'] = __( 'Deleting your account will delete all of the content you have created. It will be completely irrecoverable.', 'buddypress' );
+	} elseif ( 'member-activity-loading' === $feedback_id && bp_is_my_profile() ) {
+		$feedback_messages['member-activity-loading']['message'] = __( 'Loading your updates, please wait.', 'buddypress' );
+	} elseif ( 'member-blogs-loading' === $feedback_id && bp_is_my_profile() ) {
+		$feedback_messages['member-blogs-loading']['message'] = __( 'Loading the blogs you are a contributor of, please wait.', 'buddypress' );
+	} elseif ( 'member-friends-loading' === $feedback_id && bp_is_my_profile() ) {
+		$feedback_messages['member-friends-loading']['message'] = __( 'Loading your friends, please wait.', 'buddypress' );
+	}  elseif ( 'member-groups-loading' === $feedback_id && bp_is_my_profile() ) {
+		$feedback_messages['member-groups-loading']['message'] = __( 'Loading the groups you are a member of, please wait.', 'buddypress' );
+	}
+
+	/**
+	 * Filter here if you wish to edit the message just before being displayed
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $feedback_messages
+	 */
+	return apply_filters( 'bp_nouveau_get_user_feedback', $feedback_messages[ $feedback_id ] );
 }
 
 /**
@@ -1284,8 +1307,9 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string     $section The section of fields to get 'account_details' or 'blog_details'. Required.
- * @return array|bool          The list of signup fields for the requested section. False if not found.
+ * @param string $section Optional. The section of fields to get 'account_details' or 'blog_details'.
+ *
+ * @return array|false The list of signup fields for the requested section. False if not found.
  */
 function bp_nouveau_get_signup_fields( $section = '' ) {
 	if ( empty( $section ) ) {
@@ -1296,8 +1320,7 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
 	 * Filter to add your specific 'text' or 'password' inputs
 	 *
 	 * If you need to use other types of field, please use the
-	 * do_action( 'bp_account_details_fields' ) or do_action( 'blog_details' )
-	 * hooks instead.
+	 * do_action( 'bp_account_details_fields' ) or do_action( 'blog_details' ) hooks instead.
 	 *
 	 * @since 1.0.0
 	 *
@@ -1390,9 +1413,10 @@ function bp_nouveau_get_signup_fields( $section = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string $action The action requested.
- * @return array|bool The list of the submit button parameters for the requested action
- *                    False if no actions were found.
+ * @param string $action The action requested.
+ *
+ * @return array|false The list of the submit button parameters for the requested action
+ *                     False if no actions were found.
  */
 function bp_nouveau_get_submit_button( $action = '' ) {
 	if ( empty( $action ) ) {
@@ -1401,26 +1425,16 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 
 	/**
 	 * Filter the Submit buttons to add your own.
-	 * We strongly advise to not edit the existing ones.
-	 * You can eventually add classes though.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $value The list of submit buttons.
+	 *
+	 * @return array|false
 	 */
 	$actions = apply_filters( 'bp_nouveau_get_submit_button', array(
 		'register' => array(
-			/**
-			 * Fires after the display of the registration submit buttons.
-			 *
-			 * @since 1.1.0 (BuddyPress)
-			 */
 			'before'     => 'bp_before_registration_submit_buttons',
-			/**
-			 * Fires after the display of the registration submit buttons.
-			 *
-			 * @since 1.1.0 (BuddyPress)
-			 */
 			'after'      => 'bp_after_registration_submit_buttons',
 			'nonce'      => 'bp_new_signup',
 			'attributes' => array(
@@ -1440,17 +1454,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			),
 		),
 		'member-capabilities' => array(
-			/**
-			 * Fires before the display of the submit button for user capabilities saving.
-			 *
-			 * @since 1.6.0 (BuddyPress)
-			 */
 			'before' => 'bp_members_capabilities_account_before_submit',
-			/**
-			 * Fires after the display of the submit button for user capabilities saving.
-			 *
-			 * @since 1.6.0 (BuddyPress)
-			 */
 			'after'  => 'bp_members_capabilities_account_after_submit',
 			'nonce'  => 'capabilities',
 			'attributes' => array(
@@ -1460,17 +1464,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			),
 		),
 		'member-delete-account' => array(
-			/**
-			 * Fires before the display of the submit button for user delete account submitting.
-			 *
-			 * @since 1.5.0 (BuddyPress)
-			 */
 			'before' => 'bp_members_delete_account_before_submit',
-			/**
-			 * Fires after the display of the submit button for user delete account submitting.
-			 *
-			 * @since 1.5.0 (BuddyPress)
-			 */
 			'after'  => 'bp_members_delete_account_after_submit',
 			'nonce'  => 'delete-account',
 			'attributes' => array(
@@ -1481,17 +1475,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			),
 		),
 		'members-general-settings' => array(
-			/**
-			 * Fires before the display of the submit button for user general settings saving.
-			 *
-			 * @since 1.5.0 (BuddyPress)
-			 */
 			'before' => 'bp_core_general_settings_before_submit',
-			/**
-			 * Fires after the display of the submit button for user general settings saving.
-			 *
-			 * @since 1.5.0 (BuddyPress)
-			 */
 			'after'  => 'bp_core_general_settings_after_submit',
 			'nonce'  => 'bp_settings_general',
 			'attributes' => array(
@@ -1502,17 +1486,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			),
 		),
 		'member-notifications-settings' => array(
-			/**
-			 * Fires before the display of the submit button for user notification saving.
-			 *
-			 * @since 1.5.0 (BuddyPress)
-			 */
 			'before' => 'bp_members_notification_settings_before_submit',
-			/**
-			 * Fires after the display of the submit button for user notification saving.
-			 *
-			 * @since 1.5.0 (BuddyPress)
-			 */
 			'after'  => 'bp_members_notification_settings_after_submit',
 			'nonce'  => 'bp_settings_notifications',
 			'attributes' => array(
@@ -1523,17 +1497,7 @@ function bp_nouveau_get_submit_button( $action = '' ) {
 			),
 		),
 		'members-profile-settings' => array(
-			/**
-			 * Fires before the display of the submit button for user profile saving.
-			 *
-			 * @since 2.0.0 (BuddyPress)
-			 */
 			'before' => 'bp_core_xprofile_settings_before_submit',
-			/**
-			 * Fires after the display of the submit button for user profile saving.
-			 *
-			 * @since 2.0.0 (BuddyPress)
-			 */
 			'after'  => 'bp_core_xprofile_settings_after_submit',
 			'nonce'  => 'bp_xprofile_settings',
 			'attributes' => array(
@@ -1566,10 +1530,11 @@ function bp_nouveau_get_submit_button( $action = '' ) {
  *
  * @since 1.0.0
  *
- * @param  object $nav         The BuddyPress Item Nav object to reorder
- * @param  array  $order       A list of slugs ordered (eg: array( 'profile', 'activity', etc..) )
- * @param  string $parent_slug A parent slug if it's a secondary nav we are reordering (case of the Groups single item)
- * @return bool                True on success. False otherwise.
+ * @param object $nav         The BuddyPress Item Nav object to reorder
+ * @param array  $order       A list of slugs ordered (eg: array( 'profile', 'activity', etc..) )
+ * @param string $parent_slug A parent slug if it's a secondary nav we are reordering (case of the Groups single item)
+ *
+ * @return bool True on success. False otherwise.
  */
 function bp_nouveau_set_nav_item_order( $nav = null, $order = array(), $parent_slug = '' ) {
 	if ( ! is_object( $nav ) || empty( $order ) || ! is_array( $order ) ) {

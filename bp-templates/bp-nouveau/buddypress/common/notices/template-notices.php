@@ -3,8 +3,6 @@
  * BP Nouveau temptate notices template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 <aside class="<?php bp_nouveau_template_message_classes(); ?>">

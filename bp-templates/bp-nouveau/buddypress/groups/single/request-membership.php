@@ -3,8 +3,6 @@
  * BuddyPress - Groups Request Membership
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_group_hook( 'before', 'request_membership_content' ); ?>

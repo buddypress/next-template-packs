@@ -3,8 +3,6 @@
  * BuddyPress - Groups Admin
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_get_template_part( 'groups/single/parts/admin-subnav' ); ?>

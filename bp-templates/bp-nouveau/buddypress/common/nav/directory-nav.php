@@ -3,8 +3,6 @@
  * BP Nouveau Component's directory nav template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

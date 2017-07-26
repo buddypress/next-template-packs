@@ -6,8 +6,6 @@
  * support to their plugins for the members component.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_member_hook( 'before', 'plugin_template' ); ?>

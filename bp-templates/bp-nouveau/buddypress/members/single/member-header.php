@@ -3,10 +3,7 @@
  * BuddyPress - Users Header
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
-
 ?>
 
 <div id="item-header-avatar">

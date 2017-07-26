@@ -3,10 +3,7 @@
  * BuddyPress - Members Home
  *
  * @since   1.0.0
- *
- * @package BP Nouveau
  */
-
 ?>
 
 	<?php bp_nouveau_member_hook( 'before', 'home_content' ); ?>

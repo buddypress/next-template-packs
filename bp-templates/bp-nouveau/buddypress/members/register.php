@@ -3,8 +3,6 @@
  * BuddyPress - Members/Blogs Registration forms
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 ?>

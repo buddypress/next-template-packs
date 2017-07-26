@@ -3,8 +3,6 @@
  * Code to hook into the WP Customizer
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 /**
@@ -19,12 +17,8 @@ function bp_nouveau_customize_register( WP_Customize_Manager $wp_customize ) {
 		return;
 	}
 
-	// include the Customizer control.
 	require_once( trailingslashit( bp_nouveau()->includes_dir ) . 'customizer-controls.php' );
-
-	// Add it to control types
 	$wp_customize->register_control_type( 'BP_Nouveau_Nav_Customize_Control' );
-
 	$bp_nouveau_options = bp_nouveau_get_appearance_settings();
 
 	$wp_customize->add_panel( 'bp_nouveau_panel', array(
@@ -342,7 +336,7 @@ add_action( 'bp_customize_register', 'bp_nouveau_customize_register', 10, 1 );
 /**
  * Enqueue needed JS for our customizer Settings & Controls
  *
- * @since  1.0.0
+ * @since 1.0.0
  */
 function bp_nouveau_customizer_enqueue_scripts() {
 	$min = bp_core_get_minified_asset_suffix();

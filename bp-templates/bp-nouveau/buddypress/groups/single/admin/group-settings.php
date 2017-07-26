@@ -3,8 +3,6 @@
  * BP Nouveau Group's edit settings template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

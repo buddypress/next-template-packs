@@ -3,8 +3,6 @@
  * BP Nouveau Activity widgets
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -116,9 +114,10 @@ class BP_Latest_Activities extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array $new_instance The new instance settings.
-	 * @param  array $old_instance The old instance settings.
-	 * @return array               The widget settings.
+	 * @param array $new_instance The new instance settings.
+	 * @param array $old_instance The old instance settings.
+	 *
+	 * @return array The widget settings.
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
@@ -142,8 +141,9 @@ class BP_Latest_Activities extends WP_Widget {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $instance Settings for this widget.
-	 * @return string           HTML output.
+	 * @param array $instance Settings for this widget.
+	 *
+	 * @return string HTML output.
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array(

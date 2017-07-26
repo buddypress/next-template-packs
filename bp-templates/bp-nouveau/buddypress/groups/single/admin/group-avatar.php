@@ -3,10 +3,7 @@
  * BP Nouveau Group's avatar template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
-
 ?>
 <h2 class="bp-screen-title <?php if ( bp_is_group_create() ) { echo esc_attr( 'creation-step-name' ); } ?>">
 	<?php _e( 'Group Avatar', 'buddypress' ); ?>

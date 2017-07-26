@@ -3,8 +3,6 @@
  * BuddyPress - Members Single Profile Edit Field visibility
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 if ( empty( $GLOBALS['profile_template'] ) ) return;

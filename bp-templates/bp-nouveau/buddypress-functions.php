@@ -4,8 +4,6 @@
  *
  * @since 1.0.0
  *
- * @package BP Nouveau
- *
  * @buddypress-template-pack {
  * Template Pack ID:       nouveau
  * Template Pack Name:     BP Nouveau
@@ -32,8 +30,6 @@ defined( 'ABSPATH' ) || exit;
  * See @link BP_Theme_Compat() for more.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 class BP_Nouveau extends BP_Theme_Compat {
 	/**
@@ -81,22 +77,13 @@ class BP_Nouveau extends BP_Theme_Compat {
 	protected function setup_globals() {
 		$bp = buddypress();
 
-		if ( ! isset( $bp->theme_compat->packages['nouveau'] ) ) {
-			wp_die( __( 'Something is going wrong, please deactivate any plugin having an impact on the BP Theme Compat API', 'buddypress' ) );
-		}
-
 		foreach ( $bp->theme_compat->packages['nouveau'] as $property => $value ) {
 			$this->{$property} = $value;
 		}
 
-		// Includes dir
-		$this->includes_dir = trailingslashit( $this->dir ) . 'includes/';
-
-		// i18n
-		$this->lang_dir = trailingslashit( $this->dir ) . 'languages';
-		$this->domain   = 'bp-nouveau';
-
-		// Set the Directory Nav
+		$this->includes_dir  = trailingslashit( $this->dir ) . 'includes/';
+		$this->lang_dir      = trailingslashit( $this->dir ) . 'languages';
+		$this->domain        = 'bp-nouveau';
 		$this->directory_nav = new BP_Core_Nav();
 	}
 
@@ -105,7 +92,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->includes_dir . 'functions.php';
 		require $this->includes_dir . 'classes.php';
 		require $this->includes_dir . 'template-tags.php';
@@ -123,9 +110,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 			}, 0 );
 		}
 
-		// Customizer.
 		add_action( 'bp_customize_register', function() {
-			// @todo Cap check might need to change.
 			if ( bp_is_root_blog() && current_user_can( 'customize' ) ) {
 				require $this->includes_dir . 'customizer.php';
 			}
@@ -134,7 +119,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		foreach ( bp_core_get_packaged_component_ids() as $component ) {
 			$component_loader = trailingslashit( $this->includes_dir ) . $component . '/loader.php';
 
-			// Only load files for active components.
 			if ( ! bp_is_active( $component ) || ! file_exists( $component_loader ) ) {
 				continue;
 			}
@@ -150,7 +134,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_support() {
+	protected function setup_support() {
 		$width         = 1300;
 		$top_offset    = 150;
 		$avatar_height = apply_filters( 'bp_core_avatar_full_height', $top_offset );
@@ -217,9 +201,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Register the Primary Object nav widget
 		add_action( 'bp_widgets_init', array( 'BP_Nouveau_Object_Nav_Widget', 'register_widget' ) );
 
-		// loads the languages..
-		add_action( 'bp_init', array( $this, 'load_textdomain' ), 5 );
-
 		// Set the BP Uri for the Ajax customizer preview
 		add_filter( 'bp_uri', array( $this, 'customizer_set_uri' ), 10, 1 );
 
@@ -263,7 +244,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 					continue;
 				}
 
-				// Eventually use the rtl/minified version.
 				$file = sprintf( $style['file'], $rtl, $min );
 
 				// Locate the asset if needed.
@@ -328,12 +308,10 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		foreach ( $scripts as $handle => $script ) {
-
 			if ( ! isset( $script['file'] ) ) {
 				continue;
 			}
 
-			// Eventually use the minified version.
 			$file = sprintf( $script['file'], $min );
 
 			// Locate the asset if needed.
@@ -363,23 +341,16 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		// Always enqueue the common javascript file
 		wp_enqueue_script( 'bp-nouveau' );
 
-		// Maybe enqueue Password Verify
 		if ( bp_is_register_page() || bp_is_user_settings_general() ) {
 			wp_enqueue_script( 'bp-nouveau-password-verify' );
 		}
 
-		// Maybe enqueue comment reply JS.
 		if ( is_singular() && bp_is_blog_page() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
 
-		/**
-		 * Let specific scripts to components to be enqueued
-		 */
 		do_action( 'bp_nouveau_enqueue_scripts' );
 	}
 
@@ -398,9 +369,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @return array $classes
 	 */
 	public function add_nojs_body_class( $classes ) {
-		if ( ! in_array( 'no-js', $classes ) )
-			$classes[] = 'no-js';
-
+		$classes[] = 'no-js';
 		return array_unique( $classes );
 	}
 
@@ -412,7 +381,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @since 1.0.0
 	 */
 	public function localize_scripts() {
-		// First global params
 		$params = array(
 			'ajaxurl'             => bp_core_ajax_url(),
 			'accepted'            => __( 'Accepted', 'buddypress' ),
@@ -517,7 +485,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 	 * @return array
 	 */
 	public function theme_compat_page_templates( $templates = array() ) {
-
 		/**
 		 * Filters whether or not we are looking at a directory to determine if to return early.
 		 *
@@ -560,15 +527,14 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Check for page template.
 		$page_template = get_page_template_slug( $page_id );
 
-		// Add it to the beginning of the templates array so it takes precedence
-		// over the default hierarchy.
+		// Add it to the beginning of the templates array so it takes precedence over the default hierarchy.
 		if ( ! empty( $page_template ) ) {
 
 			/**
 			 * Check for existence of template before adding it to template
 			 * stack to avoid accidentally including an unintended file.
 			 *
-			 * @see: https://buddypress.trac.wordpress.org/ticket/6190
+			 * @see https://buddypress.trac.wordpress.org/ticket/6190
 			 */
 			if ( '' !== locate_template( $page_template ) ) {
 				array_unshift( $templates, $page_template );
@@ -635,24 +601,22 @@ class BP_Nouveau extends BP_Theme_Compat {
 	}
 
 	/**
-	 * Inform developers about the Legacy hooks
-	 * we are not using. This will be output as
-	 * warnings inside the Browser console to avoid
-	 * messing with the page display.
+	 * Inform developers about the Legacy hooks we are not using.
+	 *
+	 * This will be output as warnings inside the Browser console to avoid messing with the page display.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string HTML Output
+	 * @return array
 	 */
 	public function developer_feedbacks() {
 		$notices = array();
 
-		// If debug is not on, stop!
-		if ( ! WP_DEBUG ) {
+		if ( ! defined( 'WP_DEBUG') || ! WP_DEBUG ) {
 			return;
 		}
 
-		// Get The forsaken hooks.
+		// Get the forsaken hooks.
 		$forsaken_hooks = bp_nouveau_get_forsaken_hooks();
 
 		// Loop to check if deprecated hooks are used.
@@ -709,27 +673,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		}
 
 		return $path;
-	}
-
-	/**
-	 * Loads the translation files
-	 *
-	 * @since 1.0.0
-	 */
-	public function load_textdomain() {
-		// Traditional WordPress plugin locale filter
-		$locale        = apply_filters( 'plugin_locale', get_locale(), $this->domain );
-		$mofile        = sprintf( '%1$s-%2$s.mo', $this->domain, $locale );
-
-		// Setup paths to current locale file
-		$mofile_local  = trailingslashit( $this->lang_dir ) . $mofile;
-		$mofile_global = WP_LANG_DIR . '/buddypress/' . $mofile;
-
-		// Look in global /wp-content/languages/buddypress folder
-		if ( ! load_textdomain( $this->domain, $mofile_global ) ) {
-			// Look in local /wp-content/plugins/next-template-packs/bp-nouveau/languages/ folder
-			load_textdomain( $this->domain, $mofile_local );
-		}
 	}
 }
 

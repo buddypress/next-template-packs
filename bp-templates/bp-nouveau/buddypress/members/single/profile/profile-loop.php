@@ -3,8 +3,6 @@
  * BuddyPress - Members Profile Loop
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_xprofile_hook( 'before', 'loop_content' ); ?>

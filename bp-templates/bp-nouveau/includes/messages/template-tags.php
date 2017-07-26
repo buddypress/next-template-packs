@@ -3,8 +3,6 @@
  * Messages template tags
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -14,12 +12,9 @@ defined( 'ABSPATH' ) || exit;
  * Fire specific hooks into the private messages template.
  *
  * @since 1.0.0
- * @since 1.0.0 (BuddyPress) for the 'composent_content' (after), 'thread_header_actions', 'meta',
- *                           'content', 'thread_content', 'thread_list', 'reply_box' suffixes
- * @since 1.1.0 (BuddyPress) for the 'compose_content' (before), 'thread_reply' suffixes
  *
- * @param string $when   Either 'before' or 'after'.
- * @param string $suffix Use it to add terms at the end of the hook name.
+ * @param string $when   Optional. Either 'before' or 'after'.
+ * @param string $suffix Optional. Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_messages_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );

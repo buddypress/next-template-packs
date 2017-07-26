@@ -3,8 +3,6 @@
  * Groups functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -19,7 +17,6 @@ defined( 'ABSPATH' ) || exit;
  * @return array  The same array with the specific groups scripts.
  */
 function bp_nouveau_groups_register_scripts( $scripts = array() ) {
-
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
@@ -61,7 +58,8 @@ function bp_nouveau_groups_enqueue_scripts() {
  *
  * @since 1.0.0
  *
- * @param  bool $default False to allow. True to disallow.
+ * @param bool $default False to allow. True to disallow.
+ *
  * @return bool
  */
 function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
@@ -70,7 +68,7 @@ function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  bool $default True to disable the nav. False otherwise.
+	 * @param bool $default True to disable the nav. False otherwise.
 	 */
 	return apply_filters( 'bp_nouveau_groups_disallow_all_members_invites', $default );
 }
@@ -80,8 +78,9 @@ function bp_nouveau_groups_disallow_all_members_invites( $default = false ) {
  *
  * @since 1.0.0
  *
- * @param  array  $params Associative array containing the JS Strings needed by scripts
- * @return array          The same array with specific strings for the Group's Invite UI if needed.
+ * @param array $params Associative array containing the JS Strings needed by scripts
+ *
+ * @return array The same array with specific strings for the Group's Invite UI if needed.
  */
 function bp_nouveau_groups_localize_scripts( $params = array() ) {
 	if ( ! bp_is_group_invites() && ! ( bp_is_group_create() && bp_is_group_creation_step( 'group-invites' ) ) ) {
@@ -122,6 +121,9 @@ function bp_nouveau_groups_localize_scripts( $params = array() ) {
 	return $params;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_groups_get_inviter_ids( $user_id, $group_id ) {
 	if ( empty( $user_id ) || empty( $group_id ) ) {
 		return false;
@@ -130,6 +132,9 @@ function bp_nouveau_groups_get_inviter_ids( $user_id, $group_id ) {
 	return BP_Nouveau_Group_Invite_Query::get_inviter_ids( $user_id, $group_id );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_prepare_group_potential_invites_for_js( $user ) {
 	$bp = buddypress();
 
@@ -184,6 +189,9 @@ function bp_nouveau_prepare_group_potential_invites_for_js( $user ) {
 	return apply_filters( 'bp_nouveau_prepare_group_potential_invites_for_js', $response, $user );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_get_group_potential_invites( $args = array() ) {
 	$r = bp_parse_args( $args, array(
 		'group_id'     => bp_get_current_group_id(),
@@ -200,7 +208,7 @@ function bp_nouveau_get_group_potential_invites( $args = array() ) {
 		return false;
 	}
 
-	/**
+	/*
 	 * If it's not a friend request and users can restrict invites to friends,
 	 * make sure they are not displayed in results.
 	 */
@@ -234,7 +242,10 @@ function bp_nouveau_get_group_potential_invites( $args = array() ) {
 	return $response;
 }
 
-// I don't see any reason why to restrict group invites to friends..
+/**
+ * @since 1.0.0
+ * @todo I don't see any reason why to restrict group invites to friends..
+ */
 function bp_nouveau_group_invites_create_steps( $steps = array() ) {
 	if ( bp_is_active( 'friends' ) && isset( $steps['group-invites'] ) ) {
 		// Simply change the name
@@ -251,6 +262,9 @@ function bp_nouveau_group_invites_create_steps( $steps = array() ) {
 	return $steps;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_group_setup_nav() {
 	if ( ! bp_is_group() || ! bp_groups_user_can_send_invites() ) {
 		return;
@@ -285,6 +299,9 @@ function bp_nouveau_group_setup_nav() {
 	}
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_groups_invites_custom_message( $message = '' ) {
 	if ( empty( $message ) ) {
 		return $message;
@@ -307,6 +324,8 @@ function bp_nouveau_groups_invites_custom_message( $message = '' ) {
 
 /**
  * Format a Group for a json reply
+ *
+ * @since 1.0.0
  */
 function bp_nouveau_prepare_group_for_js( $item ) {
 	if ( empty( $item->id ) ) {
@@ -359,11 +378,11 @@ function bp_nouveau_groups_invites_restriction_nav() {
  *
  * @since 1.0.0
  *
- * @param   array $wp_admin_nav The list of settings admin subnav items.
- * @return  array The list of settings admin subnav items.
+ * @param array $wp_admin_nav The list of settings admin subnav items.
+ *
+ * @return array The list of settings admin subnav items.
  */
 function bp_nouveau_groups_invites_restriction_admin_nav( $wp_admin_nav ) {
-
 	// Setup the logged in user variables.
 	$settings_link = trailingslashit( bp_loggedin_user_domain() . bp_get_settings_slug() );
 
@@ -384,7 +403,6 @@ function bp_nouveau_groups_invites_restriction_admin_nav( $wp_admin_nav ) {
  * @since 1.0.0
  */
 function bp_nouveau_groups_screen_invites_restriction() {
-
 	// Redirect if no invites restriction settings page is accessible.
 	if ( 'invites' !== bp_current_action() || ! bp_is_active( 'friends' ) ) {
 		bp_do_404();
@@ -392,7 +410,6 @@ function bp_nouveau_groups_screen_invites_restriction() {
 	}
 
 	if ( isset( $_POST['member-group-invites-submit'] ) ) {
-
 		// Nonce check.
 		check_admin_referer( 'bp_nouveau_group_invites_settings' );
 
@@ -404,8 +421,6 @@ function bp_nouveau_groups_screen_invites_restriction() {
 			}
 
 			bp_core_add_message( __( 'Group invites preferences saved.', 'buddypress' ) );
-
-		// OOps!
 		} else {
 			bp_core_add_message( __( 'You are not allowed to perform this action.', 'buddypress' ), 'error' );
 		}
@@ -423,6 +438,9 @@ function bp_nouveau_groups_screen_invites_restriction() {
 	bp_core_load_template( apply_filters( 'bp_nouveau_groups_screen_invites_restriction', 'members/single/settings/group-invites' ) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_get_groups_directory_nav_items() {
 	$nav_items = array();
 
@@ -490,6 +508,7 @@ function bp_nouveau_get_groups_directory_nav_items() {
  * @since 1.0.0
  *
  * @param string $context 'directory' or 'user'
+ *
  * @return array the filters
  */
 function bp_nouveau_get_groups_filters( $context = '' ) {
@@ -532,7 +551,7 @@ function bp_nouveau_get_groups_filters( $context = '' ) {
  *
  * @since 1.0.0
  *
- * @param  array $button The arguments of the button that BuddyPress is about to create.
+ * @param array $button The arguments of the button that BuddyPress is about to create.
  *
  * @return array An empty array to stop the button creation process.
  */
@@ -599,7 +618,7 @@ function bp_nouveau_groups_front_page_description() {
 	// This check is a problem it needs to be used in templates but returns true even if not on the front page
 	// return false on this if we are not displaying the front page 'bp_is_group_home()'
 	// This may well be a bad approach to re-think ~hnla.
-
+	// @todo
 	return ! empty( $group_settings['group_front_page'] ) && ! empty( $group_settings['group_front_description'] ) && bp_is_group_home();
 }
 
@@ -608,8 +627,9 @@ function bp_nouveau_groups_front_page_description() {
  *
  * @since 1.0.0
  *
- * @param  array $sections the Customizer sections to add.
- * @return array           the Customizer sections to add.
+ * @param array $sections the Customizer sections to add.
+ *
+ * @return array the Customizer sections to add.
  */
 function bp_nouveau_groups_customizer_sections( $sections = array() ) {
 	return array_merge( $sections, array(
@@ -633,8 +653,9 @@ function bp_nouveau_groups_customizer_sections( $sections = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array $settings the settings to add.
- * @return array           the settings to add.
+ * @param array $settings the settings to add.
+ *
+ * @return array the settings to add.
  */
 function bp_nouveau_groups_customizer_settings( $settings = array() ) {
 	return array_merge( $settings, array(
@@ -709,8 +730,9 @@ function bp_nouveau_groups_customizer_settings( $settings = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array $controls the controls to add.
- * @return array           the controls to add.
+ * @param array $controls the controls to add.
+ *
+ * @return array the controls to add.
  */
 function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 	return array_merge( $controls, array(
@@ -778,9 +800,10 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array           $templates The list of templates for the front.php template part.
- * @param  BP_Groups_Group The group object.
- * @return array           The same list with the default front template if needed.
+ * @param array           $templates The list of templates for the front.php template part.
+ * @param BP_Groups_Group The group object.
+ *
+ * @return array The same list with the default front template if needed.
  */
 function bp_nouveau_group_reset_front_template( $templates = array(), $group = null ) {
 	if ( empty( $group->id ) ) {
@@ -806,7 +829,8 @@ function bp_nouveau_group_reset_front_template( $templates = array(), $group = n
  *
  * @since 1.0.0
  *
- * @param  string $template The template part to get (eg: activity, members...).
+ * @param string $template The template part to get (eg: activity, members...).
+ *
  * @return string The located template.
  */
 function bp_nouveau_group_locate_template_part( $template = '' ) {
@@ -814,7 +838,7 @@ function bp_nouveau_group_locate_template_part( $template = '' ) {
 	$bp_nouveau     = bp_nouveau();
 
 	if ( ! $template || empty( $current_group->id ) ) {
-		return false;
+		return '';
 	}
 
 	// Use a global to avoid requesting the hierarchy for each template
@@ -858,7 +882,8 @@ function bp_nouveau_group_locate_template_part( $template = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string $template The template part to get (eg: activity, members...).
+ * @param string $template The template part to get (eg: activity, members...).
+ *
  * @return string HTML output.
  */
 function bp_nouveau_group_get_template_part( $template = '' ) {
@@ -898,8 +923,9 @@ function bp_nouveau_group_is_home_widgets() {
  *
  * @since 1.0.0
  *
- * @param  array  $args The Activities Template arguments.
- * @return array        The Activities Template arguments.
+ * @param array $args The Activities Template arguments.
+ *
+ * @return array The Activities Template arguments.
  */
 function bp_nouveau_group_activity_widget_overrides( $args = array() ) {
 	return array_merge( $args, array(
@@ -913,8 +939,9 @@ function bp_nouveau_group_activity_widget_overrides( $args = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array  $args The Groups Template arguments.
- * @return array        The Groups Template arguments.
+ * @param array $args The Groups Template arguments.
+ *
+ * @return array The Groups Template arguments.
  */
 function bp_nouveau_group_groups_widget_overrides( $args = array() ) {
 	return array_merge( $args, array(
@@ -927,8 +954,9 @@ function bp_nouveau_group_groups_widget_overrides( $args = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array  $args The Members Template arguments.
- * @return array        The Members Template arguments.
+ * @param array $args The Members Template arguments.
+ *
+ * @return array The Members Template arguments.
  */
 function bp_nouveau_group_members_widget_overrides( $args = array() ) {
 	$group_members = groups_get_group_members( array( 'exclude_admins_mods' => false ) );
@@ -973,14 +1001,13 @@ function bp_nouveau_groups_remove_home_widget_filters() {
  *
  * @since 1.0.0
  *
- * @param  string $id  The screen id
- * @return mixed       An array containing the hook dynamic part, the nonce, and eventually a specific template.
- *                     False if it's not a core create screen.
+ * @param string $id The screen id
+ *
+ * @return mixed An array containing the hook dynamic part, the nonce, and eventually a specific template.
+ *               False if it's not a core create screen.
  */
 function bp_nouveau_group_get_core_create_screens( $id = '' ) {
-	/**
-	 * screen id => dynamic part of the hooks, nonce & specific template to use.
-	 */
+	// screen id => dynamic part of the hooks, nonce & specific template to use.
 	$screens = array(
 		'group-details'     => array( 'hook' => 'group_details_creation_step',     'nonce' => 'groups_create_save_group-details',     'template' => 'groups/single/admin/edit-details' ),
 		'group-settings'    => array( 'hook' => 'group_settings_creation_step',    'nonce' => 'groups_create_save_group-settings',                                                     ),
@@ -1001,13 +1028,13 @@ function bp_nouveau_group_get_core_create_screens( $id = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string $id  The screen id
- * @return mixed       An array containing the hook dynamic part and the nonce. False if it's not a core manage screen.
+ * @param string $id The screen id
+ *
+ * @return mixed An array containing the hook dynamic part and the nonce.
+ *               False if it's not a core manage screen.
  */
 function bp_nouveau_group_get_core_manage_screens( $id = '' ) {
-	/**
-	 * screen id => dynamic part of the hooks & nonce.
-	 */
+	// screen id => dynamic part of the hooks & nonce.
 	$screens = array(
 		'edit-details'        => array( 'hook' => 'group_details_admin',             'nonce' => 'groups_edit_group_details'  ),
 		'group-settings'      => array( 'hook' => 'group_settings_admin',            'nonce' => 'groups_edit_group_settings' ),

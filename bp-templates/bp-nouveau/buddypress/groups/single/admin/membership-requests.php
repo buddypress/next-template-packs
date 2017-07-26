@@ -3,8 +3,6 @@
  * BP Nouveau Group's membership requests template.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 ?>
 

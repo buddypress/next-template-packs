@@ -3,23 +3,21 @@
  * Messages functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Enqueue Styles for the Messages UI (mentions)
+ * Enqueue styles for the Messages UI (mentions).
  *
  * @since 1.0.0
  *
- * @param  array  $styles  The array of styles to enqueue
- * @return array  The same array with the specific messages styles.
+ * @param array $styles Optional. The array of styles to enqueue.
+ *
+ * @return array The same array with the specific messages styles.
  */
 function bp_nouveau_messages_enqueue_styles( $styles = array() ) {
-
 	if ( ! bp_is_user_messages() ) {
 		return $styles;
 	}
@@ -38,11 +36,11 @@ function bp_nouveau_messages_enqueue_styles( $styles = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array  $scripts  The array of scripts to register
- * @return array  The same array with the specific messages scripts.
+ * @param array $scripts The array of scripts to register
+ *
+ * @return array The same array with the specific messages scripts.
  */
 function bp_nouveau_messages_register_scripts( $scripts = array() ) {
-
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
@@ -68,7 +66,6 @@ function bp_nouveau_messages_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_messages_enqueue_scripts() {
-
 	if ( ! bp_is_user_messages() ) {
 		return;
 	}
@@ -84,11 +81,10 @@ function bp_nouveau_messages_enqueue_scripts() {
  *
  * @since 1.0.0
  *
- * @param  array  $params Associative array containing the JS Strings needed by scripts
- * @return array          The same array with specific strings for the messages UI if needed.
+ * @param  array $params Associative array containing the JS Strings needed by scripts
+ * @return array         The same array with specific strings for the messages UI if needed.
  */
 function bp_nouveau_messages_localize_scripts( $params = array() ) {
-
 	if ( ! bp_is_user_messages() ) {
 		return $params;
 	}
@@ -126,10 +122,11 @@ function bp_nouveau_messages_localize_scripts( $params = array() ) {
 	return $params;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_message_search_form() {
 	$query_arg = bp_core_get_component_search_query_arg( 'messages' );
-
-	// Get the default search text.
 	$placeholder = bp_get_search_default_text( 'messages' );
 
 	$search_form_html = '<form action="" method="get" id="search-messages-form">
@@ -148,6 +145,9 @@ function bp_nouveau_message_search_form() {
 }
 add_filter( 'bp_message_search_form', 'bp_nouveau_message_search_form', 10, 1 );
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_messages_adjust_nav() {
 	$bp = buddypress();
 
@@ -158,7 +158,6 @@ function bp_nouveau_messages_adjust_nav() {
 	}
 
 	foreach ( $secondary_nav_items as $secondary_nav_item ) {
-
 		if ( empty( $secondary_nav_item->slug ) ) {
 			continue;
 		}
@@ -178,8 +177,10 @@ function bp_nouveau_messages_adjust_nav() {
 	}
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_messages_adjust_admin_nav( $admin_nav ) {
-
 	if ( empty( $admin_nav ) ) {
 		return $admin_nav;
 	}
@@ -201,25 +202,25 @@ function bp_nouveau_messages_adjust_admin_nav( $admin_nav ) {
 	return $admin_nav;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_add_notice_notification_for_user( $notifications, $user_id ) {
-
 	if ( ! bp_is_active( 'messages' ) || ! doing_action( 'admin_bar_menu' ) ) {
 		return $notifications;
 	}
 
 	$notice = BP_Messages_Notice::get_active();
-
 	if ( empty( $notice->id ) ) {
 		return $notifications;
 	}
 
 	$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
-
 	if ( empty( $closed_notices ) ) {
 		$closed_notices = array();
 	}
 
-	if ( in_array( $notice->id, $closed_notices ) ) {
+	if ( in_array( $notice->id, $closed_notices, true ) ) {
 		return $notifications;
 	}
 
@@ -236,6 +237,9 @@ function bp_nouveau_add_notice_notification_for_user( $notifications, $user_id )
 	return array_merge( $notifications, array( $notice_notification ) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_format_notice_notification_for_user( $array ) {
 	if ( ! empty( $array['text'] ) || ! doing_action( 'admin_bar_menu' ) ) {
 		return $array;
@@ -247,6 +251,9 @@ function bp_nouveau_format_notice_notification_for_user( $array ) {
 	);
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_unregister_notices_widget() {
 	unregister_widget( 'BP_Messages_Sitewide_Notices_Widget' );
 }
@@ -263,24 +270,19 @@ function bp_nouveau_push_sitewide_notices() {
 	}
 
 	$notice = BP_Messages_Notice::get_active();
-
 	if ( empty( $notice ) ) {
-		return false;
+		return;
 	}
 
 	$user_id = bp_loggedin_user_id();
 
 	$closed_notices = bp_get_user_meta( $user_id, 'closed_notices', true );
-
 	if ( empty( $closed_notices ) ) {
 		$closed_notices = array();
 	}
 
 	if ( $notice->id && is_array( $closed_notices ) && ! in_array( $notice->id, $closed_notices ) ) {
-		/*
-		 * Inject the notice into the template_message if no other message
-		 * has priority.
-		 */
+		// Inject the notice into the template_message if no other message has priority.
 		$bp = buddypress();
 
 		if ( empty( $bp->template_message ) ) {
@@ -295,6 +297,9 @@ function bp_nouveau_push_sitewide_notices() {
 	}
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_mce_buttons( $buttons = array() ) {
 	$remove_buttons = array(
 		'wp_more',
@@ -312,6 +317,9 @@ function bp_nouveau_mce_buttons( $buttons = array() ) {
 	return $buttons;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_messages_at_on_tinymce_init( $settings, $editor_id ) {
 	// We only apply the mentions init to the visual post editor in the WP dashboard.
 	if ( 'message_content' === $editor_id ) {
@@ -321,6 +329,9 @@ function bp_nouveau_messages_at_on_tinymce_init( $settings, $editor_id ) {
 	return $settings;
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_get_message_date( $date ) {
 	$now = bp_core_current_time( true, 'timestamp' );
 	$date = strtotime( $date );
@@ -330,7 +341,7 @@ function bp_nouveau_get_message_date( $date ) {
 	$compare   = array_diff( $date_date, $now_date );
 	$date_format = 'Y/m/d';
 
-	// Use Timezone string if set
+	// Use Timezone string if set.
 	$timezone_string = bp_get_option( 'timezone_string' );
 	if ( ! empty( $timezone_string ) ) {
 		$timezone_object = timezone_open( $timezone_string );
@@ -355,6 +366,9 @@ function bp_nouveau_get_message_date( $date ) {
 	return apply_filters( 'bp_nouveau_get_message_date', date_i18n( $date_format, $calculated_time, true ), $calculated_time, $date, $date_format );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_messages_get_bulk_actions() {
 	ob_start();
 	bp_messages_bulk_management_dropdown();

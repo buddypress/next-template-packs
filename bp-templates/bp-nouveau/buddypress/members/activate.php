@@ -1,9 +1,6 @@
 <?php
 /**
  * BuddyPress - Members Activate
- *
- * @package BuddyPress
- * @subpackage bp-nouveau
  */
 
 ?>

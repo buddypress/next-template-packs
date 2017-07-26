@@ -3,8 +3,6 @@
  * BP Nouveau Friends
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -24,11 +22,7 @@ class BP_Nouveau_Friends {
 	public function __construct() {
 		$this->setup_globals();
 		$this->includes();
-
-		// Setup list of add_action() hooks
 		$this->setup_actions();
-
-		// Setup list of add_filter() hooks
 		$this->setup_filters();
 	}
 
@@ -37,7 +31,7 @@ class BP_Nouveau_Friends {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
@@ -46,7 +40,7 @@ class BP_Nouveau_Friends {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		// Test suite requires the AJAX functions early.
 		if ( function_exists( 'tests_add_filter' ) ) {
 			require $this->dir . 'ajax.php';
@@ -66,7 +60,7 @@ class BP_Nouveau_Friends {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		// Remove BuddyPress action for the members loop
 		remove_action( 'bp_directory_members_actions', 'bp_member_add_friend_button' );
 
@@ -79,7 +73,7 @@ class BP_Nouveau_Friends {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 		$buttons = array(
 			'friends_pending',
 			'friends_is_friend',

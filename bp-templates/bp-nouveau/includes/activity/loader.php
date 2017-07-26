@@ -3,8 +3,6 @@
  * BP Nouveau Activity
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -24,11 +22,7 @@ class BP_Nouveau_Activity {
 	public function __construct() {
 		$this->setup_globals();
 		$this->includes();
-
-		// Setup list of add_action() hooks
 		$this->setup_actions();
-
-		// Setup list of add_filter() hooks
 		$this->setup_filters();
 	}
 
@@ -37,7 +31,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = trailingslashit( dirname( __FILE__ ) );
 	}
 
@@ -46,7 +40,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require $this->dir . 'functions.php';
 		require $this->dir . 'template-tags.php';
 		require $this->dir . 'widgets.php';
@@ -74,18 +68,12 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
-
-		// Enqueue the scripts
+	protected function setup_actions() {
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_activity_enqueue_scripts' );
-
-		// Register the Activity Widget.
 		add_action( 'bp_widgets_init', array( 'BP_Latest_Activities', 'register_widget' ) );
-
-		// Register the Activity Notifications filters
 		add_action( 'bp_nouveau_notifications_init_filters', 'bp_nouveau_activity_notification_filters' );
 
-		/**
+		/*
 		 * Avoid BuddyPress to trigger a forsaken action notice.
 		 * We'll generate the button inside our bp_nouveau_get_activity_entry_buttons()
 		 * function.
@@ -103,7 +91,7 @@ class BP_Nouveau_Activity {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 
 		// Register activity scripts
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_activity_register_scripts', 10, 1 );
@@ -124,7 +112,6 @@ class BP_Nouveau_Activity {
  * @since 1.0.0
  */
 function bp_nouveau_activity( $bp_nouveau = null ) {
-
 	if ( is_null( $bp_nouveau ) ) {
 		return;
 	}

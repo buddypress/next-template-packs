@@ -3,8 +3,6 @@
  * Groups Template tags
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -79,12 +77,9 @@ function bp_nouveau_after_groups_directory_content() {
  * Fire specific hooks into the groups create template.
  *
  * @since 1.0.0
- * @since 1.2.0 (BuddyPress) for no suffix
- * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
- * @since 1.7.0 (BuddyPress) for the 'page' suffix
  *
- * @param string $when   Either 'before' or 'after'.
- * @param string $suffix Use it to add terms at the end of the hook name.
+ * @param string $when   Optional. Either 'before' or 'after'.
+ * @param string $suffix Optional. Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
@@ -107,14 +102,9 @@ function bp_nouveau_groups_create_hook( $when = '', $suffix = '' ) {
  * Fire specific hooks into the single groups templates.
  *
  * @since 1.0.0
- * @since 1.1.0 (BuddyPress) for the 'menu_admins', 'menu_mods', 'members_content',
- *                           'members_list', 'members_list_item', 'request_membership_content'
- *                           'membership_requests_admin_item', 'invites_item', 'invites_content' suffixes
- * @since 1.2.0 (BuddyPress) for the 'activity_content', 'header_meta', 'home_content',
- *                           'plugin_template', 'friend_requests_content' suffixes.
  *
- * @param string $when   Either 'before' or 'after'.
- * @param string $suffix Use it to add terms at the end of the hook name.
+ * @param string $when   Optional. Either 'before' or 'after'.
+ * @param string $suffix Optional. Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_group_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
@@ -142,7 +132,7 @@ function bp_nouveau_groups_loop_item() {
 	/**
 	 * Fires inside the listing of an individual group listing item.
 	 *
-	 * @since 1.1.0 (BuddyPress)
+	 * @since 1.1.0
 	 */
 	do_action( 'bp_directory_groups_item' );
 }
@@ -281,7 +271,6 @@ function bp_nouveau_group_manage_screen() {
 	}
 
 	$screen_id = sanitize_file_name( $action );
-
 	if ( ! bp_is_group_admin_screen( $screen_id ) && ! bp_is_group_creation_step( $screen_id ) ) {
 		return;
 	}
@@ -355,7 +344,6 @@ function bp_nouveau_group_manage_screen() {
 		}
 
 		if ( ! empty( $core_screen['nonce'] ) ) {
-
 			if ( ! $is_group_create ) {
 				$output = sprintf( '<p><input type="submit" value="%s" id="save" name="save" /></p>', esc_attr__( 'Save Changes', 'buddypress' ) );
 
@@ -437,7 +425,6 @@ function bp_nouveau_group_manage_screen() {
 		 */
 		do_action( 'bp_after_group_admin_content' );
 
-	// We use a strange hook for the create screens...??
 	} else {
 		/**
 		 * Fires and displays the groups directory content.
@@ -460,9 +447,7 @@ function bp_nouveau_group_header_buttons( $args = array() ) {
 
 	$output = join( ' ', bp_nouveau_get_groups_buttons( $args) );
 
-	/**
-	 * On the group's header we need to reset the group button's global
-	 */
+	// On the group's header we need to reset the group button's global.
 	if ( ! empty( $bp_nouveau->groups->group_buttons ) ) {
 		unset( $bp_nouveau->groups->group_buttons );
 	}
@@ -648,10 +633,8 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		}
 
 		/*
-		 * If the 'container' is set to 'ul'
-		 * set $parent_element to li otherwise
-		 * simply pass any value found in $args
-		 * or set var false.
+		 * If the 'container' is set to 'ul' set $parent_element to li,
+		 * otherwise simply pass any value found in $args or set var false.
 		 */
 		if ( ! empty( $args['container'] ) && 'ul' === $args['container']  ) {
 			$parent_element = 'li';
@@ -664,8 +647,8 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 		/*
 		 * If we have a arg value for $button_element passed through
 		 * use it to default all the $buttons['button_element'] values
-		 * otherwise default to 'a' (anchor)
-		 * Or override & hardcode the 'element' string on $buttons array.
+		 * otherwise default to 'a' (anchor) o override & hardcode the
+		 * 'element' string on $buttons array.
 		 *
 		 * Icons sets a class for icon display if not using the button element
 		 */
@@ -691,7 +674,6 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 			}
 
 			// Setup Accept button attributes
-
 			$buttons['accept_invite'] =  array(
 				'id'                => 'accept_invite',
 				'position'          => 5,
@@ -1075,8 +1057,7 @@ function bp_nouveau_group_meta() {
 		 * @todo Paul says that a function that prints and/or returns a value,
 		 * depending on global state, is madness. This needs changing.
 		 */
-		//echo join( "\n", $meta );
-		return  (object) bp_nouveau_get_group_meta();
+		return (object) bp_nouveau_get_group_meta();
 	}
 }
 
@@ -1295,7 +1276,6 @@ function bp_nouveau_groups_get_customizer_widgets_link() {
  *                       Default: 100.
  *
  * @return string Excerpt.
- *
  */
 function bp_nouveau_group_description_excerpt( $group = null, $length = null ) {
 	echo bp_nouveau_get_group_description_excerpt( $group, $length );
@@ -1312,7 +1292,8 @@ function bp_nouveau_group_description_excerpt( $group = null, $length = null ) {
  *                       Defaults to the group currently being
  *                       iterated on in the groups loop.
  * @param int $length    Optional. Length of returned string, including ellipsis.
- *                       Default: 250.
+ *                       Default: 100.
+ *
  * @return string Excerpt.
  */
 function bp_nouveau_get_group_description_excerpt( $group = null, $length = null ) {

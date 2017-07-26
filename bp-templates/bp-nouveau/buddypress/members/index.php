@@ -1,10 +1,6 @@
 <?php
 /**
  * BuddyPress Members Directory
- *
- * @package BP Nouveau
- *
- * @since 1.0.0
  */
 
 ?>

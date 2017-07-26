@@ -3,8 +3,6 @@
  * Messages Ajax functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -12,6 +10,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Registers messages AJAX actions.
+ *
+ * @todo this funciton CANNOT be run when the file is included (like it is now). Move to a function and hook to something.
  */
 bp_nouveau_register_ajax_actions( array(
 	array( 'messages_send_message'             => array( 'function' => 'bp_nouveau_ajax_messages_send_message',      'nopriv' => false ) ),
@@ -27,6 +27,9 @@ bp_nouveau_register_ajax_actions( array(
 	array( 'messages_dismiss_sitewide_notice'  => array( 'function' => 'bp_nouveau_ajax_dismiss_sitewide_notice',    'nopriv' => false ) ),
 ) );
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_messages_send_message() {
 	$response = array(
 		'feedback' => __( 'Your message could not be sent, please try again.', 'buddypress' ),
@@ -82,6 +85,9 @@ function bp_nouveau_ajax_messages_send_message() {
 	}
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_messages_send_reply() {
 	$response = array(
 		'feedback' => __( 'There was a problem sending your reply. Please try again.', 'buddypress' ),
@@ -168,6 +174,9 @@ function bp_nouveau_ajax_messages_send_reply() {
 	) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_get_user_message_threads() {
 	global $messages_template;
 
@@ -277,6 +286,9 @@ function bp_nouveau_ajax_get_user_message_threads() {
 	wp_send_json_success( $threads );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_messages_thread_read() {
 	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error();
@@ -304,6 +316,9 @@ function bp_nouveau_ajax_messages_thread_read() {
 	wp_send_json_success();
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_get_thread_messages() {
 	global $thread_template;
 
@@ -397,6 +412,9 @@ function bp_nouveau_ajax_get_thread_messages() {
 	wp_send_json_success( $thread );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_delete_thread_messages() {
 	$response = array(
 		'feedback' => __( 'There was a problem deleting your message(s). Please try again.', 'buddypress' ),
@@ -427,6 +445,9 @@ function bp_nouveau_ajax_delete_thread_messages() {
 	) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_star_thread_messages() {
 	if ( empty( $_POST['action'] ) ) {
 		wp_send_json_error();
@@ -511,6 +532,9 @@ function bp_nouveau_ajax_star_thread_messages() {
 	) );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_readunread_thread_messages() {
 	if ( empty( $_POST['action'] ) ) {
 		wp_send_json_error();
@@ -571,6 +595,9 @@ function bp_nouveau_ajax_readunread_thread_messages() {
 	wp_send_json_success( $response );
 }
 
+/**
+ * @since 1.0.0
+ */
 function bp_nouveau_ajax_dismiss_sitewide_notice() {
 	if ( empty( $_POST['action'] ) ) {
 		wp_send_json_error();

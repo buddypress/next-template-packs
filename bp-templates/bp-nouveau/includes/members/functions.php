@@ -3,8 +3,6 @@
  * Members functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -51,7 +49,6 @@ function bp_nouveau_get_members_directory_nav_items() {
 	);
 
 	if ( is_user_logged_in() ) {
-
 		// If friends component is active and the user has friends
 		if ( bp_is_active( 'friends' ) && bp_get_total_friend_count( bp_loggedin_user_id() ) ) {
 			$nav_items['personal'] = array(
@@ -68,7 +65,6 @@ function bp_nouveau_get_members_directory_nav_items() {
 
 	// Check for the deprecated hook :
 	$extra_nav_items = bp_nouveau_parse_hooked_dir_nav( 'bp_members_directory_member_types', 'members', 20 );
-
 	if ( ! empty( $extra_nav_items ) ) {
 		$nav_items = array_merge( $nav_items, $extra_nav_items );
 	}
@@ -78,7 +74,7 @@ function bp_nouveau_get_members_directory_nav_items() {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array $nav_items The list of the members directory nav items.
+	 * @param array $nav_items The list of the members directory nav items.
 	 */
 	return apply_filters( 'bp_nouveau_get_members_directory_nav_items', $nav_items );
 }
@@ -88,7 +84,8 @@ function bp_nouveau_get_members_directory_nav_items() {
  *
  * @since 1.0.0
  *
- * @param string $context 'directory' see comment below
+ * @param string $context Optional.
+ *
  * @return array the filters
  */
 function bp_nouveau_get_members_filters( $context = '' ) {
@@ -140,11 +137,12 @@ function bp_nouveau_get_members_filters( $context = '' ) {
  *
  * @since 1.0.0
  *
- * @param  array $buttons The arguments of the button that BuddyPress is about to create.
+ * @param array $buttons The arguments of the button that BuddyPress is about to create.
+ *
  * @return array An empty array to stop the button creation process.
  */
 function bp_nouveau_members_catch_button_args( $button = array() ) {
-	/**
+	/*
 	 * Globalize the arguments so that we can use it
 	 * in bp_nouveau_get_member_header_buttons().
 	 */
@@ -156,11 +154,11 @@ function bp_nouveau_members_catch_button_args( $button = array() ) {
 
 /**
  * Catch the content hooked to the do_action hooks in single member header
- * and in the members loop
+ * and in the members loop.
  *
  * @since 1.0.0
  *
- * @return string|bool HTML Output if hooked. False otherwise.
+ * @return string|false HTML Output if hooked. False otherwise.
  */
 function bp_nouveau_get_hooked_member_meta() {
 	ob_start();
@@ -200,8 +198,9 @@ function bp_nouveau_get_hooked_member_meta() {
  *
  * @since 1.0.0
  *
- * @param  array  $templates The list of templates for the front.php template part.
- * @return array  The same list with the default front template if needed.
+ * @param array $templates The list of templates for the front.php template part.
+ *
+ * @return array The same list with the default front template if needed.
  */
 function bp_nouveau_member_reset_front_template( $templates = array() ) {
 	$use_default_front = bp_nouveau_get_appearance_settings( 'user_front_page' );
@@ -223,8 +222,9 @@ function bp_nouveau_member_reset_front_template( $templates = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array  $templates The User's front template hierarchy.
- * @return array             Only the global front templates.
+ * @param array $templates The User's front template hierarchy.
+ *
+ * @return array Only the global front templates.
  */
 function bp_nouveau_member_restrict_user_front_templates( $templates = array() ) {
 	return array_intersect( array(
@@ -238,7 +238,8 @@ function bp_nouveau_member_restrict_user_front_templates( $templates = array() )
  *
  * @since 1.0.0
  *
- * @param  string $template The template part to get (eg: activity, groups...).
+ * @param string $template The template part to get (eg: activity, groups...).
+ *
  * @return string The located template.
  */
 function bp_nouveau_member_locate_template_part( $template = '' ) {
@@ -246,7 +247,7 @@ function bp_nouveau_member_locate_template_part( $template = '' ) {
 	$bp_nouveau     = bp_nouveau();
 
 	if ( ! $template || empty( $displayed_user->id ) ) {
-		return false;
+		return '';
 	}
 
 	// Use a global to avoid requesting the hierarchy for each template
@@ -290,7 +291,8 @@ function bp_nouveau_member_locate_template_part( $template = '' ) {
  *
  * @since 1.0.0
  *
- * @param  string $template The template part to get (eg: activity, groups...).
+ * @param string $template The template part to get (eg: activity, groups...).
+ *
  * @return string HTML output.
  */
 function bp_nouveau_member_get_template_part( $template = '' ) {
@@ -343,8 +345,9 @@ function bp_nouveau_member_is_home_widgets() {
  *
  * @since 1.0.0
  *
- * @param  array  $args The Activities Template arguments.
- * @return array        The Activities Template arguments.
+ * @param array $args The Activities Template arguments.
+ *
+ * @return array The Activities Template arguments.
  */
 function bp_nouveau_member_activity_widget_overrides( $args = array() ) {
 	return array_merge( $args, array(
@@ -357,8 +360,9 @@ function bp_nouveau_member_activity_widget_overrides( $args = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array  $args The Groups Template arguments.
- * @return array        The Groups Template arguments.
+ * @param array $args The Groups Template arguments.
+ *
+ * @return array The Groups Template arguments.
  */
 function bp_nouveau_member_groups_widget_overrides( $args = array() ) {
 	return array_merge( $args, array(
@@ -371,8 +375,9 @@ function bp_nouveau_member_groups_widget_overrides( $args = array() ) {
  *
  * @since 1.0.0
  *
- * @param  array  $args The Members Template arguments.
- * @return array        The Members Template arguments.
+ * @param array $args The Members Template arguments.
+ *
+ * @return array The Members Template arguments.
  */
 function bp_nouveau_member_members_widget_overrides( $args = array() ) {
 	// Do nothing for the friends widget

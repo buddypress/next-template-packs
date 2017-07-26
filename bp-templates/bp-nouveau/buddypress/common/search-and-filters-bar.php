@@ -1,11 +1,9 @@
 <?php
 /**
-	* BP Nouveau Search & filters bar
-	*
-	* @since 1.0.0
-	*
-	* @package BP Nouveau
-	*/
+ * BP Nouveau Search & filters bar
+ *
+ * @since 1.0.0
+ */
 ?>
 <div class="subnav-filters filters no-ajax" id="subnav-filters">
 

@@ -3,8 +3,6 @@
  * BP Nouveau Members
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -33,7 +31,7 @@ class BP_Nouveau_Members {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir                  = dirname( __FILE__ );
 		$this->is_user_home_sidebar = false;
 	}
@@ -43,7 +41,7 @@ class BP_Nouveau_Members {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		require( trailingslashit( $this->dir ) . 'functions.php'     );
 		require( trailingslashit( $this->dir ) . 'template-tags.php' );
 	}
@@ -53,7 +51,7 @@ class BP_Nouveau_Members {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
+	protected function setup_actions() {
 		$ajax_actions = array(
 			array( 'members_filter' => array( 'function' => 'bp_nouveau_ajax_object_template_loader', 'nopriv' => true ) ),
 		);
@@ -80,7 +78,7 @@ class BP_Nouveau_Members {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
+	protected function setup_filters() {
 		// Add the default-front to User's front hierarchy if user enabled it (Enabled by default).
 		add_filter( 'bp_displayed_user_get_front_template', 'bp_nouveau_member_reset_front_template', 10, 1 );
 	}

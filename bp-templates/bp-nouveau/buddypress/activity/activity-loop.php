@@ -1,9 +1,6 @@
 <?php
 /**
  * BuddyPress - Activity Loop
- *
- * @package BuddyPress
- * @subpackage bp-nouveau
  */
 
 bp_nouveau_before_loop(); ?>

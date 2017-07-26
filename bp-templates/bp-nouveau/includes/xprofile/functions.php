@@ -3,8 +3,6 @@
  * xProfile functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -15,11 +13,11 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  *
- * @param  array  $scripts  The array of scripts to register
- * @return array  The same array with the specific groups scripts.
+ * @param  array $scripts  The array of scripts to register
+ *
+ * @return array The same array with the specific groups scripts.
  */
 function bp_nouveau_xprofile_register_scripts( $scripts = array() ) {
-
 	if ( ! isset( $scripts['bp-nouveau'] ) ) {
 		return $scripts;
 	}
@@ -39,7 +37,6 @@ function bp_nouveau_xprofile_register_scripts( $scripts = array() ) {
  * @since 1.0.0
  */
 function bp_nouveau_xprofile_enqueue_scripts() {
-
 	if ( ! bp_is_user_profile_edit() && ! bp_is_register_page() ) {
 		return;
 	}

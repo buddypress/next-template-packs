@@ -3,8 +3,6 @@
  * BuddyPress - Members Profile Change Cover Image
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 ?>

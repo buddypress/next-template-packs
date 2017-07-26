@@ -3,8 +3,6 @@
  * BP Nouveau Notifications
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -24,11 +22,7 @@ class BP_Nouveau_Notifications {
 	public function __construct() {
 		$this->setup_globals();
 		$this->includes();
-
-		// Setup list of add_action() hooks
 		$this->setup_actions();
-
-		// Setup list of add_filter() hooks
 		$this->setup_filters();
 	}
 
@@ -37,7 +31,7 @@ class BP_Nouveau_Notifications {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->dir = dirname( __FILE__ );
 	}
 
@@ -46,7 +40,7 @@ class BP_Nouveau_Notifications {
 	 *
 	 * @since 1.0.0
 	 */
-	private function includes() {
+	protected function includes() {
 		$dir = trailingslashit( $this->dir );
 
 		require "{$dir}functions.php";
@@ -58,11 +52,8 @@ class BP_Nouveau_Notifications {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_actions() {
-		// Init notifications filters
+	protected function setup_actions() {
 		add_action( 'bp_init', 'bp_nouveau_notifications_init_filters', 20 );
-
-		// Enqueue the scripts
 		add_action( 'bp_nouveau_enqueue_scripts', 'bp_nouveau_notifications_enqueue_scripts' );
 
 		$ajax_actions = array(
@@ -85,12 +76,8 @@ class BP_Nouveau_Notifications {
 	 *
 	 * @since 1.0.0
 	 */
-	private function setup_filters() {
-
-		// Register notifications scripts
+	protected function setup_filters() {
 		add_filter( 'bp_nouveau_register_scripts', 'bp_nouveau_notifications_register_scripts', 10, 1 );
-
-		// Add Dashicons to notification action links
 		add_filter( 'bp_get_the_notification_mark_unread_link', 'bp_nouveau_notifications_mark_unread_link', 10, 1 );
 		add_filter( 'bp_get_the_notification_mark_read_link',   'bp_nouveau_notifications_mark_read_link'  , 10, 1 );
 		add_filter( 'bp_get_the_notification_delete_link',      'bp_nouveau_notifications_delete_link'     , 10, 1 );

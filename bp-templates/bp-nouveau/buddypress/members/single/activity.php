@@ -3,8 +3,6 @@
  * BuddyPress - Users Activity
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 ?>

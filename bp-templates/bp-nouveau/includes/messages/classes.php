@@ -3,8 +3,6 @@
  * Mesages classes
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -120,12 +118,12 @@ class BP_Nouveau_Admin_Notices {
 		$this->setup_actions();
 	}
 
-	private function setup_globals() {
+	protected function setup_globals() {
 		$this->screen_id = '';
 		$this->url       = add_query_arg( array( 'page' => 'bp-notices' ), bp_get_admin_url( 'users.php' ) );
 	}
 
-	private function setup_actions() {
+	protected function setup_actions() {
 		add_action( bp_core_admin_hook(), array( $this, 'admin_menu' ) );
 	}
 

@@ -1,11 +1,7 @@
 <?php
 /**
  * BuddyPress - Users Messages
- *
- * @package BuddyPress
- * @subpackage bp-nouveau
  */
-
 ?>
 
 <nav class="<?php bp_nouveau_single_item_subnav_classes(); ?>" id="subnav" role="navigation" aria-label="<?php esc_attr_e( 'Messages menu', 'buddypress' ); ?>">

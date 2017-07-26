@@ -3,8 +3,6 @@
  * Members template tags
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -588,9 +586,9 @@ function bp_nouveau_member_meta() {
 			 *
 			 * @since 1.0.0
 			 *
-			 * @param array  $meta     The list of meta to output.
-			 * @param object $member   The member object
-			 * @param bool   $is_loop  True if in the members loop. False otherwise.
+			 * @param array  $meta    The list of meta to output.
+			 * @param object $member  The member object
+			 * @param bool   $is_loop True if in the members loop. False otherwise.
 			 */
 			$member->template_meta = apply_filters( 'bp_nouveau_get_member_meta', $meta, $member, $is_loop );
 		}

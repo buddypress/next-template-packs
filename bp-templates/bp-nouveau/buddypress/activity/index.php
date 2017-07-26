@@ -3,9 +3,6 @@
  * BuddyPress Activity templates
  *
  * @since 2.3.0
- *
- * @package BuddyPress
- * @subpackage bp-nouveau
  */
 ?>
 

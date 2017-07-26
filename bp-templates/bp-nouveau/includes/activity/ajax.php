@@ -3,8 +3,6 @@
  * Activity Ajax functions
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -12,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Registers activity AJAX actions.
+ * @todo this funciton CANNOT be run when the file is included (like it is now). Move to a function and hook to something.
  */
 bp_nouveau_register_ajax_actions( array(
 	array( 'activity_filter'                 => array( 'function' => 'bp_nouveau_ajax_object_template_loader',      'nopriv' => true ) ),
@@ -354,6 +353,7 @@ function bp_nouveau_ajax_new_activity_comment() {
 
 /**
  * Get items to attach the activity to.
+ *
  * This is used within the activity post form autocomplete field.
  *
  * @since 1.0.0
@@ -450,7 +450,6 @@ function bp_nouveau_ajax_post_update() {
 		}
 
 	} else {
-
 		/** This filter is documented in bp-activity/bp-activity-actions.php */
 		$activity_id = apply_filters( 'bp_activity_custom_update', false, $object, $item_id, $_POST['content'] );
 	}

@@ -5,8 +5,6 @@
  * Querystring is set via AJAX in _inc/ajax.php - bp_legacy_theme_object_filter()
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 bp_nouveau_before_loop(); ?>

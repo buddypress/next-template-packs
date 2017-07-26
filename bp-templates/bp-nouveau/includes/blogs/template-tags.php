@@ -3,8 +3,6 @@
  * Blogs Template tags
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -47,8 +45,7 @@ function bp_nouveau_before_blogs_directory_content() {
 }
 
 /**
- * Template tag to wrap all Legacy actions that was used
- * after the blogs directory content
+ * Template tag to wrap all Legacy actions that was used after the blogs directory content
  *
  * @since 1.0.0
  */
@@ -86,11 +83,9 @@ function bp_nouveau_after_blogs_directory_content() {
  * Fire specific hooks into the blogs create template
  *
  * @since 1.0.0
- * @since 1.1.0 (BuddyPress) for the 'content' suffix
- * @since 1.6.0 (BuddyPress) for the 'content_template' suffix
  *
- * @param string $when   Either 'before' or 'after'.
- * @param string $suffix Use it to add terms at the end of the hook name.
+ * @param string $when   Optional. Either 'before' or 'after'.
+ * @param string $suffix Optional. Use it to add terms at the end of the hook name.
  */
 function bp_nouveau_blogs_create_hook( $when = '', $suffix = '' ) {
 	$hook = array( 'bp' );
@@ -161,6 +156,7 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 	 * @since 1.0.0
 	 *
 	 * @param string $type Type of Group of buttons to get.
+	 *
 	 * @return array
 	 */
 	function bp_nouveau_get_blogs_buttons( $args ) {
@@ -182,10 +178,8 @@ function bp_nouveau_blogs_loop_buttons( $args = array() ) {
 		}
 
 		/*
-		 * If the 'container' is set to 'ul'
-		 * set a var $parent_element to li
-		 * otherwise simply pass any value found in args
-		 * or set var false.
+		 * If the 'container' is set to 'ul', set a var $parent_element to li,
+		 * otherwise simply pass any value found in args or set var false.
 		 */
 		if ( ! empty( $args['container'] ) && 'ul' === $args['container'] ) {
 			$parent_element = 'li';

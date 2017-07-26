@@ -3,8 +3,6 @@
 * BP Nouveau User screens filters
 *
 * @since 1.0.0
-*
-* @package BP Nouveau
 */
 ?>
 <div id="comp-filters" class="component-filters clearfix">

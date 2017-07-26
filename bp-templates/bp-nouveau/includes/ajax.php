@@ -3,8 +3,6 @@
  * Common functions only loaded on AJAX requests.
  *
  * @since 1.0.0
- *
- * @package BP Nouveau
  */
 
 // Exit if accessed directly.
@@ -17,17 +15,14 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 function bp_nouveau_ajax_object_template_loader() {
-	// Bail if not a POST action.
 	if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 		wp_send_json_error();
 	}
 
-	// Bail if no object passed.
 	if ( empty( $_POST['object'] ) ) {
 		wp_send_json_error();
 	}
 
-	// Sanitize the object.
 	$object = sanitize_title( $_POST['object'] );
 
 	// Bail if object is not an active component to prevent arbitrary file inclusion.
@@ -82,7 +77,7 @@ function bp_nouveau_ajax_object_template_loader() {
 		$result['feed_url'] = apply_filters( 'bp_legacy_theme_activity_feed_url', $feed_url, $scope );
 	}
 
- 	/**
+ 	/*
 	 * AJAX requests happen too early to be seen by bp_update_is_directory()
 	 * so we do it manually here to ensure templates load with the correct
 	 * context. Without this check, templates will load the 'single' version
