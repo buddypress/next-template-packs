@@ -350,7 +350,7 @@ window.bp = window.bp || {};
 
 						// Prepend a link to display all
 						if ( ! i ) {
-							$( item ).before( '<li class="show-all"><a href="#' + activity_item.prop( 'id' ) + '/show-all/" aria-expanded="false" data-bp-tooltip="' + BP_Nouveau.show_all_comments + '">' + BP_Nouveau.show_x_comments.replace( '%d', comment_count ) + '</a></li>' );
+							$( item ).before( '<li class="show-all"><a href="#' + activity_item.prop( 'id' ) + '/show-all/">' + BP_Nouveau.show_x_comments.replace( '%d', comment_count ) + '</a></li>' );
 						}
 					}
 				} );
