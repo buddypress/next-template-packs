@@ -105,6 +105,16 @@ module.exports = function(grunt) {
 				]
 			}
 		},
+		cssmin: {
+			minify: {
+				cwd: WORKING_DIR,
+				dest: WORKING_DIR,
+				extDot: 'last',
+				expand: true,
+				ext: '.min.css',
+				src: 'bp-nouveau/css/*.css'
+			}
+		},
 		watch: {
 			config: {
 				files: 'Gruntfile.js',
@@ -139,7 +149,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'lint', ['stylelint', 'jshint' ] );
 
 	// Build CSS & JavaScript
-	grunt.registerTask( 'build', [ 'sass', 'rtlcss' ] );
+	grunt.registerTask( 'build', [ 'sass', 'rtlcss', 'cssmin' ] );
 
 	// Default task(s).
 	grunt.registerTask( 'default', 'Runs the default Grunt tasks', [ 'checkDependencies', 'lint', 'build' ] );
