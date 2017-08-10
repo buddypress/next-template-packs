@@ -115,6 +115,16 @@ module.exports = function(grunt) {
 				src: 'bp-nouveau/css/*.css'
 			}
 		},
+		uglify: {
+			core: {
+				cwd: WORKING_DIR,
+				dest: WORKING_DIR,
+				extDot: 'last',
+				expand: true,
+				ext: '.min.js',
+				src: 'bp-nouveau/js/*.js'
+			}
+		},
 		watch: {
 			config: {
 				files: 'Gruntfile.js',
@@ -149,7 +159,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'lint', ['stylelint', 'jshint' ] );
 
 	// Build CSS & JavaScript
-	grunt.registerTask( 'build', [ 'sass', 'rtlcss', 'cssmin' ] );
+	grunt.registerTask( 'build', [ 'sass', 'rtlcss', 'cssmin', 'uglify' ] );
 
 	// Default task(s).
 	grunt.registerTask( 'default', 'Runs the default Grunt tasks', [ 'checkDependencies', 'lint', 'build' ] );
