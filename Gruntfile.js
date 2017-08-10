@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 		],
 
 		BP_NTP_EXCLUDED_CSS = [
-			'!**/*-rtl.css'
+			'!**/*-rtl.css',
+			'!**/*.min.css'
 		],
 
 		BP_NTP_JS = [
@@ -112,7 +113,10 @@ module.exports = function(grunt) {
 				extDot: 'last',
 				expand: true,
 				ext: '.min.css',
-				src: 'bp-nouveau/css/*.css'
+				src: [
+					'bp-nouveau/css/*.css',
+					'!bp-nouveau/css/*.min.css'
+				]
 			}
 		},
 		uglify: {
@@ -122,7 +126,10 @@ module.exports = function(grunt) {
 				extDot: 'last',
 				expand: true,
 				ext: '.min.js',
-				src: 'bp-nouveau/js/*.js'
+				src: [
+					'bp-nouveau/js/*.js',
+					'!bp-nouveau/js/*.min.js'
+				]
 			}
 		},
 		watch: {
@@ -159,7 +166,7 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'lint', ['stylelint', 'jshint' ] );
 
 	// Build CSS & JavaScript
-	grunt.registerTask( 'build', [ 'sass', 'rtlcss', 'cssmin', 'uglify' ] );
+	grunt.registerTask( 'build', [ 'sass', 'rtlcss', 'cssmin',  'uglify' ] );
 
 	// Default task(s).
 	grunt.registerTask( 'default', 'Runs the default Grunt tasks', [ 'checkDependencies', 'lint', 'build' ] );
