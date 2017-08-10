@@ -13,7 +13,8 @@ module.exports = function(grunt) {
 		],
 
 		BP_NTP_JS = [
-			'**/*.js'
+			'**/*.js',
+			'!**/*.min.js'
 		],
 
 		stylelintConfigCss  = require('stylelint-config-wordpress/index.js'),
@@ -88,7 +89,8 @@ module.exports = function(grunt) {
 				src: [
 					'bp-nouveau/css/*.css',
 					'!bp-nouveau/css/buddypress.css',
-					'!bp-nouveau/css/buddypress-rtl.css'
+					'!bp-nouveau/css/buddypress-rtl.css',
+					'!bp-nouveau/css/*.min.css'
 				]
 			//ignoreFiles: 'bp-nouveau/css/*-rtl.css'
 			},
