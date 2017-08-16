@@ -33,6 +33,17 @@ body {
 	}
 }
 
+// Add link focus - this might conflict with themes so nested under BP class, see #162
+.buddypress {
+
+	a:focus,
+	input:focus,
+	textarea:focus,
+	select:focus {
+		outline: thin dotted;
+	}
+}
+
 // Some themes have very restricted content widths for pages
 // or entry-content (2013, 2014, 2017) Lets adjust these restrictions
 body.buddypress {

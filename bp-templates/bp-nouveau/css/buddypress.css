@@ -66,6 +66,13 @@ body #buddypress .bp-list .action {
 	box-sizing: border-box;
 }
 
+.buddypress a:focus,
+.buddypress input:focus,
+.buddypress textarea:focus,
+.buddypress select:focus {
+	outline: thin dotted;
+}
+
 @media screen and (min-width: 46.8em) {
 	body.buddypress .entry-header,
 	body.buddypress .site-content .entry-header,
