@@ -174,6 +174,9 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// We need to neutralize the BuddyPress core "bp_core_render_message()" once it has been added.
 		add_action( 'bp_actions', array( $this, 'neutralize_core_template_notices' ), 6 );
 
+		// Output Nouveau 'forsaken' hook error messages to WP debug log.
+		add_action('bp_init', array( $this, 'nouveau_write_deprecated_hooks_log' ) );
+
 		/** Scripts ***********************************************************/
 
 		add_action( 'bp_enqueue_scripts', array( $this, 'register_scripts'  ), 2 ); // Register theme JS
@@ -374,6 +377,31 @@ class BP_Nouveau extends BP_Theme_Compat {
 	}
 
 	/**
+	 * Pass Nouveau's hook error messages array to WP debug log function if
+	 * 'define( 'WP_DEBUG', true )' & 'define( 'WP_DEBUG_LOG', true )' are set.
+	 *
+	 *
+	 * @since 1.0.0
+	 */
+	public function nouveau_write_deprecated_hooks_log() {
+		if ( ! defined( 'WP_DEBUG') || ! WP_DEBUG )
+			return;
+
+		$log = $this->developer_feedbacks();
+
+		if ( $log ) {
+			// File section delimeter for clarity.
+			error_log( print_r( '========= Nouveau deprecated action hook messages =========', true ) );
+		}
+
+		if ( is_array( $log ) || is_object( $log ) ) {
+			error_log( print_r( $log, true ) );
+		} else {
+			error_log( $log );
+		}
+	}
+
+	/**
 	 * Load localizations for topic script.
 	 *
 	 * These localizations require information that may not be loaded even by init.
@@ -452,9 +480,6 @@ class BP_Nouveau extends BP_Theme_Compat {
 		// Add components & nonces
 		$params['objects'] = $supported_objects;
 		$params['nonces']  = $object_nonces;
-
-		// Add Warnings if any
-		$params['warnings'] = $this->developer_feedbacks();
 
 		// Used to transport the settings inside the Ajax requests
 		if ( is_customize_preview() ) {
@@ -603,7 +628,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 	/**
 	 * Inform developers about the Legacy hooks we are not using.
 	 *
-	 * This will be output as warnings inside the Browser console to avoid messing with the page display.
+	 * This will be sent to the WP error log.
 	 *
 	 * @since 1.0.0
 	 *
