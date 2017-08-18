@@ -362,7 +362,7 @@ function bp_nouveau_groups_invites_restriction_nav() {
 	}
 
 	bp_core_new_subnav_item( array(
-		'name'            => _x( 'Group invites settings', 'My Group Invites settings screen nav', 'buddypress' ),
+		'name'            => _x( 'Group Invites', 'My Group Invites settings screen nav', 'buddypress' ),
 		'slug'            => 'invites',
 		'parent_url'      => trailingslashit( $user_domain . $slug ),
 		'parent_slug'     => $slug,
