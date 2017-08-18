@@ -475,6 +475,9 @@ window.bp = window.bp || {};
 		 * [addListeners description]
 		 */
 		addListeners: function() {
+			// Disabled inputs
+			$( '[data-bp-disable-input]' ).on( 'change', this.toggleDisabledInput );
+
 			// HeartBeat Send and Recieve
 			$( document ).on( 'heartbeat-send.buddypress', this.heartbeatSend );
 			$( document ).on( 'heartbeat-tick.buddypress', this.heartbeatTick );
@@ -502,6 +505,30 @@ window.bp = window.bp || {};
 		},
 
 		/** Event Callbacks ***********************************************************/
+
+		/**
+		 * [enableDisabledInput description]
+		 * @param  {[type]} event [description]
+		 * @param  {[type]} data  [description]
+		 * @return {[type]}       [description]
+		 */
+		toggleDisabledInput: function() {
+
+			// Fetch the data attr value (id)
+			// This a pro tem approach due to current conditions see
+			// https://github.com/buddypress/next-template-packs/issues/180.
+			var disabledControl = $(this).attr('data-bp-disable-input');
+
+			if ( $( disabledControl ).prop( 'disabled', true ) && !$(this).hasClass('enabled') ) {
+				$(this).addClass('enabled').removeClass('disabled');
+				$( disabledControl ).removeProp( 'disabled' );
+
+			} else if( $( disabledControl ).prop( 'disabled', false ) && $(this).hasClass('enabled') ) {
+				$(this).removeClass('enabled').addClass('disabled');
+				// Set using attr not .prop else DOM renders as 'disable=""' CSS needs 'disable="disable"'.
+				$( disabledControl ).attr( 'disabled', 'disabled' );
+			}
+		},
 
 		/**
 		 * [heartbeatSend description]
