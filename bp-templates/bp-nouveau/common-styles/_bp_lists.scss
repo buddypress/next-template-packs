@@ -4,15 +4,16 @@
 // is useful, causing issue with specificity on other
 // lists if they do not use it.
 
+@include clearfix-element(".bp-list");
+
 .bp-list {
 
 	@include box-model();
 	border-top: 1px solid $light-grey;
 	clear: both;
 	list-style: none;
-	margin: $marg-med 0;
-	overflow: hidden;
-	padding: 0;
+	margin: $marg-lrg 0;
+	padding: $pad-sml 0;
 	width: 100%;
 
 	// these clearfix rules simply because the element can't be classed

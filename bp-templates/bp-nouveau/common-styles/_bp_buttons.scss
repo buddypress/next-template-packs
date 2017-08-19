@@ -313,14 +313,14 @@
 
 	.filter label:before,
 	.feed a:before,
-	.bp-invites-filters  .invite-button:before,
+	.bp-invites-filters  .invite-button span.icons:before,
 	.bp-messages-filters li a.messages-button:before,
-	.bp-invites-content li .invite-button:before {
+	.bp-invites-content li .invite-button span.icons:before {
 		font-family: dashicons;
 		font-size: 18px;
 	}
 
-	.bp-invites-content .item-list li .invite-button:before {
+	.bp-invites-content .item-list li .invite-button span.icons:before {
 
 		@include responsive-font(32);
 	}
@@ -353,13 +353,22 @@
 
 	ul.item-list {
 
-		li .invite-button:not(.group-remove-invite-button):before {
-			content: "\f502";
+		li {
+
+			.invite-button:not(.group-remove-invite-button) {
+
+				span.icons:before {
+					content: "\f502";
+				}
+			}
 		}
 
-		li.selected .invite-button:before,
-		li .group-remove-invite-button:before {
-			content: "\f153";
+		li.selected .invite-button,
+		li .group-remove-invite-button {
+
+			span.icons:before {
+				content: "\f153";
+			}
 		}
 	} // close ul.item-list
 

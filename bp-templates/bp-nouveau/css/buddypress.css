@@ -815,6 +815,16 @@ dt.section-title {
 * @section 3.0 - BP Lists / Loops Generic
 *-------------------------------------------------------------------------------
 */
+.bp-list:before,
+.bp-list:after {
+	content: " ";
+	display: table;
+}
+
+.bp-list:after {
+	clear: both;
+}
+
 .bp-list {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -822,9 +832,8 @@ dt.section-title {
 	border-top: 1px solid #eaeaea;
 	clear: both;
 	list-style: none;
-	margin: 15px 0;
-	overflow: hidden;
-	padding: 0;
+	margin: 20px 0;
+	padding: 0.5em 0;
 	width: 100%;
 }
 
@@ -2385,7 +2394,6 @@ body.no-js .single-item-header .js-self-profile-button {
 .buddypress .bp-invites-content ul.item-list li {
 	border: 1px solid #eaeaea;
 	margin: 0 0 1%;
-	overflow: hidden;
 	padding-left: 5px;
 	padding-right: 5px;
 	position: relative;
@@ -3976,19 +3984,19 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 
 .buddypress-wrap .filter label:before,
 .buddypress-wrap .feed a:before,
-.buddypress-wrap .bp-invites-filters .invite-button:before,
+.buddypress-wrap .bp-invites-filters .invite-button span.icons:before,
 .buddypress-wrap .bp-messages-filters li a.messages-button:before,
-.buddypress-wrap .bp-invites-content li .invite-button:before {
+.buddypress-wrap .bp-invites-content li .invite-button span.icons:before {
 	font-family: dashicons;
 	font-size: 18px;
 }
 
-.buddypress-wrap .bp-invites-content .item-list li .invite-button:before {
+.buddypress-wrap .bp-invites-content .item-list li .invite-button span.icons:before {
 	font-size: 27px;
 }
 
 @media screen and (min-width: 46.8em) {
-	.buddypress-wrap .bp-invites-content .item-list li .invite-button:before {
+	.buddypress-wrap .bp-invites-content .item-list li .invite-button span.icons:before {
 		font-size: 32px;
 	}
 }
@@ -4005,12 +4013,12 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	content: "\f303";
 }
 
-.buddypress-wrap ul.item-list li .invite-button:not(.group-remove-invite-button):before {
+.buddypress-wrap ul.item-list li .invite-button:not(.group-remove-invite-button) span.icons:before {
 	content: "\f502";
 }
 
-.buddypress-wrap ul.item-list li.selected .invite-button:before,
-.buddypress-wrap ul.item-list li .group-remove-invite-button:before {
+.buddypress-wrap ul.item-list li.selected .invite-button span.icons:before,
+.buddypress-wrap ul.item-list li .group-remove-invite-button span.icons:before {
 	content: "\f153";
 }
 
