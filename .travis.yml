@@ -65,7 +65,7 @@ matrix:
     - php: 7.2
     - php: nightly
 
-install:
+before_install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
     if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." ]]; then
