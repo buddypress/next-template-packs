@@ -2921,7 +2921,6 @@ li#compose-personal-li a#compose:hover {
 .bp-messages-content #thread-preview {
 	border: 1px solid #eaeaea;
 	margin-top: 20px;
-	overflow: hidden;
 }
 
 .bp-messages-content #thread-preview .preview-message {
@@ -4739,10 +4738,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	.bp-single-vert-nav .item-body:not(#group-create-body) {
 		background: #fff;
 		border-left: 1px solid #d6d6d6;
+		float: right;
 		margin: 0;
 		min-height: 400px;
-		overflow: hidden;
 		padding: 0 0 0 1em;
+		width: calc(75% + 1px);
 	}
 	.bp-single-vert-nav .item-body:not(#group-create-body) #subnav:not(.tabbed-links) {
 		background: #eaeaea;
