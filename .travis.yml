@@ -17,7 +17,6 @@ php:
   - 5.6
   - 5.5
   - 5.4
-  - 5.3
 
 # Specify versions of WordPress to test against
 # WP_VERSION = WordPress version number (use "master" for SVN trunk)
@@ -30,6 +29,27 @@ env:
   - WP_VERSION=4.6 BP_VERSION=2.8
   - WP_VERSION=4.5 BP_VERSION=2.8
   - WP_VERSION=4.4 BP_VERSION=2.8
+
+matrix:
+  include:
+    - php: 5.3
+      env: WP_VERSION=master BP_VERSION=master
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.8 BP_VERSION=master
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.7 BP_VERSION=master
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.6 BP_VERSION=master
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.5 BP_VERSION=master
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.4 BP_VERSION=master
+      dist: precise
 
 install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
