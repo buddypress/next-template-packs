@@ -56,11 +56,11 @@ matrix:
       dist: precise
   exclude:
     - php: 7.1
-      env: WP_VERSION=4.6 BP_VERSION=master
+      env: WP_VERSION=4.6 BP_VERSION=2.8
     - php: 7.1
-      env: WP_VERSION=4.5 BP_VERSION=master
+      env: WP_VERSION=4.5 BP_VERSION=2.8
     - php: 7.1
-      env: WP_VERSION=4.4 BP_VERSION=master
+      env: WP_VERSION=4.4 BP_VERSION=2.8
   allow_failures:
     - php: 7.2
     - php: nightly
