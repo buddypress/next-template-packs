@@ -75,10 +75,22 @@ before_install:
     fi
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
-    if [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.7" || "$WP_VERSION" = "4.8" || "$WP_VERSION" = "master"]]; then
+    if [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "master" ]]; then
       echo "Using latest PHPUnit 6.x branch"
       composer global require "phpunit/phpunit=^6"
-    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.4" || "$WP_VERSION" = "4.5" || "$WP_VERSION" = "4.6"]]; then
+    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.8" ]]; then
+      echo "Using latest PHPUnit 6.x branch"
+      composer global require "phpunit/phpunit=^6"
+    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.7" ]]; then
+      echo "Using latest PHPUnit 6.x branch"
+      composer global require "phpunit/phpunit=^6"
+    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.6" ]]; then
+      echo "Using latest PHPUnit 5.x branch"
+      composer global require "phpunit/phpunit=^5"
+    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.5" ]]; then
+      echo "Using latest PHPUnit 5.x branch"
+      composer global require "phpunit/phpunit=^5"
+    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.4" ]]; then
       echo "Using latest PHPUnit 5.x branch"
       composer global require "phpunit/phpunit=^5"
     elif [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]]; then
