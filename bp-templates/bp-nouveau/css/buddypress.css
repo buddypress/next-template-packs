@@ -2875,6 +2875,10 @@ li#compose-personal-li a#compose:hover {
 	color: #5087e5;
 }
 
+#message-threads li .thread-content {
+	cursor: pointer;
+}
+
 #message-threads li .thread-content .excerpt {
 	color: #737373;
 	font-size: 12px;
@@ -2904,10 +2908,6 @@ li#compose-personal-li a#compose:hover {
 #message-threads li .thread-date {
 	padding-right: 5px;
 	text-align: right;
-}
-
-#message-threads li:not(.selected) .thread-content {
-	cursor: s-resize;
 }
 
 .bp-messages-content .actions {

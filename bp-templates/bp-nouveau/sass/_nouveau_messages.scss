@@ -170,6 +170,7 @@ li#compose-personal-li {
 		}
 
 		.thread-content {
+			cursor: pointer;
 
 			.excerpt {
 				color: $meta-text;
@@ -197,10 +198,6 @@ li#compose-personal-li {
 		.thread-date {
 			padding-right: 5px;
 			text-align: right;
-		}
-
-		&:not(.selected) .thread-content {
-			cursor: s-resize;
 		}
 
 	} // close li
