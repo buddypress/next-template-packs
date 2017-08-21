@@ -3092,7 +3092,7 @@ li#compose-personal-li a#compose:hover {
 }
 
 .bp-messages-content .standard-form #subject {
-	border-bottom: 0;
+	margin-bottom: 20px;
 }
 
 div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
