@@ -25,6 +25,7 @@ php:
 # or version number to one decimal point - eg. 2.8)
 env:
   - WP_VERSION=master BP_VERSION=master
+  - WP_VERSION=4.8 BP_VERSION=2.8
   - WP_VERSION=4.7 BP_VERSION=2.8
   - WP_VERSION=4.6 BP_VERSION=2.8
   - WP_VERSION=4.5 BP_VERSION=2.8
