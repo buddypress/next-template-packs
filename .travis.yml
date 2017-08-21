@@ -2,6 +2,8 @@ sudo: false
 
 language: php
 
+# Tell Travis CI which distro to use
+dist: trusty
 
 # Configure caches
 cache:
