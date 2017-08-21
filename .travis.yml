@@ -21,14 +21,14 @@ php:
 # Specify versions of WordPress to test against
 # WP_VERSION = WordPress version number (use "master" for SVN trunk)
 # BP_VERSION = Branch version of BuddyPress to test (use "master" for trunk
-# or version number to one decimal point - eg. 2.8)
+# or version number to one decimal point - eg. 2.9)
 env:
   - WP_VERSION=master BP_VERSION=master
-  - WP_VERSION=4.8 BP_VERSION=2.8
-  - WP_VERSION=4.7 BP_VERSION=2.8
-  - WP_VERSION=4.6 BP_VERSION=2.8
-  - WP_VERSION=4.5 BP_VERSION=2.8
-  - WP_VERSION=4.4 BP_VERSION=2.8
+  - WP_VERSION=4.8 BP_VERSION=2.9
+  - WP_VERSION=4.7 BP_VERSION=2.9
+  - WP_VERSION=4.6 BP_VERSION=2.9
+  - WP_VERSION=4.5 BP_VERSION=2.9
+  - WP_VERSION=4.4 BP_VERSION=2.9
 
 matrix:
   include:
@@ -40,27 +40,27 @@ matrix:
       env: WP_VERSION=master BP_VERSION=master
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.8 BP_VERSION=2.8
+      env: WP_VERSION=4.8 BP_VERSION=2.9
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.7 BP_VERSION=2.8
+      env: WP_VERSION=4.7 BP_VERSION=2.9
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.6 BP_VERSION=2.8
+      env: WP_VERSION=4.6 BP_VERSION=2.9
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.5 BP_VERSION=2.8
+      env: WP_VERSION=4.5 BP_VERSION=2.9
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.4 BP_VERSION=2.8
+      env: WP_VERSION=4.4 BP_VERSION=2.9
       dist: precise
   exclude:
     - php: 7.1
-      env: WP_VERSION=4.6 BP_VERSION=2.8
+      env: WP_VERSION=4.6 BP_VERSION=2.9
     - php: 7.1
-      env: WP_VERSION=4.5 BP_VERSION=2.8
+      env: WP_VERSION=4.5 BP_VERSION=2.9
     - php: 7.1
-      env: WP_VERSION=4.4 BP_VERSION=2.8
+      env: WP_VERSION=4.4 BP_VERSION=2.9
   allow_failures:
     - php: 7.2
     - php: nightly
