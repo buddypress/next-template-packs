@@ -83,7 +83,20 @@ before_install:
       composer global require "phpunit/phpunit=^4"
     fi
   # setup NodeJS version using NVM
+  - node --version
   - nvm install 6
+  - node --version
+  - npm install -g grunt-cli
+  - npm --version
+  - mysql --version
+  - phpenv versions
+  - php --version
+  - php -m
+  - phpunit --version
+  - curl --version
+  - grunt --version
+  - git --version
+  - svn --version
 
 before_script:
   # set up WP install
