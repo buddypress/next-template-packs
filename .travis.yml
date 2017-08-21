@@ -32,6 +32,10 @@ env:
 
 matrix:
   include:
+    - php: 7.2
+      env: WP_VERSION=master BP_VERSION=master
+    - php: nightly
+      env: WP_VERSION=master BP_VERSION=master
     - php: 5.3
       env: WP_VERSION=master BP_VERSION=master
       dist: precise
@@ -50,6 +54,16 @@ matrix:
     - php: 5.3
       env: WP_VERSION=4.4 BP_VERSION=master
       dist: precise
+  exclude:
+    - php: 7.1
+      env: WP_VERSION=4.6 BP_VERSION=master
+    - php: 7.1
+      env: WP_VERSION=4.5 BP_VERSION=master
+    - php: 7.1
+      env: WP_VERSION=4.4 BP_VERSION=master
+  allow_failures:
+    - php: 7.2
+    - php: nightly
 
 install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
