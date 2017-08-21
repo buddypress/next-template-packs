@@ -3030,7 +3030,7 @@ li#compose-personal-li a#compose:hover {
 
 .bp-messages-content .preview-thread-title .messages-title,
 .bp-messages-content .single-thread-title .messages-title {
-	color: #5087e5;
+	padding-left: 2em;
 }
 
 .bp-messages-content .thread-participants {
