@@ -82,6 +82,8 @@ before_install:
       echo "Using latest PHPUnit 4.x branch"
       composer global require "phpunit/phpunit=^4"
     fi
+  # setup NodeJS version using NVM
+  - nvm install 6
 
 before_script:
   # set up WP install
@@ -109,7 +111,6 @@ before_script:
   - cd $plugin_dir
   - pwd
   # run npm to install dependencies
-  - nvm install 6
   - npm install
 
 # run tests
