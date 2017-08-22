@@ -23,7 +23,7 @@ php:
 # BP_VERSION = Branch version of BuddyPress to test (use "master" for trunk
 # or version number to one decimal point - eg. 2.9)
 env:
-  - WP_VERSION=master BP_VERSION=master
+  - WP_VERSION=master BP_VERSION=master PHPUNIT_VERSION=6
   - WP_VERSION=4.8 BP_VERSION=2.9
   - WP_VERSION=4.7 BP_VERSION=2.9
   - WP_VERSION=4.6 BP_VERSION=2.9
@@ -74,29 +74,13 @@ before_install:
       echo "xdebug.ini does not exist"
     fi
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - |
-    if [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "master" ]]; then
-      echo "Using latest PHPUnit 6.x branch"
-      composer global require "phpunit/phpunit=^6"
-    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.8" ]]; then
-      echo "Using latest PHPUnit 6.x branch"
-      composer global require "phpunit/phpunit=^6"
-    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.7" ]]; then
-      echo "Using latest PHPUnit 6.x branch"
-      composer global require "phpunit/phpunit=^6"
-    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.6" ]]; then
-      echo "Using latest PHPUnit 5.x branch"
-      composer global require "phpunit/phpunit=^5"
-    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.5" ]]; then
-      echo "Using latest PHPUnit 5.x branch"
-      composer global require "phpunit/phpunit=^5"
-    elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.4" ]]; then
-      echo "Using latest PHPUnit 5.x branch"
-      composer global require "phpunit/phpunit=^5"
-    else [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]];
-      echo "Using latest PHPUnit 4.x branch"
-      composer global require "phpunit/phpunit=^4"
-    fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.3" ]]; then composer global require --dev phpunit/phpunit ^4; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.4" ]]; then composer global require --dev phpunit/phpunit ^4; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then composer global require --dev phpunit/phpunit ^4; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.6" ]]; then composer global require --dev phpunit/phpunit ^5; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]]; then composer global require --dev phpunit/phpunit ^6; fi
   # setup NodeJS version using NVM
   - node --version
   - nvm install 6
