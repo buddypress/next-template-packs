@@ -2,33 +2,105 @@ sudo: false
 
 language: php
 
+# Tell Travis CI which distro to use
+dist: trusty
+
+# Configure caches
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
+
 php:
   - 7.1
   - 7.0
   - 5.6
   - 5.5
   - 5.4
-  - 5.3
 
 # Specify versions of WordPress to test against
 # WP_VERSION = WordPress version number (use "master" for SVN trunk)
 # BP_VERSION = Branch version of BuddyPress to test (use "master" for trunk
-# or version number to one decimal point - eg. 2.8)
+# or version number to one decimal point - eg. 2.9)
 env:
   - WP_VERSION=master BP_VERSION=master
-  - WP_VERSION=4.7 BP_VERSION=2.8
-  - WP_VERSION=4.6 BP_VERSION=2.8
-  - WP_VERSION=4.5 BP_VERSION=2.8
-  - WP_VERSION=4.4 BP_VERSION=2.8
+  - WP_VERSION=4.8 BP_VERSION=2.9
+  - WP_VERSION=4.7 BP_VERSION=2.9
+  - WP_VERSION=4.6 BP_VERSION=2.9
+  - WP_VERSION=4.5 BP_VERSION=2.9
+  - WP_VERSION=4.4 BP_VERSION=2.9
 
-install:
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+matrix:
+  include:
+    - php: 7.2
+      env: WP_VERSION=master BP_VERSION=master
+    - php: nightly
+      env: WP_VERSION=master BP_VERSION=master
+    - php: 5.3
+      env: WP_VERSION=master BP_VERSION=master
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.8 BP_VERSION=2.9
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.7 BP_VERSION=2.9
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.6 BP_VERSION=2.9
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.5 BP_VERSION=2.9
+      dist: precise
+    - php: 5.3
+      env: WP_VERSION=4.4 BP_VERSION=2.9
+      dist: precise
+  exclude:
+    - php: 7.1
+      env: WP_VERSION=4.6 BP_VERSION=2.9
+    - php: 7.1
+      env: WP_VERSION=4.5 BP_VERSION=2.9
+    - php: 7.1
+      env: WP_VERSION=4.4 BP_VERSION=2.9
+  allow_failures:
+    - php: 7.2
+    - php: nightly
+
+before_install:
   - |
-    if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." ]]; then
-      composer global require "phpunit/phpunit=5.7.*"
-    elif [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]]; then
-      composer global require "phpunit/phpunit=4.8.*"
+    # Remove Xdebug for a huge performance increase:
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
     fi
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.3" ]]; then composer global require --dev phpunit/phpunit ^4; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.4" ]]; then composer global require --dev phpunit/phpunit ^4; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then composer global require --dev phpunit/phpunit ^4; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.6" ]]; then composer global require --dev phpunit/phpunit ^5; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.4" ]]; then composer global require --dev phpunit/phpunit ^5; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.5" ]]; then composer global require --dev phpunit/phpunit ^5; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.6" ]]; then composer global require --dev phpunit/phpunit ^5; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.7" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.8" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "master" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]]; then composer global require --dev phpunit/phpunit ^6; fi
+  # setup NodeJS version using NVM
+  - node --version
+  - nvm install 6
+  - node --version
+  - npm install -g grunt-cli
+  - npm --version
+  - mysql --version
+  - phpenv versions
+  - php --version
+  - php -m
+  - phpunit --version
+  - curl --version
+  - grunt --version
+  - git --version
+  - svn --version
 
 before_script:
   # set up WP install
@@ -56,7 +128,6 @@ before_script:
   - cd $plugin_dir
   - pwd
   # run npm to install dependencies
-  - nvm install 6
   - npm install
 
 # run tests
