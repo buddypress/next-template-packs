@@ -23,7 +23,7 @@ php:
 # BP_VERSION = Branch version of BuddyPress to test (use "master" for trunk
 # or version number to one decimal point - eg. 2.9)
 env:
-  - WP_VERSION=master BP_VERSION=master PHPUNIT_VERSION=6
+  - WP_VERSION=master BP_VERSION=master
   - WP_VERSION=4.8 BP_VERSION=2.9
   - WP_VERSION=4.7 BP_VERSION=2.9
   - WP_VERSION=4.6 BP_VERSION=2.9
