@@ -93,7 +93,7 @@ before_install:
     elif [[ ${TRAVIS_PHP_VERSION:0:2} != "7." && "$WP_VERSION" = "4.4" ]]; then
       echo "Using latest PHPUnit 5.x branch"
       composer global require "phpunit/phpunit=^5"
-    elif [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]]; then
+    else [[ ${TRAVIS_PHP_VERSION:0:3} != "5.2" ]]; then
       echo "Using latest PHPUnit 4.x branch"
       composer global require "phpunit/phpunit=^4"
     fi
