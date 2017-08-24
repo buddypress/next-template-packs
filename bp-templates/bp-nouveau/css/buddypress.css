@@ -4048,6 +4048,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: block;
 }
 
+.buddypress-wrap .bp-messages.bp-user-messages-feedback {
+	border: 0;
+}
+
 .buddypress-wrap #group-create-body .bp-cover-image-status p.warning {
 	background: #38a;
 	border: 0;

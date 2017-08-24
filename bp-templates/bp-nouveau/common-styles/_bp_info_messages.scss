@@ -44,6 +44,12 @@
 
 	} // close .bp-messages
 
+	// user message screens handled seperately due to backbone templates
+	// & looped messages
+	.bp-messages.bp-user-messages-feedback {
+		border: 0;
+	}
+
 	// This is an anomaly, this screen message is locked away in
 	// core avatar styles and ought to be pulled out, markup & styles to nouveau
 	#group-create-body {

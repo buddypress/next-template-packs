@@ -177,8 +177,8 @@
 
 					<# } #>
 
-					<a href="#view/{{data.id}}" class="message-action-view bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'View Full Conversation.', 'buddypress' );?>">
-						<span class="bp-screen-reader-text"><?php esc_html_e( 'View Full conversation.', 'buddypress' );?></span>
+					<a href="#view/{{data.id}}" class="message-action-view bp-tooltip bp-icons" data-bp-tooltip="<?php esc_attr_e( 'View full conversation and reply.', 'buddypress' );?>">
+						<span class="bp-screen-reader-text"><?php esc_html_e( 'View full conversation and reply.', 'buddypress' );?></span>
 					</a>
 				</div>
 			</header>

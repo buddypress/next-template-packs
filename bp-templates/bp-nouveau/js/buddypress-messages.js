@@ -468,7 +468,7 @@ window.bp = window.bp || {};
 	// Feedback view
 	bp.Views.Feedback = bp.Nouveau.Messages.View.extend( {
 		tagName: 'div',
-		className: 'bp-feedback',
+		className: 'bp-messages bp-user-messages-feedback',
 
 		initialize: function() {
 			this.value = this.options.value;
@@ -612,7 +612,7 @@ window.bp = window.bp || {};
 			if ( errors.length ) {
 				var feedback = '';
 				_.each( errors, function( e ) {
-					feedback += BP_Nouveau.messages.errors[ e ] + '<br/>';
+					feedback += '<div class="bp-feedback error"><span class="bp-icon"></span><p>'+BP_Nouveau.messages.errors[ e ] + '</p></div>';
 				} );
 
 				bp.Nouveau.Messages.displayFeedback( feedback, 'error' );

@@ -197,7 +197,7 @@ function bp_nouveau_ajax_get_user_message_threads() {
 	// Simulate the loop.
 	if ( ! bp_has_message_threads( bp_ajax_querystring( 'messages' ) ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Sorry, no messages were found.', 'buddypress' ),
+			'feedback' => '<div class="bp-feedback info"><span class="bp-icon"></span><p>' . __( 'Sorry, no messages were found.', 'buddypress' ) . '</p></div>',
 			'type'     => 'info'
 		) );
 	}
