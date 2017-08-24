@@ -169,7 +169,7 @@ function bp_nouveau_ajax_messages_send_reply() {
 
 	wp_send_json_success( array(
 		'messages' => array( $reply ),
-		'feedback' => __( 'Your reply was sent successfully', 'buddypress' ),
+		'feedback' => '<div class="bp-feedback success"><span class="bp-icon"></span><p>' . __( 'Your reply was sent successfully', 'buddypress' ) . '</p></div>',
 		'type'     => 'success',
 	) );
 }
@@ -180,9 +180,9 @@ function bp_nouveau_ajax_messages_send_reply() {
 function bp_nouveau_ajax_get_user_message_threads() {
 	global $messages_template;
 
-	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
+	if ( empty( $_POST['nonce'] ) ||  !wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Unauthorized request.', 'buddypress' ),
+			'feedback' => '<div class="bp-feedback error"><span class="bp-icon"></span><p>' . __( 'Unauthorized request.', 'buddypress' ) . '</p></div>',
 			'type'     => 'error'
 		) );
 	}
@@ -324,13 +324,13 @@ function bp_nouveau_ajax_get_thread_messages() {
 
 	if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'bp_nouveau_messages' ) ) {
 		wp_send_json_error( array(
-			'feedback' => __( 'Unauthorized request.', 'buddypress' ),
+			'feedback' => '<div class="bp-feedback error"><span class="bp-icon"></span><p>' . __( 'Unauthorized request.', 'buddypress' ) . '</p></div>',
 			'type'     => 'error'
 		) );
 	}
 
 	$response = array(
-		'feedback' => __( 'Sorry, no messages were found.', 'buddypress' ),
+		'feedback' => '<div class="bp-feedback info"><span class="bp-icon"></span><p>' . __( 'Sorry, no messages were found.', 'buddypress' ) . '</p></div>',
 		'type'     => 'info'
 	);
 

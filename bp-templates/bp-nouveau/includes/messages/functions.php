@@ -98,7 +98,7 @@ function bp_nouveau_messages_localize_scripts( $params = array() ) {
 		'nonces' => array(
 			'send' => wp_create_nonce( 'messages_send_message' ),
 		),
-		'loading' => __( 'Loading messages, please wait.', 'buddypress' ),
+		'loading' => '<div class="bp-feedback info"><span class="bp-icon"></span><p>' . __( 'Loading messages, please wait.', 'buddypress' ) . '</p></div>',
 		'bulk_actions' => bp_nouveau_messages_get_bulk_actions(),
 	);
 
