@@ -175,7 +175,7 @@ class BP_Nouveau extends BP_Theme_Compat {
 		add_action( 'bp_actions', array( $this, 'neutralize_core_template_notices' ), 6 );
 
 		// Output Nouveau 'forsaken' hook error messages to WP debug log.
-		add_action('bp_init', array( $this, 'nouveau_write_deprecated_hooks_log' ) );
+//		add_action('bp_init', array( $this, 'nouveau_write_deprecated_hooks_log' ) );
 
 		/** Scripts ***********************************************************/
 
