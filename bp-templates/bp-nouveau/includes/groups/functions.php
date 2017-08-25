@@ -743,7 +743,7 @@ function bp_nouveau_groups_customizer_controls( $controls = array() ) {
 			'type'       => 'checkbox',
 		),
 		'group_front_boxes' => array(
-			'label'      => __( 'Enable Group extensions widgets.', 'buddypress' ),
+			'label'      => __( 'Enable widget region for groups homepage - allows widgets to be added to a sidebar in widgets screen.', 'buddypress' ),
 			'section'    => 'bp_nouveau_group_front_page',
 			'settings'   => 'bp_nouveau_appearance[group_front_boxes]',
 			'type'       => 'checkbox',
