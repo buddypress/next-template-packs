@@ -127,12 +127,21 @@ function bp_nouveau_has_template_message() {
 /**
  * Checks if the template notice/feedback message needs a dismiss button
  *
+ *
+ * @todo this is a hack - these dismiss buttons logic needs improving to
+ * prevent dismiss button showing on form error messages and where we can't seem to control
+ * feedback message i.e on groups create steps 'group-details'.
+ *
  * @since 1.0.0
  *
  * @return bool True if a template notice needs a dismiss button. False otherwise.
  */
 function bp_nouveau_has_dismiss_button() {
 	$bp_nouveau = bp_nouveau();
+
+	if ( 'group-details' == bp_get_groups_current_create_step() ) {
+		return false;
+	}
 
 	if ( ! empty( $bp_nouveau->template_message['message'] ) || ! empty( $bp_nouveau->user_feedback['dismiss'] ) ) {
 		return true;
