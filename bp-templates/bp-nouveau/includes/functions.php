@@ -1251,9 +1251,13 @@ function bp_nouveau_get_user_feedback( $feedback_id = '' ) {
 			'type'    => 'loading',
 			'message' => __( 'Loading notifications, please wait.', 'buddypress' ),
 		),
-		'member-group-invites' => array(
+		'member-group-invites-all' => array(
 			'type'    => 'info',
 			'message' => __( 'Currently every member of the community can invite you to join their groups. If you are not comfortable with it, you can always restrict group invites to your friends only.', 'buddypress' ),
+		),
+		'member-group-invites-friends-only' => array(
+			'type'    => 'info',
+			'message' => __( 'Currently only your friends can invite you to groups, uncheck the box to allow any member to send invites.', 'buddypress' ),
 		),
 	) );
 
