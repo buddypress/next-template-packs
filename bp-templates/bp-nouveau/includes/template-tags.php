@@ -128,9 +128,9 @@ function bp_nouveau_has_template_message() {
  * Checks if the template notice/feedback message needs a dismiss button
  *
  *
- * @todo this is a hack - these dismiss buttons logic needs improving to
- * prevent dismiss button showing on form error messages and where we can't seem to control
- * feedback message i.e on groups create steps 'group-details'.
+ * @todo Dismiss button re-worked to try and prevent buttons on general
+ * BP template notices - Nouveau user_feedback key needs review.
+	*
  *
  * @since 1.0.0
  *
@@ -139,11 +139,12 @@ function bp_nouveau_has_template_message() {
 function bp_nouveau_has_dismiss_button() {
 	$bp_nouveau = bp_nouveau();
 
-	if ( 'group-details' == bp_get_groups_current_create_step() ) {
-		return false;
+	// BP template notices - set 'dismiss' true for a type in `bp_nouveau_template_notices()`
+	if ( ! empty( $bp_nouveau->template_message['message'] ) && true === $bp_nouveau->template_message['dismiss'] ) {
+		return true;
 	}
 
-	if ( ! empty( $bp_nouveau->template_message['message'] ) || ! empty( $bp_nouveau->user_feedback['dismiss'] ) ) {
+	if ( isset( $bp_nouveau->user_feedback['dismiss'] ) ) {
 		return true;
 	}
 
@@ -225,6 +226,15 @@ function bp_nouveau_template_notices() {
 		if ( ! empty( $bp->template_message_type ) ) {
 			$template_message['type'] = $bp->template_message_type;
 		}
+
+		// Adds a 'dimiss' (button) key to array - set true/false.
+		// defaulting to false.
+			$template_message['dismiss'] = false;
+
+		// Set dismiss button true for sitewide notices
+			if( 'bp-sitewide-notice' == $template_message['type'] ) {
+				$template_message['dismiss'] = true;
+			}
 
 		$bp_nouveau->template_message = $template_message;
 		bp_get_template_part( 'common/notices/template-notices' );
