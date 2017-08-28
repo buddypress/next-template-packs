@@ -4155,8 +4155,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 }
 
 .buddypress-wrap .bp-feedback.info .bp-icon,
-.buddypress-wrap .bp-feedback.help .bp-icon {
-	background-color: #38a;
+.buddypress-wrap .bp-feedback.help .bp-icon,
+.buddypress-wrap .bp-feedback.error .bp-icon,
+.buddypress-wrap .bp-feedback.warning .bp-icon,
+.buddypress-wrap .bp-feedback.loading .bp-icon,
+.buddypress-wrap .bp-feedback.success .bp-icon {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: -webkit-flex;
@@ -4165,6 +4168,11 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	-webkit-align-items: center;
 	-webkit-box-align: center;
 	align-items: center;
+}
+
+.buddypress-wrap .bp-feedback.info .bp-icon,
+.buddypress-wrap .bp-feedback.help .bp-icon {
+	background-color: #38a;
 }
 
 .buddypress-wrap .bp-feedback.info .bp-icon:before,

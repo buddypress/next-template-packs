@@ -163,12 +163,22 @@
 	}
 
 	.bp-feedback.info,
+	.bp-feedback.help,
+	.bp-feedback.error,
+	.bp-feedback.warning,
+	.bp-feedback.loading,
+	.bp-feedback.success {
+
+		.bp-icon {
+			@include center-vert();
+		}
+	}
+
+	.bp-feedback.info,
 	.bp-feedback.help {
 
 		.bp-icon {
 			background-color: $informational;
-
-			@include center-vert();
 
 			&:before {
 				content: "\f348";
