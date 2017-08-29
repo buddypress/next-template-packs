@@ -7,24 +7,24 @@
 ?>
 
 <div class="group-front-page">
-	<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
 
-		<div class="bp-feedback custom-homepage-info info no-icon">
-			<strong><?php esc_html_e( 'Manage the Groups default front page', 'buddypress' ); ?></strong>
+	<?php if ( ! is_active_sidebar( 'sidebar-buddypress-groups' ) || ! bp_nouveau_groups_do_group_boxes() ) : ?>
+		<?php if ( ! is_customize_preview() && bp_current_user_can( 'bp_moderate' ) ) : ?>
 
-			<p>
-			<?php printf(
-				esc_html__( 'You can set your preferences about the %s or add %s to it.', 'buddypress' ),
-				bp_nouveau_groups_get_customizer_option_link(),
-				bp_nouveau_groups_get_customizer_widgets_link()
-			); ?>
-			</p>
+			<div class="bp-feedback custom-homepage-info info no-icon">
+				<strong><?php esc_html_e( 'Manage the Groups default front page', 'buddypress' ); ?></strong>
 
-			<button type="button" class="bp-tooltip" data-bp-tooltip="<?php esc_attr_e( 'Close', 'buddypress' ); ?>" aria-label="<?php esc_attr_e( 'Close this notice', 'buddypress' ); ?>" data-bp-close="remove">
-				<span class="dashicons dashicons-dismiss" aria-hidden="true"></span>
-			</button>
-		</div>
+				<p>
+				<?php printf(
+					esc_html__( 'You can set your preferences for the %s or add %s to it.', 'buddypress' ),
+					bp_nouveau_groups_get_customizer_option_link(),
+					bp_nouveau_groups_get_customizer_widgets_link()
+				); ?>
+				</p>
 
+			</div>
+
+		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php if ( bp_nouveau_groups_front_page_description() ) : ?>
