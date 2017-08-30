@@ -9,6 +9,25 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Provide a convenience function to add markup wrapper for message strings
+ *
+ * @param  $message: The message text string
+ *         $type: the message type - 'error, 'info', 'warning', success'
+ * @return string
+ *
+ * @since 3.0
+ */
+function bp_nouveau_message_markup_wrapper( $message, $type ) {
+
+	if( ! $message )
+		return false;
+
+	$message = '<div class="bp-feedback ' . $type . '"><span class="bp-icon" aria-hidden="true"></span><p>' . $message . '</p></div>';
+
+	return $message;
+}
+
+/**
  * Register Scripts for the Groups component
  *
  * @since 1.0.0
@@ -106,10 +125,10 @@ function bp_nouveau_groups_localize_scripts( $params = array() ) {
 
 	$params['group_invites'] = array(
 		'nav'                => bp_sort_by_key( $invites_nav, 'order', 'num' ),
-		'loading'            => __( 'Loading members, please wait.', 'buddypress' ),
-		'invites_form'       => __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'buddypress' ),
-		'invites_form_reset' => __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'buddypress' ),
-		'invites_sending'    => __( 'Sending the invites, please wait.', 'buddypress' ),
+		'loading'            => bp_nouveau_message_markup_wrapper( __( 'Loading members, please wait.', 'buddypress' ), 'loading' ),
+		'invites_form'       => bp_nouveau_message_markup_wrapper( __( 'Use the "Send" button to send your invite, or the "Cancel" button to abort.', 'buddypress' ), 'info' ),
+		'invites_form_reset' => bp_nouveau_message_markup_wrapper( __( 'Invites cleared, please use one of the available tabs to select members to invite.', 'buddypress' ), 'success' ),
+		'invites_sending'    => bp_nouveau_message_markup_wrapper( __( 'Sending the invites, please wait.', 'buddypress' ), 'loading' ),
 		'group_id'           => ! bp_get_current_group_id() ? bp_get_new_group_id() : bp_get_current_group_id(),
 		'is_group_create'    => bp_is_group_create(),
 		'nonces'             => array(
