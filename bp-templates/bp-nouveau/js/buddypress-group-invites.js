@@ -337,7 +337,7 @@ window.bp = window.bp || {};
 	// Feedback view
 	bp.Views.Feedback = bp.Nouveau.GroupInvites.View.extend( {
 		tagName   : 'div',
-		className : 'bp-feedback',
+		className : 'bp-invites-feedback',
 
 		initialize: function() {
 			this.value = this.options.value;
