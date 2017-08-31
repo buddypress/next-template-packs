@@ -2177,6 +2177,7 @@ body.no-js .single-item-header .js-self-profile-button {
 		float: left;
 		margin-left: 10%;
 		text-align: left;
+		padding-top: 15px;
 		width: 42%;
 	}
 	.groups-header .group-item-actions {
@@ -2253,10 +2254,13 @@ body.no-js .single-item-header .js-self-profile-button {
 * Groups specific item body rules -  screens
 *----------------------------------------------------
 */
-.single-item.group-members .item-body .filters {
+.single-item.group-members .item-body .filters:not(.no-subnav) {
 	border-top: 5px solid #eaeaea;
-	margin-top: 0;
 	padding-top: 1em;
+}
+
+.single-item.group-members .item-body .filters {
+	margin-top: 0;
 }
 
 /**

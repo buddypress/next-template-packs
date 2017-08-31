@@ -7,7 +7,7 @@
 ?>
 
 
-	<div class="subnav-filters filters clearfix">
+	<div class="subnav-filters filters clearfix no-subnav">
 
 			<?php bp_nouveau_search_form(); ?>
 
