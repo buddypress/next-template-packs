@@ -4510,6 +4510,10 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 		margin: 0 auto;
 		min-height: 7rem;
 	}
+	.grid.members-group-list .list-wrap .item-block {
+		margin: 0 auto;
+		min-height: 7rem;
+	}
 	.grid.groups-list .list-wrap {
 		min-height: 470px;
 	}

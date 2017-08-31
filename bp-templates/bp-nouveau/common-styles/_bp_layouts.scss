@@ -76,6 +76,17 @@
 			}
 		}
 
+		&.members-group-list {
+
+			.list-wrap {
+
+				.item-block {
+					margin: 0 auto;
+					min-height: 7rem;
+				}
+			}
+		}
+
 		&.groups-list {
 
 			.list-wrap {
