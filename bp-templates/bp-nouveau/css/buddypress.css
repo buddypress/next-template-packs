@@ -3148,13 +3148,17 @@ div.bp-navs#subsubnav.bp-messages-filters .user-messages-bulk-actions {
 .buddypress-wrap input[type="url"]:focus,
 .buddypress-wrap input[type="tel"]:focus,
 .buddypress-wrap input[type="password"]:focus {
-	-webkit-box-shadow: 0 0 8px #eee;
-	-moz-box-shadow: 0 0 8px #eee;
-	box-shadow: 0 0 8px #eee;
+	-webkit-box-shadow: 0 0 8px #eaeaea;
+	-moz-box-shadow: 0 0 8px #eaeaea;
+	box-shadow: 0 0 8px #eaeaea;
 }
 
 .buddypress-wrap select {
 	height: auto;
+}
+
+.buddypress-wrap textarea {
+	resize: vertical;
 }
 
 .buddypress-wrap .standard-form .bp-controls-wrap {

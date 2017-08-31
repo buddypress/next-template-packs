@@ -42,7 +42,7 @@
 
 		&:focus {
 
-			@include box-shadow(0 0 8px #eee);
+			@include box-shadow(0 0 8px $light-grey);
 		}
 	}
 
@@ -50,6 +50,11 @@
 
 	select {
 		height: auto;
+	}
+
+	// Preserve fluid widths, prevent horizontal resize of textareas.
+	textarea {
+		resize: vertical;
 	}
 
 	.standard-form {
