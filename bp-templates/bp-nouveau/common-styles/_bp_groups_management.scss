@@ -11,7 +11,7 @@
 // ==== Members manage ====
 
 .groups-manage-members-list {
-	padding: $pad-sml;
+	padding: $pad-sml 0;
 
 	dd {
 		margin: 0;
@@ -48,6 +48,25 @@
 
 		.member-name {
 			margin-bottom: 0;
+			text-align: center;
+		}
+
+		img {
+			display: block;
+			margin: 0 auto;
+			width: 20%;
+		}
+
+		@include medium-small-up() {
+
+			.member-name {
+				text-align: left;
+			}
+
+			img {
+				display: inline;
+				width: 50px;
+			}
 		}
 
 		@include clearfix-element(".members-manage-buttons");
