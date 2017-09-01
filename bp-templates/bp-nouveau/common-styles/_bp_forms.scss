@@ -11,6 +11,7 @@
 
 	.filter,
 	#whats-new-post-in-box { // has no form element and can't hold rules below.
+
 		select {
 			border: 1px solid $form-border-color;
 		}

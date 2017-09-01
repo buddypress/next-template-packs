@@ -24,7 +24,7 @@
 
 .buddypress-wrap.bp-single-vert-nav {
 
-	.bp-list {
+	.bp-list:not(.grid) {
 
 		.item-entry {
 			padding-left: $pad-sml;

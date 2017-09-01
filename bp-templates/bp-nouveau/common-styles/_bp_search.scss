@@ -11,8 +11,8 @@
 
 		width: 100%;
 
-		@include medium-small-up() {
-			width: 12em;
+		@include medium-lrg-up() {
+			width: 15em;
 		}
 
 		label {
