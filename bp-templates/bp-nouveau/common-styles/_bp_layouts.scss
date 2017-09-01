@@ -353,8 +353,22 @@
 		} // close > li
 	} // close .grid.bp-list
 
+
+	// Specific grid layout adjustments by grid row qnt & component
+
+	.blogs-list.grid.two {
+
+		> li {
+
+			.blogs-title {
+				min-height: 5em;
+			}
+		}
+	}
+
 	// where three or four items to a row we need to increase the desc height as
 	// narrow widths force the box taller & adjust some padding values.
+	// In addition blogs grid in narrow theme widths need a little more height.
 
 	.grid.three,
 	.grid.four {
@@ -366,6 +380,23 @@
 			}
 		}
 	}
+
+	.blogs-list.grid.three,
+	.blogs-list.grid.four {
+
+		> li {
+			min-height: 350px;
+
+			.last-activity {
+				margin-bottom: 0;
+			}
+
+			.last-post {
+				margin-top: 0;
+			}
+		}
+	}
+
 } // close .buddypress-wrap
 
 // If we're logged out remove additional padding designed to help

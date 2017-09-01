@@ -93,12 +93,12 @@ body #buddypress .bp-list .action {
 	}
 }
 
-body .buddypress-wrap h1,
-body .buddypress-wrap h2,
-body .buddypress-wrap h3,
-body .buddypress-wrap h4,
-body .buddypress-wrap h5,
-body .buddypress-wrap h6 {
+body.buddypress .buddypress-wrap h1,
+body.buddypress .buddypress-wrap h2,
+body.buddypress .buddypress-wrap h3,
+body.buddypress .buddypress-wrap h4,
+body.buddypress .buddypress-wrap h5,
+body.buddypress .buddypress-wrap h6 {
 	clear: none;
 	margin: 1em 0;
 	padding: 0;
@@ -4722,9 +4722,28 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	float: none;
 }
 
+.buddypress-wrap .blogs-list.grid.two > li .blogs-title {
+	min-height: 5em;
+}
+
 .buddypress-wrap .grid.three > li .group-desc,
 .buddypress-wrap .grid.four > li .group-desc {
 	min-height: 8em;
+}
+
+.buddypress-wrap .blogs-list.grid.three > li,
+.buddypress-wrap .blogs-list.grid.four > li {
+	min-height: 350px;
+}
+
+.buddypress-wrap .blogs-list.grid.three > li .last-activity,
+.buddypress-wrap .blogs-list.grid.four > li .last-activity {
+	margin-bottom: 0;
+}
+
+.buddypress-wrap .blogs-list.grid.three > li .last-post,
+.buddypress-wrap .blogs-list.grid.four > li .last-post {
+	margin-top: 0;
 }
 
 .buddypress:not(.logged-in) .grid.bp-list .list-wrap {

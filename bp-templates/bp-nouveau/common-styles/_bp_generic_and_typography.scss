@@ -93,7 +93,8 @@ body.buddypress {
 // elements we have limited scope
 
 // Ensure themes can't cause issues with headings.
-body { // add weight
+body.buddypress { // add weight
+
 	.buddypress-wrap {
 
 		h1,
