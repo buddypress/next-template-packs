@@ -95,12 +95,12 @@
 	<div class="group-invites-search subnav-search clearfix" role="search" >
 		<div class="bp-search">
 			<form action="" method="get" id="group_invites_search_form" class="bp-invites-search-form" data-bp-search="{{data.scope}}">
-				<label for="group_invites_search">
-					<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'buddypress' ) ); ?>"/>
-				</label>
+				<label for="group_invites_search" class="bp-screen-reader-text"><?php bp_nouveau_search_default_text( 'Search Members', false ); ?></label>
+				<input type="search" id="group_invites_search" placeholder="<?php esc_attr_e( __( 'Search', 'buddypress' ) ); ?>"/>
+
 				<button type="submit" id="group_invites_search_submit" class="nouveau-search-submit">
 					<span class="dashicons dashicons-search" aria-hidden="true"></span>
-					<span class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'buddypress' ); ?></span>
+					<span id="button-text" class="bp-screen-reader-text"><?php esc_html_e( 'Search', 'buddypress' ); ?></span>
 				</button>
 			</form>
 			</div>
