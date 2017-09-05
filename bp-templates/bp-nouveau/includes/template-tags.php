@@ -144,6 +144,7 @@ function bp_nouveau_has_dismiss_button() {
 		return true;
 	}
 
+	// Test for isset as value may be bool or string i.e 'clear'
 	if ( isset( $bp_nouveau->user_feedback['dismiss'] ) ) {
 		return true;
 	}
@@ -153,6 +154,9 @@ function bp_nouveau_has_dismiss_button() {
 
 /**
  * Ouptut the dismiss type.
+ * $type is used to set the data-attr for the button.
+ * 'clear' is tested for & used to remove cookies, if set, in buddypress-nouveau.js.
+ * Currently template_notices(BP) will take $type = 'clear' if button set to true.
  *
  * @since 1.0.0
  */
@@ -229,12 +233,12 @@ function bp_nouveau_template_notices() {
 
 		// Adds a 'dimiss' (button) key to array - set true/false.
 		// defaulting to false.
-			$template_message['dismiss'] = false;
+		$template_message['dismiss'] = false;
 
 		// Set dismiss button true for sitewide notices
-			if( 'bp-sitewide-notice' == $template_message['type'] ) {
-				$template_message['dismiss'] = true;
-			}
+		if( 'bp-sitewide-notice' == $template_message['type'] ) {
+			$template_message['dismiss'] = true;
+		}
 
 		$bp_nouveau->template_message = $template_message;
 		bp_get_template_part( 'common/notices/template-notices' );
@@ -1680,8 +1684,9 @@ function bp_nouveau_search_selector_name( $suffix = '', $sep = '_' ) {
  */
 function bp_nouveau_search_default_text( $text = '', $is_attr = true ) {
 	$objects = bp_nouveau_get_search_objects();
+
 	if ( ! empty( $objects['secondary'] ) ) {
-		$text = bp_get_search_default_text( $objects['secondary'] );
+	echo	$text = bp_get_search_default_text( $objects['secondary'] );
 	}
 
 	if ( $is_attr ) {
