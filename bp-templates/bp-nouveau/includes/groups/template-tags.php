@@ -375,7 +375,7 @@ function bp_nouveau_group_manage_screen() {
 			if ( ! bp_is_first_group_creation_step() ) {
 				$creation_step_buttons .= sprintf( '<input type="button" value="%1$s" id="group-creation-previous" name="previous" onclick="%2$s" />',
 					esc_attr__( 'Back to Previous Step', 'buddypress' ),
-					esc_js( "location.href='" . esc_url_raw( bp_get_group_creation_previous_link() ) . "'" )
+					"location.href='" . esc_url_raw( bp_get_group_creation_previous_link() )  . "'"
 				);
 			}
 
