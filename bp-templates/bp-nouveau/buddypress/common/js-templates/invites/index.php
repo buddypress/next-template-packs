@@ -110,7 +110,7 @@
 <script type="text/html" id="tmpl-bp-invites-paginate">
 	<# if ( 1 !== data.page ) { #>
 		<a href="#" id="bp-invites-prev-page" class="button invite-button">
-			<span class="bp-screen-reader-text"><?php esc_html_e( 'Prev', 'buddypress' );?></span>
+			<span class="bp-screen-reader-text"><?php esc_html_e( 'Previous', 'buddypress' );?></span>
 		</a>
 	<# } #>
 
