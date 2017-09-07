@@ -10,13 +10,11 @@ cache:
   directories:
   - vendor
   - $HOME/.composer/cache
+  - $HOME/.npm
 
 php:
   - 7.1
-  - 7.0
   - 5.6
-  - 5.5
-  - 5.4
 
 # Specify versions of WordPress to test against
 # WP_VERSION = WordPress version number (use "master" for SVN trunk)
@@ -28,14 +26,9 @@ env:
   - WP_VERSION=4.7 BP_VERSION=2.9
   - WP_VERSION=4.6 BP_VERSION=2.9
   - WP_VERSION=4.5 BP_VERSION=2.9
-  - WP_VERSION=4.4 BP_VERSION=2.9
 
 matrix:
   include:
-    - php: 7.2
-      env: WP_VERSION=master BP_VERSION=master
-    - php: nightly
-      env: WP_VERSION=master BP_VERSION=master
     - php: 5.3
       env: WP_VERSION=master BP_VERSION=master
       dist: precise
@@ -51,19 +44,11 @@ matrix:
     - php: 5.3
       env: WP_VERSION=4.5 BP_VERSION=2.9
       dist: precise
-    - php: 5.3
-      env: WP_VERSION=4.4 BP_VERSION=2.9
-      dist: precise
   exclude:
     - php: 7.1
       env: WP_VERSION=4.6 BP_VERSION=2.9
     - php: 7.1
       env: WP_VERSION=4.5 BP_VERSION=2.9
-    - php: 7.1
-      env: WP_VERSION=4.4 BP_VERSION=2.9
-  allow_failures:
-    - php: 7.2
-    - php: nightly
 
 before_install:
   - |
@@ -75,17 +60,8 @@ before_install:
     fi
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.3" ]]; then composer global require --dev phpunit/phpunit ^4; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.4" ]]; then composer global require --dev phpunit/phpunit ^4; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.5" ]]; then composer global require --dev phpunit/phpunit ^4; fi
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.6" ]]; then composer global require --dev phpunit/phpunit ^5; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.4" ]]; then composer global require --dev phpunit/phpunit ^5; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.5" ]]; then composer global require --dev phpunit/phpunit ^5; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.6" ]]; then composer global require --dev phpunit/phpunit ^5; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.7" ]]; then composer global require --dev phpunit/phpunit ^6; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "4.8" ]]; then composer global require --dev phpunit/phpunit ^6; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" && $WP_VERSION == "master" ]]; then composer global require --dev phpunit/phpunit ^6; fi
   - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then composer global require --dev phpunit/phpunit ^6; fi
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]]; then composer global require --dev phpunit/phpunit ^6; fi
   # setup NodeJS version using NVM
   - node --version
   - nvm install 6
