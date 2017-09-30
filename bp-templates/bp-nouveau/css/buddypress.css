@@ -4079,6 +4079,7 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	display: block;
 }
 
+.buddypress-wrap li.bp-messages,
 .buddypress-wrap .bp-messages.bp-user-messages-feedback {
 	border: 0;
 }
