@@ -4297,6 +4297,114 @@ body.no-js .buddypress #messages-bulk-management #select-all-messages {
 	top: 30px;
 }
 
+.buddypress.widget .item-options {
+	font-size: 14px;
+}
+
+.buddypress.widget ul.item-list {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-flow: column nowrap;
+	-moz-flex-flow: column nowrap;
+	-ms-flex-flow: column nowrap;
+	-o-flex-flow: column nowrap;
+	flex-flow: column nowrap;
+	list-style: none;
+	margin: 10px -2%;
+	overflow: hidden;
+}
+
+@media screen and (min-width: 32em) {
+	.buddypress.widget ul.item-list {
+		display: -webkit-flex;
+		display: -moz-flex;
+		display: -ms-flex;
+		display: -o-flex;
+		display: flex;
+		-webkit-flex-flow: row wrap;
+		-moz-flex-flow: row wrap;
+		-ms-flex-flow: row wrap;
+		-o-flex-flow: row wrap;
+		flex-flow: row wrap;
+	}
+}
+
+.buddypress.widget ul.item-list li {
+	border: 1px solid #eee;
+	-ms-flex-align: stretch;
+	-webkit-align-items: stretch;
+	-webkit-box-align: stretch;
+	align-items: stretch;
+	-webkit-flex: 1 1 46%;
+	-moz-flex: 1 1 46%;
+	-ms-flex: 1 1 46%;
+	-o-flex: 1 1 46%;
+	flex: 1 1 46%;
+	margin: 2%;
+}
+
+@media screen and (min-width: 75em) {
+	.buddypress.widget ul.item-list li {
+		-webkit-flex: 0 1 20%;
+		-moz-flex: 0 1 20%;
+		-ms-flex: 0 1 20%;
+		-o-flex: 0 1 20%;
+		flex: 0 1 20%;
+	}
+}
+
+.buddypress.widget ul.item-list li .item-avatar {
+	padding: 0.5em;
+	text-align: center;
+}
+
+.buddypress.widget ul.item-list li .item-avatar .avatar {
+	width: 60%;
+}
+
+.buddypress.widget ul.item-list li .item {
+	padding: 0 0.5em 0.5em;
+}
+
+.buddypress.widget ul.item-list li .item .item-meta {
+	font-size: 12px;
+	overflow-wrap: break-word;
+}
+
+.widget-area .buddypress.widget ul.item-list li {
+	-webkit-flex: 0 1 46%;
+	-moz-flex: 0 1 46%;
+	-ms-flex: 0 1 46%;
+	-o-flex: 0 1 46%;
+	flex: 0 1 46%;
+	margin: 2% 2% 10px;
+}
+
+@media screen and (min-width: 75em) {
+	.widget-area .buddypress.widget ul.item-list li .avatar {
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 75em) {
+	.widget-area .buddypress.widget ul.item-list {
+		margin: 10px -2%;
+		width: 100%;
+	}
+	.widget-area .buddypress.widget ul.item-list li {
+		-webkit-flex: 0 1 auto;
+		-moz-flex: 0 1 auto;
+		-ms-flex: 0 1 auto;
+		-o-flex: 0 1 auto;
+		flex: 0 1 auto;
+		margin: 10px 2% 1%;
+		width: 46%;
+	}
+}
+
 #buddypress-wrap * {
 	transition: opacity 0.1s ease-in-out 0.1s;
 }
