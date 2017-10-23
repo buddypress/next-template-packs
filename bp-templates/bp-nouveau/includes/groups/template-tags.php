@@ -926,6 +926,12 @@ function bp_nouveau_groups_manage_members_buttons( $args = array() ) {
 					$parent_class .= ' ' . $button_args['wrapper_class'];
 				}
 
+				// The join or leave group header button should default to 'button'
+				// Reverse the earler button var to set default as 'button' not 'a'
+				if ( empty( $args['button_element'] ) ) {
+					$button_element = 'button';
+				}
+
 				$buttons['group_membership'] = array(
 					'id'                => 'group_membership',
 					'position'          => 5,
