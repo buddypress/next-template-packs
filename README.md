@@ -5,6 +5,12 @@ This repo is a work in progress and represents the work to bring the next genera
 
 The estimated time of arrival is hopefully to be around the end of the current BP 2.8 release cycle, however that may be delayed depending on how functional and tested the theme is.
 
+### Ongoing development
+N.B. Development has now moved over to BP Core as the project has been committed.
+https://buddypress.trac.wordpress.org/search?q=Nouveau&noquickjump=1&ticket=on
+
+Any bugs or enhancements can be raised in a ticket on BP's trac home linked to above.
+
 ## Some notes about the progess so far...
 
 The initial backend prep has been provided by imath, adding the base templates and a good deal of new and customized functionality such as backbone views for component loops along with an advanced structure for includes below can be seen screen shots & explanations of some of the features imath has added to improve various components.
